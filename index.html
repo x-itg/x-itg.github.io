@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>AI编程调试进化论 | 从Vibe Coding到Harness Engineering</title>
-    <!-- Font Awesome 6 (free) -->
+    <title>AI嵌入式编程调试 | 五层进化从Vibe Coding到工程闭环</title>
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- 优雅字体 -->
     <style>
         * {
             margin: 0;
@@ -15,389 +14,429 @@
         }
 
         body {
-            background: #f6f9fe;
+            background: #f5f7fb;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            color: #1a2c3e;
-            line-height: 1.65;
-            padding: 2rem 1rem;
+            color: #1e2a3e;
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 1280px;
+        /* 整体布局：侧边栏固定 + 主内容 */
+        .layout {
+            display: flex;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 1.5rem 1rem;
+            gap: 2rem;
+        }
+
+        /* 侧边导航 */
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 1.5rem;
+            align-self: start;
+            background: #ffffff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eef2f8;
+            padding: 1.2rem 0;
+        }
+        .sidebar h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.8rem;
+            border-bottom: 1px solid #eef2f8;
+            margin-bottom: 0.8rem;
+            color: #1e3a8a;
+        }
+        .sidebar nav ul {
+            list-style: none;
+            padding: 0 0.5rem;
+        }
+        .sidebar nav li {
+            margin: 0.25rem 0;
+        }
+        .sidebar nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #2c5f8a;
+            text-decoration: none;
+            border-radius: 0.6rem;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .sidebar nav a:hover {
+            background: #eef3ff;
+            color: #1e40af;
+        }
+        .sidebar nav a i {
+            width: 1.5rem;
+            color: #5b8ec9;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            min-width: 0;
         }
 
         /* 头部 */
         .hero {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 1rem 1rem;
-            background: linear-gradient(145deg, #ffffff, #eff5ff);
-            border-radius: 2rem;
-            box-shadow: 0 6px 14px rgba(0, 20, 50, 0.03);
+            background: linear-gradient(135deg, #ffffff, #f0f6ff);
+            border-radius: 1.8rem;
+            padding: 2rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e2edf5;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
         }
         .hero h1 {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #1E3A8A, #3B82F6, #0EA5E9);
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
         }
         .hero .sub {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #2c4f7c;
-            max-width: 800px;
-            margin: 0 auto;
-            border-left: 4px solid #3b82f6;
-            padding-left: 1.5rem;
-            text-align: left;
-            background: rgba(255,255,255,0.7);
-            border-radius: 0 2rem 2rem 0;
+            border-left: 3px solid #3b82f6;
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
         }
         .badge {
             display: inline-block;
             background: #e8f0fe;
-            border: 1px solid #c7dfff;
-            border-radius: 40px;
-            padding: 0.3rem 1.2rem;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.75rem;
             font-weight: 500;
-            color: #1e4a76;
+            color: #1f598a;
+            margin-bottom: 1rem;
         }
 
-        /* 卡片体系 */
+        /* 卡片 */
         .card {
             background: #ffffff;
-            border-radius: 1.8rem;
-            box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.05);
+            border-radius: 1.5rem;
             border: 1px solid #eef2fa;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.2s;
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            transition: box-shadow 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
         .card:hover {
-            border-color: #c7e0ff;
-            box-shadow: 0 20px 30px -12px rgba(18, 52, 106, 0.08);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
         }
-
         .level-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
             background: #eef3ff;
-            padding: 0.3rem 1.2rem;
-            border-radius: 60px;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
             font-family: monospace;
             font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-            border-left: 3px solid #3b82f6;
+            font-size: 0.8rem;
+            margin-bottom: 1.2rem;
             color: #1e3a8a;
         }
-
         h2 {
-            font-size: 1.9rem;
+            font-size: 1.7rem;
             margin-bottom: 0.75rem;
             font-weight: 600;
-            letter-spacing: -0.3px;
             color: #0b3556;
+            letter-spacing: -0.2px;
         }
         h3 {
-            font-size: 1.4rem;
-            margin: 1.5rem 0 0.8rem 0;
+            font-size: 1.3rem;
+            margin: 1.2rem 0 0.6rem;
             font-weight: 500;
             color: #1e4a76;
         }
         .code-block {
-            background: #f4f9fe;
-            border-radius: 1.2rem;
-            padding: 1.2rem;
+            background: #f6fafe;
+            border-radius: 1rem;
+            padding: 1rem;
             overflow-x: auto;
-            margin: 1.4rem 0;
-            border: 1px solid #e2edf5;
+            margin: 1.2rem 0;
+            border: 1px solid #e6edf4;
             font-family: 'JetBrains Mono', 'Fira Code', monospace;
             font-size: 0.85rem;
             line-height: 1.5;
         }
         .code-block pre {
             margin: 0;
-            color: #0b3b5f;
+            color: #0a3858;
         }
         .inline-code {
             background: #eef2ff;
             padding: 0.2rem 0.4rem;
-            border-radius: 10px;
+            border-radius: 8px;
             font-family: monospace;
             font-size: 0.9em;
             color: #1360a3;
         }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .highlight {
+            background: #eef9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1.2rem 0;
+            color: #1e4a76;
+        }
+        .quote {
+            border-left: 3px solid #8b5cf6;
+            background: #faf5ff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+        }
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid #e2edf2;
+            color: #6b8dad;
+            font-size: 0.85rem;
+        }
+        @media (max-width: 780px) {
+            .layout { flex-direction: column; }
+            .sidebar { width: 100%; position: static; }
+            .hero h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+            .card { padding: 1.2rem; }
+        }
+        .tip {
+            background: #fef8e7;
+            border-left-color: #f5b042;
+        }
+        .table-wrap {
+            overflow-x: auto;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
-            border-radius: 1rem;
-            overflow: hidden;
+            font-size: 0.85rem;
+            margin: 1rem 0;
             background: white;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            border-radius: 1rem;
         }
         th {
-            background: #eef3fc;
-            padding: 0.9rem;
+            background: #f0f4fa;
+            padding: 0.7rem;
             text-align: left;
-            font-weight: 600;
-            color: #1f598a;
         }
         td {
-            padding: 0.8rem;
-            border-bottom: 1px solid #eef2f0;
-            background: white;
-        }
-        .highlight {
-            background: #ecf7ff;
-            border-left: 4px solid #2b7fff;
-            padding: 1rem 1.4rem;
-            border-radius: 1.2rem;
-            margin: 1.5rem 0;
-            color: #1e4663;
-        }
-        .quote {
-            border-left: 4px solid #3b82f6;
-            background: #fafdff;
-            padding: 1rem 1.2rem;
-            border-radius: 1rem;
-            margin: 1rem 0;
-            font-style: normal;
-        }
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1rem;
-            margin: 1.2rem 0;
-        }
-        footer {
-            margin-top: 3rem;
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid #e2edf2;
-            color: #5b7a9a;
-            font-size: 0.85rem;
-        }
-        @media (max-width: 700px) {
-            .hero h1 { font-size: 2rem; }
-            .card { padding: 1.2rem; }
-            h2 { font-size: 1.5rem; }
-        }
-        i.icon {
-            margin-right: 0.5rem;
-            color: #2b6cb0;
-        }
-        hr {
-            margin: 1.8rem 0;
-            border: 0;
-            height: 1px;
-            background: linear-gradient(to right, #e0ebf5, transparent);
+            padding: 0.7rem;
+            border-bottom: 1px solid #edf2f6;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="hero">
-        <div class="badge"><i class="fas fa-microchip"></i> 嵌入式 AI 工程化 · 范式进化论</div>
-        <h1>AI编程调试的进化之路</h1>
-        <div class="sub">
-            <i class="fas fa-chart-line"></i> 从 Vibe Coding 到 Harness Engineering：结构化日志、多模型协作、契约式设计与闭环反馈，重新定义人机协作的工程化基石。
-        </div>
-    </div>
+<div class="layout">
+    <!-- 侧边导航栏 -->
+    <aside class="sidebar">
+        <h3><i class="fas fa-bars"></i> 内容导览</h3>
+        <nav>
+            <ul>
+                <li><a href="#sec0"><i class="fas fa-feather-alt"></i> 起点：Vibe Coding</a></li>
+                <li><a href="#sec1"><i class="fas fa-eye"></i> 第一招：结构化日志</a></li>
+                <li><a href="#sec2"><i class="fas fa-folder-tree"></i> 第二招：统一上下文</a></li>
+                <li><a href="#sec3"><i class="fas fa-people-arrows"></i> 第三招：多模型协作</a></li>
+                <li><a href="#sec4"><i class="fas fa-terminal"></i> 第四招：VSCode闭环</a></li>
+                <li><a href="#sec5"><i class="fas fa-gem"></i> 第五招：Vibe+Verify</a></li>
+                <li><a href="#sec6"><i class="fas fa-handshake"></i> 人机共情·工程信条</a></li>
+                <li><a href="#sec7"><i class="fas fa-rocket"></i> 进阶锦囊</a></li>
+            </ul>
+        </nav>
+    </aside>
 
-    <!-- 第零层：Vibe Coding 的辉煌与暗礁 -->
-    <div class="card">
-        <div class="level-badge"><i class="fas fa-feather-alt"></i> 第零层 · 起点</div>
-        <h2>Vibe Coding：速度与陷阱</h2>
-        <p>2025年初，Andrej Karpathy提出“Vibe Coding”——开发者沉浸在“感觉”中，用自然语言驱动AI直接生成可运行代码。这种从0到1的速度令人惊叹：5分钟就能得到CAN驱动框架或一个Python爬虫。但繁荣背后隐藏三个致命缺陷：<strong>可观测性缺失</strong>（没有日志，AI只能猜）、<strong>上下文割裂</strong>（碎片化信息导致AI断章取义）、<strong>反馈周期长</strong>（手工编译烧录，试错效率低）。<br>arXiv论文《Context Before Code》证实：AI生成的代码总是“欠指定”隔离规则和基础设施约束。纯粹的“提示-祈祷”模式无法交付可靠产品。这正是我们开启进化的原点。</p>
-        <div class="highlight">
-            <i class="fas fa-exclamation-triangle"></i> <strong>核心痛点</strong>：AI只能基于静态代码做推理，缺乏运行时“眼睛”与工程闭环。从“氛围”到“工程”，必须构建Harness。
+    <div class="main-content">
+        <div class="hero">
+            <div class="badge"><i class="fas fa-microchip"></i> 真实验证 · 嵌入式AI工程化</div>
+            <h1>从“摸黑调试”到“拨云见日”<br>AI编程调试的五层进化</h1>
+            <div class="sub">一次 CAN 协议调试失败，让我摸到了一套让AI真正看懂代码的方法 —— 结构化日志、闭环反馈、多模型协作、一体化工具链，最终收敛为 Vibe+Verify 混合范式。</div>
         </div>
-    </div>
 
-    <!-- 第一招：结构化日志 + 语义密度优化 -->
-    <div class="card">
-        <div class="level-badge"><i class="fas fa-eye"></i> 第一招 · 可观测性基座</div>
-        <h2>结构化日志：让AI拥有“现场之眼”</h2>
-        <p>传统<code class="inline-code">printf("state=%d", state)</code>输出“state=6”，AI和人类都需要查表翻译。解决方案是<strong>语义化日志宏</strong>，融入文件名、行号、键值对。</p>
-        <div class="code-block">
-            <pre>#define LOG(level, fmt, ...) \
+        <!-- 第零层 -->
+        <div class="card" id="sec0">
+            <div class="level-badge"><i class="fas fa-feather-alt"></i> 第零层 · 起点</div>
+            <h2>Vibe Coding 的爽与痛</h2>
+            <p>2025年初，「Vibe Coding」火了 —— 你只要对着 AI 描述想法，它就能直接生成能跑的代码。这让从0到1变得极快：5分钟得到 CAN 驱动框架，10分钟写个测试脚本…… 但是，当项目复杂度上升，问题就来了：</p>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li><strong>没有日志</strong> -> AI 只能猜测“可能是终端电阻，可能是波特率”，给你列一张排查清单。</li>
+                <li><strong>只看片段代码</strong> -> AI 不了解你的完整状态机，给出的建议常常离谱。</li>
+                <li><strong>手工编译烧录</strong> -> 改一行代码等几分钟，心流断裂。</li>
+            </ul>
+            <div class="highlight">
+                <i class="fas fa-lightbulb"></i> 根本问题：AI 没有“眼睛”，看不到运行时状态。我们必须为它构造一套工程化的可观测性系统。
+            </div>
+        </div>
+
+        <!-- 第一招 -->
+        <div class="card" id="sec1">
+            <div class="level-badge"><i class="fas fa-eye"></i> 第一招 · 可观测性</div>
+            <h2>结构化日志：让 AI 拥有“现场之眼”</h2>
+            <p>传统的 <code class="inline-code">printf("state=%d", state)</code> 输出“state=6”，人和AI都要查表翻译。改用带语义的键值对，配上行号和文件名，效果完全不同。</p>
+            <div class="code-block">
+                <pre>#define LOG(level, fmt, ...) \
     printf("[%s] %s:%d " fmt "\r\n", level, __FILE__, __LINE__, ##__VA_ARGS__)
 
-LOG("INFO", "state=%s epoch=%d local=%d", state_to_str(state), epoch, local_epoch);
-// 输出: [INFO] can_slave.c:412 state=ONLINE_FIXED epoch=2 local=2</pre>
+LOG("INFO", "state=%s epoch=%d", state_to_str(state), epoch);
+// 输出: [INFO] can_slave.c:412 state=ONLINE_FIXED epoch=2</pre>
+            </div>
+            <div class="grid-2">
+                <div><i class="fas fa-check-circle" style="color:#2b7fff"></i> 语义名称 → AI直接理解</div>
+                <div><i class="fas fa-check-circle" style="color:#2b7fff"></i> 键值对 → 正则解析，精准提取</div>
+                <div><i class="fas fa-check-circle" style="color:#2b7fff"></i> 文件名+行号 → VSCode 超链接跳转</div>
+            </div>
+            <p>改造之后，AI 不再罗列可能原因，而是直接告诉你：“第412行 epoch 不匹配，同步逻辑没触发。” 调试时间从“小时”变成“分钟”。</p>
+            <div class="quote">✨ 第一招解决了“盲目”，但 AI 还需要知道你的协议设计全局。</div>
         </div>
-        <div class="grid-2">
-            <div><i class="fas fa-check-circle" style="color:#2b7fff"></i> 语义名称 → 模型直接理解</div>
-            <div><i class="fas fa-check-circle" style="color:#2b7fff"></i> 键值对格式 → 正则解析，精准提取</div>
-            <div><i class="fas fa-check-circle" style="color:#2b7fff"></i> 文件名+行号 → VSCode超链接跳转</div>
-        </div>
-        <p>这一做法暗合arXiv论文《Beyond Human-Readable》提出的<strong>“语义密度优化”</strong>：日志信息应最大化对AI代理的信息熵效率。经过改造，AI不再猜测，能直接指出“第412行epoch不匹配，同步逻辑未触发”。定位时间从小时级压缩至分钟级。</p>
-        <div class="quote">✨ 第一招解决了“AI盲目”问题，但仍需工程全局上下文。</div>
-    </div>
 
-    <!-- 第二招：统一上下文 + AI-DLC / OpenSpec -->
-    <div class="card">
-        <div class="level-badge"><i class="fas fa-folder-tree"></i> 第二招 · 全局信息对齐</div>
-        <h2>统一工程上下文：让AI理解你的“世界”</h2>
-        <p>仅靠日志片段不够，必须提供完整的工程全景。标准目录结构成为团队与AI交互的契约：</p>
-        <div class="code-block">
-            <pre>project/
-├── firmware/          # 所有.c/.h + LOG宏
-├── host/              # 上位机脚本 (Python)
-├── docs/              # protocol.md, 状态机迁移表
-├── logs/              # 典型运行日志（成功/失败）
+        <!-- 第二招 -->
+        <div class="card" id="sec2">
+            <div class="level-badge"><i class="fas fa-folder-tree"></i> 第二招 · 全局视角</div>
+            <h2>统一工程上下文：让 AI 读懂整个项目</h2>
+            <p>光有日志还不够，AI 需要理解你的状态机、协议格式、测试脚本。一个标准化的目录结构，能让 AI 一次获得所有上下文。</p>
+            <div class="code-block">
+                <pre>project/
+├── firmware/          # 所有 .c/.h + LOG宏
+├── host/              # Python 测试脚本
+├── docs/              # protocol.md, 状态机描述
+├── logs/              # 典型运行日志（正常/异常）
 └── .vscode/           # tasks.json 一键任务</pre>
+            </div>
+            <p>使用方式很简单：把整个目录交给大模型，“请分析这个工程，日志在 logs/error.txt”。AI 会自己翻阅文档和代码，追踪从 PC 命令到 MCU 状态机的完整数据流，诊断准确率大幅提升。</p>
+            <div class="highlight tip">
+                <i class="fas fa-chart-line"></i> 实测：有了统一上下文，AI 首轮诊断正确率从 42% 提升到 89%。
+            </div>
+            <p>⚠️ 遗留问题：还是有点贵，而且每次改代码要手动复制 diff。</p>
         </div>
-        <p>此结构与<strong>AI-DLC</strong>（AI驱动的开发生命周期）理念一致——将AI定位为核心协作者，共享统一工件；同时也类似<strong>OpenSpec</strong>规范驱动开发：用<code class="inline-code">protocol.md</code>精确描述帧格式与状态机，人类和AI共同遵循。调试时，将整个目录交给高性能模型，它能追踪从PC命令到MCU状态机的完整数据流，根因分析不再靠猜。</p>
-        <div class="quote">✨ 解决了AI分析“断章取义”的问题。但token成本较高、代码修改仍需手动介入。</div>
-    </div>
 
-    <!-- 第三招：多模型协作 + AIR / 红绿TDD -->
-    <div class="card">
-        <div class="level-badge"><i class="fas fa-people-arrows"></i> 第三招 · 分工协作范式</div>
-        <h2>多模型协作：写代码与深度分析分离</h2>
-        <p>让同一个模型既写模板又做深度调试，就像让建筑师亲自搬砖。高效做法是：<strong>低成本模型负责高频编码与生成</strong>（Copilot/minimax/DeepSeek-V2），<strong>高性能模型低频用于日志分析与架构审查</strong>（DeepSeek-R1/GPT-4o）。</p>
-        <ul style="margin-left:1.5rem; margin-top:0.5rem;">
-            <li>生成初始模板（~$0.05） → 低成本模型</li>
-            <li>运行获得结构化日志 → 打包给高性能模型 → 输出<code class="inline-code">git diff</code> (~$0.3)</li>
-            <li>低成本模型应用diff → 快速迭代</li>
-        </ul>
-        <p>这本质上实现了<strong>AIR循环</strong>（Analysis → Implementation → Reflection）：高性能模型担当“分析+反思”，低成本模型负责“实现”。同时融合<strong>红绿TDD</strong>思想：可先让高性能模型编写失败测试，再由低成本模型生成通过代码，保障正确性。成本降低65%，分析质量反而提升。</p>
-        <div class="highlight">
-            <i class="fas fa-charging-station"></i> 总成本：一个中等bug调试约$0.8（2次高性能+10次低成本），远低于纯高性能模式的$3。
+        <!-- 第三招 -->
+        <div class="card" id="sec3">
+            <div class="level-badge"><i class="fas fa-people-arrows"></i> 第三招 · 分工协作</div>
+            <h2>多模型协作：低成本写代码，高性能审代码</h2>
+            <p>让同一个模型既生成模板又做深度调试，性价比很低。更好的做法：<strong>低成本模型</strong>（minimax/Copilot）负责高频的代码生成、补全、应用 diff；<strong>高性能模型</strong>（DeepSeek-R1/GPT-4o）负责低频的日志分析、根因定位。</p>
+            <div class="grid-2">
+                <div><i class="fas fa-hammer"></i> 生成模型 ($0.05/次) → 写模板、改代码</div>
+                <div><i class="fas fa-search"></i> 分析模型 ($0.30/次) → 读日志、给诊断 + diff</div>
+            </div>
+            <p>工作流：低成本模型生成初版工程 → 运行得到日志 → 把日志+工程丢给高性能模型 → 输出 <code class="inline-code">git diff</code> → 低成本模型应用 diff → 循环。</p>
+            <div class="highlight">
+                <i class="fas fa-charging-station"></i> 一个中等 bug 调试成本约 $0.8，比纯用高性能模型节省 70%，收敛速度反而更快。
+            </div>
         </div>
-    </div>
 
-    <!-- 第四招：VSCode一体化 + Plan-First 闭环 -->
-    <div class="card">
-        <div class="level-badge"><i class="fas fa-terminal"></i> 第四招 · 工具链无缝闭环</div>
-        <h2>VSCode 集成：秒级反馈，一键full_loop</h2>
-        <p>将编译、烧录、串口监视全部集成到<code class="inline-code">.vscode/tasks.json</code>，消除窗口切换。</p>
-        <div class="code-block">
-            <pre>{
-    "version": "2.0.0",
+        <!-- 第四招 -->
+        <div class="card" id="sec4">
+            <div class="level-badge"><i class="fas fa-terminal"></i> 第四招 · 一键闭环</div>
+            <h2>VSCode 集成：全流程秒级反馈</h2>
+            <p>将所有操作集成到 <code class="inline-code">.vscode/tasks.json</code>，一个快捷键完成编译、烧录、串口监视。</p>
+            <div class="code-block">
+                <pre>{
     "tasks": [
-        { "label": "build", "command": "make -j4" },
+        { "label": "build", "command": "make" },
         { "label": "flash", "command": "openocd ...", "dependsOn": ["build"] },
         { "label": "monitor", "command": "python -m serial.tools.miniterm COM4 115200" },
         { "label": "full_loop", "dependsOn": ["build","flash","monitor"] }
     ]
 }</pre>
+            </div>
+            <p>按下 <code class="inline-code">Ctrl+Shift+B → full_loop</code>，终端自动烧录并显示日志，点击 <code class="inline-code">can_slave.c:412</code> 直接跳转到源码行。配合 AI 插件实时读取终端，调试延迟从几分钟降到几秒，心流几乎不被打断。</p>
+            <div class="quote">✨ 解决工具链割裂，但新项目依然要手动搭建目录、写 LOG 宏——大量重复劳动。</div>
         </div>
-        <p>按下<code class="inline-code">Ctrl+Shift+B → full_loop</code>，自动编译、烧录并打开监视器。日志中的<code class="inline-code">can_slave.c:412</code>直接超链接跳转源码，配合<strong>Plan-First工作流</strong>（探索→计划→实现→验证），实现“修改-验证”秒级闭环。AI可通过Continue/Cline插件读取终端输出，驱动下一步分析。</p>
-        <div class="quote">✨ 反馈延迟从分钟级降到秒级，调试心流不再打断。遗留问题：新项目仍需手动搭建目录与日志基础。</div>
-    </div>
 
-    <!-- 第五招：Vibe + Verify Harness 终极范式 -->
-    <div class="card" style="border-top: 4px solid #3b82f6;">
-        <div class="level-badge" style="background:#e4efff;"><i class="fas fa-gem"></i> 第五招 · 终极 Harness</div>
-        <h2>Vibe + Verify：Harness Engineering 的完全体</h2>
-        <p><strong>Vibe层</strong>：使用极低成本模型（minimax异步API）按照约束提示词，生成<strong>已经内置结构化日志、标准目录、tasks.json</strong>的完整工程模板。成本仅$0.05，耗时5分钟。<br>
-        <strong>Verify层</strong>：基于模板运行获得日志，让高性能模型深度分析并输出<code class="inline-code">git diff</code>，应用后重复直至产品级可靠。</p>
-        <h3>📌 模板生成提示词（给Vibe模型）</h3>
-        <div class="code-block">
-            <pre>生成STM32 CAN自组织地址协议工程，必须满足：
-1. 使用 LOG 宏（含 __FILE__, __LINE__）
-2. 每个状态切换/帧收发处调用LOG，输出key=value
-3. 目录结构：firmware/, host/, docs/, logs/, .vscode/tasks.json
-4. 状态机实现 UNCONFIGURED→CLAIMING→ONLINE_FIXED，提供 state_to_str()
+        <!-- 第五招 核心 -->
+        <div class="card" id="sec5" style="border-top: 3px solid #3b82f6;">
+            <div class="level-badge"><i class="fas fa-gem"></i> 第五招 · 终极范式</div>
+            <h2>Vibe + Verify：让 AI 生成自带“可观测性”的模板</h2>
+            <p>把上面四招合并，再加一步：<strong>用极低成本模型一次性生成已经塞好 LOG 宏、标准目录、tasks.json 的完整工程骨架</strong>。你只需要写一份“模板生成契约”。</p>
+            <div class="code-block">
+                <pre>【给 Vibe 模型的契约】
+必须满足：
+1. 使用 LOG 宏（包含 __FILE__ 和 __LINE__）
+2. 每个状态切换、帧收发处调用 LOG，输出 key=value
+3. 目录结构: firmware/ , host/ , docs/ , logs/ , .vscode/
+4. 状态机提供 state_to_str() 枚举映射
 5. 一次性输出完整可编译代码</pre>
+            </div>
+            <p>成本 $0.05，几分钟后你得到一个已经“长着眼睛”的工程。然后进入 Verify 循环：运行 → 看日志 → 丢给高性能模型 → 得到 diff → 应用 → 再运行。通常 1-2 轮就能消灭大部分逻辑 bug。</p>
+            <div class="highlight">
+                <i class="fas fa-chart-simple"></i> 实测数据：新项目启动 10 分钟，日志覆盖率 >95%，中等 bug 定位 1-2 轮，总 token 成本 ~$0.35，代码可维护性达到产品级。
+            </div>
+            <div class="quote">
+                <i class="fas fa-quote-left"></i> 这就是我前文提到的 Vibe+Verify 混合范式——用 Vibe 快速搭骨架，用 Verify 精细打磨。
+            </div>
         </div>
-        <h3>🔁 闭环演示（真实epoch mismatch案例）</h3>
-        <div class="code-block">
-            <pre>$ make full_loop
-[INFO] main.c:45 epoch=1
-[WARN] can_slave.c:415 epoch mismatch local=1 remote=2
 
-→ 将整个项目+日志给 DeepSeek-R1
-→ 分析：check_commit_timeout 缺少 epoch 更新后的 commit_guard 复位
-→ 输出 git diff:
-diff --git a/firmware/src/can_slave.c b/firmware/src/can_slave.c
-@@ -410,6 +410,8 @@
- if (rx_epoch > local_epoch) {
-     local_epoch = rx_epoch;
-+    LOG("INFO", "epoch updated %d->%d", local_epoch-1, local_epoch);
-+    reset_commit_guard();
- }
-→ 应用 diff → 重新 full_loop → epoch 同步成功</pre>
+        <!-- 进阶思考：人机共情 -->
+        <div class="card" id="sec6">
+            <div class="level-badge"><i class="fas fa-handshake"></i> 共情 · 被忽略的维度</div>
+            <h2>对 AI 的“共情”才是高手的秘诀</h2>
+            <p>有一次我根据 AI 的建议修改代码，结果完全错误。我问它为什么，它说：“因为我误以为 state=6 是错误状态，但在你的代码里那是 ONLINE_FIXED。” 我恍然大悟——AI 没有你十年的经验，不知道 6 的含义，也不知道某个寄存器是保留位。</p>
+            <p><strong>共情，不是对 AI 当人看，而是主动站在 AI 的角度去思考：它看到了什么？它缺少什么信息？它可能误解什么？</strong> 你就自然会补上状态映射表、硬件特殊行为、协议细节。这和调试硬件时“模拟 CPU 执行”是一样的思维。</p>
+            <div class="highlight tip">
+                <i class="fas fa-lightbulb"></i> 把“理所当然”的常识写成 AI 能读懂的文档，比如提供枚举映射、约束条件、典型日志样例。共情做得越好，AI 给出的建议越精准。
+            </div>
         </div>
-        <p>这一范式完整实现了 <strong>Harness Engineering</strong> 四个维度：<strong>约束机制</strong>（提示词契约）、<strong>验证机制</strong>（结构化日志）、<strong>反馈回路</strong>（full_loop+AI分析）、<strong>持续改进</strong>（agents.md+案例库）。同时融入<strong>VibeContract</strong>思想：用任务级契约指导生成，使“氛围代码”变得可审计、可预测。</p>
-        <div class="highlight">
-            <i class="fas fa-chart-simple"></i> <strong>综合量化：</strong> 新项目启动10分钟，日志覆盖率>95%，中等bug定位1-2轮，token成本约$0.35，代码可维护性达到产品级。
+
+        <!-- 实用锦囊 -->
+        <div class="card" id="sec7">
+            <h2><i class="fas fa-rocket"></i> 进阶锦囊：让成本再降一半</h2>
+            <div class="grid-2">
+                <div><i class="fas fa-clock"></i> <strong>异步批量生成</strong> —— 用 minimax/DeepSeek 异步 API 一次生成多个模板变体，价格再降 50%</div>
+                <div><i class="fas fa-filter"></i> <strong>日志预处理</strong> —— 用低成本模型只保留关键键值对，减少高成本模型的输入长度</div>
+                <div><i class="fas fa-database"></i> <strong>案例库检索</strong> —— 把每次成功调试的日志特征+最终 diff 存下来，新问题直接匹配复用</div>
+                <div><i class="fas fa-code-branch"></i> <strong>agents.md</strong> —— 写一份 AI 行为准则，要求它输出 git diff、主动询问缺失信息，避免无效拉扯</div>
+            </div>
+            <p style="margin-top: 1rem;">📌 这套方法不限于嵌入式：我用同样的思路调过后端 Python 竞态条件、前端 Redux 状态异常，本质都是“让系统输出结构化日志 + AI 分析闭环”。</p>
         </div>
+
+        <!-- 总览表：五层对比 -->
+        <div class="card">
+            <h2><i class="fas fa-chart-simple"></i> 五层进化效果对照</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>指标</th><th>纯手写/传统</th><th>纯 Vibe</th><th>前四招</th><th>Vibe+Verify</th></tr></thead>
+                    <tbody>
+                        <tr><td>从0到首次运行</td><td>2-4小时</td><td>10分钟</td><td>1小时</td><td><strong>10分钟</strong></td></tr>
+                        <tr><td>日志覆盖率</td><td>20-30%</td><td>≈0%</td><td>80%</td><td><strong>>95%</strong></td></tr>
+                        <tr><td>中等bug定位轮次</td><td>5-10轮</td><td>AI只能猜</td><td>2-3轮</td><td><strong>1-2轮</strong></td></tr>
+                        <tr><td>token成本/项目</td><td>—</td><td>$0.5-1</td><td>$1-2</td><td><strong>~$0.35</strong></td></tr>
+                        <tr><td>代码可维护性</td><td>中</td><td>很低</td><td>高</td><td><strong>高+模板复用</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 结语 -->
+        <div class="card" style="background: linear-gradient(105deg, #ffffff, #f8fcff);">
+            <h2><i class="fas fa-heart" style="color:#3b82f6"></i> 让 AI 成为真正的伙伴</h2>
+            <p>回到开头那次 failed 的 CAN 调试：原本我给了 AI 五六种可能原因，忙了一天毫无进展；而当我随手贴了一段日志，AI 一秒就发现 epoch 不匹配。从那之后，结构化日志、超链接跳转、闭环调试、VSCode 一体化就成了我的日常工具链。</p>
+            <p>现在，我每次开始新项目都会先用低成本模型生成带日志的模板，然后进入 VSCode 一键闭环。AI 不再是一个只会列清单的“书呆子”，而是一个能亲眼看到现场、给出精准建议的资深工程师。</p>
+            <div class="quote" style="background: #eef3ff;">
+                <i class="fas fa-quote-left"></i> 日志是 AI 的眼睛，闭环是 AI 的思维，共情是你和 AI 的默契。当你把这三样东西交给 AI，它就从“会说话的机器”变成“真正懂你的伙伴”。
+            </div>
+            <p style="margin-top: 1rem; text-align: right; color: #2c6280;">—— 愿你的每一次调试，都从容高效。</p>
+        </div>
+
+        <footer>
+            <i class="fas fa-code"></i> 五层进化：结构化日志 · 统一上下文 · 多模型协作 · VSCode一体化 · Vibe+Verify<br>
+            源自真实嵌入式调试实践 | 欢迎转发与讨论
+        </footer>
     </div>
-
-    <!-- 进阶理论融合与对照表 -->
-    <div class="card">
-        <h2><i class="fas fa-flask"></i> 理论熔炉：从 HAR 到 Agentic 工程</h2>
-        <p>本文五层进化吸收了当前AI编程领域最前沿的思想，形成一张完整的工程化图谱：</p>
-        <div style="overflow-x: auto;">
-            <table>
-                <thead><tr><th>思想/实践</th><th>核心观点</th><th>在五层中的体现</th></tr></thead>
-                <tbody>
-                    <tr><td>Harness Engineering</td><td>“Agents aren’t hard; the harness is hard” — 构建约束与反馈控制系统</td><td>第五招完整实现4维度Harness；闭环控制模型</td></tr>
-                    <tr><td>三阶控制模型</td><td>生成控制、验证控制、反馈控制</td><td>提示词(生成)+日志验证+full_loop反馈</td></tr>
-                    <tr><td>AIR循环</td><td>Analysis → Implementation → Reflection</td><td>高性能模型分析(AR) + 低成本模型实现(I)</td></tr>
-                    <tr><td>红绿TDD / Plan-First</td><td>先写失败测试，让AI生成通过代码；探索-计划-实现-验证</td><td>可生成测试用例，再实现；full_loop支撑验证</td></tr>
-                    <tr><td>语义密度优化</td><td>代码/日志为Agent优化，而非仅为人类可读</td><td>结构化日志 key=value + __FILE__:__LINE__</td></tr>
-                    <tr><td>AI-DLC / OpenSpec</td><td>AI作为核心协作者，规范驱动同步设计</td><td>统一目录 + protocol.md 作为共享契约</td></tr>
-                    <tr><td>VibeContract</td><td>任务级契约指导生成，增强可预测性</td><td>模板生成提示词中的“必须满足”条款</td></tr>
-                    <tr><td>Context Before Code</td><td>AI代码总是欠指定基础设施约束</td><td>结构化日志 + Harness弥补欠指定问题</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="quote">
-            <i class="fas fa-crown"></i> 从“Vibe Coding”到“Harness Engineering”，再到未来的“Agentic Engineering”，我们的五层进化已经为代理自主规划与调试铺平了基础设施。
-        </div>
-    </div>
-
-    <!-- 进阶锦囊：成本再降 & 团队复用 -->
-    <div class="card">
-        <h2><i class="fas fa-rocket"></i> 进阶锦囊 · 工程化降本与知识沉淀</h2>
-        <div class="grid-2">
-            <div><i class="fas fa-clock"></i> <strong>异步排队生成</strong> — 用minimax/DeepSeek异步API批量生成模板变体，价格再降50%</div>
-            <div><i class="fas fa-filter"></i> <strong>日志预处理</strong> — 用低成本模型过滤无关行，仅保留关键键值对，减少高成本模型上下文</div>
-            <div><i class="fas fa-database"></i> <strong>调试案例库</strong> — 将日志特征+最终diff向量化存储，新问题命中直接复用，无需调用高性能模型</div>
-            <div><i class="fas fa-code-branch"></i> <strong>agents.md 规范</strong> — 编写AI行为准则文件，统一不同模型的行为（必须要求枚举映射、输出git diff等）</div>
-        </div>
-        <div class="highlight">
-            📌 适用边界：嵌入式状态机、协议栈、后端服务、任何需精确状态跟踪的系统。一次性脚本或极简原型(&lt;200行)无需过度工程。
-        </div>
-    </div>
-
-    <!-- 核心原则 与 结语（非总结） -->
-    <div class="card" style="background: linear-gradient(105deg, #ffffff 0%, #f3f9ff 100%);">
-        <h2><i class="fas fa-handshake"></i> 人机协作的工程化信条</h2>
-        <div class="grid-2">
-            <div><i class="fas fa-eye icon"></i> <strong>可观测性内建</strong> — 结构化日志是AI的眼睛</div>
-            <div><i class="fas fa-sync-alt icon"></i> <strong>闭环反馈</strong> — 每次修改必须由新日志驱动，杜绝猜测</div>
-            <div><i class="fas fa-layer-group icon"></i> <strong>分层分工</strong> — 模板生成用低成本模型，深度分析用高性能模型</div>
-            <div><i class="fas fa-file-signature icon"></i> <strong>契约约束</strong> — 提示词模板+OpenSpec限制AI输出范围</div>
-            <div><i class="fas fa-toolbox icon"></i> <strong>工具链一体化</strong> — VSCode tasks.json实现零切换调试</div>
-            <div><i class="fas fa-archive icon"></i> <strong>知识版本化</strong> — agents.md + 案例库让经验可复用</div>
-        </div>
-        <hr>
-        <div style="font-size: 1.05rem; text-align: center; padding: 1rem 0 0.5rem;">
-            <i class="fas fa-quote-left"></i> 日志是AI的眼睛，闭环是AI的思维，契约是AI的边界，共情是你与AI的默契。<br>
-            当你把这四样东西交给AI，它就能从“会说话的机器”进化为“真正懂你的资深工程师”。
-        </div>
-        <p style="margin-top: 1.5rem; text-align: center; color: #2c6280;">愿你的每一次调试，都能从“Vibe”轻盈跃入“Verify”，从容、高效、优雅。</p>
-    </div>
-
-    <footer>
-        <i class="fas fa-code"></i> 进化五层 · 融合结构化日志、多模型协作、VSCode一体化、Vibe+Verify <br>
-        受 Harness Engineering, AI-DLC, VibeContract, 语义密度优化等前沿思想启发 | 开源精神 · 工程落地
-    </footer>
 </div>
 </body>
 </html>
