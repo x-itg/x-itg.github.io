@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>实践项目 · 高可复用嵌入式AI编程模板</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f7fb;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #1e2a3e;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 1.8rem;
+            padding: 2rem;
+            border: 1px solid #eef2fa;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #2c4f7c;
+            border-left: 3px solid #3b82f6;
+            padding-left: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            font-size: 1.6rem;
+            margin: 2rem 0 1rem;
+            color: #0b3556;
+            border-bottom: 2px solid #eef3ff;
+            padding-bottom: 0.3rem;
+        }
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.8rem;
+            color: #1e4a76;
+        }
+        h4 {
+            font-size: 1.1rem;
+            margin: 1rem 0 0.5rem;
+            color: #2c6288;
+        }
+        .code-block {
+            background: #f6fafe;
+            border-radius: 1rem;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid #e6edf4;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+        .code-block pre {
+            margin: 0;
+            color: #0a3858;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin: 1rem 0;
+        }
+        .card-light {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #e5e7eb;
+        }
+        .badge {
+            display: inline-block;
+            background: #e8f0fe;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1f598a;
+            margin-bottom: 0.8rem;
+        }
+        .highlight {
+            background: #eef9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1.2rem 0;
+        }
+        .quote {
+            border-left: 3px solid #8b5cf6;
+            background: #faf5ff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+        }
+        .dir-tree {
+            font-family: 'JetBrains Mono', monospace;
+            background: #1e2937;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 1rem;
+            line-height: 1.8;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+        }
+        .dir-tree .dir {
+            color: #7dd3fc;
+        }
+        .dir-tree .file {
+            color: #a5b4fc;
+        }
+        .dir-tree .comment {
+            color: #94a3b8;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            background: white;
+        }
+        th {
+            background: #f0f4fa;
+            padding: 0.7rem;
+            text-align: left;
+        }
+        td {
+            padding: 0.7rem;
+            border-bottom: 1px solid #edf2f6;
+        }
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #6b8dad;
+            font-size: 0.85rem;
+            border-top: 1px solid #e2edf2;
+            padding-top: 1.5rem;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.2rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="badge"><i class="fas fa-microchip"></i> 实践案例 · 可复用模板</div>
+        <h1>高可复用嵌入式AI编程模板<br>传感器采集 · RS485通讯 · 上位机管理</h1>
+        <div class="subtitle">基于“五层进化”方法论的真实项目骨架，集成负日志、CLI调试助手与自动化闭环</div>
+
+        <!-- 项目概述 -->
+        <h2>1. 项目全景</h2>
+        <p>本项目是一个<strong>开箱即用的嵌入式AI编程模板</strong>，包含：</p>
+        <ul style="margin-left:1.5rem; margin-top:0.5rem;">
+            <li><strong>嵌入式主板</strong>（STM32F407）：采集温湿度、压力等传感器，通过RS485总线与上位机通讯。</li>
+            <li><strong>上位机软件</strong>（Python/Qt）：负责设备管理、数据存储、实时曲线显示。</li>
+            <li><strong>Python调试助手</strong>（核心）：同时监控RS485总线流量、控制板串口日志、上位机文件日志，并在适当时机输出AI可读的诊断总结。</li>
+        </ul>
+        <p>整个项目严格遵循文章中的五层进化架构：<strong>结构化正/负日志、统一工程目录、多模型协作契约、CLI全自动闭环、Vibe+Verify模板化生成</strong>。</p>
+
+        <!-- 目录结构 -->
+        <h2>2. 项目目录结构（统一上下文）</h2>
+        <div class="dir-tree">
+            <pre>
+<span class="dir">project/</span>
+├── <span class="dir">firmware/</span>                     <span class="comment"># 嵌入式固件</span>
+│   ├── src/
+│   │   ├── main.c
+│   │   ├── sensor.c               <span class="comment"># 传感器采集</span>
+│   │   ├── rs485.c                <span class="comment"># RS485驱动</span>
+│   │   ├── protocol.c             <span class="comment"># 通讯协议</span>
+│   │   └── logger.c               <span class="comment"># 正/负日志引擎</span>
+│   ├── inc/
+│   │   ├── logger.h
+│   │   └── negative_logger.h
+│   └── build/
+│       └── CMakeLists.txt
+├── <span class="dir">host/</span>                         <span class="comment"># 上位机软件</span>
+│   ├── main.py                     <span class="comment"># 主界面</span>
+│   ├── rs485_manager.py           <span class="comment"># 串口通讯管理</span>
+│   ├── data_store.py              <span class="comment"># 数据存储</span>
+│   └── logs/                      <span class="comment"># 运行时日志目录</span>
+├── <span class="dir">debug_tools/</span>                 <span class="comment"># 调试助手（Python脚本）</span>
+│   ├── debug_assistant.py         <span class="comment"># 核心调试脚本（CLI）</span>
+│   └── log_parser.py              <span class="comment"># 日志解析与总结</span>
+├── <span class="dir">.vscode/</span>
+│   └── tasks.json                 <span class="comment"># 一键自动化任务</span>
+├── agents.md                      <span class="comment"># AI行为准则与项目上下文</span>
+└── README.md
+</pre>
+        </div>
+
+        <!-- 嵌入式固件关键代码 -->
+        <h2>3. 嵌入式固件：正/负日志实战</h2>
+        <p>固件中集成了完整的结构化日志与负日志引擎，所有关键路径都添加了日志点。以下是RS485通讯任务的核心片段：</p>
+        <div class="code-block">
+            <pre>
+// firmware/src/protocol.c
+void rs485_communication_task(void) {
+    static uint8_t epoch = 0;
+    LOG_STATE(WAITING_FOR_POLL, epoch);   // 正日志：记录状态
+
+    // 等待上位机轮询帧（50ms超时）
+    EXPECT_WITHIN(50, "POLL_FRAME", poll_received_flag);
+    if (!poll_received_flag) {
+        // 负日志已自动输出，此处仅记录额外上下文
+        LOG("WARN", "Poll timeout, epoch=%d", epoch);
+        return;
+    }
+    EVENT_OCCURRED("POLL_received");      // 正日志：事件发生
+
+    // 采集传感器数据并回复
+    float temp = read_temperature();
+    float pressure = read_pressure();
+    rs485_send_response(epoch, temp, pressure);
+    LOG("INFO", "Response sent: temp=%.2f, press=%.2f, epoch=%d", temp, pressure, epoch);
+    epoch++;
+}
+</pre>
+        </div>
+        <div class="highlight">
+            <i class="fas fa-check-circle"></i> 固件中同时使用了 <code>EXPECT_WITHIN</code>（负日志）和 <code>EVENT_OCCURRED</code>（正日志），保证了运行时状态对AI完全透明。
+        </div>
+
+        <!-- 上位机软件结构 -->
+        <h2>4. 上位机软件：通讯与管理</h2>
+        <div class="grid-2">
+            <div class="card-light">
+                <h4><i class="fas fa-plug"></i> RS485管理器</h4>
+                <p>负责串口打开/关闭、轮询帧发送、超时重试。内部同样集成了正/负日志（输出到文件）。</p>
+                <div class="code-block" style="margin:0.5rem 0; padding:0.5rem;">
+                    <pre>
+# host/rs485_manager.py
+def poll_device(self):
+    self.send_frame(CMD_POLL)
+    t0 = time.time()
+    while not self.response_received:
+        if time.time() - t0 > 0.05:
+            self.logger.negative("POLL_RESPONSE",
+                f"Device {self.dev_id} not responding")
+            break
+        time.sleep(0.001)
+    if self.response_received:
+        self.logger.positive("POLL_RESPONSE",
+            f"temp={self.temp}, press={self.press}")
+</pre>
+                </div>
+            </div>
+            <div class="card-light">
+                <h4><i class="fas fa-database"></i> 数据管理</h4>
+                <p>存储传感器历史数据，支持CSV导出。日志记录每次操作的成功/失败状态，便于AI诊断。</p>
+            </div>
+        </div>
+
+        <!-- Python调试助手（核心） -->
+        <h2>5. Python调试助手：三合一监控与自动总结</h2>
+        <p>这是整个模板的<strong>灵魂脚本</strong>，它实现了对三个数据源的实时监控：</p>
+        <ol style="margin-left:1.5rem; margin-top:0.5rem;">
+            <li><strong>RS485总线监听</strong>（通过USB转RS485适配器，监听模式）</li>
+            <li><strong>控制板串口日志</strong>（通过另一个COM口读取固件printf输出）</li>
+            <li><strong>上位机文件日志</strong>（实时tail -f，监控日志文件新增行）</li>
+        </ol>
+        <p>脚本将所有日志统一为结构化格式，并在<strong>测试结束后、检测到负日志时、或定时周期</strong>自动输出AI可读的总结报告，方便复制给AI模型诊断。</p>
+
+        <div class="code-block">
+            <pre>
+#!/usr/bin/env python3
+# debug_tools/debug_assistant.py
+"""
+三合一调试助手：监听RS485总线、控制板串口日志、上位机日志文件，
+并按正/负日志规范输出统一的结构化日志与AI诊断总结。
+用法：
+    python debug_assistant.py --rs485 COM3 --mcu COM4 --host-log ../host/logs/app.log
+选项：
+    --summary-interval 10  每10秒自动输出一次总结（默认检测到负日志时立即输出）
+    --output-summary-only  仅输出总结，不输出实时日志行
+"""
+import serial
+import time
+import re
+import os
+import argparse
+from datetime import datetime
+from collections import defaultdict
+
+class DebugAssistant:
+    def __init__(self, rs485_port, mcu_port, host_log_path, summary_interval=0):
+        self.rs485 = serial.Serial(rs485_port, 9600, timeout=0.1) if rs485_port else None
+        self.mcu = serial.Serial(mcu_port, 115200, timeout=0.1) if mcu_port else None
+        self.host_log_path = host_log_path
+        self.host_log_pos = 0
+        self.summary_interval = summary_interval  # 0表示仅负日志触发
+        self.negative_events = []
+        self.positive_events = []
+        self.last_summary_time = time.time()
+        self.running = True
+
+    def read_rs485_line(self):
+        if self.rs485 and self.rs485.in_waiting:
+            line = self.rs485.readline().decode('utf-8', errors='ignore').strip()
+            if line:
+                print(f"[RS485] {line}")
+                self.categorize_log(line, source='RS485')
+
+    def read_mcu_line(self):
+        if self.mcu and self.mcu.in_waiting:
+            line = self.mcu.readline().decode('utf-8', errors='ignore').strip()
+            if line:
+                print(f"[MCU] {line}")
+                self.categorize_log(line, source='MCU')
+
+    def read_host_log(self):
+        if not os.path.exists(self.host_log_path):
+            return
+        with open(self.host_log_path, 'r', encoding='utf-8') as f:
+            f.seek(0, 2)
+            size = f.tell()
+            if size > self.host_log_pos:
+                f.seek(self.host_log_pos)
+                new_lines = f.read().splitlines()
+                self.host_log_pos = size
+                for line in new_lines:
+                    print(f"[HOST] {line}")
+                    self.categorize_log(line, source='HOST')
+
+    def categorize_log(self, line, source):
+        """根据日志内容分类为正/负事件"""
+        if 'NEGATIVE' in line or 'expected' in line.lower():
+            self.negative_events.append((source, line))
+        elif 'POSITIVE' in line or 'occurred' in line.lower():
+            self.positive_events.append((source, line))
+
+    def generate_summary(self):
+        """生成AI可读的诊断总结"""
+        summary = []
+        summary.append("=" * 40)
+        summary.append(f"🕒 调试总结 [{datetime.now().strftime('%H:%M:%S')}]")
+        summary.append(f"📊 正事件数量: {len(self.positive_events)}")
+        summary.append(f"⚠️ 负事件数量: {len(self.negative_events)}")
+        if self.negative_events:
+            summary.append("--- 负事件详情 (期望但未发生) ---")
+            for src, evt in self.negative_events[-5:]:  # 最近5条
+                summary.append(f"  [{src}] {evt}")
+        if self.positive_events:
+            summary.append("--- 最近正事件 ---")
+            for src, evt in self.positive_events[-3:]:
+                summary.append(f"  [{src}] {evt}")
+        summary.append("=" * 40)
+        return "\n".join(summary)
+
+    def run(self):
+        print("🚀 调试助手启动，按Ctrl+C停止...")
+        try:
+            while self.running:
+                self.read_rs485_line()
+                self.read_mcu_line()
+                self.read_host_log()
+                # 触发总结的条件：
+                # 1. 检测到新的负事件立即输出
+                # 2. 或者按间隔周期输出
+                now = time.time()
+                if self.negative_events and (self.summary_interval == 0 or now - self.last_summary_time > self.summary_interval):
+                    print("\n" + self.generate_summary())
+                    self.last_summary_time = now
+                    # 仅保留最近的汇总，防止重复输出同一批
+                    self.negative_events = self.negative_events[-1:]
+                time.sleep(0.05)
+        except KeyboardInterrupt:
+            print("\n🛑 停止监控，输出最终总结：")
+            print(self.generate_summary())
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="三合一调试助手")
+    parser.add_argument("--rs485", help="RS485监听串口")
+    parser.add_argument("--mcu", help="控制板日志串口")
+    parser.add_argument("--host-log", help="上位机日志文件路径")
+    parser.add_argument("--summary-interval", type=int, default=0, help="总结输出间隔(秒)，0=仅负日志触发")
+    args = parser.parse_args()
+    assistant = DebugAssistant(args.rs485, args.mcu, args.host_log, args.summary_interval)
+    assistant.run()
+</pre>
+        </div>
+
+        <div class="quote">
+            💡 这个脚本就是<strong>CLI闭环的物理载体</strong>：AI可以通过命令 <code>python debug_tools/debug_assistant.py --rs485 COM3 --mcu COM4 --host-log host/logs/app.log</code> 直接启动监控，并实时获取结构化总结，无需人工解读日志。
+        </div>
+
+        <!-- agents.md 示例 -->
+        <h2>6. agents.md：AI协作契约</h2>
+        <p>放入项目根目录，任何接入的AI助手都会自动遵守项目规范。</p>
+        <div class="code-block">
+            <pre>
+# agents.md - RS485传感器采集项目
+
+## 项目概述
+- 嵌入式平台：STM32F407，RS485总线9600bps
+- 传感器：温湿度SHT30、压力传感器（模拟量）
+- 上位机：Python/PyQt，通过USB-RS485适配器通信
+
+## 状态枚举
+| 数值 | 枚举名 | 含义 |
+|------|--------|------|
+| 0 | IDLE | 空闲 |
+| 1 | WAITING_FOR_POLL | 等待上位机轮询 |
+| 2 | SENDING_RESPONSE | 正在发送数据 |
+
+## 行为准则
+1. 所有日志分析优先查找 [NEGATIVE] 和 [POSITIVE] 标签
+2. 上位机日志位于 host/logs/ 下，格式为结构化键值对
+3. 调试助手启动命令：`python debug_tools/debug_assistant.py --rs485 COMx --mcu COMy --host-log host/logs/app.log`
+4. 建议修改固件时，使用 git diff 格式输出
+5. 遇到通讯超时，优先检查RS485总线终端电阻和设备地址
+
+## 已知陷阱
+- 轮询间隔必须 > 50ms，否则固件可能因中断过载丢帧
+- RS485收发切换需延时2ms，避免总线竞争
+</pre>
+        </div>
+
+        <!-- VSCode Tasks 自动化 -->
+        <h2>7. VSCode Tasks：一键全自动测试</h2>
+        <div class="code-block">
+            <pre>
+// .vscode/tasks.json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-fw",
+            "type": "shell",
+            "command": "cd firmware/build && cmake --build .",
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "flash",
+            "dependsOn": ["build-fw"],
+            "type": "shell",
+            "command": "openocd -f interface/stlink.cfg -f target/stm32f4x.cfg -c 'program firmware/build/firmware.elf verify reset exit'"
+        },
+        {
+            "label": "start-debug-assistant",
+            "dependsOn": ["flash"],
+            "type": "shell",
+            "command": "python debug_tools/debug_assistant.py --rs485 COM3 --mcu COM4 --host-log host/logs/app.log",
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "run-host-app",
+            "dependsOn": ["start-debug-assistant"],
+            "type": "shell",
+            "command": "python host/main.py"
+        },
+        {
+            "label": "full-test",
+            "dependsOn": ["run-host-app"],
+            "group": { "kind": "test", "isDefault": true }
+        }
+    ]
+}
+</pre>
+        </div>
+
+        <!-- 五层进化落地总结 -->
+        <h2>8. 五层进化在本项目中的映射</h2>
+        <table>
+            <thead><tr><th>层级</th><th>文章方法</th><th>本项目落地</th></tr></thead>
+            <tbody>
+                <tr><td>第一招</td><td>双向可观测性</td><td>固件/上位机均使用正负日志宏；调试助手自动归类并总结</td></tr>
+                <tr><td>第二招</td><td>统一上下文</td><td>标准目录结构 + agents.md 提供完整项目语境</td></tr>
+                <tr><td>第三招</td><td>多模型协作</td><td>低代码模型生成模板，高能力模型分析调试总结</td></tr>
+                <tr><td>第四招</td><td>CLI闭环</td><td>debug_assistant.py 可被AI直接调用，输出结构化总结</td></tr>
+                <tr><td>第五招</td><td>完整闭环工程</td><td>VSCode Tasks 实现一键 full-test，案例库可积累日志样本</td></tr>
+            </tbody>
+        </table>
+
+        <div class="highlight">
+            <p><strong>🎯 使用场景：</strong>当AI助手（如Claude、GPT）接入此项目时，只需读取 <code>agents.md</code> 和项目结构，即可自主运行 <code>full-test</code> 任务，读取调试助手输出的总结，并基于正/负日志定位问题。整个过程无需人工解释硬件细节。</p>
+        </div>
+
+        <div class="quote" style="margin-top:2rem;">
+            <i class="fas fa-rocket"></i> 这个模板可以直接克隆到任何RS485传感器采集项目中。只需修改传感器驱动和协议帧定义，其余工程化组件（日志、调试助手、agents.md、tasks.json）均可复用。真正的“一次搭建，终身受益”。
+        </div>
+
+        <footer>
+            <i class="fas fa-code"></i> 高可复用嵌入式AI编程模板 · 基于五层进化方法论 · 传感器采集 · RS485通讯 · 上位机管理<br>
+            调试助手自动总结，为AI诊断铺平道路
+        </footer>
+    </div>
+</body>
+</html>
