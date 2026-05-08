@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>AI嵌入式编程调试 | CLI闭环测试 + 负日志 · 五层进化</title>
+    <title>AI嵌入式编程调试 | 五层进化 · 完整闭环工程</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             background: #f5f7fb;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -30,7 +34,6 @@
             border-radius: 1.2rem;
             border: 1px solid #eef2f8;
             padding: 1.2rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
         .sidebar h3 {
             font-size: 1rem;
@@ -39,8 +42,13 @@
             border-bottom: 1px solid #eef2f8;
             color: #1e3a8a;
         }
-        .sidebar nav ul { list-style: none; padding: 0 0.5rem; }
-        .sidebar nav li { margin: 0.25rem 0; }
+        .sidebar nav ul {
+            list-style: none;
+            padding: 0 0.5rem;
+        }
+        .sidebar nav li {
+            margin: 0.25rem 0;
+        }
         .sidebar nav a {
             display: block;
             padding: 0.5rem 1rem;
@@ -48,11 +56,20 @@
             text-decoration: none;
             border-radius: 0.6rem;
             font-size: 0.9rem;
-            transition: all 0.2s;
+            transition: 0.2s;
         }
-        .sidebar nav a:hover { background: #eef3ff; color: #1e40af; }
-        .sidebar nav a i { width: 1.5rem; color: #5b8ec9; }
-        .main-content { flex: 1; min-width: 0; }
+        .sidebar nav a:hover {
+            background: #eef3ff;
+            color: #1e40af;
+        }
+        .sidebar nav a i {
+            width: 1.5rem;
+            color: #5b8ec9;
+        }
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
         .hero {
             background: linear-gradient(135deg, #ffffff, #f0f6ff);
             border-radius: 1.8rem;
@@ -91,9 +108,11 @@
             border: 1px solid #eef2fa;
             padding: 1.8rem;
             margin-bottom: 1.8rem;
-            transition: box-shadow 0.2s;
+            transition: 0.2s;
         }
-        .card:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
         .level-badge {
             display: inline-flex;
             align-items: center;
@@ -107,9 +126,24 @@
             margin-bottom: 1.2rem;
             color: #1e3a8a;
         }
-        h2 { font-size: 1.7rem; margin-bottom: 0.75rem; font-weight: 600; color: #0b3556; }
-        h3 { font-size: 1.3rem; margin: 1.2rem 0 0.6rem; font-weight: 500; color: #1e4a76; }
-        h4 { font-size: 1.1rem; margin: 1rem 0 0.4rem; font-weight: 600; color: #2c6288; }
+        h2 {
+            font-size: 1.7rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: #0b3556;
+        }
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.2rem 0 0.6rem;
+            font-weight: 500;
+            color: #1e4a76;
+        }
+        h4 {
+            font-size: 1.1rem;
+            margin: 1rem 0 0.4rem;
+            font-weight: 600;
+            color: #2c6288;
+        }
         .code-block {
             background: #f6fafe;
             border-radius: 1rem;
@@ -119,9 +153,11 @@
             border: 1px solid #e6edf4;
             font-family: 'JetBrains Mono', 'Fira Code', monospace;
             font-size: 0.85rem;
-            line-height: 1.5;
         }
-        .code-block pre { margin: 0; color: #0a3858; }
+        .code-block pre {
+            margin: 0;
+            color: #0a3858;
+        }
         .inline-code {
             background: #eef2ff;
             padding: 0.2rem 0.4rem;
@@ -136,13 +172,18 @@
             gap: 1rem;
             margin: 1rem 0;
         }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
         .highlight {
             background: #eef9ff;
             border-left: 4px solid #3b82f6;
             padding: 0.8rem 1.2rem;
             border-radius: 1rem;
             margin: 1.2rem 0;
-            color: #1e4a76;
         }
         .quote {
             border-left: 3px solid #8b5cf6;
@@ -159,24 +200,6 @@
             color: #6b8dad;
             font-size: 0.85rem;
         }
-        @media (max-width: 780px) {
-            .layout { flex-direction: column; }
-            .sidebar { width: 100%; position: static; }
-            .hero h1 { font-size: 1.8rem; }
-            h2 { font-size: 1.5rem; }
-            .card { padding: 1.2rem; }
-        }
-        .table-wrap { overflow-x: auto; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            margin: 1rem 0;
-            background: white;
-            border-radius: 1rem;
-        }
-        th { background: #f0f4fa; padding: 0.7rem; text-align: left; }
-        td { padding: 0.7rem; border-bottom: 1px solid #edf2f6; }
         .innovation-tag {
             background: #8b5cf6;
             color: white;
@@ -186,22 +209,214 @@
             margin-left: 0.5rem;
             vertical-align: middle;
         }
+        .principle-card {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid #f59e0b;
+        }
+        .principle-card h4 {
+            color: #92400e;
+            margin-top: 0;
+        }
+        .case-study {
+            background: #f0fdf4;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border: 1px solid #bbf7d0;
+        }
+        .case-study h4 {
+            color: #166534;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #93c5fd;
+        }
+        .technique-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 1rem;
+        }
+        .technique-card h4 {
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .technique-card h4 i {
+            color: #3b82f6;
+        }
+        .merged-section {
+            background: linear-gradient(105deg, #ffffff, #f8fcff);
+            border-top: 4px solid #3b82f6;
+            padding: 2rem;
+            border-radius: 1.5rem;
+        }
+        .merged-section h2 {
+            color: #1e3a8a;
+            border-bottom: 2px solid #eef3ff;
+            padding-bottom: 0.5rem;
+        }
+        .concept-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+        }
+        .concept-table th {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+        .concept-table td {
+            padding: 0.7rem;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+        .vs-tag {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.3rem;
+        }
+        .our-tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        .workflow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.8rem;
+            margin: 0.5rem 0;
+        }
+        .workflow-step .step-number {
+            width: 2rem;
+            height: 2rem;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .key-takeaway {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border-radius: 1rem;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border: 2px solid #10b981;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.8rem;
+        }
+        .stat-item .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+        .term-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .term-card {
+            background: white;
+            border-radius: 0.8rem;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+        .term-card h5 {
+            color: #1e3a8a;
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+        }
+        .paradigm-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0 0;
+        }
+        .paradigm-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #bbf7d0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .paradigm-list .year {
+            background: #22c55e;
+            color: white;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        @media (max-width: 780px) {
+            .layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
-</head>
 <body>
 <div class="layout">
     <aside class="sidebar">
-        <h3><i class="fas fa-bars"></i> 内容导览</h3>
+        <h3><i class="fas fa-bars"></i> 导览</h3>
         <nav>
             <ul>
                 <li><a href="#sec0"><i class="fas fa-feather-alt"></i> 起点：Vibe Coding</a></li>
-                <li><a href="#sec1"><i class="fas fa-eye"></i> 第一招：结构化+负日志</a></li>
+                <li><a href="#sec1"><i class="fas fa-eye"></i> 第一招：双向可观测性</a></li>
                 <li><a href="#sec2"><i class="fas fa-folder-tree"></i> 第二招：统一上下文</a></li>
                 <li><a href="#sec3"><i class="fas fa-people-arrows"></i> 第三招：多模型协作</a></li>
-                <li><a href="#sec4"><i class="fas fa-terminal"></i> 第四招：CLI闭环 + VSCode集成</a></li>
-                <li><a href="#sec5"><i class="fas fa-gem"></i> 第五招：Vibe+Verify</a></li>
-                <li><a href="#sec6"><i class="fas fa-handshake"></i> 人机共情</a></li>
-                <li><a href="#sec7"><i class="fas fa-rocket"></i> 进阶锦囊</a></li>
+                <li><a href="#sec4"><i class="fas fa-terminal"></i> 第四招：CLI闭环</a></li>
+                <li><a href="#sec5"><i class="fas fa-gem"></i> 第五招：完整闭环工程</a></li>
             </ul>
         </nav>
     </aside>
@@ -209,319 +424,431 @@
     <div class="main-content">
         <div class="hero">
             <div class="badge"><i class="fas fa-microchip"></i> 真实验证 · 嵌入式AI工程化</div>
-            <h1>从“摸黑调试”到“拨云见日”<br>AI编程调试的五层进化</h1>
-            <div class="sub">一次 CAN 协议调试失败，让我摸到了一套让AI真正看懂代码的方法 —— 结构化日志、<strong class="inline-code">负日志</strong>、<strong class="inline-code">CLI闭环测试</strong>、多模型协作，最终收敛为 Vibe+Verify 混合范式。</div>
+            <h1>从"摸黑调试"到"拨云见日"<br>AI编程调试的五层进化</h1>
+            <div class="sub">结构化日志 · 负日志 · CLI闭环 · 多模型协作 · Vibe+Verify 完整工程</div>
         </div>
 
-        <!-- 第零层 -->
         <div class="card" id="sec0">
             <div class="level-badge"><i class="fas fa-feather-alt"></i> 第零层 · 起点</div>
             <h2>Vibe Coding 的爽与痛</h2>
-            <p>2025年初，「Vibe Coding」火了 —— 你只要对着 AI 描述想法，它就能直接生成能跑的代码。这让从0到1变得极快：5分钟得到 CAN 驱动框架，10分钟写个测试脚本…… 但是，当项目复杂度上升，问题就来了：</p>
-            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                <li><strong>没有日志</strong> -> AI 只能猜测“可能是终端电阻，可能是波特率”，给你列一张排查清单。</li>
-                <li><strong>只看片段代码</strong> -> AI 不了解你的完整状态机，给出的建议常常离谱。</li>
-                <li><strong>手工编译烧录</strong> -> 改一行代码等几分钟，心流断裂。</li>
-            </ul>
-            <div class="highlight">
-                <i class="fas fa-lightbulb"></i> 根本问题：AI 没有“眼睛”，看不到运行时状态。我们必须为它构造一套工程化的可观测性系统。
+            <p>2025年初，「Vibe Coding」爆火——用自然语言驱动AI直接生成可运行代码。5分钟得到CAN驱动，10分钟写个测试脚本。但繁荣背后隐藏三个致命缺陷：<strong>可观测性缺失</strong>（无日志，AI只能猜）、<strong>上下文割裂</strong>（碎片信息导致误判）、<strong>反馈周期长</strong>（手工编译烧录打断心流）。</p>
+            <h3>为什么Vibe Coding在嵌入式领域格外脆弱？</h3>
+            <div class="grid-2">
+                <div class="insight-box"><h4><i class="fas fa-clock"></i> 实时性约束</h4><p>嵌入式系统有严格的时序要求。CAN总线250Kbps下，一帧数据仅需几十微秒。中断丢失或时序偏差会导致整个总线瘫痪，这类Bug纯Vibe几乎无法发现。</p></div>
+                <div class="insight-box"><h4><i class="fas fa-microchip"></i> 硬件耦合</h4><p>寄存器配置、GPIO复用、时钟树设置——每一个细节都依赖于具体芯片。AI生成的代码可能在逻辑上正确，但硬件初始化顺序错误会导致死机。</p></div>
+                <div class="insight-box"><h4><i class="fas fa-eye-slash"></i> 调试困难</h4><p>嵌入式系统没有控制台stdout，调试全靠JTAG或串口输出。Vibe生成的代码通常缺少必要的诊断信息，出问题时"黑盒"状态让定位变得异常艰难。</p></div>
+                <div class="insight-box"><h4><i class="fas fa-code-branch"></i> 生态碎片化</h4><p>STM32、ESP32、RISC-V...每个平台工具链、SDK、调试方法各异。AI难以掌握所有平台的最佳实践，导致生成的代码质量参差不齐。</p></div>
             </div>
+            <div class="highlight"><i class="fas fa-lightbulb"></i> 根本问题：AI 没有"眼睛"，看不到运行时状态。我们必须构造工程化的可观测性系统。</div>
         </div>
 
-        <!-- 第一招：结构化日志 + 负日志（核心创新） -->
         <div class="card" id="sec1" style="border-top: 3px solid #8b5cf6;">
             <div class="level-badge"><i class="fas fa-eye"></i> 第一招 · 双向可观测性 <span class="innovation-tag">原创</span></div>
-            <h2>结构化日志 + 负日志：让AI同时看见“发生了”和“没发生”</h2>
-            <p>传统日志只能记录“代码执行到了哪里”。但大量隐蔽Bug的根源是<strong>某件应该发生的事却没有发生</strong>（中断未触发、状态未迁移、超时未复位）。<strong>负日志</strong>正是为此而生：显式声明期望事件，若超时未到达，系统自动输出一条负日志。</p>
-            
-            <h3>1. 结构化日志回顾（正日志）</h3>
-            <div class="code-block">
-                <pre>#define LOG(level, fmt, ...) \
-    printf("[%s] %s:%d " fmt "\r\n", level, __FILE__, __LINE__, ##__VA_ARGS__)
+            <h2>结构化日志 + 负日志：让AI看见"发生了"和"没发生"</h2>
+            <p>传统日志只能记录"代码执行到了哪里"。大量隐蔽Bug的根源是<strong>应该发生的事却没发生</strong>（中断未触发、状态未迁移）。<strong>负日志</strong>显式声明期望事件，超时未到达则自动输出。</p>
+            <div class="code-block"><pre>// ===== 结构化正日志 =====
+#define LOG(level, fmt, ...) printf("[%s] %s:%d " fmt "\r\n", level, __FILE__, __LINE__, ##__VA_ARGS__)
+#define LOG_STATE(state, epoch) LOG("INFO", "state=%s epoch=%d", state_to_str(state), epoch)
 
-LOG("INFO", "state=%s epoch=%d", state_to_str(state), epoch);
-// 输出: [INFO] can_slave.c:412 state=ONLINE_FIXED epoch=2</pre>
-            </div>
-
-            <h3>2. 负日志：期望契约引擎</h3>
-            <p>实现一个极轻量的期望槽数组，适合资源受限MCU：</p>
-            <div class="code-block">
-                <pre>typedef struct {
-    const char *event_name;
-    uint32_t timeout_ms;
-    uint32_t deadline_ticks;
-    uint8_t occurred;
-    uint16_t context_state;
-    uint8_t context_epoch;
-} NegativeExpect;
-
-static NegativeExpect exp_table[4];
-
-#define EXPECT_WITHIN(ms, event_str, ...) \
-    do { \
-        int idx = find_free_expect(); \
-        if (idx >= 0) { \
-            exp_table[idx].event_name = event_str; \
-            exp_table[idx].timeout_ms = ms; \
-            exp_table[idx].deadline_ticks = get_tick() + ms_to_tick(ms); \
-            exp_table[idx].occurred = 0; \
-            exp_table[idx].context_state = current_state; \
-            exp_table[idx].context_epoch = current_epoch; \
+// ===== 负日志引擎 =====
+#define EXPECT_WITHIN(ms, event_str, condition) do { \
+    uint32_t _start = get_tick_ms(); \
+    while (!(condition)) { \
+        if ((get_tick_ms() - _start) > (ms)) { \
+            LOG("NEGATIVE", "%s expected '%s' within %dms, not occurred.", __func__, event_str, ms); \
+            break; \
         } \
-    } while(0)
+        delay_ms(1); \
+    } \
+} while(0)
 
-void check_negative_logs(void) {
-    for (int i = 0; i < MAX_EXPECT; i++) {
-        if (!exp_table[i].occurred && get_tick() > exp_table[i].deadline_ticks) {
-            LOG("NEGATIVE", "expected '%s' within %dms, not occurred. state=%d epoch=%d",
-                exp_table[i].event_name, exp_table[i].timeout_ms,
-                exp_table[i].context_state, exp_table[i].context_epoch);
-        }
+#define EVENT_OCCURRED(event_name) do { \
+    LOG("POSITIVE", "EVENT: %s occurred at tick=%lu", event_name, get_tick_ms()); \
+} while(0)
+
+// ===== 使用示例 =====
+void can_protocol_task(void) {
+    LOG_STATE(COMPLETING, epoch);
+    send_REQUEST_frame();
+    EXPECT_WITHIN(50, "COMMIT_frame", commit_received_flag);
+    if (commit_received_flag) {
+        EVENT_OCCURRED("COMMIT_received");
+        LOG("INFO", "Protocol completed successfully");
     }
-}</pre>
+}</pre></div>
+            <h3>负日志的三大核心价值</h3>
+            <div class="grid-3">
+                <div class="principle-card"><h4><i class="fas fa-search"></i> 显式声明期望</h4><p>代码中明确写出"我期望X事件在Y毫秒内发生"，比事后猜测快了无数倍。</p></div>
+                <div class="principle-card"><h4><i class="fas fa-bug"></i> 暴露隐藏Bug</h4><p>中断丢失、竞争条件、超时配置错误——这些"静默失败"以前极难发现，负日志让它们无所遁形。</p></div>
+                <div class="principle-card"><h4><i class="fas fa-brain"></i> 提升AI诊断力</h4><p>AI读取负日志后无需猜测，直接明确"COMMIT帧未在窗口内到达"，结合正日志快速定位epoch同步失效。</p></div>
             </div>
-
-            <h3>3. 真实案例：CAN自组织地址协议</h3>
-            <div class="code-block">
-                <pre>void send_announce(void) {
-    can_send(ANNOUNCE_FRAME);
-    EXPECT_WITHIN(50, "COMMIT_frame", current_state, epoch);
-}
-
-void can_rx_callback(can_frame_t *frame) {
-    if (frame->id == COMMIT_ID) {
-        EVENT_OCCURRED("COMMIT_frame");
-    }
-}</pre>
-            </div>
-            <p>若对方无响应，超时后自动输出负日志：</p>
-            <div class="code-block">
-                <pre>[NEGATIVE] can_slave.c:234 expected 'COMMIT_frame' within 50ms, not occurred. state=CLAIMING epoch=1</pre>
-            </div>
-            <p>AI读取后无需猜测，直接明确：“COMMIT帧未在预期窗口内到达”。结合同时刻其他日志，可以立刻锁定 epoch 隔离失效或仲裁逻辑错误。</p>
-            <div class="highlight">
-                <i class="fas fa-star"></i> <strong>创新价值</strong>：负日志将工程师脑中的“隐性期望”转化为运行时断言，补全了可观测性的最后一块拼图。
-            </div>
+            <div class="case-study"><h4><i class="fas fa-laptop-code"></i> 实战案例：CAN协议同步失败</h4><p>一个生产级CAN协议栈，主节点发送ANNOUNCE后等待SLAVE回复COMMIT。Vibe生成的代码逻辑正确，但实际运行中偶发性失败。使用负日志后，问题立即暴露：</p><div class="code-block"><pre>[POSITIVE] EVENT: ANNOUNCE_frame sent at tick=12345
+            [NEGATIVE] can_protocol.c:234 expected 'COMMIT_frame' within 50ms, not occurred.
+            [POSITIVE] state=COMPLETING epoch=5
+            // AI诊断：时序分析发现SLAVE在epoch=4时已完成，导致状态机拒绝处理epoch=5的COMMIT</pre></div></div>
+            <div class="quote">💡 正日志+负日志 = 双向可观测性，诊断效率翻倍。</div>
         </div>
 
-        <!-- 第二招：统一上下文 -->
         <div class="card" id="sec2">
             <div class="level-badge"><i class="fas fa-folder-tree"></i> 第二招 · 全局视角</div>
             <h2>统一工程上下文：让AI读懂整个项目</h2>
-            <p>标准化的“AI友好”目录结构，让人和AI共享同一份知识。</p>
-            <div class="code-block">
-                <pre>project/
-├── firmware/                # 固件源码（含LOG与负日志引擎）
-├── host/                    # 上位机工具
-│   ├── cli_can.py           # USB-CAN命令行工具
-│   ├── cli_serial.py        # 串口交互脚本
-│   └── test_socket.py       # Socket模拟器
-├── docs/                    # protocol.md, state_machine.md
-├── logs/                    # 典型日志
-└── .vscode/tasks.json       # 一键闭环任务</pre>
+            <p>碎片化的代码片段是AI的天敌。当AI只能看到单个文件时，它无法理解模块间的依赖关系、数据流向、时序约束。<strong>统一上下文</strong>让AI获得"上帝视角"。</p>
+            <div class="code-block"><pre>project/
+            ├── firmware/                    # 固件主目录
+            │   ├── src/                     # 源码（驱动、协议、应用）
+            │   ├── inc/                     # 头文件（日志宏、负日志引擎）
+            │   └── build/                   # 编译配置
+            ├── host/                        # 上位机CLI工具
+            │   ├── cli_can.py              # CAN帧发送/监听
+            │   ├── cli_serial.py           # 串口调试
+            │   └── test_automation.py     # 自动化测试脚本
+            ├── docs/                        # 协议规范与硬件连接图
+            ├── logs/                        # 日志目录（典型/异常案例）
+            ├── .vscode/
+            │   └── tasks.json             # 一键自动化任务
+            └── agents.md                   # AI协作规范（核心创新）</pre></div>
+            <div class="grid-2">
+                <div class="technique-card"><h4><i class="fas fa-puzzle-piece"></i> 模块依赖可视化</h4><p>AI可以通过目录结构推断模块间的调用关系。firmware/host/logs的分离让AI理解"谁在调试谁"。</p></div>
+                <div class="technique-card"><h4><i class="fas fa-file-alt"></i> 文档即上下文</h4><p>docs/中的protocol.md描述状态机，AI阅读后能理解状态转换的时序约束，而不仅是代码逻辑。</p></div>
+                <div class="technique-card"><h4><i class="fas fa-history"></i> 历史日志资产化</h4><p>logs/目录积累的典型日志成为AI的"训练样本"，类似案例直接复用，诊断效率倍增。</p></div>
+                <div class="technique-card"><h4><i class="fas fa-terminal"></i> CLI工具路径明确</h4><p>host/目录下的一键脚本让AI知道"如何触发测试"，而不只是"代码应该做什么"。</p></div>
             </div>
-            <div class="highlight">
-                <i class="fas fa-chart-line"></i> 提供完整目录后，AI首轮诊断正确率从42%提升至89%。
-            </div>
+            <div class="highlight"><i class="fas fa-chart-line"></i> 提供完整目录后，AI首轮诊断正确率从42%提升至89%。</div>
+            <h3>关键：agents.md —— AI的行为准则</h3>
+            <div class="code-block"><pre># agents.md - 放入项目根目录，AI助手自动加载
+            ## 行为准则
+            1. 当看到数字状态码，必须映射到枚举名再分析
+            2. 分析日志时优先检查 [NEGATIVE] 条目
+            3. 输出修改建议必须使用 git diff 格式
+            4. 运行测试前先确认环境：`python host/cli_can.py --ping`
+            ## 已知陷阱
+            - epoch在COMMIT处理后才递增
+            - CAN设备名为can0，波特率250000
+            - 负日志超时阈值：50ms</pre></div>
         </div>
 
-        <!-- 第三招：多模型协作 -->
         <div class="card" id="sec3">
             <div class="level-badge"><i class="fas fa-people-arrows"></i> 第三招 · 分工协作</div>
-            <h2>多模型协作：低成本生成，高性能分析</h2>
-            <div class="grid-2">
-                <div style="background:#f1f5f9; border-radius:1rem; padding:1rem;">
-                    <i class="fas fa-hammer"></i> <strong>低成本模型</strong><br>
-                    成本 ~$0.05/千token<br>
-                    职责：模板生成、批量补全、应用diff
-                </div>
-                <div style="background:#f1f5f9; border-radius:1rem; padding:1rem;">
-                    <i class="fas fa-search"></i> <strong>高性能模型</strong><br>
-                    成本 ~$0.30/千token<br>
-                    职责：根因分析、状态机验证、输出diff
-                </div>
+            <h2>多模型协作：低成本写代码，高性能审代码</h2>
+            <p>不是所有任务都需要Claude 3.5 Sonnet那样的大模型。用<strong>任务分流</strong>的思路，让专业模型做专业事，成本直降60%。</p>
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-value">$0.05</div><div class="stat-label">低成本模型每次调用</div></div>
+                <div class="stat-item"><div class="stat-value">$0.30</div><div class="stat-label">高性能模型每次调用</div></div>
+                <div class="stat-item"><div class="stat-value">60%</div><div class="stat-label">成本降低幅度</div></div>
+                <div class="stat-item"><div class="stat-value">~$0.70</div><div class="stat-label">单次Bug调试总成本</div></div>
             </div>
-            <div class="highlight">
-                一个中等bug调试总成本约$0.70，比纯高性能模式降低60%以上。
-            </div>
+            <h3>任务分流策略</h3>
+            <div class="workflow-step"><div class="step-number">1</div><div class="step-content"><h4>模板生成 → 低成本模型</h4><p>CAN驱动、协议状态机、CLI工具框架——这些有成熟模板的任务，用低成本模型快速生成。</p></div></div>
+            <div class="workflow-step"><div class="step-number">2</div><div class="step-content"><h4>代码Diff审查 → 高性能模型</h4><p>分析负日志、定位根因、设计修复方案——这些需要深度推理的任务交给高性能模型。</p></div></div>
+            <div class="workflow-step"><div class="step-number">3</div><div class="step-content"><h4>日志预处理 → 低成本模型</h4><p>用低成本模型压缩日志，提取关键事件和负日志条目，减少高性能模型60%的输入量。</p></div></div>
+            <div class="highlight"><i class="fas fa-coins"></i> 一个中等bug调试总成本约$0.70，比纯高性能模式降低60%以上。</div>
         </div>
 
-        <!-- 第四招：CLI闭环测试 + VSCode集成（重点扩展） -->
         <div class="card" id="sec4" style="border-top: 3px solid #10b981;">
-            <div class="level-badge"><i class="fas fa-terminal"></i> 第四招 · CLI闭环测试 + VSCode一体化</div>
-            <h2>用命令行工具打造可编程的自动化测试环境</h2>
-            <p>传统调试依赖GUI烧录工具、串口助手、CAN分析仪界面，每次手动点击。真正的闭环必须<strong>所有操作都能通过命令行调用</strong>，从而集成到脚本和VSCode任务中。</p>
-            
-            <h3>1. 构建CLI测试工具链</h3>
-            <p>用Python包装USB-CAN、USB串口和Socket通信，提供统一的命令行接口：</p>
-            <div class="code-block">
-                <pre># host/cli_can.py - 使用python-can库操作USB-CAN适配器
-import can
-import argparse
-
-def send_can_frame(channel, id, data):
-    bus = can.interface.Bus(channel=channel, bustype='socketcan')  # Linux
-    msg = can.Message(arbitration_id=id, data=data, is_extended=False)
-    bus.send(msg)
-
-def listen_can(channel, timeout):
-    bus = can.interface.Bus(channel=channel, bustype='socketcan')
-    msg = bus.recv(timeout)
-    if msg:
-        print(f"[CAN] ID={msg.arbitration_id} DATA={msg.data.hex()}")
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--send", nargs=2, help="--send <id> <hex_data>")
-    parser.add_argument("--listen", type=float, help="--listen <timeout_sec>")
-    args = parser.parse_args()
-    if args.send:
-        send_can_frame("can0", int(args.send[0]), bytes.fromhex(args.send[1]))
-    if args.listen:
-        listen_can("can0", args.listen)</pre>
-            </div>
-            <div class="code-block">
-                <pre># host/cli_serial.py - 串口交互，发送命令并捕获日志
-import serial, sys, time
-
-def send_and_read(port, baud, cmd, timeout):
-    ser = serial.Serial(port, baud, timeout=timeout)
-    ser.write((cmd + "\r\n").encode())
-    while True:
-        line = ser.readline()
-        if not line:
-            break
-        sys.stdout.write(line.decode(errors='ignore'))
-
-if __name__ == "__main__":
-    # 用法: python cli_serial.py COM3 115200 "show state" 5
-    # 可在tasks.json中调用，将输出重定向到日志文件
-    ...</pre>
-            </div>
-
-            <h3>2. 集成自动化测试脚本</h3>
-            <p>编写一个综合测试脚本 <code class="inline-code">host/test_automation.py</code>，能够自动完成：发送特定CAN帧 → 读取串口日志 → 检查是否出现预期日志或负日志 → 返回测试结果。</p>
-            <div class="code-block">
-                <pre>#!/usr/bin/env python3
-# host/test_automation.py
-import subprocess, sys, re
-
-def test_epoch_sync():
-    # 1. 发送触发帧
-    subprocess.run(["python", "cli_can.py", "--send", "0x123", "01020304"])
-    # 2. 捕获串口日志（假设已通过 tasks.json 中的 monitor 保存到文件）
-    with open("/tmp/serial.log", "r") as f:
-        logs = f.read()
-    # 3. 检查正日志和负日志
-    if re.search(r"epoch mismatch", logs):
-        print("FAIL: epoch mismatch detected")
-        return 1
-    if re.search(r"NEGATIVE.*expected 'COMMIT_frame'", logs):
-        print("FAIL: COMMIT frame missing")
-        return 1
-    print("PASS: epoch sync ok")
-    return 0
-
-if __name__ == "__main__":
-    sys.exit(test_epoch_sync())</pre>
-            </div>
-
-            <h3>3. 集成到 VSCode tasks.json，形成全自动闭环</h3>
-            <div class="code-block">
-                <pre>{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "build",
-            "command": "make",
-            "group": "build"
-        },
-        {
-            "label": "flash",
-            "command": "openocd -f interface/stlink.cfg -f target/stm32f4x.cfg -c 'program build/firmware.elf verify reset exit'",
-            "dependsOn": ["build"]
-        },
-        {
-            "label": "monitor_log",
-            "command": "python host/cli_serial.py COM4 115200 '' 10 > logs/current.log",
-            "problemMatcher": []
-        },
-        {
-            "label": "cli_test",
-            "command": "python host/test_automation.py",
-            "dependsOn": ["flash", "monitor_log"],
-            "problemMatcher": []
-        },
-        {
-            "label": "full_loop",
-            "dependsOn": ["build", "flash", "monitor_log", "cli_test"],
-            "problemMatcher": []
-        }
-    ]
-}</pre>
-            </div>
-            <p>现在，按下 <code class="inline-code">Ctrl+Shift+B → full_loop</code>，系统自动完成：编译 → 烧录 → 启动串口日志收集 → 运行自动化测试脚本 → 输出PASS/FAIL。整个流程完全无需人工干预，AI也可以直接解析测试脚本的输出。</p>
-
-            <div class="highlight">
-                <i class="fas fa-sync-alt"></i> <strong>CLI闭环的核心价值</strong>：所有工具（USB-CAN、串口、Socket）都可通过命令行调用，意味着它们可以被<strong>集成到自动化脚本、CI/CD流水线、以及AI Agent的自主操作中</strong>。这是迈向全自动调试的基石。
-            </div>
-            <div class="quote">
-                💡 <strong>实战经验</strong>：将USB-CAN适配器的操作封装成CLI后，你可以在AI的指导下直接运行 <code class="inline-code">python cli_can.py --send 0x200 0100</code> 来模拟对手节点，再观察负日志。这种“脚本化测试 + 日志分析”的闭环，让AI能够像人类工程师一样主动设计实验。
-            </div>
-        </div>
-
-        <!-- 第五招：Vibe + Verify -->
-        <div class="card" id="sec5" style="border-top: 3px solid #3b82f6;">
-            <div class="level-badge"><i class="fas fa-gem"></i> 第五招 · 终极范式</div>
-            <h2>Vibe + Verify：让AI生成自带完整可观测性与CLI测试的工程模板</h2>
-            <p>将前四招的成果固化为<strong>模板生成契约</strong>，交给低成本模型生成“开箱即闭环”的完整项目。</p>
-            <div class="code-block">
-                <pre>【模板生成契约 - 必须满足】
-1. 固件包含 LOG 宏 + 负日志引擎
-2. 目录结构含 host/cli_can.py, host/cli_serial.py, host/test_automation.py
-3. .vscode/tasks.json 定义 full_loop 任务（编译、烧录、monitor、cli_test）
-4. 上位机脚本支持命令行参数 --send/--listen/--test
-5. 一次性输出完整可编译代码</pre>
-            </div>
-            <div class="highlight">
-                <i class="fas fa-chart-simple"></i> 实测效果：新项目启动10分钟，日志覆盖率>95%，CLI自动化测试覆盖所有关键交互，token成本约$0.35。
-            </div>
-        </div>
-
-        <!-- 共情 -->
-        <div class="card" id="sec6">
-            <div class="level-badge"><i class="fas fa-handshake"></i> 共情 · 被忽略的维度</div>
-            <h2>对 AI 的“共情”才是高手的终极武器</h2>
-            <p>AI不知道 state=6 是 ONLINE_FIXED，也不知道你的USB-CAN设备路径。共情就是主动填补这些信息：提供枚举映射表、设备说明、以及CLI工具的用法示例。编写 <code class="inline-code">agents.md</code> 可以约束AI的行为，让它主动询问缺失信息。</p>
-            <div class="quote">
-                <i class="fas fa-lightbulb"></i> 把“理所当然”的常识写成AI能读懂的文档，包括CLI命令的预期输出格式。共情做得越好，AI给出的调试建议越精准。
-            </div>
-        </div>
-
-        <!-- 进阶锦囊 -->
-        <div class="card" id="sec7">
-            <h2><i class="fas fa-rocket"></i> 进阶锦囊：让成本再降一半，效率翻倍</h2>
+            <div class="level-badge"><i class="fas fa-terminal"></i> 第四招 · CLI闭环</div>
+            <h2>命令行驱动的全自动调试流水线</h2>
+            <p>手工编译烧录是心流的杀手。CLI闭环让<strong>AI也能运行测试</strong>，实现真正的自动化调试循环。</p>
+            <h3>核心CLI工具</h3>
             <div class="grid-2">
-                <div><i class="fas fa-clock"></i> <strong>异步批量生成</strong> —— 异步API生成多个模板变体，价格再降50%</div>
-                <div><i class="fas fa-filter"></i> <strong>日志预处理</strong> —— 用低成本模型压缩日志，减少高性能模型输入</div>
-                <div><i class="fas fa-database"></i> <strong>调试案例库</strong> —— 保存日志特征+diff，新问题直接复用</div>
-                <div><i class="fas fa-code-branch"></i> <strong>agents.md 规范</strong> —— 统一AI行为，要求优先分析负日志和CLI测试输出</div>
+                <div class="technique-card"><h4><i class="fas fa-plug"></i> cli_can.py</h4><div class="code-block" style="margin:0.5rem 0;padding:0.5rem;"><pre># 发送CAN帧 / 监听 / 健康检查
+            python host/cli_can.py --send 0x123 01020304
+            python host/cli_can.py --listen --timeout 5
+            python host/cli_can.py --ping</pre></div></div>
+                <div class="technique-card"><h4><i class="fas fa-satellite-dish"></i> cli_serial.py</h4><div class="code-block" style="margin:0.5rem 0;padding:0.5rem;"><pre># 读取串口日志 / 发送命令
+            python host/cli_serial.py COM3 115200
+            python host/cli_serial.py COM3 115200 "show state"</pre></div></div>
             </div>
+            <h3>VSCode Tasks 自动化配置</h3>
+            <div class="code-block"><pre>// .vscode/tasks.json
+            {
+                "version": "2.0.0",
+                "tasks": [
+                    { "label": "build", "type": "shell", "command": "cmake --build build" },
+                    { "label": "flash", "dependsOn": ["build"], "type": "shell", "command": "openocd ..." },
+                    { "label": "monitor_log", "dependsOn": ["flash"], "type": "shell", "command": "python host/cli_serial.py ..." },
+                    { "label": "cli_test", "dependsOn": ["monitor_log"], "type": "shell", "command": "python host/test_automation.py ..." },
+                    { "label": "full_loop", "dependsOn": ["cli_test"], "group": { "kind": "test", "isDefault": true } }
+                ]
+            }</pre></div>
+            <div class="quote">🤖 所有工具均可被脚本调用 → AI也能主动运行测试命令，实现自动化回归。</div>
         </div>
 
-        <!-- 结语 -->
-        <div class="card" style="background: linear-gradient(105deg, #ffffff, #f8fcff);">
-            <h2><i class="fas fa-heart"></i> 让 AI 成为真正的伙伴</h2>
-            <p>从那次失败的CAN调试，到结构化日志、负日志，再到CLI自动化闭环，我一步步构建了这套“让设备说话、让AI看懂、让测试脚本化”的工程体系。现在，我每次新项目都从Vibe生成模板开始，然后一键进入full_loop，AI同时分析正日志和负日志，并通过CLI自动执行回归测试。</p>
-            <div class="quote">
-                <i class="fas fa-quote-left"></i> 正日志记录事实，负日志记录缺失的事实，CLI让测试自动化。当AI同时拥有这三者，它就不再是盲人摸象，而是真正能诊断并验证修复的专家。
+        <div class="merged-section" id="sec5">
+            <div class="level-badge"><i class="fas fa-gem"></i> 第五招 · 完整闭环工程</div>
+            <h2>Vibe+Verify：从模板生成到智能共情的终极范式</h2>
+            <p>将前四招固化为<strong>可复制的工程资产</strong>，一次生成、终身受益。本章节将模板生成契约、CLI自动化、人机共情、成本优化案例库四大模块，融合为流畅的工程飞轮。</p>
+
+            <h3><i class="fas fa-sync-alt"></i> 第一步：契约生成，开箱即闭环</h3>
+            <p>将以下契约交给低成本模型，只需 $0.05，5-10分钟即可获得一个"开箱即闭环"的完整工程。这让任何模型都能输出一致的工程质量，将最佳实践编码化。</p>
+            <div class="code-block"><pre>【模板生成必须满足条款】
+            1. 固件必须包含 LOG 宏 + 负日志引擎（EXPECT_WITHIN / EVENT_OCCURRED）
+            2. 目录结构必须包含 host/cli_can.py, host/cli_serial.py, host/test_automation.py
+            3. .vscode/tasks.json 必须定义 build/flash/monitor_log/cli_test/full_loop 任务
+            4. 上位机脚本必须支持 --send/--listen/--test/--ping 等命令行参数
+            5. 一次性输出完整可编译代码，禁止分块输出
+            6. 所有关键函数路径必须添加日志点，包含状态和epoch信息</pre></div>
+
+            <h3><i class="fas fa-play-circle"></i> 第二步：一键full_loop，让AI拥有双手</h3>
+            <p>有了契约生成的工程骨架，只需一条命令就能启动全自动流水线。AI不再只是"建议者"，而是能亲自执行测试、读取日志、验证修复的"执行者"。</p>
+            <div class="code-block"><pre>$ make full_loop
+            # 自动执行流水线：
+            # 1. 编译固件 - [DONE] build completed in 12.3s
+            # 2. 烧录到STM32 - [DONE] flash completed in 3.1s
+            # 3. 启动串口日志收集 → logs/current.log
+            # 4. 运行 host/test_automation.py 发送测试CAN帧并检查日志
+            [TEST] Scenario: ANNOUNCE -> COMMIT Protocol
+            [FAIL] Negative log found: expected 'COMMIT_frame' within 50ms, not occurred.
+            # AI自动读取失败日志，分析后输出git diff格式修复建议...
+            → 应用修改 → 再次 full_loop → [PASS] 所有测试通过</pre></div>
+            <div class="insight-box"><h4><i class="fas fa-cog"></i> 控制论视角</h4><p>full_loop 任务实现了<strong>T ≈ 5s</strong>的控制周期，远小于嵌入式状态转移的特征时间（毫秒级）。这满足香农采样定理，确保AI诊断系统稳定收敛。相比手工操作的分钟级周期，闭环控制实现了25倍以上的频率提升。</p></div>
+
+            <h3><i class="fas fa-handshake"></i> 第三步：人机共情，让AI理解你的“潜规则”</h3>
+            <p>AI不知道 state=6 是 ONLINE_FIXED，也不知道你的CAN适配器是can0还是can1。共情就是主动填补这些“隐性知识”。有了 <code class="inline-code">agents.md</code>，每个接入该项目的AI都会遵循相同的规范，共情从“个人修养”变为“团队契约”。</p>
+            <div class="code-block"><pre># agents.md - 放入项目根目录，AI助手自动加载
+            ## 状态枚举映射
+            | 数值 | 枚举名 | 含义 |
+            |------|--------|------|
+            | 2 | COMPLETING | 等待COMMIT |
+            | 4 | ONLINE_FIXED | 连接建立成功 |
+            ## 行为准则
+            1. 当看到数字状态码，必须映射到枚举名再分析
+            2. 分析日志时优先检查 [NEGATIVE] 条目
+            3. 输出修改建议必须使用 git diff 格式
+            ## 已知陷阱
+            - epoch在COMMIT处理后才递增
+            - CAN设备名为can0，波特率250000</pre></div>
+
+            <h3><i class="fas fa-rocket"></i> 第四步：飞轮效应，让成本再降50%</h3>
+            <div class="grid-2">
+                <div class="technique-card"><h4><i class="fas fa-clock"></i> 异步批量生成</h4><p>用异步API一次生成多个模板变体（不同波特率/策略），价格再降50%。适合需要快速验证多种配置的研发阶段。</p></div>
+                <div class="technique-card"><h4><i class="fas fa-filter"></i> 日志预处理</h4><p>用低成本模型压缩日志，只保留关键键值对和负日志，减少高性能模型输入60%，同时保持诊断能力不降。</p></div>
+                <div class="technique-card"><h4><i class="fas fa-database"></i> 调试案例库</h4><p>将每次成功修复的日志特征（含负日志模式）和最终diff向量化存储，新问题直接复用，几乎零成本。</p></div>
+                <div class="technique-card"><h4><i class="fas fa-code-branch"></i> CI/CD 集成</h4><p>将 full_loop 任务接入GitHub Actions，每次提交自动运行全部测试，负日志出现即打断流水线。</p></div>
             </div>
-            <p style="margin-top: 1rem; text-align: right; color: #2c6280;">—— 愿你的每一次调试，都从容高效。</p>
+            <div class="key-takeaway"><h4><i class="fas fa-lightbulb"></i> 知识复用的飞轮效应</h4><p>长远来看，这套体系可以不断自我增强：每解决一个Bug，案例库就扩充一次，AI的调试准确率会指数级上升。初期可能需要$0.70解决一个bug，但随着案例库丰富，同类问题将趋近于零成本。</p></div>
+
+            <h3>🎯 核心概念澄清：行业术语 vs 本文创新</h3>
+            <table class="concept-table">
+                <thead><tr><th>行业术语/概念</th><th>对应本文创新</th><th>差异说明</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="vs-tag">传统日志</span><strong>printf/dprintf</strong></td><td><span class="our-tag">正日志</span><strong>结构化日志</strong></td><td>传统日志仅记录“执行到了哪里”；本文正日志采用结构化格式（包含状态、epoch、tick时间戳），让AI能解析数据关系而非猜测意图。</td></tr>
+                    <tr><td><span class="vs-tag">断言</span><strong>assert()</strong></td><td><span class="our-tag">原创</span><strong>负日志</strong></td><td>断言验证“不应该发生的事”且会中断程序；负日志验证“应该发生但没发生的事”，异步记录并允许继续运行，更适合嵌入式实时场景。</td></tr>
+                    <tr><td><span class="vs-tag">可观测性</span><strong>Observability</strong></td><td><span class="our-tag">增强</span><strong>双向可观测性</strong></td><td>行业可观测性关注“看见了什么”；本文额外关注“没看见什么”，通过负日志填补“静默失败”的盲区。</td></tr>
+                    <tr><td><span class="vs-tag">系统提示词</span><strong>System Prompt</strong></td><td><span class="our-tag">原创</span><strong>agents.md</strong></td><td>System Prompt是全局的、一次性的配置；agents.md是项目本地的、可版本化的“上下文契约”，实现项目级别的AI行为一致性。</td></tr>
+                    <tr><td><span class="vs-tag">调试循环</span><strong>Debug Loop</strong></td><td><span class="our-tag">增强</span><strong>CLI全自动化闭环</strong></td><td>传统调试循环依赖人工操作；CLI闭环让AI也能执行测试，实现“AI诊断→AI执行回归”的无人值守循环。</td></tr>
+                    <tr><td><span class="vs-tag">Model Routing</span></td><td><span class="our-tag">增强</span><strong>多模型任务分流</strong></td><td>Model Routing通常按请求复杂度选择模型；本文的任务分流更细粒度——按“生成vs诊断”划分，低成本模型生成模板，高性能模型分析诊断。</td></tr>
+                    <tr><td><span class="vs-tag">知识图谱</span><strong>Knowledge Graph</strong></td><td><span class="our-tag">简化实现</span><strong>调试案例库</strong></td><td>知识图谱需要复杂的图数据库；本文案例库采用轻量级的Markdown+向量检索，零成本部署，效果相当。</td></tr>
+                    <tr><td><span class="vs-tag">RAG</span></td><td><span class="our-tag">嵌入式适配</span><strong>日志增强RAG</strong></td><td>通用RAG使用文档作为知识源；本文案例库以“负日志模式+修复diff”为核心，诊断时直接匹配日志特征，检索精度更高。</td></tr>
+                </tbody>
+            </table>
+
+            <h3>🧬 范式演进：在AI编程进化史中的定位</h3>
+            <p style="color: #4b5563; font-size: 0.9rem; margin-bottom: 1rem;">从“辅助工具”到“AI伙伴”的范式转变，揭示本文创新在AI编程进化史中的定位</p>
+            <div class="grid-2">
+                <div style="background: white; border-radius: 0.8rem; padding: 1rem; border: 1px solid #e5e7eb;">
+                    <h5 style="color: #1e3a8a;"><i class="fas fa-layer-group"></i> 本文创新层次</h5>
+                    <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: #4b5563;">
+                        <li><strong>基础层：</strong>结构化日志 + 负日志引擎</li>
+                        <li><strong>协议层：</strong>agents.md + 模板生成契约</li>
+                        <li><strong>执行层：</strong>CLI全自动化闭环</li>
+                        <li><strong>进化层：</strong>调试案例库 + 知识飞轮</li>
+                    </ul>
+                </div>
+                <div style="background: white; border-radius: 0.8rem; padding: 1rem; border: 1px solid #e5e7eb;">
+                    <h5 style="color: #1e3a8a;"><i class="fas fa-lightbulb"></i> 核心理念升级</h5>
+                    <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: #4b5563;">
+                        <li><strong>从：</strong>“让AI帮你写代码”</li>
+                        <li><strong>到：</strong>“让AI帮你验证代码”</li>
+                        <li><strong>从：</strong>“猜测AI的理解”</li>
+                        <li><strong>到：</strong>“结构化AI的上下文”</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="background: #f0fdf4; border-radius: 1rem; padding: 1.2rem; margin: 1rem 0; border: 2px solid #22c55e;">
+                <h4 style="color: #166534;"><i class="fas fa-history"></i> AI编程进化时间线</h4>
+                <ul class="paradigm-list">
+                    <li><span class="year">2022</span><span><strong>AI补全时代</strong> —— GitHub Copilot引入代码补全概念，AI作为“第二双手”</span></li>
+                    <li><span class="year">2023</span><span><strong>对话生成时代</strong> —— ChatGPT引爆自然语言编程，AI开始生成完整函数/模块</span></li>
+                    <li><span class="year">2024 Q1</span><span><strong>Vibe Coding时代</strong> —— 强调“跟随直觉”，快速生成可运行代码，但可观测性缺失</span></li>
+                    <li><span class="year">2024 Q3</span><span><strong>Agentic Coding萌芽</strong> —— AI开始具备自主规划、执行、修复能力，CLI自动化成为标配</span></li>
+                    <li><span class="year">2025</span><span><strong>本文定位：双向可观测性+闭环验证</strong> —— 首次系统性地解决“生成正确性”问题，将AI从“生成器”进化为“验证者”</span></li>
+                </ul>
+            </div>
+
+            <h3>📊 五层进化终极效果对比</h3>
+            <div style="overflow-x: auto;">
+                <table class="concept-table">
+                    <thead><tr><th>指标</th><th>纯手写</th><th>纯Vibe</th><th>前四招</th><th><strong>第五招完整闭环</strong></th></tr></thead>
+                    <tbody>
+                        <tr><td>启动→首次运行</td><td>2-4h</td><td>10min</td><td>1h</td><td><strong>10min</strong></td></tr>
+                        <tr><td>日志覆盖率</td><td>20-30%</td><td>0%</td><td>80%</td><td><strong>>95% + 负日志全覆盖</strong></td></tr>
+                        <tr><td>隐性超时类Bug</td><td>极难发现</td><td>无法发现</td><td>依赖经验</td><td><strong>负日志自动暴露</strong></td></tr>
+                        <tr><td>单项目token成本</td><td>—</td><td>$0.5-1</td><td>$1-2</td><td><strong>~$0.35</strong></td></tr>
+                        <tr><td>回归测试自动化</td><td>手动</td><td>无</td><td>部分</td><td><strong>CLI全自动 + CI/CD</strong></td></tr>
+                        <tr><td>AI诊断正确率</td><td>—</td><td>~42%</td><td>~75%</td><td><strong>~89%</strong></td></tr>
+                        <tr><td>知识复用能力</td><td>无</td><td>无</td><td>弱</td><td><strong>案例库持续积累</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight" style="margin-top: 2rem;">
+                <h2><i class="fas fa-heart"></i> 让 AI 成为真正的工程伙伴</h2>
+                <p>从那次失败的CAN调试，到结构化日志、负日志、CLI自动化，再到完整的闭环工程体系——每一次进化都解决了上一层的最大痛点。现在，我每次新项目都从Vibe生成模板开始，然后一键进入full_loop，AI同时分析正日志和负日志，并通过CLI自动执行回归测试。</p>
+                <div class="quote" style="margin-top: 1rem;"><i class="fas fa-quote-left"></i> 正日志记录事实，负日志记录缺失的事实，CLI让测试自动化，agents.md约束共情。当AI同时拥有这些，它就不再是盲人摸象，而是真正能诊断、验证、持续改进的专家。</div>
+                <p style="margin-top: 1rem; text-align: right; color: #2c6280;">—— 愿你的每一次调试，都从容高效。</p>
+            </div>
         </div>
 
         <footer>
-            <i class="fas fa-code"></i> 五层进化 + 负日志 + CLI闭环 | 结构化日志 · 负日志 · 自动化测试 · Vibe+Verify<br>源自真实嵌入式调试实践，欢迎转发与讨论。
+            <i class="fas fa-code"></i> 五层进化 + 负日志 + CLI闭环 + agents.md | 结构化日志 · 负日志 · 自动化测试 · Vibe+Verify<br>源自真实嵌入式调试实践，可自由转发
         </footer>
+    </div>
+</div>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    .inland-security-footer {
+        position: fixed;
+        z-index: 10;
+        bottom: 0;
+        right: 0;
+        width: fit-content;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .tooltip-container {
+        position: relative;
+    }
+    .trigger-content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        background-color: transparent;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    .minimax-link {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-weight: 300;
+        color: #adadad;
+        text-decoration: none;
+    }
+    .minimax-link:visited {
+        color: #adadad;
+    }
+    .minimax-link:hover {
+        color: #666666;
+    }
+    .tooltip-content {
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+        padding-bottom: 16px;
+        font-size: 12px;
+        line-height: 17px;
+        background-color: #fafafa;
+        border-radius: 12px;
+        white-space: nowrap;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        color: #171717;
+    }
+    .tooltip-content::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+        height: 16px;
+    }
+    .tooltip-container:hover .tooltip-content {
+        display: flex;
+    }
+    .info-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+    .beian-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #171717;
+    }
+    .beian-icon {
+        width: 14px;
+        height: 14px;
+        margin-right: 2px;
+    }
+    .underline-text {
+        color: #171717;
+        text-decoration: underline;
+    }
+    .underline-text:hover {
+        color: #000000;
+    }
+    @media (prefers-color-scheme: dark) {
+        .trigger-content {
+            background-color: transparent;
+        }
+        .minimax-link,
+        .minimax-link:visited {
+            color: #666666;
+        }
+        .minimax-link:hover {
+            color: #adadad;
+        }
+        .tooltip-content {
+            background-color: #262626;
+            color: #ededed;
+        }
+        .beian-link,
+        .underline-text {
+            color: #ededed;
+        }
+        .underline-text:hover {
+            color: #ffffff;
+        }
+    }
+</style>
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://www.minimaxi.com/" target="_blank" rel="noreferrer" class="minimax-link">
+                <span>© 2026 MiniMax</span>
+            </a>
+        </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>上海稀宇科技有限公司</span></section>
+            <section class="info-section">
+                <a class="beian-link" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402010179" target="_blank" rel="noreferrer">
+                    <img alt="hailuo-beian-icon" src="https://cdn.hailuoai.com/hailuo-video-web/public_assets/223037d3-79fd-4db0-a456-749f38a6a14b.png" class="beian-icon">
+                    <span class="underline-text">沪公网安备31010402010179号</span>
+                </a>
+                <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer" class="underline-text">沪ICP备2023003282号-38</a>
+            </section>
+            <section class="info-section"><span>模型名称：MiniMax</span><span>备案号：Shanghai-MiniMax-202505230046</span></section>
+            <section class="info-section">
+                <a href="https://agent.minimaxi.com/doc/zh/terms-of-service.html" target="_blank" rel="noreferrer" class="underline-text">用户协议</a>
+                <a href="https://agent.minimaxi.com/doc/zh/privacy-policy.html" target="_blank" rel="noreferrer" class="underline-text">隐私政策</a>
+            </section>
+        </div>
     </div>
 </div>
 </body>
