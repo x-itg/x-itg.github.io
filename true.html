@@ -26,6 +26,45 @@
             padding: 2rem;
             border: 1px solid #eef2fa;
         }
+        .page-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        .page-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 0.95rem;
+            border-radius: 999px;
+            border: 1px solid #dbe6f3;
+            background: #f8fbff;
+            color: #1f598a;
+            text-decoration: none;
+            font-size: 0.92rem;
+        }
+        .page-nav a:hover {
+            background: #eef4ff;
+            color: #1e3a8a;
+        }
+        .page-nav a.active {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            border-color: transparent;
+            color: #ffffff;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-top: 1rem;
+            color: #1f598a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            color: #1e3a8a;
+        }
         h1 {
             font-size: 2.2rem;
             font-weight: 700;
@@ -166,9 +205,15 @@
 </head>
 <body>
     <div class="container">
+        <nav class="page-nav" aria-label="站点导航">
+            <a href="index.html"><i class="fas fa-house"></i> 首页</a>
+            <a href="true.html" class="active"><i class="fas fa-flask"></i> 实践项目模板</a>
+            <a href="test.html"><i class="fas fa-vial"></i> 自主修复闭环</a>
+        </nav>
         <div class="badge"><i class="fas fa-microchip"></i> 实践案例 · 可复用模板</div>
         <h1>高可复用嵌入式AI编程模板<br>传感器采集 · RS485通讯 · 上位机管理</h1>
         <div class="subtitle">基于“五层进化”方法论的真实项目骨架，集成负日志、CLI调试助手与自动化闭环</div>
+        <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> 返回首页</a>
 
         <!-- 项目概述 -->
         <h2>1. 项目全景</h2>
@@ -503,6 +548,8 @@ if __name__ == "__main__":
         <div class="quote" style="margin-top:2rem;">
             <i class="fas fa-rocket"></i> 这个模板可以直接克隆到任何RS485传感器采集项目中。只需修改传感器驱动和协议帧定义，其余工程化组件（日志、调试助手、agents.md、tasks.json）均可复用。真正的“一次搭建，终身受益”。
         </div>
+
+        <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> 返回首页</a>
 
         <footer>
             <i class="fas fa-code"></i> 高可复用嵌入式AI编程模板 · 基于五层进化方法论 · 传感器采集 · RS485通讯 · 上位机管理<br>

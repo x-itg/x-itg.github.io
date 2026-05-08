@@ -63,6 +63,26 @@
             background: #eef3ff;
             color: #1e40af;
         }
+        .sidebar nav a.active {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: #ffffff;
+        }
+        .sidebar-utility {
+            padding: 0.9rem 1rem 0;
+            border-top: 1px solid #eef2f8;
+            margin-top: 0.75rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: #1f598a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            color: #1e3a8a;
+        }
         .main-content {
             flex: 1;
             min-width: 0;
@@ -252,6 +272,9 @@
         <h3><i class="fas fa-project-diagram"></i> 收敛闭环</h3>
         <nav>
             <ul>
+                <li><a href="index.html"><i class="fas fa-house"></i> 返回首页</a></li>
+                <li><a href="true.html"><i class="fas fa-flask"></i> 实践项目模板</a></li>
+                <li><a href="test.html" class="active"><i class="fas fa-vial"></i> 自主修复闭环</a></li>
                 <li><a href="#overview"><i class="fas fa-bullseye"></i> 核心理念</a></li>
                 <li><a href="#foundation"><i class="fas fa-layer-group"></i> 工程基础</a></li>
                 <li><a href="#agent"><i class="fas fa-robot"></i> Agent迭代引擎</a></li>
@@ -260,12 +283,16 @@
                 <li><a href="#example"><i class="fas fa-flask"></i> 收敛演示</a></li>
             </ul>
         </nav>
+        <div class="sidebar-utility">
+            <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> 返回首页</a>
+        </div>
     </aside>
     <div class="main-content">
         <div class="hero">
             <div class="badge"><i class="fas fa-arrows-spin"></i> AI自主迭代 · 需求收敛</div>
             <h1>AI驱动的代码修复与测试增强联动<br>需求收敛闭环方法</h1>
             <div class="sub">基于结构化日志与CLI自动化，让AI在每一轮迭代中同步完善代码和测试，螺旋逼近需求目标</div>
+            <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> 返回首页</a>
         </div>
 
         <!-- 概述 -->
@@ -409,6 +436,7 @@ def converge(project, requirements):
             </div>
         </div>
         <footer>
+            <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> 返回首页</a><br>
             <i class="fas fa-microchip"></i> AI双轨收敛方法 · 代码修复 + 测试增强联动 · 基于五层进化工程模板<br>
             让AI在迭代中同步完善产品与检验标准
         </footer>
