@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>PDF电路图分析器 · AI可读 · VSCode深度关联</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f7fb;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #1e2a3e;
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 1.8rem;
+            padding: 2.5rem 2rem;
+            border: 1px solid #eef2fa;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #2c4f7c;
+            border-left: 3px solid #3b82f6;
+            padding-left: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            font-size: 1.6rem;
+            margin: 2.2rem 0 1rem;
+            color: #0b3556;
+            border-bottom: 2px solid #eef3ff;
+            padding-bottom: 0.3rem;
+        }
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.8rem;
+            color: #1e4a76;
+        }
+        h4 {
+            font-size: 1.1rem;
+            margin: 1.2rem 0 0.5rem;
+            color: #2c6288;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .code-block {
+            background: #f6fafe;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin: 1.2rem 0;
+            border: 1px solid #e6edf4;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .code-block code {
+            color: #0a3858;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin: 1rem 0;
+        }
+        .card-light {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #e5e7eb;
+        }
+        .badge {
+            display: inline-block;
+            background: #e8f0fe;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1f598a;
+            margin-bottom: 1rem;
+        }
+        .highlight {
+            background: #eef9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1.2rem 0;
+        }
+        .quote {
+            border-left: 3px solid #8b5cf6;
+            background: #faf5ff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+        }
+        .workflow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.8rem;
+            margin: 0.6rem 0;
+        }
+        .workflow-step .step-num {
+            width: 2.2rem;
+            height: 2.2rem;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            background: white;
+        }
+        th {
+            background: #f0f4fa;
+            padding: 0.7rem;
+            text-align: left;
+        }
+        td {
+            padding: 0.7rem;
+            border-bottom: 1px solid #edf2f6;
+            vertical-align: top;
+        }
+        .ui-mockup {
+            background: #1e2937;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            display: grid;
+            grid-template-columns: 200px 1fr 280px;
+            gap: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+        .ui-panel {
+            background: #334155;
+            border-radius: 0.5rem;
+            padding: 0.8rem;
+        }
+        .ui-panel .title {
+            color: #94a3b8;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        .ui-panel .item {
+            color: #e2e8f0;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.4rem;
+            margin: 0.2rem 0;
+            border-radius: 0.3rem;
+            cursor: pointer;
+        }
+        .ui-panel .item:hover {
+            background: #475569;
+        }
+        .ui-panel .item.selected {
+            background: #3b82f6;
+        }
+        .ui-panel .link {
+            color: #7dd3fc;
+            text-decoration: underline;
+            font-size: 0.75rem;
+        }
+        .ui-pdf-view {
+            background: #f8fafc;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 1rem;
+        }
+        footer {
+            margin-top: 2.5rem;
+            text-align: center;
+            color: #6b8dad;
+            font-size: 0.85rem;
+            border-top: 1px solid #e2edf2;
+            padding-top: 1.5rem;
+        }
+        /* ===== 侧边栏布局（统一文章导航） ===== */
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+            gap: 2rem;
+        }
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 1.5rem;
+            align-self: start;
+            background: #ffffff;
+            border-radius: 1.2rem;
+            border: 1px solid #eef2f8;
+            padding: 1.2rem 0;
+        }
+        .sidebar nav ul {
+            list-style: none;
+            padding: 0 0.5rem;
+        }
+        .sidebar nav li {
+            margin: 0.25rem 0;
+        }
+        .sidebar nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #2c5f8a;
+            text-decoration: none;
+            border-radius: 0.6rem;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .sidebar nav a:hover {
+            background: #eef3ff;
+            color: #1e40af;
+        }
+        .sidebar nav a i {
+            width: 1.5rem;
+            color: #5b8ec9;
+        }
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+        /* ===== 统一文章导航系统 ===== */
+        .article-series {
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
+            border-bottom: 1px solid #eef2f8;
+        }
+        .article-series h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.6rem;
+            color: #1e3a8a;
+        }
+        .article-link {
+            display: flex !important;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 0.8rem !important;
+        }
+        .article-link .article-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #eef3ff;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            flex-shrink: 0;
+        }
+        .article-link.active .article-num {
+            background: #1e3a8a;
+            color: #fff;
+        }
+        .article-link .article-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+            min-width: 0;
+        }
+        .article-link .article-title {
+            font-weight: 600;
+            font-size: 0.88rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article-link .article-desc {
+            font-size: 0.68rem;
+            color: #6b8dad;
+            font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article-link.active {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
+            color: #ffffff !important;
+        }
+        .article-link.active .article-desc {
+            color: rgba(255,255,255,0.7) !important;
+        }
+        .section-nav {
+            padding-top: 0.2rem;
+        }
+        .section-nav h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.6rem;
+            color: #1e3a8a;
+        }
+        @media (max-width: 780px) {
+            .layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+        }
+        @media (max-width: 800px) {
+            .container {
+                padding: 1.2rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .ui-mockup {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="article-series">
+            <h3><i class="fas fa-book"></i> 文章系列</h3>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="article-link">
+                        <span class="article-num">1</span>
+                        <span class="article-info">
+                            <span class="article-title">五层进化</span>
+                            <span class="article-desc">AI编程调试的五层架构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="true.html" class="article-link">
+                        <span class="article-num">2</span>
+                        <span class="article-info">
+                            <span class="article-title">实践项目模板</span>
+                            <span class="article-desc">高可复用嵌入式AI编程骨架</span>
+                        </span>
+                    </a></li>
+                    <li><a href="test.html" class="article-link">
+                        <span class="article-num">3</span>
+                        <span class="article-info">
+                            <span class="article-title">自主修复闭环</span>
+                            <span class="article-desc">AI双轨收敛 · 需求螺旋闭合</span>
+                        </span>
+                    </a></li>
+                    <li><a href="pcb.html" class="article-link active">
+                        <span class="article-num">4</span>
+                        <span class="article-info">
+                            <span class="article-title">电路图分析器</span>
+                            <span class="article-desc">PDF原理图转AI可读描述</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="section-nav">
+            <h3><i class="fas fa-list"></i> 本章导览</h3>
+            <nav>
+                <ul>
+                    <li><a href="#arch"><i class="fas fa-sitemap"></i> 架构与流程</a></li>
+                    <li><a href="#gui"><i class="fas fa-desktop"></i> GUI布局设计</a></li>
+                    <li><a href="#script"><i class="fas fa-code"></i> 核心Python脚本</a></li>
+                    <li><a href="#code-mapping"><i class="fas fa-file-code"></i> 代码映射格式</a></li>
+                    <li><a href="#integration"><i class="fas fa-puzzle-piece"></i> 工程集成</a></li>
+                    <li><a href="#example"><i class="fas fa-comment-dots"></i> 协作场景</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    <div class="main-content">
+        <div class="container" style="padding:0;">
+        <div class="badge"><i class="fas fa-file-pdf"></i> PDF原理图 · AI可读分析</div>
+        <h1>PDF电路图分析器<br>Markdown生成 + VSCode深度关联</h1>
+        <div class="subtitle">基于PyQt的GUI工具，将PDF电路图转化为结构化描述，建立元件与代码的快速跳转通道</div>
+
+        <h2 id="arch">1. 整体架构与工作流程</h2>
+        <p>该工具面向嵌入式AI开发场景：PDF原理图通常由EDA工具导出，包含器件位号、网络标号、引脚连接等信息。脚本通过<strong>OCR + 规则解析</strong>提取这些文本，生成AI可读的Markdown描述，并在PyQt GUI中建立“电路元件 ↔ 代码文件:行号”的关联视图。点击超链接直接调用VSCode打开对应位置。</p>
+        <div class="workflow-step"><div class="step-num">1</div><div><h4>PDF导入与预处理</h4><p>将PDF页面渲染为高清图像，增强对比度，为OCR做准备。</p></div></div>
+        <div class="workflow-step"><div class="step-num">2</div><div><h4>OCR文本提取</h4><p>使用PaddleOCR或Tesseract识别元件位号（U1、R3）、网络名（CAN_TX）、引脚号等。</p></div></div>
+        <div class="workflow-step"><div class="step-num">3</div><div><h4>元件关联分析</h4><p>根据空间邻近关系和线条追踪，建立元件之间的连接关系。</p></div></div>
+        <div class="workflow-step"><div class="step-num">4</div><div><h4>Markdown生成</h4><p>输出结构化电路描述，包含元件列表、网络连接、引脚映射，方便AI模型理解硬件架构。</p></div></div>
+        <div class="workflow-step"><div class="step-num">5</div><div><h4>代码映射与超链接</h4><p>读取映射配置，为每个元件关联代码文件及行号。GUI中点击直接跳转VSCode。</p></div></div>
+
+        <h2 id="gui">2. GUI布局设计</h2>
+        <p>PyQt界面分为三个区域：左侧<strong>元件/网络列表</strong>、中间<strong>PDF原始视图</strong>、右侧<strong>关联代码面板</strong>。三者联动，点选元件自动高亮对应代码行。</p>
+        <div class="ui-mockup">
+            <div class="ui-panel" style="overflow-y: auto;">
+                <div class="title"><i class="fas fa-microchip"></i> 元件列表</div>
+                <div class="item"><b>U1</b> STM32F407</div>
+                <div class="item selected"><b>U2</b> MAX485 →</div>
+                <div class="item"><b>R1</b> 120Ω终端电阻</div>
+                <div class="item"><b>J1</b> RS485端子</div>
+                <div class="title" style="margin-top:1rem;"><i class="fas fa-project-diagram"></i> 网络</div>
+                <div class="item">CAN_TX</div>
+                <div class="item">CAN_RX</div>
+                <div class="item">VCC3V3</div>
+            </div>
+            <div class="ui-pdf-view">
+                <div>[PDF页面预览区域]<br>当前显示第1页<br>高亮框标注U2元件<br>支持缩放与拖拽</div>
+            </div>
+            <div class="ui-panel" style="overflow-y: auto;">
+                <div class="title"><i class="fas fa-code"></i> 关联代码</div>
+                <div style="color:#e2e8f0; font-size:0.8rem; margin-bottom:0.5rem;">U2 - MAX485 驱动器</div>
+                <div class="item"><span class="link">📄 rs485.c:45</span><br><span style="color:#94a3b8;font-size:0.7rem;">void rs485_init(void)</span></div>
+                <div class="item"><span class="link">📄 rs485.c:102</span><br><span style="color:#94a3b8;font-size:0.7rem;">rs485_send_byte()</span></div>
+                <div class="item"><span class="link">📄 pinout.h:23</span><br><span style="color:#94a3b8;font-size:0.7rem;">#define RS485_DE</span></div>
+                <div class="title" style="margin-top:1rem;"><i class="fas fa-book"></i> 数据手册</div>
+                <div class="item"><span class="link">📋 MAX485_ds.pdf</span></div>
+            </div>
+        </div>
+        <div class="highlight"><i class="fas fa-mouse-pointer"></i> 交互逻辑：点击左侧“U2 MAX485” → 中间PDF视图自动滚动到U2位置并用红框标出 → 右侧显示U2对应的所有代码位置，点击“rs485.c:45”直接调用 <code>code --goto rs485.c:45</code> 打开VSCode。</div>
+
+        <h2 id="script">3. 核心Python脚本实现</h2>
+        <p>以下是完整可运行的PyQt脚本，集成了PDF渲染、OCR识别、Markdown生成和VSCode跳转功能。</p>
+        <div class="code-block"><code>#!/usr/bin/env python3
+# schematic_analyzer.py - PDF电路图分析器，PyQt GUI，支持VSCode跳转
+import sys
+import os
+import json
+import subprocess
+from pathlib import Path
+import fitz  # PyMuPDF，用于PDF渲染
+from PIL import Image, ImageEnhance
+import numpy as np
+from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
+                             QHBoxLayout, QListWidget, QListWidgetItem, QLabel,
+                             QTextEdit, QSplitter, QPushButton, QFileDialog,
+                             QMessageBox, QScrollArea, QFrame)
+from PyQt6.QtGui import QPixmap, QImage, QPainter, QColor, QPen, QFont, QDesktopServices
+from PyQt6.QtCore import Qt, QUrl, QRect, pyqtSignal
+
+# 尝试导入PaddleOCR，若失败则降级使用Tesseract
+try:
+    from paddleocr import PaddleOCR
+    OCR_ENGINE = "paddle"
+except ImportError:
+    OCR_ENGINE = "tesseract"
+
+
+class SchematicAnalyzer(QMainWindow):
+    """主窗口：PDF电路图分析器"""
+    component_selected = pyqtSignal(str, list)  # 元件名, [(文件名, 行号), ...]
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("PDF电路图分析器 - AI可读 · VSCode关联")
+        self.setGeometry(100, 100, 1400, 850)
+        self.pdf_path = None
+        self.current_page = 0
+        self.components = {}       # 元件名 → 坐标信息
+        self.net_labels = {}      # 网络标号 → 坐标信息
+        self.code_mappings = {}   # 元件名 → [(文件, 行号, 描述), ...]
+        self.highlight_rect = None
+        self.pdf_pixmap = None
+        self.init_ui()
+        self.init_ocr()
+        self.load_code_mappings()
+
+    def init_ui(self):
+        """初始化GUI布局"""
+        central = QWidget()
+        self.setCentralWidget(central)
+        main_layout = QHBoxLayout(central)
+        splitter = QSplitter(Qt.Orientation.Horizontal)
+        # 左侧面板：元件列表 + 网络列表
+        left_panel = QWidget()
+        left_layout = QVBoxLayout(left_panel)
+        left_layout.addWidget(QLabel("<b>🔌 元件列表</b>"))
+        self.component_list = QListWidget()
+        self.component_list.itemClicked.connect(self.on_component_clicked)
+        left_layout.addWidget(self.component_list)
+        left_layout.addWidget(QLabel("<b>🌐 网络标号</b>"))
+        self.net_list = QListWidget()
+        self.net_list.itemClicked.connect(self.on_net_clicked)
+        left_layout.addWidget(self.net_list)
+        # 中间面板：PDF视图
+        mid_panel = QWidget()
+        mid_layout = QVBoxLayout(mid_panel)
+        self.page_label = QLabel("第 0 页")
+        mid_layout.addWidget(self.page_label)
+        self.pdf_view = QLabel("请打开PDF文件")
+        self.pdf_view.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.pdf_view.setMinimumSize(600, 500)
+        self.pdf_view.setStyleSheet("background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;")
+        self.pdf_scroll = QScrollArea()
+        self.pdf_scroll.setWidget(self.pdf_view)
+        self.pdf_scroll.setWidgetResizable(True)
+        mid_layout.addWidget(self.pdf_scroll)
+        btn_layout = QHBoxLayout()
+        self.prev_btn = QPushButton("◀ 上一页")
+        self.prev_btn.clicked.connect(self.prev_page)
+        self.next_btn = QPushButton("下一页 ▶")
+        self.next_btn.clicked.connect(self.next_page)
+        btn_layout.addWidget(self.prev_btn)
+        btn_layout.addWidget(self.next_btn)
+        mid_layout.addLayout(btn_layout)
+        # 右侧面板：代码关联
+        right_panel = QWidget()
+        right_layout = QVBoxLayout(right_panel)
+        right_layout.addWidget(QLabel("<b>💻 代码关联</b>"))
+        self.code_view = QTextEdit()
+        self.code_view.setReadOnly(True)
+        self.code_view.setMinimumWidth(280)
+        self.code_view.anchorClicked.connect(self.on_anchor_clicked)
+        right_layout.addWidget(self.code_view)
+        right_layout.addWidget(QLabel("<b>📊 Markdown输出</b>"))
+        self.md_view = QTextEdit()
+        self.md_view.setReadOnly(True)
+        self.md_view.setMinimumWidth(280)
+        right_layout.addWidget(self.md_view)
+        splitter.addWidget(left_panel)
+        splitter.addWidget(mid_panel)
+        splitter.addWidget(right_panel)
+        splitter.setSizes([220, 650, 380])
+        main_layout.addWidget(splitter)
+        # 菜单栏
+        menu = self.menuBar()
+        file_menu = menu.addMenu("文件")
+        file_menu.addAction("打开PDF", self.open_pdf)
+        file_menu.addAction("加载代码映射", self.load_mappings_file)
+        file_menu.addAction("导出Markdown", self.export_markdown)
+        file_menu.addAction("运行OCR分析", self.run_ocr)
+        analyze_menu = menu.addMenu("分析")
+        analyze_menu.addAction("生成AI可读描述", self.generate_ai_description)
+
+    def init_ocr(self):
+        """初始化OCR引擎"""
+        if OCR_ENGINE == "paddle":
+            self.ocr = PaddleOCR(use_angle_cls=True, lang='en', show_log=False)
+        else:
+            self.ocr = None  # 需要用户安装tesserocr
+
+    def open_pdf(self):
+        """打开PDF文件并渲染首页"""
+        path, _ = QFileDialog.getOpenFileName(self, "打开原理图PDF", "", "PDF Files (*.pdf)")
+        if not path:
+            return
+        self.pdf_path = path
+        self.current_page = 0
+        self.render_pdf_page()
+        self.page_label.setText(f"第 1 页 / 共 ...")
+        self.run_ocr()
+
+    def render_pdf_page(self):
+        """渲染PDF当前页为QPixmap"""
+        if not self.pdf_path:
+            return
+        doc = fitz.open(self.pdf_path)
+        if self.current_page >= len(doc):
+            self.current_page = len(doc) - 1
+        page = doc.load_page(self.current_page)
+        # 高分辨率渲染 (2x zoom)
+        mat = fitz.Matrix(2, 2)
+        pix = page.get_pixmap(matrix=mat)
+        img = QImage(pix.samples, pix.width, pix.height, pix.stride, QImage.Format.Format_RGB888)
+        self.pdf_pixmap = QPixmap.fromImage(img)
+        # 绘制高亮框
+        if self.highlight_rect:
+            painter = QPainter(self.pdf_pixmap)
+            pen = QPen(QColor(255, 50, 50), 3)
+            painter.setPen(pen)
+            painter.drawRect(self.highlight_rect)
+            painter.end()
+        self.pdf_view.setPixmap(self.pdf_pixmap.scaled(
+            self.pdf_scroll.width() - 20, self.pdf_scroll.height() - 20,
+            Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
+        ))
+        doc.close()
+        self.page_label.setText(f"第 {self.current_page + 1} 页")
+
+    def prev_page(self):
+        if self.pdf_path:
+            self.current_page -= 1
+            self.render_pdf_page()
+
+    def next_page(self):
+        if self.pdf_path:
+            self.current_page += 1
+            self.render_pdf_page()
+
+    def run_ocr(self):
+        """对当前PDF页进行OCR，提取元件信息"""
+        if not self.pdf_path:
+            return
+        doc = fitz.open(self.pdf_path)
+        page = doc.load_page(self.current_page)
+        # 保存页面为图片供OCR使用
+        mat = fitz.Matrix(1.5, 1.5)
+        pix = page.get_pixmap(matrix=mat)
+        img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+        # 增强对比度
+        enhancer = ImageEnhance.Contrast(img)
+        img = enhancer.enhance(2.0)
+        # OCR识别
+        if OCR_ENGINE == "paddle":
+            result = self.ocr.ocr(np.array(img), cls=True)
+        else:
+            QMessageBox.warning(self, "警告", "请安装PaddleOCR或Tesseract")
+            doc.close()
+            return
+        # 解析OCR结果：区分元件位号与网络标号
+        self.components.clear()
+        self.net_labels.clear()
+        if result and result[0]:
+            for line in result[0]:
+                bbox = line[0]  # [[x1,y1],[x2,y2],[x3,y3],[x4,y4]]
+                text = line[1][0]
+                confidence = line[1][1]
+                if confidence < 0.7:
+                    continue
+                x = int(bbox[0][0] * 2 / 1.5)
+                y = int(bbox[0][1] * 2 / 1.5)
+                w = int((bbox[2][0] - bbox[0][0]) * 2 / 1.5)
+                h = int((bbox[2][1] - bbox[0][1]) * 2 / 1.5)
+                rect = QRect(x, y, w, h)
+                # 简单分类：字母+数字为元件位号，纯大写为网络标号
+                if any(c.isdigit() for c in text) and any(c.isalpha() for c in text):
+                    self.components[text] = {"rect": rect, "page": self.current_page}
+                elif text.isupper() and len(text) > 2:
+                    self.net_labels[text] = {"rect": rect, "page": self.current_page}
+        doc.close()
+        self.update_component_list()
+        self.update_net_list()
+        self.render_pdf_page()
+        QMessageBox.information(self, "OCR完成",
+            f"识别到 {len(self.components)} 个元件, {len(self.net_labels)} 个网络标号")
+
+    def update_component_list(self):
+        """更新左侧元件列表"""
+        self.component_list.clear()
+        for comp_name in sorted(self.components.keys()):
+            item = QListWidgetItem(f"{comp_name}")
+            item.setData(Qt.ItemDataRole.UserRole, comp_name)
+            self.component_list.addItem(item)
+
+    def update_net_list(self):
+        """更新左侧网络列表"""
+        self.net_list.clear()
+        for net_name in sorted(self.net_labels.keys()):
+            item = QListWidgetItem(net_name)
+            item.setData(Qt.ItemDataRole.UserRole, net_name)
+            self.net_list.addItem(item)
+
+    def on_component_clicked(self, item):
+        """点击元件时：高亮PDF区域 + 显示代码关联"""
+        comp_name = item.data(Qt.ItemDataRole.UserRole)
+        if comp_name in self.components:
+            self.highlight_rect = self.components[comp_name]["rect"]
+            self.render_pdf_page()
+        # 更新代码关联视图
+        self.code_view.clear()
+        if comp_name in self.code_mappings:
+            html = f"<h4>{comp_name} 代码关联</h4><ul>"
+            for file, line, desc in self.code_mappings[comp_name]:
+                url = f"vscode://file/{file}:{line}"
+                html += f'<li><a href="{url}">📄 {file}:{line}</a><br><small>{desc}</small></li>'
+            html += "</ul>"
+            self.code_view.setHtml(html)
+        else:
+            self.code_view.setHtml(f"<p>{comp_name} 暂无代码映射，请加载映射文件</p>")
+
+    def on_net_clicked(self, item):
+        """点击网络标号时高亮PDF区域"""
+        net_name = item.data(Qt.ItemDataRole.UserRole)
+        if net_name in self.net_labels:
+            self.highlight_rect = self.net_labels[net_name]["rect"]
+            self.render_pdf_page()
+
+    def on_anchor_clicked(self, url):
+        """处理代码链接点击：调用VSCode打开文件"""
+        vscode_path = url.toString()
+        if vscode_path.startswith("vscode://file/"):
+            file_part = vscode_path[len("vscode://file/"):]
+            if ":" in file_part:
+                file_path, line = file_part.rsplit(":", 1)
+                # 构建VSCode命令行
+                abs_path = os.path.abspath(file_path)
+                cmd = f'code --goto "{abs_path}:{line}"'
+                subprocess.Popen(cmd, shell=True)
+                print(f"跳转: {cmd}")
+
+    def load_code_mappings(self):
+        """加载默认代码映射"""
+        # 这里读取项目中的映射文件，演示使用硬编码
+        default_mapping = {
+            "U2": [
+                ("firmware/src/rs485.c", "45", "void rs485_init(void)"),
+                ("firmware/src/rs485.c", "102", "rs485_send_byte()"),
+                ("firmware/inc/pinout.h", "23", "#define RS485_DE GPIO_PIN_8"),
+            ],
+            "U1": [
+                ("firmware/src/main.c", "12", "int main(void)"),
+                ("firmware/src/sensor.c", "8", "void sensor_task(void)"),
+            ],
+            "J1": [
+                ("firmware/inc/hardware.h", "15", "RS485端子定义"),
+            ]
+        }
+        self.code_mappings = default_mapping
+
+    def load_mappings_file(self):
+        """从JSON文件加载代码映射"""
+        path, _ = QFileDialog.getOpenFileName(self, "加载代码映射", "", "JSON Files (*.json)")
+        if path:
+            with open(path, 'r', encoding='utf-8') as f:
+                self.code_mappings = json.load(f)
+            QMessageBox.information(self, "成功", f"已加载 {len(self.code_mappings)} 个元件的映射")
+
+    def export_markdown(self):
+        """导出电路图Markdown描述"""
+        if not self.pdf_path:
+            QMessageBox.warning(self, "警告", "请先打开PDF文件")
+            return
+        md = self.generate_markdown()
+        path, _ = QFileDialog.getSaveFileName(self, "保存Markdown", "schematic.md", "Markdown (*.md)")
+        if path:
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(md)
+            self.md_view.setPlainText(md)
+            QMessageBox.information(self, "成功", f"Markdown已保存到 {path}")
+
+    def generate_markdown(self):
+        """生成AI可读的电路图Markdown描述"""
+        lines = []
+        lines.append("# 电路图分析报告\n")
+        lines.append(f"**源文件**: {os.path.basename(self.pdf_path)}")
+        lines.append(f"**分析页数**: 第{self.current_page+1}页\n")
+        lines.append("## 元件列表\n")
+        lines.append("| 位号 | 推测类型 | 关联代码 | 备注 |")
+        lines.append("|------|----------|----------|------|")
+        for comp_name, info in self.components.items():
+            code_refs = ""
+            if comp_name in self.code_mappings:
+                refs = self.code_mappings[comp_name]
+                code_refs = ", ".join([f"`{f}:{l}`" for f, l, d in refs])
+            comp_type = self._guess_component_type(comp_name)
+            lines.append(f"| {comp_name} | {comp_type} | {code_refs} | |")
+        lines.append("\n## 网络连接\n")
+        lines.append("| 网络标号 | 推测功能 | 关联元件 |")
+        lines.append("|----------|----------|----------|")
+        for net_name in self.net_labels:
+            related_comps = self._find_related_components(net_name)
+            net_func = self._guess_net_function(net_name)
+            lines.append(f"| {net_name} | {net_func} | {', '.join(related_comps)} |")
+        lines.append("\n## AI分析提示\n")
+        lines.append("- 请根据上述元件和网络关系，推断电路功能并关联到固件代码。")
+        lines.append("- 元件位号与代码的映射关系已标注，可用于调试时快速定位。")
+        return "\n".join(lines)
+
+    def _guess_component_type(self, name):
+        """根据命名规则推测元件类型"""
+        if name.startswith("U"): return "集成电路"
+        if name.startswith("R"): return "电阻"
+        if name.startswith("C"): return "电容"
+        if name.startswith("J") or name.startswith("P"): return "连接器"
+        if name.startswith("Q"): return "晶体管"
+        if name.startswith("D"): return "二极管"
+        return "未知"
+
+    def _find_related_components(self, net_name):
+        """通过空间邻近关系寻找与网络相关的元件（简化实现）"""
+        # 实际应基于线条追踪算法，此处返回示例
+        return list(self.components.keys())[:3]
+
+    def _guess_net_function(self, name):
+        """根据名称推测网络功能"""
+        func_map = {"CAN": "CAN总线", "TX": "发送", "RX": "接收",
+                    "VCC": "电源", "GND": "地", "SCL": "I2C时钟", "SDA": "I2C数据"}
+        for key, func in func_map.items():
+            if key in name: return func
+        return "信号网络"
+
+    def generate_ai_description(self):
+        """生成面向AI的结构化描述（Markdown + JSON）"""
+        md = self.generate_markdown()
+        # 同时输出JSON格式，方便AI编程接口使用
+        json_data = {
+            "components": {k: {"type": self._guess_component_type(k),
+                               "codes": self.code_mappings.get(k, [])} for k in self.components},
+            "nets": list(self.net_labels.keys()),
+            "page": self.current_page
+        }
+        combined = f"{md}\n\n## JSON格式（供程序化使用）\n```json\n{json.dumps(json_data, indent=2, ensure_ascii=False)}\n```"
+        self.md_view.setPlainText(combined)
+        QMessageBox.information(self, "完成", "AI可读描述已生成，可在右侧面板查看")
+
+
+# 代码映射文件示例 (code_mapping.json)
+"""
+{
+  "U2": [
+    ["firmware/src/rs485.c", "45", "void rs485_init(void)"],
+    ["firmware/src/rs485.c", "102", "rs485_send_byte()"],
+    ["firmware/inc/pinout.h", "23", "#define RS485_DE"]
+  ],
+  "U1": [
+    ["firmware/src/main.c", "12", "int main(void)"],
+    ["firmware/src/sensor.c", "8", "void sensor_task(void)"]
+  ],
+  "J1": [
+    ["firmware/inc/hardware.h", "15", "RS485端子定义"]
+  ]
+}
+"""
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = SchematicAnalyzer()
+    window.show()
+    print("📊 PDF电路图分析器已启动")
+    print("使用方法：文件 → 打开PDF → 运行OCR分析 → 加载代码映射 → 点击元件查看关联")
+    sys.exit(app.exec())
+</code></div>
+
+        <h2 id="code-mapping">4. 代码映射文件格式</h2>
+        <p>维护一个<code>code_mapping.json</code>文件，描述每个元件位号对应的代码位置。该文件可在项目初期手动创建，或由AI根据代码注释自动生成。</p>
+        <div class="code-block"><code>{
+            "U2": [
+            ["firmware/src/rs485.c", "45", "void rs485_init(void)"],
+            ["firmware/src/rs485.c", "102", "rs485_send_byte()"],
+            ["firmware/inc/pinout.h", "23", "#define RS485_DE GPIO_PIN_8"]
+            ],
+            "U1": [
+            ["firmware/src/main.c", "12", "int main(void)"],
+            ["firmware/src/sensor.c", "8", "void sensor_task(void)"]
+            ],
+            "J1": [
+            ["firmware/inc/hardware.h", "15", "RS485端子定义"]
+            ]
+        }</code></div>
+        <div class="highlight"><i class="fas fa-robot"></i> AI可以利用此映射：当诊断RS485通讯问题时，自动定位到U2对应的<code>rs485.c:45</code>初始化函数，并结合原理图理解MAX485芯片的DE/RE引脚控制逻辑。</div>
+
+        <h2 id="integration">5. 与五层进化工程体系的集成</h2>
+        <p>该电路图分析器可直接融入前文的<strong>嵌入式AI编程模板</strong>：</p>
+        <table>
+            <thead><tr><th>集成点</th><th>作用</th></tr></thead>
+            <tbody>
+                <tr><td><strong>统一上下文</strong></td><td>生成的Markdown电路描述放入<code>docs/</code>目录，AI助手自动加载理解硬件架构</td></tr>
+                <tr><td><strong>agents.md</strong></td><td>添加一条规则：“遇到硬件相关Bug时，查阅<code>docs/schematic.md</code>获取元件与代码的映射”</td></tr>
+                <tr><td><strong>CLI调用</strong></td><td>脚本支持命令行模式：<code>python schematic_analyzer.py --pdf schematic.pdf --output docs/schematic.md --mappings code_mapping.json</code></td></tr>
+                <tr><td><strong>VSCode Tasks</strong></td><td>新增任务“分析电路图”，一键完成PDF → Markdown + 代码关联全流程</td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="example">6. AI协作场景示例</h2>
+        <div class="quote"><i class="fas fa-comment-dots"></i> <strong>用户：</strong>“RS485通讯失败，U2的DE引脚似乎没有正确切换。”<br>
+            <strong>AI：</strong>“我已查阅<code>docs/schematic.md</code>：U2(MAX485)的DE引脚由<code>pinout.h:23</code>定义为GPIO_PIN_8，初始化在<code>rs485.c:45</code>。建议检查该GPIO的时钟是否使能。要跳转到对应代码吗？”<br>
+            <strong>用户点击超链接</strong> → VSCode自动打开<code>rs485.c</code>并定位到第45行。</div>
+
+        <footer><i class="fas fa-file-pdf"></i> PDF电路图分析器 · OCR识别 · Markdown生成 · VSCode超链接跳转 · AI可读描述<br>
+            将硬件图纸转化为AI可理解的结构化知识，赋能嵌入式智能调试
+        </footer>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -383,6 +383,78 @@
             font-size: 0.7rem;
             font-weight: 600;
         }
+        /* ===== 统一文章导航系统 ===== */
+        .article-series {
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
+            border-bottom: 1px solid #eef2f8;
+        }
+        .article-series h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.6rem;
+            color: #1e3a8a;
+        }
+        .article-link {
+            display: flex !important;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 0.8rem !important;
+        }
+        .article-link .article-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #eef3ff;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            flex-shrink: 0;
+        }
+        .article-link.active .article-num {
+            background: #1e3a8a;
+            color: #fff;
+        }
+        .article-link .article-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+            min-width: 0;
+        }
+        .article-link .article-title {
+            font-weight: 600;
+            font-size: 0.88rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article-link .article-desc {
+            font-size: 0.68rem;
+            color: #6b8dad;
+            font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article-link.active {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
+            color: #ffffff !important;
+        }
+        .article-link.active .article-desc {
+            color: rgba(255,255,255,0.7) !important;
+        }
+        .section-nav {
+            padding-top: 0.2rem;
+        }
+        .section-nav h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.6rem;
+            color: #1e3a8a;
+        }
         @media (max-width: 780px) {
             .layout {
                 flex-direction: column;
@@ -408,19 +480,54 @@
 <body>
 <div class="layout">
     <aside class="sidebar">
-        <h3><i class="fas fa-bars"></i> 导览</h3>
-        <nav>
-            <ul>
-                <li><a href="#sec0"><i class="fas fa-feather-alt"></i> 起点：Vibe Coding</a></li>
-                <li><a href="#sec1"><i class="fas fa-eye"></i> 第一招：双向可观测性</a></li>
-                <li><a href="#sec2"><i class="fas fa-folder-tree"></i> 第二招：统一上下文</a></li>
-                <li><a href="#sec3"><i class="fas fa-people-arrows"></i> 第三招：多模型协作</a></li>
-                <li><a href="#sec4"><i class="fas fa-terminal"></i> 第四招：CLI闭环</a></li>
-                <li><a href="#sec5"><i class="fas fa-gem"></i> 第五招：完整闭环工程</a></li>
-                <li><a href="true.html"><i class="fas fa-flask"></i> 实践项目模板</a></li>
-                <li><a href="test.html"><i class="fas fa-vial"></i> 自主修复闭环</a></li>
-            </ul>
-        </nav>
+        <div class="article-series">
+            <h3><i class="fas fa-book"></i> 文章系列</h3>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="article-link active">
+                        <span class="article-num">1</span>
+                        <span class="article-info">
+                            <span class="article-title">五层进化</span>
+                            <span class="article-desc">AI编程调试的五层架构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="true.html" class="article-link">
+                        <span class="article-num">2</span>
+                        <span class="article-info">
+                            <span class="article-title">实践项目模板</span>
+                            <span class="article-desc">高可复用嵌入式AI编程骨架</span>
+                        </span>
+                    </a></li>
+                    <li><a href="test.html" class="article-link">
+                        <span class="article-num">3</span>
+                        <span class="article-info">
+                            <span class="article-title">自主修复闭环</span>
+                            <span class="article-desc">AI双轨收敛 · 需求螺旋闭合</span>
+                        </span>
+                    </a></li>
+                    <li><a href="pcb.html" class="article-link">
+                        <span class="article-num">4</span>
+                        <span class="article-info">
+                            <span class="article-title">电路图分析器</span>
+                            <span class="article-desc">PDF原理图转AI可读描述</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="section-nav">
+            <h3><i class="fas fa-list"></i> 本章导览</h3>
+            <nav>
+                <ul>
+                    <li><a href="#sec0"><i class="fas fa-feather-alt"></i> 起点：Vibe Coding</a></li>
+                    <li><a href="#sec1"><i class="fas fa-eye"></i> 第一招：双向可观测性</a></li>
+                    <li><a href="#sec2"><i class="fas fa-folder-tree"></i> 第二招：统一上下文</a></li>
+                    <li><a href="#sec3"><i class="fas fa-people-arrows"></i> 第三招：多模型协作</a></li>
+                    <li><a href="#sec4"><i class="fas fa-terminal"></i> 第四招：CLI闭环</a></li>
+                    <li><a href="#sec5"><i class="fas fa-gem"></i> 第五招：完整闭环工程</a></li>
+                </ul>
+            </nav>
+        </div>
     </aside>
 
     <div class="main-content">

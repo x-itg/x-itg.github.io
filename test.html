@@ -252,6 +252,78 @@
             color: #6b8dad;
             font-size: 0.85rem;
         }
+        /* ===== 统一文章导航系统 ===== */
+        .article-series {
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
+            border-bottom: 1px solid #eef2f8;
+        }
+        .article-series h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.6rem;
+            color: #1e3a8a;
+        }
+        .article-link {
+            display: flex !important;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 0.8rem !important;
+        }
+        .article-link .article-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #eef3ff;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            flex-shrink: 0;
+        }
+        .article-link.active .article-num {
+            background: #1e3a8a;
+            color: #fff;
+        }
+        .article-link .article-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+            min-width: 0;
+        }
+        .article-link .article-title {
+            font-weight: 600;
+            font-size: 0.88rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article-link .article-desc {
+            font-size: 0.68rem;
+            color: #6b8dad;
+            font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article-link.active {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
+            color: #ffffff !important;
+        }
+        .article-link.active .article-desc {
+            color: rgba(255,255,255,0.7) !important;
+        }
+        .section-nav {
+            padding-top: 0.2rem;
+        }
+        .section-nav h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.6rem;
+            color: #1e3a8a;
+        }
         @media (max-width: 780px) {
             .layout {
                 flex-direction: column;
@@ -269,22 +341,53 @@
 <body>
 <div class="layout">
     <aside class="sidebar">
-        <h3><i class="fas fa-project-diagram"></i> 收敛闭环</h3>
-        <nav>
-            <ul>
-                <li><a href="index.html"><i class="fas fa-house"></i> 返回首页</a></li>
-                <li><a href="true.html"><i class="fas fa-flask"></i> 实践项目模板</a></li>
-                <li><a href="test.html" class="active"><i class="fas fa-vial"></i> 自主修复闭环</a></li>
-                <li><a href="#overview"><i class="fas fa-bullseye"></i> 核心理念</a></li>
-                <li><a href="#foundation"><i class="fas fa-layer-group"></i> 工程基础</a></li>
-                <li><a href="#agent"><i class="fas fa-robot"></i> Agent迭代引擎</a></li>
-                <li><a href="#loop"><i class="fas fa-sync-alt"></i> 三重迭代循环</a></li>
-                <li><a href="#integration"><i class="fas fa-puzzle-piece"></i> 项目集成</a></li>
-                <li><a href="#example"><i class="fas fa-flask"></i> 收敛演示</a></li>
-            </ul>
-        </nav>
-        <div class="sidebar-utility">
-            <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> 返回首页</a>
+        <div class="article-series">
+            <h3><i class="fas fa-book"></i> 文章系列</h3>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="article-link">
+                        <span class="article-num">1</span>
+                        <span class="article-info">
+                            <span class="article-title">五层进化</span>
+                            <span class="article-desc">AI编程调试的五层架构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="true.html" class="article-link">
+                        <span class="article-num">2</span>
+                        <span class="article-info">
+                            <span class="article-title">实践项目模板</span>
+                            <span class="article-desc">高可复用嵌入式AI编程骨架</span>
+                        </span>
+                    </a></li>
+                    <li><a href="test.html" class="article-link active">
+                        <span class="article-num">3</span>
+                        <span class="article-info">
+                            <span class="article-title">自主修复闭环</span>
+                            <span class="article-desc">AI双轨收敛 · 需求螺旋闭合</span>
+                        </span>
+                    </a></li>
+                    <li><a href="pcb.html" class="article-link">
+                        <span class="article-num">4</span>
+                        <span class="article-info">
+                            <span class="article-title">电路图分析器</span>
+                            <span class="article-desc">PDF原理图转AI可读描述</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="section-nav">
+            <h3><i class="fas fa-list"></i> 本章导览</h3>
+            <nav>
+                <ul>
+                    <li><a href="#overview"><i class="fas fa-bullseye"></i> 核心理念</a></li>
+                    <li><a href="#foundation"><i class="fas fa-layer-group"></i> 工程基础</a></li>
+                    <li><a href="#agent"><i class="fas fa-robot"></i> Agent迭代引擎</a></li>
+                    <li><a href="#loop"><i class="fas fa-sync-alt"></i> 三重迭代循环</a></li>
+                    <li><a href="#integration"><i class="fas fa-puzzle-piece"></i> 项目集成</a></li>
+                    <li><a href="#example"><i class="fas fa-flask"></i> 收敛演示</a></li>
+                </ul>
+            </nav>
         </div>
     </aside>
     <div class="main-content">
@@ -292,7 +395,6 @@
             <div class="badge"><i class="fas fa-arrows-spin"></i> AI自主迭代 · 需求收敛</div>
             <h1>AI驱动的代码修复与测试增强联动<br>需求收敛闭环方法</h1>
             <div class="sub">基于结构化日志与CLI自动化，让AI在每一轮迭代中同步完善代码和测试，螺旋逼近需求目标</div>
-            <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> 返回首页</a>
         </div>
 
         <!-- 概述 -->
@@ -436,7 +538,6 @@ def converge(project, requirements):
             </div>
         </div>
         <footer>
-            <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> 返回首页</a><br>
             <i class="fas fa-microchip"></i> AI双轨收敛方法 · 代码修复 + 测试增强联动 · 基于五层进化工程模板<br>
             让AI在迭代中同步完善产品与检验标准
         </footer>

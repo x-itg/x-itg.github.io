@@ -16,7 +16,6 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             color: #1e2a3e;
             line-height: 1.6;
-            padding: 2rem 1rem;
         }
         .container {
             max-width: 1200px;
@@ -25,45 +24,6 @@
             border-radius: 1.8rem;
             padding: 2rem;
             border: 1px solid #eef2fa;
-        }
-        .page-nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 1.25rem;
-        }
-        .page-nav a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            padding: 0.55rem 0.95rem;
-            border-radius: 999px;
-            border: 1px solid #dbe6f3;
-            background: #f8fbff;
-            color: #1f598a;
-            text-decoration: none;
-            font-size: 0.92rem;
-        }
-        .page-nav a:hover {
-            background: #eef4ff;
-            color: #1e3a8a;
-        }
-        .page-nav a.active {
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            border-color: transparent;
-            color: #ffffff;
-        }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            margin-top: 1rem;
-            color: #1f598a;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            color: #1e3a8a;
         }
         h1 {
             font-size: 2.2rem;
@@ -193,30 +153,198 @@
             border-top: 1px solid #e2edf2;
             padding-top: 1.5rem;
         }
-        @media (max-width: 700px) {
-            .container {
-                padding: 1.2rem;
+        /* ===== 侧边栏布局（统一文章导航） ===== */
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+            gap: 2rem;
+        }
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 1.5rem;
+            align-self: start;
+            background: #ffffff;
+            border-radius: 1.2rem;
+            border: 1px solid #eef2f8;
+            padding: 1.2rem 0;
+        }
+        .sidebar nav ul {
+            list-style: none;
+            padding: 0 0.5rem;
+        }
+        .sidebar nav li {
+            margin: 0.25rem 0;
+        }
+        .sidebar nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #2c5f8a;
+            text-decoration: none;
+            border-radius: 0.6rem;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .sidebar nav a:hover {
+            background: #eef3ff;
+            color: #1e40af;
+        }
+        .sidebar nav a i {
+            width: 1.5rem;
+            color: #5b8ec9;
+        }
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+        /* ===== 统一文章导航系统 ===== */
+        .article-series {
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
+            border-bottom: 1px solid #eef2f8;
+        }
+        .article-series h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.6rem;
+            color: #1e3a8a;
+        }
+        .article-link {
+            display: flex !important;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 0.8rem !important;
+        }
+        .article-link .article-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #eef3ff;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            flex-shrink: 0;
+        }
+        .article-link.active .article-num {
+            background: #1e3a8a;
+            color: #fff;
+        }
+        .article-link .article-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+            min-width: 0;
+        }
+        .article-link .article-title {
+            font-weight: 600;
+            font-size: 0.88rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article-link .article-desc {
+            font-size: 0.68rem;
+            color: #6b8dad;
+            font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article-link.active {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
+            color: #ffffff !important;
+        }
+        .article-link.active .article-desc {
+            color: rgba(255,255,255,0.7) !important;
+        }
+        .section-nav {
+            padding-top: 0.2rem;
+        }
+        .section-nav h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.6rem;
+            color: #1e3a8a;
+        }
+        @media (max-width: 780px) {
+            .layout {
+                flex-direction: column;
             }
-            h1 {
-                font-size: 1.6rem;
+            .sidebar {
+                width: 100%;
+                position: static;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="page-nav" aria-label="站点导航">
-            <a href="index.html"><i class="fas fa-house"></i> 首页</a>
-            <a href="true.html" class="active"><i class="fas fa-flask"></i> 实践项目模板</a>
-            <a href="test.html"><i class="fas fa-vial"></i> 自主修复闭环</a>
-        </nav>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="article-series">
+            <h3><i class="fas fa-book"></i> 文章系列</h3>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="article-link">
+                        <span class="article-num">1</span>
+                        <span class="article-info">
+                            <span class="article-title">五层进化</span>
+                            <span class="article-desc">AI编程调试的五层架构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="true.html" class="article-link active">
+                        <span class="article-num">2</span>
+                        <span class="article-info">
+                            <span class="article-title">实践项目模板</span>
+                            <span class="article-desc">高可复用嵌入式AI编程骨架</span>
+                        </span>
+                    </a></li>
+                    <li><a href="test.html" class="article-link">
+                        <span class="article-num">3</span>
+                        <span class="article-info">
+                            <span class="article-title">自主修复闭环</span>
+                            <span class="article-desc">AI双轨收敛 · 需求螺旋闭合</span>
+                        </span>
+                    </a></li>
+                    <li><a href="pcb.html" class="article-link">
+                        <span class="article-num">4</span>
+                        <span class="article-info">
+                            <span class="article-title">电路图分析器</span>
+                            <span class="article-desc">PDF原理图转AI可读描述</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="section-nav">
+            <h3><i class="fas fa-list"></i> 本章导览</h3>
+            <nav>
+                <ul>
+                    <li><a href="#overview"><i class="fas fa-globe"></i> 项目全景</a></li>
+                    <li><a href="#structure"><i class="fas fa-folder-tree"></i> 目录结构</a></li>
+                    <li><a href="#firmware"><i class="fas fa-microchip"></i> 嵌入式固件</a></li>
+                    <li><a href="#host"><i class="fas fa-desktop"></i> 上位机软件</a></li>
+                    <li><a href="#debug"><i class="fas fa-robot"></i> 调试助手</a></li>
+                    <li><a href="#agents"><i class="fas fa-file-alt"></i> agents.md</a></li>
+                    <li><a href="#tasks"><i class="fas fa-terminal"></i> VSCode Tasks</a></li>
+                    <li><a href="#mapping"><i class="fas fa-table"></i> 五层映射</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    <div class="main-content">
+        <div class="container" style="padding:0;">
         <div class="badge"><i class="fas fa-microchip"></i> 实践案例 · 可复用模板</div>
         <h1>高可复用嵌入式AI编程模板<br>传感器采集 · RS485通讯 · 上位机管理</h1>
-        <div class="subtitle">基于“五层进化”方法论的真实项目骨架，集成负日志、CLI调试助手与自动化闭环</div>
-        <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> 返回首页</a>
+        <div class="subtitle">基于"五层进化"方法论的真实项目骨架，集成负日志、CLI调试助手与自动化闭环</div>
 
         <!-- 项目概述 -->
-        <h2>1. 项目全景</h2>
+        <h2 id="overview">1. 项目全景</h2>
         <p>本项目是一个<strong>开箱即用的嵌入式AI编程模板</strong>，包含：</p>
         <ul style="margin-left:1.5rem; margin-top:0.5rem;">
             <li><strong>嵌入式主板</strong>（STM32F407）：采集温湿度、压力等传感器，通过RS485总线与上位机通讯。</li>
@@ -226,7 +354,7 @@
         <p>整个项目严格遵循文章中的五层进化架构：<strong>结构化正/负日志、统一工程目录、多模型协作契约、CLI全自动闭环、Vibe+Verify模板化生成</strong>。</p>
 
         <!-- 目录结构 -->
-        <h2>2. 项目目录结构（统一上下文）</h2>
+        <h2 id="structure">2. 项目目录结构（统一上下文）</h2>
         <div class="dir-tree">
             <pre>
 <span class="dir">project/</span>
@@ -258,7 +386,7 @@
         </div>
 
         <!-- 嵌入式固件关键代码 -->
-        <h2>3. 嵌入式固件：正/负日志实战</h2>
+        <h2 id="firmware">3. 嵌入式固件：正/负日志实战</h2>
         <p>固件中集成了完整的结构化日志与负日志引擎，所有关键路径都添加了日志点。以下是RS485通讯任务的核心片段：</p>
         <div class="code-block">
             <pre>
@@ -290,7 +418,7 @@ void rs485_communication_task(void) {
         </div>
 
         <!-- 上位机软件结构 -->
-        <h2>4. 上位机软件：通讯与管理</h2>
+        <h2 id="host">4. 上位机软件：通讯与管理</h2>
         <div class="grid-2">
             <div class="card-light">
                 <h4><i class="fas fa-plug"></i> RS485管理器</h4>
@@ -320,7 +448,7 @@ def poll_device(self):
         </div>
 
         <!-- Python调试助手（核心） -->
-        <h2>5. Python调试助手：三合一监控与自动总结</h2>
+        <h2 id="debug">5. Python调试助手：三合一监控与自动总结</h2>
         <p>这是整个模板的<strong>灵魂脚本</strong>，它实现了对三个数据源的实时监控：</p>
         <ol style="margin-left:1.5rem; margin-top:0.5rem;">
             <li><strong>RS485总线监听</strong>（通过USB转RS485适配器，监听模式）</li>
@@ -453,7 +581,7 @@ if __name__ == "__main__":
         </div>
 
         <!-- agents.md 示例 -->
-        <h2>6. agents.md：AI协作契约</h2>
+        <h2 id="agents">6. agents.md：AI协作契约</h2>
         <p>放入项目根目录，任何接入的AI助手都会自动遵守项目规范。</p>
         <div class="code-block">
             <pre>
@@ -485,7 +613,7 @@ if __name__ == "__main__":
         </div>
 
         <!-- VSCode Tasks 自动化 -->
-        <h2>7. VSCode Tasks：一键全自动测试</h2>
+        <h2 id="tasks">7. VSCode Tasks：一键全自动测试</h2>
         <div class="code-block">
             <pre>
 // .vscode/tasks.json
@@ -529,7 +657,7 @@ if __name__ == "__main__":
         </div>
 
         <!-- 五层进化落地总结 -->
-        <h2>8. 五层进化在本项目中的映射</h2>
+        <h2 id="mapping">8. 五层进化在本项目中的映射</h2>
         <table>
             <thead><tr><th>层级</th><th>文章方法</th><th>本项目落地</th></tr></thead>
             <tbody>
@@ -546,15 +674,15 @@ if __name__ == "__main__":
         </div>
 
         <div class="quote" style="margin-top:2rem;">
-            <i class="fas fa-rocket"></i> 这个模板可以直接克隆到任何RS485传感器采集项目中。只需修改传感器驱动和协议帧定义，其余工程化组件（日志、调试助手、agents.md、tasks.json）均可复用。真正的“一次搭建，终身受益”。
+            <i class="fas fa-rocket"></i> 这个模板可以直接克隆到任何RS485传感器采集项目中。只需修改传感器驱动和协议帧定义，其余工程化组件（日志、调试助手、agents.md、tasks.json）均可复用。真正的"一次搭建，终身受益"。
         </div>
-
-        <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> 返回首页</a>
 
         <footer>
             <i class="fas fa-code"></i> 高可复用嵌入式AI编程模板 · 基于五层进化方法论 · 传感器采集 · RS485通讯 · 上位机管理<br>
             调试助手自动总结，为AI诊断铺平道路
         </footer>
+        </div>
     </div>
+</div>
 </body>
 </html>
