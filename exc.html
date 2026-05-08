@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>规格-实现共生演化机制 | 嵌入式AI工程化的知识一致性生存之道</title>
+<style>
+    :root {
+        --bg: #f8f9fa;
+        --card-bg: #ffffff;
+        --text: #2c3e50;
+        --text-secondary: #5a6c7d;
+        --accent: #c0392b;
+        --accent-soft: #e74c3c;
+        --border: #e0e4e8;
+        --code-bg: #1e293b;
+        --code-text: #e2e8f0;
+        --highlight: #fef9e7;
+        --tag-bg: #f0f3f6;
+        --tag-text: #4a5568;
+        --link: #2980b9;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --radius: 6px;
+        --radius-lg: 10px;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+    }
+
+    /* 顶部导航 */
+    .top-nav {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 48px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+        font-size: 14px;
+        color: var(--text-secondary);
+    }
+    .top-nav a {
+        color: var(--link);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .top-nav a:hover {
+        color: var(--accent);
+    }
+    .top-nav .sep {
+        color: #c0c7cf;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        margin-bottom: 48px;
+    }
+    .article-header .series-tag {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 3px;
+        letter-spacing: 0.5px;
+        margin-bottom: 16px;
+    }
+    .article-header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.35;
+        margin-bottom: 12px;
+        letter-spacing: -0.3px;
+    }
+    .article-header .subtitle {
+        font-size: 17px;
+        color: var(--text-secondary);
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+    .article-header .meta {
+        font-size: 13px;
+        color: #8896a4;
+    }
+
+    /* 通用排版 */
+    h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 56px 0 16px;
+        padding-top: 24px;
+        border-top: 2px solid var(--border);
+        letter-spacing: -0.2px;
+    }
+    h3 {
+        font-size: 19px;
+        font-weight: 600;
+        margin: 36px 0 12px;
+        color: #1a1a2e;
+    }
+    p {
+        margin: 14px 0;
+    }
+    strong {
+        color: #1a1a2e;
+    }
+
+    /* 卡片 */
+    .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 28px 30px;
+        margin: 28px 0;
+        box-shadow: var(--shadow-sm);
+    }
+    .card.accent-left {
+        border-left: 4px solid var(--accent);
+    }
+    .card.warning {
+        background: #fffdf7;
+        border-color: #f0e5c0;
+    }
+
+    /* 高亮段落 */
+    .insight-box {
+        background: var(--highlight);
+        border: 1px solid #f0d78c;
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        margin: 24px 0;
+        font-style: italic;
+        color: #6b4c1e;
+    }
+    .insight-box strong {
+        color: #4a340f;
+    }
+
+    /* 三个环节的卡片 */
+    .phase-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 28px 0;
+    }
+    .phase-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 26px 28px;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+    }
+    .phase-card .phase-number {
+        position: absolute;
+        top: -14px;
+        left: 24px;
+        background: #1a1a2e;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 3px 12px;
+        border-radius: 20px;
+        letter-spacing: 0.8px;
+    }
+    .phase-card h3 {
+        margin-top: 8px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .phase-card .mechanism-label {
+        display: inline-block;
+        background: var(--tag-bg);
+        color: var(--tag-text);
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        letter-spacing: 0.4px;
+    }
+
+    /* 代码块 */
+    pre {
+        background: var(--code-bg);
+        color: var(--code-text);
+        padding: 20px 24px;
+        border-radius: var(--radius);
+        overflow-x: auto;
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        margin: 20px 0;
+        box-shadow: var(--shadow-md);
+    }
+    pre .keyword {
+        color: #c792ea;
+    }
+    pre .string {
+        color: #c3e88d;
+    }
+    pre .comment {
+        color: #546e7a;
+        font-style: italic;
+    }
+    pre .func {
+        color: #82aaff;
+    }
+    pre .type {
+        color: #ffcb6b;
+    }
+    code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+        font-size: 13px;
+    }
+    p code,
+    li code {
+        background: #eef1f5;
+        padding: 2px 6px;
+        border-radius: 3px;
+        color: #c0392b;
+        font-size: 12px;
+    }
+
+    /* 决策报告块 */
+    .report-block {
+        background: #fafcfd;
+        border: 1px solid #d0dbe6;
+        border-radius: var(--radius);
+        padding: 20px 22px;
+        margin: 20px 0;
+        font-size: 14px;
+        line-height: 1.7;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+    .report-block .report-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #8896a4;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+    .report-block .choice {
+        display: inline-block;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 3px;
+        margin: 0 2px;
+    }
+    .choice-a {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+    .choice-b {
+        background: #fce4ec;
+        color: #c62828;
+    }
+    .choice-c {
+        background: #e3f2fd;
+        color: #1565c0;
+    }
+
+    /* 五层映射表 */
+    .mapping-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+        font-size: 14px;
+    }
+    .mapping-table th,
+    .mapping-table td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+    }
+    .mapping-table th {
+        font-weight: 700;
+        background: #f5f7fa;
+        color: #4a5568;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+    .mapping-table .layer-tag {
+        display: inline-block;
+        background: #1a1a2e;
+        color: #fff;
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-weight: 600;
+    }
+
+    /* SVG 图表容器 */
+    .figure {
+        margin: 32px 0;
+        text-align: center;
+    }
+    .figure svg {
+        max-width: 100%;
+        height: auto;
+    }
+    .figure .caption {
+        font-size: 12px;
+        color: #8896a4;
+        margin-top: 8px;
+    }
+
+    /* 脚注 */
+    .footnote-section {
+        margin-top: 60px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+    }
+    .footnote-section h4 {
+        font-size: 14px;
+        color: #8896a4;
+        margin-bottom: 10px;
+    }
+    .footnote-section p {
+        font-size: 13px;
+        color: #8896a4;
+        line-height: 1.6;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+        .container {
+            padding: 20px 16px 60px;
+        }
+        .article-header h1 {
+            font-size: 26px;
+        }
+        h2 {
+            font-size: 21px;
+        }
+        .card,
+        .phase-card {
+            padding: 18px 16px;
+        }
+        pre {
+            padding: 14px 16px;
+            font-size: 12px;
+        }
+    }
+
+        /* ===== 统一文章导航系统（侧边栏布局） ===== */
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+            gap: 2rem;
+        }
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 1.5rem;
+            align-self: start;
+            background: #ffffff;
+            border-radius: 1.2rem;
+            border: 1px solid #eef2f8;
+            padding: 1.2rem 0;
+        }
+        .sidebar nav ul {
+            list-style: none;
+            padding: 0 0.5rem;
+        }
+        .sidebar nav li {
+            margin: 0.25rem 0;
+        }
+        .sidebar nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #2c5f8a;
+            text-decoration: none;
+            border-radius: 0.6rem;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .sidebar nav a:hover {
+            background: #eef3ff;
+            color: #1e40af;
+        }
+        .sidebar nav a i {
+            width: 1.5rem;
+            color: #5b8ec9;
+        }
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .article-series {
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
+            border-bottom: 1px solid #eef2f8;
+        }
+        .article-series h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.6rem;
+            color: #1e3a8a;
+        }
+        .article-link {
+            display: flex !important;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 0.8rem !important;
+        }
+        .article-link .article-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #eef3ff;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            flex-shrink: 0;
+        }
+        .article-link.active .article-num {
+            background: #1e3a8a;
+            color: #fff;
+        }
+        .article-link .article-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+            min-width: 0;
+        }
+        .article-link .article-title {
+            font-weight: 600;
+            font-size: 0.88rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article-link .article-desc {
+            font-size: 0.68rem;
+            color: #6b8dad;
+            font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article-link.active {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
+            color: #ffffff !important;
+        }
+        .article-link.active .article-desc {
+            color: rgba(255,255,255,0.7) !important;
+        }
+        .section-nav {
+            padding-top: 0.2rem;
+        }
+        .section-nav h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0 1.2rem 0.6rem;
+            color: #1e3a8a;
+        }
+        @media (max-width: 780px) {
+            .layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="article-series">
+            <h3><i class="fas fa-book"></i> 文章系列</h3>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="article-link">
+                        <span class="article-num">1</span>
+                        <span class="article-info">
+                            <span class="article-title">五层进化</span>
+                            <span class="article-desc">AI编程调试的五层架构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="true.html" class="article-link">
+                        <span class="article-num">2</span>
+                        <span class="article-info">
+                            <span class="article-title">实践项目模板</span>
+                            <span class="article-desc">高可复用嵌入式AI编程骨架</span>
+                        </span>
+                    </a></li>
+                    <li><a href="test.html" class="article-link">
+                        <span class="article-num">3</span>
+                        <span class="article-info">
+                            <span class="article-title">自主修复闭环</span>
+                            <span class="article-desc">AI双轨收敛 · 需求螺旋闭合</span>
+                        </span>
+                    </a></li>
+                    <li><a href="pcb.html" class="article-link">
+                        <span class="article-num">4</span>
+                        <span class="article-info">
+                            <span class="article-title">电路图分析器</span>
+                            <span class="article-desc">PDF原理图转AI可读描述</span>
+                        </span>
+                    </a></li>
+                    <li><a href="exc.html" class="article-link active">
+                        <span class="article-num">5</span>
+                        <span class="article-info">
+                            <span class="article-title">共生演化</span>
+                            <span class="article-desc">规格-实现知识一致性</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="section-nav">
+            <h3><i class="fas fa-list"></i> 本章导览</h3>
+            <nav>
+                <ul>
+                    <li><a href="#problem"><i class="fas fa-exclamation-triangle"></i> 生存性问题</a></li>
+                    <li><a href="#phases"><i class="fas fa-sync-alt"></i> 三个核心环节</a></li>
+                    <li><a href="#framework"><i class="fas fa-layer-group"></i> 五层定位</a></li>
+                    <li><a href="#conclusion"><i class="fas fa-flag-checkered"></i> 总结</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    <div class="main-content">
+        <div class="container">
+
+        <!-- 文章头部 -->
+        <header class="article-header">
+            <span class="series-tag">五层进化 · 深度扩展</span>
+            <h1>规格-实现共生演化机制</h1>
+            <p class="subtitle">当<code>agents.md</code>与代码彼此背离时，AI不应盲从任何一方。<br>它应成为那个持续追踪分歧、展示后果、然后恭敬地请求人的智慧来做最终选择的忠诚管家。</p>
+            <p class="meta">itg · 嵌入式AI工程化系列 · 知识一致性生存之道</p>
+        </header>
+
+        <!-- 问题定义 -->
+        <section>
+            <h2 id="problem">一、一个被忽视的生存性问题</h2>
+
+            <p>在嵌入式AI工程化的实践中，我们投入巨大精力构建了两个信息世界：</p>
+            <ul style="margin-left:20px;margin-top:8px;">
+                <li><strong>规约世界</strong>——<code>agents.md</code>、需求文档、设计规约，它们表述系统“<em>应该如何</em>”。</li>
+                <li><strong>实现世界</strong>——固件代码、硬件配置、运行时行为，它们呈现系统“<em>实际如何</em>”。</li>
+            </ul>
+
+            <div class="card accent-left">
+                <p style="margin-top:0;"><strong>核心矛盾：</strong>在长达数月甚至数年的迭代中，这两个世界之间必然出现一种<strong>缓慢、无痛但致命的漂移</strong>。它不是一次激烈的冲突，而是一系列微小妥协的累积——一个为了赶工期而绕过的规约、一段为了修复现场Bug而临时插入却从未被文档化的补丁、一条因为芯片换型而不再适用但无人记得更新的设计准则。</p>
+            </div>
+
+            <p>当漂移积累到一定程度，整个AI工程化体系将建立在越来越虚假的“意图”之上。AI会对着过时的<code>agents.md</code>虔诚地优化代码；或者反过来，代码里沉淀了无数未被言说的现场智慧，却被AI当作“违背规约”的脏东西清洗掉。</p>
+
+            <div class="insight-box">
+                <strong>这不是一个技术问题，而是一个知识一致性的生存问题。</strong>在五层进化的L4自动化与L5自治阶段，如果AI无法感知并妥善处理这种漂移，那么整个闭环最终会崩塌于自身的知识债务。
+            </div>
+
+            <p>因此，我们需要一个专门的子系统。我将其命名为：<strong>规格-实现共生演化机制（Spec-Implementation Co-evolution）</strong>。</p>
+
+            <p>它的核心哲学是：<strong>不强迫一方服从另一方，而是让二者像两条缠绕上升的螺旋，在持续对话中共同演化。</strong></p>
+        </section>
+
+        <!-- SVG: 漂移示意 -->
+        <figure class="figure">
+            <svg viewBox="0 0 680 200" width="100%" style="max-width:680px;">
+                <defs>
+                    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#8896a4" />
+                    </marker>
+                </defs>
+                <!-- 时间轴 -->
+                <line x1="40" y1="170" x2="640" y2="170" stroke="#d0dbe6" stroke-width="2" />
+                <text x="40" y="195" font-size="12" fill="#8896a4">t₀ 项目启动</text>
+                <text x="540" y="195" font-size="12" fill="#8896a4">tₙ 当前</text>
+                <!-- 规约线 -->
+                <path d="M40 100 Q180 95 280 105 Q380 115 480 108 Q580 100 640 105" fill="none" stroke="#2980b9" stroke-width="2.5" stroke-dasharray="8 4" />
+                <text x="550" y="90" font-size="13" fill="#2980b9" font-weight="600">规约世界 (agents.md)</text>
+                <!-- 实现线 -->
+                <path d="M40 130 Q150 140 250 120 Q350 90 430 125 Q520 155 640 135" fill="none" stroke="#c0392b" stroke-width="2.5" />
+                <text x="550" y="150" font-size="13" fill="#c0392b" font-weight="600">实现世界 (固件代码)</text>
+                <!-- 漂移高亮 -->
+                <ellipse cx="520" cy="120" rx="35" ry="22" fill="rgba(231,76,60,0.12)" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4 3" />
+                <text x="520" y="75" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="700">⚠ 漂移区</text>
+            </svg>
+            <p class="caption">图1：规约与实现在时间轴上的漂移示意——初始紧密对齐，随时间推移逐渐分离。</p>
+        </figure>
+
+        <!-- 三个核心环节 -->
+        <section>
+            <h2 id="phases">二、三个核心环节</h2>
+            <p>整个机制由三个环环相扣的环节组成，可直接嵌入现有的CI流程与本地工具链。</p>
+
+            <div class="phase-grid">
+
+                <!-- 环节一：漂移感知 -->
+                <div class="phase-card">
+                    <span class="phase-number">环节 1</span>
+                    <span class="mechanism-label">检测机制</span>
+                    <h3>漂移感知：让Agent建立对“分歧”的第六感</h3>
+                    <p>在CI pipeline或本地watchdog中植入一个<strong>Spec-Drift Sniffer</strong>。它不运行测试，而是专注于一件事：<strong>将规约文件与代码之间建立语义关联，并持续计算差异向量</strong>。</p>
+
+                    <p>其工作流程如下：</p>
+                    <ol style="margin-left:20px;">
+                        <li><strong>提取规约断言</strong>：让AI解析<code>agents.md</code>，抽取所有断言性质的规约（如“中断函数中严禁调用HAL_Delay”、“所有SPI传输必须使用DMA”、“电源管理模块必须在进入停机模式前完成ADC校准数据保存”）。每条规约被赋予一个唯一ID。</li>
+                        <li><strong>扫描代码证据</strong>：AI扫描代码本体，为每条规约寻找对应的“证明相符”或“疑似违背”的代码证据，记录文件路径、行号和匹配置信度。</li>
+                        <li><strong>分类分歧类型</strong>：
+                            <ul style="margin-left:16px;">
+                                <li><strong>幽灵规约</strong>：规约中存在，但代码中完全找不到对应证据——规约可能已过时。</li>
+                                <li><strong>潜规则</strong>：代码中存在的重要模式，规约中完全没有提及——这是沉淀在代码中的“暗知识”，可能比规约更接近现实。</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <p>每次提交触发一次嗅探，生成一个<strong>漂移热力矩阵</strong>：行是规约条目，列是代码模块，颜色深浅表示漂移程度。这张图本身就是给开发者和AI共同的预警信号。</p>
+
+                    <!-- 伪代码 -->
+                    <pre><span class="comment">// Spec-Drift Sniffer 核心逻辑（简化）</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span> {
+    <span class="type">char</span>        spec_id[48];       <span class="comment">// 规约唯一ID</span>
+    <span class="type">char</span>        spec_text[256];    <span class="comment">// 规约原文摘要</span>
+    <span class="type">char</span>        code_evidence[256];<span class="comment">// 匹配到的代码证据</span>
+    <span class="type">float</span>       confidence;        <span class="comment">// 匹配置信度 0.0~1.0</span>
+    <span class="type">drift_type_t</span> type;             <span class="comment">// SPEC_GHOST | CODE_LATENT | ALIGNED</span>
+} <span class="type">drift_record_t</span>;
+
+<span class="comment">// 每次CI触发时运行</span>
+<span class="type">void</span> <span class="func">sniff_drift</span>(<span class="keyword">const</span> <span class="type">char</span>* agents_md_path,
+                  <span class="keyword">const</span> <span class="type">char</span>* codebase_path,
+                  <span class="type">drift_report_t</span>* report);</pre>
+                </div>
+
+                <!-- 环节二：冲突仲裁 -->
+                <div class="phase-card">
+                    <span class="phase-number">环节 2</span>
+                    <span class="mechanism-label">决策机制</span>
+                    <h3>冲突仲裁：把“选择权”设计成一个可追溯的决策事件</h3>
+                    <p>当漂移超过预设阈值，Agent<strong>暂停自动修复行为</strong>，转而生成一份<strong>决策邀请报告</strong>。<strong>这是整个机制最关键的设计决策：谁有权定义“真值”，必须是人。但人需要AI帮他看清全部后果。</strong></p>
+
+                    <p>报告格式不是冰冷的diff，而是一个叙事。它用工程师能理解的语言，把分歧的来龙去脉、可能的原因、每种选择的后果，清晰地呈现出来：</p>
+
+                    <div class="report-block">
+                        <div class="report-label">📋 决策邀请报告 #DRIFT-2026-042</div>
+                        <p style="margin:8px 0 4px;"><strong>我注意到一个分歧：</strong></p>
+                        <p style="margin:4px 0;color:#5a6c7d;"><code>agents.md</code> 第42行声称：<em>“电源管理模块必须在进入停机模式前完成所有ADC校准数据的保存。”</em></p>
+                        <p style="margin:4px 0;color:#5a6c7d;">但在 <code>pwr_mgr.c:203</code>，保存操作发生在<strong>进入停机模式后的第一个唤醒ISR中</strong>。</p>
+                        <p style="margin:10px 0 4px;"><strong>这不是Bug，而是一个有意图的设计分歧。</strong>可能的原因：</p>
+                        <ol style="margin:4px 0 4px 18px;">
+                            <li>在停机前保存，因内部Flash写入时间过长导致芯片被看门狗复位（来自 <code>issue#117</code> 的讨论）。</li>
+                            <li>在唤醒后保存，利用了备份域SRAM，但增加了掉电风险窗口——若备份域在此期间掉电，数据将永久丢失。</li>
+                        </ol>
+                        <p style="margin:10px 0 4px;"><strong>请你决定：</strong></p>
+                        <p style="margin:2px 0;">
+                            <span class="choice choice-a">A. 代码是对的，规约过时了</span> → 我将重写 <code>agents.md</code> 的相关段落，并附带本次决策的完整上下文。
+                        </p>
+                        <p style="margin:2px 0;">
+                            <span class="choice choice-b">B. 规约是对的，代码必须修正</span> → 我将生成一个包含所需改动及风险评估的修复任务。
+                        </p>
+                        <p style="margin:2px 0;">
+                            <span class="choice choice-c">C. 两者都不对，需要重新讨论</span> → 我将生成一份更完整的深潜分析，作为新讨论的起点。
+                        </p>
+                    </div>
+
+                    <p>人的每一次选择（A/B/C）都被记录为一个<strong>不可篡改的决策事件</strong>，附带时间戳和上下文快照，加密写入一个<strong>规格决策账本（Spec Decision Ledger）</strong>。这保证了漂移历史不会随着时间再次被遗忘——即使是十年后的维护者，也能追溯每一个“为什么当初这样决定”的完整故事。</p>
+                </div>
+
+                <!-- 环节三：共生决议 -->
+                <div class="phase-card">
+                    <span class="phase-number">环节 3</span>
+                    <span class="mechanism-label">演化机制</span>
+                    <h3>共生决议：让“文本”和“代码”形成进化的双螺旋</h3>
+                    <p>一旦人做出选择，Agent将执行一个<strong>自动化的共生演化动作</strong>。这不是简单的“修改文件”，而是保证<strong>决策上下文永不丢失</strong>的结构化操作。</p>
+
+                    <p><strong>若选择A（代码胜出，规约需更新）：</strong></p>
+                    <ul style="margin-left:20px;">
+                        <li>Agent更新<code>agents.md</code>中的对应段落，使其与代码实际行为一致。</li>
+                        <li>在更新处自动插入一个<code>[DRIFT-RESOLVED]</code>标记块，内含：原始规约引用、促使改变的关键代码片段哈希、人的决策摘要、时间戳。</li>
+                        <li>未来的AI读到这段时，看到的不再是冷冰的断言，而是一段活的演进史。</li>
+                    </ul>
+
+                    <p><strong>若选择B（规约胜出，代码需修正）：</strong></p>
+                    <ul style="margin-left:20px;">
+                        <li>Agent将修复任务放入要求人工审核的PR队列。</li>
+                        <li>在PR描述中自动引用规约原文和本次决策记录，实现从“规约”到“代码修复”的全链路追溯。</li>
+                        <li>修复完成后，Sniffer重新扫描确认漂移已消除。</li>
+                    </ul>
+
+                    <p><strong>若选择C（重新设计）：</strong></p>
+                    <ul style="margin-left:20px;">
+                        <li>Agent创建一份<strong>分歧深潜文档</strong>，提出几种不同的调和方案及其代价分析。</li>
+                        <li>切换到“协作模式”，在这一单一议题上与人反复讨论，直到新共识被同时写入规约和代码。</li>
+                    </ul>
+
+                    <div class="insight-box" style="margin-top:16px;">
+                        <strong>关键设计原则：</strong>AI从不代替人做“什么是正确”的价值判断。它只负责<strong>追踪分歧、展示后果、然后恭敬地等待人的裁决</strong>。裁决一旦做出，它以不可磨灭的方式将其记录在案，确保同样的困惑不会在未来重演。
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SVG: 三环节流程图 -->
+        <figure class="figure">
+            <svg viewBox="0 0 680 300" width="100%" style="max-width:680px;">
+                <!-- 环节框 -->
+                <rect x="10" y="30" width="200" height="100" rx="8" fill="#f5f7fa" stroke="#d0dbe6" stroke-width="2" />
+                <text x="110" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a2e">① 漂移感知</text>
+                <text x="110" y="82" text-anchor="middle" font-size="12" fill="#5a6c7d">Spec-Drift Sniffer</text>
+                <text x="110" y="102" text-anchor="middle" font-size="12" fill="#5a6c7d">热力矩阵 · 幽灵规约</text>
+                <text x="110" y="120" text-anchor="middle" font-size="12" fill="#5a6c7d">潜规则发现</text>
+
+                <rect x="240" y="30" width="200" height="100" rx="8" fill="#fffdf7" stroke="#f0d78c" stroke-width="2" />
+                <text x="340" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a2e">② 冲突仲裁</text>
+                <text x="340" y="82" text-anchor="middle" font-size="12" fill="#5a6c7d">决策邀请报告</text>
+                <text x="340" y="102" text-anchor="middle" font-size="12" fill="#c0392b" font-weight="600">← 人的裁决 →</text>
+                <text x="340" y="120" text-anchor="middle" font-size="12" fill="#5a6c7d">决策账本 · 不可篡改</text>
+
+                <rect x="470" y="30" width="200" height="100" rx="8" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="2" />
+                <text x="570" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a2e">③ 共生决议</text>
+                <text x="570" y="82" text-anchor="middle" font-size="12" fill="#5a6c7d">自动同步 · 上下文锚定</text>
+                <text x="570" y="102" text-anchor="middle" font-size="12" fill="#5a6c7d">[DRIFT-RESOLVED] 标记</text>
+                <text x="570" y="120" text-anchor="middle" font-size="12" fill="#5a6c7d">双螺旋共同进化</text>
+
+                <!-- 箭头 -->
+                <line x1="210" y1="80" x2="238" y2="80" stroke="#8896a4" stroke-width="2" marker-end="url(#arrowhead)" />
+                <line x1="440" y1="80" x2="468" y2="80" stroke="#8896a4" stroke-width="2" marker-end="url(#arrowhead)" />
+                <!-- 反馈回路 -->
+                <path d="M570 130 L570 200 L340 200 L340 132" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-dasharray="6 3" marker-end="url(#arrowhead)" />
+                <text x="455" y="215" text-anchor="middle" font-size="11" fill="#c0392b">持续循环 · 螺旋收敛</text>
+            </svg>
+            <p class="caption">图2：三个环节的闭环流程——感知漂移 → 请求裁决 → 共生演化 → 再次感知，形成螺旋收敛。</p>
+        </figure>
+
+        <!-- 五层框架映射 -->
+        <section>
+            <h2 id="framework">三、在五层进化框架中的定位</h2>
+            <p>这一机制并非在五层框架之外另起炉灶，而是对<strong>L4自动化与L5自治在时间维度上的关键补全</strong>。</p>
+
+            <table class="mapping-table">
+                <thead>
+                    <tr>
+                        <th>层级</th>
+                        <th>本机制的对应角色</th>
+                        <th>具体表现</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="layer-tag">L1 上下文增强</span></td>
+                        <td>规约与代码的统一索引</td>
+                        <td>Sniffer建立规约条目与代码行之间的双向语义链接，增强AI的全局视野。</td>
+                    </tr>
+                    <tr>
+                        <td><span class="layer-tag">L2 可观测性</span></td>
+                        <td>知识漂移作为一种新的“负日志”</td>
+                        <td>“应然与实然的系统沉默分歧”被显性化——这不是运行时Bug，而是<strong>设计意图层面的负事件</strong>。</td>
+                    </tr>
+                    <tr>
+                        <td><span class="layer-tag">L3 数据闭环</span></td>
+                        <td>漂移热力矩阵作为闭环输入</td>
+                        <td>每次CI生成的漂移报告成为反馈信号，驱动后续决策。</td>
+                    </tr>
+                    <tr>
+                        <td><span class="layer-tag">L4 自动化</span></td>
+                        <td>决策报告与工作流的自动生成</td>
+                        <td>Agent自动发现分歧、自动生成叙事性报告、自动执行人的裁决结果。人无需费心寻找分裂点。</td>
+                    </tr>
+                    <tr>
+                        <td><span class="layer-tag">L5 自治</span></td>
+                        <td><strong>知识自愈能力</strong></td>
+                        <td>系统在长时间运行中，不盲目忠实于任何单一信息源，而是在人的最终裁决下，持续将“代码中的暗知识”和“规约中的明意图”编织为统一的进化体。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="card warning">
+                <p style="margin-top:0;"><strong>补全的意义：</strong>没有这一层，五层框架是一个优秀的<strong>开发时</strong>系统。有了这一层，它才成为一个能持续运行一年、三年、十年而不会在知识层面积累致命债务的<strong>全生命周期</strong>系统。这是从“工具”到“伙伴”的质变。</p>
+            </div>
+        </section>
+
+        <!-- 总结 -->
+        <section>
+            <h2 id="conclusion">四、回到最初的问题</h2>
+
+            <p>你问：当规约文本与代码现实彼此背离时，AI应该坚持文本描述的思路，还是让文本向代码进化？</p>
+
+            <p>答案在于<strong>两者都不应成为绝对的权威</strong>。</p>
+
+            <p>规约文本承载着<strong>设计意图和历史共识</strong>，它是“应然”的守护者。忽视它，意味着抛弃所有前人在这个项目上投入的思考。代码实现承载着<strong>物理现实和现场智慧</strong>，它是“实然”的见证者。清洗它，意味着抹去所有在真实世界中用代价换来的教训。</p>
+
+            <p>AI的角色不是在这两者之间选边站。它的角色是：</p>
+
+            <div class="insight-box">
+                <strong>成为那个持续追踪分歧、展示全部后果、然后恭敬地请求人的智慧来做最终选择的忠诚管家。</strong><br><br>
+                裁决权永远属于人。但AI确保：<br>
+                ① 分歧不会被忽视；<br>
+                ② 后果被充分展示；<br>
+                ③ 裁决被永久铭记；<br>
+                ④ 同样的困惑不会在未来重演。
+            </div>
+
+            <p>这就是<strong>规格-实现共生演化机制</strong>的全部意义。它不只是一个工具特性，而是嵌入式AI工程化在时间维度上的生存哲学。</p>
+        </section>
+
+        <!-- 脚注 -->
+        <section class="footnote-section">
+            <h4>本文定位</h4>
+            <p>本文是对《从"摸黑调试"到"拨云见日"：AI编程调试的五层进化》中<strong>L4自动化与L5自治</strong>在<strong>时间维度</strong>上的深度扩展。它回答了“当AI自治系统长期运行时，如何保证其依赖的知识基础（规约文件）不因代码演进而过时”这一根本性问题。</p>
+            <p style="margin-top:6px;">相关文章：<a href="index.html">五层进化总纲</a> · <a href="true.html">高复用模板</a> · <a href="test.html">闭环收敛方法</a> · <a href="pcb.html">PCB分析器</a></p>
+        </section>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
