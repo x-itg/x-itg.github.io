@@ -503,6 +503,110 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* exc.html 风格对齐 */
+        body {
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+        .main-content {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+        .main-content > .hero {
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            padding: 0;
+            margin-bottom: 48px;
+        }
+        .main-content > .hero .badge {
+            background: var(--accent);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        .main-content > .hero h1 {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+            background: none;
+            color: var(--text);
+        }
+        .main-content > .hero .sub {
+            font-size: 17px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 20px;
+            border-left: 0;
+            padding-left: 0;
+        }
+        .main-content > .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px 30px;
+            margin: 28px 0;
+            box-shadow: var(--shadow-sm);
+        }
+        .main-content > .card:hover {
+            box-shadow: var(--shadow-sm);
+        }
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 56px 0 16px;
+            padding-top: 24px;
+            padding-bottom: 0;
+            border-top: 2px solid var(--border);
+            border-bottom: 0;
+            color: var(--text);
+            letter-spacing: -0.2px;
+        }
+        h3 {
+            font-size: 19px;
+            font-weight: 600;
+            margin: 36px 0 12px;
+            color: #1a1a2e;
+        }
+        h4 {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 20px 0 8px;
+            color: #1a1a2e;
+        }
+        p {
+            margin: 14px 0;
+        }
+        footer {
+            margin-top: 60px;
+            padding: 24px 0 0;
+            border-top: 1px solid var(--border);
+            color: #8896a4;
+            font-size: 13px;
+            text-align: left;
+        }
+        @media (max-width: 780px) {
+            .main-content {
+                padding: 20px 16px 60px;
+            }
+            .main-content > .hero h1 {
+                font-size: 26px;
+            }
+            h2 {
+                font-size: 21px;
+            }
+            .main-content > .card {
+                padding: 18px 16px;
+            }
+        }
     </style>
 <body>
 <div class="layout">

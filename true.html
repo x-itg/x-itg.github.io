@@ -373,6 +373,92 @@
             justify-content: center;
             gap: 12px;
         }
+
+        /* exc.html 风格对齐 */
+        body {
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+        .main-content > .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 40px 24px 80px !important;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+        }
+        .main-content > .container > .badge {
+            background: var(--accent);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        .main-content > .container > h1 {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+            background: none;
+            color: var(--text);
+        }
+        .main-content > .container > .subtitle {
+            font-size: 17px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 20px;
+            border-left: 0;
+            padding-left: 0;
+        }
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 56px 0 16px;
+            padding-top: 24px;
+            padding-bottom: 0;
+            border-top: 2px solid var(--border);
+            border-bottom: 0;
+            color: var(--text);
+            letter-spacing: -0.2px;
+        }
+        h3 {
+            font-size: 19px;
+            font-weight: 600;
+            margin: 36px 0 12px;
+            color: #1a1a2e;
+        }
+        h4 {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 20px 0 8px;
+            color: #1a1a2e;
+        }
+        p {
+            margin: 14px 0;
+        }
+        footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            color: #8896a4;
+            font-size: 13px;
+            text-align: left;
+        }
+        @media (max-width: 780px) {
+            .main-content > .container {
+                padding: 20px 16px 60px !important;
+            }
+            .main-content > .container > h1 {
+                font-size: 26px;
+            }
+            h2 {
+                font-size: 21px;
+            }
+        }
     </style>
 </head>
 <body>
