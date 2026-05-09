@@ -35,7 +35,8 @@
             background: var(--bg);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
             color: var(--text);
-            line-height: 1.7;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
         }
         .layout {
             display: flex;
@@ -165,25 +166,36 @@
             font-weight: 600;
             color: #2c6288;
         }
-        .code-block {
+        pre {
             background: var(--code-bg);
-            border-radius: var(--radius);
-            padding: 1rem;
-            overflow-x: auto;
-            margin: 1.2rem 0;
-            border: 1px solid #2d3748;
-            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
-            font-size: 0.85rem;
-            line-height: 1.7;
-        }
-        .code-block pre {
-            margin: 0;
             color: var(--code-text);
+            padding: 20px 24px;
+            border-radius: var(--radius);
+            overflow-x: auto;
+            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 20px 0;
+            box-shadow: var(--shadow-md);
             white-space: pre-wrap;
             word-break: break-word;
         }
-        .code-block code {
-            color: var(--code-text);
+        pre .keyword { color: #c792ea; }
+        pre .string { color: #c3e88d; }
+        pre .comment { color: #546e7a; font-style: italic; }
+        pre .func { color: #82aaff; }
+        pre .type { color: #ffcb6b; }
+        code {
+            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+            font-size: 13px;
+        }
+        p code,
+        li code {
+            background: #eef1f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #c0392b;
+            font-size: 12px;
         }
         .inline-code {
             background: #eef2ff;
@@ -208,16 +220,16 @@
         .highlight {
             background: var(--highlight);
             border-left: 4px solid var(--accent);
-            padding: 0.8rem 1.2rem;
+            padding: 16px 24px;
             border-radius: var(--radius);
-            margin: 1.2rem 0;
+            margin: 24px 0;
         }
         .quote {
             border-left: 3px solid var(--accent);
             background: #faf5ff;
-            padding: 0.8rem 1.2rem;
+            padding: 16px 24px;
             border-radius: var(--radius);
-            margin: 1rem 0;
+            margin: 20px 0;
         }
         footer {
             margin-top: 2rem;
@@ -589,7 +601,7 @@
             <div class="level-badge"><i class="fas fa-eye"></i> 第一招 · 双向可观测性 <span class="innovation-tag">原创</span></div>
             <h2>结构化日志 + 负日志：让AI看见"发生了"和"没发生"</h2>
             <p>传统日志只能记录"代码执行到了哪里"。大量隐蔽Bug的根源是<strong>应该发生的事却没发生</strong>（中断未触发、状态未迁移）。<strong>负日志</strong>显式声明期望事件，超时未到达则自动输出。</p>
-            <div class="code-block"><pre>// ===== 结构化正日志 =====
+            <pre>// ===== 结构化正日志 =====
 #define LOG(level, fmt, ...) printf("[%s] %s:%d " fmt "\r\n", level, __FILE__, __LINE__, ##__VA_ARGS__)
 #define LOG_STATE(state, epoch) LOG("INFO", "state=%s epoch=%d", state_to_str(state), epoch)
 
@@ -625,10 +637,10 @@ void can_protocol_task(void) {
                 <div class="principle-card"><h4><i class="fas fa-bug"></i> 暴露隐藏Bug</h4><p>中断丢失、竞争条件、超时配置错误——这些"静默失败"以前极难发现，负日志让它们无所遁形。</p></div>
                 <div class="principle-card"><h4><i class="fas fa-brain"></i> 提升AI诊断力</h4><p>AI读取负日志后无需猜测，直接明确"COMMIT帧未在窗口内到达"，结合正日志快速定位epoch同步失效。</p></div>
             </div>
-            <div class="case-study"><h4><i class="fas fa-laptop-code"></i> 实战案例：CAN协议同步失败</h4><p>一个生产级CAN协议栈，主节点发送ANNOUNCE后等待SLAVE回复COMMIT。Vibe生成的代码逻辑正确，但实际运行中偶发性失败。使用负日志后，问题立即暴露：</p><div class="code-block"><pre>[POSITIVE] EVENT: ANNOUNCE_frame sent at tick=12345
-            [NEGATIVE] can_protocol.c:234 expected 'COMMIT_frame' within 50ms, not occurred.
-            [POSITIVE] state=COMPLETING epoch=5
-            // AI诊断：时序分析发现SLAVE在epoch=4时已完成，导致状态机拒绝处理epoch=5的COMMIT</pre></div></div>
+            <div class="case-study"><h4><i class="fas fa-laptop-code"></i> 实战案例：CAN协议同步失败</h4><p>一个生产级CAN协议栈，主节点发送ANNOUNCE后等待SLAVE回复COMMIT。Vibe生成的代码逻辑正确，但实际运行中偶发性失败。使用负日志后，问题立即暴露：</p>            <pre>[POSITIVE] EVENT: ANNOUNCE_frame sent at tick=12345
+[NEGATIVE] can_protocol.c:234 expected 'COMMIT_frame' within 50ms, not occurred.
+[POSITIVE] state=COMPLETING epoch=5
+// AI诊断：时序分析发现SLAVE在epoch=4时已完成，导致状态机拒绝处理epoch=5的COMMIT</pre></div>
             <div class="quote">💡 正日志+负日志 = 双向可观测性，诊断效率翻倍。</div>
         </div>
 
@@ -636,20 +648,20 @@ void can_protocol_task(void) {
             <div class="level-badge"><i class="fas fa-folder-tree"></i> 第二招 · 全局视角</div>
             <h2>统一工程上下文：让AI读懂整个项目</h2>
             <p>碎片化的代码片段是AI的天敌。当AI只能看到单个文件时，它无法理解模块间的依赖关系、数据流向、时序约束。<strong>统一上下文</strong>让AI获得"上帝视角"。</p>
-            <div class="code-block"><pre>project/
-            ├── firmware/                    # 固件主目录
-            │   ├── src/                     # 源码（驱动、协议、应用）
-            │   ├── inc/                     # 头文件（日志宏、负日志引擎）
-            │   └── build/                   # 编译配置
-            ├── host/                        # 上位机CLI工具
-            │   ├── cli_can.py              # CAN帧发送/监听
-            │   ├── cli_serial.py           # 串口调试
-            │   └── test_automation.py     # 自动化测试脚本
-            ├── docs/                        # 协议规范与硬件连接图
-            ├── logs/                        # 日志目录（典型/异常案例）
-            ├── .vscode/
-            │   └── tasks.json             # 一键自动化任务
-            └── agents.md                   # AI协作规范（核心创新）</pre></div>
+            <pre>project/
+├── firmware/                    # 固件主目录
+│   ├── src/                     # 源码（驱动、协议、应用）
+│   ├── inc/                     # 头文件（日志宏、负日志引擎）
+│   └── build/                   # 编译配置
+├── host/                        # 上位机CLI工具
+│   ├── cli_can.py              # CAN帧发送/监听
+│   ├── cli_serial.py           # 串口调试
+│   └── test_automation.py     # 自动化测试脚本
+├── docs/                        # 协议规范与硬件连接图
+├── logs/                        # 日志目录（典型/异常案例）
+├── .vscode/
+│   └── tasks.json             # 一键自动化任务
+└── agents.md                   # AI协作规范（核心创新）</pre>
             <div class="grid-2">
                 <div class="technique-card"><h4><i class="fas fa-puzzle-piece"></i> 模块依赖可视化</h4><p>AI可以通过目录结构推断模块间的调用关系。firmware/host/logs的分离让AI理解"谁在调试谁"。</p></div>
                 <div class="technique-card"><h4><i class="fas fa-file-alt"></i> 文档即上下文</h4><p>docs/中的protocol.md描述状态机，AI阅读后能理解状态转换的时序约束，而不仅是代码逻辑。</p></div>
@@ -702,7 +714,7 @@ void can_protocol_task(void) {
             python host/cli_serial.py COM3 115200 "show state"</pre></div></div>
             </div>
             <h3>VSCode Tasks 自动化配置</h3>
-            <div class="code-block"><pre>// .vscode/tasks.json
+            <pre>// .vscode/tasks.json
             {
                 "version": "2.0.0",
                 "tasks": [
@@ -723,13 +735,13 @@ void can_protocol_task(void) {
 
             <h3><i class="fas fa-sync-alt"></i> 第一步：契约生成，开箱即闭环</h3>
             <p>将以下契约交给低成本模型，只需 $0.05，5-10分钟即可获得一个"开箱即闭环"的完整工程。这让任何模型都能输出一致的工程质量，将最佳实践编码化。</p>
-            <div class="code-block"><pre>【模板生成必须满足条款】
-            1. 固件必须包含 LOG 宏 + 负日志引擎（EXPECT_WITHIN / EVENT_OCCURRED）
-            2. 目录结构必须包含 host/cli_can.py, host/cli_serial.py, host/test_automation.py
-            3. .vscode/tasks.json 必须定义 build/flash/monitor_log/cli_test/full_loop 任务
-            4. 上位机脚本必须支持 --send/--listen/--test/--ping 等命令行参数
-            5. 一次性输出完整可编译代码，禁止分块输出
-            6. 所有关键函数路径必须添加日志点，包含状态和epoch信息</pre></div>
+            <pre>【模板生成必须满足条款】
+1. 固件必须包含 LOG 宏 + 负日志引擎（EXPECT_WITHIN / EVENT_OCCURRED）
+2. 目录结构必须包含 host/cli_can.py, host/cli_serial.py, host/test_automation.py
+3. .vscode/tasks.json 必须定义 build/flash/monitor_log/cli_test/full_loop 任务
+4. 上位机脚本必须支持 --send/--listen/--test/--ping 等命令行参数
+5. 一次性输出完整可编译代码，禁止分块输出
+6. 所有关键函数路径必须添加日志点，包含状态和epoch信息</pre>
 
             <h3><i class="fas fa-play-circle"></i> 第二步：一键full_loop，让AI拥有双手</h3>
             <p>有了契约生成的工程骨架，只需一条命令就能启动全自动流水线。AI不再只是"建议者"，而是能亲自执行测试、读取日志、验证修复的"执行者"。</p>
@@ -747,16 +759,16 @@ void can_protocol_task(void) {
 
             <h3><i class="fas fa-handshake"></i> 第三步：人机共情，让AI理解你的“潜规则”</h3>
             <p>AI不知道 state=6 是 ONLINE_FIXED，也不知道你的CAN适配器是can0还是can1。共情就是主动填补这些“隐性知识”。有了 <code class="inline-code">agents.md</code>，每个接入该项目的AI都会遵循相同的规范，共情从“个人修养”变为“团队契约”。</p>
-            <div class="code-block"><pre># agents.md - 放入项目根目录，AI助手自动加载
-            ## 状态枚举映射
-            | 数值 | 枚举名 | 含义 |
-            |------|--------|------|
-            | 2 | COMPLETING | 等待COMMIT |
-            | 4 | ONLINE_FIXED | 连接建立成功 |
-            ## 行为准则
-            1. 当看到数字状态码，必须映射到枚举名再分析
-            2. 分析日志时优先检查 [NEGATIVE] 条目
-            3. 输出修改建议必须使用 git diff 格式
+            <pre># agents.md - 放入项目根目录，AI助手自动加载
+## 状态枚举映射
+| 数值 | 枚举名 | 含义 |
+|------|--------|------|
+| 2 | COMPLETING | 等待COMMIT |
+| 4 | ONLINE_FIXED | 连接建立成功 |
+## 行为准则
+1. 当看到数字状态码，必须映射到枚举名再分析
+2. 分析日志时优先检查 [NEGATIVE] 条目
+3. 输出修改建议必须使用 git diff 格式
             ## 已知陷阱
             - epoch在COMMIT处理后才递增
             - CAN设备名为can0，波特率250000</pre></div>

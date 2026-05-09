@@ -35,7 +35,8 @@
             background: var(--bg);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
             color: var(--text);
-            line-height: 1.7;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
         }
         .container {
             max-width: 1300px;
@@ -82,21 +83,36 @@
             align-items: center;
             gap: 0.5rem;
         }
-        .code-block {
+        pre {
             background: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px 24px;
             border-radius: var(--radius);
-            padding: 1.2rem;
             overflow-x: auto;
-            margin: 1.2rem 0;
-            border: 1px solid #2d3748;
             font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
-            font-size: 0.85rem;
+            font-size: 13px;
             line-height: 1.7;
+            margin: 20px 0;
+            box-shadow: var(--shadow-md);
             white-space: pre-wrap;
             word-break: break-word;
         }
-        .code-block code {
-            color: var(--code-text);
+        pre .keyword { color: #c792ea; }
+        pre .string { color: #c3e88d; }
+        pre .comment { color: #546e7a; font-style: italic; }
+        pre .func { color: #82aaff; }
+        pre .type { color: #ffcb6b; }
+        code {
+            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+            font-size: 13px;
+        }
+        p code,
+        li code {
+            background: #eef1f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #c0392b;
+            font-size: 12px;
         }
         .grid-2 {
             display: grid;
@@ -123,16 +139,16 @@
         .highlight {
             background: var(--highlight);
             border-left: 4px solid var(--accent);
-            padding: 0.8rem 1.2rem;
+            padding: 16px 24px;
             border-radius: var(--radius);
-            margin: 1.2rem 0;
+            margin: 24px 0;
         }
         .quote {
             border-left: 3px solid var(--accent);
             background: #faf5ff;
-            padding: 0.8rem 1.2rem;
+            padding: 16px 24px;
             border-radius: var(--radius);
-            margin: 1rem 0;
+            margin: 20px 0;
         }
         .workflow-step {
             display: flex;
@@ -225,12 +241,13 @@
             padding: 1rem;
         }
         footer {
-            margin-top: 2.5rem;
+            margin-top: 60px;
             text-align: center;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 13px;
             border-top: 1px solid var(--border);
-            padding-top: 1.5rem;
+            padding-top: 24px;
+            padding-bottom: 60px;
         }
         /* ===== 侧边栏布局（统一文章导航） ===== */
         .layout {
@@ -548,7 +565,7 @@
 
         <h2 id="script">3. 核心Python脚本实现</h2>
         <p>以下是完整可运行的PyQt脚本，集成了PDF渲染、OCR识别、Markdown生成和VSCode跳转功能。</p>
-        <div class="code-block"><code>#!/usr/bin/env python3
+        <pre>#!/usr/bin/env python3
 # schematic_analyzer.py - PDF电路图分析器，PyQt GUI，支持VSCode跳转
 import sys
 import os
@@ -945,24 +962,24 @@ if __name__ == "__main__":
     print("📊 PDF电路图分析器已启动")
     print("使用方法：文件 → 打开PDF → 运行OCR分析 → 加载代码映射 → 点击元件查看关联")
     sys.exit(app.exec())
-</code></div>
+</pre>
 
         <h2 id="code-mapping">4. 代码映射文件格式</h2>
         <p>维护一个<code>code_mapping.json</code>文件，描述每个元件位号对应的代码位置。该文件可在项目初期手动创建，或由AI根据代码注释自动生成。</p>
-        <div class="code-block"><code>{
-            "U2": [
-            ["firmware/src/rs485.c", "45", "void rs485_init(void)"],
-            ["firmware/src/rs485.c", "102", "rs485_send_byte()"],
-            ["firmware/inc/pinout.h", "23", "#define RS485_DE GPIO_PIN_8"]
-            ],
-            "U1": [
-            ["firmware/src/main.c", "12", "int main(void)"],
-            ["firmware/src/sensor.c", "8", "void sensor_task(void)"]
-            ],
-            "J1": [
-            ["firmware/inc/hardware.h", "15", "RS485端子定义"]
-            ]
-        }</code></div>
+        <pre>{
+    "U2": [
+        ["firmware/src/rs485.c", "45", "void rs485_init(void)"],
+        ["firmware/src/rs485.c", "102", "rs485_send_byte()"],
+        ["firmware/inc/pinout.h", "23", "#define RS485_DE GPIO_PIN_8"]
+    ],
+    "U1": [
+        ["firmware/src/main.c", "12", "int main(void)"],
+        ["firmware/src/sensor.c", "8", "void sensor_task(void)"]
+    ],
+    "J1": [
+        ["firmware/inc/hardware.h", "15", "RS485端子定义"]
+    ]
+}</pre>
         <div class="highlight"><i class="fas fa-robot"></i> AI可以利用此映射：当诊断RS485通讯问题时，自动定位到U2对应的<code>rs485.c:45</code>初始化函数，并结合原理图理解MAX485芯片的DE/RE引脚控制逻辑。</div>
 
         <h2 id="integration">5. 与五层进化工程体系的集成</h2>

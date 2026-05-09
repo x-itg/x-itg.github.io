@@ -35,7 +35,8 @@
             background: var(--bg);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
         }
         .container {
             max-width: 1200px;
@@ -79,21 +80,36 @@
             margin: 1rem 0 0.5rem;
             color: #2c6288;
         }
-        .code-block {
-            background: #f6fafe;
-            border-radius: 1rem;
-            padding: 1rem;
+        pre {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px 24px;
+            border-radius: var(--radius);
             overflow-x: auto;
-            margin: 1rem 0;
-            border: 1px solid #e6edf4;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 0.85rem;
-        }
-        .code-block pre {
-            margin: 0;
-            color: #0a3858;
+            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 20px 0;
+            box-shadow: var(--shadow-md);
             white-space: pre-wrap;
             word-break: break-word;
+        }
+        pre .keyword { color: #c792ea; }
+        pre .string { color: #c3e88d; }
+        pre .comment { color: #546e7a; font-style: italic; }
+        pre .func { color: #82aaff; }
+        pre .type { color: #ffcb6b; }
+        code {
+            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+            font-size: 13px;
+        }
+        p code,
+        li code {
+            background: #eef1f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #c0392b;
+            font-size: 12px;
         }
         .grid-2 {
             display: grid;
@@ -118,18 +134,18 @@
             margin-bottom: 0.8rem;
         }
         .highlight {
-            background: #eef9ff;
-            border-left: 4px solid #3b82f6;
-            padding: 0.8rem 1.2rem;
-            border-radius: 1rem;
-            margin: 1.2rem 0;
+            background: var(--highlight);
+            border-left: 4px solid var(--accent);
+            padding: 16px 24px;
+            border-radius: var(--radius);
+            margin: 24px 0;
         }
         .quote {
-            border-left: 3px solid #8b5cf6;
+            border-left: 3px solid var(--accent);
             background: #faf5ff;
-            padding: 0.8rem 1.2rem;
-            border-radius: 1rem;
-            margin: 1rem 0;
+            padding: 16px 24px;
+            border-radius: var(--radius);
+            margin: 20px 0;
         }
         .dir-tree {
             font-family: 'JetBrains Mono', monospace;
@@ -487,8 +503,7 @@
         <!-- 嵌入式固件关键代码 -->
         <h2 id="firmware">3. 嵌入式固件：正/负日志实战</h2>
         <p>固件中集成了完整的结构化日志与负日志引擎，所有关键路径都添加了日志点。以下是RS485通讯任务的核心片段：</p>
-        <div class="code-block">
-            <pre>
+        <pre>
 // firmware/src/protocol.c
 void rs485_communication_task(void) {
     static uint8_t epoch = 0;
@@ -522,8 +537,7 @@ void rs485_communication_task(void) {
             <div class="card-light">
                 <h4><i class="fas fa-plug"></i> RS485管理器</h4>
                 <p>负责串口打开/关闭、轮询帧发送、超时重试。内部同样集成了正/负日志（输出到文件）。</p>
-                <div class="code-block" style="margin:0.5rem 0; padding:0.5rem;">
-                    <pre>
+                <pre style="margin:0.5rem 0; padding:0.5rem;">
 # host/rs485_manager.py
 def poll_device(self):
     self.send_frame(CMD_POLL)
@@ -713,8 +727,7 @@ if __name__ == "__main__":
 
         <!-- VSCode Tasks 自动化 -->
         <h2 id="tasks">7. VSCode Tasks：一键全自动测试</h2>
-        <div class="code-block">
-            <pre>
+        <pre>
 // .vscode/tasks.json
 {
     "version": "2.0.0",
