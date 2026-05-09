@@ -836,5 +836,91 @@
         </div>
     </div>
 </div>
+<style>
+.inland-security-footer {
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    right: 0;
+    width: fit-content;
+    display: flex;
+    justify-content: flex-end;
+}
+.tooltip-container {
+    position: relative;
+}
+.trigger-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.x-itg-link {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 300;
+    color: #adadad;
+    text-decoration: none;
+}
+.x-itg-link:visited {
+    color: #adadad;
+}
+.x-itg-link:hover {
+    color: #666666;
+}
+.tooltip-content {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    padding-bottom: 16px;
+    font-size: 12px;
+    line-height: 17px;
+    background-color: #fafafa;
+    border-radius: 12px;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    color: #171717;
+}
+.tooltip-content::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 16px;
+}
+.tooltip-container:hover .tooltip-content {
+    display: flex;
+}
+.info-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+</style>
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://x-itg.github.io/" target="_blank" rel="noreferrer" class="x-itg-link">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
+        </div>
+    </div>
+</div>
 </body>
 </html>

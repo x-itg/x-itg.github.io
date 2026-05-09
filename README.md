@@ -3,6 +3,9 @@
 > 融合结构化日志、多模型协作、契约式设计与闭环反馈，重新定义工程化的人机协作范式
 
 - git -c http.proxy=http://192.168.31.103:8080 -c https.proxy=http://192.168.31.103:8080 push origin main
+- git -c http.proxy=http://192.168.31.103:8080 -c https.proxy=http://192.168.31.103:8080 clone https://github.com/x-itg/x-itg.github.io.git
+- git -c http.proxy=http://127.0.0.1:1080 -c https.proxy=http://127.0.0.1:1080 push origin main
+- git -c http.proxy=http://127.0.0.1:1080 -c https.proxy=http://127.0.0.1:1080 clone https://github.com/x-itg/x-itg.github.io.git
 ---
 
 ## 📖 前言：一场静默的革命

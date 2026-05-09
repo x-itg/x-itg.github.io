@@ -6,25 +6,45 @@
     <title>PDF电路图分析器 · AI可读 · VSCode深度关联</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        :root {
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --accent: #c0392b;
+            --accent-soft: #e74c3c;
+            --border: #e0e4e8;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+            --highlight: #fef9e7;
+            --tag-bg: #f0f3f6;
+            --tag-text: #4a5568;
+            --link: #2980b9;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 6px;
+            --radius-lg: 10px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            background: #f5f7fb;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: #1e2a3e;
+            background: var(--bg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: var(--text);
             line-height: 1.7;
         }
         .container {
             max-width: 1300px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 1.8rem;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
             padding: 2.5rem 2rem;
-            border: 1px solid #eef2fa;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
         }
         h1 {
             font-size: 2.2rem;
@@ -37,8 +57,8 @@
         }
         .subtitle {
             font-size: 1.1rem;
-            color: #2c4f7c;
-            border-left: 3px solid #3b82f6;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--accent);
             padding-left: 1.2rem;
             margin-bottom: 2rem;
         }
@@ -63,20 +83,20 @@
             gap: 0.5rem;
         }
         .code-block {
-            background: #f6fafe;
-            border-radius: 1rem;
+            background: var(--code-bg);
+            border-radius: var(--radius);
             padding: 1.2rem;
             overflow-x: auto;
             margin: 1.2rem 0;
-            border: 1px solid #e6edf4;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            border: 1px solid #2d3748;
+            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
             font-size: 0.85rem;
             line-height: 1.7;
             white-space: pre-wrap;
             word-break: break-word;
         }
         .code-block code {
-            color: #0a3858;
+            color: var(--code-text);
         }
         .grid-2 {
             display: grid;
@@ -101,17 +121,17 @@
             margin-bottom: 1rem;
         }
         .highlight {
-            background: #eef9ff;
-            border-left: 4px solid #3b82f6;
+            background: var(--highlight);
+            border-left: 4px solid var(--accent);
             padding: 0.8rem 1.2rem;
-            border-radius: 1rem;
+            border-radius: var(--radius);
             margin: 1.2rem 0;
         }
         .quote {
-            border-left: 3px solid #8b5cf6;
+            border-left: 3px solid var(--accent);
             background: #faf5ff;
             padding: 0.8rem 1.2rem;
-            border-radius: 1rem;
+            border-radius: var(--radius);
             margin: 1rem 0;
         }
         .workflow-step {
@@ -207,9 +227,9 @@
         footer {
             margin-top: 2.5rem;
             text-align: center;
-            color: #6b8dad;
+            color: var(--text-secondary);
             font-size: 0.85rem;
-            border-top: 1px solid #e2edf2;
+            border-top: 1px solid var(--border);
             padding-top: 1.5rem;
         }
         /* ===== 侧边栏布局（统一文章导航） ===== */
@@ -350,6 +370,77 @@
             .ui-mockup {
                 grid-template-columns: 1fr;
             }
+        }
+        .inland-security-footer {
+            position: fixed;
+            z-index: 10;
+            bottom: 0;
+            right: 0;
+            width: fit-content;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .tooltip-container {
+            position: relative;
+        }
+        .trigger-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            background-color: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .x-itg-link {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 300;
+            color: #adadad;
+            text-decoration: none;
+        }
+        .x-itg-link:visited {
+            color: #adadad;
+        }
+        .x-itg-link:hover {
+            color: #666666;
+        }
+        .tooltip-content {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            padding-bottom: 16px;
+            font-size: 12px;
+            line-height: 17px;
+            background-color: #fafafa;
+            border-radius: 12px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            color: #171717;
+        }
+        .tooltip-content::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 16px;
+        }
+        .tooltip-container:hover .tooltip-content {
+            display: flex;
+        }
+        .info-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
         }
     </style>
 </head>
@@ -894,6 +985,19 @@ if __name__ == "__main__":
         <footer><i class="fas fa-file-pdf"></i> PDF电路图分析器 · OCR识别 · Markdown生成 · VSCode超链接跳转 · AI可读描述<br>
             将硬件图纸转化为AI可理解的结构化知识，赋能嵌入式智能调试
         </footer>
+        </div>
+    </div>
+</div>
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://x-itg.github.io/" target="_blank" rel="noreferrer" class="x-itg-link">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
         </div>
     </div>
 </div>

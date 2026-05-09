@@ -6,16 +6,36 @@
     <title>AI嵌入式编程调试 | 五层进化 · 完整闭环工程</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        :root {
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --accent: #c0392b;
+            --accent-soft: #e74c3c;
+            --border: #e0e4e8;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+            --highlight: #fef9e7;
+            --tag-bg: #f0f3f6;
+            --tag-text: #4a5568;
+            --link: #2980b9;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 6px;
+            --radius-lg: 10px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            background: #f5f7fb;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: #1e2a3e;
-            line-height: 1.6;
+            background: var(--bg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: var(--text);
+            line-height: 1.7;
         }
         .layout {
             display: flex;
@@ -72,10 +92,10 @@
         }
         .hero {
             background: linear-gradient(135deg, #ffffff, #f0f6ff);
-            border-radius: 1.8rem;
+            border-radius: var(--radius-lg);
             padding: 2rem;
             margin-bottom: 2rem;
-            border: 1px solid #e2edf5;
+            border: 1px solid var(--border);
         }
         .hero h1 {
             font-size: 2.4rem;
@@ -88,8 +108,8 @@
         }
         .hero .sub {
             font-size: 1.1rem;
-            color: #2c4f7c;
-            border-left: 3px solid #3b82f6;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--accent);
             padding-left: 1.2rem;
         }
         .badge {
@@ -103,15 +123,16 @@
             margin-bottom: 1rem;
         }
         .card {
-            background: #ffffff;
-            border-radius: 1.5rem;
-            border: 1px solid #eef2fa;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
             padding: 1.8rem;
             margin-bottom: 1.8rem;
             transition: 0.2s;
+            box-shadow: var(--shadow-sm);
         }
         .card:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-md);
         }
         .level-badge {
             display: inline-flex;
@@ -145,18 +166,24 @@
             color: #2c6288;
         }
         .code-block {
-            background: #f6fafe;
-            border-radius: 1rem;
+            background: var(--code-bg);
+            border-radius: var(--radius);
             padding: 1rem;
             overflow-x: auto;
             margin: 1.2rem 0;
-            border: 1px solid #e6edf4;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            border: 1px solid #2d3748;
+            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
             font-size: 0.85rem;
+            line-height: 1.7;
         }
         .code-block pre {
             margin: 0;
-            color: #0a3858;
+            color: var(--code-text);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .code-block code {
+            color: var(--code-text);
         }
         .inline-code {
             background: #eef2ff;
@@ -179,25 +206,25 @@
             margin: 1rem 0;
         }
         .highlight {
-            background: #eef9ff;
-            border-left: 4px solid #3b82f6;
+            background: var(--highlight);
+            border-left: 4px solid var(--accent);
             padding: 0.8rem 1.2rem;
-            border-radius: 1rem;
+            border-radius: var(--radius);
             margin: 1.2rem 0;
         }
         .quote {
-            border-left: 3px solid #8b5cf6;
+            border-left: 3px solid var(--accent);
             background: #faf5ff;
             padding: 0.8rem 1.2rem;
-            border-radius: 1rem;
+            border-radius: var(--radius);
             margin: 1rem 0;
         }
         footer {
             margin-top: 2rem;
             text-align: center;
             padding: 1.5rem;
-            border-top: 1px solid #e2edf2;
-            color: #6b8dad;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
             font-size: 0.85rem;
         }
         .innovation-tag {
@@ -947,12 +974,12 @@ void can_protocol_task(void) {
     <div class="tooltip-container">
         <div class="trigger-content">
             <a href="https://x-itg.github.io/" target="_blank" rel="noreferrer" class="x-itg-link">
-                <span>© 2026 x-itg</span>
+                <span>itg · -lvgl-</span>
             </a>
         </div>
         <div class="tooltip-content">
-            <section class="info-section"><span>x-itg</span></section> 
-            <section class="info-section"><span></span><span></span></section>
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
         </div>
     </div>
 </div>
