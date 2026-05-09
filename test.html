@@ -35,8 +35,7 @@
             background: var(--bg);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
             color: var(--text);
-            line-height: 1.8;
-            -webkit-font-smoothing: antialiased;
+            line-height: 1.7;
             padding: 0;
         }
         .layout {
@@ -175,36 +174,20 @@
             align-items: center;
             gap: 0.5rem;
         }
-        pre {
+        .code-block {
             background: var(--code-bg);
-            color: var(--code-text);
-            padding: 20px 24px;
             border-radius: var(--radius);
+            padding: 1rem;
             overflow-x: auto;
+            margin: 1.2rem 0;
+            border: 1px solid #2d3748;
             font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
-            font-size: 13px;
-            line-height: 1.7;
-            margin: 20px 0;
-            box-shadow: var(--shadow-md);
+            font-size: 0.85rem;
             white-space: pre-wrap;
             word-break: break-word;
         }
-        pre .keyword { color: #c792ea; }
-        pre .string { color: #c3e88d; }
-        pre .comment { color: #546e7a; font-style: italic; }
-        pre .func { color: #82aaff; }
-        pre .type { color: #ffcb6b; }
-        code {
-            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
-            font-size: 13px;
-        }
-        p code,
-        li code {
-            background: #eef1f5;
-            padding: 2px 6px;
-            border-radius: 3px;
-            color: #c0392b;
-            font-size: 12px;
+        .code-block code {
+            color: var(--code-text);
         }
         .grid-2 {
             display: grid;
@@ -227,27 +210,22 @@
             background: var(--highlight);
             border: 1px solid #f0d78c;
             border-radius: var(--radius);
-            padding: 20px 24px;
-            margin: 24px 0;
-            font-style: italic;
-            color: #6b4c1e;
-        }
-        .insight-box strong {
-            color: #4a340f;
+            padding: 1rem;
+            margin: 1rem 0;
         }
         .highlight {
             background: var(--highlight);
             border-left: 4px solid var(--accent);
-            padding: 16px 24px;
+            padding: 0.8rem 1.2rem;
             border-radius: var(--radius);
-            margin: 24px 0;
+            margin: 1.2rem 0;
         }
         .quote {
             border-left: 3px solid var(--accent);
             background: #faf5ff;
-            padding: 16px 24px;
+            padding: 0.8rem 1.2rem;
             border-radius: var(--radius);
-            margin: 20px 0;
+            margin: 1rem 0;
         }
         .workflow-step {
             display: flex;
@@ -572,7 +550,7 @@
             <div class="workflow-step"><div class="step-num">4</div><div><h4>生成测试增强提案（轨2）</h4><p>对于未覆盖的需求点，Agent指示低成本AI批量生成补充测试用例（如增加边界参数、故意引入异常、调整时序）。这些新用例加入测试套件。</p></div></div>
             <div class="workflow-step"><div class="step-num">5</div><div><h4>回归验证</h4><p>使用增强后的测试套件再次运行全流程。若仍有失败，重复步骤2~4。若全部通过且需求覆盖充分，则终止迭代。</p></div></div>
             <p>该循环的关键在于<strong>步骤2的智能分析</strong>：Agent必须准确判断一个失败是代码Bug还是测试用例设计不当。这依赖于日志的结构化程度以及需求检查点的定义质量。</p>
-            <pre># ConvergenceAgent 核心伪代码
+            <div class="code-block"><code># ConvergenceAgent 核心伪代码
 def converge(project, requirements):
     for iteration in range(MAX_ITER):
         logs = run_all_tests(project)
@@ -593,7 +571,7 @@ def converge(project, requirements):
             augment_test_suite(project, new_test_cases)
 
         # 新测试可能暴露旧代码的问题，继续循环
-</pre>
+</code></div>
         </div>
 
         <!-- 三重迭代循环（深入解析） -->
