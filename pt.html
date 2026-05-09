@@ -496,14 +496,14 @@
                             <span class="article-desc">规格-实现知识一致性</span>
                         </span>
                     </a></li>
-                    <li><a href="history.html" class="article-link active">
+                    <li><a href="history.html" class="article-link">
                         <span class="article-num">6</span>
                         <span class="article-info">
                             <span class="article-title">历史的包袱</span>
                             <span class="article-desc">遗留工程与AI迁移策略</span>
                         </span>
                     </a></li>
-                    <li><a href="pt.html" class="article-link">
+                    <li><a href="pt.html" class="article-link active">
                         <span class="article-num">7</span>
                         <span class="article-info">
                             <span class="article-title">历史的包袱 PT</span>
@@ -530,7 +530,6 @@
     <div class="main-content">
 <div class="container">
 
-    <!-- 文章头部 -->
     <header class="article-header">
         <span class="series-tag">五层进化 · 环境维度</span>
         <h1>历史的包袱</h1>
@@ -541,7 +540,7 @@
     <section>
         <h2 id="legacy">一、遗产不是罪，沉默才是</h2>
 
-        <p>每个嵌入式工程师的硬盘里，都躺着一批 Keil/IAR 老项目。它们已经稳定运行了五年、十年，是公司的现金牛，是产品线的基石。它们沉默、可靠、不可触碰。没有人想重写它们——不是因为它们完美，而是因为当年写它们的人可能已经离职，当年用的芯片还可能带着七个硬件勘误，当年留下的注释只有一行<code>// adjust this value</code>。</p>
+        <p>每个嵌入式工程师的硬盘里，都躺着一批 Keil/IAR 老项目。它们已经稳定运行了五年、十年，是公司的现金牛，是产品线的基石。它们沉默、可靠、不可触碰。没有人想重写它们，不是因为它们完美，而是因为当年写它们的人可能已经离职，当年用的芯片还可能带着七个硬件勘误，当年留下的注释只有一行<code>// adjust this value</code>。</p>
 
         <div class="card accent-left">
             <p style="margin-top:0;"><strong>核心矛盾：</strong>你的 AI 方法论已经进化到能自治地管理代码与规约的共生演化，但你的老项目还活在一堵高墙之后。墙的一侧是现代 Linux 开发环境、VSCode、AI 助手、CLI 闭环；另一侧是 Windows 虚拟机、Keil/IAR 的图形界面、一个鼠标点来点去的编译按钮。每次你需要在老项目上做哪怕一行修改，你都要穿越这堵墙。</p>
@@ -554,7 +553,6 @@
         </div>
     </section>
 
-    <!-- 策略总览图 -->
     <figure class="figure">
         <svg viewBox="0 0 680 240" width="100%" style="max-width:680px;">
             <defs>
@@ -562,7 +560,6 @@
                     <polygon points="0 0, 8 3, 0 6" fill="#c0392b" />
                 </marker>
             </defs>
-            <!-- 三层梯形 -->
             <polygon points="80,180 340,60 600,180" fill="none" stroke="#d0dbe6" stroke-width="2"/>
             <line x1="140" y1="160" x2="540" y2="160" stroke="#d0dbe6" stroke-width="1.5" stroke-dasharray="4 3"/>
             <line x1="200" y1="120" x2="480" y2="120" stroke="#d0dbe6" stroke-width="1.5" stroke-dasharray="4 3"/>
@@ -581,26 +578,26 @@
             <path d="M340 70 L340 88" stroke="#c0392b" stroke-width="1.8" marker-end="url(#arrow)"/>
             <text x="360" y="82" font-size="10" fill="#c0392b">从防御到进攻</text>
         </svg>
-        <p class="caption">图1：三层策略——防御层承认历史，抽象层翻译历史，进攻层超越历史。</p>
+        <p class="caption">图1：三层策略，防御层承认历史，抽象层翻译历史，进攻层超越历史。</p>
     </figure>
 
     <section>
         <h2 id="defense">二、防御层：把 Keil/IAR 变成一个“烧录按钮”</h2>
 
-        <p>对老项目的日常维护，你真正需要 Keil/IAR 做的事情只有两件：<strong>编译</strong>，和<strong>烧录/调试</strong>。你不需要在 Keil 里面写代码、看代码、做版本对比。你的现代开发能力——VSCode 编辑、AI 对话、Git 管理——早已超越那个狭窄的 IDE 窗口。</p>
+        <p>对老项目的日常维护，你真正需要 Keil/IAR 做的事情只有两件：<strong>编译</strong>，和<strong>烧录/调试</strong>。你不需要在 Keil 里面写代码、看代码、做版本对比。你的现代开发能力，VSCode 编辑、AI 对话、Git 管理，早已超越那个狭窄的 IDE 窗口。</p>
 
         <p>防御层的核心思想是：<strong>不攻击 Keil/IAR，而是把它们封装成一个远程执行的命令。</strong></p>
 
         <div class="card">
             <p style="margin-top:0;"><strong>具体做法：</strong></p>
             <ol style="margin-left:20px;">
-                <li>保留一个最轻量的 Windows 环境——一台旧笔记本、一个工控机，或宿主机上一个干净到极致的虚拟机（只装 Keil/IAR + JLink 驱动，无其他任何负担）。</li>
-                <li>你的所有脑力工作（编码、AI 对话、版本管理）都在 Ubuntu 宿主机上进行。代码通过 Git 或共享文件夹同步到 Windows 执行环境。</li>
+                <li>保留一个最轻量的 Windows 环境，一台旧笔记本、一个工控机，或宿主机上一个干净到极致的虚拟机，只装 Keil/IAR 和 JLink 驱动。</li>
+                <li>你的所有脑力工作，编码、AI 对话、版本管理，都在 Ubuntu 宿主机上进行。代码通过 Git 或共享文件夹同步到 Windows 执行环境。</li>
                 <li>Keil 和 IAR 都有命令行编译接口。你在 Ubuntu 上写一个 Python 脚本，通过 <code>ssh</code> 远程触发 Windows 上的编译和烧录。编译输出、串口日志通过 TCP 转发回你的 Python 调试助手和 AI 分析流。</li>
             </ol>
         </div>
 
-        <p><strong>效果：</strong>你的日常主场已经是流畅的 Ubuntu。Windows 上的 Keil/IAR 退化成一个静默的“编译烧录服务器”——你甚至可以关掉它的显示器。你为老项目付出的“环境税”，降低到了只是触发编译命令的那几秒网络延迟。</p>
+        <p><strong>效果：</strong>你的日常主场已经是流畅的 Ubuntu。Windows 上的 Keil/IAR 退化成一个静默的“编译烧录服务器”。你为老项目付出的环境税，降低到了只是触发编译命令的那几秒网络延迟。</p>
 
         <pre><span class="comment"># 宿主机 Ubuntu 上的远程编译脚本（示例）</span>
 <span class="comment"># 通过 ssh 触发 Windows 上 Keil 的命令行编译，并取回结果</span>
@@ -619,18 +616,18 @@ scp win-env:<span class="string">"C:\\Projects\\OldFirmware\\build.log"</span> .
         <div class="card">
             <p style="margin-top:0;"><strong>让 AI 做一次性翻译工作：</strong></p>
             <ol style="margin-left:20px;">
-                <li><strong>输入：</strong>把 <code>.uvprojx</code> / <code>.ewp</code> 工程文件、分散加载文件 <code>.sct</code> / <code>.icf</code>、启动文件 <code>.s</code>、以及 <code>main.c</code> 等核心文件，全部喂给 AI。</li>
-                <li><strong>输出：</strong>AI 生成三份结构化文档——
+                <li><strong>输入：</strong>把 <code>.uvprojx</code>、<code>.ewp</code> 工程文件、分散加载文件 <code>.sct</code>、<code>.icf</code>、启动文件 <code>.s</code>，以及 <code>main.c</code> 等核心文件，全部喂给 AI。</li>
+                <li><strong>输出：</strong>AI 生成三份结构化文档。
                     <ul style="margin-left:16px;">
                         <li><strong>项目结构 Markdown：</strong>列出所有源文件、include 路径、预定义宏、链接脚本中的内存布局、外设基地址。</li>
                         <li><strong>平台无关的构建描述：</strong><code>CMakeLists.txt</code> 初稿，或你的工具链能理解的 <code>.json</code> 配置文件。</li>
-                        <li><strong>硬件抽象层（HAL）规格：</strong>这个老项目到底操作了哪些外设，GPIO 如何配置，中断向量表如何定义。</li>
+                        <li><strong>硬件抽象层规格：</strong>这个老项目到底操作了哪些外设，GPIO 如何配置，中断向量表如何定义。</li>
                     </ul>
                 </li>
             </ol>
         </div>
 
-        <p><strong>效果：</strong>经过这一次翻译，你立即获得了一个 AI 能读懂的旧项目。以后你问 AI：“这个项目的 SPI 时钟是多少？”它不用猜，而是有你的翻译文档作为知识基础。你还未真正迁移它的工具链，但你已经解放了它的<strong>设计意图</strong>。这份翻译文档，就是老项目进入 AI 对话世界的护照。</p>
+        <p><strong>效果：</strong>经过这一次翻译，你立即获得了一个 AI 能读懂的旧项目。以后你问 AI：“这个项目的 SPI 时钟是多少？”它不用猜，而是有你的翻译文档作为知识基础。你还未真正迁移它的工具链，但你已经解放了它的设计意图。这份翻译文档，就是老项目进入 AI 对话世界的护照。</p>
 
         <div class="insight-box">
             <strong>这一步不涉及任何代码修改，因此风险为零。</strong>但它为所有后续的维护、理解和演进工作，铺平了道路。它是历史被照亮的第一步。
@@ -640,26 +637,25 @@ scp win-env:<span class="string">"C:\\Projects\\OldFirmware\\build.log"</span> .
     <section>
         <h2 id="offense">四、进攻层：把老项目的“灵魂”迁移出来</h2>
 
-        <p>如果某个老项目对你还有战略价值——需要长期维护、衍生新项目——那么你应该逐步把它的<strong>核心资产</strong>从 Keil/IAR 牢笼中抽离出来。核心资产不是代码，而是<strong>规格和约束</strong>。代码是那个时代的表达，规格才是超越时代的价值。</p>
+        <p>如果某个老项目对你还有战略价值，需要长期维护、衍生新项目，那么你应该逐步把它的<strong>核心资产</strong>从 Keil/IAR 牢笼中抽离出来。核心资产不是代码，而是<strong>规格和约束</strong>。代码是那个时代的表达，规格才是超越时代的价值。</p>
 
         <div class="card">
             <p style="margin-top:0;"><strong>逆向提取核心资产：</strong></p>
             <ol style="margin-left:20px;">
-                <li>用 AI 配合你的 PCB 分析器，把老项目的<strong>硬件原理图</strong>和代码中的外设操作对应上。</li>
-                <li>提取出所有应该在 <code>agents.md</code> 中存在的规约：“这个传感器需要 10ms 的启动时间”、“电机控制必须在 1ms 周期内完成”、“这颗 Flash 在写入后必须等待 3μs”。</li>
-                <li>用你的高复用模板重新生成一个<strong>平台无关的新固件骨架</strong>，在你的 Ubuntu + GCC 环境下开发。</li>
-                <li>用老项目作为<strong>黄金参考模型</strong>，用你闭环收敛的方法，让 AI 确保新固件在行为上与老固件一致。老项目的输入/输出数据，成为你的测试基准。</li>
+                <li>用 AI 配合你的 PCB 分析器，把老项目的硬件原理图和代码中的外设操作对应上。</li>
+                <li>提取出所有应该在 <code>agents.md</code> 中存在的规约，例如“这个传感器需要 10ms 的启动时间”、“电机控制必须在 1ms 周期内完成”。</li>
+                <li>用你的高复用模板重新生成一个平台无关的新固件骨架，在 Ubuntu + GCC 环境下开发。</li>
+                <li>用老项目作为黄金参考模型，用你闭环收敛的方法，让 AI 确保新固件在行为上与老固件一致。老项目的输入输出数据，成为测试基准。</li>
             </ol>
         </div>
 
-        <p><strong>效果：</strong>你为一个有遗产价值的项目赋予了新生。它从一个特定供应商的牢笼中解放，迁入了你自己建立的、AI 可操作的开发生态。它现在可以享受你的五层进化的全部红利：负日志的可观测性、双轨收敛的测试保障、PCB 分析器的硬件感知、共生演化的知识一致性。</p>
+        <p><strong>效果：</strong>你为一个有遗产价值的项目赋予了新生。它从一个特定供应商的牢笼中解放，迁入了你自己建立的、AI 可操作的开发生态。它现在可以享受五层进化的全部红利：负日志的可观测性、双轨收敛的测试保障、PCB 分析器的硬件感知、共生演化的知识一致性。</p>
 
         <div class="insight-box">
             <strong>核心原则：不是盲目的重写，而是为有遗产价值的项目赋予新的生命形态。</strong>那些没有战略价值的老项目，防御层和抽象层已经足够。只有那些还需要活很久、还需要不断演化的项目，才值得动用进攻层。
         </div>
     </section>
 
-    <!-- 三层策略表格 -->
     <section>
         <h2 id="guide">五、三层策略的选择指南</h2>
         <table class="mapping-table">
@@ -690,10 +686,9 @@ scp win-env:<span class="string">"C:\\Projects\\OldFirmware\\build.log"</span> .
         </table>
     </section>
 
-    <!-- 与五层框架的映射 -->
     <section>
         <h2>六、在五层进化框架中的定位</h2>
-        <p>这篇文章处理的是五层框架的<strong>前置条件</strong>——在 AI 能够对项目施加任何影响力之前，项目本身必须从供应商锁定的工具链中被<strong>解析、翻译、解放</strong>。它与各层的关系如下：</p>
+        <p>这篇文章处理的是五层框架的<strong>前置条件</strong>，在 AI 能够对项目施加任何影响力之前，项目本身必须从供应商锁定的工具链中被解析、翻译、解放。它与各层的关系如下：</p>
         <table class="mapping-table">
             <thead>
                 <tr>
@@ -726,10 +721,9 @@ scp win-env:<span class="string">"C:\\Projects\\OldFirmware\\build.log"</span> .
         </table>
     </section>
 
-    <!-- 结尾 -->
     <section>
         <h2 id="conclusion">七、历史不是负资产</h2>
-        <p>嵌入式工程师常常觉得，老项目是包袱。它们用的工具是过时的，它们写的代码是陈旧的，它们占用的时间是沉默的。但真相是：<strong>老项目是被封装在过时工具链里的智慧结晶。</strong>那些为特定芯片勘误而写的绕行代码，那些在现场极端条件下被验证的时序参数，那些一个离职老工程师再也不会说出来的决策原因——这些才是真正有价值的东西。</p>
+        <p>嵌入式工程师常常觉得，老项目是包袱。它们用的工具是过时的，它们写的代码是陈旧的，它们占用的时间是沉默的。但真相是：<strong>老项目是被封装在过时工具链里的智慧结晶。</strong>那些为特定芯片勘误而写的绕行代码，那些在现场极端条件下被验证的时序参数，那些一个离职老工程师再也不会说出来的决策原因，这些才是真正有价值的东西。</p>
 
         <p>你的工作，不是逃避这些历史，而是用你手中的方法论去照亮它。让 AI 读懂它，让工具链适配它，让它的知识从二进制工程文件的坟墓里被挖掘出来，成为你整个五层进化体系的一部分。</p>
 
@@ -747,6 +741,241 @@ scp win-env:<span class="string">"C:\\Projects\\OldFirmware\\build.log"</span> .
 </div>
     </div>
     </div>
+
+</body>
+</html>
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <nav class="top-nav">
+        <a href="index.html">五层进化</a> <span class="sep">/</span>
+        <a href="true.html">高复用模板</a> <span class="sep">/</span>
+        <a href="test.html">闭环收敛</a> <span class="sep">/</span>
+        <a href="pcb.html">PCB分析器</a> <span class="sep">/</span>
+        <a href="co-evolution.html">共生演化</a> <span class="sep">/</span>
+        <a href="legacy.html">历史的包袱</a>
+    </nav>
+
+    <header class="article-header">
+        <span class="series-tag">五层进化 · 应用层</span>
+        <h1>最后的拼图：Skills</h1>
+        <p class="subtitle">你的体系已经搭好了高速公路。<br>现在，你需要让车跑起来——不是任何车，而是高度适配你路基的、5 分钟就能上路的快车。</p>
+        <p class="meta">itg · 嵌入式AI工程化系列 · 快消费应用即时方法</p>
+    </header>
+
+    <section>
+        <h2>一、体系不是终点，效率才是</h2>
+
+        <p>前六篇文章，我们一直在做一件缓慢而郑重的事：定义坐标系，搭建工程骨架，设计闭环收敛，打通物理世界，管理知识演化，解放历史遗产。它们是基础设徊，是法度，是高速公路。它们回答的问题是：<strong>“AI 生成的代码，如何成为能在物理世界中负责任地运行的资产？”</strong></p>
+
+        <p>但高速公路建好之后，真正的问题才浮出水面：<strong>“今天下午，我需要在已有工程里增加一个 I2C 传感器驱动——能不能在 5 分钟内搞定，并且代码直接可用，不需要我重读昨天的规约？”</strong></p>
+
+        <div class="card accent-left">
+            <p style="margin-top:0;"><strong>核心洞察：</strong>一个完整的方法论体系，如果只有“慢建构”的能力，它就只能在项目启动时被郑重其事地应用一次，然后逐渐被遗忘在日常琐碎里。它需要一个<strong>“快消费”的伴侣层</strong>——不是替代体系，而是运行在体系之上，让日常高频需求也能享受严谨法度的红利。</p>
+        </div>
+
+        <p>这一层，就是 <strong>Skills</strong>。它不是新概念，而是你整个体系自然生长的另一半。如果说前六篇是<strong>“Core 层”</strong>——定义法则、搭建骨架、管理演化，那么 Skills 就是<strong>“应用层”</strong>——在法则之内，快速解决高度具体的、一次性的、但频繁出现的问题。两者不是竞争关系，是共生关系。</p>
+
+        <div class="insight-box">
+            <strong>本文的命题：</strong>不是“如何设计 skill”，而是“你的 Core 体系如何成为 skill 的最佳运行时环境”。Skills 不是零散的代码片段，它们是浸透了项目规约、硬件上下文和验证闭环的<strong>规则感知型即时方法</strong>。而你的六篇文章，正好为这种高级 skill 提供了全部前置条件。
+        </div>
+    </section>
+
+    <!-- 架构图 SVG -->
+    <figure class="figure">
+        <svg viewBox="0 0 680 300" width="100%" style="max-width:680px;">
+            <defs>
+                <marker id="arrow-down" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                    <polygon points="0 0, 8 3, 0 6" fill="#5a6c7d" />
+                </marker>
+            </defs>
+            <!-- 底层 Core -->
+            <rect x="30" y="180" width="620" height="90" rx="10" fill="#f5f7fa" stroke="#d0dbe6" stroke-width="2" />
+            <text x="340" y="210" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1a2e">Core 层（前六篇）</text>
+            <text x="340" y="232" text-anchor="middle" font-size="12" fill="#5a6c7d">五层进化 · 工程模板 · 闭环收敛 · PCB分析器 · 共生演化 · 历史包袱</text>
+            <text x="340" y="252" text-anchor="middle" font-size="11" fill="#8896a4">职责：定义领域法则、搭建基础设施、管理长期演化</text>
+
+            <!-- 上层 Skills -->
+            <rect x="30" y="50" width="620" height="80" rx="10" fill="#fff" stroke="#27ae60" stroke-width="2.5" stroke-dasharray="6 3" />
+            <text x="340" y="80" text-anchor="middle" font-size="16" font-weight="700" fill="#27ae60">Skill 层（第七篇）</text>
+            <text x="340" y="102" text-anchor="middle" font-size="12" fill="#5a6c7d">I2C驱动生成 · GPIO配置 · 中断服务模板 · 传感器校准 · 通信协议适配</text>
+            <text x="340" y="122" text-anchor="middle" font-size="11" fill="#8896a4">职责：在 Core 法则内，5 分钟解决一个具体问题</text>
+
+            <!-- 从上到下的连接箭头 -->
+            <line x1="340" y1="130" x2="340" y2="178" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow-down)" stroke-dasharray="4 2"/>
+            <text x="355" y="158" font-size="11" fill="#27ae60">运行时依赖</text>
+
+            <!-- 侧面标注 -->
+            <text x="660" y="100" font-size="11" fill="#8896a4" transform="rotate(90, 660, 100)">快消费 · 高频 · 即用即走</text>
+            <text x="660" y="235" font-size="11" fill="#8896a4" transform="rotate(90, 660, 235)">慢建构 · 低频 · 长期受益</text>
+        </svg>
+        <p class="caption">图1：Core 层与 Skill 层的共生架构——Core 提供法则和上下文，Skill 在法则内高速运转。</p>
+    </figure>
+
+    <section>
+        <h2>二、为什么你的体系能让 skill 真正“即插即用”</h2>
+
+        <p>市面上大多数的 AI 编程 skill，本质上是泛化的代码片段生成器。它们能生成一段 I2C 驱动，但不知道你用的是哪颗芯片、你的工程模板要求什么代码风格、你的硬件原理图上 SDA 和 SCL 分别连在哪个 GPIO。你拿到那段代码后，仍然需要阅读、修改、适配。</p>
+
+        <p>你的体系，恰好把“适配”所需的信息全部结构化了：</p>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr><th>Skill 运行时所需的上下文</th><th>你的体系如何提供</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>项目规约与代码风格</strong></td>
+                        <td><code>agents.md</code>（② + ⑤）定义了断言、负日志宏、命名规范等，skill 生成的代码自动遵守</td>
+                    </tr>
+                    <tr>
+                        <td><strong>硬件拓扑与外设映射</strong></td>
+                        <td>PCB分析器（④）提供了完整的外设-GPIO 映射表，skill 可以直接查询“I2C1 的 SDA 在 PA9”</td>
+                    </tr>
+                    <tr>
+                        <td><strong>工程模板与 HAL 约定</strong></td>
+                        <td>高复用模板（②）固化了模块文件结构、include 路径和初始化风格，skill 产物直接贴合</td>
+                    </tr>
+                    <tr>
+                        <td><strong>验证与闭环</strong></td>
+                        <td>闭环收敛（③）提供了自动测试框架，skill 生成的代码可以被立即验证，发现问题自动反馈给 skill 修正</td>
+                    </tr>
+                    <tr>
+                        <td><strong>历史约束</strong></td>
+                        <td>决策账本（⑤ + ⑥）记录了哪些做法是禁区，skill 绝不上演“已经被证明是坏主意”的代码</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p><strong>这意味着：</strong>在你的体系上运行 skill，生成的代码不是“泛用模板”，而是<strong>带着这个项目完整上下文和全部历史教训的、几乎可以直接烧录的最终代码</strong>。你不需要再去想“这个项目用的是 LL 库还是 HAL”，skill 已经知道。你不需要再查“这颗芯片的 Flash 写入后必须等几个 NOP”，skill 从你的规约文件里读到了。</p>
+
+        <div class="insight-box">
+            <strong>核心信条：</strong>所有的 skill 都应该是<strong>规则感知型</strong>的。而一个强大的 Core 层，就是为 skill 提供规则感知能力的唯一可靠途径。没有 Core 的 skill，是散兵游勇；没有 skill 的 Core，是空转的引擎。
+        </div>
+    </section>
+
+    <section>
+        <h2>三、一个具体的 skill 是如何在你的体系中运行的</h2>
+
+        <p>让我们模拟一个真实场景。下午 3 点，你需要为当前项目增加一个 <strong>I2C 温度传感器 TMP117</strong> 的驱动。</p>
+
+        <p><strong>传统流程：</strong>打开数据手册 → 查找 I2C 地址 → 回忆项目里 I2C 用的是哪路 → 找到其他 I2C 设备驱动当模板 → 逐行修改寄存器操作 → 编译 → 调试 → 发现忘了配置中断优先级 → 再来一遍。耗时：45 分钟到 2 小时。</p>
+
+        <p><strong>在你的体系下，这次操作是一个 skill 调用：</strong></p>
+
+        <pre><span class="comment">// 开发者只需要提供一个意图声明</span>
+<span class="comment">// 然后启动 "i2c-sensor-skill"</span>
+
+<span class="comment">// 意图文件: tmp117_intent.yaml</span>
+<span class="keyword">sensor</span>: TMP117
+<span class="keyword">bus</span>: I2C1
+<span class="keyword">i2c_address</span>: 0x48
+<span class="keyword">sample_rate</span>: 1Hz
+<span class="keyword">alert_threshold</span>: 85.0  <span class="comment"># 摄氏度</span>
+<span class="keyword">output</span>: tmp117_driver</pre>
+
+        <p>Skill 启动后，自动执行以下查询链：</p>
+        <ol>
+            <li><strong>查询 PCB 分析器：</strong>“I2C1 的 SDA/SCL 分别映射到哪两个 GPIO？当前有没有其他设备共享这条总线？”</li>
+            <li><strong>查询 agents.md：</strong>“I2C 驱动必须使用 DMA 模式，中断优先级必须为 4，严禁在 ISR 中调用任何日志函数。”</li>
+            <li><strong>查询工程模板：</strong>“驱动文件应放在 <code>Src/drivers/</code>，头文件在 <code>Inc/drivers/</code>，并遵循统一的错误返回码约定。”</li>
+            <li><strong>查询决策账本：</strong>“历史上是否有与 TMP117 或 I2C1 相关的已知陷阱？”（账本记录：某次 I2C1 与 SPI2 同时使用时出现总线冲突，原因是 DMA 通道重叠，已通过调整通道号解决。）</li>
+            <li><strong>生成代码：</strong>基于以上所有上下文，生成完整的 <code>tmp117.c</code> 和 <code>tmp117.h</code>，代码已经遵循了负日志规范（包含期望值检查），使用了模板规定的 HAL 封装风格。</li>
+            <li><strong>立即验证：</strong>闭环收敛 Agent 被触发，自动编译、烧录、运行 I2C 扫描测试和温度读取测试，确认传感器在线且数据在合理范围内。</li>
+        </ol>
+
+        <p><strong>耗时：5 分钟。</strong>其中 4 分钟是编译和烧录的物理时间，你真正参与的只有第一步——写一个意图声明。</p>
+
+        <p>这就是 <strong>Skill 层的价值：它把日常开发从“写代码”转变为“声明意图，审查结果”。</strong></p>
+    </section>
+
+    <section>
+        <h2>四、Skill 的设计原则：快，但不牺牲质量和可追溯性</h2>
+
+        <p>快消费不代表“用完就扔，不管后果”。在你体系中运行的 skill，必须遵循几条硬性原则。这些原则，直接来自于你的 Core 层哲学：</p>
+
+        <div class="card">
+            <p style="margin-top:0;"><strong>原则一：所有 skill 产物必须可验证。</strong></p>
+            <p>Skill 生成的代码，必须能立即被 CI 或闭环收敛 Agent 接管。如果 skill 生成了一段 I2C 驱动，那么对应的 I2C 扫描测试和压力测试就必须同步生成，并且必须在硬件上跑通。不允许“生成完就不管”的 skill。</p>
+        </div>
+
+        <div class="card">
+            <p style="margin-top:0;"><strong>原则二：所有 skill 必须尊重决策账本。</strong></p>
+            <p>Skill 在生成代码前，必须查询账本中的历史禁区和已知陷阱。如果账本明确指示“I2C1 的 DMA 不能与 TIM2 的 CH2 共用通道”，skill 必须自动避开，而不是再次踩坑后等人来救。</p>
+        </div>
+
+        <div class="card">
+            <p style="margin-top:0;"><strong>原则三：Skill 的运行上下文必须被记录。</strong></p>
+            <p>当一个 skill 生成了代码并被接受，这个事件本身就是一个决策——相当于人在说：“这个 skill 的判断在当时是正确的。”这个决策必须被写回决策账本，以便未来的共生演化能追踪这次增量的来龙去脉。</p>
+        </div>
+
+        <div class="card">
+            <p style="margin-top:0;"><strong>原则四：Skill 不替代 Core，Core 不限制 Skill。</strong></p>
+            <p>Skill 可以快速创建和废弃，但 Core 层（规约、模板、验证闭环）是稳定的。反之，Core 层永远不应该为了适应某个具体的 skill 而临时降低标准。两者各守其界，才能长期保持健康。</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>五、Skills 与五层进化的映射</h2>
+
+        <p>Skills 不是外挂，而是五层进化每一层在“日常高频使用”时的自然延伸：</p>
+
+        <table>
+            <thead>
+                <tr><th>五层进化</th><th>Skill 如何在其上运行</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="layer-tag">L1 上下文增强</span></td>
+                    <td>Skill 自动查询 PCB 分析器和芯片数据库，获得完整的硬件上下文</td>
+                </tr>
+                <tr>
+                    <td><span class="layer-tag">L2 可观测性</span></td>
+                    <td>Skill 生成的代码自动嵌入负日志，确保生成即带可观测性</td>
+                </tr>
+                <tr>
+                    <td><span class="layer-tag">L3 数据闭环</span></td>
+                    <td>Skill 产物立即触发自动测试，失败则自动反馈修正</td>
+                </tr>
+                <tr>
+                    <td><span class="layer-tag">L4 自动化</span></td>
+                    <td>Skill 调用链是全自动的，从意图声明到验证通过，无人介入</td>
+                </tr>
+                <tr>
+                    <td><span class="layer-tag">L5 自治与共生</span></td>
+                    <td>Skill 的每一次执行结果都被记录进决策账本，参与未来的共生演化</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>从这个角度看，<strong>Skill 是让你的 L4 和 L5 日常化、平民化的关键</strong>。没有 skill，那些强大的自治机制只在重大迭代时被唤起；有了 skill，它们每一天都在为你的小修小补保驾护航。</p>
+    </section>
+
+    <section>
+        <h2>六、最后的拼图</h2>
+
+        <p>你的六篇文章，定义了一整套嵌入式 AI 工程化的严肃纪律。但纪律如果只存在于项目启动会议和重大重构中，它就会慢慢变成摆设。真正能让纪律活下来的，是把它融入到每一天、每一个具体小需求的执行里。</p>
+
+        <p>Skills 就是这一块拼图。它不是你体系的升级，而是你体系的<strong>日常化</strong>。它确保：当你在下午 3 点需要加一个传感器驱动时，你不会因为嫌麻烦而绕过所有精心设计的规约——因为 skill 让你在不绕路的情况下，比绕路更快。</p>
+
+        <div class="insight-box">
+            <strong>系列至此完整：</strong>你有了一纵一横的深度，有了向历史回望的担当，现在又有了覆盖日常高频操作的快消费层。你可以安静地说出那句话了——<strong>“这不再是一套只在理想条件下运转的理论，而是一套能落地到每一天日常工作中的、完整的工程哲学。”</strong>
+        </div>
+    </section>
+
+    <section class="footnote-section">
+        <h4>本文定位</h4>
+        <p>本文是五层进化系列在<strong>应用层</strong>的收官。它提出了 Skill 层作为 Core 层的共生伴侣，定义了 skill 的运行原则，并将其映射到五层进化的每一级。建议与《高复用模板》和《共生演化》联合阅读，理解 skill 如何在规约、硬件上下文和决策账本的加持下，实现真正的“即插即用”。</p>
+        <p style="margin-top:6px;">系列导航：<a href="index.html">① 五层进化</a> · <a href="true.html">② 高复用模板</a> · <a href="test.html">③ 闭环收敛</a> · <a href="pcb.html">④ PCB分析器</a> · <a href="co-evolution.html">⑤ 共生演化</a> · <a href="legacy.html">⑥ 历史的包袱</a> · <strong>⑦ 最后的拼图：Skills</strong></p>
+    </section>
+
+</div>
 
 </body>
 </html>
