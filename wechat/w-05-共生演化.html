@@ -1,0 +1,263 @@
+<section style="max-width:680px;margin:0 auto;padding:20px 0;font-family:-apple-system,BlinkMacSystemFont,Microsoft YaHei,PingFang SC,sans-serif;color:#2c3e50;line-height:1.8;">
+<div style="margin-bottom:40px;">
+<span style="display:inline-block;background:#c0392b;color:#fff;font-size:13px;font-weight:700;padding:4px 14px;border-radius:3px;margin-bottom:14px;">五层进化 . 深度扩展</span>
+<h1 style="font-size:30px;font-weight:700;line-height:1.35;margin-bottom:12px;letter-spacing:-0.3px;">共生演化</h1>
+<p style="font-size:17px;color:#5a6c7d;font-weight:400;margin-bottom:10px;border-left:3px solid #3b82f6;padding-left:16px;">当agents.md与代码彼此背离时，AI应成为持续追踪分歧的忠诚管家</p>
+<p style="font-size:13px;color:#8896a4;">itg &middot; 嵌入式AI工程化系列</p>
+</div>
+<div style="background:#f8f9fa;border:1px solid #e0e4e8;border-radius:8px;padding:16px 20px;margin:0 0 32px 0;font-size:14px;line-height:1.8;">
+<strong style="color:#1a1a2e;font-size:15px;">[嵌入式AI工程化系列]</strong><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第1篇</span> 五层进化 <span style="color:#8896a4;font-size:13px;">-- AI编程调试的五层架构</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第2篇</span> 实践项目模板 <span style="color:#8896a4;font-size:13px;">-- 高可复用嵌入式AI编程骨架</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第3篇</span> 自主修复闭环 <span style="color:#8896a4;font-size:13px;">-- AI双轨收敛 . 需求螺旋闭合</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第4篇</span> 电路图分析器 <span style="color:#8896a4;font-size:13px;">-- PDF原理图转AI可读描述</span><br>
+<span style="display:inline-block;background:#c0392b;color:#fff;padding:1px 8px;border-radius:3px;font-weight:700;margin:2px 0;">第5篇</span> <strong>共生演化</strong> <span style="color:#8896a4;font-size:13px;">-- 规格-实现知识一致性</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第6篇</span> 历史的包袱 <span style="color:#8896a4;font-size:13px;">-- 遗留工程与AI迁移策略</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第7篇</span> 最后的拼图：Skills <span style="color:#8896a4;font-size:13px;">-- 规则感知型即时方法</span><br>
+</div>
+
+
+        <div style="max-width:780px;margin:0 auto;">
+
+        <!-- 文章头部 -->
+        <div style="margin-bottom:40px;">
+            <span style="display:inline-block;background:#c0392b;color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:3px;margin-bottom:16px;">五层进化 · 深度扩展</span>
+            <h1 style="font-size:26px;font-weight:700;line-height:1.35;margin-bottom:12px;">规格-实现共生演化机制</h1>
+            <p style="margin:14px 0;line-height:1.8;">当<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">agents.md</code>与代码彼此背离时，AI不应盲从任何一方。<br>它应成为那个持续追踪分歧、展示后果、然后恭敬地请求人的智慧来做最终选择的忠诚管家。</p>
+            <p style="margin:14px 0;line-height:1.8;">itg · 嵌入式AI工程化系列 · 知识一致性生存之道</p>
+        </div>
+
+        <!-- 问题定义 -->
+        <section>
+            <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">一、一个被忽视的生存性问题</h2>
+
+            <p style="margin:14px 0;line-height:1.8;">在嵌入式AI工程化的实践中，我们投入巨大精力构建了两个信息世界：</p>
+            <ul style="margin:14px 0 14px 20px;line-height:1.8;">
+                <li style="margin:6px 0;"><strong>规约世界</strong>——<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">agents.md</code>、需求文档、设计规约，它们表述系统“<em>应该如何</em>”。</li>
+                <li style="margin:6px 0;"><strong>实现世界</strong>——固件代码、硬件配置、运行时行为，它们呈现系统“<em>实际如何</em>”。</li>
+            </ul>
+
+            <div>
+                <p style="margin:14px 0;line-height:1.8;"><strong>核心矛盾：</strong>在长达数月甚至数年的迭代中，这两个世界之间必然出现一种<strong>缓慢、无痛但致命的漂移</strong>。它不是一次激烈的冲突，而是一系列微小妥协的累积——一个为了赶工期而绕过的规约、一段为了修复现场Bug而临时插入却从未被文档化的补丁、一条因为芯片换型而不再适用但无人记得更新的设计准则。</p>
+            </div>
+
+            <p style="margin:14px 0;line-height:1.8;">当漂移积累到一定程度，整个AI工程化体系将建立在越来越虚假的“意图”之上。AI会对着过时的<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">agents.md</code>虔诚地优化代码；或者反过来，代码里沉淀了无数未被言说的现场智慧，却被AI当作“违背规约”的脏东西清洗掉。</p>
+
+            <div style="background:#fef9e7;border:1px solid #f0d78c;border-radius:6px;padding:18px 22px;margin:20px 0;color:#6b4c1e;line-height:1.7;">
+                <strong>这不是一个技术问题，而是一个知识一致性的生存问题。</strong>在五层进化的L4自动化与L5自治阶段，如果AI无法感知并妥善处理这种漂移，那么整个闭环最终会崩塌于自身的知识债务。
+            </div>
+
+            <p style="margin:14px 0;line-height:1.8;">因此，我们需要一个专门的子系统。我将其命名为：<strong>规格-实现共生演化机制（Spec-Implementation Co-evolution）</strong>。</p>
+
+            <p style="margin:14px 0;line-height:1.8;">它的核心哲学是：<strong>不强迫一方服从另一方，而是让二者像两条缠绕上升的螺旋，在持续对话中共同演化。</strong></p>
+        </section>
+
+        <!-- SVG: 漂移示意 -->
+        <div style="margin:24px 0;text-align:center;">
+            
+            <p style="margin:14px 0;line-height:1.8;">图1：规约与实现在时间轴上的漂移示意——初始紧密对齐，随时间推移逐渐分离。</p>
+
+        <!-- 三个核心环节 -->
+        <section>
+            <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">二、三个核心环节</h2>
+            <p style="margin:14px 0;line-height:1.8;">整个机制由三个环环相扣的环节组成，可直接嵌入现有的CI流程与本地工具链。</p>
+
+            <div style="margin:24px 0;">
+
+                <!-- 环节一：漂移感知 -->
+                <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 26px;margin:20px 0;">
+                    <span style="display:inline-block;background:#1a1a2e;color:#fff;font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:10px;">环节 1</span>
+                    <span style="display:inline-block;background:#f0f3f6;color:#4a5568;font-size:11px;font-weight:600;padding:3px 8px;border-radius:3px;margin-bottom:10px;">检测机制</span>
+                    <h3 style="font-size:19px;font-weight:600;margin:32px 0 12px;color:#1a1a2e;">漂移感知：让Agent建立对“分歧”的第六感</h3>
+                    <p style="margin:14px 0;line-height:1.8;">在CI pipeline或本地watchdog中植入一个<strong>Spec-Drift Sniffer</strong>。它不运行测试，而是专注于一件事：<strong>将规约文件与代码之间建立语义关联，并持续计算差异向量</strong>。</p>
+
+                    <p style="margin:14px 0;line-height:1.8;">其工作流程如下：</p>
+                    <ol style="margin:14px 0 14px 20px;line-height:1.8;">
+                        <li style="margin:6px 0;"><strong>提取规约断言</strong>：让AI解析<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">agents.md</code>，抽取所有断言性质的规约（如“中断函数中严禁调用HAL_Delay”、“所有SPI传输必须使用DMA”、“电源管理模块必须在进入停机模式前完成ADC校准数据保存”）。每条规约被赋予一个唯一ID。</li>
+                        <li style="margin:6px 0;"><strong>扫描代码证据</strong>：AI扫描代码本体，为每条规约寻找对应的“证明相符”或“疑似违背”的代码证据，记录文件路径、行号和匹配置信度。</li>
+                        <li style="margin:6px 0;"><strong>分类分歧类型</strong>：
+                            <br>&nbsp;&nbsp;&nbsp;&bull; 幽灵规约：规约中存在，但代码中完全找不到对应证据——规约可能已过时。<br>&nbsp;&nbsp;&nbsp;&bull; 潜规则：代码中存在的重要模式，规约中完全没有提及——这是沉淀在代码中的“暗知识”，可能比规约更接近现实。</li>
+                    </ol>
+
+                    <p style="margin:14px 0;line-height:1.8;">每次提交触发一次嗅探，生成一个<strong>漂移热力矩阵</strong>：行是规约条目，列是代码模块，颜色深浅表示漂移程度。这张图本身就是给开发者和AI共同的预警信号。</p>
+
+                    <!-- 伪代码 -->
+                    <pre style="background:#1e293b;color:#e2e8f0;padding:16px 20px;border-radius:6px;font-family:Consolas,monospace;font-size:13px;line-height:1.7;margin:16px 0;overflow-x:auto;white-space:pre-wrap;"><span style="display:block;"><span style="color:#546e7a;font-style:italic;">// Spec-Drift Sniffer 核心逻辑（简化）</span></span><span style="display:block;"><span style="color:#c792ea;">typedef</span> <span style="color:#c792ea;">struct</span> {</span><span style="display:block;">    <span style="color:#ffcb6b;">char</span>        spec_id[48];       <span style="color:#546e7a;font-style:italic;">// 规约唯一ID</span></span><span style="display:block;">    <span style="color:#ffcb6b;">char</span>        spec_text[256];    <span style="color:#546e7a;font-style:italic;">// 规约原文摘要</span></span><span style="display:block;">    <span style="color:#ffcb6b;">char</span>        code_evidence[256];<span style="color:#546e7a;font-style:italic;">// 匹配到的代码证据</span></span><span style="display:block;">    <span style="color:#ffcb6b;">float</span>       confidence;        <span style="color:#546e7a;font-style:italic;">// 匹配置信度 0.0~1.0</span></span><span style="display:block;">    <span style="color:#ffcb6b;">drift_type_t</span> type;             <span style="color:#546e7a;font-style:italic;">// SPEC_GHOST | CODE_LATENT | ALIGNED</span></span><span style="display:block;">} <span style="color:#ffcb6b;">drift_record_t</span>;</span><span style="display:block;"><br></span><span style="display:block;"><span style="color:#546e7a;font-style:italic;">// 每次CI触发时运行</span></span><span style="display:block;"><span style="color:#ffcb6b;">void</span> <span style="color:#82aaff;">sniff_drift</span>(<span style="color:#c792ea;">const</span> <span style="color:#ffcb6b;">char</span>* agents_md_path,</span><span style="display:block;">                  <span style="color:#c792ea;">const</span> <span style="color:#ffcb6b;">char</span>* codebase_path,</span><span style="display:block;">                  <span style="color:#ffcb6b;">drift_report_t</span>* report);</span></pre>
+                </div>
+
+                <!-- 环节二：冲突仲裁 -->
+                <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 26px;margin:20px 0;">
+                    <span style="display:inline-block;background:#1a1a2e;color:#fff;font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:10px;">环节 2</span>
+                    <span style="display:inline-block;background:#f0f3f6;color:#4a5568;font-size:11px;font-weight:600;padding:3px 8px;border-radius:3px;margin-bottom:10px;">决策机制</span>
+                    <h3 style="font-size:19px;font-weight:600;margin:32px 0 12px;color:#1a1a2e;">冲突仲裁：把“选择权”设计成一个可追溯的决策事件</h3>
+                    <p style="margin:14px 0;line-height:1.8;">当漂移超过预设阈值，Agent<strong>暂停自动修复行为</strong>，转而生成一份<strong>决策邀请报告</strong>。<strong>这是整个机制最关键的设计决策：谁有权定义“真值”，必须是人。但人需要AI帮他看清全部后果。</strong></p>
+
+                    <p style="margin:14px 0;line-height:1.8;">报告格式不是冰冷的diff，而是一个叙事。它用工程师能理解的语言，把分歧的来龙去脉、可能的原因、每种选择的后果，清晰地呈现出来：</p>
+
+                    <table style="width:100%;border-collapse:collapse;margin:18px 0;border:1px solid #d0dbe6;"><tr><td style="padding:18px 20px;background:#fafcfd;border:none;font-size:14px;line-height:1.7;">
+                        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#8896a4;font-weight:700;margin-bottom:8px;">📋 决策邀请报告 #DRIFT-2026-042</div>
+                        <p style="margin:14px 0;line-height:1.8;"><strong>我注意到一个分歧：</strong></p>
+                        <p style="margin:14px 0;line-height:1.8;"><code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">agents.md</code> 第42行声称：<em>“电源管理模块必须在进入停机模式前完成所有ADC校准数据的保存。”</em></p>
+                        <p style="margin:14px 0;line-height:1.8;">但在 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">pwr_mgr.c:203</code>，保存操作发生在<strong>进入停机模式后的第一个唤醒ISR中</strong>。</p>
+                        <p style="margin:14px 0;line-height:1.8;"><strong>这不是Bug，而是一个有意图的设计分歧。</strong>可能的原因：</p>
+                        <ol style="margin:14px 0 14px 20px;line-height:1.8;">
+                            <li style="margin:6px 0;">在停机前保存，因内部Flash写入时间过长导致芯片被看门狗复位（来自 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">issue#117</code> 的讨论）。</li>
+                            <li style="margin:6px 0;">在唤醒后保存，利用了备份域SRAM，但增加了掉电风险窗口——若备份域在此期间掉电，数据将永久丢失。</li>
+                        </ol>
+                        <p style="margin:14px 0;line-height:1.8;"><strong>请你决定：</strong></p>
+                        <p style="margin:14px 0;line-height:1.8;">
+                            <strong style="color:#c0392b;">A. 代码是对的，规约过时了</span> → 我将重写 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">agents.md</code> 的相关段落，并附带本次决策的完整上下文。
+                        </p>
+                        <p style="margin:14px 0;line-height:1.8;">
+                            <strong style="color:#c0392b;">B. 规约是对的，代码必须修正</span> → 我将生成一个包含所需改动及风险评估的修复任务。
+                        </p>
+                        <p style="margin:14px 0;line-height:1.8;">
+                            <strong style="color:#c0392b;">C. 两者都不对，需要重新讨论</span> → 我将生成一份更完整的深潜分析，作为新讨论的起点。
+                        </p>
+                    </div>
+
+                    <p style="margin:14px 0;line-height:1.8;">人的每一次选择（A/B/C）都被记录为一个<strong>不可篡改的决策事件</strong>，附带时间戳和上下文快照，加密写入一个<strong>规格决策账本（Spec Decision Ledger）</strong>。这保证了漂移历史不会随着时间再次被遗忘——即使是十年后的维护者，也能追溯每一个“为什么当初这样决定”的完整故事。</p>
+                </div>
+
+                <!-- 环节三：共生决议 -->
+                <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 26px;margin:20px 0;">
+                    <span style="display:inline-block;background:#1a1a2e;color:#fff;font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:10px;">环节 3</span>
+                    <span style="display:inline-block;background:#f0f3f6;color:#4a5568;font-size:11px;font-weight:600;padding:3px 8px;border-radius:3px;margin-bottom:10px;">演化机制</span>
+                    <h3 style="font-size:19px;font-weight:600;margin:32px 0 12px;color:#1a1a2e;">共生决议：让“文本”和“代码”形成进化的双螺旋</h3>
+                    <p style="margin:14px 0;line-height:1.8;">一旦人做出选择，Agent将执行一个<strong>自动化的共生演化动作</strong>。这不是简单的“修改文件”，而是保证<strong>决策上下文永不丢失</strong>的结构化操作。</p>
+
+                    <p style="margin:14px 0;line-height:1.8;"><strong>若选择A（代码胜出，规约需更新）：</strong></p>
+                    <ul style="margin:14px 0 14px 20px;line-height:1.8;">
+                        <li style="margin:6px 0;">Agent更新<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">agents.md</code>中的对应段落，使其与代码实际行为一致。</li>
+                        <li style="margin:6px 0;">在更新处自动插入一个<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">[DRIFT-RESOLVED]</code>标记块，内含：原始规约引用、促使改变的关键代码片段哈希、人的决策摘要、时间戳。</li>
+                        <li style="margin:6px 0;">未来的AI读到这段时，看到的不再是冷冰的断言，而是一段活的演进史。</li>
+                    </ul>
+
+                    <p style="margin:14px 0;line-height:1.8;"><strong>若选择B（规约胜出，代码需修正）：</strong></p>
+                    <ul style="margin:14px 0 14px 20px;line-height:1.8;">
+                        <li style="margin:6px 0;">Agent将修复任务放入要求人工审核的PR队列。</li>
+                        <li style="margin:6px 0;">在PR描述中自动引用规约原文和本次决策记录，实现从“规约”到“代码修复”的全链路追溯。</li>
+                        <li style="margin:6px 0;">修复完成后，Sniffer重新扫描确认漂移已消除。</li>
+                    </ul>
+
+                    <p style="margin:14px 0;line-height:1.8;"><strong>若选择C（重新设计）：</strong></p>
+                    <ul style="margin:14px 0 14px 20px;line-height:1.8;">
+                        <li style="margin:6px 0;">Agent创建一份<strong>分歧深潜文档</strong>，提出几种不同的调和方案及其代价分析。</li>
+                        <li style="margin:6px 0;">切换到“协作模式”，在这一单一议题上与人反复讨论，直到新共识被同时写入规约和代码。</li>
+                    </ul>
+
+                    <div style="background:#fef9e7;border:1px solid #f0d78c;border-radius:6px;padding:18px 22px;margin:20px 0;color:#6b4c1e;line-height:1.7;">
+                        <strong>关键设计原则：</strong>AI从不代替人做“什么是正确”的价值判断。它只负责<strong>追踪分歧、展示后果、然后恭敬地等待人的裁决</strong>。裁决一旦做出，它以不可磨灭的方式将其记录在案，确保同样的困惑不会在未来重演。
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SVG: 三环节流程图 -->
+        <div style="margin:24px 0;text-align:center;">
+            
+            <p style="margin:14px 0;line-height:1.8;">图2：三个环节的闭环流程——感知漂移 → 请求裁决 → 共生演化 → 再次感知，形成螺旋收敛。</p>
+
+        <!-- 五层框架映射 -->
+        <section>
+            <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">三、在五层进化框架中的定位</h2>
+            <p style="margin:14px 0;line-height:1.8;">这一机制并非在五层框架之外另起炉灶，而是对<strong>L4自动化与L5自治在时间维度上的关键补全</strong>。</p>
+
+            <table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
+                <th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;">
+                    <tr>
+                        <th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;">层级</th>
+                        <th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;">本机制的对应角色</th>
+                        <th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;">具体表现</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><span style="display:inline-block;background:#1a1a2e;color:#fff;font-size:11px;padding:2px 10px;border-radius:3px;font-weight:600;">L1 上下文增强</span></td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">规约与代码的统一索引</td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">Sniffer建立规约条目与代码行之间的双向语义链接，增强AI的全局视野。</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><span style="display:inline-block;background:#1a1a2e;color:#fff;font-size:11px;padding:2px 10px;border-radius:3px;font-weight:600;">L2 可观测性</span></td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">知识漂移作为一种新的“负日志”</td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">“应然与实然的系统沉默分歧”被显性化——这不是运行时Bug，而是<strong>设计意图层面的负事件</strong>。</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><span style="display:inline-block;background:#1a1a2e;color:#fff;font-size:11px;padding:2px 10px;border-radius:3px;font-weight:600;">L3 数据闭环</span></td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">漂移热力矩阵作为闭环输入</td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">每次CI生成的漂移报告成为反馈信号，驱动后续决策。</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><span style="display:inline-block;background:#1a1a2e;color:#fff;font-size:11px;padding:2px 10px;border-radius:3px;font-weight:600;">L4 自动化</span></td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">决策报告与工作流的自动生成</td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">Agent自动发现分歧、自动生成叙事性报告、自动执行人的裁决结果。人无需费心寻找分裂点。</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><span style="display:inline-block;background:#1a1a2e;color:#fff;font-size:11px;padding:2px 10px;border-radius:3px;font-weight:600;">L5 自治</span></td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>知识自愈能力</strong></td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">系统在长时间运行中，不盲目忠实于任何单一信息源，而是在人的最终裁决下，持续将“代码中的暗知识”和“规约中的明意图”编织为统一的进化体。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <p style="margin:14px 0;line-height:1.8;"><strong>补全的意义：</strong>没有这一层，五层框架是一个优秀的<strong>开发时</strong>系统。有了这一层，它才成为一个能持续运行一年、三年、十年而不会在知识层面积累致命债务的<strong>全生命周期</strong>系统。这是从“工具”到“伙伴”的质变。</p>
+            </div>
+        </section>
+
+        <!-- 总结 -->
+        <section>
+            <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">四、回到最初的问题</h2>
+
+            <p style="margin:14px 0;line-height:1.8;">你问：当规约文本与代码现实彼此背离时，AI应该坚持文本描述的思路，还是让文本向代码进化？</p>
+
+            <p style="margin:14px 0;line-height:1.8;">答案在于<strong>两者都不应成为绝对的权威</strong>。</p>
+
+            <p style="margin:14px 0;line-height:1.8;">规约文本承载着<strong>设计意图和历史共识</strong>，它是“应然”的守护者。忽视它，意味着抛弃所有前人在这个项目上投入的思考。代码实现承载着<strong>物理现实和现场智慧</strong>，它是“实然”的见证者。清洗它，意味着抹去所有在真实世界中用代价换来的教训。</p>
+
+            <p style="margin:14px 0;line-height:1.8;">AI的角色不是在这两者之间选边站。它的角色是：</p>
+
+            <div style="background:#fef9e7;border:1px solid #f0d78c;border-radius:6px;padding:18px 22px;margin:20px 0;color:#6b4c1e;line-height:1.7;">
+                <strong>成为那个持续追踪分歧、展示全部后果、然后恭敬地请求人的智慧来做最终选择的忠诚管家。</strong><br><br>
+                裁决权永远属于人。但AI确保：<br>
+                ① 分歧不会被忽视；<br>
+                ② 后果被充分展示；<br>
+                ③ 裁决被永久铭记；<br>
+                ④ 同样的困惑不会在未来重演。
+            </div>
+
+            <p style="margin:14px 0;line-height:1.8;">这就是<strong>规格-实现共生演化机制</strong>的全部意义。它不只是一个工具特性，而是嵌入式AI工程化在时间维度上的生存哲学。</p>
+        </section>
+
+        <!-- 脚注 -->
+        <section>
+            <h4 style="font-size:16px;font-weight:600;margin:24px 0 8px;color:#1a1a2e;">本文定位</h4>
+            <p style="margin:14px 0;line-height:1.8;">本文是对《从"摸黑调试"到"拨云见日"：AI编程调试的五层进化》中<strong>L4自动化与L5自治</strong>在<strong>时间维度</strong>上的深度扩展。它回答了“当AI自治系统长期运行时，如何保证其依赖的知识基础（规约文件）不因代码演进而过时”这一根本性问题。</p>
+            <p style="margin:14px 0;line-height:1.8;">相关文章：<a href="index.html">五层进化总纲</a> · <a href="true.html">高复用模板</a> · <a href="test.html">闭环收敛方法</a> · <a href="pcb.html">PCB分析器</a></p>
+        </section>
+
+        </div>
+    </div>
+</div>
+
+<div>
+    <div>
+        <div>
+            <a href="https://x-itg.github.io/" target="_blank" rel="noreferrer">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div>
+            <section><span>itg</span></section>
+            <section><span>微信号: -lvgl-</span></section>
+        </div>
+    </div>
+</td></tr></table>
+
+<div style="margin-top:40px;padding-top:20px;border-top:2px solid #e0e4e8;font-size:14px;text-align:center;line-height:2.2;">
+<span style="margin-right:20px;"><a href="pcb.html" style="color:#2980b9;">&lt; 上一篇：电路图分析器</a></span>
+<span><a href="history.html" style="color:#2980b9;">下一篇：历史的包袱 &gt;</a></span>
+<br><a href="index.html" style="color:#2980b9;">[返回系列首页]</a>
+</div>
+</section>

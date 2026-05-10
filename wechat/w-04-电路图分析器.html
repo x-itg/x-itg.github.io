@@ -1,0 +1,154 @@
+<section style="max-width:680px;margin:0 auto;padding:20px 0;font-family:-apple-system,BlinkMacSystemFont,Microsoft YaHei,PingFang SC,sans-serif;color:#2c3e50;line-height:1.8;">
+<div style="margin-bottom:40px;">
+<span style="display:inline-block;background:#c0392b;color:#fff;font-size:13px;font-weight:700;padding:4px 14px;border-radius:3px;margin-bottom:14px;">五层进化 . 硬件工具链</span>
+<h1 style="font-size:30px;font-weight:700;line-height:1.35;margin-bottom:12px;letter-spacing:-0.3px;">电路图分析器</h1>
+<p style="font-size:17px;color:#5a6c7d;font-weight:400;margin-bottom:10px;border-left:3px solid #3b82f6;padding-left:16px;">将PDF电路图转化为结构化描述，建立元件与代码的快速跳转通道</p>
+<p style="font-size:13px;color:#8896a4;">itg &middot; 嵌入式AI工程化系列</p>
+</div>
+<div style="background:#f8f9fa;border:1px solid #e0e4e8;border-radius:8px;padding:16px 20px;margin:0 0 32px 0;font-size:14px;line-height:1.8;">
+<strong style="color:#1a1a2e;font-size:15px;">[嵌入式AI工程化系列]</strong><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第1篇</span> 五层进化 <span style="color:#8896a4;font-size:13px;">-- AI编程调试的五层架构</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第2篇</span> 实践项目模板 <span style="color:#8896a4;font-size:13px;">-- 高可复用嵌入式AI编程骨架</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第3篇</span> 自主修复闭环 <span style="color:#8896a4;font-size:13px;">-- AI双轨收敛 . 需求螺旋闭合</span><br>
+<span style="display:inline-block;background:#c0392b;color:#fff;padding:1px 8px;border-radius:3px;font-weight:700;margin:2px 0;">第4篇</span> <strong>电路图分析器</strong> <span style="color:#8896a4;font-size:13px;">-- PDF原理图转AI可读描述</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第5篇</span> 共生演化 <span style="color:#8896a4;font-size:13px;">-- 规格-实现知识一致性</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第6篇</span> 历史的包袱 <span style="color:#8896a4;font-size:13px;">-- 遗留工程与AI迁移策略</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第7篇</span> 最后的拼图：Skills <span style="color:#8896a4;font-size:13px;">-- 规则感知型即时方法</span><br>
+</div>
+
+
+        <div style="max-width:780px;margin:0 auto;">
+        <div style="display:inline-block;background:#e8f0fe;border-radius:30px;padding:4px 14px;font-size:13px;font-weight:500;color:#1f598a;margin-bottom:12px;"> PDF原理图 · AI可读分析</div>
+        <h1 style="font-size:26px;font-weight:700;line-height:1.35;margin-bottom:12px;">PDF电路图分析器<br>Markdown生成 + VSCode深度关联</h1>
+        <div>基于PyQt的GUI工具，将PDF电路图转化为结构化描述，建立元件与代码的快速跳转通道</div>
+
+        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">1. 整体架构与工作流程</h2>
+        <p style="margin:14px 0;line-height:1.8;">该工具面向嵌入式AI开发场景：PDF原理图通常由EDA工具导出，包含器件位号、网络标号、引脚连接等信息。脚本通过<strong>OCR + 规则解析</strong>提取这些文本，生成AI可读的Markdown描述，并在PyQt GUI中建立“电路元件 ↔ 代码文件:行号”的关联视图。点击超链接直接调用VSCode打开对应位置。</p>
+        <table style="width:100%;border-collapse:collapse;margin:16px 0;border:1px solid #d0dbe6;">
+<tr>
+<td style="width:50px;text-align:center;vertical-align:middle;background:#f0f4fa;border:1px solid #d0dbe6;padding:14px 8px;">
+<div style="display:inline-block;width:36px;height:36px;background:#3b82f6;color:white;border-radius:50%;text-align:center;line-height:36px;font-weight:700;font-size:16px;">1</div>
+</td>
+<td style="padding:14px 18px;vertical-align:middle;background:#ffffff;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#1a1a2e;margin-bottom:4px;">PDF导入与预处理</div>
+<div style="font-size:14px;line-height:1.7;color:#4a5568;">将PDF页面渲染为高清图像，增强对比度，为OCR做准备。</div>
+</td>
+</tr>
+<tr>
+<td style="width:50px;text-align:center;vertical-align:middle;background:#f0f4fa;border:1px solid #d0dbe6;padding:14px 8px;">
+<div style="display:inline-block;width:36px;height:36px;background:#3b82f6;color:white;border-radius:50%;text-align:center;line-height:36px;font-weight:700;font-size:16px;">2</div>
+</td>
+<td style="padding:14px 18px;vertical-align:middle;background:#ffffff;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#1a1a2e;margin-bottom:4px;">OCR文本提取</div>
+<div style="font-size:14px;line-height:1.7;color:#4a5568;">使用PaddleOCR或Tesseract识别元件位号（U1、R3）、网络名（CAN_TX）、引脚号等。</div>
+</td>
+</tr>
+<tr>
+<td style="width:50px;text-align:center;vertical-align:middle;background:#f0f4fa;border:1px solid #d0dbe6;padding:14px 8px;">
+<div style="display:inline-block;width:36px;height:36px;background:#3b82f6;color:white;border-radius:50%;text-align:center;line-height:36px;font-weight:700;font-size:16px;">3</div>
+</td>
+<td style="padding:14px 18px;vertical-align:middle;background:#ffffff;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#1a1a2e;margin-bottom:4px;">元件关联分析</div>
+<div style="font-size:14px;line-height:1.7;color:#4a5568;">根据空间邻近关系和线条追踪，建立元件之间的连接关系。</div>
+</td>
+</tr>
+<tr>
+<td style="width:50px;text-align:center;vertical-align:middle;background:#f0f4fa;border:1px solid #d0dbe6;padding:14px 8px;">
+<div style="display:inline-block;width:36px;height:36px;background:#3b82f6;color:white;border-radius:50%;text-align:center;line-height:36px;font-weight:700;font-size:16px;">4</div>
+</td>
+<td style="padding:14px 18px;vertical-align:middle;background:#ffffff;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#1a1a2e;margin-bottom:4px;">Markdown生成</div>
+<div style="font-size:14px;line-height:1.7;color:#4a5568;">输出结构化电路描述，包含元件列表、网络连接、引脚映射，方便AI模型理解硬件架构。</div>
+</td>
+</tr>
+<tr>
+<td style="width:50px;text-align:center;vertical-align:middle;background:#f0f4fa;border:1px solid #d0dbe6;padding:14px 8px;">
+<div style="display:inline-block;width:36px;height:36px;background:#3b82f6;color:white;border-radius:50%;text-align:center;line-height:36px;font-weight:700;font-size:16px;">5</div>
+</td>
+<td style="padding:14px 18px;vertical-align:middle;background:#ffffff;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#1a1a2e;margin-bottom:4px;">代码映射与超链接</div>
+<div style="font-size:14px;line-height:1.7;color:#4a5568;">读取映射配置，为每个元件关联代码文件及行号。GUI中点击直接跳转VSCode。</div>
+</td>
+</tr>
+</table><h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">2. GUI布局设计</h2>
+        <p style="margin:14px 0;line-height:1.8;">PyQt界面分为三个区域：左侧<strong>元件/网络列表</strong>、中间<strong>PDF原始视图</strong>、右侧<strong>关联代码面板</strong>。三者联动，点选元件自动高亮对应代码行。</p>
+        <div style="background:#1e2937;border-radius:8px;padding:14px;margin:14px 0;">
+            <div style="background:#334155;border-radius:6px;padding:12px 10px;margin:8px 0;">
+                <div> 元件列表</div>
+                <div><b>U1</b> STM32F407</div>
+                <div><b>U2</b> MAX485 →</div>
+                <div><b>R1</b> 120Ω终端电阻</div>
+                <div><b>J1</b> RS485端子</div>
+                <div style="margin-top:1rem;"> 网络</div>
+                <div>CAN_TX</div>
+                <div>CAN_RX</div>
+                <div>VCC3V3</div>
+            </div>
+            <div style="background:#f8fafc;border-radius:6px;text-align:center;color:#64748b;font-size:13px;padding:20px;margin:6px 0;">
+                <div>[PDF页面预览区域]<br>当前显示第1页<br>高亮框标注U2元件<br>支持缩放与拖拽</div>
+            </div>
+            <div style="background:#334155;border-radius:6px;padding:12px 10px;margin:8px 0;">
+                <div> 关联代码</div>
+                <div style="color:#e2e8f0; font-size:0.8rem; margin-bottom:0.5rem;">U2 - MAX485 驱动器</div>
+                <div><span>📄 rs485.c:45</span><br><span style="color:#94a3b8;font-size:0.7rem;">void rs485_init(void)</span></div>
+                <div><span>📄 rs485.c:102</span><br><span style="color:#94a3b8;font-size:0.7rem;">rs485_send_byte()</span></div>
+                <div><span>📄 pinout.h:23</span><br><span style="color:#94a3b8;font-size:0.7rem;">#define RS485_DE</span></div>
+                <div style="margin-top:1rem;"> 数据手册</div>
+                <div><span>📋 MAX485_ds.pdf</span></div>
+            </div>
+        </div>
+        <table style="width:100%;border-collapse:collapse;margin:16px 0;border:1px solid #a3d9a5;">
+<tr>
+<td style="width:6px;padding:0;background:#22c55e;border:1px solid #a3d9a5;"></td>
+<td style="padding:16px 20px;vertical-align:top;background:#f0fdf4;border:1px solid #a3d9a5;">
+<div style="font-size:16px;font-weight:600;color:#166534;margin-bottom:6px;">{comp_name} 代码关联</div>
+<div style="font-size:14px;line-height:1.7;color:#2d6a4f;"><ul>"</span><span style="display:block;">            for file, line, desc in self.code_mappings[comp_name]:</span><span style="display:block;">                url = f"vscode://file/{file}:{line}"</span><span style="display:block;">                html += f'<li><a href="{url}">📄 {file}:{line}</a><br><small>{desc}</small></li>'</span><span style="display:block;">            html += "</ul>"</span><span style="display:block;">            self.code_view.setHtml(html)</span><span style="display:block;">        else:</span><span style="display:block;">            self.code_view.setHtml(f"<p>{comp_name} 暂无代码映射，请加载映射文件</p>")</span><span style="display:block;"><br></span><span style="display:block;">    def on_net_clicked(self, item):</span><span style="display:block;">        """点击网络标号时高亮PDF区域"""</span><span style="display:block;">        net_name = item.data(Qt.ItemDataRole.UserRole)</span><span style="display:block;">        if net_name in self.net_labels:</span><span style="display:block;">            self.highlight_rect = self.net_labels[net_name]["rect"]</span><span style="display:block;">            self.render_pdf_page()</span><span style="display:block;"><br></span><span style="display:block;">    def on_anchor_clicked(self, url):</span><span style="display:block;">        """处理代码链接点击：调用VSCode打开文件"""</span><span style="display:block;">        vscode_path = url.toString()</span><span style="display:block;">        if vscode_path.startswith("vscode://file/"):</span><span style="display:block;">            file_part = vscode_path[len("vscode://file/"):]</span><span style="display:block;">            if ":" in file_part:</span><span style="display:block;">                file_path, line = file_part.rsplit(":", 1)</span><span style="display:block;">                # 构建VSCode命令行</span><span style="display:block;">                abs_path = os.path.abspath(file_path)</span><span style="display:block;">                cmd = f'code --goto "{abs_path}:{line}"'</span><span style="display:block;">                subprocess.Popen(cmd, shell=True)</span><span style="display:block;">                print(f"跳转: {cmd}")</span><span style="display:block;"><br></span><span style="display:block;">    def load_code_mappings(self):</span><span style="display:block;">        """加载默认代码映射"""</span><span style="display:block;">        # 这里读取项目中的映射文件，演示使用硬编码</span><span style="display:block;">        default_mapping = {</span><span style="display:block;">            "U2": [</span><span style="display:block;">                ("firmware/src/rs485.c", "45", "void rs485_init(void)"),</span><span style="display:block;">                ("firmware/src/rs485.c", "102", "rs485_send_byte()"),</span><span style="display:block;">                ("firmware/inc/pinout.h", "23", "#define RS485_DE GPIO_PIN_8"),</span><span style="display:block;">            ],</span><span style="display:block;">            "U1": [</span><span style="display:block;">                ("firmware/src/main.c", "12", "int main(void)"),</span><span style="display:block;">                ("firmware/src/sensor.c", "8", "void sensor_task(void)"),</span><span style="display:block;">            ],</span><span style="display:block;">            "J1": [</span><span style="display:block;">                ("firmware/inc/hardware.h", "15", "RS485端子定义"),</span><span style="display:block;">            ]</span><span style="display:block;">        }</span><span style="display:block;">        self.code_mappings = default_mapping</span><span style="display:block;"><br></span><span style="display:block;">    def load_mappings_file(self):</span><span style="display:block;">        """从JSON文件加载代码映射"""</span><span style="display:block;">        path, _ = QFileDialog.getOpenFileName(self, "加载代码映射", "", "JSON Files (*.json)")</span><span style="display:block;">        if path:</span><span style="display:block;">            with open(path, 'r', encoding='utf-8') as f:</span><span style="display:block;">                self.code_mappings = json.load(f)</span><span style="display:block;">            QMessageBox.information(self, "成功", f"已加载 {len(self.code_mappings)} 个元件的映射")</span><span style="display:block;"><br></span><span style="display:block;">    def export_markdown(self):</span><span style="display:block;">        """导出电路图Markdown描述"""</span><span style="display:block;">        if not self.pdf_path:</span><span style="display:block;">            QMessageBox.warning(self, "警告", "请先打开PDF文件")</span><span style="display:block;">            return</span><span style="display:block;">        md = self.generate_markdown()</span><span style="display:block;">        path, _ = QFileDialog.getSaveFileName(self, "保存Markdown", "schematic.md", "Markdown (*.md)")</span><span style="display:block;">        if path:</span><span style="display:block;">            with open(path, 'w', encoding='utf-8') as f:</span><span style="display:block;">                f.write(md)</span><span style="display:block;">            self.md_view.setPlainText(md)</span><span style="display:block;">            QMessageBox.information(self, "成功", f"Markdown已保存到 {path}")</span><span style="display:block;"><br></span><span style="display:block;">    def generate_markdown(self):</span><span style="display:block;">        """生成AI可读的电路图Markdown描述"""</span><span style="display:block;">        lines = []</span><span style="display:block;">        lines.append("# 电路图分析报告\n")</span><span style="display:block;">        lines.append(f"**源文件**: {os.path.basename(self.pdf_path)}")</span><span style="display:block;">        lines.append(f"**分析页数**: 第{self.current_page+1}页\n")</span><span style="display:block;">        lines.append("## 元件列表\n")</span><span style="display:block;">        lines.append("| 位号 | 推测类型 | 关联代码 | 备注 |")</span><span style="display:block;">        lines.append("|------|----------|----------|------|")</span><span style="display:block;">        for comp_name, info in self.components.items():</span><span style="display:block;">            code_refs = ""</span><span style="display:block;">            if comp_name in self.code_mappings:</span><span style="display:block;">                refs = self.code_mappings[comp_name]</span><span style="display:block;">                code_refs = ", ".join([f"`{f}:{l}`" for f, l, d in refs])</span><span style="display:block;">            comp_type = self._guess_component_type(comp_name)</span><span style="display:block;">            lines.append(f"| {comp_name} | {comp_type} | {code_refs} | |")</span><span style="display:block;">        lines.append("\n## 网络连接\n")</span><span style="display:block;">        lines.append("| 网络标号 | 推测功能 | 关联元件 |")</span><span style="display:block;">        lines.append("|----------|----------|----------|")</span><span style="display:block;">        for net_name in self.net_labels:</span><span style="display:block;">            related_comps = self._find_related_components(net_name)</span><span style="display:block;">            net_func = self._guess_net_function(net_name)</span><span style="display:block;">            lines.append(f"| {net_name} | {net_func} | {', '.join(related_comps)} |")</span><span style="display:block;">        lines.append("\n## AI分析提示\n")</span><span style="display:block;">        lines.append("- 请根据上述元件和网络关系，推断电路功能并关联到固件代码。")</span><span style="display:block;">        lines.append("- 元件位号与代码的映射关系已标注，可用于调试时快速定位。")</span><span style="display:block;">        return "\n".join(lines)</span><span style="display:block;"><br></span><span style="display:block;">    def _guess_component_type(self, name):</span><span style="display:block;">        """根据命名规则推测元件类型"""</span><span style="display:block;">        if name.startswith("U"): return "集成电路"</span><span style="display:block;">        if name.startswith("R"): return "电阻"</span><span style="display:block;">        if name.startswith("C"): return "电容"</span><span style="display:block;">        if name.startswith("J") or name.startswith("P"): return "连接器"</span><span style="display:block;">        if name.startswith("Q"): return "晶体管"</span><span style="display:block;">        if name.startswith("D"): return "二极管"</span><span style="display:block;">        return "未知"</span><span style="display:block;"><br></span><span style="display:block;">    def _find_related_components(self, net_name):</span><span style="display:block;">        """通过空间邻近关系寻找与网络相关的元件（简化实现）"""</span><span style="display:block;">        # 实际应基于线条追踪算法，此处返回示例</span><span style="display:block;">        return list(self.components.keys())[:3]</span><span style="display:block;"><br></span><span style="display:block;">    def _guess_net_function(self, name):</span><span style="display:block;">        """根据名称推测网络功能"""</span><span style="display:block;">        func_map = {"CAN": "CAN总线", "TX": "发送", "RX": "接收",</span><span style="display:block;">                    "VCC": "电源", "GND": "地", "SCL": "I2C时钟", "SDA": "I2C数据"}</span><span style="display:block;">        for key, func in func_map.items():</span><span style="display:block;">            if key in name: return func</span><span style="display:block;">        return "信号网络"</span><span style="display:block;"><br></span><span style="display:block;">    def generate_ai_description(self):</span><span style="display:block;">        """生成面向AI的结构化描述（Markdown + JSON）"""</span><span style="display:block;">        md = self.generate_markdown()</span><span style="display:block;">        # 同时输出JSON格式，方便AI编程接口使用</span><span style="display:block;">        json_data = {</span><span style="display:block;">            "components": {k: {"type": self._guess_component_type(k),</span><span style="display:block;">                               "codes": self.code_mappings.get(k, [])} for k in self.components},</span><span style="display:block;">            "nets": list(self.net_labels.keys()),</span><span style="display:block;">            "page": self.current_page</span><span style="display:block;">        }</span><span style="display:block;">        combined = f"{md}\n\n## JSON格式（供程序化使用）\n```json\n{json.dumps(json_data, indent=2, ensure_ascii=False)}\n```"</span><span style="display:block;">        self.md_view.setPlainText(combined)</span><span style="display:block;">        QMessageBox.information(self, "完成", "AI可读描述已生成，可在右侧面板查看")</span><span style="display:block;"><br></span><span style="display:block;"><br></span><span style="display:block;"># 代码映射文件示例 (code_mapping.json)</span><span style="display:block;">"""</span><span style="display:block;">{</span><span style="display:block;">  "U2": [</span><span style="display:block;">    ["firmware/src/rs485.c", "45", "void rs485_init(void)"],</span><span style="display:block;">    ["firmware/src/rs485.c", "102", "rs485_send_byte()"],</span><span style="display:block;">    ["firmware/inc/pinout.h", "23", "#define RS485_DE"]</span><span style="display:block;">  ],</span><span style="display:block;">  "U1": [</span><span style="display:block;">    ["firmware/src/main.c", "12", "int main(void)"],</span><span style="display:block;">    ["firmware/src/sensor.c", "8", "void sensor_task(void)"]</span><span style="display:block;">  ],</span><span style="display:block;">  "J1": [</span><span style="display:block;">    ["firmware/inc/hardware.h", "15", "RS485端子定义"]</span><span style="display:block;">  ]</span><span style="display:block;">}</span><span style="display:block;">"""</span><span style="display:block;"><br></span><span style="display:block;">if __name__ == "__main__":</span><span style="display:block;">    app = QApplication(sys.argv)</span><span style="display:block;">    window = SchematicAnalyzer()</span><span style="display:block;">    window.show()</span><span style="display:block;">    print("📊 PDF电路图分析器已启动")</span><span style="display:block;">    print("使用方法：文件 → 打开PDF → 运行OCR分析 → 加载代码映射 → 点击元件查看关联")</span><span style="display:block;">    sys.exit(app.exec())</span><span style="display:block;"><br></span></pre></div>
+
+        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">4. 代码映射文件格式</h2>
+        <p style="margin:14px 0;line-height:1.8;">维护一个<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">code_mapping.json</code>文件，描述每个元件位号对应的代码位置。该文件可在项目初期手动创建，或由AI根据代码注释自动生成。</p>
+        <div><pre style="background:#1e293b;color:#e2e8f0;padding:16px 20px;border-radius:6px;font-family:Consolas,monospace;font-size:13px;line-height:1.7;margin:16px 0;overflow-x:auto;white-space:pre-wrap;"><span style="display:block;">{</span><span style="display:block;">    "U2": [</span><span style="display:block;">    ["firmware/src/rs485.c", "45", "void rs485_init(void)"],</span><span style="display:block;">    ["firmware/src/rs485.c", "102", "rs485_send_byte()"],</span><span style="display:block;">    ["firmware/inc/pinout.h", "23", "#define RS485_DE GPIO_PIN_8"]</span><span style="display:block;">    ],</span><span style="display:block;">    "U1": [</span><span style="display:block;">    ["firmware/src/main.c", "12", "int main(void)"],</span><span style="display:block;">    ["firmware/src/sensor.c", "8", "void sensor_task(void)"]</span><span style="display:block;">    ],</span><span style="display:block;">    "J1": [</span><span style="display:block;">    ["firmware/inc/hardware.h", "15", "RS485端子定义"]</span><span style="display:block;">    ]</span><span style="display:block;">}</span></pre></div>
+        <div style="background:#eef9ff;border-left:4px solid #3b82f6;padding:14px 20px;border-radius:8px;margin:16px 0;"> AI可以利用此映射：当诊断RS485通讯问题时，自动定位到U2对应的<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">rs485.c:45</code>初始化函数，并结合原理图理解MAX485芯片的DE/RE引脚控制逻辑。</div>
+
+        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">5. 与五层进化工程体系的集成</h2>
+        <p style="margin:14px 0;line-height:1.8;">该电路图分析器可直接融入前文的<strong>嵌入式AI编程模板</strong>：</p>
+        <table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
+            <th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;"><tr><th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;">集成点</th><th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;">作用</th></tr></thead>
+            <tbody>
+                <tr><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>统一上下文</strong></td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">生成的Markdown电路描述放入<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">docs/</code>目录，AI助手自动加载理解硬件架构</td></tr>
+                <tr><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>agents.md</strong></td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">添加一条规则：“遇到硬件相关Bug时，查阅<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">docs/schematic.md</code>获取元件与代码的映射”</td></tr>
+                <tr><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>CLI调用</strong></td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">脚本支持命令行模式：<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">python schematic_analyzer.py --pdf schematic.pdf --output docs/schematic.md --mappings code_mapping.json</code></td></tr>
+                <tr><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>VSCode Tasks</strong></td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">新增任务“分析电路图”，一键完成PDF → Markdown + 代码关联全流程</td></tr>
+            </tbody>
+        </table>
+
+        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">6. AI协作场景示例</h2>
+        <div style="border-left:3px solid #8b5cf6;background:#faf5ff;padding:14px 20px;border-radius:8px;margin:16px 0;"> <strong>用户：</strong>“RS485通讯失败，U2的DE引脚似乎没有正确切换。”<br>
+            <strong>AI：</strong>“我已查阅<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">docs/schematic.md</code>：U2(MAX485)的DE引脚由<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">pinout.h:23</code>定义为GPIO_PIN_8，初始化在<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">rs485.c:45</code>。建议检查该GPIO的时钟是否使能。要跳转到对应代码吗？”<br>
+            <strong>用户点击超链接</strong> → VSCode自动打开<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">rs485.c</code>并定位到第45行。</div>
+
+        
+        </div>
+    </div>
+</div>
+<div>
+    <div>
+        <div>
+            <a href="https://x-itg.github.io/" target="_blank" rel="noreferrer">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div>
+            <section><span>itg</span></section>
+            <section><span>微信号: -lvgl-</span></section>
+        </div>
+    </div></div>
+</td>
+</tr>
+</table>
+
+<div style="margin-top:40px;padding-top:20px;border-top:2px solid #e0e4e8;font-size:14px;text-align:center;line-height:2.2;">
+<span style="margin-right:20px;"><a href="test.html" style="color:#2980b9;">&lt; 上一篇：自主修复闭环</a></span>
+<span><a href="exc.html" style="color:#2980b9;">下一篇：共生演化 &gt;</a></span>
+<br><a href="index.html" style="color:#2980b9;">[返回系列首页]</a>
+</div>
+</section>

@@ -1,0 +1,123 @@
+<section style="max-width:680px;margin:0 auto;padding:20px 0;font-family:-apple-system,BlinkMacSystemFont,Microsoft YaHei,PingFang SC,sans-serif;color:#2c3e50;line-height:1.8;">
+<div style="margin-bottom:40px;">
+<span style="display:inline-block;background:#c0392b;color:#fff;font-size:13px;font-weight:700;padding:4px 14px;border-radius:3px;margin-bottom:14px;">五层进化 . 闭环方法论</span>
+<h1 style="font-size:30px;font-weight:700;line-height:1.35;margin-bottom:12px;letter-spacing:-0.3px;">自主修复闭环</h1>
+<p style="font-size:17px;color:#5a6c7d;font-weight:400;margin-bottom:10px;border-left:3px solid #3b82f6;padding-left:16px;">AI在每一轮迭代中同步完善代码和测试，螺旋逼近需求目标</p>
+<p style="font-size:13px;color:#8896a4;">itg &middot; 嵌入式AI工程化系列</p>
+</div>
+<div style="background:#f8f9fa;border:1px solid #e0e4e8;border-radius:8px;padding:16px 20px;margin:0 0 32px 0;font-size:14px;line-height:1.8;">
+<strong style="color:#1a1a2e;font-size:15px;">[嵌入式AI工程化系列]</strong><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第1篇</span> 五层进化 <span style="color:#8896a4;font-size:13px;">-- AI编程调试的五层架构</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第2篇</span> 实践项目模板 <span style="color:#8896a4;font-size:13px;">-- 高可复用嵌入式AI编程骨架</span><br>
+<span style="display:inline-block;background:#c0392b;color:#fff;padding:1px 8px;border-radius:3px;font-weight:700;margin:2px 0;">第3篇</span> <strong>自主修复闭环</strong> <span style="color:#8896a4;font-size:13px;">-- AI双轨收敛 . 需求螺旋闭合</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第4篇</span> 电路图分析器 <span style="color:#8896a4;font-size:13px;">-- PDF原理图转AI可读描述</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第5篇</span> 共生演化 <span style="color:#8896a4;font-size:13px;">-- 规格-实现知识一致性</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第6篇</span> 历史的包袱 <span style="color:#8896a4;font-size:13px;">-- 遗留工程与AI迁移策略</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第7篇</span> 最后的拼图：Skills <span style="color:#8896a4;font-size:13px;">-- 规则感知型即时方法</span><br>
+</div>
+
+
+        <table style="width:100%;border-collapse:collapse;margin:16px 0;border:1px solid #d0dbe6;">
+<tr>
+<td style="width:6px;padding:0;background:#f59e0b;border:1px solid #d0dbe6;"></td>
+<td style="padding:14px 18px;vertical-align:top;background:#fffdf7;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#92400e;margin-bottom:6px;"> 轨1：代码修复</div>
+<div style="font-size:14px;line-height:1.7;color:#5a4a3a;">根据失败日志（尤其是负日志），定位根因，生成git diff修复提案，应用后回归验证。</div>
+</td>
+</tr>
+<tr>
+<td style="width:6px;padding:0;background:#f59e0b;border:1px solid #d0dbe6;"></td>
+<td style="padding:14px 18px;vertical-align:top;background:#fffdf7;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#92400e;margin-bottom:6px;"> 轨2：测试增强</div>
+<div style="font-size:14px;line-height:1.7;color:#5a4a3a;">分析已覆盖与未覆盖的需求点，补充新测试用例或优化断言，提升测试的“需求敏感度”。</div>
+</td>
+</tr>
+<tr>
+<td style="width:6px;padding:0;background:#f59e0b;border:1px solid #d0dbe6;"></td>
+<td style="padding:14px 18px;vertical-align:top;background:#fffdf7;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#92400e;margin-bottom:6px;"> 收敛判据</div>
+<div style="font-size:14px;line-height:1.7;color:#5a4a3a;">当连续两轮测试均无失败，且需求覆盖率保持100%且无新的负日志出现，视为收敛。</div>
+</td>
+</tr>
+<tr>
+<td style="width:6px;padding:0;background:#f59e0b;border:1px solid #d0dbe6;"></td>
+<td style="padding:14px 18px;vertical-align:top;background:#fffdf7;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#92400e;margin-bottom:6px;"> Agent驱动</div>
+<div style="font-size:14px;line-height:1.7;color:#5a4a3a;">一个自治Agent统筹所有步骤：读取日志、生成修复、提出新测试、调度CLI执行、循环直至收敛。</div>
+</td>
+</tr>
+</table>
+        </div>
+
+        <!-- 工程基础（融合文章1） -->
+        <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 28px;margin:24px 0;">
+            <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">2. 工程基础：让Agent拥有“眼睛”和“双手”</h2>
+            <p style="margin:14px 0;line-height:1.8;">迭代收敛离不开前期搭建的嵌入式AI工程模板。以下关键组件为Agent提供了完备的感知与执行能力：</p>
+            <table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
+                <th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;"><tr><th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;">组件</th><th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;">作用</th><th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;">Agent使用方式</th></tr></thead>
+                <tbody>
+                    <tr><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>结构化正/负日志</strong></td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">记录“发生了什么”和“应该发生却未发生”的事件</td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">Agent解析日志，提取失败证据和需求覆盖信息</td></tr>
+                    <tr><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>统一项目上下文</strong></td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">标准目录结构 + agents.md 让AI理解项目全貌</td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">Agent自动加载上下文，生成准确修复和测试建议</td></tr>
+                    <tr><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>CLI调试助手</strong></td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">同时监听RS485总线、控制板串口、上位机日志</td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">Agent调用助手收集每一次测试的完整日志</td></tr>
+                    <tr><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>VSCode Tasks</strong></td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">一键编译、烧录、启动监控、运行测试</td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">Agent通过<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">make full-loop</code>触发整个序列</td></tr>
+                    <tr><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>需求检查点文件</strong></td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">将需求转化为可验证的日志模式列表</td><td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">Agent比对检查点，计算覆盖率并发现漏洞</td></tr>
+                </tbody>
+            </table>
+            <table style="width:100%;border-collapse:collapse;margin:16px 0;border:1px solid #a3d9a5;">
+<tr>
+<td style="width:6px;padding:0;background:#22c55e;border:1px solid #a3d9a5;"></td>
+<td style="padding:16px 20px;vertical-align:top;background:#f0fdf4;border:1px solid #a3d9a5;">
+<div style="font-size:16px;font-weight:600;color:#166534;margin-bottom:6px;">循环C实例</div>
+<div style="font-size:14px;line-height:1.7;color:#2d6a4f;"><p style="margin:14px 0;line-height:1.8;">项目中偶发RS485帧丢失，软件日志无法捕获。Agent分析后建议：“调试助手增加硬件GPIO触发信号，同步捕捉总线电气波形”。它自动生成一个新的测试脚本，调用示波器API，并将该建议写入<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">agents.md</code>供后续参考。</p>
+            </div>
+        </div>
+
+        <!-- 与现有项目集成 -->
+        <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 28px;margin:24px 0;">
+            <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">5. 无缝嵌入你的RS485传感器项目</h2>
+            <p style="margin:14px 0;line-height:1.8;">以下步骤将收敛Agent部署到之前的嵌入式AI编程模板中：</p>
+            <table style="width:100%;border-collapse:collapse;margin:16px 0;border:1px solid #d0dbe6;">
+<tr>
+<td style="width:6px;padding:0;background:#f59e0b;border:1px solid #d0dbe6;"></td>
+<td style="padding:14px 18px;vertical-align:top;background:#fffdf7;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#92400e;margin-bottom:6px;"> 代码侧</div>
+<div style="font-size:14px;line-height:1.7;color:#5a4a3a;">每次失败都转化为精确的修复提案，并立即验证。</div>
+</td>
+</tr>
+<tr>
+<td style="width:6px;padding:0;background:#f59e0b;border:1px solid #d0dbe6;"></td>
+<td style="padding:14px 18px;vertical-align:top;background:#fffdf7;border:1px solid #d0dbe6;">
+<div style="font-size:16px;font-weight:600;color:#92400e;margin-bottom:6px;"> 测试侧</div>
+<div style="font-size:14px;line-height:1.7;color:#5a4a3a;">每次覆盖缺失都催生新的测试场景，像“免疫系统”一样完善。</div>
+</td>
+</tr>
+</table>
+            <div style="background:#eef9ff;border-left:4px solid #3b82f6;padding:14px 20px;border-radius:8px;margin:16px 0;">
+                <p style="margin:14px 0;line-height:1.8;">最终，项目达到一个稳定状态：<strong>代码实现通过所有测试，而测试又完整反映了需求描述</strong>——这正是收敛的本质。</p>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<div>
+    <div>
+        <div>
+            <a href="https://x-itg.github.io/" target="_blank" rel="noreferrer">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div>
+            <section><span>itg</span></section>
+            <section><span>微信号: -lvgl-</span></section>
+        </div>
+    </div></div>
+</td>
+</tr>
+</table>
+
+<div style="margin-top:40px;padding-top:20px;border-top:2px solid #e0e4e8;font-size:14px;text-align:center;line-height:2.2;">
+<span style="margin-right:20px;"><a href="true.html" style="color:#2980b9;">&lt; 上一篇：实践项目模板</a></span>
+<span><a href="pcb.html" style="color:#2980b9;">下一篇：电路图分析器 &gt;</a></span>
+<br><a href="index.html" style="color:#2980b9;">[返回系列首页]</a>
+</div>
+</section>
