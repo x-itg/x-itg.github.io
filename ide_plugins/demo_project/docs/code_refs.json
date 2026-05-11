@@ -1,0 +1,18 @@
+{
+  "links": {
+    "R1": [
+      "rs485.c:45"
+    ],
+    "U1": [
+      "main.c:10"
+    ],
+    "U2": [
+      "sht40_driver.c:15"
+    ]
+  },
+  "reverse_links": {
+    "rs485.c:45": "R1",
+    "main.c:10": "U1",
+    "sht40_driver.c:15": "U2"
+  }
+}

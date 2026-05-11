@@ -1,0 +1,45 @@
+# IDE AI Engineering Tools - 配置文件
+
+project:
+  root: "."
+  agents_md: "docs/agents.md"
+  skills_dir: "skills"
+  decision_ledger: "docs/.decision_ledger"
+
+server:
+  host: "127.0.0.1"
+  port: 8765
+  debug: false
+
+logging:
+  level: "INFO"
+  file: "logs/ide_tools.log"
+
+serial:
+  port: "COM3"
+  baudrate: 115200
+  timeout: 1.0
+
+convergence:
+  max_iterations: 10
+  convergence_threshold: 0.95
+
+schematic:
+  pdf_storage: "hardware/schematics"
+  ocr_cache: "hardware/ocr_cache"
+
+knowledge_vitals:
+  health_thresholds:
+    healthy: 0.8
+    warning: 0.5
+    danger: 0.3
+  cold_document_days: 30
+  check_interval: 60
+
+remote_build:
+  enabled: false
+  host: "192.168.1.100"
+  user: "developer"
+  password: ""
+  keil_path: "C:/Keil_v5/UV4/UV4.exe"
+  project_ext: ".uvprojx"

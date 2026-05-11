@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDE AI Engineering Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* 侧边栏动画 */
+        .sidebar-item {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sidebar-item:hover {
+            background: rgba(59, 130, 246, 0.08);
+        }
+        .sidebar-item.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+        .sidebar-item.active .status-dot { background: #4ade80 !important; }
+        
+        /* 内容区域过渡 */
+        .content-panel {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 卡片悬浮效果 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* 渐变背景 */
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        /* 状态点动画 */
+        .status-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .status-healthy { background: #22c55e; }
+        .status-warning { background: #f59e0b; }
+        .status-error { background: #ef4444; }
+        
+        /* 工具图标 */
+        .tool-icon {
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+        .sidebar-item:hover .tool-icon { transform: scale(1.1); }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen">
+    <!-- 主容器 -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- 左侧边栏 -->
+        <aside class="w-72 bg-white border-r border-slate-200 flex flex-col shadow-lg z-10">
+            <!-- Logo区域 -->
+            <div class="p-5 border-b border-slate-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg">
+                        <span class="text-white text-xl">⚡</span>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-slate-800 text-lg">IDE Tools</h1>
+                        <p class="text-xs text-slate-500">AI 工程化体系</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 搜索框 -->
+            <div class="p-4">
+                <div class="relative">
+                    <input type="text" id="tool-search" placeholder="搜索工具..." 
+                        class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- 工具列表 -->
+            <nav class="flex-1 overflow-y-auto p-3 space-y-1">
+                <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">开发工具</div>
+                
+                <div class="sidebar-item active flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer" onclick="switchModule('law-manager')" data-module="law-manager">
+                    <div class="tool-icon bg-blue-50 text-blue-600">📜</div>
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">法则管理器</div>
+                        <div class="text-xs text-slate-400">规约网络</div>
+                    </div>
+                    <div class="status-dot status-healthy"></div>
+                </div>
+                
+                <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer" onclick="switchModule('negative-logger')" data-module="negative-logger">
+                    <div class="tool-icon bg-red-50 text-red-600">📊</div>
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">负日志监控器</div>
+                        <div class="text-xs text-slate-400">期望 vs 现实</div>
+                    </div>
+                    <div class="status-dot status-healthy"></div>
+                </div>
+                
+                <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer" onclick="switchModule('convergence-engine')" data-module="convergence-engine">
+                    <div class="tool-icon bg-green-50 text-green-600">🎯</div>
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">收敛引擎</div>
+                        <div class="text-xs text-slate-400">Bug/测试追踪</div>
+                    </div>
+                    <div class="status-dot status-healthy"></div>
+                </div>
+                
+                <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer" onclick="switchModule('schematic-navigator')" data-module="schematic-navigator">
+                    <div class="tool-icon bg-yellow-50 text-yellow-600">🔧</div>
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">电路图导航器</div>
+                        <div class="text-xs text-slate-400">硬件地图</div>
+                    </div>
+                    <div class="status-dot status-healthy"></div>
+                </div>
+                
+                <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3 mt-6">知识管理</div>
+                
+                <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer" onclick="switchModule('knowledge-vitals')" data-module="knowledge-vitals">
+                    <div class="tool-icon bg-purple-50 text-purple-600">📈</div>
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">知识体征仪表盘</div>
+                        <div class="text-xs text-slate-400">健康度监控</div>
+                    </div>
+                    <div class="status-dot status-healthy"></div>
+                </div>
+                
+                <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer" onclick="switchModule('skills-launcher')" data-module="skills-launcher">
+                    <div class="tool-icon bg-indigo-50 text-indigo-600">🚀</div>
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">Skills 启动台</div>
+                        <div class="text-xs text-slate-400">高频操作</div>
+                    </div>
+                    <div class="status-dot status-healthy"></div>
+                </div>
+                
+                <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer" onclick="switchModule('legacy-adapter')" data-module="legacy-adapter">
+                    <div class="tool-icon bg-orange-50 text-orange-600">�遗</div>
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">遗产项目适配器</div>
+                        <div class="text-xs text-slate-400">平滑迁移</div>
+                    </div>
+                    <div class="status-dot status-healthy"></div>
+                </div>
+            </nav>
+            
+            <!-- 底部状态 -->
+            <div class="p-4 border-t border-slate-100">
+                <div class="glass-card rounded-xl p-3">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-slate-600">系统状态</span>
+                        <span class="flex items-center gap-1 text-green-600">
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                            在线
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- 顶部栏 -->
+            <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-xl font-semibold text-slate-800" id="current-module-title">法则管理器</h2>
+                    <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs rounded-full font-medium">开发工具</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-2 text-sm text-slate-500">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        已连接
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-sm font-medium">
+                        AI
+                    </div>
+                </div>
+            </header>
+            
+            <!-- 内容区域 -->
+            <div class="flex-1 overflow-y-auto p-6" id="main-content">
+                <!-- 动态内容将在这里加载 -->
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE = 'http://127.0.0.1:8765/api';
+        
+        // 当前选中的模块
+        let currentModule = 'law-manager';
+        
+        // 模块配置
+        const moduleConfig = {
+            'law-manager': { title: '法则管理器', category: '开发工具', icon: '📜' },
+            'negative-logger': { title: '负日志监控器', category: '开发工具', icon: '📊' },
+            'convergence-engine': { title: '收敛引擎', category: '开发工具', icon: '🎯' },
+            'schematic-navigator': { title: '电路图导航器', category: '开发工具', icon: '🔧' },
+            'knowledge-vitals': { title: '知识体征仪表盘', category: '知识管理', icon: '📈' },
+            'skills-launcher': { title: 'Skills 启动台', category: '知识管理', icon: '🚀' },
+            'legacy-adapter': { title: '遗产项目适配器', category: '知识管理', icon: '🏛️' }
+        };
+        
+        function switchModule(moduleId) {
+            // 更新侧边栏选中状态
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.module === moduleId) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // 更新顶部标题
+            const config = moduleConfig[moduleId];
+            document.getElementById('current-module-title').textContent = config.title;
+            currentModule = moduleId;
+            
+            // 加载对应内容
+            loadModuleContent(moduleId);
+        }
+        
+        function loadModuleContent(moduleId) {
+            const content = document.getElementById('main-content');
+            
+            const contents = {
+                'law-manager': `
+                    <div class="space-y-6">
+                        <div class="glass-card rounded-2xl p-6 shadow-sm">
+                            <p class="text-slate-600 mb-4">将 agents.md 和所有规约文件从静态文本变成可交互的法则网络。</p>
+                            <h3 class="font-semibold text-slate-800 mb-3">核心功能：</h3>
+                            <ul class="grid grid-cols-2 gap-3">
+                                <li class="flex items-center gap-2 p-3 bg-slate-50 rounded-xl">
+                                    <span class="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 text-sm">📂</span>
+                                    <span class="text-sm">侧边栏树视图</span>
+                                </li>
+                                <li class="flex items-center gap-2 p-3 bg-slate-50 rounded-xl">
+                                    <span class="w-6 h-6 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-sm">✓</span>
+                                    <span class="text-sm">自动验证</span>
+                                </li>
+                                <li class="flex items-center gap-2 p-3 bg-slate-50 rounded-xl">
+                                    <span class="w-6 h-6 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 text-sm">✨</span>
+                                    <span class="text-sm">法则创建向导</span>
+                                </li>
+                                <li class="flex items-center gap-2 p-3 bg-slate-50 rounded-xl">
+                                    <span class="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600 text-sm">💬</span>
+                                    <span class="text-sm">AI对话联动</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button onclick="showDocumentList()" class="w-full bg-blue-500 text-white py-3 px-6 rounded-xl hover:bg-blue-600 transition font-medium shadow-lg shadow-blue-500/30">
+                            📚 查看文档列表
+                        </button>
+                    </div>
+                `,
+                'negative-logger': `
+                    <div class="space-y-6 content-panel">
+                        <div class="glass-card rounded-2xl p-6 shadow-sm">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-red-600 text-xl">📊</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-slate-800">负日志监控器</h3>
+                                    <p class="text-sm text-slate-500">可视化期望与现实的差距</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-3 mb-4">
+                                <button onclick="startLogDemo()" id="log-demo-btn" class="flex-1 bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition font-medium shadow-lg shadow-green-500/30">
+                                    ▶ 启动演示
+                                </button>
+                                <button onclick="stopLogDemo()" class="bg-red-500 text-white py-3 px-6 rounded-xl hover:bg-red-600 transition">
+                                    ⏹ 停止
+                                </button>
+                                <button onclick="resetLogDemo()" class="bg-slate-200 text-slate-700 py-3 px-6 rounded-xl hover:bg-slate-300 transition">
+                                    🔄 重置
+                                </button>
+                            </div>
+                            
+                            <div id="log-stream" class="bg-slate-900 text-green-400 p-4 rounded-xl font-mono text-sm h-48 overflow-y-auto border border-slate-700">
+                                <div class="text-slate-500">[点击"启动演示"开始...]</div>
+                            </div>
+                            
+                            <div class="mt-4 grid grid-cols-3 gap-3">
+                                <div class="bg-green-50 p-4 rounded-xl text-center">
+                                    <div class="text-3xl font-bold text-green-600" id="pos-count">0</div>
+                                    <div class="text-sm text-green-700 flex items-center justify-center gap-1">
+                                        <span>✓</span> 正面
+                                    </div>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-xl text-center">
+                                    <div class="text-3xl font-bold text-red-600" id="neg-count">0</div>
+                                    <div class="text-sm text-red-700 flex items-center justify-center gap-1">
+                                        <span>✗</span> 负面
+                                    </div>
+                                </div>
+                                <div class="bg-yellow-50 p-4 rounded-xl text-center">
+                                    <div class="text-3xl font-bold text-yellow-600" id="expect-count">0</div>
+                                    <div class="text-sm text-yellow-700 flex items-center justify-center gap-1">
+                                        <span>⏳</span> 待验证
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'convergence-engine': `
+                    <div class="space-y-6 content-panel">
+                        <div class="glass-card rounded-2xl p-6 shadow-sm">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-green-600 text-xl">🎯</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-slate-800">收敛引擎</h3>
+                                    <p class="text-sm text-slate-500">Bug/测试追踪与收敛</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-3 mb-4">
+                                <button onclick="addBugTask()" class="flex-1 bg-red-500 text-white py-3 px-6 rounded-xl hover:bg-red-600 transition font-medium shadow-lg shadow-red-500/30">
+                                    🐛 添加Bug
+                                </button>
+                                <button onclick="addTestTask()" class="flex-1 bg-blue-500 text-white py-3 px-6 rounded-xl hover:bg-blue-600 transition font-medium shadow-lg shadow-blue-500/30">
+                                    🧪 添加测试
+                                </button>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="bg-red-50 p-4 rounded-xl">
+                                    <h4 class="font-semibold text-red-700 mb-3 flex items-center gap-2">
+                                        <span>🐛</span> Bug队列
+                                    </h4>
+                                    <div id="bug-queue" class="space-y-2 text-sm max-h-40 overflow-y-auto">
+                                        <div class="text-slate-400 text-center py-4">暂无Bug任务</div>
+                                    </div>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-xl">
+                                    <h4 class="font-semibold text-blue-700 mb-3 flex items-center gap-2">
+                                        <span>🧪</span> 测试队列
+                                    </h4>
+                                    <div id="test-queue" class="space-y-2 text-sm max-h-40 overflow-y-auto">
+                                        <div class="text-slate-400 text-center py-4">暂无测试任务</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-slate-50 p-4 rounded-xl mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium text-slate-700">📊 收敛进度</span>
+                                    <span id="iter-progress" class="text-sm text-slate-500">0%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-3 mb-3">
+                                    <div id="iter-bar" class="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                                <button onclick="startConvergence()" id="conv-btn" class="w-full bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition font-medium shadow-lg shadow-green-500/30">
+                                    🚀 启动收敛
+                                </button>
+                            </div>
+                            
+                            <div class="grid grid-cols-4 gap-3">
+                                <div class="bg-slate-100 p-3 rounded-xl text-center">
+                                    <div class="text-xl font-bold text-slate-700" id="task-total">0</div>
+                                    <div class="text-xs text-slate-500">总计</div>
+                                </div>
+                                <div class="bg-yellow-50 p-3 rounded-xl text-center">
+                                    <div class="text-xl font-bold text-yellow-600" id="task-pending">0</div>
+                                    <div class="text-xs text-yellow-600">待处理</div>
+                                </div>
+                                <div class="bg-green-50 p-3 rounded-xl text-center">
+                                    <div class="text-xl font-bold text-green-600" id="task-done">0</div>
+                                    <div class="text-xs text-green-600">完成</div>
+                                </div>
+                                <div class="bg-red-50 p-3 rounded-xl text-center">
+                                    <div class="text-xl font-bold text-red-600" id="task-fail">0</div>
+                                    <div class="text-xs text-red-600">失败</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'schematic-navigator': `
+                    <div class="space-y-6 content-panel">
+                        <div class="glass-card rounded-2xl p-6 shadow-sm">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-yellow-600 text-xl">🔧</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-slate-800">电路图导航器</h3>
+                                    <p class="text-sm text-slate-500">将PDF原理图变成可点击的硬件地图</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-slate-100 p-4 rounded-xl mb-4">
+                                <div class="flex justify-between text-sm text-slate-600 mb-3">
+                                    <span>📄 demo_schematic.pdf</span>
+                                    <span>缩放: <span id="zoom-level">100%</span></span>
+                                </div>
+                                <div class="flex gap-2 mb-3">
+                                    <button onclick="zoomIn()" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition shadow">🔍+</button>
+                                    <button onclick="zoomOut()" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition shadow">🔍-</button>
+                                    <button onclick="resetZoom()" class="bg-slate-300 text-slate-700 px-4 py-2 rounded-lg text-sm hover:bg-slate-400 transition">重置</button>
+                                </div>
+                                <div id="schematic-viewer" class="bg-white border-2 border-dashed border-slate-300 rounded-xl p-6 min-h-56 relative overflow-hidden" style="transform: scale(1); transform-origin: top left;">
+                                    <div class="text-center text-slate-400 mb-4">— 原理图预览区域 —</div>
+                                    <div class="grid grid-cols-4 gap-3 text-center">
+                                        <div class="circuit-component p-3 bg-blue-50 rounded-xl cursor-pointer hover:bg-blue-100 transition" onclick="selectComponent(this, 'MCU')">
+                                            <div class="text-3xl mb-1">🔲</div>
+                                            <div class="text-xs font-medium">MCU</div>
+                                            <div class="text-xs text-slate-500">STM32F103</div>
+                                        </div>
+                                        <div class="circuit-component p-3 bg-green-50 rounded-xl cursor-pointer hover:bg-green-100 transition" onclick="selectComponent(this, 'SENSOR')">
+                                            <div class="text-3xl mb-1">🌡️</div>
+                                            <div class="text-xs font-medium">传感器</div>
+                                            <div class="text-xs text-slate-500">SHT40</div>
+                                        </div>
+                                        <div class="circuit-component p-3 bg-yellow-50 rounded-xl cursor-pointer hover:bg-yellow-100 transition" onclick="selectComponent(this, 'I2C')">
+                                            <div class="text-3xl mb-1">📊</div>
+                                            <div class="text-xs font-medium">总线</div>
+                                            <div class="text-xs text-slate-500">I2C</div>
+                                        </div>
+                                        <div class="circuit-component p-3 bg-red-50 rounded-xl cursor-pointer hover:bg-red-100 transition" onclick="selectComponent(this, 'LED')">
+                                            <div class="text-3xl mb-1">💡</div>
+                                            <div class="text-xs font-medium">指示灯</div>
+                                            <div class="text-xs text-slate-500">LED</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="component-detail" class="bg-slate-50 p-4 rounded-xl mb-4 hidden">
+                                <h4 class="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                                    <span>📍</span> 元件详情: <span id="component-name"></span>
+                                </h4>
+                                <div class="grid grid-cols-2 gap-3 text-sm">
+                                    <div class="bg-white p-2 rounded-lg"><span class="text-slate-500">引脚:</span> <span id="component-pins" class="font-medium">-</span></div>
+                                    <div class="bg-white p-2 rounded-lg"><span class="text-slate-500">地址:</span> <span id="component-addr" class="font-medium">-</span></div>
+                                    <div class="bg-white p-2 rounded-lg col-span-2"><span class="text-slate-500">代码:</span> <span id="component-code" class="font-medium">-</span></div>
+                                </div>
+                                <button onclick="jumpToCode()" class="mt-3 w-full bg-blue-500 text-white py-2 rounded-lg text-sm hover:bg-blue-600 transition font-medium">
+                                    📝 跳转到代码
+                                </button>
+                            </div>
+                            
+                            <div class="bg-purple-50 p-4 rounded-xl">
+                                <h4 class="font-semibold text-purple-700 mb-2 flex items-center gap-2">
+                                    <span>📋</span> OCR 识别结果
+                                </h4>
+                                <div id="ocr-result" class="bg-white p-3 rounded-lg text-sm font-mono text-slate-600 mb-2">
+                                    等待上传PDF进行OCR识别...
+                                </div>
+                                <button onclick="runOCR()" class="w-full bg-purple-500 text-white py-2 rounded-lg text-sm hover:bg-purple-600 transition font-medium">
+                                    🔄 运行OCR识别
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'knowledge-vitals': `
+                    <div class="space-y-6 content-panel">
+                        <div class="glass-card rounded-2xl p-6 shadow-sm">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-purple-600 text-xl">📈</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-slate-800">知识体征仪表盘</h3>
+                                    <p class="text-sm text-slate-500">图形化实时监控文档健康度</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="bg-slate-50 p-4 rounded-xl">
+                                    <h4 class="font-semibold text-center text-slate-700 mb-4">🍩 健康度分布</h4>
+                                    <div class="relative w-36 h-36 mx-auto">
+                                        <svg class="w-full h-full" viewBox="0 0 100 100">
+                                            <circle cx="50" cy="50" r="40" fill="none" stroke="#e2e8f0" stroke-width="12"/>
+                                            <circle cx="50" cy="50" r="40" fill="none" stroke="#22c55e" stroke-width="12" stroke-dasharray="143.5 251.2" transform="rotate(-90 50 50)"/>
+                                            <circle cx="50" cy="50" r="40" fill="none" stroke="#f59e0b" stroke-width="12" stroke-dasharray="35.9 251.2" transform="rotate(154.3 50 50)"/>
+                                            <circle cx="50" cy="50" r="40" fill="none" stroke="#ef4444" stroke-width="12" stroke-dasharray="71.8 251.2" transform="rotate(205.7 50 50)"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="text-center">
+                                                <div class="text-3xl font-bold text-slate-800">7</div>
+                                                <div class="text-xs text-slate-500">文档</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-center gap-4 mt-4 text-xs">
+                                        <span class="flex items-center gap-1"><span class="w-3 h-3 bg-green-500 rounded"></span>健康4</span>
+                                        <span class="flex items-center gap-1"><span class="w-3 h-3 bg-yellow-500 rounded"></span>亚健康1</span>
+                                        <span class="flex items-center gap-1"><span class="w-3 h-3 bg-red-500 rounded"></span>危险2</span>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-xl">
+                                    <h4 class="font-semibold text-center text-slate-700 mb-4">🔥 活跃度分布</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-xs w-10 text-slate-600">热区</span>
+                                            <div class="flex-1 bg-slate-200 rounded-full h-3">
+                                                <div class="bg-red-500 h-3 rounded-full" style="width: 28%"></div>
+                                            </div>
+                                            <span class="text-xs w-6 text-slate-600">2</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-xs w-10 text-slate-600">温区</span>
+                                            <div class="flex-1 bg-slate-200 rounded-full h-3">
+                                                <div class="bg-yellow-500 h-3 rounded-full" style="width: 43%"></div>
+                                            </div>
+                                            <span class="text-xs w-6 text-slate-600">3</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-xs w-10 text-slate-600">冷区</span>
+                                            <div class="flex-1 bg-slate-200 rounded-full h-3">
+                                                <div class="bg-blue-500 h-3 rounded-full" style="width: 29%"></div>
+                                            </div>
+                                            <span class="text-xs w-6 text-slate-600">2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+                                    <span>⚠️</span> 预警提醒
+                                </h4>
+                                <div class="space-y-2" id="alert-list">
+                                    <div class="flex items-center gap-3 p-3 bg-red-50 rounded-xl text-sm">
+                                        <span class="text-xl">🔴</span>
+                                        <span class="flex-1 font-medium">单元测试指南</span>
+                                        <span class="text-red-600 text-xs bg-red-100 px-2 py-1 rounded-full">危险</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-orange-50 rounded-xl text-sm">
+                                        <span class="text-xl">🟠</span>
+                                        <span class="flex-1 font-medium">错误处理规范</span>
+                                        <span class="text-orange-600 text-xs bg-orange-100 px-2 py-1 rounded-full">90天未更新</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-yellow-50 rounded-xl text-sm">
+                                        <span class="text-xl">🟡</span>
+                                        <span class="flex-1 font-medium">硬件配置表</span>
+                                        <span class="text-yellow-600 text-xs bg-yellow-100 px-2 py-1 rounded-full">亚健康</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-slate-50 p-4 rounded-xl mb-4">
+                                <h4 class="font-semibold text-slate-700 mb-3">📖 文档详情</h4>
+                                <div class="bg-white p-3 rounded-xl mb-3">
+                                    <div class="flex justify-between mb-3">
+                                        <span class="font-medium">I2C驱动开发规范</span>
+                                        <span class="text-green-600 text-sm font-medium">健康 92%</span>
+                                    </div>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-16 text-slate-500">时效性</span>
+                                            <div class="flex-1 bg-slate-100 rounded-full h-2"><div class="bg-green-500 h-2 rounded-full" style="width: 95%"></div></div>
+                                            <span class="w-10 text-right">95%</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-16 text-slate-500">引用量</span>
+                                            <div class="flex-1 bg-slate-100 rounded-full h-2"><div class="bg-green-500 h-2 rounded-full" style="width: 80%"></div></div>
+                                            <span class="w-10 text-right">80%</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-16 text-slate-500">准确度</span>
+                                            <div class="flex-1 bg-slate-100 rounded-full h-2"><div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div></div>
+                                            <span class="w-10 text-right">100%</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-16 text-slate-500">完整度</span>
+                                            <div class="flex-1 bg-slate-100 rounded-full h-2"><div class="bg-yellow-500 h-2 rounded-full" style="width: 85%"></div></div>
+                                            <span class="w-10 text-right">85%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="toggleAlert()" class="w-full bg-blue-500 text-white py-2 rounded-xl text-sm hover:bg-blue-600 transition font-medium" id="alert-toggle-btn">
+                                    🔔 3 条预警
+                                </button>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-semibold text-slate-700 mb-3">🔍 事实索引搜索</h4>
+                                <div class="flex gap-2">
+                                    <input type="text" id="fact-search" placeholder="输入关键词搜索..." class="flex-1 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" onkeypress="if(event.key==='Enter') searchFact()">
+                                    <button onclick="searchFact()" class="bg-blue-500 text-white px-6 py-2.5 rounded-xl text-sm hover:bg-blue-600 transition font-medium shadow-lg shadow-blue-500/30">
+                                        搜索
+                                    </button>
+                                </div>
+                                <div id="search-results" class="mt-3 text-sm text-slate-400 p-4 bg-slate-50 rounded-xl">输入关键词查找权威来源...</div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'skills-launcher': `
+                    <div class="space-y-6 content-panel">
+                        <div class="glass-card rounded-2xl p-6 shadow-sm">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-indigo-600 text-xl">🚀</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-slate-800">Skills 启动台</h3>
+                                    <p class="text-sm text-slate-500">让高频操作变成可点击的按钮</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="bg-slate-50 p-4 rounded-xl">
+                                    <h4 class="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+                                        <span>📋</span> 可用 Skills
+                                    </h4>
+                                    <div class="space-y-2" id="skills-list">
+                                        <div class="skill-item p-3 rounded-xl cursor-pointer hover:bg-indigo-50 transition flex items-center gap-2" onclick="selectSkill('generate_docs')" data-skill="generate_docs">
+                                            <span class="text-xl">📄</span>
+                                            <div><div class="font-medium text-sm">生成文档</div><div class="text-xs text-slate-400">代码→Markdown</div></div>
+                                        </div>
+                                        <div class="skill-item p-3 rounded-xl cursor-pointer hover:bg-indigo-50 transition flex items-center gap-2" onclick="selectSkill('validate_spec')" data-skill="validate_spec">
+                                            <span class="text-xl">✓</span>
+                                            <div><div class="font-medium text-sm">规约验证</div><div class="text-xs text-slate-400">代码规范检查</div></div>
+                                        </div>
+                                        <div class="skill-item p-3 rounded-xl cursor-pointer hover:bg-indigo-50 transition flex items-center gap-2" onclick="selectSkill('generate_test')" data-skill="generate_test">
+                                            <span class="text-xl">🧪</span>
+                                            <div><div class="font-medium text-sm">生成测试</div><div class="text-xs text-slate-400">单元测试用例</div></div>
+                                        </div>
+                                        <div class="skill-item p-3 rounded-xl cursor-pointer hover:bg-indigo-50 transition flex items-center gap-2" onclick="selectSkill('analyze_impact')" data-skill="analyze_impact">
+                                            <span class="text-xl">🔍</span>
+                                            <div><div class="font-medium text-sm">影响分析</div><div class="text-xs text-slate-400">变更范围评估</div></div>
+                                        </div>
+                                        <div class="skill-item p-3 rounded-xl cursor-pointer hover:bg-indigo-50 transition flex items-center gap-2" onclick="selectSkill('extract_api')" data-skill="extract_api">
+                                            <span class="text-xl">🔗</span>
+                                            <div><div class="font-medium text-sm">API提取</div><div class="text-xs text-slate-400">文档自动生成</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-span-2">
+                                    <div class="bg-slate-50 p-4 rounded-xl">
+                                        <div id="skill-form-placeholder" class="text-center text-slate-400 py-12">
+                                            <div class="text-5xl mb-3">👈</div>
+                                            <div>选择一个Skill开始</div>
+                                        </div>
+                                        
+                                        <div id="skill-form-container" class="hidden">
+                                            <div class="flex items-center justify-between mb-4">
+                                                <h4 class="font-semibold flex items-center gap-2">
+                                                    <span id="skill-icon" class="text-2xl">📄</span>
+                                                    <span id="skill-title">生成文档</span>
+                                                </h4>
+                                                <button onclick="closeSkillForm()" class="text-slate-400 hover:text-slate-600 text-xl">×</button>
+                                            </div>
+                                            
+                                            <div id="form-generate_docs" class="skill-form hidden space-y-3">
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-1">源文件/目录</label>
+                                                    <input type="text" id="gen-source" placeholder="如: Src/i2c.c 或 Src/" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                </div>
+                                                <div class="grid grid-cols-2 gap-3">
+                                                    <div>
+                                                        <label class="block text-sm font-medium mb-1">输出格式</label>
+                                                        <select id="gen-format" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                            <option value="markdown">Markdown (.md)</option>
+                                                            <option value="html">HTML (.html)</option>
+                                                            <option value="doxygen">Doxygen 注释</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label class="block text-sm font-medium mb-1">文档模板</label>
+                                                        <select id="gen-template" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                            <option value="standard">标准模板</option>
+                                                            <option value="api">API参考模板</option>
+                                                            <option value="driver">驱动开发模板</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div id="form-validate_spec" class="skill-form hidden space-y-3">
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-1">目标文件/目录</label>
+                                                    <input type="text" id="val-target" placeholder="如: Src/ 或 docs/" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-1">规约类型</label>
+                                                    <select id="val-type" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                        <option value="all">全部规约</option>
+                                                        <option value="naming">命名规范</option>
+                                                        <option value="error">错误处理规范</option>
+                                                        <option value="comment">注释规范</option>
+                                                        <option value="style">代码风格</option>
+                                                    </select>
+                                                </div>
+                                                <div class="space-y-2">
+                                                    <label class="flex items-center gap-2 p-2 bg-white rounded-lg cursor-pointer hover:bg-blue-50">
+                                                        <input type="checkbox" id="val-auto-fix" class="rounded text-blue-500">
+                                                        <span class="text-sm">自动修复可检测问题</span>
+                                                    </label>
+                                                    <label class="flex items-center gap-2 p-2 bg-white rounded-lg cursor-pointer hover:bg-blue-50">
+                                                        <input type="checkbox" id="val-queue" class="rounded text-blue-500" checked>
+                                                        <span class="text-sm">加入收敛引擎验证队列</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div id="form-generate_test" class="skill-form hidden space-y-3">
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-1">源文件</label>
+                                                    <input type="text" id="test-source" placeholder="如: Src/sht40.c" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                </div>
+                                                <div class="grid grid-cols-2 gap-3">
+                                                    <div>
+                                                        <label class="block text-sm font-medium mb-1">测试类型</label>
+                                                        <select id="test-type" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                            <option value="unit">单元测试</option>
+                                                            <option value="integration">集成测试</option>
+                                                            <option value="mock">Mock测试</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label class="block text-sm font-medium mb-1">覆盖率目标</label>
+                                                        <div class="flex items-center gap-2 mt-1">
+                                                            <input type="range" id="test-coverage" min="50" max="100" value="80" class="flex-1" oninput="updateCoverageDisplay(this.value)">
+                                                            <span id="coverage-value" class="text-sm font-medium w-12 bg-white p-1 rounded text-center">80%</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div id="form-analyze_impact" class="skill-form hidden space-y-3">
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-1">变更文件</label>
+                                                    <input type="text" id="impact-file" placeholder="如: Src/i2c.c" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                </div>
+                                                <div class="grid grid-cols-2 gap-3">
+                                                    <div>
+                                                        <label class="block text-sm font-medium mb-1">分析深度</label>
+                                                        <select id="impact-depth" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                            <option value="shallow">浅层（直接依赖）</option>
+                                                            <option value="normal">标准（传递依赖）</option>
+                                                            <option value="deep">深度（全链路）</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="flex items-center">
+                                                        <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-blue-50">
+                                                            <input type="checkbox" id="impact-ci" class="rounded text-blue-500" checked>
+                                                            <span class="text-sm">触发CI测试</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div id="form-extract_api" class="skill-form hidden space-y-3">
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-1">源目录/文件</label>
+                                                    <input type="text" id="api-source" placeholder="如: Inc/" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-1">输出格式</label>
+                                                    <select id="api-format" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                        <option value="openapi">OpenAPI 3.0</option>
+                                                        <option value="swagger">Swagger 2.0</option>
+                                                        <option value="postman">Postman Collection</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <button onclick="executeSkill()" class="w-full mt-4 bg-blue-500 text-white py-3 rounded-xl hover:bg-blue-600 transition font-medium shadow-lg shadow-blue-500/30">
+                                                ▶ 执行 Skill
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="skill-result" class="hidden mt-4 bg-slate-50 p-4 rounded-xl">
+                                        <div class="flex items-center justify-between mb-3">
+                                            <h4 class="font-semibold flex items-center gap-2">
+                                                <span id="result-icon" class="text-xl">✅</span>
+                                                <span>执行结果</span>
+                                            </h4>
+                                            <button onclick="addToConvergence()" class="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full hover:bg-purple-200">
+                                                📤 加入验证队列
+                                            </button>
+                                        </div>
+                                        <div id="result-content" class="text-sm bg-white border border-slate-200 rounded-xl p-4 max-h-48 overflow-y-auto font-mono">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h4 class="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+                                    <span>📜</span> 最近执行
+                                </h4>
+                                <div id="skill-history" class="space-y-2">
+                                    <div class="text-sm text-slate-400 text-center py-4 bg-slate-50 rounded-xl">暂无执行记录</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'legacy-adapter': `
+                    <div class="space-y-6 content-panel">
+                        <div class="glass-card rounded-2xl p-6 shadow-sm">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-orange-600 text-xl">🏛️</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-slate-800">遗产项目适配器</h3>
+                                    <p class="text-sm text-slate-500">帮助老项目平滑迁移到 AI 友好生态</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 功能标签页 -->
+                            <div class="flex gap-2 mb-4 border-b border-slate-200 pb-2">
+                                <button onclick="switchLegacyTab('compile')" id="tab-compile" class="px-4 py-2 font-medium border-b-2 border-blue-500 text-blue-600 rounded-t-lg transition">
+                                    🔧 远程编译
+                                </button>
+                                <button onclick="switchLegacyTab('translate')" id="tab-translate" class="px-4 py-2 font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 transition">
+                                    📝 工程翻译
+                                </button>
+                                <button onclick="switchLegacyTab('defense')" id="tab-defense" class="px-4 py-2 font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 transition">
+                                    🛡️ 防御层模式
+                                </button>
+                            </div>
+                            
+                            <!-- 远程编译配置 -->
+                            <div id="panel-compile" class="legacy-panel">
+                                <div class="bg-slate-50 p-4 rounded-xl mb-4">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h4 class="font-semibold flex items-center gap-2">
+                                            <span>🖥️</span> SSH 连接配置
+                                        </h4>
+                                        <span id="ssh-status" class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">未连接</span>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label class="block text-sm font-medium mb-1">主机地址</label>
+                                            <input type="text" id="ssh-host" value="192.168.1.100" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-1">端口</label>
+                                            <input type="text" id="ssh-port" value="22" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-1">用户名</label>
+                                            <input type="text" id="ssh-user" value="developer" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-1">认证方式</label>
+                                            <select id="ssh-auth" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                <option value="password">密码</option>
+                                                <option value="key">SSH 密钥</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label class="block text-sm font-medium mb-1">Keil/IAR 安装路径</label>
+                                        <input type="text" id="ide-path" placeholder="如: C:\\\\Keil_v5\\\\UV4\\\\UV4.exe" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    
+                                    <div class="flex gap-2">
+                                        <button onclick="testSSHConnection()" class="flex-1 bg-blue-500 text-white py-2.5 rounded-xl hover:bg-blue-600 transition font-medium shadow-lg shadow-blue-500/30">
+                                            🔌 测试连接
+                                        </button>
+                                        <button onclick="saveSSHConfig()" class="flex-1 bg-green-500 text-white py-2.5 rounded-xl hover:bg-green-600 transition font-medium shadow-lg shadow-green-500/30">
+                                            💾 保存配置
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-slate-50 p-4 rounded-xl">
+                                    <h4 class="font-semibold mb-2 text-sm flex items-center gap-2">
+                                        <span>📋</span> 连接日志
+                                    </h4>
+                                    <div id="ssh-log" class="bg-slate-900 text-green-400 p-3 rounded-xl font-mono text-xs h-32 overflow-y-auto border border-slate-700">
+                                        <div class="text-slate-500">[等待连接测试...]</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 工程翻译向导 -->
+                            <div id="panel-translate" class="legacy-panel hidden">
+                                <div class="bg-slate-50 p-4 rounded-xl mb-4">
+                                    <h4 class="font-semibold mb-4 flex items-center gap-2">
+                                        <span>📂</span> 选择要翻译的工程
+                                    </h4>
+                                    
+                                    <div class="mb-4">
+                                        <label class="block text-sm font-medium mb-1">工程根目录</label>
+                                        <div class="flex gap-2">
+                                            <input type="text" id="proj-path" value="C:\\\\Projects\\\\Legacy\\\\STM32_Project" class="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            <button onclick="browseProject()" class="bg-slate-300 text-slate-700 px-4 py-2 rounded-lg hover:bg-slate-400 transition">
+                                                📁 浏览
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h5 class="font-medium text-sm mb-2">工程结构</h5>
+                                        <div class="bg-white border border-slate-200 rounded-xl p-3 text-sm">
+                                            <div class="text-slate-400">📁 STM32_Project/</div>
+                                            <div class="ml-4">
+                                                <div class="text-slate-600">📄 STM32F103.uvprojx</div>
+                                                <div class="text-slate-600">📁 Src/</div>
+                                                <div class="text-slate-600">📁 Inc/</div>
+                                                <div class="text-slate-600">📁 Drivers/</div>
+                                                <div class="text-slate-600">📄 README.txt</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h5 class="font-medium text-sm mb-2">翻译内容</h5>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center gap-2 p-3 bg-white rounded-xl cursor-pointer hover:bg-blue-50 transition">
+                                                <input type="checkbox" checked class="rounded text-blue-500">
+                                                <span class="text-sm">📊 生成目录结构文档</span>
+                                            </label>
+                                            <label class="flex items-center gap-2 p-3 bg-white rounded-xl cursor-pointer hover:bg-blue-50 transition">
+                                                <input type="checkbox" checked class="rounded text-blue-500">
+                                                <span class="text-sm">📝 分析模块依赖关系</span>
+                                            </label>
+                                            <label class="flex items-center gap-2 p-3 bg-white rounded-xl cursor-pointer hover:bg-blue-50 transition">
+                                                <input type="checkbox" class="rounded text-blue-500">
+                                                <span class="text-sm">🔍 标注缺失的注释</span>
+                                            </label>
+                                            <label class="flex items-center gap-2 p-3 bg-white rounded-xl cursor-pointer hover:bg-blue-50 transition">
+                                                <input type="checkbox" class="rounded text-blue-500">
+                                                <span class="text-sm">⚠️ 检测命名不规范</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <button onclick="startTranslation()" class="w-full bg-blue-500 text-white py-3 rounded-xl hover:bg-blue-600 transition font-medium shadow-lg shadow-blue-500/30">
+                                        🚀 开始翻译
+                                    </button>
+                                </div>
+                                
+                                <div id="translate-progress" class="hidden bg-green-50 p-4 rounded-xl">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="font-medium text-sm">翻译进度</span>
+                                        <span id="translate-percent" class="text-sm">0%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 rounded-full h-3 mb-3">
+                                        <div id="translate-bar" class="bg-green-500 h-3 rounded-full transition-all" style="width: 0%"></div>
+                                    </div>
+                                    <div id="translate-log" class="text-sm space-y-1"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- 防御层模式 -->
+                            <div id="panel-defense" class="legacy-panel hidden">
+                                <div class="bg-slate-50 p-4 rounded-xl">
+                                    <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                        <span>🛡️</span> 防御层模式配置
+                                    </h4>
+                                    <p class="text-sm text-slate-500 mb-4">
+                                        为老项目目录开启 AI 友好模式，自动过滤 IDE 生成文件、临时文件，专注核心代码。
+                                    </p>
+                                    
+                                    <div class="mb-4">
+                                        <label class="block text-sm font-medium mb-1">项目目录</label>
+                                        <input type="text" id="defense-path" value="C:\\\\Projects\\\\Legacy\\\\Old_Project" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h5 class="font-medium text-sm mb-2">过滤规则</h5>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center justify-between p-3 bg-white rounded-xl">
+                                                <span class="text-sm">IDE 项目文件</span>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" checked class="sr-only peer">
+                                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                                                </label>
+                                            </div>
+                                            <div class="flex items-center justify-between p-3 bg-white rounded-xl">
+                                                <span class="text-sm">编译输出 (.hex, .bin)</span>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" checked class="sr-only peer">
+                                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                                                </label>
+                                            </div>
+                                            <div class="flex items-center justify-between p-3 bg-white rounded-xl">
+                                                <span class="text-sm">临时文件和缓存</span>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" checked class="sr-only peer">
+                                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                                                </label>
+                                            </div>
+                                            <div class="flex items-center justify-between p-3 bg-white rounded-xl">
+                                                <span class="text-sm">第三方库源码</span>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" class="sr-only peer">
+                                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h5 class="font-medium text-sm mb-2">额外规则</h5>
+                                        <textarea id="defense-rules" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm h-24 focus:outline-none focus:ring-2 focus:ring-blue-500">*.uvoptx
+*.build.log
+_htmplesc/
+RTE/</textarea>
+                                    </div>
+                                    
+                                    <button onclick="enableDefenseMode()" class="w-full bg-purple-500 text-white py-3 rounded-xl hover:bg-purple-600 transition font-medium shadow-lg shadow-purple-500/30">
+                                        🛡️ 开启防御模式
+                                    </button>
+                                </div>
+                                
+                                <div id="defense-status" class="hidden mt-4 bg-purple-50 p-4 rounded-xl">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span class="text-3xl">🛡️</span>
+                                        <div class="flex-1">
+                                            <div class="font-medium">防御模式已开启</div>
+                                            <div class="text-sm text-slate-500" id="defense-path-display">-</div>
+                                        </div>
+                                        <button onclick="disableDefenseMode()" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600 transition">
+                                            关闭
+                                        </button>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-3 text-sm">
+                                        <div class="bg-white p-3 rounded-xl text-center">
+                                            <div class="font-bold text-lg" id="filtered-count">-</div>
+                                            <div class="text-slate-500">过滤后文件</div>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-xl text-center">
+                                            <div class="font-bold text-lg" id="total-count">-</div>
+                                            <div class="text-slate-500">原文件数</div>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-xl text-center">
+                                            <div class="font-bold text-lg text-purple-600" id="saved-tokens">-</div>
+                                            <div class="text-slate-500">节省Token</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            };
+            content.innerHTML = contents[currentModule] || '<p class="text-slate-400">模块内容加载中...</p>';
+        }
+        
+        const documentList = [
+            { id: 'agents', name: '知识库体征', path: 'docs/agents.md', status: 'healthy' },
+            { id: 'drivers_i2c', name: 'I2C驱动开发规范', path: 'docs/drivers/i2c_spec.md', status: 'healthy' },
+            { id: 'drivers_sht40', name: 'SHT40温湿度传感器', path: 'docs/drivers/sht40_driver.md', status: 'healthy' },
+            { id: 'modbus', name: 'Modbus RTU协议', path: 'docs/protocol/modbus_spec.md', status: 'healthy' },
+            { id: 'hardware', name: '硬件配置表', path: 'docs/hardware/hardware_config.md', status: 'subhealthy' },
+            { id: 'error_handling', name: '错误处理规范', path: 'docs/error_handling.md', status: 'warning' },
+            { id: 'testing', name: '单元测试指南', path: 'docs/testing_guide.md', status: 'danger' }
+        ];
+
+        function getStatusBadge(status) {
+            const badges = {
+                'healthy': '<span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">健康</span>',
+                'subhealthy': '<span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">亚健康</span>',
+                'warning': '<span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full text-xs">预警</span>',
+                'danger': '<span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">危险</span>'
+            };
+            return badges[status] || badges['healthy'];
+        }
+
+        function showDocumentList() {
+            const content = document.getElementById('main-content');
+            document.getElementById('current-module-title').textContent = '📚 文档列表';
+            
+            let html = '<div class="space-y-4">';
+            html += '<div class="glass-card rounded-2xl p-6 shadow-sm">';
+            html += '<h3 class="font-semibold text-slate-800 mb-4 flex items-center gap-2"><span>📚</span> 文档列表</h3>';
+            html += '<div class="space-y-3">';
+            documentList.forEach(doc => {
+                html += `
+                    <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">📄</div>
+                            <div>
+                                <div class="font-medium text-slate-800">${doc.name}</div>
+                                <div class="text-sm text-slate-400">${doc.path}</div>
+                            </div>
+                        </div>
+                        ${getStatusBadge(doc.status)}
+                    </div>
+                `;
+            });
+            html += '</div>';
+            html += `
+                <div class="mt-6 p-4 bg-blue-50 rounded-xl">
+                    <h4 class="font-semibold mb-2 flex items-center gap-2">
+                        <span>💡</span> 使用提示
+                    </h4>
+                    <ul class="text-sm space-y-1 text-slate-700">
+                        <li>• 文档放在 <code class="bg-slate-200 px-1 rounded">demo_project/docs/</code> 目录</li>
+                        <li>• 支持 Markdown 格式</li>
+                        <li>• 系统会自动分析文档健康度和引用关系</li>
+                        <li>• 引用文档时使用 <code class="bg-slate-200 px-1 rounded">@doc:xxx</code> 语法</li>
+                    </ul>
+                </div>
+            `;
+            html += '</div></div>';
+            content.innerHTML = html;
+        }
+
+        // 遗产项目适配器功能
+        function switchLegacyTab(tab) {
+            // 隐藏所有面板
+            document.querySelectorAll('.legacy-panel').forEach(p => p.classList.add('hidden'));
+            // 移除所有tab的激活样式
+            document.querySelectorAll('[id^="tab-"]').forEach(t => {
+                t.classList.remove('border-blue-500', 'text-blue-600');
+                t.classList.add('border-transparent', 'text-gray-500');
+            });
+            // 显示目标面板
+            document.getElementById('panel-' + tab).classList.remove('hidden');
+            // 激活tab样式
+            const activeTab = document.getElementById('tab-' + tab);
+            activeTab.classList.remove('border-transparent', 'text-gray-500');
+            activeTab.classList.add('border-blue-500', 'text-blue-600');
+        }
+
+        function addSSHLog(message, type = 'info') {
+            const log = document.getElementById('ssh-log');
+            if (!log) return;
+            const time = new Date().toLocaleTimeString();
+            const color = type === 'error' ? 'text-red-400' : type === 'success' ? 'text-green-400' : 'text-gray-400';
+            const div = document.createElement('div');
+            div.className = color;
+            div.textContent = `[${time}] ${message}`;
+            log.appendChild(div);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function testSSHConnection() {
+            const status = document.getElementById('ssh-status');
+            const host = document.getElementById('ssh-host').value;
+            const port = document.getElementById('ssh-port').value;
+            const user = document.getElementById('ssh-user').value;
+            
+            status.textContent = '连接中...';
+            status.className = 'px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs';
+            
+            addSSHLog(`正在连接 ${user}@${host}:${port}...`);
+            
+            setTimeout(() => {
+                // 模拟连接结果
+                const success = Math.random() > 0.3;
+                if (success) {
+                    status.textContent = '已连接';
+                    status.className = 'px-2 py-1 bg-green-100 text-green-700 rounded text-xs';
+                    addSSHLog('✓ 连接成功!', 'success');
+                    addSSHLog('检测到 Keil MDK v5.38 安装');
+                    addSSHLog('检测到 IAR EWARM v9.20 安装');
+                } else {
+                    status.textContent = '连接失败';
+                    status.className = 'px-2 py-1 bg-red-100 text-red-700 rounded text-xs';
+                    addSSHLog('✗ 连接失败: Connection refused', 'error');
+                    addSSHLog('请检查主机地址和端口设置');
+                }
+            }, 1500);
+        }
+
+        function saveSSHConfig() {
+            addSSHLog('配置已保存到 ~/.codebuddy/ssh_config.json');
+            alert('SSH配置已保存！');
+        }
+
+        function browseProject() {
+            const path = document.getElementById('proj-path');
+            path.value = 'C:\\Projects\\Legacy\\STM32_Project';
+            addSSHLog('已选择项目: STM32_Project');
+        }
+
+        function startTranslation() {
+            const progress = document.getElementById('translate-progress');
+            const bar = document.getElementById('translate-bar');
+            const percent = document.getElementById('translate-percent');
+            const log = document.getElementById('translate-log');
+            
+            progress.classList.remove('hidden');
+            log.innerHTML = '';
+            bar.style.width = '0%';
+            percent.textContent = '0%';
+            
+            const steps = [
+                { msg: '扫描工程目录...', time: 300 },
+                { msg: '解析 STM32F103.uvprojx...', time: 500 },
+                { msg: '分析 Src/ 目录 (12 个文件)', time: 400 },
+                { msg: '分析 Inc/ 目录 (8 个文件)', time: 350 },
+                { msg: '提取模块依赖关系...', time: 450 },
+                { msg: '生成目录结构文档...', time: 400 },
+                { msg: '检测代码质量问题...', time: 500 },
+                { msg: '✓ 翻译完成!', time: 100 }
+            ];
+            
+            let current = 0;
+            const interval = setInterval(() => {
+                if (current >= steps.length) {
+                    clearInterval(interval);
+                    return;
+                }
+                const step = steps[current];
+                log.innerHTML += `<div class="text-gray-600">${step.msg}</div>`;
+                current++;
+                const progressVal = Math.round((current / steps.length) * 100);
+                bar.style.width = progressVal + '%';
+                percent.textContent = progressVal + '%';
+            }, 400);
+        }
+
+        function enableDefenseMode() {
+            const path = document.getElementById('defense-path').value;
+            const status = document.getElementById('defense-status');
+            
+            // 模拟统计数据
+            const total = 127;
+            const filtered = 89;
+            const savedTokens = Math.round(filtered * 0.3); // 假设平均每个文件节省0.3k token
+            
+            document.getElementById('defense-path-display').textContent = path;
+            document.getElementById('filtered-count').textContent = filtered;
+            document.getElementById('total-count').textContent = total;
+            document.getElementById('saved-tokens').textContent = `~${savedTokens}K tokens`;
+            
+            status.classList.remove('hidden');
+            status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function disableDefenseMode() {
+            document.getElementById('defense-status').classList.add('hidden');
+        }
+
+        // 负日志演示功能
+        let logDemoInterval = null;
+        let posCount = 0;
+        let negCount = 0;
+        let expectCount = 0;
+
+        const positiveLogs = [
+            '[POSITIVE] I2C通信成功',
+            '[POSITIVE] 传感器数据读取: 25.3°C',
+            '[POSITIVE] Modbus响应: 寄存器0x01=OK',
+            '[POSITIVE] 看门狗心跳正常',
+            '[POSITIVE] 温度告警已清除'
+        ];
+
+        const negativeLogs = [
+            '[NEGATIVE] I2C超时: 设备无响应',
+            '[NEGATIVE] CRC校验失败',
+            '[NEGATIVE] 传感器读取错误',
+            '[NEGATIVE] Modbus从机无应答',
+            '[NEGATIVE] 内存分配失败'
+        ];
+
+        const expectLogs = [
+            'EXPECT_WITHIN: 传感器响应 < 100ms',
+            'EXPECT_WITHIN: Modbus轮询完成',
+            'EXPECT_WITHIN: 告警触发条件检测'
+        ];
+
+        function addLog(message, type) {
+            const logStream = document.getElementById('log-stream');
+            if (!logStream) return;
+            const time = new Date().toLocaleTimeString();
+            let color = 'text-green-400';
+            if (type === 'negative') color = 'text-red-400';
+            if (type === 'expect') color = 'text-yellow-400';
+            
+            const logDiv = document.createElement('div');
+            logDiv.className = `${color} mb-1`;
+            logDiv.textContent = `[${time}] ${message}`;
+            logStream.appendChild(logDiv);
+            logStream.scrollTop = logStream.scrollHeight;
+        }
+
+        function startLogDemo() {
+            if (logDemoInterval) return;
+            const btn = document.getElementById('log-demo-btn');
+            if (btn) {
+                btn.textContent = '⏸ 运行中...';
+                btn.classList.remove('bg-green-500');
+                btn.classList.add('bg-gray-500');
+            }
+            
+            logDemoInterval = setInterval(() => {
+                const rand = Math.random();
+                if (rand < 0.6) {
+                    addLog(positiveLogs[Math.floor(Math.random() * positiveLogs.length)], 'positive');
+                    posCount++;
+                } else if (rand < 0.85) {
+                    addLog(negativeLogs[Math.floor(Math.random() * negativeLogs.length)], 'negative');
+                    negCount++;
+                } else {
+                    addLog(expectLogs[Math.floor(Math.random() * expectLogs.length)], 'expect');
+                    expectCount++;
+                }
+                document.getElementById('pos-count').textContent = posCount;
+                document.getElementById('neg-count').textContent = negCount;
+                document.getElementById('expect-count').textContent = expectCount;
+            }, 1500);
+        }
+
+        function stopLogDemo() {
+            if (logDemoInterval) {
+                clearInterval(logDemoInterval);
+                logDemoInterval = null;
+            }
+            const btn = document.getElementById('log-demo-btn');
+            if (btn) {
+                btn.textContent = '▶ 重新演示';
+                btn.classList.remove('bg-gray-500');
+                btn.classList.add('bg-green-500');
+            }
+        }
+
+        function resetLogDemo() {
+            stopLogDemo();
+            posCount = 0;
+            negCount = 0;
+            expectCount = 0;
+            document.getElementById('pos-count').textContent = '0';
+            document.getElementById('neg-count').textContent = '0';
+            document.getElementById('expect-count').textContent = '0';
+            const logStream = document.getElementById('log-stream');
+            if (logStream) {
+                logStream.innerHTML = '<div class="text-gray-500">[已重置，点击"启动演示"开始...]</div>';
+            }
+        }
+
+        // 收敛引擎演示功能
+        let bugTasks = [];
+        let testTasks = [];
+        let convInterval = null;
+        let iterProgress = 0;
+        let taskDone = 0;
+        let taskFail = 0;
+
+        function updateTaskStats() {
+            const total = bugTasks.length + testTasks.length;
+            const pending = bugTasks.filter(t => t.status === 'pending').length + 
+                           testTasks.filter(t => t.status === 'pending').length;
+            document.getElementById('task-total').textContent = total;
+            document.getElementById('task-pending').textContent = pending;
+            document.getElementById('task-done').textContent = taskDone;
+            document.getElementById('task-fail').textContent = taskFail;
+        }
+
+        function renderBugQueue() {
+            const queue = document.getElementById('bug-queue');
+            if (!queue) return;
+            if (bugTasks.length === 0) {
+                queue.innerHTML = '<div class="text-gray-400">暂无Bug任务</div>';
+            } else {
+                queue.innerHTML = bugTasks.map((t, i) => `
+                    <div class="flex items-center gap-2 p-2 bg-white rounded ${t.status === 'done' ? 'opacity-50' : ''}">
+                        <span class="${t.status === 'done' ? 'text-green-500' : t.status === 'fail' ? 'text-red-500' : 'text-yellow-500'}">${t.status === 'done' ? '✓' : t.status === 'fail' ? '✗' : '⏳'}</span>
+                        <span class="flex-1 truncate">${t.title}</span>
+                        <button onclick="removeBug(${i})" class="text-red-500 hover:text-red-700">×</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function renderTestQueue() {
+            const queue = document.getElementById('test-queue');
+            if (!queue) return;
+            if (testTasks.length === 0) {
+                queue.innerHTML = '<div class="text-gray-400">暂无测试任务</div>';
+            } else {
+                queue.innerHTML = testTasks.map((t, i) => `
+                    <div class="flex items-center gap-2 p-2 bg-white rounded ${t.status === 'done' ? 'opacity-50' : ''}">
+                        <span class="${t.status === 'done' ? 'text-green-500' : t.status === 'fail' ? 'text-red-500' : 'text-yellow-500'}">${t.status === 'done' ? '✓' : t.status === 'fail' ? '✗' : '⏳'}</span>
+                        <span class="flex-1 truncate">${t.title}</span>
+                        <button onclick="removeTest(${i})" class="text-red-500 hover:text-red-700">×</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function addBugTask() {
+            const titles = ['I2C通信超时', '内存泄漏', '串口丢包', '看门狗失效', 'ADC采样不准'];
+            bugTasks.push({ title: titles[Math.floor(Math.random() * titles.length)], status: 'pending' });
+            renderBugQueue();
+            updateTaskStats();
+        }
+
+        function addTestTask() {
+            const titles = ['边界条件测试', '异常处理测试', '性能测试', '集成测试', '回归测试'];
+            testTasks.push({ title: titles[Math.floor(Math.random() * titles.length)], status: 'pending' });
+            renderTestQueue();
+            updateTaskStats();
+        }
+
+        function removeBug(index) {
+            bugTasks.splice(index, 1);
+            renderBugQueue();
+            updateTaskStats();
+        }
+
+        function removeTest(index) {
+            testTasks.splice(index, 1);
+            renderTestQueue();
+            updateTaskStats();
+        }
+
+        function startConvergence() {
+            if (convInterval) return;
+            const btn = document.getElementById('conv-btn');
+            if (btn) {
+                btn.textContent = '⏳ 收敛中...';
+                btn.classList.remove('bg-green-500');
+                btn.classList.add('bg-yellow-500');
+            }
+            iterProgress = 0;
+            taskDone = 0;
+            taskFail = 0;
+            
+            convInterval = setInterval(() => {
+                iterProgress += 5;
+                document.getElementById('iter-progress').textContent = iterProgress + '%';
+                document.getElementById('iter-bar').style.width = iterProgress + '%';
+                
+                // 随机完成任务
+                const pendingBugs = bugTasks.filter(t => t.status === 'pending');
+                const pendingTests = testTasks.filter(t => t.status === 'pending');
+                
+                if (pendingBugs.length > 0 && Math.random() > 0.5) {
+                    const idx = Math.floor(Math.random() * pendingBugs.length);
+                    const realIdx = bugTasks.indexOf(pendingBugs[idx]);
+                    bugTasks[realIdx].status = Math.random() > 0.2 ? 'done' : 'fail';
+                    if (bugTasks[realIdx].status === 'done') taskDone++; else taskFail++;
+                }
+                if (pendingTests.length > 0 && Math.random() > 0.5) {
+                    const idx = Math.floor(Math.random() * pendingTests.length);
+                    const realIdx = testTasks.indexOf(pendingTests[idx]);
+                    testTasks[realIdx].status = Math.random() > 0.15 ? 'done' : 'fail';
+                    if (testTasks[realIdx].status === 'done') taskDone++; else taskFail++;
+                }
+                
+                renderBugQueue();
+                renderTestQueue();
+                updateTaskStats();
+                
+                if (iterProgress >= 100) {
+                    clearInterval(convInterval);
+                    convInterval = null;
+                    if (btn) {
+                        btn.textContent = '✅ 收敛完成';
+                        btn.classList.remove('bg-yellow-500');
+                        btn.classList.add('bg-green-500');
+                    }
+                }
+            }, 500);
+        }
+
+        // 电路图导航器功能
+        let currentZoom = 1;
+        let selectedComponent = null;
+
+        const componentInfo = {
+            'MCU': { pins: '48', addr: '0x4002 2000', code: 'Src/main.c:12' },
+            'SENSOR': { pins: '4', addr: '0x44', code: 'Src/sht40.c:8' },
+            'I2C': { pins: '2', addr: '0x4000 5400', code: 'Src/i2c.c:5' },
+            'LED': { pins: '2', addr: 'N/A', code: 'Src/gpio.c:25' }
+        };
+
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom + 0.2, 2);
+            applyZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom - 0.2, 0.5);
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            const viewer = document.getElementById('schematic-viewer');
+            if (viewer) {
+                viewer.style.transform = `scale(${currentZoom})`;
+                document.getElementById('zoom-level').textContent = Math.round(currentZoom * 100) + '%';
+            }
+        }
+
+        function selectComponent(el, type) {
+            // 移除之前的选中状态
+            document.querySelectorAll('.circuit-component').forEach(c => {
+                c.classList.remove('ring-2', 'ring-blue-500');
+            });
+            el.classList.add('ring-2', 'ring-blue-500');
+            selectedComponent = type;
+            
+            const info = componentInfo[type] || {};
+            document.getElementById('component-name').textContent = type;
+            document.getElementById('component-pins').textContent = info.pins || '-';
+            document.getElementById('component-addr').textContent = info.addr || '-';
+            document.getElementById('component-code').textContent = info.code || '-';
+            document.getElementById('component-detail').classList.remove('hidden');
+        }
+
+        function jumpToCode() {
+            const info = componentInfo[selectedComponent];
+            if (info && info.code) {
+                alert(`跳转到: ${info.code}\n\n(实际会打开IDE并定位到对应代码行)`);
+            }
+        }
+
+        function runOCR() {
+            const result = document.getElementById('ocr-result');
+            result.innerHTML = '<span class="text-yellow-600">🔄 OCR识别中...</span>';
+            
+            setTimeout(() => {
+                const ocrData = [
+                    { ref: 'U1', desc: 'STM32F103C8T6', type: 'MCU' },
+                    { ref: 'U2', desc: 'SHT40', type: '温湿度传感器' },
+                    { ref: 'R1', desc: '10kΩ', type: '上拉电阻' },
+                    { ref: 'LED1', desc: '3mm 红色', type: '指示灯' }
+                ];
+                result.innerHTML = '<div class="space-y-1">' + 
+                    ocrData.map(item => `<div><span class="font-bold">${item.ref}</span>: ${item.desc} (${item.type})</div>`)
+                    .join('') + 
+                    '</div>';
+            }, 1500);
+        }
+
+        // 知识体征搜索功能
+        const factIndex = [
+            { keyword: 'I2C', facts: [
+                { text: 'I2C1_SCL → PB6', source: 'hardware_config.md' },
+                { text: 'I2C1_SDA → PB7', source: 'hardware_config.md' },
+                { text: 'SHT40 I2C地址 → 0x44', source: 'sht40_driver.md' }
+            ]},
+            { keyword: 'SHT40', facts: [
+                { text: 'SHT40 I2C地址 → 0x44', source: 'sht40_driver.md' },
+                { text: '温湿度寄存器地址 → 0x0001-0x0002', source: 'modbus_spec.md' }
+            ]},
+            { keyword: 'Modbus', facts: [
+                { text: '温湿度寄存器地址 → 0x0001-0x0002', source: 'modbus_spec.md' },
+                { text: 'RS485配置 → 9600bps, 8N1', source: 'modbus_spec.md' }
+            ]},
+            { keyword: '看门狗', facts: [
+                { text: '看门狗超时 → 3000ms', source: 'error_handling.md' }
+            ]},
+            { keyword: '引脚', facts: [
+                { text: 'I2C1_SCL → PB6', source: 'hardware_config.md' },
+                { text: 'I2C1_SDA → PB7', source: 'hardware_config.md' }
+            ]}
+        ];
+
+        function searchFact() {
+            const query = document.getElementById('fact-search').value.trim().toLowerCase();
+            const results = document.getElementById('search-results');
+            
+            if (!query) {
+                results.innerHTML = '<span class="text-gray-400">请输入搜索关键词...</span>';
+                return;
+            }
+            
+            const matchedFacts = [];
+            factIndex.forEach(item => {
+                if (item.keyword.toLowerCase().includes(query)) {
+                    matchedFacts.push(...item.facts);
+                }
+            });
+            
+            if (matchedFacts.length === 0) {
+                results.innerHTML = '<span class="text-gray-400">未找到匹配的事实索引...</span>';
+            } else {
+                results.innerHTML = '<div class="space-y-2">' + 
+                    matchedFacts.map(fact => `
+                        <div class="bg-blue-50 p-2 rounded">
+                            <div class="font-medium">${fact.text}</div>
+                            <div class="text-xs text-gray-500">来源: ${fact.source}</div>
+                        </div>
+                    `).join('') + 
+                    '</div>';
+            }
+        }
+
+        let alertMuted = false;
+        function toggleAlert() {
+            alertMuted = !alertMuted;
+            const btn = document.getElementById('alert-toggle-btn');
+            if (!btn) return;
+            if (alertMuted) {
+                btn.textContent = '🔕 预警已静音';
+                btn.classList.remove('bg-blue-500');
+                btn.classList.add('bg-gray-500');
+            } else {
+                btn.textContent = '🔔 3 条预警';
+                btn.classList.remove('bg-gray-500');
+                btn.classList.add('bg-blue-500');
+            }
+        }
+
+        // Skills Launcher 功能
+        let currentSkill = null;
+        let skillHistory = [];
+
+        const skillInfo = {
+            'generate_docs': { icon: '📄', title: '生成文档', outputFile: 'docs/generated_doc.md' },
+            'validate_spec': { icon: '✓', title: '规约验证', outputFile: 'validation_report.txt' },
+            'generate_test': { icon: '🧪', title: '生成测试', outputFile: 'Tests/generated_tests.c' },
+            'analyze_impact': { icon: '🔍', title: '影响分析', outputFile: 'impact_report.html' },
+            'extract_api': { icon: '🔗', title: 'API提取', outputFile: 'api_spec.yaml' }
+        };
+
+        function selectSkill(skillId) {
+            currentSkill = skillId;
+            
+            // 更新侧边栏选中状态
+            document.querySelectorAll('.skill-item').forEach(item => {
+                item.classList.remove('bg-blue-200', 'ring-2', 'ring-blue-400');
+                if (item.dataset.skill === skillId) {
+                    item.classList.add('bg-blue-200', 'ring-2', 'ring-blue-400');
+                }
+            });
+
+            // 显示表单
+            const placeholder = document.getElementById('skill-form-placeholder');
+            const container = document.getElementById('skill-form-container');
+            if (placeholder) placeholder.classList.add('hidden');
+            if (container) container.classList.remove('hidden');
+
+            // 设置表单标题
+            const info = skillInfo[skillId];
+            document.getElementById('skill-icon').textContent = info.icon;
+            document.getElementById('skill-title').textContent = info.title;
+
+            // 隐藏所有表单，显示当前
+            document.querySelectorAll('.skill-form').forEach(form => {
+                form.classList.add('hidden');
+            });
+            const targetForm = document.getElementById('form-' + skillId);
+            if (targetForm) targetForm.classList.remove('hidden');
+
+            // 隐藏结果区域
+            document.getElementById('skill-result').classList.add('hidden');
+        }
+
+        function closeSkillForm() {
+            currentSkill = null;
+            document.querySelectorAll('.skill-item').forEach(item => {
+                item.classList.remove('bg-blue-200', 'ring-2', 'ring-blue-400');
+            });
+            document.getElementById('skill-form-placeholder').classList.remove('hidden');
+            document.getElementById('skill-form-container').classList.add('hidden');
+            document.getElementById('skill-result').classList.add('hidden');
+        }
+
+        function updateCoverageDisplay(value) {
+            document.getElementById('coverage-value').textContent = value + '%';
+        }
+
+        function executeSkill() {
+            if (!currentSkill) return;
+
+            const resultDiv = document.getElementById('skill-result');
+            const resultContent = document.getElementById('result-content');
+            const resultIcon = document.getElementById('result-icon');
+
+            resultDiv.classList.remove('hidden');
+            resultIcon.textContent = '⏳';
+            resultContent.innerHTML = '<span class="text-yellow-600">正在执行 ' + skillInfo[currentSkill].title + '...</span>';
+
+            // 模拟执行
+            setTimeout(() => {
+                const outputs = {
+                    'generate_docs': [
+                        '> 分析源文件: Src/i2c.c',
+                        '> 提取函数签名和注释',
+                        '> 生成文档结构',
+                        '> 完成! 输出: docs/generated_doc.md',
+                        '',
+                        '# I2C驱动开发文档',
+                        '## 函数列表',
+                        '- i2c_init() - I2C初始化',
+                        '- i2c_read_reg() - 寄存器读取',
+                        '- i2c_read_with_retry() - 带重试读取'
+                    ],
+                    'validate_spec': [
+                        '> 扫描目录: Src/',
+                        '> 检查规约违反...',
+                        '',
+                        '⚠️ 发现 2 处违反:',
+                        '  - i2c.c:45 - 缺少错误日志',
+                        '  - i2c.c:78 - 超时时间过短',
+                        '',
+                        '✓ 规约检查完成 (2 警告)'
+                    ],
+                    'generate_test': [
+                        '> 分析源文件: Src/sht40.c',
+                        '> 生成单元测试用例...',
+                        '',
+                        '✓ 生成测试用例 12 个',
+                        '  - test_init_success',
+                        '  - test_init_timeout',
+                        '  - test_read_valid',
+                        '  - test_read_crc_error',
+                        '  ...',
+                        '> 输出: Tests/generated_tests.c'
+                    ],
+                    'analyze_impact': [
+                        '> 分析变更: Src/i2c.c',
+                        '> 追踪依赖关系...',
+                        '',
+                        '📊 影响分析结果:',
+                        '  直接依赖:',
+                        '    - Src/sht40_driver.c',
+                        '    - Inc/i2c.h',
+                        '  传递依赖:',
+                        '    - Src/main.c',
+                        '    - Inc/main.h',
+                        '',
+                        '⚠️ 建议运行回归测试'
+                    ],
+                    'extract_api': [
+                        '> 扫描目录: Inc/',
+                        '> 提取API定义...',
+                        '',
+                        '✓ 提取完成!',
+                        '  - HAL_I2C_Master_Transmit',
+                        '  - HAL_I2C_Master_Receive',
+                        '  - HAL_GPIO_Init',
+                        '  ...',
+                        '> 输出: api_spec.yaml (OpenAPI 3.0)'
+                    ]
+                };
+
+                resultIcon.textContent = '✅';
+                resultContent.innerHTML = outputs[currentSkill].map(line => 
+                    `<div>${line}</div>`
+                ).join('');
+
+                // 添加到历史记录
+                addToHistory(currentSkill);
+
+            }, 1500);
+        }
+
+        function addToHistory(skillId) {
+            const info = skillInfo[skillId];
+            const time = new Date().toLocaleTimeString();
+            
+            skillHistory.unshift({
+                skill: skillId,
+                title: info.title,
+                time: time,
+                icon: info.icon
+            });
+
+            // 只保留最近5条
+            if (skillHistory.length > 5) {
+                skillHistory.pop();
+            }
+
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('skill-history');
+            if (!container) return;
+
+            if (skillHistory.length === 0) {
+                container.innerHTML = '<div class="text-sm text-gray-400 text-center py-2">暂无执行记录</div>';
+                return;
+            }
+
+            container.innerHTML = skillHistory.map((item, idx) => `
+                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded hover:bg-gray-100">
+                    <span class="text-lg">${item.icon}</span>
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">${item.title}</div>
+                        <div class="text-xs text-gray-500">${item.time}</div>
+                    </div>
+                    <button onclick="rerunSkill('${item.skill}')" class="text-xs text-blue-500 hover:text-blue-700">
+                        重新执行
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function rerunSkill(skillId) {
+            selectSkill(skillId);
+            executeSkill();
+        }
+
+        function addToConvergence() {
+            if (!currentSkill) return;
+
+            const info = skillInfo[currentSkill];
+            
+            // 根据skill类型添加到对应的收敛引擎队列
+            if (currentSkill === 'validate_spec') {
+                const target = document.getElementById('val-target')?.value || 'Src/';
+                testTasks.push({ title: `规约验证: ${target}`, status: 'pending' });
+                renderTestQueue();
+                updateTaskStats();
+            } else if (currentSkill === 'generate_test') {
+                const source = document.getElementById('test-source')?.value || 'unknown.c';
+                testTasks.push({ title: `生成测试: ${source}`, status: 'pending' });
+                renderTestQueue();
+                updateTaskStats();
+            }
+
+            // 显示提示
+            const resultContent = document.getElementById('result-content');
+            resultContent.innerHTML += '<div class="mt-3 p-2 bg-purple-100 rounded text-purple-700 text-sm">📤 已加入收敛引擎验证队列</div>';
+        }
+
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadModuleContent('law-manager');
+        });
+    </script>
+</body>
+</html>

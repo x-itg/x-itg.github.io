@@ -1,0 +1,50 @@
+# IDE AI Engineering Tools Configuration
+
+project:
+  root: ./workspace
+  agents_md: docs/agents.md
+  decision_ledger: docs/.decision_ledger/
+  specs_dir: docs/specs/
+  history_dir: docs/history/
+  skills_dir: .skills/
+
+serial:
+  port: COM3
+  baudrate: 115200
+  timeout: 1
+
+remote_build:
+  enabled: false
+  host: ""
+  user: ""
+  password: ""
+  keil_path: "C:/Keil_v5/UV4/UV4.exe"
+  project_ext: .uvprojx
+
+convergence:
+  max_iterations: 10
+  convergence_threshold: 0.95
+  test_timeout: 300
+  build_timeout: 180
+
+knowledge_vitals:
+  health_thresholds:
+    healthy: 0.8
+    warning: 0.5
+    danger: 0.3
+  cold_document_days: 180
+  check_interval: 3600
+
+schematic:
+  pdf_storage: docs/schematics/
+  ocr_cache: .cache/ocr/
+  code_refs: .code_refs.json
+
+server:
+  host: 127.0.0.1
+  port: 8765
+  debug: false
+
+logging:
+  level: INFO
+  file: logs/ide_plugins.log

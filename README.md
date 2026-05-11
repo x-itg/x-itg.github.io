@@ -117,6 +117,73 @@
 
 ---
 
+## 🖥️ IDE 插件演示
+
+本体系配套提供了一套完整的 **IDE AI 工程工具** Web 演示系统，真实模拟了与 VSCode 等主流 IDE 集成的工具界面。
+
+### 在线演示
+
+👉 **立即体验**：[IDE AI Engineering Tools](https://x-itg.github.io/ide_plugins/web/index.html)
+
+### 演示工具一览
+
+| 工具模块 | 功能描述 |
+|---------|---------|
+| 📜 **法则管理器** | 管理项目规约网络，定义 AI 执行边界 |
+| 📊 **负日志监控器** | 实时监控期望事件与实际事件的分歧 |
+| 🎯 **收敛引擎** | 追踪 Bug 修复与测试增强的收敛进度 |
+| 🔧 **电路图导航器** | PCB 原理图与代码行的双向跳转 |
+| 📈 **知识体征仪表盘** | 知识库热力分布与健康度监控 |
+| 🚀 **Skills 启动台** | 一键启动高频嵌入式开发任务 |
+| 遗 **遗产项目适配器** | Keil/IAR 老项目的渐进式迁移 |
+
+### 配套示例项目
+
+演示系统配合一个完整的 **嵌入式温湿度监控系统** 示例项目：
+
+```
+ide_plugins/
+├── web/
+│   └── index.html          # IDE 工具演示界面
+└── demo_project/
+    ├── docs/                # 知识文档（含 I2C 驱动规范）
+    ├── hardware/            # 硬件配置
+    ├── src/                 # 源代码
+    ├── tests/               # 测试文件
+    ├── README.md            # 项目说明
+    └── run_demo.py          # 演示运行脚本
+```
+
+#### 项目硬件配置
+
+- **MCU**: STM32F407VG
+- **传感器**: SHT40 (I2C 接口)
+- **通信**: RS485 (Modbus RTU)
+- **显示**: 0.96" OLED (SPI 接口)
+
+#### 文档示例
+
+示例项目中的 `docs/drivers/i2c_spec.md` 展示了如何编写符合本方法论的驱动开发规范：
+
+```c
+// 标准 I2C 初始化流程
+void i2c_init(I2C_TypeDef* instance, uint32_t clock_speed) {
+    // 1. 使能时钟
+    __HAL_RCC_I2C1_CLK_ENABLE();
+    // 2. 配置 GPIO
+    // 3. 初始化 I2C
+    HAL_I2C_Init(&hi2c);
+}
+
+// 带重试机制的错误处理
+#define I2C_MAX_RETRIES 3
+HAL_StatusTypeDef i2c_read_with_retry(uint16_t addr, uint16_t reg, uint8_t* data, uint16_t len);
+```
+
+---
+
+---
+
 ## 🙋 关于作者
 
 **itg**，一位擅长用 AI 构建复杂工程体系的嵌入式实践者。
