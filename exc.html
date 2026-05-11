@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>规格-实现共生演化机制 | 嵌入式AI工程化的知识一致性生存之道</title>
+<title>知识的生命体征 | 为AI编程工程化立宪</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
     :root {
@@ -117,11 +117,24 @@
         margin: 36px 0 12px;
         color: #1a1a2e;
     }
+    h4 {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 24px 0 10px;
+        color: #1a1a2e;
+    }
     p {
         margin: 14px 0;
     }
     strong {
         color: #1a1a2e;
+    }
+    ul, ol {
+        margin: 14px 0;
+        padding-left: 24px;
+    }
+    li {
+        margin: 6px 0;
     }
 
     /* 卡片 */
@@ -140,6 +153,10 @@
         background: #fffdf7;
         border-color: #f0e5c0;
     }
+    .card.tip {
+        background: #f0f7ff;
+        border-color: #b3d4fc;
+    }
 
     /* 高亮段落 */
     .insight-box {
@@ -155,48 +172,31 @@
         color: #4a340f;
     }
 
-    /* 三个环节的卡片 */
-    .phase-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        margin: 28px 0;
+    /* 表格 */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+        font-size: 14px;
     }
-    .phase-card {
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 26px 28px;
-        box-shadow: var(--shadow-sm);
-        position: relative;
+    th, td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
     }
-    .phase-card .phase-number {
-        position: absolute;
-        top: -14px;
-        left: 24px;
-        background: #1a1a2e;
-        color: #fff;
+    th {
+        font-weight: 700;
+        background: #f5f7fa;
+        color: #4a5568;
         font-size: 12px;
-        font-weight: 700;
-        padding: 3px 12px;
-        border-radius: 20px;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
     }
-    .phase-card h3 {
-        margin-top: 8px;
-        font-size: 18px;
-        font-weight: 700;
+    td {
+        vertical-align: top;
     }
-    .phase-card .mechanism-label {
-        display: inline-block;
-        background: var(--tag-bg);
-        color: var(--tag-text);
-        font-size: 11px;
-        font-weight: 600;
-        padding: 3px 8px;
-        border-radius: 3px;
-        margin-bottom: 10px;
-        letter-spacing: 0.4px;
+    tr:hover {
+        background: #fafbfc;
     }
 
     /* 代码块 */
@@ -241,76 +241,6 @@
         font-size: 12px;
     }
 
-    /* 决策报告块 */
-    .report-block {
-        background: #fafcfd;
-        border: 1px solid #d0dbe6;
-        border-radius: var(--radius);
-        padding: 20px 22px;
-        margin: 20px 0;
-        font-size: 14px;
-        line-height: 1.7;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
-    }
-    .report-block .report-label {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #8896a4;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-    .report-block .choice {
-        display: inline-block;
-        font-weight: 700;
-        padding: 2px 8px;
-        border-radius: 3px;
-        margin: 0 2px;
-    }
-    .choice-a {
-        background: #e8f5e9;
-        color: #2e7d32;
-    }
-    .choice-b {
-        background: #fce4ec;
-        color: #c62828;
-    }
-    .choice-c {
-        background: #e3f2fd;
-        color: #1565c0;
-    }
-
-    /* 五层映射表 */
-    .mapping-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 24px 0;
-        font-size: 14px;
-    }
-    .mapping-table th,
-    .mapping-table td {
-        padding: 12px 16px;
-        text-align: left;
-        border-bottom: 1px solid var(--border);
-    }
-    .mapping-table th {
-        font-weight: 700;
-        background: #f5f7fa;
-        color: #4a5568;
-        font-size: 12px;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-    }
-    .mapping-table .layer-tag {
-        display: inline-block;
-        background: #1a1a2e;
-        color: #fff;
-        font-size: 11px;
-        padding: 2px 8px;
-        border-radius: 3px;
-        font-weight: 600;
-    }
-
     /* SVG 图表容器 */
     .figure {
         margin: 32px 0;
@@ -342,6 +272,13 @@
         color: #8896a4;
         line-height: 1.6;
     }
+    .footnote-section a {
+        color: var(--link);
+        text-decoration: none;
+    }
+    .footnote-section a:hover {
+        text-decoration: underline;
+    }
 
     /* 响应式 */
     @media (max-width: 640px) {
@@ -362,136 +299,282 @@
             padding: 14px 16px;
             font-size: 12px;
         }
+        table {
+            font-size: 12px;
+        }
+        th, td {
+            padding: 8px 10px;
+        }
     }
 
-        /* ===== 统一文章导航系统（侧边栏布局） ===== */
+    /* ===== 统一文章导航系统（侧边栏布局） ===== */
+    .layout {
+        display: flex;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        gap: 2rem;
+    }
+    .sidebar {
+        width: 260px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 1.5rem;
+        align-self: start;
+        background: #ffffff;
+        border-radius: 1.2rem;
+        border: 1px solid #eef2f8;
+        padding: 1.2rem 0;
+    }
+    .sidebar nav ul {
+        list-style: none;
+        padding: 0 0.5rem;
+    }
+    .sidebar nav li {
+        margin: 0.25rem 0;
+    }
+    .sidebar nav a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: #2c5f8a;
+        text-decoration: none;
+        border-radius: 0.6rem;
+        font-size: 0.9rem;
+        transition: 0.2s;
+    }
+    .sidebar nav a:hover {
+        background: #eef3ff;
+        color: #1e40af;
+    }
+    .sidebar nav a i {
+        width: 1.5rem;
+        color: #5b8ec9;
+    }
+    .main-content {
+        flex: 1;
+        min-width: 0;
+    }
+    .article-series {
+        padding-bottom: 0.6rem;
+        margin-bottom: 0.4rem;
+        border-bottom: 1px solid #eef2f8;
+    }
+    .article-series h3 {
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 0 1.2rem 0.6rem;
+        color: #1e3a8a;
+    }
+    .article-link {
+        display: flex !important;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.45rem 0.8rem !important;
+    }
+    .article-link .article-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: #eef3ff;
+        border-radius: 50%;
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #1e3a8a;
+        flex-shrink: 0;
+    }
+    .article-link.active .article-num {
+        background: #1e3a8a;
+        color: #fff;
+    }
+    .article-link .article-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.05rem;
+        min-width: 0;
+    }
+    .article-link .article-title {
+        font-weight: 600;
+        font-size: 0.88rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .article-link .article-desc {
+        font-size: 0.68rem;
+        color: #6b8dad;
+        font-weight: 400;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .article-link.active {
+        background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
+        color: #ffffff !important;
+    }
+    .article-link.active .article-desc {
+        color: rgba(255,255,255,0.7) !important;
+    }
+    .section-nav {
+        padding-top: 0.2rem;
+    }
+    .section-nav h3 {
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 0 1.2rem 0.6rem;
+        color: #1e3a8a;
+    }
+    @media (max-width: 780px) {
         .layout {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.5rem 1rem;
-            gap: 2rem;
+            flex-direction: column;
         }
         .sidebar {
-            width: 260px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 1.5rem;
-            align-self: start;
-            background: #ffffff;
-            border-radius: 1.2rem;
-            border: 1px solid #eef2f8;
-            padding: 1.2rem 0;
+            width: 100%;
+            position: static;
         }
-        .sidebar nav ul {
-            list-style: none;
-            padding: 0 0.5rem;
+    }
+
+    /* YAML 代码块样式 */
+    pre.yaml {
+        font-size: 12px;
+    }
+
+    /* 状态标签 */
+    .status-tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-size: 11px;
+        font-weight: 600;
+    }
+    .status-tag.healthy {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+    .status-tag.warning {
+        background: #fff3e0;
+        color: #e65100;
+    }
+    .status-tag.danger {
+        background: #ffebee;
+        color: #c62828;
+    }
+
+    /* 四象限图示 */
+    .quadrant-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 24px 0;
+    }
+    .quadrant {
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+    }
+    .quadrant h4 {
+        margin-top: 0;
+        font-size: 14px;
+    }
+    .quadrant.high-risk {
+        background: #fff5f5;
+        border-color: #feb2b2;
+    }
+    .quadrant.core-asset {
+        background: #f0fff4;
+        border-color: #9ae6b4;
+    }
+    .quadrant.sentinel {
+        background: #ebf8ff;
+        border-color: #90cdf4;
+    }
+    .quadrant.legacy {
+        background: #faf5ff;
+        border-color: #d6bcfa;
+    }
+
+    /* 流程列表 */
+    .flow-list {
+        counter-reset: flow-step;
+        list-style: none;
+        padding-left: 0;
+    }
+    .flow-list li {
+        counter-increment: flow-step;
+        position: relative;
+        padding-left: 40px;
+        margin: 16px 0;
+    }
+    .flow-list li::before {
+        content: counter(flow-step);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 28px;
+        height: 28px;
+        background: #1e3a8a;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    /* 健康度进度条 */
+    .health-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 8px 0;
+    }
+    .health-bar-track {
+        flex: 1;
+        height: 8px;
+        background: #e2e8f0;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .health-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+    }
+    .health-bar-fill.high {
+        background: #22c55e;
+    }
+    .health-bar-fill.medium {
+        background: #f59e0b;
+    }
+    .health-bar-fill.low {
+        background: #ef4444;
+    }
+
+    /* 优势卡片 */
+    .advantage-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin: 24px 0;
+    }
+    @media (max-width: 600px) {
+        .advantage-grid {
+            grid-template-columns: 1fr;
         }
-        .sidebar nav li {
-            margin: 0.25rem 0;
-        }
-        .sidebar nav a {
-            display: block;
-            padding: 0.5rem 1rem;
-            color: #2c5f8a;
-            text-decoration: none;
-            border-radius: 0.6rem;
-            font-size: 0.9rem;
-            transition: 0.2s;
-        }
-        .sidebar nav a:hover {
-            background: #eef3ff;
-            color: #1e40af;
-        }
-        .sidebar nav a i {
-            width: 1.5rem;
-            color: #5b8ec9;
-        }
-        .main-content {
-            flex: 1;
-            min-width: 0;
-        }
-        .article-series {
-            padding-bottom: 0.6rem;
-            margin-bottom: 0.4rem;
-            border-bottom: 1px solid #eef2f8;
-        }
-        .article-series h3 {
-            font-size: 0.82rem;
-            font-weight: 600;
-            padding: 0 1.2rem 0.6rem;
-            color: #1e3a8a;
-        }
-        .article-link {
-            display: flex !important;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.45rem 0.8rem !important;
-        }
-        .article-link .article-num {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 1.5rem;
-            height: 1.5rem;
-            background: #eef3ff;
-            border-radius: 50%;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: #1e3a8a;
-            flex-shrink: 0;
-        }
-        .article-link.active .article-num {
-            background: #1e3a8a;
-            color: #fff;
-        }
-        .article-link .article-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.05rem;
-            min-width: 0;
-        }
-        .article-link .article-title {
-            font-weight: 600;
-            font-size: 0.88rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .article-link .article-desc {
-            font-size: 0.68rem;
-            color: #6b8dad;
-            font-weight: 400;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .article-link.active {
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
-            color: #ffffff !important;
-        }
-        .article-link.active .article-desc {
-            color: rgba(255,255,255,0.7) !important;
-        }
-        .section-nav {
-            padding-top: 0.2rem;
-        }
-        .section-nav h3 {
-            font-size: 0.82rem;
-            font-weight: 600;
-            padding: 0 1.2rem 0.6rem;
-            color: #1e3a8a;
-        }
-        @media (max-width: 780px) {
-            .layout {
-                flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
-                position: static;
-            }
-        }
-    </style>
+    }
+    .advantage-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+    }
+    .advantage-card h4 {
+        margin-top: 0;
+        color: #1e3a8a;
+        font-size: 15px;
+    }
+</style>
 </head>
 <body>
 <div class="layout">
@@ -531,8 +614,8 @@
                     <li><a href="exc.html" class="article-link active">
                         <span class="article-num">5</span>
                         <span class="article-info">
-                            <span class="article-title">共生演化</span>
-                            <span class="article-desc">规格-实现知识一致性</span>
+                            <span class="article-title">知识的生命体征</span>
+                            <span class="article-desc">知识资产生命周期管理</span>
                         </span>
                     </a></li>
                     <li><a href="history.html" class="article-link">
@@ -556,10 +639,13 @@
             <h3><i class="fas fa-list"></i> 本章导览</h3>
             <nav>
                 <ul>
-                    <li><a href="#problem"><i class="fas fa-exclamation-triangle"></i> 生存性问题</a></li>
-                    <li><a href="#phases"><i class="fas fa-sync-alt"></i> 三个核心环节</a></li>
-                    <li><a href="#framework"><i class="fas fa-layer-group"></i> 五层定位</a></li>
-                    <li><a href="#conclusion"><i class="fas fa-flag-checkered"></i> 总结</a></li>
+                    <li><a href="#abstract"><i class="fas fa-file-alt"></i> 摘要</a></li>
+                    <li><a href="#problem"><i class="fas fa-exclamation-triangle"></i> 知识腐烂危机</a></li>
+                    <li><a href="#philosophy"><i class="fas fa-heartbeat"></i> 三重生命体征</a></li>
+                    <li><a href="#infrastructure"><i class="fas fa-database"></i> 基础设施</a></li>
+                    <li><a href="#wake"><i class="fas fa-bell"></i> 唤醒关键词</a></li>
+                    <li><a href="#monitor"><i class="fas fa-chart-line"></i> 中央监视器</a></li>
+                    <li><a href="#summary"><i class="fas fa-flag-checkered"></i> 总结</a></li>
                 </ul>
             </nav>
         </div>
@@ -569,288 +655,666 @@
 
         <!-- 文章头部 -->
         <header class="article-header">
-            <span class="series-tag">五层进化 · 深度扩展</span>
-            <h1>规格-实现共生演化机制</h1>
-            <p class="subtitle">当<code>agents.md</code>与代码彼此背离时，AI不应盲从任何一方。<br>它应成为那个持续追踪分歧、展示后果、然后恭敬地请求人的智慧来做最终选择的忠诚管家。</p>
-            <p class="meta">itg · 嵌入式AI工程化系列 · 知识一致性生存之道</p>
+            <span class="series-tag">知识资产 · 主动协作</span>
+            <h1>知识的生命体征：为AI编程工程化立宪</h1>
+            <p class="subtitle">一套具备共生演化能力的知识资产生命周期管理体系</p>
+            <p class="meta">itg · 嵌入式AI工程化系列 · 知识资产主动协作之道</p>
         </header>
 
-        <!-- 问题定义 -->
+        <!-- 摘要 -->
         <section>
-            <h2 id="problem">一、一个被忽视的生存性问题</h2>
+            <h2 id="abstract">摘要</h2>
 
-            <p>在嵌入式AI工程化的实践中，我们投入巨大精力构建了两个信息世界：</p>
-            <ul style="margin-left:20px;margin-top:8px;">
-                <li><strong>规约世界</strong>——<code>agents.md</code>、需求文档、设计规约，它们表述系统“<em>应该如何</em>”。</li>
-                <li><strong>实现世界</strong>——固件代码、硬件配置、运行时行为，它们呈现系统“<em>实际如何</em>”。</li>
-            </ul>
+            <p>当嵌入式项目从几十个文件膨胀到上百份文档，AI编程Agent面临一个根本性难题：它不知道哪份规约已经腐朽，哪份设计说明正在发烫，哪份历史报告应该在特定错误出现时被唤醒。传统的知识管理是静态的——文档被创建、被修改、被遗忘，却从未拥有过"生命体征"。</p>
+
+            <p>我们提出了一套完整的知识文档生命周期管理体系。它由三个核心机制构成：<strong>热力分布图</strong>追踪文档的活跃程度，<strong>健康度分析</strong>评估文档的可靠程度，<strong>唤醒关键词</strong>实现事件驱动的主动激活。三者协同，让知识资产从被动存储进化为主动协作。</p>
 
             <div class="card accent-left">
-                <p style="margin-top:0;"><strong>核心矛盾：</strong>在长达数月甚至数年的迭代中，这两个世界之间必然出现一种<strong>缓慢、无痛但致命的漂移</strong>。它不是一次激烈的冲突，而是一系列微小妥协的累积——一个为了赶工期而绕过的规约、一段为了修复现场Bug而临时插入却从未被文档化的补丁、一条因为芯片换型而不再适用但无人记得更新的设计准则。</p>
+                <p style="margin-top:0;"><strong>无缝兼容性：</strong>它以通用Markdown和YAML文件为载体，零工具锁定，可直接增强任何现有AI编程Agent的"读取-检索-执行"核心流程。它不是替代现有工具，而是为它们装上一套标准化、可量化的知识质量仪表盘。</p>
             </div>
 
-            <p>当漂移积累到一定程度，整个AI工程化体系将建立在越来越虚假的“意图”之上。AI会对着过时的<code>agents.md</code>虔诚地优化代码；或者反过来，代码里沉淀了无数未被言说的现场智慧，却被AI当作“违背规约”的脏东西清洗掉。</p>
+            <p>更进一步，我们将<strong>共生演化</strong>的思想注入知识管理：知识文档不仅是资产，更是与代码、规约共同进化的生命体。通过决策账本记录每一次知识冲突与裁决，通过漂移感知检测文档与现实的偏离，通过闭环反馈实现知识的自我修复。知识与代码、规约一同呼吸，一同演进，一同趋于收敛。</p>
 
             <div class="insight-box">
-                <strong>这不是一个技术问题，而是一个知识一致性的生存问题。</strong>在五层进化的L4自动化与L5自治阶段，如果AI无法感知并妥善处理这种漂移，那么整个闭环最终会崩塌于自身的知识债务。
-            </div>
-
-            <p>因此，我们需要一个专门的子系统。我将其命名为：<strong>规格-实现共生演化机制（Spec-Implementation Co-evolution）</strong>。</p>
-
-            <p>它的核心哲学是：<strong>不强迫一方服从另一方，而是让二者像两条缠绕上升的螺旋，在持续对话中共同演化。</strong></p>
-        </section>
-
-        <!-- SVG: 漂移示意 -->
-        <figure class="figure">
-            <svg viewBox="0 0 680 200" width="100%" style="max-width:680px;">
-                <defs>
-                    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                        <polygon points="0 0, 8 3, 0 6" fill="#8896a4" />
-                    </marker>
-                </defs>
-                <!-- 时间轴 -->
-                <line x1="40" y1="170" x2="640" y2="170" stroke="#d0dbe6" stroke-width="2" />
-                <text x="40" y="195" font-size="12" fill="#8896a4">t₀ 项目启动</text>
-                <text x="540" y="195" font-size="12" fill="#8896a4">tₙ 当前</text>
-                <!-- 规约线 -->
-                <path d="M40 100 Q180 95 280 105 Q380 115 480 108 Q580 100 640 105" fill="none" stroke="#2980b9" stroke-width="2.5" stroke-dasharray="8 4" />
-                <text x="550" y="90" font-size="13" fill="#2980b9" font-weight="600">规约世界 (agents.md)</text>
-                <!-- 实现线 -->
-                <path d="M40 130 Q150 140 250 120 Q350 90 430 125 Q520 155 640 135" fill="none" stroke="#c0392b" stroke-width="2.5" />
-                <text x="550" y="150" font-size="13" fill="#c0392b" font-weight="600">实现世界 (固件代码)</text>
-                <!-- 漂移高亮 -->
-                <ellipse cx="520" cy="120" rx="35" ry="22" fill="rgba(231,76,60,0.12)" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4 3" />
-                <text x="520" y="75" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="700">⚠ 漂移区</text>
-            </svg>
-            <p class="caption">图1：规约与实现在时间轴上的漂移示意——初始紧密对齐，随时间推移逐渐分离。</p>
-        </figure>
-
-        <!-- 三个核心环节 -->
-        <section>
-            <h2 id="phases">二、三个核心环节</h2>
-            <p>整个机制由三个环环相扣的环节组成，可直接嵌入现有的CI流程与本地工具链。</p>
-
-            <div class="phase-grid">
-
-                <!-- 环节一：漂移感知 -->
-                <div class="phase-card">
-                    <span class="phase-number">环节 1</span>
-                    <span class="mechanism-label">检测机制</span>
-                    <h3>漂移感知：让Agent建立对“分歧”的第六感</h3>
-                    <p>在CI pipeline或本地watchdog中植入一个<strong>Spec-Drift Sniffer</strong>。它不运行测试，而是专注于一件事：<strong>将规约文件与代码之间建立语义关联，并持续计算差异向量</strong>。</p>
-
-                    <p>其工作流程如下：</p>
-                    <ol style="margin-left:20px;">
-                        <li><strong>提取规约断言</strong>：让AI解析<code>agents.md</code>，抽取所有断言性质的规约（如“中断函数中严禁调用HAL_Delay”、“所有SPI传输必须使用DMA”、“电源管理模块必须在进入停机模式前完成ADC校准数据保存”）。每条规约被赋予一个唯一ID。</li>
-                        <li><strong>扫描代码证据</strong>：AI扫描代码本体，为每条规约寻找对应的“证明相符”或“疑似违背”的代码证据，记录文件路径、行号和匹配置信度。</li>
-                        <li><strong>分类分歧类型</strong>：
-                            <ul style="margin-left:16px;">
-                                <li><strong>幽灵规约</strong>：规约中存在，但代码中完全找不到对应证据——规约可能已过时。</li>
-                                <li><strong>潜规则</strong>：代码中存在的重要模式，规约中完全没有提及——这是沉淀在代码中的“暗知识”，可能比规约更接近现实。</li>
-                            </ul>
-                        </li>
-                    </ol>
-
-                    <p>每次提交触发一次嗅探，生成一个<strong>漂移热力矩阵</strong>：行是规约条目，列是代码模块，颜色深浅表示漂移程度。这张图本身就是给开发者和AI共同的预警信号。</p>
-
-                    <!-- 伪代码 -->
-                    <pre><span class="comment">// Spec-Drift Sniffer 核心逻辑（简化）</span>
-<span class="keyword">typedef</span> <span class="keyword">struct</span> {
-    <span class="type">char</span>        spec_id[48];       <span class="comment">// 规约唯一ID</span>
-    <span class="type">char</span>        spec_text[256];    <span class="comment">// 规约原文摘要</span>
-    <span class="type">char</span>        code_evidence[256];<span class="comment">// 匹配到的代码证据</span>
-    <span class="type">float</span>       confidence;        <span class="comment">// 匹配置信度 0.0~1.0</span>
-    <span class="type">drift_type_t</span> type;             <span class="comment">// SPEC_GHOST | CODE_LATENT | ALIGNED</span>
-} <span class="type">drift_record_t</span>;
-
-<span class="comment">// 每次CI触发时运行</span>
-<span class="type">void</span> <span class="func">sniff_drift</span>(<span class="keyword">const</span> <span class="type">char</span>* agents_md_path,
-                  <span class="keyword">const</span> <span class="type">char</span>* codebase_path,
-                  <span class="type">drift_report_t</span>* report);</pre>
-                </div>
-
-                <!-- 环节二：冲突仲裁 -->
-                <div class="phase-card">
-                    <span class="phase-number">环节 2</span>
-                    <span class="mechanism-label">决策机制</span>
-                    <h3>冲突仲裁：把“选择权”设计成一个可追溯的决策事件</h3>
-                    <p>当漂移超过预设阈值，Agent<strong>暂停自动修复行为</strong>，转而生成一份<strong>决策邀请报告</strong>。<strong>这是整个机制最关键的设计决策：谁有权定义“真值”，必须是人。但人需要AI帮他看清全部后果。</strong></p>
-
-                    <p>报告格式不是冰冷的diff，而是一个叙事。它用工程师能理解的语言，把分歧的来龙去脉、可能的原因、每种选择的后果，清晰地呈现出来：</p>
-
-                    <div class="report-block">
-                        <div class="report-label">📋 决策邀请报告 #DRIFT-2026-042</div>
-                        <p style="margin:8px 0 4px;"><strong>我注意到一个分歧：</strong></p>
-                        <p style="margin:4px 0;color:#5a6c7d;"><code>agents.md</code> 第42行声称：<em>“电源管理模块必须在进入停机模式前完成所有ADC校准数据的保存。”</em></p>
-                        <p style="margin:4px 0;color:#5a6c7d;">但在 <code>pwr_mgr.c:203</code>，保存操作发生在<strong>进入停机模式后的第一个唤醒ISR中</strong>。</p>
-                        <p style="margin:10px 0 4px;"><strong>这不是Bug，而是一个有意图的设计分歧。</strong>可能的原因：</p>
-                        <ol style="margin:4px 0 4px 18px;">
-                            <li>在停机前保存，因内部Flash写入时间过长导致芯片被看门狗复位（来自 <code>issue#117</code> 的讨论）。</li>
-                            <li>在唤醒后保存，利用了备份域SRAM，但增加了掉电风险窗口——若备份域在此期间掉电，数据将永久丢失。</li>
-                        </ol>
-                        <p style="margin:10px 0 4px;"><strong>请你决定：</strong></p>
-                        <p style="margin:2px 0;">
-                            <span class="choice choice-a">A. 代码是对的，规约过时了</span> → 我将重写 <code>agents.md</code> 的相关段落，并附带本次决策的完整上下文。
-                        </p>
-                        <p style="margin:2px 0;">
-                            <span class="choice choice-b">B. 规约是对的，代码必须修正</span> → 我将生成一个包含所需改动及风险评估的修复任务。
-                        </p>
-                        <p style="margin:2px 0;">
-                            <span class="choice choice-c">C. 两者都不对，需要重新讨论</span> → 我将生成一份更完整的深潜分析，作为新讨论的起点。
-                        </p>
-                    </div>
-
-                    <p>人的每一次选择（A/B/C）都被记录为一个<strong>不可篡改的决策事件</strong>，附带时间戳和上下文快照，加密写入一个<strong>规格决策账本（Spec Decision Ledger）</strong>。这保证了漂移历史不会随着时间再次被遗忘——即使是十年后的维护者，也能追溯每一个“为什么当初这样决定”的完整故事。</p>
-                </div>
-
-                <!-- 环节三：共生决议 -->
-                <div class="phase-card">
-                    <span class="phase-number">环节 3</span>
-                    <span class="mechanism-label">演化机制</span>
-                    <h3>共生决议：让“文本”和“代码”形成进化的双螺旋</h3>
-                    <p>一旦人做出选择，Agent将执行一个<strong>自动化的共生演化动作</strong>。这不是简单的“修改文件”，而是保证<strong>决策上下文永不丢失</strong>的结构化操作。</p>
-
-                    <p><strong>若选择A（代码胜出，规约需更新）：</strong></p>
-                    <ul style="margin-left:20px;">
-                        <li>Agent更新<code>agents.md</code>中的对应段落，使其与代码实际行为一致。</li>
-                        <li>在更新处自动插入一个<code>[DRIFT-RESOLVED]</code>标记块，内含：原始规约引用、促使改变的关键代码片段哈希、人的决策摘要、时间戳。</li>
-                        <li>未来的AI读到这段时，看到的不再是冷冰的断言，而是一段活的演进史。</li>
-                    </ul>
-
-                    <p><strong>若选择B（规约胜出，代码需修正）：</strong></p>
-                    <ul style="margin-left:20px;">
-                        <li>Agent将修复任务放入要求人工审核的PR队列。</li>
-                        <li>在PR描述中自动引用规约原文和本次决策记录，实现从“规约”到“代码修复”的全链路追溯。</li>
-                        <li>修复完成后，Sniffer重新扫描确认漂移已消除。</li>
-                    </ul>
-
-                    <p><strong>若选择C（重新设计）：</strong></p>
-                    <ul style="margin-left:20px;">
-                        <li>Agent创建一份<strong>分歧深潜文档</strong>，提出几种不同的调和方案及其代价分析。</li>
-                        <li>切换到“协作模式”，在这一单一议题上与人反复讨论，直到新共识被同时写入规约和代码。</li>
-                    </ul>
-
-                    <div class="insight-box" style="margin-top:16px;">
-                        <strong>关键设计原则：</strong>AI从不代替人做“什么是正确”的价值判断。它只负责<strong>追踪分歧、展示后果、然后恭敬地等待人的裁决</strong>。裁决一旦做出，它以不可磨灭的方式将其记录在案，确保同样的困惑不会在未来重演。
-                    </div>
-                </div>
-
+                <strong>核心哲学：</strong>在架构设计上，我们推崇知识文档的扁平化管理——所有文档地位平等，仅以<code>agents.md</code>作为唯一的中央索引节点。这不是强制约束，而是经过深思熟虑的推荐方向：结构上的简单，换来逻辑上的清晰和长期的可维护性。
             </div>
         </section>
 
-        <!-- SVG: 三环节流程图 -->
-        <figure class="figure">
-            <svg viewBox="0 0 680 300" width="100%" style="max-width:680px;">
-                <!-- 环节框 -->
-                <rect x="10" y="30" width="200" height="100" rx="8" fill="#f5f7fa" stroke="#d0dbe6" stroke-width="2" />
-                <text x="110" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a2e">① 漂移感知</text>
-                <text x="110" y="82" text-anchor="middle" font-size="12" fill="#5a6c7d">Spec-Drift Sniffer</text>
-                <text x="110" y="102" text-anchor="middle" font-size="12" fill="#5a6c7d">热力矩阵 · 幽灵规约</text>
-                <text x="110" y="120" text-anchor="middle" font-size="12" fill="#5a6c7d">潜规则发现</text>
-
-                <rect x="240" y="30" width="200" height="100" rx="8" fill="#fffdf7" stroke="#f0d78c" stroke-width="2" />
-                <text x="340" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a2e">② 冲突仲裁</text>
-                <text x="340" y="82" text-anchor="middle" font-size="12" fill="#5a6c7d">决策邀请报告</text>
-                <text x="340" y="102" text-anchor="middle" font-size="12" fill="#c0392b" font-weight="600">← 人的裁决 →</text>
-                <text x="340" y="120" text-anchor="middle" font-size="12" fill="#5a6c7d">决策账本 · 不可篡改</text>
-
-                <rect x="470" y="30" width="200" height="100" rx="8" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="2" />
-                <text x="570" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a2e">③ 共生决议</text>
-                <text x="570" y="82" text-anchor="middle" font-size="12" fill="#5a6c7d">自动同步 · 上下文锚定</text>
-                <text x="570" y="102" text-anchor="middle" font-size="12" fill="#5a6c7d">[DRIFT-RESOLVED] 标记</text>
-                <text x="570" y="120" text-anchor="middle" font-size="12" fill="#5a6c7d">双螺旋共同进化</text>
-
-                <!-- 箭头 -->
-                <line x1="210" y1="80" x2="238" y2="80" stroke="#8896a4" stroke-width="2" marker-end="url(#arrowhead)" />
-                <line x1="440" y1="80" x2="468" y2="80" stroke="#8896a4" stroke-width="2" marker-end="url(#arrowhead)" />
-                <!-- 反馈回路 -->
-                <path d="M570 130 L570 200 L340 200 L340 132" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-dasharray="6 3" marker-end="url(#arrowhead)" />
-                <text x="455" y="215" text-anchor="middle" font-size="11" fill="#c0392b">持续循环 · 螺旋收敛</text>
-            </svg>
-            <p class="caption">图2：三个环节的闭环流程——感知漂移 → 请求裁决 → 共生演化 → 再次感知，形成螺旋收敛。</p>
-        </figure>
-
-        <!-- 五层框架映射 -->
+        <!-- 问题 -->
         <section>
-            <h2 id="framework">三、在五层进化框架中的定位</h2>
-            <p>这一机制并非在五层框架之外另起炉灶，而是对<strong>L4自动化与L5自治在时间维度上的关键补全</strong>。</p>
+            <h2 id="problem">一、问题：AI编程工程化的知识腐烂危机</h2>
 
-            <table class="mapping-table">
+            <p>AI编程Agent已经能生成语法正确的代码，能理解常见的需求，能完成大部分标准化任务。但它们面临一个被忽视的致命盲区：<strong>它们不知道所依赖的知识文档是否仍然可信。</strong></p>
+
+            <p>一个运行了三年的嵌入式项目，其知识库的典型状态是：</p>
+
+            <ul>
+                <li>某份I2C驱动规约描述的还是两年前的硬件版本，引脚映射已经失效</li>
+                <li>某个历史故障报告记录了关键的安全边界，但再无人记得它的存在</li>
+                <li>同一个SPI时钟频率在三份文档中有三个不同的数值，无人发现矛盾</li>
+                <li>新人入职时面对上百份文档，不知道从何读起，AI同样不知道</li>
+            </ul>
+
+            <div class="card warning">
+                <p style="margin-top:0;"><strong>这不是文档写得不好，而是文档缺乏</strong><strong>生命体征</strong>。它们无法告诉AI和开发者：我现在还活着吗？我还能被信任吗？我在什么情况下应该被唤醒？</p>
+            </div>
+
+            <p>现有AI Agent的核心检索机制——无论是Cursor的代码库索引、GitHub Copilot的语义搜索、还是通用的RAG和向量数据库——都聚焦于"代码级"的相似性匹配。它们回答的问题是"哪段代码和当前上下文最相关"，而非"哪个知识源是最权威、最新鲜、最可信的"。</p>
+
+            <p>这正是我们的体系要填补的空白。</p>
+        </section>
+
+        <!-- 核心哲学 -->
+        <section>
+            <h2 id="philosophy">二、核心哲学：知识是有生命周期的</h2>
+
+            <p>本体系建立在一条根本原则之上：</p>
+
+            <div class="insight-box">
+                <strong>知识文档不是静态的信息容器，而是与代码、规约共同演化的生命体。它应具备自我感知、自我修复、自我进化的能力。</strong>
+            </div>
+
+            <p>这条原则衍生出三个推论：</p>
+
+            <ol>
+                <li><strong>知识会腐烂：</strong>任何与代码和硬件脱节的文档，都在缓慢死亡。腐烂不可逆，但可被检测。</li>
+                <li><strong>知识会漂移：</strong>规约与实现之间、不同文档的同一事实之间，必然出现逐渐的偏离。漂移是常态，不是异常。</li>
+                <li><strong>知识需要共生：</strong>知识文档的质量不是一次性的审查能保证的，它需要与代码、测试、决策形成一个持续反馈的闭环，共同呼吸，共同演进。</li>
+            </ol>
+
+            <p>这套哲学，是《规格-实现共生演化机制》核心思想在知识管理领域的具体实现。知识文档的生命体征管理，是整个嵌入式AI工程化体系不可分割的一部分。</p>
+        </section>
+
+        <!-- 三重生命体征 -->
+        <section>
+            <h2>三、核心机制：知识文档的三重生命体征</h2>
+
+            <h3>3.1 热力分布图——追踪文档的活跃程度</h3>
+
+            <p>热力分布图回答的问题是："<strong>这份文档在当下的工程活动中，有多活跃？</strong>"</p>
+
+            <p>文档根据使用频率和时效性分为三种热力状态：</p>
+
+            <table>
                 <thead>
                     <tr>
-                        <th>层级</th>
-                        <th>本机制的对应角色</th>
-                        <th>具体表现</th>
+                        <th>温度状态</th>
+                        <th>定义</th>
+                        <th>典型场景</th>
+                        <th>文档类型示例</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><span class="layer-tag">L1 上下文增强</span></td>
-                        <td>规约与代码的统一索引</td>
-                        <td>Sniffer建立规约条目与代码行之间的双向语义链接，增强AI的全局视野。</td>
+                        <td><strong>热（Hot）</strong></td>
+                        <td>高频调用、实时运用</td>
+                        <td>日常开发、AI生成代码、Skills运行</td>
+                        <td><code>agents.md</code>、当前硬件映射表、活跃规约</td>
                     </tr>
                     <tr>
-                        <td><span class="layer-tag">L2 可观测性</span></td>
-                        <td>知识漂移作为一种新的“负日志”</td>
-                        <td>“应然与实然的系统沉默分歧”被显性化——这不是运行时Bug，而是<strong>设计意图层面的负事件</strong>。</td>
+                        <td><strong>温（Warm）</strong></td>
+                        <td>周期性使用、阶段性校验</td>
+                        <td>迭代回顾、里程碑验收、跨项目复用</td>
+                        <td>模块接口文档、测试策略文档、架构说明</td>
                     </tr>
                     <tr>
-                        <td><span class="layer-tag">L3 数据闭环</span></td>
-                        <td>漂移热力矩阵作为闭环输入</td>
-                        <td>每次CI生成的漂移报告成为反馈信号，驱动后续决策。</td>
-                    </tr>
-                    <tr>
-                        <td><span class="layer-tag">L4 自动化</span></td>
-                        <td>决策报告与工作流的自动生成</td>
-                        <td>Agent自动发现分歧、自动生成叙事性报告、自动执行人的裁决结果。人无需费心寻找分裂点。</td>
-                    </tr>
-                    <tr>
-                        <td><span class="layer-tag">L5 自治</span></td>
-                        <td><strong>知识自愈能力</strong></td>
-                        <td>系统在长时间运行中，不盲目忠实于任何单一信息源，而是在人的最终裁决下，持续将“代码中的暗知识”和“规约中的明意图”编织为统一的进化体。</td>
+                        <td><strong>冷（Cold）</strong></td>
+                        <td>低频参考、历史归档</td>
+                        <td>事故回溯、新人入职、老项目维护</td>
+                        <td>原始设计决策记录、历史故障报告、已冻结产品文档</td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="card warning">
-                <p style="margin-top:0;"><strong>补全的意义：</strong>没有这一层，五层框架是一个优秀的<strong>开发时</strong>系统。有了这一层，它才成为一个能持续运行一年、三年、十年而不会在知识层面积累致命债务的<strong>全生命周期</strong>系统。这是从“工具”到“伙伴”的质变。</p>
+            <div class="card tip">
+                <p style="margin-top:0;"><strong>冷区不是遗忘区，而是等待事件唤醒的休眠哨兵。</strong>任何文档在特定时刻都可能突然变得极其重要。</p>
             </div>
+
+            <h3>3.2 健康度分析——评估文档的可靠程度</h3>
+
+            <p>健康度分析回答的问题是："<strong>这份文档现在还能不能信？</strong>"</p>
+
+            <p>健康度由四个维度综合计算：</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>健康维度</th>
+                        <th>检测内容</th>
+                        <th>恶化信号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>代码一致性</strong></td>
+                        <td>文档描述的规约、接口、流程，与当前代码实现是否一致</td>
+                        <td>代码已重构，文档未更新</td>
+                    </tr>
+                    <tr>
+                        <td><strong>物理一致性</strong></td>
+                        <td>文档中引用的硬件信息，与当前PCB版本、BOM清单是否一致</td>
+                        <td>硬件改版，引脚映射已变</td>
+                    </tr>
+                    <tr>
+                        <td><strong>时间新鲜度</strong></td>
+                        <td>文档上次被验证或更新的时间距今多久</td>
+                        <td>超过N个迭代周期未维护</td>
+                    </tr>
+                    <tr>
+                        <td><strong>引用完整性</strong></td>
+                        <td>文档中引用的其他文档是否仍然存在且健康</td>
+                        <td>引用的文档已被删除或已过时</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>健康度评分标准：</strong></p>
+
+            <ul>
+                <li><span class="status-tag healthy">0.8-1.0（健康）</span>：可直接作为AI生成代码和开发者决策的依据</li>
+                <li><span class="status-tag warning">0.5-0.8（亚健康）</span>：仍可参考，但AI引用时必须附加风险提示</li>
+                <li><span class="status-tag warning">0.3-0.5（预警）</span>：不得被AI自动引用，必须经过人工确认</li>
+                <li><span class="status-tag danger">0.0-0.3（危险）</span>：应立即从活跃知识库中隔离，标记为"待修复或待退役"</li>
+            </ul>
+
+            <h3>3.3 四象限交叉分析——识别最关键的风险点</h3>
+
+            <p>热力和健康度交叉后，生成一个四象限矩阵：</p>
+
+            <div class="quadrant-grid">
+                <div class="quadrant high-risk">
+                    <h4>🔴 高危负债</h4>
+                    <p><strong>热（高频使用）+ 危险（&lt;0.5）</strong></p>
+                    <p>高频使用但不可靠，应立即修复或隔离，这是最大的工程风险</p>
+                </div>
+                <div class="quadrant core-asset">
+                    <h4>✅ 核心资产</h4>
+                    <p><strong>热（高频使用）+ 健康（≥0.8）</strong></p>
+                    <p>高频使用且可靠，重点保护、持续维护</p>
+                </div>
+                <div class="quadrant legacy">
+                    <h4>⚪ 历史遗物</h4>
+                    <p><strong>冷（低频使用）+ 危险（&lt;0.5）</strong></p>
+                    <p>既不可靠也不使用，标记为"仅供参考，不作为决策依据"</p>
+                </div>
+                <div class="quadrant sentinel">
+                    <h4>🔵 休眠哨兵</h4>
+                    <p><strong>冷（低频使用）+ 健康（≥0.8）</strong></p>
+                    <p>可靠但暂不使用，归档保存、保持最低维护</p>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <strong>关键洞察：</strong>这个矩阵直接告诉开发者和AI——当前最应该投入精力修复的，不是那些已被遗忘的文档，而是正在被高频使用但内容已不可靠的<strong>"高危负债"</strong>。
+            </div>
+        </section>
+
+        <!-- 共生演化 -->
+        <section>
+            <h2>四、生命体征驱动：知识文档的自我修复与持续收敛</h2>
+
+            <p>生命体征系统解决了"感知"问题，但感知之后必须行动。这正是共生演化机制发挥作用的地方。</p>
+
+            <h3>4.1 漂移感知：当文档与代码开始背离</h3>
+
+            <p>共生演化的起点是漂移感知。在知识管理语境下，漂移表现为三种形式：</p>
+
+            <ul>
+                <li><strong>代码漂移：</strong>文档描述的规约与当前代码实现不一致。检测方式：CI脚本自动比对文档中的接口定义与代码中的实际实现。</li>
+                <li><strong>物理漂移：</strong>文档引用的硬件信息与当前PCB版本不匹配。检测方式：PCB分析器更新硬件映射文件时，自动标记所有关联文档的物理一致性为"待验证"。</li>
+                <li><strong>事实漂移：</strong>同一事实在多份文档中出现不一致的表述。检测方式：AI驱动的静态分析器定期扫描，比较被标记为"可能重叠"的文档。</li>
+            </ul>
+
+            <p>每种漂移在发生时，文档的健康度自动下调，同时在<code>agents.md</code>的"当前风险警示"区块中生成一条告警。告警本身，就是一条面向知识库的"负日志"——它记录的不是"发生了什么"，而是"什么应该一致，却已经不一致了"。</p>
+
+            <h3>4.2 决策仲裁：当知识冲突需要人的裁决</h3>
+
+            <p>当漂移超过阈值——例如一份"热"文档的健康度跌破0.5，或同一事实在三份文档中出现三种不同表述——自动流程暂停，转为人工决策。</p>
+
+            <p>Agent生成一份<strong>决策邀请报告</strong>，包含：</p>
+
+            <ul>
+                <li>冲突文档的原文摘录</li>
+                <li>漂移分析（是什么导致了偏离？）</li>
+                <li>可能的修复路径（以哪份文档为准？）</li>
+                <li>每种路径的影响评估</li>
+            </ul>
+
+            <p>人的裁决一旦做出，结果被写入两个地方：</p>
+
+            <ol>
+                <li><strong>被修正的文档：</strong>更新内容，健康度恢复至0.9以上</li>
+                <li><strong>决策账本：</strong>记录冲突来源、裁决依据、裁决时间、裁决人</li>
+            </ol>
+
+            <p>这条决策记录，成为知识库的"免疫记忆"。当未来出现类似冲突时，AI首先查询决策账本，参考历史裁决，减少重复的决策成本。</p>
+
+            <h3>4.3 闭环收敛：知识的自我修复循环</h3>
+
+            <p>共生演化的目标不是一次性解决所有冲突，而是构建一个<strong>持续趋于收敛的循环</strong>：</p>
+
+            <ol class="flow-list">
+                <li><strong>感知：</strong>热力分布图和健康度分析持续监控文档状态</li>
+                <li><strong>检测：</strong>漂移感知机制发现文档与现实的偏离</li>
+                <li><strong>告警：</strong>偏离超过阈值，生成负日志风格的告警</li>
+                <li><strong>仲裁：</strong>需要人的判断时，提交决策邀请报告</li>
+                <li><strong>修复：</strong>根据裁决更新文档，健康度恢复</li>
+                <li><strong>记录：</strong>写入决策账本，形成免疫记忆</li>
+                <li><strong>验证：</strong>下一轮漂移感知确认修复是否有效</li>
+            </ol>
+
+            <div class="insight-box">
+                <strong>持续变好，而非追求完美。</strong>这个循环的每一次迭代，都让知识库的健康度整体提升一个微小但确定的增量。
+            </div>
+
+            <h3>4.4 冷区文档的共生律动</h3>
+
+            <p>在共生演化的视角下，冷区文档并非"死"的。它们遵循自己的演化节奏：</p>
+
+            <ul>
+                <li><strong>休眠期：</strong>文档处于冷区，健康度缓慢下降（时间新鲜度自然衰减）</li>
+                <li><strong>唤醒事件：</strong>某个特定错误触发唤醒关键词，文档被拉入热区参与决策</li>
+                <li><strong>验证窗口：</strong>被唤醒后，人在裁决过程中实际上也在验证文档的有效性</li>
+                <li><strong>回归休眠：</strong>事件结束后，文档回归冷区，但带着更新后的健康度和引用记录</li>
+            </ul>
+
+            <p>这种"休眠-唤醒-验证-回归"的律动，让冷区文档不是被遗忘的化石，而是等待被激活的记忆。它与热区文档的日常高频使用，共同构成知识库的完整呼吸。</p>
+        </section>
+
+        <!-- 基础设施 -->
+        <section>
+            <h2 id="infrastructure">五、基础设施：标准化元数据与扁平化架构</h2>
+
+            <h3>5.1 文档头部元数据</h3>
+
+            <p>每份知识文档的头部必须包含标准化的YAML元数据块。元数据是文档的"数字体检报告"，共生演化所有机制依赖元数据提供数据基础。</p>
+
+            <p>一个完整的元数据示例：</p>
+
+<pre class="yaml"><span class="comment">---</span>
+<span class="keyword">doc_id</span>: <span class="string">SPEC-047</span>
+<span class="keyword">title</span>: <span class="string">"I2C 驱动设计规约"</span>
+<span class="keyword">created</span>: <span class="string">2025-03-12</span>
+<span class="keyword">last_modified</span>: <span class="string">2026-05-09</span>
+<span class="keyword">modification_count</span>: <span class="string">14</span>
+<span class="keyword">reference_count</span>: <span class="string">23</span>
+<span class="keyword">last_referenced</span>: <span class="string">2026-05-10</span>
+<span class="keyword">health_score</span>: <span class="string">0.85</span>
+<span class="keyword">health_detail</span>:
+  <span class="keyword">code_consistency</span>: <span class="string">0.9</span>
+  <span class="keyword">physical_consistency</span>: <span class="string">0.8</span>
+  <span class="keyword">freshness</span>: <span class="string">0.85</span>
+  <span class="keyword">reference_integrity</span>: <span class="string">0.85</span>
+<span class="keyword">status</span>: <span class="string">healthy</span>
+<span class="keyword">hot_level</span>: <span class="string">warm</span>
+<span class="keyword">wake_keywords</span>:
+  <span class="keyword">hardware</span>: [<span class="string">STM32H723, TMP117, I2C1</span>]
+  <span class="keyword">errors</span>: [<span class="string">HAL_I2C_ERROR_AF, I2C_TIMEOUT</span>]
+  <span class="keyword">modules</span>: [<span class="string">i2c_driver.c, tmp117.c</span>]
+  <span class="keyword">phenomena</span>: [<span class="string">I2C总线挂死, 传感器无应答, SDA一直被拉低</span>]
+<span class="keyword">linked_docs</span>:
+  - <span class="string">SPEC-032（依赖项）</span>
+  - <span class="string">DECISION-2025-118（促成此规约的决策）</span>
+<span class="keyword">drift_history</span>:
+  - <span class="keyword">date</span>: <span class="string">2026-04-15</span>
+    <span class="keyword">type</span>: <span class="string">code_drift</span>
+    <span class="keyword">resolution</span>: <span class="string">"更新了DMA配置描述，与当前代码同步"</span>
+    <span class="keyword">decision_ref</span>: <span class="string">DECISION-2026-042</span>
+<span class="comment">---</span></pre>
+
+            <p><strong>每次对文档的实质性修改，自动更新：</strong>修改日期、修改次数、健康度及分维度得分。</p>
+            <p><strong>每次文档被AI或开发者引用，自动更新：</strong>引用次数、最近開催日、热力等级。</p>
+            <p><strong>每次漂移事件被裁决后，自动追加：</strong><code>drift_history</code>记录，形成文档自身的微型决策账本。</p>
+
+            <h3>5.2 扁平化架构：重要思想，非强制要求</h3>
+
+            <p>我们推崇知识文档的扁平化管理——<strong>所有文档地位平等，独立维护，仅以<code>agents.md</code>作为唯一的中央索引节点</strong>。这不是强制约束，而是经过深思熟虑的推荐方向。</p>
+
+            <p><strong>为什么推荐扁平化：</strong></p>
+
+            <ul>
+                <li><strong>降低维护心理负担。</strong>修改任何文档时，不需要考虑"会影响哪些子文档"，维护成本与文档数量呈线性关系。</li>
+                <li><strong>避免脆弱的引用链。</strong>深层级的从属关系会形成A→B→C→D的引用链条，任何一环断裂都会导致Agent检索出错。扁平化让引用关系始终只有一层。</li>
+                <li><strong>避免目录结构爆炸。</strong>无需为"这个文档应该放在哪个子目录"而困扰，统一的文档池加一个中央索引，解决所有分类问题。</li>
+            </ul>
+
+            <p><strong>扁平化与单一信息源的关系：</strong></p>
+
+            <p>权威性管理从文件系统的层级关系转移到<code>agents.md</code>的逻辑关系中。在<code>agents.md</code>中增设"事实索引"区块，显式声明每条关键事实的权威文档：</p>
+
+<pre><span class="comment">## 事实索引（单一信息源声明）</span>
+
+<span class="comment">### SPI相关</span>
+- SPI1时钟频率 = 42MHz → 权威来源：<span class="type">SPEC-032</span>
+- SPI Flash指令集版本 = V2.1 → 权威来源：<span class="type">SPEC-058</span>
+
+<span class="comment">### I2C相关</span>
+- I2C1 SCL引脚 = PB6 → 权威来源：<span class="type">HAL_MAP_v2.3</span>
+- I2C总线最大挂载电容 = 400pF → 权威来源：<span class="type">SPEC-047</span>
+
+<span class="comment">### 冲突已解决</span>
+- I2C超时阈值：SPEC-058与SPEC-047曾有矛盾，已裁决采用SPEC-058
+- 裁决记录：<span class="type">DECISION-2025-118</span></pre>
+
+            <p><strong>扁平化的边界条件：</strong></p>
+
+            <p>以下情况需要灵活处理，不作为强制扁平化的对象：</p>
+
+            <ul>
+                <li><strong>已冻结的历史归档文档：</strong>可放在<code>archive/</code>目录下，但<code>archive/</code>内部仍是扁平结构。</li>
+                <li><strong>与特定硬件版本强绑定的文档：</strong>随硬件版本拷贝到独立文件夹，每个文件夹内部保持扁平。</li>
+                <li><strong>自动生成的文档：</strong>如PCB分析器生成的硬件映射文件，可放在统一的<code>generated/</code>目录下，内部保持扁平。</li>
+            </ul>
+
+            <div class="card tip">
+                <p style="margin-top:0;"><strong>推荐而非强制的理由：</strong>不同项目有不同的复杂度和管理需求。指导原则是——<strong>尽可能简单，但不比必要的更简单。</strong></p>
+            </div>
+        </section>
+
+        <!-- 唤醒关键词 -->
+        <section>
+            <h2 id="wake">六、唤醒关键词：事件驱动的主动激活</h2>
+
+            <p>唤醒关键词要解决的是知识管理中一个根本性难题："<strong>我不知道我不知道什么</strong>"。</p>
+
+            <p>每份文档预设一组唤醒关键词，按类型分类：硬件型号、错误码、模块名、现象描述、关联文档ID。当AI对话、错误日志、代码提交信息或测试报告中出现这些关键词时，关联文档的体温被自动升高，从冷区或温区被唤醒，主动浮现在开发者和AI面前。</p>
+
+            <h3>工作流程：</h3>
+
+            <ol class="flow-list">
+                <li><strong>预设：</strong>文档创建者或维护者在文档头部元数据中预设<code>wake_keywords</code></li>
+                <li><strong>监听：</strong>AI对话系统、CI脚本或调试助手持续监听关键词的出现</li>
+                <li><strong>触发：</strong>命中时，关联文档的<code>hot_level</code>被临时提升为"热"，<code>last_referenced</code>更新为当前时间</li>
+                <li><strong>呈现：</strong>被唤醒的文档自动出现在AI的上下文推荐列表或开发者侧边栏</li>
+                <li><strong>冷却：</strong>若关键词触发后一段时间内无后续交互，文档温度自动恢复至原有水平</li>
+            </ol>
+
+            <h3>与共生演化的关系：</h3>
+
+            <p>唤醒不仅是检索事件，也是共生演化循环的触发器。当一份冷区文档被唤醒并参与了一次决策，它实际上被拉入了共生演化的"验证窗口"：</p>
+
+            <ul>
+                <li>如果文档内容依然正确，<code>health_score</code>中<code>freshness</code>维度得分恢复</li>
+                <li>如果文档内容已经过时，触发漂移告警，进入决策仲裁流程</li>
+                <li>裁决结果被写回文档的<code>drift_history</code>，成为下一次唤醒时的参考上下文</li>
+            </ul>
+
+            <div class="insight-box">
+                <strong>开发者可能永远不知道</strong>一个偶发的I2C错误源于多年前的一个硬件勘误，但唤醒关键词会自动把那份历史报告从冷区"捞"出来，推送到AI的决策上下文中。而共生演化机制确保：当这份报告被反复唤醒时，它的健康度得到持续验证和刷新；当它不再正确时，它被诚实标记或修复，而非静默腐烂。
+            </div>
+        </section>
+
+        <!-- 中央体征监视器 -->
+        <section>
+            <h2 id="monitor">七、中央体征监视器：agents.md的统管角色</h2>
+
+            <p>单文档元数据解决了自我感知，但还需要一个全局视角。在扁平化架构中，<code>agents.md</code>是唯一承担中央索引和全局监视角色的节点。</p>
+
+            <h3>7.1 知识库体征区块</h3>
+
+            <p><code>agents.md</code>中开辟专门的"知识库体征"区块，由自动化脚本或AI协作维护：</p>
+
+<pre><span class="comment">## 知识库体征（由自动化脚本或AI协作维护，每次文档变更时更新）</span>
+
+<span class="comment">### 全局统计</span>
+- 文档总数：<span class="type">47</span>
+- 健康文档（>=0.8）：<span class="type">38</span>
+- 亚健康文档（0.5-0.8）：<span class="type">6</span>
+- 预警文档（0.3-0.5）：<span class="type">2</span>
+- 危险文档（&lt;0.3）：<span class="type">1</span>
+- 热区文档：<span class="type">12</span>
+- 温区文档：<span class="type">20</span>
+- 冷区文档：<span class="type">15</span>
+- 最后全库巡检时间：<span class="type">2026-05-11 14:30</span>
+
+<span class="comment">### 当前风险警示</span>
+- 🔴 <strong>高危负债：</strong>SPEC-047（热度hot，健康度0.4）—— I2C驱动规约与代码已严重偏离
+- 🟡 <strong>亚健康追踪：</strong>SPEC-032（健康度0.6，连续3次迭代未验证物理一致性）
+- 🔵 <strong>即将冷却：</strong>DECISION-2025-118（180天未被引用，即将从温区掉入冷区）
+- ⚠️ <strong>漂移告警：</strong>SPEC-058与SPEC-047在I2C超时阈值上存在矛盾（发现于2026-05-10）
+
+<span class="comment">### 事实索引</span>
+- I2C1 SCL引脚 → 权威来源：<span class="type">HAL_MAP_v2.3</span>
+- SPI1时钟频率 → 权威来源：<span class="type">SPEC-032</span>
+- I2C总线最大挂载电容 → 权威来源：<span class="type">SPEC-047</span>
+
+<span class="comment">### 唤醒路由（全局关键词索引）</span>
+- TMP117 → SPEC-047, SPEC-032
+- HAL_I2C_ERROR_AF → SPEC-047, HISTORY-2023-003
+- I2C总线挂死 → SPEC-047, DECISION-2025-118</pre>
+
+            <h3>7.2 自动化更新机制</h3>
+
+            <p>中央体征区块在三个时机自动刷新：</p>
+
+            <ol>
+                <li><strong>提交时更新：</strong>Git pre-commit钩子在每次提交前，扫描所有文档元数据，汇总后写入<code>agents.md</code></li>
+                <li><strong>对话中更新：</strong>AI系统提示词中注入规则，修改或引用文档时同步更新元数据和体征区块</li>
+                <li><strong>周期性巡检：</strong>独立Python脚本每日或每周全量扫描，更新风险警示、热力分布和漂移告警列表</li>
+            </ol>
+
+            <h3>7.3 决策账本的接入</h3>
+
+            <p><code>agents.md</code>是中央体征监视器，而决策账本是共生演化的记忆中枢。两者通过引用关系连接：</p>
+
+            <ul>
+                <li><code>agents.md</code>中的"风险警示"区块引用决策账本中记录的漂移事件</li>
+                <li>决策账本中的每条裁决记录，都反向引用被修正的文档ID</li>
+                <li>当Agent需要理解一个文档"为什么是现在这个状态"时，通过<code>agents.md</code>定位文档，通过文档元数据中的<code>drift_history</code>追溯到决策账本中的完整裁决记录</li>
+            </ul>
+        </section>
+
+        <!-- 信息源头质量治理 -->
+        <section>
+            <h2>八、信息源头质量治理：单一信息源与矛盾处理</h2>
+
+            <h3>8.1 单一信息源原则</h3>
+
+            <p><strong>对于任何一条具有唯一真值的工程决策、规约或事实，必须只存在于一份权威文档中。</strong>其他所有引用通过<code>agents.md</code>中的事实索引完成，而非复制粘贴。</p>
+
+            <p><strong>信息重叠的分类处理：</strong></p>
+
+            <ul>
+                <li><strong>故意冗余：</strong>关键安全规约多处声明，通过同步脚本维护一致性。每处副本附主文档ID。</li>
+                <li><strong>可合并重复：</strong>立即合并到一个权威文档，事实索引中声明该文档为唯一来源。</li>
+                <li><strong>视角重叠：</strong>提取核心事实写入权威文档，各方保留视角解读但必须引用权威文档ID。</li>
+            </ul>
+
+            <p><strong>事实与视角的严格区分：</strong></p>
+
+            <ul>
+                <li><strong>事实：</strong>可被客观验证的陈述（如"I2C1的SCL引脚为PB6"），只有一个真实值。</li>
+                <li><strong>视角：</strong>对事实的解释或建议（如"应避免与SPI1同时使用"），可以有多个，但必须声明所依据的事实来源。</li>
+            </ul>
+
+            <h3>8.2 信息矛盾的检测与处理</h3>
+
+            <p>当信息矛盾发生时，共生演化的漂移感知机制直接介入：</p>
+
+            <p><strong>发现阶段：</strong>AI驱动的静态分析器在CI中运行，自动比较被标记为"可能重叠"的文档。一旦发现矛盾，立即生成报告并阻断自动流程。</p>
+
+            <p><strong>仲裁阶段：</strong>自动流程转为人工决策。AI生成包含以下内容的决策邀请报告：</p>
+
+            <ul>
+                <li>矛盾文档的原文摘录</li>
+                <li>矛盾原因分析（是代码重构导致？硬件改版导致？还是历史遗留？）</li>
+                <li>可能的修复路径</li>
+                <li>每条路径的影响范围评估</li>
+            </ul>
+
+            <p><strong>裁决阶段：</strong>人的裁决结果被写入三个位置：</p>
+
+            <ol>
+                <li>被修正的文档：更新内容，健康度恢复</li>
+                <li><code>agents.md</code>的"事实索引"：记录冲突已解决</li>
+                <li>决策账本：完整记录冲突来源、裁决依据、裁决时间、裁决人</li>
+            </ol>
+
+            <p><strong>免疫阶段：</strong>当未来出现类似冲突时，AI首先查询决策账本，参考历史裁决。这减少了重复的决策成本，也让知识库逐渐积累对特定冲突模式的"免疫力"。</p>
+        </section>
+
+        <!-- 核心优势 -->
+        <section>
+            <h2>九、核心优势：无缝兼容现有AI编程Agent体系</h2>
+
+            <p>这套体系最重要的工程价值在于：<strong>它不是替代现有工具，而是为它们装上一套标准化的"知识质量仪表盘"。</strong></p>
+
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <h4>🛡️ 非侵入式设计</h4>
+                    <p>整个体系以通用Markdown和YAML文件为载体，无需安装任何特定插件或软件，不锁定任何AI模型或平台。这符合OpenAI和Google等行业领导者联合推动的<code>AGENTS.md</code>标准方向。</p>
+                </div>
+                <div class="advantage-card">
+                    <h4>⚙️ 赋能Agent核心流程</h4>
+                    <p><strong>读取：</strong>Agent首先读取<code>agents.md</code>，立刻获得全局知识健康状况和当前最活跃的核心规约列表。<br><strong>检索：</strong>从无差别语义搜索变为精准制导和主动推送。<br><strong>执行：</strong>明确标记每个建议的可信度来源。</p>
+                </div>
+                <div class="advantage-card">
+                    <h4>🤝 互补而非替代</h4>
+                    <p>Agent内部机制聚焦于"代码级"相似性匹配——哪段代码最相关。我们的体系聚焦于"文档级"可信度管理——哪个知识源最权威、最新鲜、最可信。<strong>Agent负责"怎么开车"，我们的体系负责告诉它"应该走哪条路"以及"哪些路已经封了"。</strong></p>
+                </div>
+                <div class="advantage-card">
+                    <h4>🌱 生态适应性</h4>
+                    <p><strong>对开发者：</strong>上手成本几乎为零，所有规约和元数据都是可读的Markdown和YAML，可diff，可code review。<br><strong>对团队管理者：</strong>首次对项目的"知识债务"有了量化概念。<br><strong>对AI工具开发者：</strong>清晰的、可实现的增强目标。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 理论对照 -->
+        <section>
+            <h2>十、理论对照：立足于坚实学术与工业基础</h2>
+
+            <p>这套体系不是凭空臆想，而是博采数据质量、技术债务、知识管理等领域之众长，通过深度整合与创造性重组，完美适配AI辅助嵌入式开发的垂直场景。</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>概念</th>
+                        <th>理论来源</th>
+                        <th>本文的创新</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>热力分布图</strong></td>
+                        <td>持续知识管理理论、信息检索研究</td>
+                        <td>将"时间"维度引入文档状态管理</td>
+                    </tr>
+                    <tr>
+                        <td><strong>健康度分析</strong></td>
+                        <td>技术债务概念</td>
+                        <td>从代码领域扩展到整个知识文档资产</td>
+                    </tr>
+                    <tr>
+                        <td><strong>唤醒关键词</strong></td>
+                        <td>学术前沿"助推框架"</td>
+                        <td>在关键时刻温和、非强制地推送正确信息</td>
+                    </tr>
+                    <tr>
+                        <td><strong>共生演化</strong></td>
+                        <td>组织记忆与学习型组织理论</td>
+                        <td>决策账本作为结构化"组织记忆"，漂移感知对应反馈检测</td>
+                    </tr>
+                    <tr>
+                        <td><strong>中央体征监视器</strong></td>
+                        <td>知识门户、仓库知识图谱</td>
+                        <td>以<code>agents.md</code>为信息中枢，避免复杂外部系统开销</td>
+                    </tr>
+                    <tr>
+                        <td><strong>单一信息源</strong></td>
+                        <td>数据仓库工程基础原则</td>
+                        <td>适配裁剪至AI编程知识管理领域</td>
+                    </tr>
+                    <tr>
+                        <td><strong>分层过滤与主动激活</strong></td>
+                        <td>RAG和生成式AI赋能知识管理理论</td>
+                        <td>在垂直领域落地，解决"认知信任"具体工程问题</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
         <!-- 总结 -->
         <section>
-            <h2 id="conclusion">四、回到最初的问题</h2>
+            <h2 id="summary">十一、总结：为AI编程工程化立宪</h2>
 
-            <p>你问：当规约文本与代码现实彼此背离时，AI应该坚持文本描述的思路，还是让文本向代码进化？</p>
+            <p>这套体系的核心目标，是确保AI在任何时刻拿到的上下文都是<strong>清晰、可靠、无矛盾的</strong>。它通过五层能力实现这个目标：</p>
 
-            <p>答案在于<strong>两者都不应成为绝对的权威</strong>。</p>
+            <ol class="flow-list">
+                <li><strong>生命体征感知：</strong>热力分布图和健康度分析，让每份文档和整个知识库的状态透明化</li>
+                <li><strong>标准化元数据：</strong>为自动化追踪和共生演化提供基础设施</li>
+                <li><strong>事件驱动激活：</strong>唤醒关键词让正确的文档在正确的时刻自动现身</li>
+                <li><strong>全局中央监视：</strong><code>agents.md</code>提供整个知识库的健康全景和事实索引</li>
+                <li><strong>源头质量治理：</strong>单一信息源原则、事实与视角的区分、冲突检测与裁决，确保信息可信</li>
+            </ol>
 
-            <p>规约文本承载着<strong>设计意图和历史共识</strong>，它是“应然”的守护者。忽视它，意味着抛弃所有前人在这个项目上投入的思考。代码实现承载着<strong>物理现实和现场智慧</strong>，它是“实然”的见证者。清洗它，意味着抹去所有在真实世界中用代价换来的教训。</p>
+            <p>而贯穿这五层能力的，是<strong>共生演化</strong>的灵魂：</p>
 
-            <p>AI的角色不是在这两者之间选边站。它的角色是：</p>
+            <ul>
+                <li>知识文档不是静态的，它们与代码、规约共同呼吸</li>
+                <li>漂移是常态，感知漂移是知识管理的第一要务</li>
+                <li>冲突不是灾难，裁决带来的免疫记忆让系统越来越健壮</li>
+                <li>冷区文档在休眠与唤醒之间律动，如同知识库的呼吸</li>
+            </ul>
+
+            <p>在架构层面，我们推崇扁平化的文档管理——<strong>结构上的简单，换来逻辑上的清晰和长期的可维护性</strong>。</p>
 
             <div class="insight-box">
-                <strong>成为那个持续追踪分歧、展示全部后果、然后恭敬地请求人的智慧来做最终选择的忠诚管家。</strong><br><br>
-                裁决权永远属于人。但AI确保：<br>
-                ① 分歧不会被忽视；<br>
-                ② 后果被充分展示；<br>
-                ③ 裁决被永久铭记；<br>
-                ④ 同样的困惑不会在未来重演。
+                <strong>这五层能力加上共生演化的灵魂和扁平化架构，共同回答一个根本问题：</strong>在AI编程工程化的长期实践中，如何保证知识资产不腐烂、不混乱、不矛盾，并持续趋于收敛？<br><br>
+                答案就是这套框架本身——<strong>知识不再是被动存储的文本，而是拥有生命体征、能主动响应事件、能在与代码的共生关系中持续自我修复的活资产。</strong>
             </div>
 
-            <p>这就是<strong>规格-实现共生演化机制</strong>的全部意义。它不只是一个工具特性，而是嵌入式AI工程化在时间维度上的生存哲学。</p>
+            <div class="card warning">
+                <p style="margin-top:0;"><strong>物理世界不会给第二次机会。</strong>对于嵌入式AI工程化而言，知识管理体系不是外围的辅助工具，而是核心的基础设施。因为当AI的代码最终要控制一台电机、一束激光、一个阀门时，它所依赖的每一条知识都必须是可信任的。</p>
+            </div>
         </section>
 
-        <!-- 脚注 -->
-        <section class="footnote-section">
-            <h4>本文定位</h4>
-            <p>本文是对《从"摸黑调试"到"拨云见日"：AI编程调试的五层进化》中<strong>L4自动化与L5自治</strong>在<strong>时间维度</strong>上的深度扩展。它回答了“当AI自治系统长期运行时，如何保证其依赖的知识基础（规约文件）不因代码演进而过时”这一根本性问题。</p>
-            <p style="margin-top:6px;">相关文章：<a href="index.html">五层进化总纲</a> · <a href="true.html">高复用模板</a> · <a href="test.html">闭环收敛方法</a> · <a href="pcb.html">PCB分析器</a></p>
+        <!-- 附录 -->
+        <section>
+            <h2>附录：与已有七篇文章体系的关系</h2>
+
+            <p>本文是嵌入式AI工程化七篇文章体系在知识管理领域的完整实现。它将《规格-实现共生演化机制》的核心思想落实为知识文档的生命体征管理，让知识文档成为共生演化生态的一部分。</p>
+
+            <ul>
+                <li><strong>与五层进化：</strong>知识文档的生命体征管理，为L4自动化和L5自治提供了知识层面的基础设施</li>
+                <li><strong>与高复用模板：</strong>模板中的<code>agents.md</code>预置元数据标准和"知识库体征"区块，每个新项目天生具备此结构</li>
+                <li><strong>与闭环收敛：</strong>漂移感知和矛盾检测是闭环收敛在知识维度的实现——知识也在持续验证和修复中趋于收敛</li>
+                <li><strong>与PCB分析器：</strong>PCB分析器更新硬件映射时，自动触发关联文档的物理一致性重新验证，这是文档层与物理层的闭环</li>
+                <li><strong>与共生演化：</strong>决策账本、漂移感知、决策仲裁——知识管理中的这些核心机制，是共生演化思想在知识维度的具体实践</li>
+                <li><strong>与历史的包袱：</strong>老项目翻译文档以健康度评估作为验收标准，四维度均达0.7以上才能纳入活跃知识库</li>
+                <li><strong>与Skills：</strong>Skill运行时自动过滤不健康文档，利用唤醒关键词提升检索意图识别能力</li>
+            </ul>
+
+            <p style="text-align:center;margin-top:32px;color:#8896a4;">
+                <strong>系列导航：</strong>
+                <a href="index.html">五层进化</a> ·
+                <a href="true.html">高复用模板</a> ·
+                <a href="test.html">闭环收敛</a> ·
+                <a href="pcb.html">PCB分析器</a> ·
+                <strong>知识的生命体征</strong> ·
+                <a href="history.html">历史的包袱</a> ·
+                <a href="pt.html">Skills</a>
+            </p>
         </section>
 
         </div>
     </div>
 </div>
+
+<!-- 页脚署名 -->
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://x-itg.github.io/" target="_blank" rel="noreferrer" class="x-itg-link">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
+        </div>
+    </div>
+</div>
+
 <style>
 .inland-security-footer {
     position: fixed;
@@ -924,18 +1388,6 @@
     gap: 12px;
 }
 </style>
-<div class="inland-security-footer">
-    <div class="tooltip-container">
-        <div class="trigger-content">
-            <a href="https://x-itg.github.io/" target="_blank" rel="noreferrer" class="x-itg-link">
-                <span>itg · -lvgl-</span>
-            </a>
-        </div>
-        <div class="tooltip-content">
-            <section class="info-section"><span>itg</span></section>
-            <section class="info-section"><span>微信号: -lvgl-</span></section>
-        </div>
-    </div>
-</div>
+
 </body>
 </html>

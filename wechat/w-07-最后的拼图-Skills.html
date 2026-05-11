@@ -11,7 +11,7 @@
 <span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第2篇</span> 实践项目模板 <span style="color:#8896a4;font-size:13px;">-- 高可复用嵌入式AI编程骨架</span><br>
 <span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第3篇</span> 自主修复闭环 <span style="color:#8896a4;font-size:13px;">-- AI双轨收敛 . 需求螺旋闭合</span><br>
 <span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第4篇</span> 电路图分析器 <span style="color:#8896a4;font-size:13px;">-- PDF原理图转AI可读描述</span><br>
-<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第5篇</span> 共生演化 <span style="color:#8896a4;font-size:13px;">-- 规格-实现知识一致性</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第5篇</span> 知识的生命体征 <span style="color:#8896a4;font-size:13px;">-- 知识资产生命周期管理</span><br>
 <span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第6篇</span> 历史的包袱 <span style="color:#8896a4;font-size:13px;">-- 遗留工程与AI迁移策略</span><br>
 <span style="display:inline-block;background:#c0392b;color:#fff;padding:1px 8px;border-radius:3px;font-weight:700;margin:2px 0;">第7篇</span> <strong>最后的拼图：Skills</strong> <span style="color:#8896a4;font-size:13px;">-- 规则感知型即时方法</span><br>
 </div>
@@ -29,18 +29,18 @@
     <section>
         <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">一、体系不是终点，效率才是</h2>
 
-        <p style="margin:14px 0;line-height:1.8;">前六篇文章，我们一直在做一件缓慢而郑重的事：定义坐标系，搭建工程骨架，设计闭环收敛，打通物理世界，管理知识演化，解放历史遗产。它们是基础设徊，是法度，是高速公路。它们回答的问题是：<strong>“AI 生成的代码，如何成为能在物理世界中负责任地运行的资产？”</strong></p>
+        <p style="margin:14px 0;line-height:1.8;">前六篇文章，我们一直在做一件缓慢而郑重的事：定义坐标系，搭建工程骨架，设计闭环收敛，打通物理世界，管理知识演化，解放历史遗产。它们是基础设徊，是法度，是高速公路。它们回答的问题是：<strong>"AI 生成的代码，如何成为能在物理世界中负责任地运行的资产？"</strong></p>
 
-        <p style="margin:14px 0;line-height:1.8;">但高速公路建好之后，真正的问题才浮出水面：<strong>“今天下午，我需要在已有工程里增加一个 I2C 传感器驱动——能不能在 5 分钟内搞定，并且代码直接可用，不需要我重读昨天的规约？”</strong></p>
+        <p style="margin:14px 0;line-height:1.8;">但高速公路建好之后，真正的问题才浮出水面：<strong>"今天下午，我需要在已有工程里增加一个 I2C 传感器驱动——能不能在 5 分钟内搞定，并且代码直接可用，不需要我重读昨天的规约？"</strong></p>
 
         <div>
-            <p style="margin:14px 0;line-height:1.8;"><strong>核心洞察：</strong>一个完整的方法论体系，如果只有“慢建构”的能力，它就只能在项目启动时被郑重其事地应用一次，然后逐渐被遗忘在日常琐碎里。它需要一个<strong>“快消费”的伴侣层</strong>——不是替代体系，而是运行在体系之上，让日常高频需求也能享受严谨法度的红利。</p>
+            <p style="margin:14px 0;line-height:1.8;"><strong>核心洞察：</strong>一个完整的方法论体系，如果只有"慢建构"的能力，它就只能在项目启动时被郑重其事地应用一次，然后逐渐被遗忘在日常琐碎里。它需要一个<strong>"快消费"的伴侣层</strong>——不是替代体系，而是运行在体系之上，让日常高频需求也能享受严谨法度的红利。</p>
         </div>
 
-        <p style="margin:14px 0;line-height:1.8;">这一层，就是 <strong>Skills</strong>。它不是新概念，而是你整个体系自然生长的另一半。如果说前六篇是<strong>“Core 层”</strong>——定义法则、搭建骨架、管理演化，那么 Skills 就是<strong>“应用层”</strong>——在法则之内，快速解决高度具体的、一次性的、但频繁出现的问题。两者不是竞争关系，是共生关系。</p>
+        <p style="margin:14px 0;line-height:1.8;">这一层，就是 <strong>Skills</strong>。它不是新概念，而是你整个体系自然生长的另一半。如果说前六篇是<strong>"Core 层"</strong>——定义法则、搭建骨架、管理演化，那么 Skills 就是<strong>"应用层"</strong>——在法则之内，快速解决高度具体的、一次性的、但频繁出现的问题。两者不是竞争关系，是共生关系。</p>
 
         <div style="background:#fef9e7;border:1px solid #f0d78c;border-radius:6px;padding:18px 22px;margin:20px 0;color:#6b4c1e;line-height:1.7;">
-            <strong>本文的命题：</strong>不是“如何设计 skill”，而是“你的 Core 体系如何成为 skill 的最佳运行时环境”。Skills 不是零散的代码片段，它们是浸透了项目规约、硬件上下文和验证闭环的<strong>规则感知型即时方法</strong>。而你的六篇文章，正好为这种高级 skill 提供了全部前置条件。
+            <strong>本文的命题：</strong>不是"如何设计 skill"，而是"你的 Core 体系如何成为 skill 的最佳运行时环境"。Skills 不是零散的代码片段，它们是浸透了项目规约、硬件上下文和验证闭环的<strong>规则感知型即时方法</strong>。而你的六篇文章，正好为这种高级 skill 提供了全部前置条件。
         </div>
     </section>
 
@@ -50,11 +50,11 @@
         <p style="margin:14px 0;line-height:1.8;">图1：Core 层与 Skill 层的共生架构——Core 提供法则和上下文，Skill 在法则内高速运转。</p>
 
     <section>
-        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">二、为什么你的体系能让 skill 真正“即插即用”</h2>
+        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">二、为什么你的体系能让 skill 真正"即插即用"</h2>
 
         <p style="margin:14px 0;line-height:1.8;">市面上大多数的 AI 编程 skill，本质上是泛化的代码片段生成器。它们能生成一段 I2C 驱动，但不知道你用的是哪颗芯片、你的工程模板要求什么代码风格、你的硬件原理图上 SDA 和 SCL 分别连在哪个 GPIO。你拿到那段代码后，仍然需要阅读、修改、适配。</p>
 
-        <p style="margin:14px 0;line-height:1.8;">你的体系，恰好把“适配”所需的信息全部结构化了：</p>
+        <p style="margin:14px 0;line-height:1.8;">你的体系，恰好把"适配"所需的信息全部结构化了：</p>
 
         <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 28px;margin:24px 0;">
             <table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
@@ -68,7 +68,7 @@
                     </tr>
                     <tr>
                         <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>硬件拓扑与外设映射</strong></td>
-                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">PCB分析器（④）提供了完整的外设-GPIO 映射表，skill 可以直接查询“I2C1 的 SDA 在 PA9”</td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">PCB分析器（④）提供了完整的外设-GPIO 映射表，skill 可以直接查询"I2C1 的 SDA 在 PA9"</td>
                     </tr>
                     <tr>
                         <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>工程模板与 HAL 约定</strong></td>
@@ -80,13 +80,13 @@
                     </tr>
                     <tr>
                         <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><strong>历史约束</strong></td>
-                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">决策账本（⑤ + ⑥）记录了哪些做法是禁区，skill 绝不上演“已经被证明是坏主意”的代码</td>
+                        <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">决策账本（⑤ + ⑥）记录了哪些做法是禁区，skill 绝不上演"已经被证明是坏主意"的代码</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <p style="margin:14px 0;line-height:1.8;"><strong>这意味着：</strong>在你的体系上运行 skill，生成的代码不是“泛用模板”，而是<strong>带着这个项目完整上下文和全部历史教训的、几乎可以直接烧录的最终代码</strong>。你不需要再去想“这个项目用的是 LL 库还是 HAL”，skill 已经知道。你不需要再查“这颗芯片的 Flash 写入后必须等几个 NOP”，skill 从你的规约文件里读到了。</p>
+        <p style="margin:14px 0;line-height:1.8;"><strong>这意味着：</strong>在你的体系上运行 skill，生成的代码不是"泛用模板"，而是<strong>带着这个项目完整上下文和全部历史教训的、几乎可以直接烧录的最终代码</strong>。你不需要再去想"这个项目用的是 LL 库还是 HAL"，skill 已经知道。你不需要再查"这颗芯片的 Flash 写入后必须等几个 NOP"，skill 从你的规约文件里读到了。</p>
 
         <div style="background:#fef9e7;border:1px solid #f0d78c;border-radius:6px;padding:18px 22px;margin:20px 0;color:#6b4c1e;line-height:1.7;">
             <strong>核心信条：</strong>所有的 skill 都应该是<strong>规则感知型</strong>的。而一个强大的 Core 层，就是为 skill 提供规则感知能力的唯一可靠途径。没有 Core 的 skill，是散兵游勇；没有 skill 的 Core，是空转的引擎。
@@ -106,37 +106,37 @@
 
         <p style="margin:14px 0;line-height:1.8;">Skill 启动后，自动执行以下查询链：</p>
         <ol style="margin:14px 0 14px 20px;line-height:1.8;">
-            <li style="margin:6px 0;"><strong>查询 PCB 分析器：</strong>“I2C1 的 SDA/SCL 分别映射到哪两个 GPIO？当前有没有其他设备共享这条总线？”</li>
-            <li style="margin:6px 0;"><strong>查询 agents.md：</strong>“I2C 驱动必须使用 DMA 模式，中断优先级必须为 4，严禁在 ISR 中调用任何日志函数。”</li>
-            <li style="margin:6px 0;"><strong>查询工程模板：</strong>“驱动文件应放在 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">Src/drivers/</code>，头文件在 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">Inc/drivers/</code>，并遵循统一的错误返回码约定。”</li>
-            <li style="margin:6px 0;"><strong>查询决策账本：</strong>“历史上是否有与 TMP117 或 I2C1 相关的已知陷阱？”（账本记录：某次 I2C1 与 SPI2 同时使用时出现总线冲突，原因是 DMA 通道重叠，已通过调整通道号解决。）</li>
+            <li style="margin:6px 0;"><strong>查询 PCB 分析器：</strong>"I2C1 的 SDA/SCL 分别映射到哪两个 GPIO？当前有没有其他设备共享这条总线？"</li>
+            <li style="margin:6px 0;"><strong>查询 agents.md：</strong>"I2C 驱动必须使用 DMA 模式，中断优先级必须为 4，严禁在 ISR 中调用任何日志函数。"</li>
+            <li style="margin:6px 0;"><strong>查询工程模板：</strong>"驱动文件应放在 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">Src/drivers/</code>，头文件在 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">Inc/drivers/</code>，并遵循统一的错误返回码约定。"</li>
+            <li style="margin:6px 0;"><strong>查询决策账本：</strong>"历史上是否有与 TMP117 或 I2C1 相关的已知陷阱？"（账本记录：某次 I2C1 与 SPI2 同时使用时出现总线冲突，原因是 DMA 通道重叠，已通过调整通道号解决。）</li>
             <li style="margin:6px 0;"><strong>生成代码：</strong>基于以上所有上下文，生成完整的 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">tmp117.c</code> 和 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">tmp117.h</code>，代码已经遵循了负日志规范（包含期望值检查），使用了模板规定的 HAL 封装风格。</li>
             <li style="margin:6px 0;"><strong>立即验证：</strong>闭环收敛 Agent 被触发，自动编译、烧录、运行 I2C 扫描测试和温度读取测试，确认传感器在线且数据在合理范围内。</li>
         </ol>
 
         <p style="margin:14px 0;line-height:1.8;"><strong>耗时：5 分钟。</strong>其中 4 分钟是编译和烧录的物理时间，你真正参与的只有第一步——写一个意图声明。</p>
 
-        <p style="margin:14px 0;line-height:1.8;">这就是 <strong>Skill 层的价值：它把日常开发从“写代码”转变为“声明意图，审查结果”。</strong></p>
+        <p style="margin:14px 0;line-height:1.8;">这就是 <strong>Skill 层的价值：它把日常开发从"写代码"转变为"声明意图，审查结果"。</strong></p>
     </section>
 
     <section>
         <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">四、Skill 的设计原则：快，但不牺牲质量和可追溯性</h2>
 
-        <p style="margin:14px 0;line-height:1.8;">快消费不代表“用完就扔，不管后果”。在你体系中运行的 skill，必须遵循几条硬性原则。这些原则，直接来自于你的 Core 层哲学：</p>
+        <p style="margin:14px 0;line-height:1.8;">快消费不代表"用完就扔，不管后果"。在你体系中运行的 skill，必须遵循几条硬性原则。这些原则，直接来自于你的 Core 层哲学：</p>
 
         <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 28px;margin:24px 0;">
             <p style="margin:14px 0;line-height:1.8;"><strong>原则一：所有 skill 产物必须可验证。</strong></p>
-            <p style="margin:14px 0;line-height:1.8;">Skill 生成的代码，必须能立即被 CI 或闭环收敛 Agent 接管。如果 skill 生成了一段 I2C 驱动，那么对应的 I2C 扫描测试和压力测试就必须同步生成，并且必须在硬件上跑通。不允许“生成完就不管”的 skill。</p>
+            <p style="margin:14px 0;line-height:1.8;">Skill 生成的代码，必须能立即被 CI 或闭环收敛 Agent 接管。如果 skill 生成了一段 I2C 驱动，那么对应的 I2C 扫描测试和压力测试就必须同步生成，并且必须在硬件上跑通。不允许"生成完就不管"的 skill。</p>
         </div>
 
         <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 28px;margin:24px 0;">
             <p style="margin:14px 0;line-height:1.8;"><strong>原则二：所有 skill 必须尊重决策账本。</strong></p>
-            <p style="margin:14px 0;line-height:1.8;">Skill 在生成代码前，必须查询账本中的历史禁区和已知陷阱。如果账本明确指示“I2C1 的 DMA 不能与 TIM2 的 CH2 共用通道”，skill 必须自动避开，而不是再次踩坑后等人来救。</p>
+            <p style="margin:14px 0;line-height:1.8;">Skill 在生成代码前，必须查询账本中的历史禁区和已知陷阱。如果账本明确指示"I2C1 的 DMA 不能与 TIM2 的 CH2 共用通道"，skill 必须自动避开，而不是再次踩坑后等人来救。</p>
         </div>
 
         <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 28px;margin:24px 0;">
             <p style="margin:14px 0;line-height:1.8;"><strong>原则三：Skill 的运行上下文必须被记录。</strong></p>
-            <p style="margin:14px 0;line-height:1.8;">当一个 skill 生成了代码并被接受，这个事件本身就是一个决策——相当于人在说：“这个 skill 的判断在当时是正确的。”这个决策必须被写回决策账本，以便未来的共生演化能追踪这次增量的来龙去脉。</p>
+            <p style="margin:14px 0;line-height:1.8;">当一个 skill 生成了代码并被接受，这个事件本身就是一个决策——相当于人在说："这个 skill 的判断在当时是正确的。"这个决策必须被写回决策账本，以便未来的知识生命体征管理能追踪这次增量的来龙去脉。</p>
         </div>
 
         <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 28px;margin:24px 0;">
@@ -148,7 +148,7 @@
     <section>
         <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">五、Skills 与五层进化的映射</h2>
 
-        <p style="margin:14px 0;line-height:1.8;">Skills 不是外挂，而是五层进化每一层在“日常高频使用”时的自然延伸：</p>
+        <p style="margin:14px 0;line-height:1.8;">Skills 不是外挂，而是五层进化每一层在"日常高频使用"时的自然延伸：</p>
 
         <table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
             <th style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;background:#f5f7fa;font-weight:700;font-size:13px;">
@@ -173,7 +173,7 @@
                 </tr>
                 <tr>
                     <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><span style="display:inline-block;background:#1a1a2e;color:#fff;font-size:11px;padding:2px 10px;border-radius:3px;font-weight:600;">L5 自治与共生</span></td>
-                    <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">Skill 的每一次执行结果都被记录进决策账本，参与未来的共生演化</td>
+                    <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">Skill 的每一次执行结果都被记录进决策账本，参与未来的知识生命体征管理</td>
                 </tr>
             </tbody>
         </table>
@@ -189,14 +189,14 @@
         <p style="margin:14px 0;line-height:1.8;">Skills 就是这一块拼图。它不是你体系的升级，而是你体系的<strong>日常化</strong>。它确保：当你在下午 3 点需要加一个传感器驱动时，你不会因为嫌麻烦而绕过所有精心设计的规约——因为 skill 让你在不绕路的情况下，比绕路更快。</p>
 
         <div style="background:#fef9e7;border:1px solid #f0d78c;border-radius:6px;padding:18px 22px;margin:20px 0;color:#6b4c1e;line-height:1.7;">
-            <strong>系列至此完整：</strong>你有了一纵一横的深度，有了向历史回望的担当，现在又有了覆盖日常高频操作的快消费层。你可以安静地说出那句话了——<strong>“这不再是一套只在理想条件下运转的理论，而是一套能落地到每一天日常工作中的、完整的工程哲学。”</strong>
+            <strong>系列至此完整：</strong>你有了一纵一横的深度，有了向历史回望的担当，现在又有了覆盖日常高频操作的快消费层。你可以安静地说出那句话了——<strong>"这不再是一套只在理想条件下运转的理论，而是一套能落地到每一天日常工作中的、完整的工程哲学。"</strong>
         </div>
     </section>
 
     <section>
         <h4 style="font-size:16px;font-weight:600;margin:24px 0 8px;color:#1a1a2e;">本文定位</h4>
-        <p style="margin:14px 0;line-height:1.8;">本文是五层进化系列在<strong>应用层</strong>的收官。它提出了 Skill 层作为 Core 层的共生伴侣，定义了 skill 的运行原则，并将其映射到五层进化的每一级。建议与《高复用模板》和《共生演化》联合阅读，理解 skill 如何在规约、硬件上下文和决策账本的加持下，实现真正的“即插即用”。</p>
-        <p style="margin:14px 0;line-height:1.8;">系列导航：<a href="index.html">① 五层进化</a> · <a href="true.html">② 高复用模板</a> · <a href="test.html">③ 闭环收敛</a> · <a href="pcb.html">④ PCB分析器</a> · <a href="exc.html">⑤ 共生演化</a> · <a href="history.html">⑥ 历史的包袱</a> · <strong>⑦ 最后的拼图：Skills</strong></p>
+        <p style="margin:14px 0;line-height:1.8;">本文是五层进化系列在<strong>应用层</strong>的收官。它提出了 Skill 层作为 Core 层的共生伴侣，定义了 skill 的运行原则，并将其映射到五层进化的每一级。建议与《高复用模板》和《知识的生命体征》联合阅读，理解 skill 如何在规约、硬件上下文和决策账本的加持下，实现真正的"即插即用"。</p>
+        <p style="margin:14px 0;line-height:1.8;">系列导航：<a href="index.html">① 五层进化</a> · <a href="true.html">② 高复用模板</a> · <a href="test.html">③ 闭环收敛</a> · <a href="pcb.html">④ PCB分析器</a> · <a href="exc.html">⑤ 知识的生命体征</a> · <a href="history.html">⑥ 历史的包袱</a> · <strong>⑦ 最后的拼图：Skills</strong></p>
     </section>
 
 </div>

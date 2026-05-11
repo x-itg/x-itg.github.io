@@ -11,7 +11,7 @@
 <span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第2篇</span> 实践项目模板 <span style="color:#8896a4;font-size:13px;">-- 高可复用嵌入式AI编程骨架</span><br>
 <span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第3篇</span> 自主修复闭环 <span style="color:#8896a4;font-size:13px;">-- AI双轨收敛 . 需求螺旋闭合</span><br>
 <span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第4篇</span> 电路图分析器 <span style="color:#8896a4;font-size:13px;">-- PDF原理图转AI可读描述</span><br>
-<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第5篇</span> 共生演化 <span style="color:#8896a4;font-size:13px;">-- 规格-实现知识一致性</span><br>
+<span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第5篇</span> 知识的生命体征 <span style="color:#8896a4;font-size:13px;">-- 知识资产生命周期管理</span><br>
 <span style="display:inline-block;background:#c0392b;color:#fff;padding:1px 8px;border-radius:3px;font-weight:700;margin:2px 0;">第6篇</span> <strong>历史的包袱</strong> <span style="color:#8896a4;font-size:13px;">-- 遗留工程与AI迁移策略</span><br>
 <span style="display:inline-block;background:#f0f3f6;color:#4a5568;padding:1px 8px;border-radius:3px;margin:2px 0;">第7篇</span> 最后的拼图：Skills <span style="color:#8896a4;font-size:13px;">-- 规则感知型即时方法</span><br>
 </div>
@@ -33,13 +33,13 @@
         <p style="margin:14px 0;line-height:1.8;">每个嵌入式工程师的硬盘里，都躺着一批 Keil/IAR 老项目。它们已经稳定运行了五年、十年，是公司的现金牛，是产品线的基石。它们沉默、可靠、不可触碰。没有人想重写它们——不是因为它们完美，而是因为当年写它们的人可能已经离职，当年用的芯片还可能带着七个硬件勘误，当年留下的注释只有一行<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">// adjust this value</code>。</p>
 
         <div>
-            <p style="margin:14px 0;line-height:1.8;"><strong>核心矛盾：</strong>你的 AI 方法论已经进化到能自治地管理代码与规约的共生演化，但你的老项目还活在一堵高墙之后。墙的一侧是现代 Linux 开发环境、VSCode、AI 助手、CLI 闭环；另一侧是 Windows 虚拟机、Keil/IAR 的图形界面、一个鼠标点来点去的编译按钮。每次你需要在老项目上做哪怕一行修改，你都要穿越这堵墙。</p>
+            <p style="margin:14px 0;line-height:1.8;"><strong>核心矛盾：</strong>你的 AI 方法论已经进化到能自治地管理代码与规约的知识生命体征，但你的老项目还活在一堵高墙之后。墙的一侧是现代 Linux 开发环境、VSCode、AI 助手、CLI 闭环；另一侧是 Windows 虚拟机、Keil/IAR 的图形界面、一个鼠标点来点去的编译按钮。每次你需要在老项目上做哪怕一行修改，你都要穿越这堵墙。</p>
         </div>
 
         <p style="margin:14px 0;line-height:1.8;">这份沉默是有代价的。它让你的老项目无法被 AI 理解、无法被自动化验证、无法被纳入你那套已经成形的五层进化体系。它们是历史，但历史不应是黑暗的。历史应该被照亮、被翻译、被赋予与当下对话的能力。</p>
 
         <div style="background:#fef9e7;border:1px solid #f0d78c;border-radius:6px;padding:18px 22px;margin:20px 0;color:#6b4c1e;line-height:1.7;">
-            <strong>本文的主张：承认历史的物理惯性，但不被它定义。</strong>你不是在“全切 Linux”和“困在 Windows”之间做选择。你是在设计一套分层策略，逐步把老项目从供应商锁定的牢笼里，迁入你自建的、AI 可操作的开发生态。
+            <strong>本文的主张：承认历史的物理惯性，但不被它定义。</strong>你不是在"全切 Linux"和"困在 Windows"之间做选择。你是在设计一套分层策略，逐步把老项目从供应商锁定的牢笼里，迁入你自建的、AI 可操作的开发生态。
         </div>
     </section>
 
@@ -49,7 +49,7 @@
         <p style="margin:14px 0;line-height:1.8;">图1：三层策略——防御层承认历史，抽象层翻译历史，进攻层超越历史。</p>
 
     <section>
-        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">二、防御层：把 Keil/IAR 变成一个“烧录按钮”</h2>
+        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">二、防御层：把 Keil/IAR 变成一个"烧录按钮"</h2>
 
         <p style="margin:14px 0;line-height:1.8;">对老项目的日常维护，你真正需要 Keil/IAR 做的事情只有两件：<strong>编译</strong>，和<strong>烧录/调试</strong>。你不需要在 Keil 里面写代码、看代码、做版本对比。你的现代开发能力——VSCode 编辑、AI 对话、Git 管理——早已超越那个狭窄的 IDE 窗口。</p>
 
@@ -64,17 +64,17 @@
             </ol>
         </div>
 
-        <p style="margin:14px 0;line-height:1.8;"><strong>效果：</strong>你的日常主场已经是流畅的 Ubuntu。Windows 上的 Keil/IAR 退化成一个静默的“编译烧录服务器”——你甚至可以关掉它的显示器。你为老项目付出的“环境税”，降低到了只是触发编译命令的那几秒网络延迟。</p>
+        <p style="margin:14px 0;line-height:1.8;"><strong>效果：</strong>你的日常主场已经是流畅的 Ubuntu。Windows 上的 Keil/IAR 退化成一个静默的"编译烧录服务器"——你甚至可以关掉它的显示器。你为老项目付出的"环境税"，降低到了只是触发编译命令的那几秒网络延迟。</p>
 
         <pre style="background:#1e293b;color:#e2e8f0;padding:16px 20px;border-radius:6px;font-family:Consolas,monospace;font-size:13px;line-height:1.7;margin:16px 0;overflow-x:auto;white-space:pre-wrap;"><span style="display:block;"><span style="color:#546e7a;font-style:italic;"># 宿主机 Ubuntu 上的远程编译脚本（示例）</span></span><span style="display:block;"><span style="color:#546e7a;font-style:italic;"># 通过 ssh 触发 Windows 上 Keil 的命令行编译，并取回结果</span></span><span style="display:block;">ssh win-env <span style="color:#c3e88d;">"cd C:\\Projects\\OldFirmware && UV4.exe -b project.uvprojx -o build.log"</span></span><span style="display:block;">scp win-env:<span style="color:#c3e88d;">"C:\\Projects\\OldFirmware\\build.log"</span> ./build.log</span><span style="display:block;"><span style="color:#82aaff;">python3</span> parse_build_log.py build.log  <span style="color:#546e7a;font-style:italic;"># 将错误格式化为 VSCode problem matcher</span></span></pre>
     </section>
 
     <section>
-        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">三、抽象层：让 AI 成为你的“Keil 项目翻译官”</h2>
+        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">三、抽象层：让 AI 成为你的"Keil 项目翻译官"</h2>
 
         <p style="margin:14px 0;line-height:1.8;">老项目最深的阻碍，不是编译工具链，而是它们的<strong>工程结构、配置选项、依赖关系</strong>全部藏在 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">.uvprojx</code>、<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">.ewp</code>、<code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">.sct</code> 这些二进制或半结构化的文件里。人读起来困难，AI 根本无法进入。这个项目对 AI 来说，是一个黑箱。</p>
 
-        <p style="margin:14px 0;line-height:1.8;">抽象层的使命是：<strong>喂给 AI 这些工程文件，让它生成一份 AI 可阅读、人可审查的“项目说明书”。</strong></p>
+        <p style="margin:14px 0;line-height:1.8;">抽象层的使命是：<strong>喂给 AI 这些工程文件，让它生成一份 AI 可阅读、人可审查的"项目说明书"。</strong></p>
 
         <div style="background:#ffffff;border:1px solid #e0e4e8;border-radius:8px;padding:24px 28px;margin:24px 0;">
             <p style="margin:14px 0;line-height:1.8;"><strong>让 AI 做一次性翻译工作：</strong></p>
@@ -85,7 +85,7 @@
             </ol>
         </div>
 
-        <p style="margin:14px 0;line-height:1.8;"><strong>效果：</strong>经过这一次翻译，你立即获得了一个 AI 能读懂的旧项目。以后你问 AI：“这个项目的 SPI 时钟是多少？”它不用猜，而是有你的翻译文档作为知识基础。你还未真正迁移它的工具链，但你已经解放了它的<strong>设计意图</strong>。这份翻译文档，就是老项目进入 AI 对话世界的护照。</p>
+        <p style="margin:14px 0;line-height:1.8;"><strong>效果：</strong>经过这一次翻译，你立即获得了一个 AI 能读懂的旧项目。以后你问 AI："这个项目的 SPI 时钟是多少？"它不用猜，而是有你的翻译文档作为知识基础。你还未真正迁移它的工具链，但你已经解放了它的<strong>设计意图</strong>。这份翻译文档，就是老项目进入 AI 对话世界的护照。</p>
 
         <div style="background:#fef9e7;border:1px solid #f0d78c;border-radius:6px;padding:18px 22px;margin:20px 0;color:#6b4c1e;line-height:1.7;">
             <strong>这一步不涉及任何代码修改，因此风险为零。</strong>但它为所有后续的维护、理解和演进工作，铺平了道路。它是历史被照亮的第一步。
@@ -93,7 +93,7 @@
     </section>
 
     <section>
-        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">四、进攻层：把老项目的“灵魂”迁移出来</h2>
+        <h2 style="font-size:24px;font-weight:700;margin:48px 0 16px;padding-top:20px;border-top:2px solid #e0e4e8;">四、进攻层：把老项目的"灵魂"迁移出来</h2>
 
         <p style="margin:14px 0;line-height:1.8;">如果某个老项目对你还有战略价值——需要长期维护、衍生新项目——那么你应该逐步把它的<strong>核心资产</strong>从 Keil/IAR 牢笼中抽离出来。核心资产不是代码，而是<strong>规格和约束</strong>。代码是那个时代的表达，规格才是超越时代的价值。</p>
 
@@ -101,13 +101,13 @@
             <p style="margin:14px 0;line-height:1.8;"><strong>逆向提取核心资产：</strong></p>
             <ol style="margin:14px 0 14px 20px;line-height:1.8;">
                 <li style="margin:6px 0;">用 AI 配合你的 PCB 分析器，把老项目的<strong>硬件原理图</strong>和代码中的外设操作对应上。</li>
-                <li style="margin:6px 0;">提取出所有应该在 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">agents.md</code> 中存在的规约：“这个传感器需要 10ms 的启动时间”、“电机控制必须在 1ms 周期内完成”、“这颗 Flash 在写入后必须等待 3μs”。</li>
+                <li style="margin:6px 0;">提取出所有应该在 <code style="background:#eef1f5;padding:2px 6px;border-radius:3px;color:#c0392b;font-size:13px;font-family:Consolas,monospace;">agents.md</code> 中存在的规约："这个传感器需要 10ms 的启动时间"、"电机控制必须在 1ms 周期内完成"、"这颗 Flash 在写入后必须等待 3μs"。</li>
                 <li style="margin:6px 0;">用你的高复用模板重新生成一个<strong>平台无关的新固件骨架</strong>，在你的 Ubuntu + GCC 环境下开发。</li>
                 <li style="margin:6px 0;">用老项目作为<strong>黄金参考模型</strong>，用你闭环收敛的方法，让 AI 确保新固件在行为上与老固件一致。老项目的输入/输出数据，成为你的测试基准。</li>
             </ol>
         </div>
 
-        <p style="margin:14px 0;line-height:1.8;"><strong>效果：</strong>你为一个有遗产价值的项目赋予了新生。它从一个特定供应商的牢笼中解放，迁入了你自己建立的、AI 可操作的开发生态。它现在可以享受你的五层进化的全部红利：负日志的可观测性、双轨收敛的测试保障、PCB 分析器的硬件感知、共生演化的知识一致性。</p>
+        <p style="margin:14px 0;line-height:1.8;"><strong>效果：</strong>你为一个有遗产价值的项目赋予了新生。它从一个特定供应商的牢笼中解放，迁入了你自己建立的、AI 可操作的开发生态。它现在可以享受你的五层进化的全部红利：负日志的可观测性、双轨收敛的测试保障、PCB 分析器的硬件感知、知识的生命体征管理。</p>
 
         <div style="background:#fef9e7;border:1px solid #f0d78c;border-radius:6px;padding:18px 22px;margin:20px 0;color:#6b4c1e;line-height:1.7;">
             <strong>核心原则：不是盲目的重写，而是为有遗产价值的项目赋予新的生命形态。</strong>那些没有战略价值的老项目，防御层和抽象层已经足够。只有那些还需要活很久、还需要不断演化的项目，才值得动用进攻层。
@@ -175,7 +175,7 @@
                 </tr>
                 <tr>
                     <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;"><span style="display:inline-block;background:#1a1a2e;color:#fff;font-size:11px;padding:2px 10px;border-radius:3px;font-weight:600;">L5 自治与共生</span></td>
-                    <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">老项目规约被提取后，纳入共生演化管理。即使原始 IDE 被废弃，知识不丢失</td>
+                    <td style="padding:10px 14px;text-align:left;border:1px solid #d0dbe6;">老项目规约被提取后，纳入知识生命体征管理。即使原始 IDE 被废弃，知识不丢失</td>
                 </tr>
             </tbody>
         </table>
@@ -195,8 +195,8 @@
 
     <section>
         <h4 style="font-size:16px;font-weight:600;margin:24px 0 8px;color:#1a1a2e;">本文定位</h4>
-        <p style="margin:14px 0;line-height:1.8;">本文是五层进化框架在<strong>环境维度</strong>的扩展。它回答了“如何将封闭 IDE 的老项目纳入 AI 工程化体系”这一现实问题，提供了三层递进策略：防御层承认约束、抽象层翻译意图、进攻层解放资产。建议与《规格-实现共生演化机制》共同阅读，理解知识一致性的全生命周期管理。</p>
-        <p style="margin:14px 0;line-height:1.8;">相关文章：<a href="index.html">五层进化</a> · <a href="true.html">高复用模板</a> · <a href="test.html">闭环收敛</a> · <a href="pcb.html">PCB分析器</a> · <a href="exc.html">共生演化</a></p>
+        <p style="margin:14px 0;line-height:1.8;">本文是五层进化框架在<strong>环境维度</strong>的扩展。它回答了"如何将封闭 IDE 的老项目纳入 AI 工程化体系"这一现实问题，提供了三层递进策略：防御层承认约束、抽象层翻译意图、进攻层解放资产。建议与《知识的生命体征》共同阅读，理解知识一致性的全生命周期管理。</p>
+        <p style="margin:14px 0;line-height:1.8;">相关文章：<a href="index.html">五层进化</a> · <a href="true.html">高复用模板</a> · <a href="test.html">闭环收敛</a> · <a href="pcb.html">PCB分析器</a> · <a href="exc.html">知识的生命体征</a></p>
     </section>
 
 </div>
@@ -205,7 +205,7 @@
 
 
 <div style="margin-top:40px;padding-top:20px;border-top:2px solid #e0e4e8;font-size:14px;text-align:center;line-height:2.2;">
-<span style="margin-right:20px;"><a href="exc.html" style="color:#2980b9;">&lt; 上一篇：共生演化</a></span>
+<span style="margin-right:20px;"><a href="exc.html" style="color:#2980b9;">&lt; 上一篇：知识的生命体征</a></span>
 <span><a href="pt.html" style="color:#2980b9;">下一篇：最后的拼图：Skills &gt;</a></span>
 <br><a href="index.html" style="color:#2980b9;">[返回系列首页]</a>
 </div>
