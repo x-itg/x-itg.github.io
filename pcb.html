@@ -649,6 +649,8 @@
         <a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
         <h1>PDF电路图分析器<br>Markdown生成 + VSCode深度关联</h1>
         <div class="subtitle">基于PyQt的GUI工具，将PDF电路图转化为结构化描述，建立元件与代码的快速跳转通道</div>
+        <p class="meta" style="font-size:13px;color:var(--text-secondary);margin-top:8px;">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
+
 
         <h2 id="arch">1. 整体架构与工作流程</h2>
         <p>该工具面向嵌入式AI开发场景：PDF原理图通常由EDA工具导出，包含器件位号、网络标号、引脚连接等信息。脚本通过<strong>OCR + 规则解析</strong>提取这些文本，生成AI可读的Markdown描述，并在PyQt GUI中建立“电路元件 ↔ 代码文件:行号”的关联视图。点击超链接直接调用VSCode打开对应位置。</p>
