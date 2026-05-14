@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用工程魔法打败生活魔法 | itg</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #fefce8; --card-bg: #ffffff; --text: #292524;
+        --text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
+        --border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
+        background: var(--bg); color: var(--text); line-height: 1.9; -webkit-font-smoothing: antialiased;
+    }
+    .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
+
+    .sidebar {
+        width:240px; position:sticky; top:0; height:100vh; overflow-y:auto;
+        padding:32px 16px; border-right:1px solid var(--border);
+        background:var(--sidebar-bg); flex-shrink:0;
+    }
+    .sidebar .logo { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:8px; }
+    .sidebar .logo a { color:var(--accent); text-decoration:none; }
+    .sidebar .logo a:hover { opacity:0.75; }
+    .sidebar .nav-section { margin-bottom:20px; }
+    .sidebar .nav-section h3 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary); margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+    .sidebar .nav-section ul { list-style:none; }
+    .sidebar .nav-section li { margin-bottom:4px; }
+    .sidebar .nav-section a { display:block; padding:6px 10px; font-size:13px; color:var(--text); text-decoration:none; border-radius:6px; transition:background 0.15s; }
+    .sidebar .nav-section a:hover, .sidebar .nav-section a.active { background:rgba(217,119,6,0.1); color:var(--accent); }
+    .sidebar .nav-section a i { width:20px; color:var(--accent); }
+    .sidebar .back-home { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; }
+    .sidebar .back-home a { color:var(--text-secondary); text-decoration:none; }
+    .sidebar .back-home a:hover { color:var(--accent); }
+
+    .main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+    .main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+    .main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
+    .main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.3px; }
+    .main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
+    .main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
+    .main-content h2 { font-size:20px; font-weight:700; color:#1c1917; margin:40px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--accent-light); }
+    .main-content p { margin:14px 0; font-size:15px; color:#44403c; text-align:justify; }
+    .main-content strong { color:#1c1917; font-weight:600; }
+
+    .insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
+    .insight-box strong { color:#92400e; }
+
+    .scene-card {
+        background:white; border:1px solid var(--border); border-radius:var(--radius);
+        padding:24px; margin:24px 0; transition:box-shadow 0.2s;
+    }
+    .scene-card:hover { box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+    .scene-card h3 { font-size:16px; color:#1c1917; margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+    .scene-card h3 i { color:var(--accent); }
+    .scene-card .pain { font-size:13px; color:#a8a29e; margin-bottom:10px; font-style:italic; }
+    .scene-card p { margin:8px 0; }
+
+    .series-nav { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); display:flex; justify-content:space-between; font-size:14px; }
+    .series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
+    .series-nav a:hover { text-decoration:underline; }
+
+    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
+</style>
+</head>
+<body>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="logo"><a href="../index.html"><i class="fas fa-home"></i> itg</a></div>
+        <div class="nav-section">
+            <h3>生活随记</h3>
+            <ul>
+                <li><a href="../about.html"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
+                <li><a href="../aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
+                <li><a href="../aboutmore/fw.html" class="active"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
+                <li><a href="../aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <h3>技术系列</h3>
+            <ul>
+                <li><a href="../index.html"><i class="fas fa-microchip"></i> 嵌入式AI工程化</a></li>
+            </ul>
+        </div>
+        <div class="back-home">
+            <a href="../index.html">← 返回首页</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="article-header">
+            <span class="series-tag">番外篇</span>
+            <h1>用工程魔法打败生活魔法</h1>
+            <p class="subtitle">一套思想体系的七种不正经应用</p>
+            <p class="meta">itg · 生活随记 · 番外篇</p>
+        </header>
+
+        <article>
+            <h2>引言：当法则走出嵌入式</h2>
+            <p>我们构建了一套严肃的工程体系：闭环收敛、负日志、共生演化、决策切换、多性格Agent、单一信息源、知识生命体征。它们本是为"让AI在物理世界中可以被信任"而生的。</p>
+            <p>但如果把这些概念从嵌入式工程中"拎"出来，扔进生活的泥潭里——会议、减肥、吵架、剁手、收藏夹吃灰、选择困难、孩子发烧——会发生什么？</p>
+            <p>这篇番外篇，就是一次严肃概念的"不正经"实验。我们把七个核心概念，分别投射到七个让人抓狂的生活场景里，看看能否用工程魔法打败生活魔法。</p>
+
+            <div class="scene-card">
+                <h3><i class="fas fa-users"></i> 场景一：会议终结者 · 负日志</h3>
+                <p class="pain">痛点：会议冗长、发散、议而不决。开了两小时，不知道到底定了什么。</p>
+                <p><strong>工程魔法：</strong>把会议变成一场可观测的系统运行。</p>
+                <p>会议发起人必须在邀请里声明"期望事件"：本次会议期望在45分钟内，就Q3预算方案达成"批准/驳回/需补充数据"三种决议之一。会议结束时，若未达成任何决议，系统自动记录一条"会议负日志"，并抄送全员。连续三次负日志的项目，触发组织级的"决策切换"审查。</p>
+                <p><span class="keyword-tag">温和版</span> 仅记录决议，不追责，起提醒作用。</p>
+                <p><span class="keyword-tag">激进版</span> 连续三次未决，自动升级议题，并冻结发起人两周会议预约权限。</p>
+            </div>
+
+            <div class="scene-card">
+                <h3><i class="fas fa-weight-scale"></i> 场景二：减肥收敛器 · 闭环收敛</h3>
+                <p class="pain">痛点：体重像AI生成的代码——反复波动，永远不收敛。</p>
+                <p><strong>工程魔法：</strong>把减肥变成双轨收敛闭环。</p>
+                <p>轨一（饮食修复）：每天记录摄入，AI根据体重反馈调整食谱。轨二（运动增强）：每周体测，发现平台期就增加新的运动模式。收敛判据：连续两周体重波动小于0.5kg，体脂率达标，且无"深夜外卖"负日志事件。</p>
+                <p>当连续四周未收敛，系统自动触发仲裁者评估——你的代谢是不是适应了当前方案？是否需要切换到"力量训练为主"的新路径？</p>
+            </div>
+
+            <div class="scene-card">
+                <h3><i class="fas fa-heart-crack"></i> 场景三：吵架修复器 · 共生演化</h3>
+                <p class="pain">痛点：同样的矛盾反复发生，关系随时间悄悄漂移。</p>
+                <p><strong>工程魔法：</strong>引入关系版本的漂移感知与免疫记忆。</p>
+                <p>每次吵架后（等情绪平复），双方进行一次"漂移检查"：我们这次冲突的根因是什么？和上一次有没有相似的模式？找到根因后，形成一条"免疫记忆"——下次遇到类似情况，我们应该怎么做？</p>
+                <p>这条记忆被写进双方的"关系决策账本"。当同样的模式第三次出现时，系统自动提醒：你们在2025年已经为此吵过两次，当时的约定是冷静十分钟再谈。要不要试试？</p>
+            </div>
+
+            <div class="scene-card">
+                <h3><i class="fas fa-cart-shopping"></i> 场景四：剁手冷静器 · 多性格Agent</h3>
+                <p class="pain">痛点：深夜刷直播，手比脑子快。</p>
+                <p><strong>工程魔法：</strong>把消费决策交给你的"AI内阁"。</p>
+                <p>激进的探索者负责找出全网最低价、最强平替和最真实差评。保守的审查者计算这笔消费对你未来六个月储蓄率的影响，并警告："你上个月买过类似商品，使用率仅为12%。"中立的仲裁者基于你的财务目标和历史消费数据，给出最终裁决。</p>
+            </div>
+
+            <div class="scene-card">
+                <h3><i class="fas fa-bookmark"></i> 场景五：收藏夹清道夫 · 知识生命体征</h3>
+                <p class="pain">痛点：收藏等于已读，知识只进不出。</p>
+                <p><strong>工程魔法：</strong>为你的数字收藏赋予热度、健康度和唤醒机制。</p>
+                <p>每篇文章都是一个知识文档。反复查阅的，热度提升；被引用来解决问题的，健康度升级。长期只收藏不回顾的，健康度进入"预警"状态。系统定期提醒你："这30篇文章你已经收藏半年了，从未打开。是时候清理或学习了。"</p>
+            </div>
+
+            <div class="scene-card">
+                <h3><i class="fas fa-question"></i> 场景六：选择困难症终结者 · 决策切换</h3>
+                <p class="pain">痛点：在两个选项之间反复纠结，越比较越焦虑。</p>
+                <p><strong>工程魔法：</strong>引入代价评估模型，在纠结中触发"决策切换"。</p>
+                <p>当你在一件小事上花费了不成比例的时间——比如挑选餐厅超过20分钟——系统自动触发提醒，显示你的已投入心理成本。它列出替代方案：随机选一个、交给朋友决定、选最便宜的。系统用数据告诉你：再花30分钟纠结，选到"最佳餐厅"的概率只提升了3%，但心情成本已经翻倍。</p>
+            </div>
+
+            <div class="scene-card">
+                <h3><i class="fas fa-house-chimney"></i> 场景七：家庭指挥部 · 统一法则管理</h3>
+                <p class="pain">痛点：家务分工模糊、家庭信息分散、育儿决策不一致。</p>
+                <p><strong>工程魔法：</strong>为家庭建立一套轻量级的"法则体系"。</p>
+                <p>一个家庭版的"法则管理器"，包含：待办事项的明确分工与标准（如"洗碗 = 清洁所有餐具 + 擦拭灶台 + 倒垃圾"），家庭物资的"单一信息源"（日用品库存实时可见），以及育儿的统一决策框架（孩子发烧时，什么情况在家观察、什么情况立即就医，提前约定）。</p>
+                <p>系统不是强制执行，而是把那些本该提前说清楚、却总是靠临时吵架来解决的事情，变成一套透明的、可修订的共识。</p>
+            </div>
+
+            <div class="insight-box">
+                七个场景，七种魔法。它们看似各不相同，底层却共享同一套逻辑：我们定义期望和边界，构建可观测的反馈，通过持续的迭代和适时的路径切换，让一个复杂的系统——无论是一段代码、一段关系，还是一段人生——朝着我们想要的方向收敛。
+            </div>
+
+            <h2>结语：魔法不在书里，在你的淤青里</h2>
+            <p>这套思想体系的每一次延伸，都不是凭空设计，而是被现实逼出来的解法。负日志来自调试的挫败，闭环收敛来自Bug反复横跳的抓狂，决策切换来自AI在死胡同里越挖越深的无奈。把它们用在生活里，不是强行跨界，而是诚实地承认：生活的混乱和工程的混乱，本质上同一种混乱。而我们能用来对抗它的武器，也只有同一套：<strong>定义法则，言出法随</strong>。</p>
+        </article>
+
+        <div class="series-nav">
+            <a href="../aboutmore/tk.html">← 以不变应万变</a>
+            <a href="../aboutmore/sc.html">调试AI，学会经营感情 →</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
