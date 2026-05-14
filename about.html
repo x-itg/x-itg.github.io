@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关于作者 | 嵌入式AI工程化系列</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #f8f9fa;
+        --card-bg: #ffffff;
+        --text: #2c3e50;
+        --text-secondary: #5a6c7d;
+        --accent: #c0392b;
+        --border: #e0e4e8;
+        --highlight: #fef9e7;
+        --code-bg: #1e293b;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.9;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 60px 24px 100px;
+    }
+
+    /* 顶部导航 */
+    .back-nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 48px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border);
+        font-size: 14px;
+    }
+    .back-nav a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .back-nav a:hover {
+        text-decoration: underline;
+    }
+    .back-nav .sep {
+        color: #c0c7cf;
+    }
+
+    /* 作者头部区域 */
+    .author-header {
+        text-align: center;
+        margin-bottom: 64px;
+        padding-bottom: 56px;
+        border-bottom: 2px solid var(--border);
+        position: relative;
+    }
+    .author-header::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+        border-radius: 2px;
+    }
+    .author-avatar {
+        width: 96px;
+        height: 96px;
+        background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 28px;
+        font-size: 38px;
+        color: white;
+        box-shadow: 0 8px 24px rgba(30, 58, 138, 0.25);
+    }
+    .author-header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+    .author-header .tagline {
+        font-size: 16px;
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+        font-style: italic;
+    }
+    .author-header .bio {
+        display: inline-flex;
+        gap: 12px;
+        font-size: 13px;
+        color: #8896a4;
+        background: #f5f7fa;
+        padding: 6px 16px;
+        border-radius: 20px;
+    }
+
+    /* 章节标题 */
+    h2 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin: 52px 0 20px;
+        padding-top: 28px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    h2::before {
+        content: '';
+        width: 4px;
+        height: 20px;
+        background: linear-gradient(180deg, #1e3a8a, #3b82f6);
+        border-radius: 2px;
+        flex-shrink: 0;
+    }
+    h2:first-of-type {
+        border-top: none;
+        padding-top: 0;
+        margin-top: 0;
+    }
+    h2:first-of-type::before {
+        display: none;
+    }
+
+    /* 段落 */
+    p {
+        margin: 18px 0;
+        color: #3d4f5f;
+        font-size: 15px;
+        text-align: justify;
+    }
+    p:first-of-type {
+        margin-top: 0;
+    }
+
+    strong {
+        color: #1a1a2e;
+        font-weight: 600;
+    }
+
+    /* 洞察盒子 */
+    .insight-box {
+        background: var(--highlight);
+        border-left: 4px solid #f59e0b;
+        border-radius: 0 8px 8px 0;
+        padding: 20px 24px;
+        margin: 28px 0;
+        font-size: 15px;
+        color: #6b4c1e;
+        line-height: 1.8;
+        position: relative;
+    }
+    .insight-box::before {
+        content: '"';
+        position: absolute;
+        top: 8px;
+        left: 12px;
+        font-size: 48px;
+        color: #f59e0b;
+        opacity: 0.3;
+        font-family: Georgia, serif;
+        line-height: 1;
+    }
+    .insight-box strong {
+        color: #92400e;
+    }
+
+    /* 引用区块 */
+    .quote-block {
+        background: linear-gradient(135deg, #f8fafc, #f0f6ff);
+        border: 1px solid #e0e8f0;
+        border-radius: 12px;
+        padding: 28px 32px;
+        margin: 32px 0;
+        text-align: center;
+        font-size: 16px;
+        color: #4a5568;
+        line-height: 1.9;
+        position: relative;
+    }
+    .quote-block::before,
+    .quote-block::after {
+        content: '"';
+        position: absolute;
+        font-size: 64px;
+        color: #3b82f6;
+        opacity: 0.15;
+        font-family: Georgia, serif;
+        line-height: 1;
+    }
+    .quote-block::before {
+        top: 8px;
+        left: 16px;
+    }
+    .quote-block::after {
+        content: '"';
+        bottom: 8px;
+        right: 16px;
+    }
+    .quote-block strong {
+        color: #1e3a8a;
+    }
+
+    /* 关键词标签 */
+    .keyword-tag {
+        display: inline-block;
+        background: #eef3ff;
+        color: #1e3a8a;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 2px 10px;
+        border-radius: 4px;
+        margin: 0 2px;
+    }
+
+    /* 分隔装饰 */
+    .section-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin: 40px 0;
+        color: #c0c7cf;
+    }
+    .section-divider::before,
+    .section-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+    }
+    .section-divider i {
+        font-size: 12px;
+    }
+
+    /* 个人特质网格 */
+    .traits-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin: 28px 0;
+    }
+    .trait-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 20px 16px;
+        text-align: center;
+        transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .trait-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+    .trait-card i {
+        font-size: 24px;
+        color: #3b82f6;
+        margin-bottom: 10px;
+    }
+    .trait-card h4 {
+        font-size: 14px;
+        color: #1a1a2e;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+    .trait-card p {
+        font-size: 12px;
+        color: #6b8dad;
+        margin: 0;
+        text-align: center;
+    }
+
+    /* 底部区域 */
+    .footer-section {
+        margin-top: 64px;
+        padding-top: 32px;
+        border-top: 2px solid var(--border);
+    }
+    .footer-section h3 {
+        font-size: 13px;
+        font-weight: 600;
+        color: #8896a4;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .series-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        font-size: 13px;
+    }
+    .series-list a {
+        color: #3b82f6;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .series-list a:hover {
+        text-decoration: underline;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+        .container {
+            padding: 40px 16px 60px;
+        }
+        .author-header h1 {
+            font-size: 26px;
+        }
+        .traits-grid {
+            grid-template-columns: 1fr;
+        }
+        .quote-block {
+            padding: 24px 20px;
+            font-size: 15px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <nav class="back-nav">
+        <a href="index.html">← 返回首页</a>
+        <span class="sep">·</span>
+        <span>嵌入式AI工程化系列</span>
+    </nav>
+
+    <header class="author-header">
+        <div class="author-avatar">
+            <i class="fas fa-microchip"></i>
+        </div>
+        <h1>我找到了一套法则</h1>
+        <p class="tagline">凌晨两点的示波器，是灵感的起点</p>
+        <p class="bio">嵌入式工程师 · 写作者 · 法则的定义者</p>
+    </header>
+
+    <article>
+        <h2>凌晨两点的示波器</h2>
+
+        <p>凌晨两点，我盯着示波器上跳动的波形，已经连续调试了六个小时。一块板子的CAN总线间歇性挂死，每次都在运行四十分钟后准时出现。日志干干净净，没有一行报错。</p>
+
+        <p>那是一种很特别的孤独。整个公司只有你一个人懂这个模块，没有人能和你讨论，没有人能帮你检查思路。你能对话的，只有这台示波器。</p>
+
+        <p>但那个深夜，我没有找到答案，却找到了一个更重要的问题。我在笔记本上写了一句话：<strong>"应该发生的事没有发生，这本身就是一条信息。"</strong></p>
+
+        <div class="insight-box">
+            多年以后，我把这句话变成了一个概念，叫<strong>负日志</strong>。它不是记录"发生了什么"，而是断言"什么必须发生"。它的核心逻辑极其简洁：如果一件事应该在50毫秒内发生但没有发生，这就是一条独立的信息，它的重要性不亚于任何一条成功日志。
+        </div>
+
+        <p>后来我才意识到，那个凌晨我无意间触碰到了一种通用的思维方式：在一个复杂系统里，安静比喧嚣更值得倾听。</p>
+
+        <h2>从痛苦的裂缝里，长出法则</h2>
+
+        <p>我喜欢规律。不是那种为了应付考试死记硬背的公式，而是那种藏在事物运行深处的、一旦被发现就能解释一大片现象的规律。</p>
+
+        <p>物理世界有物理世界的规律。工程活动有工程活动的规律。人和人的协作，也有它自己的规律。</p>
+
+        <p>一个Bug修了三次，每次修好之后又引入新Bug。这不是能力问题，这是"修复"和"验证"之间缺少一道同步机制。我把这道机制设计出来，叫<strong>闭环收敛</strong>。代码修复和测试增强双轨并行，像两条互相追赶的螺旋，谁也别想偷懒。</p>
+
+        <p>项目做了三年，文档和代码悄悄对不上了，团队没人发现，直到一次事故才暴露。这不是粗心，这是时间对一切不一致的系统施加的必然熵增。我设计了一套机制来感知它、纠正它，叫<strong>共生演化</strong>。让规约和代码在长期运行中持续对话，识别漂移，形成免疫记忆。</p>
+
+        <p>AI生成代码很快，但一旦选错技术路线，它会在死胡同里越走越深，从不会主动说"这条路可能不对"。这不是AI笨，这是它缺少一个审视路径本身的能力。我设计了一个机制来触发这种审视，叫<strong>决策切换</strong>。</p>
+
+        <p>每发现一个这样的规律，我就把它写下来。不是当成技术文档写，而是当成法则写——把它从"我的一次痛苦经历"，变成"任何人遇到同类问题都能用的思维工具"。</p>
+
+        <p>这是一个极其享受的过程。它既需要工程师对复杂系统的深刻洞察，也需要写作者对清晰表达的执拗追求。你得先理解事物运行的底层结构——这是理科。你得把一个模糊的直觉翻译成别人能听懂、能复用的语言——这是文科。少了一半，法则就立不起来。</p>
+
+        <div class="section-divider"><i class="fas fa-feather-alt"></i></div>
+
+        <h2>用自己定义的方法，证明自己的方法</h2>
+
+        <p>体系建完之后，发生了一件让我自己都惊讶的事。我发现，我正在用我定义的方法，创造我创造方法的过程。</p>
+
+        <div class="quote-block">
+            我的体系说"人定义法则，AI在法则内执行"——我正是这么做的。<br><br>
+            我的体系说"闭环收敛需要双轨并行"——我正是通过和AI反复对话，才完成了每一篇文章。<br><br>
+            我的体系说"共生演化需要决策账本"——每一次重要对话的结论，我都记录在案。
+        </div>
+
+        <p>我用自己的方法论，证明了这套方法论的有效性。这不是逻辑上的循环论证。这是实践上的自我验证。就像验证一个公式，你把未知数代进去，左右两边刚好相等——那个瞬间，你知道公式是对的。</p>
+
+        <div class="section-divider"><i class="fas fa-globe"></i></div>
+
+        <h2>从工程世界到生活世界</h2>
+
+        <p>当体系逐渐成型，我开始做另一件让我充满好奇的事：把它用在工程之外的地方。</p>
+
+        <p>我写过一篇文章，用这套法则去解读亲密关系。物理诚实变成了沟通的基石——不说"你总是"，而说"我观察到"。负日志变成了期待管理——那些"应该发生但没发生"的关怀，不说出来就会变成安静的失望。闭环收敛变成了矛盾的解决框架——不仅要修复这次裂痕，还要一起建立规则，避免下次因为同样的事再吵。</p>
+
+        <p>这篇文章发布后，有读者说："我以为是讲嵌入式开发的，结果看到最后，被治愈了。"</p>
+
+        <div class="insight-box">
+            这些法则处理的，其实是一个比嵌入式工程更普遍的问题：<strong>如何在复杂、多变、充满不确定性的环境中，让两个互相依赖的实体，持续地、安全地、朝向共同目标地协同演化。</strong>
+        </div>
+
+        <p>代码与规约。AI与人。设备与设备。人与他所爱的人。这些看起来毫不相关的场景，底层的规律是相通的。我能看见这种相通，大概是因为我习惯了在两个世界之间游走——一个是硬件和代码的世界，逻辑严密、因果分明；一个是人和情感的世界，模糊但真实、感性但有结构。这两种世界，并不矛盾。它们只是用不同的语言说着同一件事。</p>
+
+        <div class="section-divider"><i class="fas fa-book"></i></div>
+
+        <h2>那些早就被说过的话</h2>
+
+        <p>当我把这套体系写完，和经典理论对照时，我发现了一件事，让我既谦卑又踏实。</p>
+
+        <p><strong>闭环收敛</strong>，是控制论的反馈修正在AI编程中的工程化落地。<strong>双轨制</strong>，是矛盾论中矛盾的对立统一与螺旋上升的生动演绎。<strong>多Agent性格制衡</strong>，是博弈论中机制设计思想的实践应用。<strong>决策切换</strong>中主次矛盾的转化，是矛盾论在工程决策中的精确表达。</p>
+
+        <p>马克思、毛泽东、维纳、纳什——他们早就在更抽象的层面把规律说清楚了。我只是在嵌入式AI工程这个新场景里，用自己的实践，把他们的智慧重新翻译了一遍。</p>
+
+        <div class="insight-box">
+            这个发现让我踏实。因为我知道，这些法则之所以有效，不是因为我想出来的，而是因为它们本来就有效。它们被验证了几十年、上百年，我只是那个幸运的人，在凌晨两点的示波器前，隐约感觉到了它们的存在，然后用了很长时间，把它们写成了工程师能直接用的法则。
+        </div>
+
+        <div class="section-divider"><i class="fas fa-sync-alt"></i></div>
+
+        <h2>现在，我每天做的事</h2>
+
+        <p>我每天回读自己的文章，优化概念，做一些验证。不是为了考试，不是为了晋升。我是在持续地做一件事：<strong>让自己配得上自己发现的法则。</strong></p>
+
+        <p>每一条法则，我都在问自己：我还在遵守它吗？我有没有偷懒绕过去？我有没有在实践中发现它的新边界？</p>
+
+        <p>同时，我也在等。等下一个凌晨两点的示波器时刻，等下一个让我隐约感觉到但还说不清楚的规律。我享受这个等待，因为我知道，一旦它来，我就有了新的素材——又一条法则可以从痛苦的裂缝里被提炼出来，被写进我的体系。</p>
+
+        <div class="section-divider"><i class="fas fa-user"></i></div>
+
+        <h2>关于我</h2>
+
+        <p>我是一个嵌入式工程师。我的日常曾经是查数据手册、调寄存器、盯着示波器找毛刺。现在，我的日常多了一件事：把从那些时刻里找到的规律，变成法则，写成文章，分享出去。</p>
+
+        <div class="traits-grid">
+            <div class="trait-card">
+                <i class="fas fa-search"></i>
+                <h4>追求清晰</h4>
+                <p>不喜欢模糊的东西在脑子里待太久</p>
+            </div>
+            <div class="trait-card">
+                <i class="fas fa-puzzle-piece"></i>
+                <h4>喜欢结构</h4>
+                <p>发现事物间隐藏的相同骨架</p>
+            </div>
+            <div class="trait-card">
+                <i class="fas fa-pen-fancy"></i>
+                <h4>享受写作</h4>
+                <p>把技术翻译成有画面感的语言</p>
+            </div>
+        </div>
+
+        <p>我享受理性和感性的交汇。享受用工程师的严谨去追问"为什么"，也享受用写作者的敏感去追问"这感觉该怎么表达"。我相信真正的洞察力，既需要前者，也需要后者。</p>
+
+        <div class="quote-block">
+            这套法则体系，是我过去几年所有凌晨时刻的总和。<br><br>
+            它们是调试失败的产物，是反复追问的产物，是试图把一个模糊直觉写清楚的产物。<br><br>
+            如果它们对你有用，那说明它们确实不是我的——<br><strong>它们本来就藏在你的直觉里，等着被你自己发现。</strong>
+        </div>
+    </article>
+
+    <footer class="footer-section">
+        <h3>系列文章</h3>
+        <div class="series-list">
+            <a href="index.html">① 五层进化</a> ·
+            <a href="true.html">② 高复用模板</a> ·
+            <a href="test.html">③ 闭环收敛</a> ·
+            <a href="pcb.html">④ PCB分析器</a> ·
+            <a href="exc.html">⑤ 知识的生命体征</a> ·
+            <a href="history.html">⑥ 历史的包袱</a> ·
+            <a href="pt.html">⑦ Skills</a> ·
+            <a href="devs.html">⑧ 固件铭牌</a>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>
