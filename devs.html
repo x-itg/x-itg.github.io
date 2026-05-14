@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>固件铭牌与设备画像 | 嵌入式AI工程化系列</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #f8f9fa;
+        --card-bg: #ffffff;
+        --text: #2c3e50;
+        --text-secondary: #5a6c7d;
+        --accent: #c0392b;
+        --accent-soft: #e74c3c;
+        --border: #e0e4e8;
+        --code-bg: #1e293b;
+        --code-text: #e2e8f0;
+        --highlight: #fef9e7;
+        --tag-bg: #f0f3f6;
+        --tag-text: #4a5568;
+        --link: #2980b9;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --radius: 6px;
+        --radius-lg: 10px;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+    }
+
+    .layout {
+        display: flex;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        gap: 2rem;
+    }
+    .sidebar {
+        width: 260px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 1.5rem;
+        align-self: start;
+        background: #ffffff;
+        border-radius: 1.2rem;
+        border: 1px solid #eef2f8;
+        padding: 1.2rem 0;
+    }
+    .sidebar nav ul {
+        list-style: none;
+        padding: 0 0.5rem;
+    }
+    .sidebar nav li {
+        margin: 0.25rem 0;
+    }
+    .sidebar nav a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: #2c5f8a;
+        text-decoration: none;
+        border-radius: 0.6rem;
+        font-size: 0.9rem;
+        transition: 0.2s;
+    }
+    .sidebar nav a:hover {
+        background: #eef3ff;
+        color: #1e40af;
+    }
+    .sidebar nav a i {
+        width: 1.5rem;
+        color: #5b8ec9;
+    }
+    .main-content {
+        flex: 1;
+        min-width: 0;
+    }
+    .article-series {
+        padding-bottom: 0.6rem;
+        margin-bottom: 0.4rem;
+        border-bottom: 1px solid #eef2f8;
+    }
+    .article-series h3 {
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 0 1.2rem 0.6rem;
+        color: #1e3a8a;
+    }
+    .article-link {
+        display: flex !important;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.45rem 0.8rem !important;
+    }
+    .article-link .article-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: #eef3ff;
+        border-radius: 50%;
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #1e3a8a;
+        flex-shrink: 0;
+    }
+    .article-link.active .article-num {
+        background: #1e3a8a;
+        color: #fff;
+    }
+    .article-link .article-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.05rem;
+        min-width: 0;
+    }
+    .article-link .article-title {
+        font-weight: 600;
+        font-size: 0.88rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .article-link .article-desc {
+        font-size: 0.68rem;
+        color: #6b8dad;
+        font-weight: 400;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .article-link.active {
+        background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
+        color: #ffffff !important;
+    }
+    .article-link.active .article-desc {
+        color: rgba(255,255,255,0.7) !important;
+    }
+    .section-nav {
+        padding-top: 0.2rem;
+    }
+    .section-nav h3 {
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 0 1.2rem 0.6rem;
+        color: #1e3a8a;
+    }
+
+    .article-header {
+        margin-bottom: 48px;
+    }
+    .article-header .series-tag {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 3px;
+        letter-spacing: 0.5px;
+        margin-bottom: 16px;
+    }
+    .article-header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.35;
+        margin-bottom: 12px;
+        letter-spacing: -0.3px;
+    }
+    .article-header .subtitle {
+        font-size: 17px;
+        color: var(--text-secondary);
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+    .article-header .meta {
+        font-size: 13px;
+        color: #8896a4;
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 56px 0 16px;
+        padding-top: 24px;
+        border-top: 2px solid var(--border);
+        letter-spacing: -0.2px;
+    }
+    h3 {
+        font-size: 19px;
+        font-weight: 600;
+        margin: 36px 0 12px;
+        color: #1a1a2e;
+    }
+    p {
+        margin: 14px 0;
+    }
+    strong {
+        color: #1a1a2e;
+    }
+
+    .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 28px 30px;
+        margin: 28px 0;
+        box-shadow: var(--shadow-sm);
+    }
+    .card.accent-left {
+        border-left: 4px solid var(--accent);
+    }
+    .card.green-left {
+        border-left: 4px solid #27ae60;
+    }
+    .card.purple-left {
+        border-left: 4px solid #8b5cf6;
+    }
+    .card.blue-left {
+        border-left: 4px solid #3b82f6;
+    }
+
+    .insight-box {
+        background: var(--highlight);
+        border: 1px solid #f0d78c;
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        margin: 24px 0;
+        font-style: italic;
+        color: #6b4c1e;
+    }
+    .insight-box strong {
+        color: #4a340f;
+    }
+
+    pre {
+        background: var(--code-bg);
+        color: var(--code-text);
+        padding: 20px 24px;
+        border-radius: var(--radius);
+        overflow-x: auto;
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        margin: 20px 0;
+        box-shadow: var(--shadow-md);
+    }
+
+    code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
+        font-size: 13px;
+    }
+    p code, li code {
+        background: #eef1f5;
+        padding: 2px 6px;
+        border-radius: 3px;
+        color: #c0392b;
+        font-size: 12px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+        font-size: 14px;
+    }
+    table th, table td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+    }
+    table th {
+        font-weight: 700;
+        background: #f5f7fa;
+        color: #4a5568;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .layer-tag {
+        display: inline-block;
+        background: #1a1a2e;
+        color: #fff;
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-weight: 600;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin: 20px 0;
+    }
+    .feature-item {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 16px;
+        border: 1px solid #e5e7eb;
+    }
+    .feature-item h4 {
+        font-size: 14px;
+        color: #1e3a8a;
+        margin-bottom: 8px;
+    }
+    .feature-item p {
+        font-size: 13px;
+        color: #5a6c7d;
+        margin: 0;
+    }
+
+    .flow-step {
+        display: flex;
+        gap: 16px;
+        padding: 16px;
+        background: #f8fafc;
+        border-radius: 8px;
+        margin: 12px 0;
+        align-items: flex-start;
+    }
+    .flow-step .step-num {
+        width: 28px;
+        height: 28px;
+        background: #1e3a8a;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 13px;
+        flex-shrink: 0;
+    }
+    .flow-step .step-content {
+        flex: 1;
+    }
+    .flow-step .step-content h4 {
+        font-size: 15px;
+        color: #1a1a2e;
+        margin-bottom: 4px;
+    }
+    .flow-step .step-content p {
+        font-size: 13px;
+        color: #5a6c7d;
+        margin: 0;
+    }
+
+    .footnote-section {
+        margin-top: 60px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+    }
+    .footnote-section h4 {
+        font-size: 14px;
+        color: #8896a4;
+        margin-bottom: 10px;
+    }
+    .footnote-section p {
+        font-size: 13px;
+        color: #8896a4;
+        line-height: 1.6;
+        margin: 6px 0;
+    }
+
+    @media (max-width: 780px) {
+        .layout {
+            flex-direction: column;
+        }
+        .sidebar {
+            width: 100%;
+            position: static;
+        }
+        .container {
+            padding: 20px 16px 60px;
+        }
+        .article-header h1 {
+            font-size: 26px;
+        }
+        h2 {
+            font-size: 21px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="article-series">
+            <h3><i class="fas fa-book"></i> 文章系列</h3>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="article-link">
+                        <span class="article-num">1</span>
+                        <span class="article-info">
+                            <span class="article-title">五层进化</span>
+                            <span class="article-desc">AI编程调试的五层架构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="true.html" class="article-link">
+                        <span class="article-num">2</span>
+                        <span class="article-info">
+                            <span class="article-title">实践项目模板</span>
+                            <span class="article-desc">高可复用嵌入式AI编程骨架</span>
+                        </span>
+                    </a></li>
+                    <li><a href="test.html" class="article-link">
+                        <span class="article-num">3</span>
+                        <span class="article-info">
+                            <span class="article-title">自主修复闭环</span>
+                            <span class="article-desc">AI双轨收敛 · 需求螺旋闭合</span>
+                        </span>
+                    </a></li>
+                    <li><a href="pcb.html" class="article-link">
+                        <span class="article-num">4</span>
+                        <span class="article-info">
+                            <span class="article-title">电路图分析器</span>
+                            <span class="article-desc">PDF原理图转AI可读描述</span>
+                        </span>
+                    </a></li>
+                    <li><a href="exc.html" class="article-link">
+                        <span class="article-num">5</span>
+                        <span class="article-info">
+                            <span class="article-title">知识的生命体征</span>
+                            <span class="article-desc">知识资产生命周期管理</span>
+                        </span>
+                    </a></li>
+                    <li><a href="history.html" class="article-link">
+                        <span class="article-num">6</span>
+                        <span class="article-info">
+                            <span class="article-title">历史的包袱</span>
+                            <span class="article-desc">遗留工程与AI迁移策略</span>
+                        </span>
+                    </a></li>
+                    <li><a href="pt.html" class="article-link">
+                        <span class="article-num">7</span>
+                        <span class="article-info">
+                            <span class="article-title">最后的拼图：Skills</span>
+                            <span class="article-desc">规则感知型即时方法</span>
+                        </span>
+                    </a></li>
+                    <li><a href="devs.html" class="article-link active">
+                        <span class="article-num">8</span>
+                        <span class="article-info">
+                            <span class="article-title">固件铭牌与设备画像</span>
+                            <span class="article-desc">固件数字身份与协同管理</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- IDE工具演示入口 -->
+        <div style="margin-top:1rem;padding:1rem;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);border-radius:8px;text-align:center;">
+            <div style="color:white;font-size:1.5rem;margin-bottom:0.5rem;">⚡</div>
+            <div style="color:white;font-weight:600;font-size:0.85rem;">IDE工具演示</div>
+            <div style="color:rgba(255,255,255,0.8);font-size:0.7rem;margin:0.25rem 0 0.5rem;">在线体验完整工具系统</div>
+            <a href="ide_plugins/web/index.html" target="_blank" style="display:inline-block;padding:0.35rem 1rem;background:white;color:#667eea;text-decoration:none;border-radius:15px;font-size:0.75rem;font-weight:600;">
+                立即体验 →
+            </a>
+        </div>
+        
+        <div class="section-nav">
+            <h3><i class="fas fa-list"></i> 本章导览</h3>
+            <nav>
+                <ul>
+                    <li><a href="#silent"><i class="fas fa-volume-mute"></i> 沉默的固件</a></li>
+                    <li><a href="#nameplate"><i class="fas fa-id-card"></i> 固件数字铭牌</a></li>
+                    <li><a href="#profile"><i class="fas fa-user-circle"></i> 设备画像</a></li>
+                    <li><a href="#lineage"><i class="fas fa-code-branch"></i> 主线与支线</a></li>
+                    <li><a href="#production"><i class="fas fa-industry"></i> 产线集成</a></li>
+                    <li><a href="#mapping"><i class="fas fa-layer-group"></i> 体系映射</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <div class="main-content">
+<div class="container">
+
+    <header class="article-header">
+        <span class="series-tag">五层进化 · 协同维度</span>
+        <h1>固件铭牌与设备画像</h1>
+        <p class="subtitle">让固件携带"身份证"，让设备会"说话"。<br>当固件不再沉默，多设备协同管理的复杂性就变成了可感知、可校验、可追溯的工程系统。</p>
+        <p class="meta">itg · 嵌入式AI工程化系列 · 企业级协同基础设施</p>
+    </header>
+
+    <section>
+        <h2 id="silent">一、沉默的固件，混乱的协同</h2>
+
+        <p>一个典型的多设备公司的日常：</p>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h4><i class="fas fa-question-circle"></i> 版本迷雾</h4>
+                <p>生产部门拿到固件二进制，不知道它适用于哪个硬件版本，不知道它修复了什么Bug。</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-code-branch"></i> 定制污染</h4>
+                <p>客户A的定制版本悄悄混入了主线，导致通用版本设备出现诡异行为。</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-history"></i> 追溯断链</h4>
+                <p>某批次设备出问题，需追溯固件版本，但烧录记录散落在Excel、邮件和记忆里。</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-link"></i> 兼容盲区</h4>
+                <p>设备A、B、C临时组合，A升级后与B、C兼容性无人验证，直到现场故障才被发现。</p>
+            </div>
+        </div>
+
+        <div class="card accent-left">
+            <p style="margin-top:0;"><strong>共同根源：</strong>固件一直是沉默的。它不会告诉你它是谁、它从哪来、它应该和谁在一起、它经历了什么。</p>
+        </div>
+
+        <p>我们的解法是：<strong>让固件自己说话。</strong></p>
+
+        <div class="insight-box">
+            <strong>本文的主张：</strong>以<strong>固件数字铭牌</strong>为核心，让每台设备携带可信的结构化身份信息；以<strong>决策账本</strong>为追溯链；以<strong>设备画像</strong>为可视化中枢。它不是新概念的堆砌，而是已有法则在设备管理维度的一次系统性应用。
+        </div>
+    </section>
+
+    <section>
+        <h2 id="nameplate">二、固件数字铭牌：让固件携带"身份证"</h2>
+
+        <p>在固件编译时，自动生成一份结构化的数字铭牌，随固件一同发布。这份铭牌是固件的"身份证"，包含研发、生产、维护三方都需要的核心信息。</p>
+
+        <h3>铭牌数据结构</h3>
+<pre>{
+  "firmware_identity": {
+    "device_model": "SmartSensorHub",
+    "hardware_version": "V2.1",
+    "firmware_version": "v2.3.1",
+    "compiled_at": "2026-05-14T10:30:00Z",
+    
+    "repository": "https://github.com/company/smartsensorhub-fw.git",
+    "commit_sha": "a1b2c3d4e5f6",
+    "branch": "main",
+    
+    "parent_firmware": "v2.3.0",
+    "fork_decision_id": "DECISION-2026-088",
+    "fork_reason": "为客户A定制低温环境RS485重试机制",
+    
+    "device_physical_profile": {
+      "appearance": "长方体铝合金外壳，120x80x40mm，正面2.4英寸TFT屏幕",
+      "internal_wiring": "绿色PCB V1.2，主控STM32F407位于中央",
+      "photo_references": ["photos/external.jpg", "photos/internal.jpg"]
+    },
+    
+    "compatible_hardware": ["SmartSensorHub-V2.1", "SmartSensorHub-V2.2"],
+    "features": ["RS485通讯", "温湿度采集", "TFT屏幕驱动"],
+    
+    "digital_signature": "MEUCIQDx..."
+  }
+}</pre>
+
+        <h3>铭牌生成流程</h3>
+        <div class="flow-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>编译阶段</h4>
+                <p>CI/CD流水线编译固件，自动提取Git信息、依赖库版本、编译参数。</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>AI生成物理特征</h4>
+                <p>研发人员上传设备照片，AI分析生成<code>device_physical_profile</code>字段。</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>AI生成变更摘要</h4>
+                <p>AI对比上一版本铭牌和Git变更，自动生成版本间的变更摘要、Bug修复列表。</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>数字签名</h4>
+                <p>对整个铭牌进行数字签名，确保发布后不可篡改。</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <h4>随固件发布</h4>
+                <p>铭牌与固件二进制一同归档，烧录时写入设备。</p>
+            </div>
+        </div>
+
+        <h3>铭牌的价值</h3>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h4><i class="fas fa-industry"></i> 生产人员</h4>
+                <p>扫码设备，平台立即展示完整身份信息，包括硬件版本、功能列表和实物照片。</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-wrench"></i> 现场维护</h4>
+                <p>设备上电后自动上报铭牌，平台比对历史记录，发现异常立即告警。</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-code"></i> 研发人员</h4>
+                <p>回溯任何版本的完整上下文，包括编译时间、commit、依赖库版本和变更内容。</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 id="profile">三、设备画像与产品体系视图</h2>
+
+        <p>有了固件铭牌，管理平台可以为每台设备建立动态画像，并汇聚成完整的产品体系视图。</p>
+
+        <h3>设备画像</h3>
+        <div class="card blue-left">
+            <ul style="margin: 0; padding-left: 20px;">
+                <li><strong>基本信息：</strong>设备型号、硬件版本、序列号、出厂日期</li>
+                <li><strong>当前固件状态：</strong>运行版本、编译时间、功能特性</li>
+                <li><strong>固件历史：</strong>历次升级记录，每次升级的原因和批准人</li>
+                <li><strong>组合关系：</strong>当前与哪些设备协同工作</li>
+                <li><strong>风险标记：</strong>是否有已知缺陷？是否有待升级的安全补丁？</li>
+                <li><strong>物理快照：</strong>出厂时的外观和内部接线照片</li>
+            </ul>
+        </div>
+
+        <h3>产品体系视图</h3>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h4><i class="fas fa-map"></i> 设备分布图</h4>
+                <p>按型号、版本、地区、客户分布展示全局</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-fire"></i> 版本碎片化热力图</h4>
+                <p>哪些型号的固件版本分散度过高，需要收敛</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-project-diagram"></i> 组合关系拓扑图</h4>
+                <p>展示设备间的组合关系及每种组合的固件版本</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-heartbeat"></i> 健康度仪表盘</h4>
+                <p>哪些设备已"冷却"（长期未更新），哪些是"高危负债"</p>
+            </div>
+        </div>
+
+        <h3>组合协同校验</h3>
+        <p>当设备A、B、C被定义为定型组合时，形成一份"组合合约"，声明每台设备的型号和最小固件版本要求。</p>
+
+        <div class="card green-left">
+            <p style="margin-top:0;"><strong>自动校验：</strong>每次设备上电并上报铭牌后，管理平台自动执行组合校验：</p>
+            <ul style="margin: 12px 0 0; padding-left: 20px;">
+                <li>设备A的固件版本是否满足组合合约的最低要求？</li>
+                <li>设备B是否被替换成了不同型号？</li>
+                <li>设备C的固件是否来自未经批准的支线版本？</li>
+            </ul>
+        </div>
+
+        <div class="insight-box">
+            <strong>这正是"负日志"机制在设备组合层面的应用：</strong>它报告的不是"发生了什么"，而是"什么应该匹配但没有匹配"。
+        </div>
+    </section>
+
+    <section>
+        <h2 id="lineage">四、主线与支线：分支的血缘追溯</h2>
+
+        <h3>物理隔离的版本策略</h3>
+        <p>主线固件永远只面向设备的通用型号。任何针对特定客户的定制、优化、临时修复，都从主线当前稳定版本打出快照，拷贝到客户专属的独立仓库，形成支线。</p>
+
+        <div class="card purple-left">
+            <p style="margin-top:0;"><strong>规则：</strong></p>
+            <ul style="margin: 12px 0 0; padding-left: 20px;">
+                <li>支线拥有独立的版本号体系（如从主线<code>v2.3.1</code>分岔出<code>v2.3.1-A1</code>）</li>
+                <li>支线不向主线合并。若有值得吸收的改进，以新特性形式重新实现</li>
+                <li>支线仓库与主线仓库物理隔离，永不混淆</li>
+            </ul>
+        </div>
+
+        <h3>决策账本记录每一次分岔</h3>
+        <p>每次支线的创建，都是一次不可逆的工程决策，必须写入决策账本：</p>
+
+<pre>决策ID：DECISION-2026-088
+决策类型：固件分支创建
+来源主线：SmartSensorHub 主线 v2.3.1
+分支目标：客户A专属支线 v2.3.1-A1
+分岔原因：客户A要求在-40°C环境下运行
+批准人：研发经理 XXX
+批准时间：2026-05-14
+预期生命周期：永久分支
+支线仓库：https://github.com/company/smartsensorhub-fw-customerA.git</pre>
+
+        <h3>支线生命周期管理</h3>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h4><i class="fas fa-snowflake"></i> 冻结期</h4>
+                <p>客户不再需要更新，支线仓库设为只读，保留所有历史commit</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-archive"></i> 退役期</h4>
+                <p>确认所有设备已不使用该固件，支线仓库归档到冷存储</p>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <strong>知识生命体征机制：</strong>管理平台自动监控每条支线的活跃度。若超过预定时间无更新，自动发出"即将冷却"告警，提醒管理者评估生命周期状态。
+        </div>
+    </section>
+
+    <section>
+        <h2 id="production">五、产线集成：自动化烧录与校验</h2>
+
+        <h3>烧录流程</h3>
+        <div class="flow-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>扫描条码</h4>
+                <p>工人扫描待烧录设备的序列号条码</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>自动匹配</h4>
+                <p>平台根据设备型号自动匹配对应的待烧录固件</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>下载并烧录</h4>
+                <p>烧录工具下载固件及数字铭牌，执行烧录</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>完整性校验</h4>
+                <p>烧录完成后自动校验固件（数字签名验证）</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <h4>事件上报</h4>
+                <p>校验通过后上报平台：设备序列号、固件版本、烧录时间</p>
+            </div>
+        </div>
+
+        <h3>物理比对</h3>
+        <p>烧录完成后，工人通过PDA看到该固件的物理特征档案和实物参考照片。对照手中设备确认：</p>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h4><i class="fas fa-cube"></i> 外观</h4>
+                <p>外壳尺寸、屏幕位置是否匹配</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-microchip"></i> PCB版本</h4>
+                <p>PCB版本是否一致</p>
+            </div>
+            <div class="feature-item">
+                <h4><i class="fas fa-plug"></i> 接线端子</h4>
+                <p>主要芯片和接线端子位置是否对应</p>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <strong>这一步将人工检验从"盲人摸象"升级为"看图识物"，大幅降低漏检率。</strong>
+        </div>
+    </section>
+
+    <section>
+        <h2 id="mapping">六、与已有体系的完整映射</h2>
+
+        <p>本文提出的所有方法，都是已有工程法则在设备管理维度的一次系统性应用：</p>
+
+        <table>
+            <thead>
+                <tr><th>已有体系机制</th><th>在本文中的应用</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="layer-tag">固件数字铭牌</span></td>
+                    <td>让固件携带结构化的身份信息，包含物理特征、依赖版本和血缘追溯链</td>
+                </tr>
+                <tr>
+                    <td><span class="layer-tag">物理隔离版本管理</span></td>
+                    <td>主线与支线、不同客户支线之间用独立仓库隔离，永不合并</td>
+                </tr>
+                <tr>
+                    <td><span class="layer-tag">决策账本</span></td>
+                    <td>每次支线分岔、每次组合合约变更，都记录为不可篡改的决策事件</td>
+                </tr>
+                <tr>
+                    <td><span class="layer-tag">知识生命体征</span></td>
+                    <td>监控支线的活跃度、设备固件版本的健康度，预警"高危负债"</td>
+                </tr>
+                <tr>
+                    <td><span class="layer-tag">负日志</span></td>
+                    <td>组合校验失败时自动告警，报告"应该匹配但没有匹配"的事件</td>
+                </tr>
+                <tr>
+                    <td><span class="layer-tag">共生演化</span></td>
+                    <td>决策账本中的记录随设备生命周期持续更新，形成可追溯的知识免疫记忆</td>
+                </tr>
+                <tr>
+                    <td><span class="layer-tag">PCB分析器</span></td>
+                    <td>数字铭牌中关联设备照片与电路图描述，实现物理与数字的双向追溯</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>七、沉默的终结</h2>
+
+        <p>当固件不再沉默，当每一台设备都能清晰地说出<strong>"我是谁、我从哪来、我应该和谁在一起、我经历了什么"</strong>，多设备协同管理的复杂性就从一个需要依赖人的记忆和手动维护的问题，变成了一个可以被自动感知、自动校验、自动追溯的工程系统。</p>
+
+        <div class="card accent-left">
+            <p style="margin-top:0;"><strong>核心原则只有一条：</strong>让固件自己说话，让关系被显式声明，让每一次分岔都被记录，让每一项决策都可追溯。</p>
+        </div>
+
+        <p>它不需要你替换现有的设备管理系统，它可以作为一种<strong>"信息增强层"</strong>，通过固件铭牌和决策账本，为已有的管理平台注入更高维度的可观测性和可追溯性。</p>
+
+        <div class="insight-box">
+            <strong>对于嵌入式AI工程化而言，</strong>这是从"单项目方法论"走向"企业级协同基础设施"的关键一步。当AI生成的代码最终要控制成百上千台设备，而这些设备又在不断组合、分岔、升级时，我们所定义的法则——物理诚实、闭环收敛、共生演化——将在更大的尺度上发挥它们的价值。
+        </div>
+    </section>
+
+    <section class="footnote-section">
+        <h4>本文定位</h4>
+        <p>本文是五层进化系列在<strong>协同维度</strong>的扩展。它将已有工程法则（决策账本、负日志、知识生命体征、物理隔离版本管理）系统性地应用到多设备协同管理场景，提出固件数字铭牌和设备画像作为企业级协同基础设施。</p>
+        <p>系列导航：
+            <a href="index.html">① 五层进化</a> · 
+            <a href="true.html">② 高复用模板</a> · 
+            <a href="test.html">③ 闭环收敛</a> · 
+            <a href="pcb.html">④ PCB分析器</a> · 
+            <a href="exc.html">⑤ 知识的生命体征</a> · 
+            <a href="history.html">⑥ 历史的包袱</a> · 
+            <a href="pt.html">⑦ Skills</a> · 
+            <strong>⑧ 固件铭牌与设备画像</strong>
+        </p>
+    </section>
+
+</div>
+    </div>
+</div>
+
+</body>
+</html>
