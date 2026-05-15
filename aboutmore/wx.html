@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>乾坤大挪移心法 · 文章总览 | itg</title>
+<meta name="description" content="嵌入式AI工程化完整体系总览——乾坤大挪移心法，从五层进化到拆解整合，十三篇文章一篇看完。">
+<meta name="keywords" content="嵌入式,AI,工程化,乾坤大挪移,心法,五层进化">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="乾坤大挪移心法 · 文章总览 | itg">
+<meta property="og:description" content="嵌入式AI工程化完整体系总览——乾坤大挪移心法，从五层进化到拆解整合。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/wx.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/wx.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #fefce8; --card-bg: #ffffff; --text: #292524;
+        --text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
+        --border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
+        background: var(--bg); color: var(--text); line-height: 1.9; -webkit-font-smoothing: antialiased;
+    }
+    .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
+
+    .sidebar {
+        width:240px; position:sticky; top:0; height:100vh; overflow-y:auto;
+        padding:32px 16px; border-right:1px solid var(--border);
+        background:var(--sidebar-bg); flex-shrink:0;
+    }
+    .sidebar .logo { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:8px; }
+    .sidebar .logo a { color:var(--accent); text-decoration:none; }
+    .sidebar .logo a:hover { opacity:0.75; }
+    .sidebar .nav-section { margin-bottom:20px; }
+    .sidebar .nav-section h3 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary); margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+    .sidebar .nav-section ul { list-style:none; }
+    .sidebar .nav-section li { margin-bottom:4px; }
+    .sidebar .nav-section a { display:block; padding:6px 10px; font-size:13px; color:var(--text); text-decoration:none; border-radius:6px; transition:background 0.15s; }
+    .sidebar .nav-section a:hover, .sidebar .nav-section a.active { background:rgba(217,119,6,0.1); color:var(--accent); }
+    .sidebar .nav-section a i { width:20px; color:var(--accent); }
+    .sidebar .back-home { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; }
+    .sidebar .back-home a { color:var(--text-secondary); text-decoration:none; }
+    .sidebar .back-home a:hover { color:var(--accent); }
+
+    .main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+    .main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+    .main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
+    .main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.3px; }
+    .main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
+    .main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
+    .main-content h2 { font-size:22px; font-weight:700; color:#1c1917; margin:48px 0 16px; padding-top:20px; border-top:2px solid #e0e4e8; }
+    .main-content h3 { font-size:18px; font-weight:600; margin:32px 0 12px; color:#1a1a2e; }
+    .main-content h3 a[read] { color:#2980b9; font-size:14px; text-decoration:none; font-weight:400; }
+    .main-content p { margin:14px 0; font-size:16px; color:#44403c; text-align:justify; }
+    .main-content strong { color:#1c1917; font-weight:600; }
+    .main-content ol { margin:14px 0 14px 24px; font-size:16px; color:#44403c; }
+    .main-content ol li { margin:6px 0; }
+
+    .insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
+    .insight-box strong { color:#92400e; }
+
+    .section-divider { display:flex; align-items:center; gap:12px; margin:36px 0; color:#d6d3d1; }
+    .section-divider::before, .section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+    .section-divider i { font-size:12px; }
+
+    .series-nav { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); display:flex; justify-content:space-between; font-size:14px; }
+    .series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
+    .series-nav a:hover { text-decoration:underline; }
+    .series-nav .placeholder { color:#d6d3d1; }
+
+    .footer-note { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); text-align:center; font-size:13px; color:#a8a29e; }
+    .footer-note strong { color:#78716c; }
+
+    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
+</style>
+</head>
+<body>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="logo"><a href="../index.html"><i class="fas fa-home"></i> itg</a></div>
+        <div class="nav-section">
+            <h3>生活随记</h3>
+            <ul>
+                <li><a href="../about.html"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
+                <li><a href="../aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
+                <li><a href="../aboutmore/fw.html"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
+                <li><a href="../aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
+                <li><a href="../aboutmore/wx.html" class="active"><i class="fas fa-compass"></i> 心法总览</a></li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <h3>技术系列</h3>
+            <ul>
+                <li><a href="../index.html"><i class="fas fa-microchip"></i> 嵌入式AI工程化</a></li>
+            </ul>
+        </div>
+        <div class="back-home">
+            <a href="../index.html">← 返回首页</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="article-header">
+            <span class="series-tag">心法总览</span>
+            <h1>乾坤大挪移心法 · 文章总览</h1>
+            <p class="subtitle">嵌入式AI工程化完整体系一览——十三篇文章一篇看完</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 乾坤大挪移心法</p>
+        </header>
+
+        <article>
+
+        <p>这不是一套教程，这是一本剑谱。不是一本剑谱，这是一门内功。<br>
+        你能用它借 AI 的力，打代码的 Bug，驯复杂系统的野兽。<br>
+        我是 <strong>itg</strong>，<strong>火星火箭</strong>，今天把压箱底的功夫亮给你看。</p>
+
+        <p style="margin:20px 0;text-align:center;">
+            <a href="https://x-itg.github.io" style="display:inline-block;background:#c0392b;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-size:16px;font-weight:600;">👉 在线阅读：x-itg.github.io</a>
+        </p>
+
+        <h2>🏔️ 总纲：五层进化</h2>
+
+        <h3>① 五层进化 <a href="https://x-itg.github.io/index.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>江湖上的武功，都分个几流几等。这套心法也分五层，从"摸黑瞎打"到"言出法随"。第一层，Vibe Coding，凭感觉出招，漏洞百出。第五层，AI 自治，人在旁边喝茶，系统自己修炼。</p>
+
+        <h2>🗡️ 核心剑法：从执行到演化</h2>
+
+        <h3>② 实践项目模板 <a href="https://x-itg.github.io/true.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>剑招再好，也得有把趁手的剑。这个模板就是锻造剑胚的铁砧——把心法变成实实在在的工程骨架，让 AI 一上手就知道该往哪儿砍。</p>
+
+        <h3>③ 自主修复闭环 <a href="https://x-itg.github.io/test.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>"双轨收敛剑"。一剑修 Bug，一剑补测试，两剑齐出，螺旋上升。AI 会自己看日志、自己改、自己再测——直到没问题。</p>
+
+        <h3>④ 从收敛到进化 <a href="https://x-itg.github.io/fwd.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>闭关久了会走火入魔。引入"Agent 性格制衡"：审慎者守关，探索者开路，仲裁者断案。三足鼎立，决策不跑偏。</p>
+
+        <h3>⑤ 知识的生命体征 <a href="https://x-itg.github.io/exc.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>武功秘笈放久了会发霉。这一招让文档有了"生命值"和"热度"——哪些秘笈快朽了，哪些是镇派之宝，一眼便知。</p>
+
+        <h2>🌿 根系功法：感知与支撑</h2>
+
+        <h3>⑥ 电路图分析器 <a href="https://x-itg.github.io/pcb.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>打通任督二脉的功夫。从此 AI 能读懂电路图，看见物理世界的经络。你点一下元件，它就能跳到对应的代码行——如臂使指。</p>
+
+        <h3>⑦ 最后的拼图：Skills <a href="https://x-itg.github.io/pt.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>"快剑诀"。日常高频的需求，像飞镖一样随手甩出，瞬间生成。I2C 驱动、GPIO 配置、报警阈值……信手拈来，不再费神。</p>
+
+        <h2>🌍 江湖游历：专业延伸</h2>
+
+        <h3>⑧ 历史的包袱 <a href="https://x-itg.github.io/history.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>祖传的 Keil/IAR 老项目怎么救？防御-抽象-进攻三层策略，把被封闭 IDE 死锁的老工程逐步翻译、解耦、迁入 AI 友好生态。</p>
+
+        <h3>⑨ 固件铭牌与设备画像 <a href="https://x-itg.github.io/devs.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>行走江湖，兵器都要刻个名。每个固件自带"身份证"，组合关系、版本血缘一目了然。从此不怕搞混自家刀剑。</p>
+
+        <h3>⑩ 合规验证与 AI 编程 <a href="https://x-itg.github.io/gmp.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>官府查得严？从"事后补文档"变成"事前建法则"。GMP 合规、21 CFR Part 11，AI 顺手就把验证报告给签了。</p>
+
+        <h2>🔥 实战演练：单 Agent &amp; 利刃</h2>
+
+        <h3>⑪ 回归现实：单 Agent 实践框架 <a href="https://x-itg.github.io/hg.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>不等多 Agent 大阵了。一个人、一个 AI、一套法则文件夹，马上就能开练。决策账本、知识体征、Skills 模板……十八般武艺样样精简。</p>
+
+        <h3>⑫ AI 编程的利刃 <a href="https://x-itg.github.io/12.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>整部剑谱的"拔刀术"。让 AI 写代码时顺便生成测试脚本，带上负日志。跑起来，两股日志汇成洪流，AI 自己读、自己改、自己收功。你只需要在旁边轻轻"嗯"一声。</p>
+
+        <h2>🐉 终极心法：拆解与整合</h2>
+
+        <h3>⑬ 拆解与整合 <a href="https://x-itg.github.io/13.html" style="color:#2980b9;font-size:14px;text-decoration:none;">[阅读]</a></h3>
+        <p>遇上大魔头（复杂系统），别硬拼。用"拆解"把它大卸八块，每个小块独立调教、单独收敛。再用"整合"一块块拼回去——每次只拼一块，拼完立刻全系统比试。</p>
+        <p>胜了，继续拼下一块；败了，问题就在新拼的那块上，揪出来再打。</p>
+        <p>这是乾坤大挪移的高阶奥义——<strong>借力打力，化繁为简</strong>。</p>
+
+        <h2>⚡ 大侠，这套心法怎么练？</h2>
+        <ol>
+            <li><strong>初窥门径</strong>：先读 ⑫ 利刃，明天就试试让 AI 自己写测试、自己改。</li>
+            <li><strong>小有所成</strong>：搭起 ② 模板，建起你的法则文件夹，用 ③ 闭环收敛打磨每个模块。</li>
+            <li><strong>游历江湖</strong>：碰到老项目用 ⑧，多设备管理用 ⑨，合规审计用 ⑩。</li>
+            <li><strong>破境冲关</strong>：用 ⑬ 拆解整合驯服复杂系统，用 ④ 决策切换避免死胡同。</li>
+            <li><strong>一代宗师</strong>：言出法随，即刻收敛，踏入五层进化之巅。</li>
+        </ol>
+
+        <h2>🧠 核心哲学</h2>
+        <ul style="margin:14px 0 14px 24px;font-size:16px;">
+            <li><strong>意图定义者 &gt; 代码执行者</strong>：人的核心价值从"编写指令"跃迁为"定义约束和边界"。</li>
+            <li><strong>可观测性即权利</strong>：结构化日志是 AI 在物理世界中的"眼睛"；正日志记录"发生了什么"，负日志捕获"应该发生却未发生"。</li>
+            <li><strong>闭环是思维，契约是边界</strong>：每一次修改必须有新日志驱动；用提示词模板和规约文件限制 AI 的输出空间。</li>
+            <li><strong>共生而非替代</strong>：人保有最终裁决权，AI 负责追踪分歧、展示后果、请求决策。</li>
+            <li><strong>法则从实践中来</strong>：真正的规律不是从书本到书本，而是从实践到理论——从淤青中长出铠甲。</li>
+        </ul>
+
+        <div class="section-divider"><i class="fas fa-compass"></i></div>
+
+        <h2>🎭 侠士自述</h2>
+        <p>我是 <strong>itg</strong>，一个还在修炼的程序员。没有大派背景，靠着自己琢磨，在这 AI 乱世里，悟出了这门"乾坤大挪移"心法。</p>
+        <p>有人说我剑走偏锋，我说，这叫借力打力。我编程手速不快，但我定义法则，AI 在法则内出招。我凌晨两点盯过示波器，也被 Bug 反复揍过。后来发现，那些淤青才是最好的秘笈。</p>
+        <p>我把这些心得写成十三篇文章，开源于 <a href="https://x-itg.github.io" style="color:#2980b9;text-decoration:none;">x-itg.github.io</a>，不藏私。若你也是那个在深夜独对屏幕的侠客，这套心法，或许能让你少走几段夜路。</p>
+        <p><strong>言出法随，即刻收敛。</strong><br>—— itg，火星火箭，乾坤大挪移传人。</p>
+
+        <div class="footer-note">
+            &copy; x-itg | 遵循"人定义法则，AI 在法则内执行"原则构建
+        </div>
+
+        </article>
+    </div>
+</div>
+
+</body>
+</html>
