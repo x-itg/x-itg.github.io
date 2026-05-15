@@ -262,150 +262,119 @@
         padding: 1.5rem 1rem;
         gap: 2rem;
     }
-    .sidebar {
-        width: 260px;
+    /* ===== 三栏布局（方案B） ===== */
+    .layout {
+        display: flex;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+    }
+
+    /* 左侧：文章系列导航 */
+    .sidebar-series {
+        width: 200px;
         flex-shrink: 0;
         position: sticky;
         top: 1.5rem;
         align-self: start;
+        max-height: calc(100vh - 3rem);
+        overflow-y: auto;
         background: #ffffff;
         border-radius: 1.2rem;
         border: 1px solid #eef2f8;
         padding: 1.2rem 0;
     }
-    .sidebar nav ul {
-        list-style: none;
-        padding: 0 0.5rem;
+    .sidebar-series nav ul { list-style: none; padding: 0 0.5rem; }
+    .sidebar-series nav li { margin: 0.25rem 0; }
+    .sidebar-series nav a {
+        display: block; padding: 0.5rem 1rem; color: #2c5f8a;
+        text-decoration: none; border-radius: 0.6rem;
+        font-size: 0.9rem; transition: 0.2s;
     }
-    .sidebar nav li {
-        margin: 0.25rem 0;
+    .sidebar-series nav a:hover { background: #eef3ff; color: #1e40af; }
+    .sidebar-series nav a i { width: 1.5rem; color: #5b8ec9; }
+    .sidebar-series::-webkit-scrollbar { width: 4px; }
+    .sidebar-series::-webkit-scrollbar-track { background: transparent; }
+    .sidebar-series::-webkit-scrollbar-thumb { background: #d0d7de; border-radius: 2px; }
+
+    /* 中间：本章导航 */
+    .sidebar-toc {
+        width: 170px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 1.5rem;
+        align-self: start;
+        max-height: calc(100vh - 3rem);
+        overflow-y: auto;
+        background: #f8fafc;
+        border-radius: 0.8rem;
+        border: 1px solid #eef2f8;
+        padding: 1rem 0;
     }
-    .sidebar nav a {
-        display: block;
-        padding: 0.5rem 1rem;
-        color: #2c5f8a;
-        text-decoration: none;
-        border-radius: 0.6rem;
-        font-size: 0.9rem;
-        transition: 0.2s;
+    .sidebar-toc h3 {
+        font-size: 0.8rem; font-weight: 600;
+        padding: 0 1rem 0.6rem; color: #1e3a8a;
     }
-    .sidebar nav a:hover {
-        background: #eef3ff;
-        color: #1e40af;
+    .sidebar-toc nav ul { list-style: none; padding: 0 0.5rem; }
+    .sidebar-toc nav li { margin: 0.15rem 0; }
+    .sidebar-toc nav a {
+        display: block; padding: 0.35rem 0.8rem; color: #4a6a8a;
+        text-decoration: none; border-radius: 0.4rem;
+        font-size: 0.78rem; transition: 0.2s; line-height: 1.4;
     }
-    .sidebar nav a i {
-        width: 1.5rem;
-        color: #5b8ec9;
-    }
-    .main-content {
-        flex: 1;
-        min-width: 0;
-    }
-    .article-series {
-        padding-bottom: 0.6rem;
-        margin-bottom: 0.4rem;
-        border-bottom: 1px solid #eef2f8;
-    }
+    .sidebar-toc nav a:hover { background: #eef3ff; color: #1e40af; }
+    .sidebar-toc nav a i { width: 1.2rem; color: #7a9ac9; font-size: 0.7rem; }
+    .sidebar-toc::-webkit-scrollbar { width: 4px; }
+    .sidebar-toc::-webkit-scrollbar-track { background: transparent; }
+    .sidebar-toc::-webkit-scrollbar-thumb { background: #d0d7de; border-radius: 2px; }
+
+    /* 右侧：正文 */
+    .main-content { flex: 1; min-width: 0; }
+
+    /* 文章系列导航系统 */
+    .article-series { padding-bottom: 0.6rem; margin-bottom: 0.4rem; border-bottom: 1px solid #eef2f8; }
     .article-series h3 {
-        font-size: 0.82rem;
-        font-weight: 600;
-        padding: 0 1.2rem 0.6rem;
-        color: #1e3a8a;
+        font-size: 0.82rem; font-weight: 600; padding: 0 1.2rem 0.6rem; color: #1e3a8a;
     }
     .article-link {
-        display: flex !important;
-        align-items: center;
-        gap: 0.6rem;
-        padding: 0.45rem 0.8rem !important;
+        display: flex !important; align-items: center; gap: 0.6rem; padding: 0.4rem 0.8rem !important;
     }
     .article-link .article-num {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 1.5rem;
-        height: 1.5rem;
-        background: #eef3ff;
-        border-radius: 50%;
-        font-size: 0.65rem;
-        font-weight: 700;
-        color: #1e3a8a;
-        flex-shrink: 0;
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 1.4rem; height: 1.4rem; background: #eef3ff; border-radius: 50%;
+        font-size: 0.6rem; font-weight: 700; color: #1e3a8a; flex-shrink: 0;
     }
-    .article-link.active .article-num {
-        background: #1e3a8a;
-        color: #fff;
-    }
-    .article-link .article-info {
-        display: flex;
-        flex-direction: column;
-        gap: 0.05rem;
-        min-width: 0;
-    }
+    .article-link.active .article-num { background: #1e3a8a; color: #fff; }
+    .article-link .article-info { display: flex; flex-direction: column; gap: 0.05rem; min-width: 0; }
     .article-link .article-title {
-        font-weight: 600;
-        font-size: 0.88rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-weight: 600; font-size: 0.82rem;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .article-link .article-desc {
-        font-size: 0.68rem;
-        color: #6b8dad;
-        font-weight: 400;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-size: 0.62rem; color: #6b8dad; font-weight: 400;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .article-link.active {
-        background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
-        color: #ffffff !important;
-    }
-    .article-link.active .article-desc {
-        color: rgba(255,255,255,0.7) !important;
-    }
-    .section-nav {
-        padding-top: 0.2rem;
-    }
-    .section-nav h3 {
-        font-size: 0.82rem;
-        font-weight: 600;
-        padding: 0 1.2rem 0.6rem;
-        color: #1e3a8a;
-    }
+    .article-link.active { background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important; color: #ffffff !important; }
+    .article-link.active .article-desc { color: rgba(255,255,255,0.7) !important; }
 
     @media (max-width: 640px) {
-        .container {
-            padding: 20px 16px 60px;
-        }
-        .article-header h1 {
-            font-size: 26px;
-        }
-        h2 {
-            font-size: 21px;
-        }
-        .card {
-            padding: 18px 16px;
-        }
-        pre {
-            padding: 14px 16px;
-            font-size: 12px;
-        }
+        .container { padding: 20px 16px 60px; }
+        .article-header h1 { font-size: 26px; }
+        h2 { font-size: 21px; }
+        .card { padding: 18px 16px; }
+        pre { padding: 14px 16px; font-size: 12px; }
     }
-    @media (max-width: 780px) {
-        .layout {
-            flex-direction: column;
-        }
-        .sidebar {
-            width: 100%;
-            position: static;
-        }
+    @media (max-width: 900px) {
+        .layout { flex-direction: column; }
+        .sidebar-series, .sidebar-toc { width: 100%; position: static; max-height: none; overflow-y: visible; }
     }
 </style>
 </head>
 <body>
 
 <div class="layout">
-    <aside class="sidebar">
+    <aside class="sidebar-series">
         <div class="article-series">
             <h3><i class="fas fa-book"></i> 文章系列</h3>
             <nav>
@@ -487,6 +456,20 @@
                             <span class="article-desc">综合实战 · 将完整法则体系落地为可立即上手的工程实践</span>
                         </span>
                     </a></li>
+                    <li><a href="12.html" class="article-link">
+                        <span class="article-num">⑫</span>
+                        <span class="article-info">
+                            <span class="article-title">AI编程的利刃</span>
+                            <span class="article-desc">工程利器 · 同步生成测试脚本让AI自我调试</span>
+                        </span>
+                    </a></li>
+                    <li><a href="13.html" class="article-link">
+                        <span class="article-num">⑬</span>
+                        <span class="article-info">
+                            <span class="article-title">拆解与整合</span>
+                            <span class="article-desc">工程心法 · 驾驭复杂系统的完整工程法则</span>
+                        </span>
+                    </a></li>
                 </ul>
             </nav>
         </div>
@@ -501,19 +484,20 @@
             </a>
         </div>
         
-        <div class="section-nav">
-            <h3><i class="fas fa-list"></i> 本章导览</h3>
-            <nav>
-                <ul>
-                    <li><a href="#efficiency"><i class="fas fa-stopwatch"></i> 效率命题</a></li>
-                    <li><a href="#plug-and-play"><i class="fas fa-plug"></i> 即插即用基础</a></li>
-                    <li><a href="#runtime"><i class="fas fa-gears"></i> Skill 运行链</a></li>
-                    <li><a href="#principles"><i class="fas fa-ruler-combined"></i> 设计原则</a></li>
-                    <li><a href="#mapping"><i class="fas fa-layer-group"></i> 与五层映射</a></li>
-                    <li><a href="#final-piece"><i class="fas fa-puzzle-piece"></i> 最后的拼图</a></li>
-                </ul>
-            </nav>
-        </div>
+    </aside>
+
+    <aside class="sidebar-toc">
+        <h3><i class="fas fa-list"></i> 本章导览</h3>
+        <nav>
+            <ul>
+                <li><a href="#efficiency"><i class="fas fa-stopwatch"></i> 效率命题</a></li>
+                <li><a href="#plug-and-play"><i class="fas fa-plug"></i> 即插即用基础</a></li>
+                <li><a href="#runtime"><i class="fas fa-gears"></i> Skill 运行链</a></li>
+                <li><a href="#principles"><i class="fas fa-ruler-combined"></i> 设计原则</a></li>
+                <li><a href="#mapping"><i class="fas fa-layer-group"></i> 与五层映射</a></li>
+                <li><a href="#final-piece"><i class="fas fa-puzzle-piece"></i> 最后的拼图</a></li>
+            </ul>
+        </nav>
     </aside>
     <div class="main-content">
 <div class="container">
