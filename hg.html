@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>回归现实：单Agent实践框架 | 嵌入式AI工程化系列</title>
+<meta name="description" content="一套基于现有工具、可立即上手的单Agent实践框架，将闭环收敛、决策账本、知识生命体征、Skills等完整法则体系落地为日常工程习惯。">
+<meta name="keywords" content="单Agent,实践框架,嵌入式AI,法则落地,决策账本,闭环收敛">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="回归现实：单Agent实践框架 | 嵌入式AI工程化系列">
+<meta property="og:description" content="一套基于现有工具、可立即上手的单Agent实践框架，将完整法则体系落地为日常工程习惯。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/hg.html">
+<link rel="canonical" href="https://x-itg.github.io/hg.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #f8f9fa;
+        --card-bg: #ffffff;
+        --text: #2c3e50;
+        --text-secondary: #5a6c7d;
+        --accent: #c0392b;
+        --accent-soft: #e74c3c;
+        --border: #e0e4e8;
+        --code-bg: #1e293b;
+        --code-text: #e2e8f0;
+        --highlight: #fef9e7;
+        --tag-bg: #f0f3f6;
+        --tag-text: #4a5568;
+        --link: #2980b9;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --radius: 6px;
+        --radius-lg: 10px;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+    }
+
+    .layout {
+        display: flex;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        gap: 2rem;
+    }
+    .sidebar {
+        width: 260px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 1.5rem;
+        align-self: start;
+        background: #ffffff;
+        border-radius: 1.2rem;
+        border: 1px solid #eef2f8;
+        padding: 1.2rem 0;
+    }
+    .sidebar nav ul {
+        list-style: none;
+        padding: 0 0.5rem;
+    }
+    .sidebar nav li {
+        margin: 0.25rem 0;
+    }
+    .sidebar nav a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: #2c5f8a;
+        text-decoration: none;
+        border-radius: 0.6rem;
+        font-size: 0.9rem;
+        transition: 0.2s;
+    }
+    .sidebar nav a:hover {
+        background: #eef3ff;
+        color: #1e40af;
+    }
+    .sidebar nav a i {
+        width: 1.5rem;
+        color: #5b8ec9;
+    }
+    .main-content {
+        flex: 1;
+        min-width: 0;
+    }
+    .article-series {
+        padding-bottom: 0.6rem;
+        margin-bottom: 0.4rem;
+        border-bottom: 1px solid #eef2f8;
+    }
+    .article-series h3 {
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 0 1.2rem 0.6rem;
+        color: #1e3a8a;
+    }
+    .article-link {
+        display: flex !important;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.45rem 0.8rem !important;
+    }
+    .article-link .article-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: #eef3ff;
+        border-radius: 50%;
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #1e3a8a;
+        flex-shrink: 0;
+    }
+    .article-link.active .article-num {
+        background: #1e3a8a;
+        color: #fff;
+    }
+    .article-link .article-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.05rem;
+        min-width: 0;
+    }
+    .article-link .article-title {
+        font-weight: 600;
+        font-size: 0.88rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .article-link .article-desc {
+        font-size: 0.68rem;
+        color: #6b8dad;
+        font-weight: 400;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .article-link.active {
+        background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
+        color: #ffffff !important;
+    }
+    .article-link.active .article-desc {
+        color: rgba(255,255,255,0.7) !important;
+    }
+    .section-nav {
+        padding-top: 0.2rem;
+    }
+    .section-nav h3 {
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 0 1.2rem 0.6rem;
+        color: #1e3a8a;
+    }
+
+    .article-header {
+        margin-bottom: 48px;
+    }
+    .article-header .series-tag {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 3px;
+        letter-spacing: 0.5px;
+        margin-bottom: 16px;
+    }
+    .article-header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.35;
+        margin-bottom: 12px;
+        letter-spacing: -0.3px;
+    }
+    .article-header .subtitle {
+        font-size: 17px;
+        color: var(--text-secondary);
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+    .article-header .meta {
+        font-size: 13px;
+        color: #8896a4;
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 56px 0 16px;
+        padding-top: 24px;
+        border-top: 2px solid var(--border);
+        letter-spacing: -0.2px;
+    }
+    h3 {
+        font-size: 19px;
+        font-weight: 600;
+        margin: 36px 0 12px;
+        color: #1a1a2e;
+    }
+    h4 {
+        font-size: 17px;
+        font-weight: 600;
+        margin: 20px 0 8px;
+        color: #1a1a2e;
+    }
+    p {
+        margin: 14px 0;
+    }
+    strong {
+        color: #1a1a2e;
+    }
+
+    .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 28px 30px;
+        margin: 28px 0;
+        box-shadow: var(--shadow-sm);
+    }
+    .card.accent-left {
+        border-left: 4px solid var(--accent);
+    }
+    .card.blue-left {
+        border-left: 4px solid #3b82f6;
+    }
+
+    .insight-box {
+        background: var(--highlight);
+        border: 1px solid #f0d78c;
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        margin: 24px 0;
+        font-style: italic;
+        color: #6b4c1e;
+    }
+    .insight-box strong {
+        color: #4a340f;
+    }
+
+    pre {
+        background: var(--code-bg);
+        color: var(--code-text);
+        padding: 20px 24px;
+        border-radius: var(--radius);
+        overflow-x: auto;
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        margin: 20px 0;
+        box-shadow: var(--shadow-md);
+    }
+
+    code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
+        font-size: 13px;
+    }
+    p code, li code {
+        background: #eef1f5;
+        padding: 2px 6px;
+        border-radius: 3px;
+        color: #c0392b;
+        font-size: 12px;
+    }
+
+    ul, ol {
+        margin: 14px 0;
+        padding-left: 24px;
+    }
+    li {
+        margin: 6px 0;
+    }
+
+    .footnote-section {
+        margin-top: 60px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+    }
+    .footnote-section h4 {
+        font-size: 14px;
+        color: #8896a4;
+        margin-bottom: 10px;
+    }
+    .footnote-section p {
+        font-size: 13px;
+        color: #8896a4;
+        line-height: 1.6;
+        margin: 6px 0;
+    }
+
+    .quote-block {
+        background: linear-gradient(135deg, #f8fafc, #f0f6ff);
+        border: 1px solid #e0e8f0;
+        border-radius: 12px;
+        padding: 28px 32px;
+        margin: 32px 0;
+        text-align: center;
+        font-size: 16px;
+        color: #4a5568;
+        line-height: 1.9;
+        position: relative;
+    }
+    .quote-block strong {
+        color: #1e3a8a;
+    }
+
+    @media (max-width: 780px) {
+        .layout {
+            flex-direction: column;
+        }
+        .sidebar {
+            width: 100%;
+            position: static;
+        }
+        .container {
+            padding: 20px 16px 60px;
+        }
+        .article-header h1 {
+            font-size: 26px;
+        }
+        h2 {
+            font-size: 21px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="article-series">
+            <h3><i class="fas fa-book"></i> 文章系列</h3>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="article-link">
+                        <span class="article-num">①</span>
+                        <span class="article-info">
+                            <span class="article-title">五层进化</span>
+                            <span class="article-desc">总纲 · 定义整个体系的坐标系和成熟度框架</span>
+                        </span>
+                    </a></li>
+                    <li><a href="true.html" class="article-link">
+                        <span class="article-num">②</span>
+                        <span class="article-info">
+                            <span class="article-title">实践项目模板</span>
+                            <span class="article-desc">执行基础 · 把方法论固化为可落地的工程骨架</span>
+                        </span>
+                    </a></li>
+                    <li><a href="test.html" class="article-link">
+                        <span class="article-num">③</span>
+                        <span class="article-info">
+                            <span class="article-title">自主修复闭环</span>
+                            <span class="article-desc">执行智能 · 双轨收敛让系统在既定路径上自我修正</span>
+                        </span>
+                    </a></li>
+                    <li><a href="fwd.html" class="article-link">
+                        <span class="article-num">④</span>
+                        <span class="article-info">
+                            <span class="article-title">从收敛到进化</span>
+                            <span class="article-desc">演化与判断智能 · 引入Agent性格制衡与决策切换</span>
+                        </span>
+                    </a></li>
+                    <li><a href="exc.html" class="article-link">
+                        <span class="article-num">⑤</span>
+                        <span class="article-info">
+                            <span class="article-title">知识的生命体征</span>
+                            <span class="article-desc">记忆智能 · 知识资产生命周期管理与免疫记忆</span>
+                        </span>
+                    </a></li>
+                    <li><a href="pcb.html" class="article-link">
+                        <span class="article-num">⑥</span>
+                        <span class="article-info">
+                            <span class="article-title">电路图分析器</span>
+                            <span class="article-desc">感知根系 · 打通物理世界与数字世界</span>
+                        </span>
+                    </a></li>
+                    <li><a href="pt.html" class="article-link">
+                        <span class="article-num">⑦</span>
+                        <span class="article-info">
+                            <span class="article-title">最后的拼图：Skills</span>
+                            <span class="article-desc">支撑根系 · 快消费应用即时方法</span>
+                        </span>
+                    </a></li>
+                    <li><a href="history.html" class="article-link">
+                        <span class="article-num">⑧</span>
+                        <span class="article-info">
+                            <span class="article-title">历史的包袱</span>
+                            <span class="article-desc">专业延伸 · 遗留工程与AI迁移策略</span>
+                        </span>
+                    </a></li>
+                    <li><a href="devs.html" class="article-link">
+                        <span class="article-num">⑨</span>
+                        <span class="article-info">
+                            <span class="article-title">固件铭牌与设备画像</span>
+                            <span class="article-desc">专业延伸 · 固件数字身份与协同管理</span>
+                        </span>
+                    </a></li>
+                    <li><a href="gmp.html" class="article-link">
+                        <span class="article-num">⑩</span>
+                        <span class="article-info">
+                            <span class="article-title">合规验证与AI编程</span>
+                            <span class="article-desc">专业延伸 · 从"事后补文档"到"事前建法则"</span>
+                        </span>
+                    </a></li>
+                    <li><a href="hg.html" class="article-link active">
+                        <span class="article-num">⑪</span>
+                        <span class="article-info">
+                            <span class="article-title">回归现实：单Agent实践框架</span>
+                            <span class="article-desc">综合实战 · 将完整法则体系落地为可立即上手的工程实践</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- IDE工具演示入口 -->
+        <div style="margin-top:1rem;padding:1rem;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);border-radius:8px;text-align:center;">
+            <div style="color:white;font-size:1.5rem;margin-bottom:0.5rem;">⚡</div>
+            <div style="color:white;font-weight:600;font-size:0.85rem;">IDE工具演示</div>
+            <div style="color:rgba(255,255,255,0.8);font-size:0.7rem;margin:0.25rem 0 0.5rem;">在线体验完整工具系统</div>
+            <a href="ide_plugins/web/index.html" target="_blank" style="display:inline-block;padding:0.35rem 1rem;background:white;color:#667eea;text-decoration:none;border-radius:15px;font-size:0.75rem;font-weight:600;">
+                立即体验 →
+            </a>
+        </div>
+        
+        <div class="section-nav">
+            <h3><i class="fas fa-list"></i> 本章导览</h3>
+            <nav>
+                <ul>
+                    <li><a href="#sec1"><i class="fas fa-user"></i> 单Agent的现实</a></li>
+                    <li><a href="#sec2"><i class="fas fa-folder"></i> 法则文件夹</a></li>
+                    <li><a href="#sec3"><i class="fas fa-book"></i> 决策账本</a></li>
+                    <li><a href="#sec4"><i class="fas fa-sync"></i> 闭环收敛</a></li>
+                    <li><a href="#sec5"><i class="fas fa-heartbeat"></i> 知识生命体征</a></li>
+                    <li><a href="#sec6"><i class="fas fa-bolt"></i> Skills</a></li>
+                    <li><a href="#sec7"><i class="fas fa-file-code"></i> 工程模板</a></li>
+                    <li><a href="#sec8"><i class="fas fa-tachometer-alt"></i> Token方案切换</a></li>
+                    <li><a href="#sec9"><i class="fas fa-cogs"></i> 协同工作流</a></li>
+                    <li><a href="#sec10"><i class="fas fa-gavel"></i> 总结</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <div class="main-content">
+<div class="container">
+
+    <header class="article-header">
+        <span class="series-tag">嵌入式AI工程化 · 综合实战</span>
+        <a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
+        <h1>回归现实：单Agent实践框架</h1>
+        <p class="subtitle">将嵌入式AI工程化法则完整落地的实战指南 —— 一套基于现有工具、可立即上手的完整实践框架</p>
+        <p class="meta">itg · 嵌入式AI工程化系列 · 综合实战 · 法则先行，执行随后</p>
+    </header>
+
+    <div class="card blue-left">
+        <p style="margin-top:0;"><strong>核心理念：</strong>多Agent架构是愿景，是交给大团队和时间去实现的未来。但在那一天到来之前，你依然可以在单Agent环境下，用这套轻量级的法则体系，让AI在物理世界中安全、高效、可追溯地运行。法则先行，执行随后。言出法随，即刻收敛。</p>
+    </div>
+
+    <section>
+        <h2 id="sec1">一、单Agent的现实：不等待未来，从现在开始</h2>
+
+        <p>多Agent协作是我们的愿景——审慎者审查代码，探索者提出新方案，仲裁者在关键时刻做出切换判断，教师记录每一次决策的上下文。但实现这套体系需要复杂的调度系统、多模型管理、状态同步机制。这需要大团队，需要时间，需要技术的进一步发展。</p>
+
+        <p><strong>但法则本身，不需要等待。</strong></p>
+
+        <p>在单Agent环境下，我们依然可以完整地实施这套体系。Agent只有一个，但法则可以通过文件、通过流程、通过约定，被Agent理解和执行。Agent不需要"性格"，它只需要在被要求时，按照我们预设的规则切换行为模式。Agent不需要"协作"，它只需要在每一步都遵循我们定义的收敛标准。</p>
+
+        <div class="insight-box">
+            <strong>本文的核心：</strong>在单Agent环境下，用最务实的、最轻量的方式，让法则完整落地。所有方法均可独立运行，互不依赖。你可以从任何一章开始，先实践最迫切需要的那一项。
+        </div>
+    </section>
+
+    <section>
+        <h2 id="sec2">二、基础设施：法则文件夹</h2>
+
+        <p>在项目根目录下创建一个法则文件夹，它是整个体系的物理载体：</p>
+
+        <pre>project/
+├── laws/                    # 法则文件夹（Agent自动加载）
+│   ├── project-rules.md     # 项目规约（技术栈、架构约束、编码规范）
+│   ├── decision-ledger.md   # 决策账本（每次重要决策的记录）
+│   ├── knowledge-vitals.md  # 知识体征（文档热度和健康度追踪）
+│   ├── skills/              # Skills定义（高频需求的意图模板）
+│   │   ├── i2c-driver.yaml
+│   │   ├── gpio-config.yaml
+│   │   └── alarm-threshold.yaml
+│   └── templates/           # 工程模板（新模块的骨架）
+│       ├── driver-template.c
+│       ├── test-template.c
+│       └── readme-template.md
+├── src/                     # 源代码
+├── tests/                   # 测试代码
+└── docs/                    # 项目文档</pre>
+
+        <p><strong>单Agent接入方式：</strong>在每次AI对话开始时，将<code>project-rules.md</code>的内容作为系统提示词注入，或在对话中明确要求Agent"先读取laws/目录下的所有文件，再开始执行任务"。</p>
+    </section>
+
+    <section>
+        <h2 id="sec3">三、决策账本：让每一次选择都有据可查</h2>
+
+        <h3>3.1 账本格式</h3>
+
+        <p>不需要复杂的数据库，一个Markdown文件即可：</p>
+
+        <pre># 决策账本
+
+## DECISION-2026-001
+- 日期：2026-05-15
+- 决策：选用STM32F407作为主控芯片
+- 背景：需要支持多路I2C和CAN总线，F407有3路I2C和2路CAN
+- 替代方案：STM32F103（I2C和CAN不足），ESP32（功耗偏高）
+- 裁决人：itg
+- 状态：已确认
+
+## DECISION-2026-002
+- 日期：2026-05-15
+- 决策：SPI Flash驱动采用DMA模式
+- 背景：轮询模式占用CPU过高，影响传感器采样周期
+- 替代方案：中断模式（代码复杂度高），轮询+缓存（延迟不可控）
+- 裁决人：itg
+- 状态：已确认</pre>
+
+        <h3>3.2 单Agent操作方式</h3>
+
+        <p><strong>记录决策：</strong>每次做出重要技术选型、架构调整、方案切换时，手动在<code>decision-ledger.md</code>中追加一条记录。这不需要Agent自动执行，你只需要养成习惯——花一分钟，把决策背景和替代方案写下来。</p>
+
+        <p><strong>查询决策：</strong>当AI提出一个方案时，要求它先读取<code>decision-ledger.md</code>，确认是否有历史决策禁止了这个方向。例如：</p>
+
+        <div class="quote-block">
+            "在给出建议之前，请先读取laws/decision-ledger.md，确认你的建议不会违反已记录的技术决策。"
+        </div>
+
+        <h3>3.3 实战价值</h3>
+
+        <p>三个月后，当你忘记为什么选了这颗芯片而不是另一颗时，打开决策账本，一分钟就能找回上下文。当新同事入职时，他不需要你口头解释历史决策，他只需要读这份文件。</p>
+    </section>
+
+    <section>
+        <h2 id="sec4">四、闭环收敛：每次修复都同步增强测试</h2>
+
+        <h3>4.1 核心操作</h3>
+
+        <p>当AI帮你修复了一个Bug后，不要只让它生成修复代码。同时要求它：</p>
+
+        <div class="quote-block">
+            "请完成以下两项任务：<br>
+            1. 生成修复代码（git diff格式）<br>
+            2. 生成一个新的测试用例，确保同样的Bug不会再次出现"
+        </div>
+
+        <h3>4.2 最小化测试文件</h3>
+
+        <p>不需要复杂的测试框架。在你的<code>tests/</code>目录下，为每个模块维护一个简单的测试脚本：</p>
+
+        <pre>// tests/test_rs485.c
+#include "unity.h"
+#include "../src/rs485.h"
+
+void test_rs485_timeout_handling(void) {
+    // 模拟超时场景
+    rs485_set_timeout_ms(10);
+    uint8_t result = rs485_send_and_wait(test_data, 4);
+    TEST_ASSERT_EQUAL(RS485_ERR_TIMEOUT, result);
+}
+
+void test_rs485_retry_counter_reset(void) {
+    // 验证上次修复的Bug：重试计数器是否正确重置
+    rs485_reset();
+    TEST_ASSERT_EQUAL(0, rs485_get_retry_count());
+}</pre>
+
+        <h3>4.3 单Agent操作方式</h3>
+
+        <p>每次修复Bug后，要求Agent同步更新对应的测试文件。如果测试文件还不存在，要求Agent创建一个。你可以这样说：</p>
+
+        <div class="quote-block">
+            "请修复rs485.c中的超时处理Bug，并同步更新tests/test_rs485.c，增加一个验证超时后重试计数器正确重置的测试用例。"
+        </div>
+
+        <h3>4.4 实战价值</h3>
+
+        <p>一个没有测试的修复，只是把Bug从"已知"变成了"未知"。一个带测试的修复，是把Bug从"存在"变成了"免疫"。这个习惯一旦养成，你的代码质量会持续上升，而不是反复震荡。</p>
+    </section>
+
+    <section>
+        <h2 id="sec5">五、知识生命体征：让文档"活着"</h2>
+
+        <h3>5.1 文档元数据</h3>
+
+        <p>在每个重要文档的头部，加入一段简单的元数据：</p>
+
+        <pre>&lt;!--
+doc_id: SPEC-001
+title: RS485驱动设计规约
+created: 2026-03-15
+last_modified: 2026-05-10
+reference_count: 8
+last_referenced: 2026-05-14
+health_score: 0.85
+status: healthy
+wake_keywords: [RS485, 超时, MAX485, 总线挂死]
+--></pre>
+
+        <h3>5.2 手动更新规则</h3>
+
+        <p>不需要自动化脚本。只需要养成两个习惯：</p>
+        <ul>
+            <li><strong>修改文档时</strong>：更新<code>last_modified</code>和<code>health_score</code>（如果内容有重大变更，手动调高健康度）</li>
+            <li><strong>引用文档时</strong>：更新<code>reference_count</code>和<code>last_referenced</code></li>
+        </ul>
+
+        <h3>5.3 唤醒关键词的使用</h3>
+
+        <p>当你在AI对话中遇到特定问题时，主动告诉AI：</p>
+
+        <div class="quote-block">
+            "我遇到了RS485总线挂死的问题。请先读取所有wake_keywords中包含'RS485'或'总线挂死'的文档，然后再给出诊断建议。"
+        </div>
+
+        <h3>5.4 知识体征看板</h3>
+
+        <p>在<code>knowledge-vitals.md</code>中维护一份全局视图：</p>
+
+        <pre># 知识体征看板
+最后更新：2026-05-15
+
+## 当前风险警示
+- 🔴 高危：SPEC-003（SPI Flash规约，健康度0.4，已半年未验证）
+- 🟡 注意：SPEC-001（RS485规约，健康度0.7，建议近期复审）
+
+## 热力分布
+- 热区文档（本月被引用3次以上）：SPEC-001, SPEC-005
+- 冷区文档（半年未引用）：SPEC-002, HISTORY-2023-001</pre>
+
+        <h3>5.5 实战价值</h3>
+
+        <p>你不用再担心"这份文档还能不能信"。打开<code>knowledge-vitals.md</code>，一眼就能看到哪些文档需要复审，哪些文档已经过时。当AI引用一份健康度只有0.4的文档时，你会立刻知道需要谨慎对待它的建议。</p>
+    </section>
+
+    <section>
+        <h2 id="sec6">六、Skills：高频需求的"快速通道"</h2>
+
+        <h3>6.1 Skill定义</h3>
+
+        <p>每个Skill是一个YAML文件，放在<code>laws/skills/</code>目录下。它定义了该Skill的意图模板、所需上下文和验证标准。</p>
+
+        <pre># laws/skills/i2c-driver.yaml
+skill_name: i2c-driver
+description: 生成一个新的I2C外设驱动
+intent_template: |
+  请为传感器 {sensor_name} 生成I2C驱动。
+  总线：{bus}
+  I2C地址：{address}
+  采样率：{sample_rate}Hz
+
+required_context:
+  - laws/project-rules.md        # 项目规约
+  - laws/decision-ledger.md      # 决策账本
+  - docs/schematic.md            # 电路描述
+
+output_requirements:
+  - 生成 {sensor_name}.c 和 {sensor_name}.h
+  - 代码必须遵循project-rules.md中的编码规范
+  - 必须包含负日志（EXPECT_WITHIN检查）
+
+verification:
+  - 编译通过
+  - I2C扫描测试通过
+  - 连续读取100次无超时</pre>
+
+        <h3>6.2 单Agent操作方式</h3>
+
+        <p>当你需要生成一个I2C驱动时，不需要每次都解释上下文。只需要告诉AI：</p>
+
+        <div class="quote-block">
+            "按照laws/skills/i2c-driver.yaml中定义的模板，为TMP117传感器生成驱动。总线I2C1，地址0x48，采样率1Hz。"
+        </div>
+
+        <h3>6.3 实战价值</h3>
+
+        <p>一个Skill定义只需创建一次，之后每次使用都能节省大量解释上下文的时间。随着Skill库的积累，你的AI协作效率会持续提升。</p>
+    </section>
+
+    <section>
+        <h2 id="sec7">七、工程模板：让每个新模块从第一天就遵守法则</h2>
+
+        <h3>7.1 驱动模板</h3>
+
+        <p>在<code>laws/templates/</code>下维护一套带法则标记的代码模板：</p>
+
+        <pre>// laws/templates/driver-template.c
+// 模板使用说明：
+// 1. 替换 [MODULE_NAME] 为实际模块名
+// 2. 替换 [PERIPHERAL] 为实际外设类型（I2C/SPI/UART）
+// 3. 保留所有负日志宏
+
+#include "[MODULE_NAME].h"
+#include "negative_logger.h"
+
+// 初始化函数
+int [MODULE_NAME]_init(void) {
+    LOG("INFO", "[MODULE_NAME] initializing...");
+
+    // 期望外设在50ms内就绪
+    EXPECT_WITHIN(50, "[MODULE_NAME]_READY", check_ready());
+
+    if (!check_ready()) {
+        LOG("ERROR", "[MODULE_NAME] initialization failed");
+        return -1;
+    }
+
+    EVENT_OCCURRED("[MODULE_NAME]_READY");
+    LOG("INFO", "[MODULE_NAME] initialized successfully");
+    return 0;
+}
+
+// 数据读取函数
+int [MODULE_NAME]_read(uint8_t *buffer, uint16_t len) {
+    EXPECT_WITHIN(100, "[MODULE_NAME]_DATA_READY", data_available());
+    return 0;
+}</pre>
+
+        <h3>7.2 测试模板</h3>
+
+        <pre>// laws/templates/test-template.c
+#include "unity.h"
+#include "../src/[MODULE_NAME].h"
+
+void test_[MODULE_NAME]_init(void) {
+    TEST_ASSERT_EQUAL(0, [MODULE_NAME]_init());
+}
+
+void test_[MODULE_NAME]_read_timeout(void) {
+    TEST_ASSERT_EQUAL(-1, [MODULE_NAME]_read(NULL, 0));
+}</pre>
+
+        <h3>7.3 单Agent操作方式</h3>
+
+        <p>当需要新增一个驱动时：</p>
+
+        <div class="quote-block">
+            "请按照laws/templates/driver-template.c和laws/templates/test-template.c的模板，为BME680传感器生成驱动和测试代码。模块名bme680，外设类型I2C。"
+        </div>
+
+        <h3>7.4 实战价值</h3>
+
+        <p>模板确保每个新模块从创建第一天就嵌入了负日志、可观测性和测试框架。你不会再遇到"这个驱动没有日志，调试完全靠猜"的困境。</p>
+    </section>
+
+    <section>
+        <h2 id="sec8">八、Agent的Token上限与方案切换</h2>
+
+        <h3>8.1 设定Token消耗上限</h3>
+
+        <p>在每次AI对话开始时，明确告诉Agent：</p>
+
+        <div class="quote-block">
+            "本次对话的Token消耗上限为20000。如果超过此上限仍未解决问题，请停止当前路径的优化，并执行方案切换评估。"
+        </div>
+
+        <h3>8.2 方案切换评估</h3>
+
+        <p>当Agent接近Token上限时，要求它生成一份决策报告：</p>
+
+        <div class="quote-block">
+            "你已经消耗了18000 Token，但问题尚未解决。请停止当前修复路径，生成一份方案切换报告，包含：<br>
+            1. 当前路径的已投入成本（时间/Token）<br>
+            2. 当前路径的成功率评估<br>
+            3. 2-3个替代方案及其预估成本<br>
+            4. 推荐切换方案及理由"
+        </div>
+
+        <h3>8.3 实战价值</h3>
+
+        <p>你不会再陷入"AI在一个错误方向上越走越深，消耗了大量Token却毫无进展"的困境。Token上限是你的硬约束，方案切换是你的安全阀。</p>
+    </section>
+
+    <section>
+        <h2 id="sec9">九、全部组件的协同工作流</h2>
+
+        <p>一个完整的新功能开发流程如下：</p>
+
+        <div class="flow-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>创建Skill定义（如需要）</h4>
+                <p>如果是高频需求（如生成I2C驱动），先在<code>laws/skills/</code>下创建Skill定义，后续复用。</p>
+            </div>
+        </div>
+
+        <div class="flow-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>按照模板生成代码</h4>
+                <p>告诉AI使用<code>laws/templates/</code>下的模板，生成驱动代码和测试代码。</p>
+            </div>
+        </div>
+
+        <div class="flow-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>决策记录</h4>
+                <p>如果涉及技术选型，在<code>decision-ledger.md</code>中追加记录。</p>
+            </div>
+        </div>
+
+        <div class="flow-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>闭环收敛</h4>
+                <p>生成代码后立即运行测试。如果发现Bug，要求AI同步修复代码和增强测试用例。</p>
+            </div>
+        </div>
+
+        <div class="flow-step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <h4>知识体征更新</h4>
+                <p>修改文档后，更新文档头部的元数据。定期查看<code>knowledge-vitals.md</code>，复审健康度低的文档。</p>
+            </div>
+        </div>
+
+        <div class="flow-step">
+            <div class="step-num">6</div>
+            <div class="step-content">
+                <h4>Token监控</h4>
+                <p>如果某个Bug调试超过Token上限，要求AI生成方案切换报告，重新评估技术路线。</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 id="sec10">十、总结：法则先行，执行随后</h2>
+
+        <p>这套单Agent实践框架，是你整套体系在"当下"的落地形态。它不依赖任何新工具的开发，不需要任何IDE插件的支持，不需要多Agent调度系统。它只需要你：</p>
+
+        <ul>
+            <li>创建<code>laws/</code>文件夹</li>
+            <li>养成记录决策的习惯</li>
+            <li>每次修复Bug时同步要求AI增强测试</li>
+            <li>每次修改文档时更新元数据</li>
+            <li>每次开始AI对话时设定Token上限</li>
+        </ul>
+
+        <p>这五项习惯，每一项都对应你体系中的一条核心法则。它们不需要同时养成，你可以从最迫切需要的那一项开始。</p>
+
+        <div class="card accent-left">
+            <p style="margin-top:0;"><strong>多Agent架构是愿景，是交给大团队和时间去实现的未来。但在那一天到来之前，你依然可以在单Agent环境下，用这套轻量级的法则体系，让AI在物理世界中安全、高效、可追溯地运行。</strong></p>
+        </div>
+
+        <div class="insight-box">
+            法则先行，执行随后。言出法随，即刻收敛。
+        </div>
+    </section>
+
+    <section class="footnote-section">
+        <h4>本文定位</h4>
+        <p>本文是整个嵌入式AI工程化系列的<strong>综合实战篇</strong>。它将前10篇文章中定义的核心法则——闭环收敛、决策账本、知识生命体征、Skills、工程模板——整合为一套可立即上手的单Agent实践框架。所有方法基于现有工具（VSCode、Git、AI编程助手），不需要开发IDE插件，不需要多Agent调度系统。建议在理解③闭环收敛、⑦Skills和⑤知识生命体征后阅读，但各节可独立使用。</p>
+        <p>系列导航：
+            <a href="index.html">① 五层进化</a> ·
+            <a href="true.html">② 实践项目模板</a> ·
+            <a href="test.html">③ 自主修复闭环</a> ·
+            <a href="fwd.html">④ 从收敛到进化</a> ·
+            <a href="exc.html">⑤ 知识的生命体征</a> ·
+            <a href="pcb.html">⑥ 电路图分析器</a> ·
+            <a href="pt.html">⑦ Skills</a> ·
+            <a href="history.html">⑧ 历史的包袱</a> ·
+            <a href="devs.html">⑨ 固件铭牌与设备画像</a> ·
+            <a href="gmp.html">⑩ 合规验证与AI编程</a> ·
+            <strong>⑪ 回归现实：单Agent实践框架</strong>
+        </p>
+        <p style="margin-top:12px;font-size:13px;"><a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a></p>
+    </section>
+
+</div>
+    </div>
+</div>
+
+</body>
+</html>
