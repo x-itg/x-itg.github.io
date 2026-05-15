@@ -18,97 +18,85 @@
 
 ---
 
-## 🏔️ 总纲：五层进化
+## 🏔️ 总纲：五层进化  [ 👈](https://x-itg.github.io/index.html)
 
 ### ① 五层进化
 江湖上的武功，都分个几流几等。这套心法也分五层，从"摸黑瞎打"到"言出法随"。
 第一层，Vibe Coding，凭感觉出招，漏洞百出。第五层，AI 自治，人在旁边喝茶，系统自己修炼。
 
-- 📄 [阅读全文](https://x-itg.github.io/index.html)
-
 ---
 
-## 🗡️ 核心剑法：从执行到演化
+## 🗡️ 核心剑法：从执行到演化   [ 👈](https://x-itg.github.io/true.html)
 
 ### ② 实践项目模板
 剑招再好，也得有把趁手的剑。这个模板就是锻造剑胚的铁砧——把心法变成实实在在的工程骨架，让 AI 一上手就知道该往哪儿砍。
 
-- 📄 [阅读全文](https://x-itg.github.io/true.html)
 
-### ③ 自主修复闭环
+### ③ 自主修复闭环   [ 👈](https://x-itg.github.io/test.html)
 "双轨收敛剑"。一剑修 Bug，一剑补测试，两剑齐出，螺旋上升。AI 会自己看日志、自己改、自己再测——直到没问题。
 
-- 📄 [阅读全文](https://x-itg.github.io/test.html)
 
-### ④ 从收敛到进化
+### ④ 从收敛到进化   [ 👈](https://x-itg.github.io/fwd.html)
 闭关久了会走火入魔。引入"Agent 性格制衡"：审慎者守关，探索者开路，仲裁者断案。三足鼎立，决策不跑偏。
 
-- 📄 [阅读全文](https://x-itg.github.io/fwd.html)
 
-### ⑤ 知识的生命体征
+
+### ⑤ 知识的生命体征   [ 👈](https://x-itg.github.io/exc.html)
 武功秘笈放久了会发霉。这一招让文档有了"生命值"和"热度"——哪些秘笈快朽了，哪些是镇派之宝，一眼便知。
 
-- 📄 [阅读全文](https://x-itg.github.io/exc.html)
 
 ---
 
 ## 🌿 根系功法：感知与支撑
 
-### ⑥ 电路图分析器
+### ⑥ 电路图分析器   [ 👈](https://x-itg.github.io/pcb.html)
 打通任督二脉的功夫。从此 AI 能读懂电路图，看见物理世界的经络。你点一下元件，它就能跳到对应的代码行——如臂使指。
 
-- 📄 [阅读全文](https://x-itg.github.io/pcb.html)
 
-### ⑦ 最后的拼图：Skills
+### ⑦ 最后的拼图：Skills   [ 👈](https://x-itg.github.io/pt.html)
 "快剑诀"。日常高频的需求，像飞镖一样随手甩出，瞬间生成。I2C 驱动、GPIO 配置、报警阈值……信手拈来，不再费神。
 
-- 📄 [阅读全文](https://x-itg.github.io/pt.html)
 
 ---
 
 ## 🌍 江湖游历：专业延伸
 
-### ⑧ 历史的包袱
+### ⑧ 历史的包袱   [ 👈](https://x-itg.github.io/history.html)
 祖传的 Keil/IAR 老项目怎么救？防御-抽象-进攻三层策略，把被封闭 IDE 死锁的老工程逐步翻译、解耦、迁入 AI 友好生态。
 
-- 📄 [阅读全文](https://x-itg.github.io/history.html)
 
-### ⑨ 固件铭牌与设备画像
+### ⑨ 固件铭牌与设备画像   [ 👈](https://x-itg.github.io/devs.html)
 行走江湖，兵器都要刻个名。每个固件自带"身份证"，组合关系、版本血缘一目了然。从此不怕搞混自家刀剑。
 
-- 📄 [阅读全文](https://x-itg.github.io/devs.html)
 
-### ⑩ 合规验证与 AI 编程
+### ⑩ 合规验证与 AI 编程   [ 👈](https://x-itg.github.io/gmp.html)
 官府查得严？从"事后补文档"变成"事前建法则"。GMP 合规、21 CFR Part 11，AI 顺手就把验证报告给签了。
 
-- 📄 [阅读全文](https://x-itg.github.io/gmp.html)
 
 ---
 
 ## 🔥 实战演练：单 Agent & 利刃
 
-### ⑪ 回归现实：单 Agent 实践框架
+### ⑪ 回归现实：单 Agent 实践框架   [ 👈](https://x-itg.github.io/hg.html)
 不等多 Agent 大阵了。一个人、一个 AI、一套法则文件夹，马上就能开练。决策账本、知识体征、Skills 模板……十八般武艺样样精简。
 
-- 📄 [阅读全文](https://x-itg.github.io/hg.html)
+- 
 
-### ⑫ AI 编程的利刃
+### ⑫ AI 编程的利刃   [ 👈](https://x-itg.github.io/12.html)
 整部剑谱的"拔刀术"。让 AI 写代码时顺便生成测试脚本，带上负日志。跑起来，两股日志汇成洪流，AI 自己读、自己改、自己收功。你只需要在旁边轻轻"嗯"一声。
 
-- 📄 [阅读全文](https://x-itg.github.io/12.html)
 
 ---
 
 ## 🐉 终极心法：拆解与整合
 
-### ⑬ 拆解与整合
+### ⑬ 拆解与整合   [ 👈](https://x-itg.github.io/13.html)
 遇上大魔头（复杂系统），别硬拼。用"拆解"把它大卸八块，每个小块独立调教、单独收敛。再用"整合"一块块拼回去——每次只拼一块，拼完立刻全系统比试。
 
 胜了，继续拼下一块；败了，问题就在新拼的那块上，揪出来再打。
 
 这是乾坤大挪移的高阶奥义——**借力打力，化繁为简**。
 
-- 📄 [阅读全文](https://x-itg.github.io/13.html)
 
 ---
 
