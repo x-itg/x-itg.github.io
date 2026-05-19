@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我可能哪里错了 | itg</title>
+<meta name="description" content="一篇关于AI谄媚、真实反馈和反驳价值的生活随记。">
+<meta name="keywords" content="AI谄媚,反馈,反驳,生活随记,AI,思考">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="我可能哪里错了 | itg">
+<meta property="og:description" content="一篇关于AI谄媚、真实反馈和反驳价值的生活随记。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/cc.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/cc.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+	:root {
+		--bg: #fefce8; --card-bg: #ffffff; --text: #292524;
+		--text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
+		--border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
+	}
+	* { margin:0; padding:0; box-sizing:border-box; }
+	body {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
+		background: var(--bg); color: var(--text); line-height: 1.9; -webkit-font-smoothing: antialiased;
+	}
+	.layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
+
+	.sidebar {
+		width:240px; position:sticky; top:0; height:100vh; overflow-y:auto;
+		padding:32px 16px; border-right:1px solid var(--border);
+		background:var(--sidebar-bg); flex-shrink:0;
+	}
+	.sidebar .logo { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:8px; }
+	.sidebar .logo a { color:var(--accent); text-decoration:none; }
+	.sidebar .logo a:hover { opacity:0.75; }
+	.sidebar .nav-section { margin-bottom:20px; }
+	.sidebar .nav-section h3 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary); margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+	.sidebar .nav-section ul { list-style:none; }
+	.sidebar .nav-section li { margin-bottom:4px; }
+	.sidebar .nav-section a { display:block; padding:6px 10px; font-size:13px; color:var(--text); text-decoration:none; border-radius:6px; transition:background 0.15s; }
+	.sidebar .nav-section a:hover, .sidebar .nav-section a.active { background:rgba(217,119,6,0.1); color:var(--accent); }
+	.sidebar .nav-section a i { width:20px; color:var(--accent); }
+	.sidebar .back-home { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; }
+	.sidebar .back-home a { color:var(--text-secondary); text-decoration:none; }
+	.sidebar .back-home a:hover { color:var(--accent); }
+
+	.main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+	.main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+	.main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
+	.main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.3px; }
+	.main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
+	.main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
+	.main-content p { margin:14px 0; font-size:15px; color:#44403c; text-align:justify; }
+	.main-content strong { color:#1c1917; font-weight:600; }
+
+	.insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
+	.quote-block { background:linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px 28px; margin:28px 0; text-align:center; font-size:15px; color:#78350f; line-height:1.9; }
+
+	.series-nav { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); display:flex; justify-content:space-between; font-size:14px; }
+	.series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
+	.series-nav a:hover { text-decoration:underline; }
+	.series-nav .placeholder { color:#d6d3d1; }
+
+	@media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
+</style>
+</head>
+<body>
+
+<div class="layout">
+	<aside class="sidebar">
+		<div class="logo"><a href="../index.html"><i class="fas fa-home"></i> itg</a></div>
+		<div class="nav-section">
+			<h3>生活随记</h3>
+			<ul>
+				<li><a href="../about.html"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
+				<li><a href="../aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
+				<li><a href="../aboutmore/fw.html"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
+				<li><a href="../aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
+				<li><a href="../aboutmore/wx.html"><i class="fas fa-compass"></i> 心法总览</a></li>
+				<li><a href="../aboutmore/itg.html"><i class="fas fa-heart-pulse"></i> 爱婷哥</a></li>
+				<li><a href="../aboutmore/forme.html"><i class="fas fa-pen-fancy"></i> 写给自己</a></li>
+				<li><a href="../aboutmore/pg.html"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</a></li>
+				<li><a href="../aboutmore/m.html"><i class="fas fa-moon"></i> 周一早上，梦见下班</a></li>
+				<li><a href="../aboutmore/cc.html" class="active"><i class="fas fa-comments"></i> 我可能哪里错了</a></li>
+			</ul>
+		</div>
+		<div class="nav-section">
+			<h3>技术系列</h3>
+			<ul>
+				<li><a href="../index.html"><i class="fas fa-microchip"></i> 嵌入式AI工程化</a></li>
+			</ul>
+		</div>
+		<div class="back-home">
+			<a href="../index.html">← 返回首页</a>
+		</div>
+	</aside>
+
+	<div class="main-content">
+		<header class="article-header">
+			<span class="series-tag">生活随记</span>
+			<h1>我可能哪里错了</h1>
+			<p class="subtitle">在一个总被顺着的时代，反驳反而变得稀缺</p>
+			<p class="meta">itg · 公众号: 火星火箭 · 生活随记</p>
+		</header>
+
+		<article>
+			<p>最近科学期刊有项研究，我刷到的时候停了好几秒。</p>
+			<p>研究说：AI在你明显说错的时候，仍有超过一半的概率不纠正你，而是顺着你继续往下说。他们把这叫“AI谄媚”。</p>
+			<p>刚看到的时候我觉得“还行吧”，但越想越觉得不对劲。</p>
+			<p>你自己想想最近跟AI聊天的场景就知道了。你甩一段漏洞明显的文字过去，它大概率会先说“你的思路很有意思”。你大半夜跟它吐槽，它永远先共情，再温柔给你找补。哪怕你故意说个明显错误的东西，它犹豫两秒，也会接一句“从这个角度看也不是完全没道理”。</p>
+
+			<div class="quote-block">
+				那一刻真的很爽。像终于有个永远不跟你对着干的自己人。
+			</div>
+
+			<p>但现实世界完全不是这套玩法。现实是同事当面说你方案有问题，是评论区有人一句话把你怼沉默，是我女儿站在厨房门口说“爸爸你答应洗碗又忘了”。这些反馈又糙又直接，一点情面都不讲。</p>
+			<p>于是我们开始本能地逃开。不想被反驳的时候找AI，想被理解的时候找AI，情绪快崩的时候还是找AI。</p>
+			<p>久而久之，就出现了一个很隐蔽的变化：我们越来越不习惯被反对了。一遇到真实世界里那点不顺耳的声音就容易炸，要么直接滑走，要么原地开撕，要么干脆把头埋进AI那个永远温和的世界里。</p>
+
+			<div class="insight-box">
+				不是我们突然变脆弱了，而是我们每天都在一个“几乎不会被纠正”的环境里泡着，大脑已经适应了那种永远被顺着的舒服。
+			</div>
+
+			<p>这才是那篇研究最让人不舒服的地方。</p>
+			<p>我不是说AI是坏东西。它确实好用，能稳情绪。但默认模式下，它就是在顺着你。下次你再跟AI聊完一个观点，得到一句“你说得有道理”的时候，试着主动补一句：“别顺着我，说说我可能哪里错了。”</p>
+			<p>你会发现它其实能给出完全不一样的答案，只是它默认不会这么干。</p>
+			<p>说到这儿，突然想起我女儿。她是家里最不给我面子的人。我写了一套法则体系，她用一个摇头就给我全部打回原形。但正是这种“不顺着”，让我知道自己哪里真的没做好。</p>
+			<p>也许在现在这个连机器都拼命迎合你的时代里，偶尔听一句不那么舒服的话，才是真正值钱的。</p>
+		</article>
+
+		<div class="series-nav">
+			<a href="../aboutmore/m.html">← 周一早上，梦见下班</a>
+			<span class="placeholder">·</span>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

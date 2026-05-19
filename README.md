@@ -130,6 +130,7 @@
 | 🧠 [以不变应万变](https://x-itg.github.io/aboutmore/tk.html) | 从 AI 编程到生活法则的认知升维 |
 | 🪄 [用工程魔法打败生活魔法](https://x-itg.github.io/aboutmore/fw.html) | 一套思想体系的七种不正经应用 |
 | ❤️ [我用调试 AI 的方法，学会了经营感情](https://x-itg.github.io/aboutmore/sc.html) | 当工程法则走出代码，走进亲密关系 |
+| 💬 [我可能哪里错了](https://x-itg.github.io/aboutmore/cc.html) | 当 AI 总在顺着你，反驳反而成了稀缺品 |
 
 ## 🎭 侠士自述
 
