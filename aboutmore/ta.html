@@ -4,149 +4,148 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>剩下的，不必全部收敛 | itg</title>
-<meta name="description" content="一篇以第三者视角写给自己的生活随记：关于收敛、可靠、疲惫和不必全部被法则化的部分。">
-<meta name="keywords" content="收敛,法则,负日志,闭环收敛,生活随记,自我观察">
+<meta name="description" content="有些疲惫，不必马上变成方法论。关于收敛、放松与学会和自己法则相处的短篇随笔。">
+<meta name="keywords" content="收敛,方法论,随笔,生活,自我接纳,法则">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="剩下的，不必全部收敛 | itg">
-<meta property="og:description" content="一篇以第三者视角写给自己的生活随记：关于收敛、可靠、疲惫和不必全部被法则化的部分。">
+<meta property="og:description" content="有些疲惫，不必马上变成方法论。关于收敛、放松与学会和自己法则相处的短篇随笔。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://x-itg.github.io/aboutmore/ta.html">
 <link rel="canonical" href="https://x-itg.github.io/aboutmore/ta.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-	:root {
-		--bg: #fefce8; --card-bg: #ffffff; --text: #292524;
-		--text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
-		--border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
-	}
-	* { margin:0; padding:0; box-sizing:border-box; }
-	body {
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
-		background: var(--bg); color: var(--text); line-height: 1.9; -webkit-font-smoothing: antialiased;
-	}
-	.layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
+    :root {
+        --bg: #fefce8; --card-bg: #ffffff; --text: #292524;
+        --text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
+        --border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
+        background: var(--bg); color: var(--text); line-height: 1.9; -webkit-font-smoothing: antialiased;
+    }
+    .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
 
-	.sidebar {
-		width:240px; position:sticky; top:0; height:100vh; overflow-y:auto;
-		padding:32px 16px; border-right:1px solid var(--border);
-		background:var(--sidebar-bg); flex-shrink:0;
-	}
-	.sidebar .logo { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:8px; }
-	.sidebar .logo a { color:var(--accent); text-decoration:none; }
-	.sidebar .logo a:hover { opacity:0.75; }
-	.sidebar .nav-section { margin-bottom:20px; }
-	.sidebar .nav-section h3 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary); margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border); }
-	.sidebar .nav-section ul { list-style:none; }
-	.sidebar .nav-section li { margin-bottom:4px; }
-	.sidebar .nav-section a { display:block; padding:6px 10px; font-size:13px; color:var(--text); text-decoration:none; border-radius:6px; transition:background 0.15s; }
-	.sidebar .nav-section a:hover, .sidebar .nav-section a.active { background:rgba(217,119,6,0.1); color:var(--accent); }
-	.sidebar .nav-section a i { width:20px; color:var(--accent); }
-	.sidebar .back-home { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; }
-	.sidebar .back-home a { color:var(--text-secondary); text-decoration:none; }
-	.sidebar .back-home a:hover { color:var(--accent); }
+    .sidebar {
+        width:240px; position:sticky; top:0; height:100vh; overflow-y:auto;
+        padding:32px 16px; border-right:1px solid var(--border);
+        background:var(--sidebar-bg); flex-shrink:0;
+    }
+    .sidebar .logo { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:8px; }
+    .sidebar .logo a { color:var(--accent); text-decoration:none; }
+    .sidebar .logo a:hover { opacity:0.75; }
+    .sidebar .nav-section { margin-bottom:20px; }
+    .sidebar .nav-section h3 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary); margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+    .sidebar .nav-section ul { list-style:none; }
+    .sidebar .nav-section li { margin-bottom:4px; }
+    .sidebar .nav-section a { display:block; padding:6px 10px; font-size:13px; color:var(--text); text-decoration:none; border-radius:6px; transition:background 0.15s; }
+    .sidebar .nav-section a:hover, .sidebar .nav-section a.active { background:rgba(217,119,6,0.1); color:var(--accent); }
+    .sidebar .nav-section a i { width:20px; color:var(--accent); }
+    .sidebar .back-home { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; }
+    .sidebar .back-home a { color:var(--text-secondary); text-decoration:none; }
+    .sidebar .back-home a:hover { color:var(--accent); }
 
-	.main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
-	.main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
-	.main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
-	.main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.3px; }
-	.main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
-	.main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
-	.main-content p { margin:14px 0; font-size:15px; color:#44403c; text-align:justify; }
-	.main-content strong { color:#1c1917; font-weight:600; }
+    .main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+    .main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+    .main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
+    .main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.3px; }
+    .main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
+    .main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
+    .main-content p { margin:14px 0; font-size:15px; color:#44403c; text-align:justify; }
+    .main-content strong { color:#1c1917; font-weight:600; }
 
-	.insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
-	.quote-block { background:linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px 28px; margin:28px 0; text-align:center; font-size:15px; color:#78350f; line-height:1.9; }
+    .insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
+    .quote-block { background:linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px 28px; margin:28px 0; text-align:center; font-size:15px; color:#78350f; line-height:1.9; }
 
-	.series-nav { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); display:flex; justify-content:space-between; font-size:14px; }
-	.series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
-	.series-nav a:hover { text-decoration:underline; }
-	.series-nav .placeholder { color:#d6d3d1; }
+    .series-nav { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); display:flex; justify-content:space-between; font-size:14px; }
+    .series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
+    .series-nav a:hover { text-decoration:underline; }
+    .series-nav .placeholder { color:#d6d3d1; }
 
-	@media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
+    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
 </style>
 </head>
 <body>
 
 <div class="layout">
-	<aside class="sidebar">
-		<div class="logo"><a href="../index.html"><i class="fas fa-home"></i> itg</a></div>
-		<div class="nav-section">
-			<h3>生活随记</h3>
-			<ul>
-				<li><a href="../about.html"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
-				<li><a href="../aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
-				<li><a href="../aboutmore/fw.html"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
-				<li><a href="../aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
-				<li><a href="../aboutmore/wx.html"><i class="fas fa-compass"></i> 心法总览</a></li>
-				<li><a href="../aboutmore/itg.html"><i class="fas fa-heart-pulse"></i> 爱婷哥</a></li>
-				<li><a href="../aboutmore/forme.html"><i class="fas fa-pen-fancy"></i> 写给自己</a></li>
-				<li><a href="../aboutmore/pg.html"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</a></li>
-				<li><a href="../aboutmore/m.html"><i class="fas fa-moon"></i> 周一早上，梦见下班</a></li>
-				<li><a href="../aboutmore/cc.html"><i class="fas fa-comments"></i> 我可能哪里错了</a></li>
-				<li><a href="../aboutmore/ll.html"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</a></li>
-				<li><a href="../aboutmore/ta.html" class="active"><i class="fas fa-infinity"></i> 不必全部收敛</a></li>
-			</ul>
-		</div>
-		<div class="nav-section">
-			<h3>技术系列</h3>
-			<ul>
-				<li><a href="../index.html"><i class="fas fa-microchip"></i> 嵌入式AI工程化</a></li>
-			</ul>
-		</div>
-		<div class="back-home">
-			<a href="../index.html">← 返回首页</a>
-		</div>
-	</aside>
+    <aside class="sidebar">
+        <div class="logo"><a href="../index.html"><i class="fas fa-home"></i> itg</a></div>
+        <div class="nav-section">
+            <h3>生活随记</h3>
+            <ul>
+                <li><a href="../about.html"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
+                <li><a href="../aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
+                <li><a href="../aboutmore/fw.html"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
+                <li><a href="../aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
+                <li><a href="../aboutmore/wx.html"><i class="fas fa-compass"></i> 心法总览</a></li>
+                <li><a href="../aboutmore/itg.html"><i class="fas fa-heart-pulse"></i> 爱婷哥</a></li>
+                <li><a href="../aboutmore/forme.html"><i class="fas fa-pen-fancy"></i> 写给自己</a></li>
+                <li><a href="../aboutmore/pg.html"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</a></li>
+                <li><a href="../aboutmore/m.html"><i class="fas fa-moon"></i> 周一早上，梦见下班</a></li>
+                <li><a href="../aboutmore/cc.html"><i class="fas fa-comments"></i> 我可能哪里错了</a></li>
+                <li><a href="../aboutmore/ll.html"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</a></li>
+                <li><a href="../aboutmore/ta.html" class="active"><i class="fas fa-infinity"></i> 不必全部收敛</a></li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <h3>技术系列</h3>
+            <ul>
+                <li><a href="../index.html"><i class="fas fa-microchip"></i> 嵌入式AI工程化</a></li>
+            </ul>
+        </div>
+        <div class="back-home">
+            <a href="../index.html">← 返回首页</a>
+        </div>
+    </aside>
 
-	<div class="main-content">
-		<header class="article-header">
-			<span class="series-tag">生活随记</span>
-			<h1>剩下的，不必全部收敛</h1>
-			<p class="subtitle">有些疲惫，不必马上变成方法论</p>
-			<p class="meta">itg · 公众号: 火星火箭 · 生活随记</p>
-		</header>
+    <div class="main-content">
+        <header class="article-header">
+            <span class="series-tag">生活随记</span>
+            <h1>剩下的，不必全部收敛</h1>
+            <p class="subtitle">有些疲惫，不必马上变成方法论</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 生活随记</p>
+        </header>
 
-		<article>
-			<p>他这个人，有个毛病：什么事都想收敛。</p>
-			<p>Bug 要收敛，文档要收敛，AI 要收敛，关系里的误会也最好能收敛。只要一件事反复出现，他就忍不住想给它起个名字，画个边界，写成一条法则。好像只要命名了，混乱就少一点。好像只要有机制，心里就稳一点。</p>
-			<p>所以他写负日志，写闭环收敛，写共生演化，写决策切换。表面上是在搭一套工程体系，实际上也是在给自己修一套防护系统。</p>
+        <article>
+            <p>他这个人，有个毛病：什么事都想收敛。</p>
+            <p>Bug 要收敛，文档要收敛，AI 要收敛，关系里的误会也最好能收敛。只要一件事反复出现，他就忍不住想给它起个名字，画个边界，写成一条法则。好像只要命名了，混乱就少一点。好像只要有机制，心里就稳一点。</p>
+            <p>所以他写负日志，写闭环收敛，写共生演化，写决策切换。表面上是在搭一套工程体系，实际上也是在给自己修一套防护系统。</p>
 
-			<div class="quote-block">
-				他太知道混乱的代价了。<br><br>
-				一个中断没来，系统可能挂掉。一句话没说，关系可能慢慢冷下去。
-			</div>
+            <div class="quote-block">
+                他太知道混乱的代价了。<br><br>
+                一个中断没来，系统可能挂掉。一句话没说，关系可能慢慢冷下去。
+            </div>
 
-			<p>一个决定没记录，几年后所有人都忘了当初为什么这么选。别人觉得“没事”，他会想：真的没事吗？还是故障还没打印出来？</p>
-			<p>这让他很敏感，也让他很累。他像一个长期值班的人，白天看代码，晚上看生活。孩子的期待有没有响应，妻子的沉默有没有被忽略，父母那边有没有什么没说出口。他把家人放在最高优先级，这当然是爱，但也是压力。他怕自己忙着修系统，最后漏掉了最重要的人。</p>
-			<p>最要命的是，他还不太放过自己。他写“让自己配得上自己发现的法则”，这话听起来很燃，仔细想想也挺狠。一个人发明了法则，最后又被自己的法则反过来审查。有没有偷懒？有没有漂移？有没有把注意力给错人？有没有在该响应的时候掉线？</p>
+            <p>一个决定没记录，几年后所有人都忘了当初为什么这么选。别人觉得“没事”，他会想：真的没事吗？还是故障还没打印出来？</p>
+            <p>这让他很敏感，也让他很累。他像一个长期值班的人，白天看代码，晚上看生活。孩子的期待有没有响应，妻子的沉默有没有被忽略，父母那边有没有什么没说出口。他把家人放在最高优先级，这当然是爱，但也是压力。他怕自己忙着修系统，最后漏掉了最重要的人。</p>
+            <p>最要命的是，他还不太放过自己。他写“让自己配得上自己发现的法则”，这话听起来很燃，仔细想想也挺狠。一个人发明了法则，最后又被自己的法则反过来审查。有没有偷懒？有没有漂移？有没有把注意力给错人？有没有在该响应的时候掉线？</p>
 
-			<div class="insight-box">
-				他越来越可靠，也越来越像一个永远在跑回归测试的人。
-			</div>
+            <div class="insight-box">
+                他越来越可靠，也越来越像一个永远在跑回归测试的人。
+            </div>
 
-			<p>有时候深夜关电脑，屏幕黑下去，他才发现客厅也安静了。茶已经凉了，女儿房间的门缝里没有光，妻子那边的手机声也停了。他站在门口听了一会儿，像在确认一个系统终于进入低功耗模式，又像在确认自己今天有没有错过什么。</p>
+            <p>有时候深夜关电脑，屏幕黑下去，他才发现客厅也安静了。茶已经凉了，女儿房间的门缝里没有光，妻子那边的手机声也停了。他站在门口听了一会儿，像在确认一个系统终于进入低功耗模式，又像在确认自己今天有没有错过什么。</p>
+            <p>但人不是项目。人不能每次都通过回归测试。人会累，会烦，会想下班，会在周一早上梦见自己已经坐在沙发上喝茶。人也会被女儿一句“能不能不尽量，直接早回来”问住。那一刻什么体系都没用，只有一个最简单的问题：你到底在不在？</p>
+            <p>他当然在努力。他把痛苦变成方法，把失败变成文章，把凌晨两点的示波器变成一套法则。他不想让任何一次崩溃白费。这是他的厉害之处，也是他的阴影。</p>
+            <p>因为不是所有痛苦都必须产出意义。有些夜晚可以只是累了，有些问题可以先放着，有些关系不必马上分类，有些爱不需要写成机制。</p>
+            <p>他已经很会收敛了。剩下的，不必全部收敛。</p>
 
-			<p>但人不是项目。人不能每次都通过回归测试。人会累，会烦，会想下班，会在周一早上梦见自己已经坐在沙发上喝茶。人也会被女儿一句“能不能不尽量，直接早回来”问住。那一刻什么体系都没用，只有一个最简单的问题：你到底在不在？</p>
-			<p>他当然在努力。他把痛苦变成方法，把失败变成文章，把凌晨两点的示波器变成一套法则。他不想让任何一次崩溃白费。这是他的厉害之处，也是他的阴影。</p>
-			<p>因为不是所有痛苦都必须产出意义。有些夜晚可以只是累了，有些问题可以先放着，有些关系不必马上分类，有些爱不需要写成机制。</p>
-			<p>他已经很会收敛了。剩下的，不必全部收敛。</p>
+            <div class="quote-block">
+                写到这里，这个序列可以先停一停了。
+            </div>
 
-			<div class="quote-block">
-				写到这里，这个序列可以先停一停了。
-			</div>
+            <p>从《我找到了一套法则》到《剩下的，不必全部收敛》，它记录的好像不只是一套方法论慢慢长完整，更像是一个人慢慢学会和自己的法则相处。</p>
+            <p>一开始，他像是在废墟里捡到了一张图纸，兴奋地把每一条线都擦得很亮。后来他才慢慢明白，法则可以保护自己，但不能替自己活着。那些凌晨的示波器、女儿的追问、周一早上的恍惚、对 AI 的清醒审视，都是真的，也都不必全部被压缩进机制里。</p>
+            <p>有些东西可以留在法则之外。有些混乱不用急着命名。有些夜晚，也可以只是累了。</p>
+            <p>这不是放弃，大概是松了一口气。是从觉醒到探索，从深情到边界，从幽默到松弛，从自我审视到慢慢放过自己的一段记录。</p>
+            <p>暂时收笔，挺合适的。已经说出来的东西，会自己在时间里发酵。等下一次再写，也不用是因为必须写，而是因为还活着，还在感受，还在想新的问题。</p>
+        </article>
 
-			<p>从《我找到了一套法则》到《剩下的，不必全部收敛》，它记录的好像不只是一套方法论慢慢长完整，更像是一个人慢慢学会和自己的法则相处。</p>
-			<p>一开始，他像是在废墟里捡到了一张图纸，兴奋地把每一条线都擦得很亮。后来他才慢慢明白，法则可以保护自己，但不能替自己活着。那些凌晨的示波器、女儿的追问、周一早上的恍惚、对 AI 的清醒审视，都是真的，也都不必全部被压缩进机制里。</p>
-			<p>有些东西可以留在法则之外。有些混乱不用急着命名。有些夜晚，也可以只是累了。</p>
-			<p>这不是放弃，大概是松了一口气。是从觉醒到探索，从深情到边界，从幽默到松弛，从自我审视到慢慢放过自己的一段记录。</p>
-			<p>暂时收笔，挺合适的。已经说出来的东西，会自己在时间里发酵。等下一次再写，也不用是因为必须写，而是因为还活着，还在感受，还在想新的问题。</p>
-		</article>
-
-		<div class="series-nav">
-			<a href="../aboutmore/ll.html">← 找个不懂的人聊聊</a>
-			<span class="placeholder">·</span>
-		</div>
-	</div>
+        <div class="series-nav">
+            <a href="../aboutmore/ll.html">← 找个不懂的人聊聊</a>
+            <span class="placeholder">·</span>
+        </div>
+    </div>
 </div>
 
 </body>
