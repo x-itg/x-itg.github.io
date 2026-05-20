@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>搞到崩溃的时候，不妨找个不懂的人聊聊 | itg</title>
-<meta name="description" content="一篇关于外行视角、范式切换和如何跳出思维死胡同的生活随记。">
-<meta name="keywords" content="外行视角,范式切换,AI协作,生活随记,嵌入式,思考">
+<title>剩下的，不必全部收敛 | itg</title>
+<meta name="description" content="一篇以第三者视角写给自己的生活随记：关于收敛、可靠、疲惫和不必全部被法则化的部分。">
+<meta name="keywords" content="收敛,法则,负日志,闭环收敛,生活随记,自我观察">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="搞到崩溃的时候，不妨找个不懂的人聊聊 | itg">
-<meta property="og:description" content="一篇关于外行视角、范式切换和如何跳出思维死胡同的生活随记。">
+<meta property="og:title" content="剩下的，不必全部收敛 | itg">
+<meta property="og:description" content="一篇以第三者视角写给自己的生活随记：关于收敛、可靠、疲惫和不必全部被法则化的部分。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://x-itg.github.io/aboutmore/ll.html">
-<link rel="canonical" href="https://x-itg.github.io/aboutmore/ll.html">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/ta.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/ta.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
 	:root {
@@ -83,8 +83,8 @@
 				<li><a href="../aboutmore/pg.html"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</a></li>
 				<li><a href="../aboutmore/m.html"><i class="fas fa-moon"></i> 周一早上，梦见下班</a></li>
 				<li><a href="../aboutmore/cc.html"><i class="fas fa-comments"></i> 我可能哪里错了</a></li>
-				<li><a href="../aboutmore/ll.html" class="active"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</a></li>
-				<li><a href="../aboutmore/ta.html"><i class="fas fa-infinity"></i> 不必全部收敛</a></li>
+				<li><a href="../aboutmore/ll.html"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</a></li>
+				<li><a href="../aboutmore/ta.html" class="active"><i class="fas fa-infinity"></i> 不必全部收敛</a></li>
 			</ul>
 		</div>
 		<div class="nav-section">
@@ -101,48 +101,38 @@
 	<div class="main-content">
 		<header class="article-header">
 			<span class="series-tag">生活随记</span>
-			<h1>搞到崩溃的时候，不妨找个不懂的人聊聊</h1>
-			<p class="subtitle">同行帮你优化，外行有时会直接帮你换条路</p>
+			<h1>剩下的，不必全部收敛</h1>
+			<p class="subtitle">有些疲惫，不必马上变成方法论</p>
 			<p class="meta">itg · 公众号: 火星火箭 · 生活随记</p>
 		</header>
 
 		<article>
-			<p>搞嵌入式久了，我发现一个很有意思的现象：真正帮我解决核心难题的，往往不是同行。</p>
-			<p>这话听起来有点反直觉，但细想确实是这么回事。同行能帮你优化方案，但外行能帮你换一个方案。优化是在同一条路上跑得更快，换方案是直接换一条路。两者的效率不是一个量级。</p>
-			<p>这是我在反复调 Bug、反复推翻方案、反复和 AI 对话之后，慢慢悟出来的一个道理。</p>
+			<p>他这个人，有个毛病：什么事都想收敛。</p>
+			<p>Bug 要收敛，文档要收敛，AI 要收敛，关系里的误会也最好能收敛。只要一件事反复出现，他就忍不住想给它起个名字，画个边界，写成一条法则。好像只要命名了，混乱就少一点。好像只要有机制，心里就稳一点。</p>
+			<p>所以他写负日志，写闭环收敛，写共生演化，写决策切换。表面上是在搭一套工程体系，实际上也是在给自己修一套防护系统。</p>
 
 			<div class="quote-block">
-				优化，是在你已经画好的圈子里转得更快。<br><br>
-				换方案，是直接重新画一个圈。
+				他太知道混乱的代价了。<br><br>
+				一个中断没来，系统可能挂掉。一句话没说，关系可能慢慢冷下去。
 			</div>
 
-			<p>行业内的人，跟你共享同一套思维模式。你遇到一个通信协议的问题，他也遇到过，他给你的建议是“调整重试间隔”或者“换一个校验算法”。这些建议有用，但它们是修补式的。它们在你已经画好的圈子里帮你转得更快，但不会带你跳出那个圈子。</p>
-			<p>行业外的人不懂你的通信协议，但他可能懂怎么让 AI 自己读日志、自己发现异常、自己生成修复方案。他不会在你的圈子里转，他会直接画一个新圈。</p>
-			<p>这就是为什么很多时候，一个做 Web 开发的人，能给嵌入式工程师提一个让他愣住三秒的建议。他不是比你更懂硬件，他是比你更懂怎么用通用方法绕过硬件层面的死胡同。</p>
+			<p>一个决定没记录，几年后所有人都忘了当初为什么这么选。别人觉得“没事”，他会想：真的没事吗？还是故障还没打印出来？</p>
+			<p>这让他很敏感，也让他很累。他像一个长期值班的人，白天看代码，晚上看生活。孩子的期待有没有响应，妻子的沉默有没有被忽略，父母那边有没有什么没说出口。他把家人放在最高优先级，这当然是爱，但也是压力。他怕自己忙着修系统，最后漏掉了最重要的人。</p>
+			<p>最要命的是，他还不太放过自己。他写“让自己配得上自己发现的法则”，这话听起来很燃，仔细想想也挺狠。一个人发明了法则，最后又被自己的法则反过来审查。有没有偷懒？有没有漂移？有没有把注意力给错人？有没有在该响应的时候掉线？</p>
 
 			<div class="insight-box">
-				当你卡在一个问题里太久，真正稀缺的往往不是更多同行经验，而是一个<strong>不受原有边界束缚的视角</strong>。
+				他越来越可靠，也越来越像一个永远在跑回归测试的人。
 			</div>
 
-			<p>我自己的体系，就是被这种“外行视角”催生出来的。我做嵌入式 AI 工程化，遇到的痛点全是行业内的事：AI 写代码快但质量不可控，文档和代码悄悄漂移没人发现，复杂系统拆解后不知道怎么拼回去。</p>
-			<p>如果我只和同行聊，他们会给我各种优化建议，更好的 Prompt、更细的日志、更严格的流程。这些都有用，但不会让我从“写代码的人”变成“定义法则的人”。</p>
-			<p>真正让我跳出这个循环的，是 AI 本身。AI 不是嵌入式工程师，它不懂寄存器的具体地址，不懂中断优先级该怎么设。但它可以帮我把模糊的直觉翻译成清晰的法则，把零散的经验凝练成可复用的体系。</p>
-			<p>我没有把它当成一个更快的代码生成器，我把它当成一个来自行业外的协作者。它用它的方式，帮我解决了我一个人搞不定的问题。</p>
-
-			<div class="quote-block">
-				真正重要的不是“谁更懂你这行”，<br><br>
-				而是“谁能把你从你这行的惯性里拽出来”。
-			</div>
-
-			<p>所以我现在遇到卡住的问题，会习惯性地问自己一句：这件事，有没有一个完全不懂我这行的人能解决？他可能用什么方法？问完这一句，脑子里的圈子就开始往外扩了。</p>
-			<p>你会发现很多你以为必须硬扛的难题，其实可以用完全不同的方式绕过去。</p>
-			<p>这不是在贬低同行。同行是你日常合作的伙伴，他们理解你的上下文，能给你最精准的建议。但当你需要的是范式级别的突破，而不是同一个范式内的优化时，你必须去找那些和你在不同世界里思考的人。</p>
-			<p>他们的一句话，可能就帮你拆掉了一堵你从来没想过可以拆的墙。</p>
+			<p>但人不是项目。人不能每次都通过回归测试。人会累，会烦，会想下班，会在周一早上梦见自己已经坐在沙发上喝茶。人也会被女儿一句“能不能不尽量，直接早回来”问住。那一刻什么体系都没用，只有一个最简单的问题：你到底在不在？</p>
+			<p>他当然在努力。他把痛苦变成方法，把失败变成文章，把凌晨两点的示波器变成一套法则。他不想让任何一次崩溃白费。这是他的厉害之处，也是他的阴影。</p>
+			<p>因为不是所有痛苦都必须产出意义。有些夜晚可以只是累了，有些问题可以先放着，有些关系不必马上分类，有些爱不需要写成机制。</p>
+			<p>他已经很会收敛了。剩下的，不必全部收敛。</p>
 		</article>
 
 		<div class="series-nav">
-			<a href="../aboutmore/cc.html">← 我可能哪里错了</a>
-			<a href="../aboutmore/ta.html">不必全部收敛 →</a>
+			<a href="../aboutmore/ll.html">← 找个不懂的人聊聊</a>
+			<span class="placeholder">·</span>
 		</div>
 	</div>
 </div>

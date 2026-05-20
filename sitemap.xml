@@ -76,6 +76,11 @@
         <priority>0.5</priority>
     </url>
     <url>
+        <loc>https://x-itg.github.io/aboutmore/ta.html</loc>
+        <lastmod>2026-05-20</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://x-itg.github.io/ide_plugins/web/index.html</loc>
         <lastmod>2026-05-14</lastmod>
         <priority>0.4</priority>
