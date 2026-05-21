@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隐藏页面 | itg</title>
+<meta name="description" content="隐藏页面，输入访问密码后呈现内容。">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="隐藏页面 | itg">
+<meta property="og:description" content="输入访问密码后呈现内容。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/ff.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/ff.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #fefce8; --card-bg: #ffffff; --text: #292524;
+        --text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
+        --border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
+        background: var(--bg); color: var(--text); line-height: 1.9; -webkit-font-smoothing: antialiased;
+    }
+    .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
+    .sidebar { width:240px; position:sticky; top:0; height:100vh; overflow-y:auto; padding:32px 16px; border-right:1px solid var(--border); background:var(--sidebar-bg); flex-shrink:0; }
+    .sidebar .logo { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:8px; }
+    .sidebar .logo a { color:var(--accent); text-decoration:none; }
+    .sidebar .logo a:hover { opacity:0.75; }
+    .sidebar .nav-section { margin-bottom:20px; }
+    .sidebar .nav-section h3 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary); margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+    .sidebar .nav-section ul { list-style:none; }
+    .sidebar .nav-section li { margin-bottom:4px; }
+    .sidebar .nav-section a { display:block; padding:6px 10px; font-size:13px; color:var(--text); text-decoration:none; border-radius:6px; transition:background 0.15s; }
+    .sidebar .nav-section a:hover { background:rgba(217,119,6,0.1); color:var(--accent); }
+    .sidebar .nav-section a i { width:20px; color:var(--accent); }
+    .sidebar .back-home { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; }
+    .sidebar .back-home a { color:var(--text-secondary); text-decoration:none; }
+    .sidebar .back-home a:hover { color:var(--accent); }
+    .main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+    .main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+    .main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
+    .main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.3px; }
+    .main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
+    .main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
+    .main-content p { margin:14px 0; font-size:15px; color:#44403c; text-align:justify; }
+    .main-content strong { color:#1c1917; font-weight:600; }
+    .access-panel { background:var(--highlight); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px; margin-top:28px; }
+    .access-panel label { display:block; font-size:13px; color:var(--text-secondary); margin-bottom:8px; }
+    .access-row { display:flex; gap:10px; }
+    .access-row input { flex:1; min-width:0; height:42px; border:1px solid #fed7aa; border-radius:6px; padding:0 12px; font-size:15px; color:var(--text); background:#fff; outline:none; }
+    .access-row input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(217,119,6,0.12); }
+    .access-row button { height:42px; border:0; border-radius:6px; padding:0 16px; background:var(--accent); color:#fff; font-size:14px; font-weight:600; cursor:pointer; }
+    .access-row button:disabled { opacity:0.65; cursor:default; }
+    .access-message { min-height:22px; margin-top:10px; font-size:13px; color:#9a3412; }
+    .quiet-note { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
+    .memory-block { background:linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px 28px; margin:28px 0; text-align:center; font-size:15px; color:#78350f; line-height:1.9; }
+    .section-divider { display:flex; align-items:center; gap:12px; margin:36px 0; color:#d6d3d1; }
+    .section-divider::before, .section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+    .section-divider i { font-size:12px; }
+    .series-nav { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); display:flex; justify-content:space-between; font-size:14px; }
+    .series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
+    .series-nav a:hover { text-decoration:underline; }
+    .series-nav .placeholder { color:#d6d3d1; }
+    [hidden] { display:none !important; }
+    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } .access-row { flex-direction:column; } .access-row button { width:100%; } }
+</style>
+</head>
+<body>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="logo"><a href="../index.html"><i class="fas fa-home"></i> itg</a></div>
+        <div class="nav-section">
+            <h3>生活随记</h3>
+            <ul>
+                <li><a href="../about.html"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
+                <li><a href="../aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
+                <li><a href="../aboutmore/fw.html"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
+                <li><a href="../aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
+                <li><a href="../aboutmore/wx.html"><i class="fas fa-compass"></i> 心法总览</a></li>
+                <li><a href="../aboutmore/itg.html"><i class="fas fa-heart-pulse"></i> 爱婷哥</a></li>
+                <li><a href="../aboutmore/forme.html"><i class="fas fa-pen-fancy"></i> 写给自己</a></li>
+                <li><a href="../aboutmore/pg.html"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</a></li>
+                <li><a href="../aboutmore/m.html"><i class="fas fa-moon"></i> 周一早上，梦见下班</a></li>
+                <li><a href="../aboutmore/cc.html"><i class="fas fa-comments"></i> 我可能哪里错了</a></li>
+                <li><a href="../aboutmore/ll.html"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</a></li>
+                <li><a href="../aboutmore/ta.html"><i class="fas fa-infinity"></i> 不必全部收敛</a></li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <h3>技术系列</h3>
+            <ul>
+                <li><a href="../index.html"><i class="fas fa-microchip"></i> 嵌入式AI工程化</a></li>
+            </ul>
+        </div>
+        <div class="back-home"><a href="../index.html">← 返回首页</a></div>
+    </aside>
+
+    <div class="main-content">
+        <header class="article-header">
+            <span class="series-tag" id="seriesTag">隐藏页面</span>
+            <h1 id="articleTitle">需要访问密码</h1>
+            <p class="subtitle" id="articleSubtitle">输入密码后呈现内容</p>
+            <p class="meta" id="articleMeta">itg · 隐藏页面</p>
+        </header>
+
+        <form class="access-panel" id="accessForm" autocomplete="off">
+            <label for="accessPassword">访问密码</label>
+            <div class="access-row">
+                <input id="accessPassword" name="accessPassword" type="password" inputmode="text" autocomplete="off" required autofocus>
+                <button id="unlockButton" type="submit"><i class="fas fa-lock-open"></i> 解锁</button>
+            </div>
+            <p class="access-message" id="accessMessage" aria-live="polite"></p>
+        </form>
+
+        <article id="articleBody" hidden></article>
+
+        <div class="series-nav" id="articleNav" hidden>
+            <span class="placeholder">隐藏页面</span>
+            <a href="../about.html">返回生活随记 →</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const encryptedPayload = {"v":1,"kdf":"PBKDF2-SHA256","iterations":250000,"salt":"SOBX9QYP2dm0+Gyowqqyiw==","iv":"qh72i5LcOAbwT/HX","tag":"648wXg1k42OdCKT+8JK+Ug==","data":"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"};
+
+const accessForm = document.getElementById("accessForm");
+const accessPassword = document.getElementById("accessPassword");
+const accessMessage = document.getElementById("accessMessage");
+const unlockButton = document.getElementById("unlockButton");
+
+function base64ToBytes(value) {
+    return Uint8Array.from(atob(value), (char) => char.charCodeAt(0));
+}
+
+async function decryptArticle(password) {
+    if (!window.crypto || !window.crypto.subtle) {
+        throw new Error("当前浏览器不支持前端解密，请使用现代浏览器通过 HTTPS 访问。");
+    }
+    const encoder = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey("raw", encoder.encode(password), "PBKDF2", false, ["deriveKey"]);
+    const key = await crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt: base64ToBytes(encryptedPayload.salt), iterations: encryptedPayload.iterations, hash: "SHA-256" },
+        keyMaterial,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["decrypt"]
+    );
+    const encrypted = base64ToBytes(encryptedPayload.data);
+    const tag = base64ToBytes(encryptedPayload.tag);
+    const combined = new Uint8Array(encrypted.length + tag.length);
+    combined.set(encrypted);
+    combined.set(tag, encrypted.length);
+    const decrypted = await crypto.subtle.decrypt({ name: "AES-GCM", iv: base64ToBytes(encryptedPayload.iv) }, key, combined);
+    return JSON.parse(new TextDecoder().decode(decrypted));
+}
+
+function renderArticle(article) {
+    document.title = `${article.title} | itg`;
+    document.getElementById("seriesTag").textContent = "隐藏随笔";
+    document.getElementById("articleTitle").textContent = article.title;
+    document.getElementById("articleSubtitle").textContent = article.subtitle;
+    document.getElementById("articleMeta").textContent = article.meta;
+    document.getElementById("articleBody").innerHTML = article.article;
+    document.getElementById("articleBody").hidden = false;
+    document.getElementById("articleNav").hidden = false;
+    accessForm.hidden = true;
+}
+
+accessForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    accessMessage.textContent = "正在解密...";
+    unlockButton.disabled = true;
+    try {
+        const article = await decryptArticle(accessPassword.value);
+        renderArticle(article);
+        accessPassword.value = "";
+    } catch (error) {
+        accessMessage.textContent = error.message.includes("支持前端解密") ? error.message : "密码不正确，或内容无法解密。";
+        unlockButton.disabled = false;
+        accessPassword.select();
+    }
+});
+</script>
+
+</body>
+</html>
