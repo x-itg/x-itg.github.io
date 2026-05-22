@@ -632,7 +632,7 @@
             <div style="color:white;font-size:1.5rem;margin-bottom:0.5rem;">⚡</div>
             <div style="color:white;font-weight:600;font-size:0.85rem;">IDE工具演示</div>
             <div style="color:rgba(255,255,255,0.8);font-size:0.7rem;margin:0.25rem 0 0.5rem;">在线体验完整工具系统</div>
-            <a href="../ide_plugins/web/index.html" target="_blank" style="display:inline-block;padding:0.35rem 1rem;background:white;color:#667eea;text-decoration:none;border-radius:15px;font-size:0.75rem;font-weight:600;">
+            <a href="ide_plugins/web/index.html" target="_blank" style="display:inline-block;padding:0.35rem 1rem;background:white;color:#667eea;text-decoration:none;border-radius:15px;font-size:0.75rem;font-weight:600;">
                 立即体验 →
             </a>
         </div>
@@ -1133,6 +1133,24 @@ if __name__ == "__main__":
         <div class="quote"><i class="fas fa-comment-dots"></i> <strong>用户：</strong>“RS485通讯失败，U2的DE引脚似乎没有正确切换。”<br>
             <strong>AI：</strong>“我已查阅<code>docs/schematic.md</code>：U2(MAX485)的DE引脚由<code>pinout.h:23</code>定义为GPIO_PIN_8，初始化在<code>rs485.c:45</code>。建议检查该GPIO的时钟是否使能。要跳转到对应代码吗？”<br>
             <strong>用户点击超链接</strong> → VSCode自动打开<code>rs485.c</code>并定位到第45行。</div>
+
+        <div class="bottom-series-links" style="margin:32px 0 18px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.25);font-size:14px;line-height:1.9;color:inherit;">
+            <strong>系列导航：</strong>
+            <a href="index.html">① 五层进化</a> ·
+            <a href="true.html">② 实践项目模板</a> ·
+            <a href="test.html">③ 自主修复闭环</a> ·
+            <a href="fwd.html">④ 从收敛到进化</a> ·
+            <a href="exc.html">⑤ 知识的生命体征</a> ·
+            <a href="pcb.html">⑥ 电路图分析器</a> ·
+            <a href="pt.html">⑦ Skills</a> ·
+            <a href="history.html">⑧ 历史的包袱</a> ·
+            <a href="devs.html">⑨ 固件铭牌与设备画像</a> ·
+            <a href="gmp.html">⑩ 合规验证与AI编程</a> ·
+            <a href="hg.html">⑪ 回归现实：单Agent实践框架</a> ·
+            <a href="12.html">⑫ AI编程的利刃</a> ·
+            <a href="13.html">⑬ 拆解与整合</a> ·
+            <a href="14.html">⑭ AI谄媚与专利</a>
+        </div>
 
         <footer><i class="fas fa-file-pdf"></i> PDF电路图分析器 · OCR识别 · Markdown生成 · VSCode超链接跳转 · AI可读描述 · <a href="gmp.html">合规验证与AI编程</a><br>
             将硬件图纸转化为AI可理解的结构化知识，赋能嵌入式智能调试 · <a href="about.html" style="color:inherit;text-decoration:none;">关于作者</a>
