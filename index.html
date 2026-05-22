@@ -597,6 +597,34 @@
             border-left: 0;
             padding-left: 0;
         }
+        .hero-recommend {
+            display: block;
+            margin: 22px 0 6px;
+            padding: 18px 20px;
+            border: 1px solid #f0d78c;
+            border-left: 4px solid var(--accent);
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            background: var(--highlight);
+            color: #6b4c1e;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+        }
+        .hero-recommend:hover {
+            border-color: #e7bf62;
+            box-shadow: var(--shadow-md);
+        }
+        .hero-recommend strong {
+            display: block;
+            color: #4a340f;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .hero-recommend span {
+            display: block;
+            color: #6b4c1e;
+            font-size: 14px;
+            line-height: 1.7;
+        }
         .main-content > .card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -648,6 +676,9 @@
             }
             .main-content > .hero h1 {
                 font-size: 26px;
+            }
+            .hero-recommend {
+                padding: 16px;
             }
             h2 {
                 font-size: 21px;
@@ -798,6 +829,10 @@
             <a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
             <h1>从"摸黑调试"到"拨云见日"<br>AI编程调试的五层进化</h1>
             <div class="sub">结构化日志 · 负日志 · CLI闭环 · 多模型协作 · Vibe+Verify 完整工程</div>
+            <a class="hero-recommend" href="aboutmore/wx.html">
+                <strong><i class="fas fa-compass"></i> 推荐先读：乾坤大挪移心法 · 文章总览</strong>
+                <span>十四篇技术文章的完整路线图，从五层进化读到反谄媚审查，适合作为整套体系的入口。</span>
+            </a>
             <p class="meta" style="font-size:13px;color:var(--text-secondary);margin-top:8px;">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
         </div>
 
