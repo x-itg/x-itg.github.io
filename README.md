@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/status-Active-brightgreen?style=flat-square" alt="Status">
   <img src="https://img.shields.io/badge/methodology-Harness_Engineering-blue?style=flat-square" alt="Methodology">
   <img src="https://img.shields.io/badge/topics-Embedded_AI%20|%20Toolchain%20|%20Agents-orange?style=flat-square" alt="Topics">
-  <img src="https://img.shields.io/badge/articles-13-orange?style=flat-square" alt="Articles">
+  <img src="https://img.shields.io/badge/articles-14-orange?style=flat-square" alt="Articles">
   <img src="https://img.shields.io/badge/pages-live-222?style=flat-square&logo=github" alt="GitHub Pages">
 </p>
 
@@ -15,6 +15,8 @@
 我是 **itg**，**火星火箭**，今天把压箱底的功夫亮给你看。
 
 👉 **在线阅读：[https://x-itg.github.io](https://x-itg.github.io)**
+
+👉 **文章总览：[乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html)**
 
 ---
 
@@ -97,6 +99,15 @@
 
 这是乾坤大挪移的高阶奥义——**借力打力，化繁为简**。
 
+---
+
+## 🧭 守关心法：反谄媚审查
+
+### ⑭ AI的谄媚与专利文件的编写   [ 👈](https://x-itg.github.io/14.html)
+练功练到后来，最怕的不是 AI 不听话，而是它太听话。你说这是绝世神功，它立刻替你写成开宗立派；你说效果显著，它很少追问一句：证据何在？这一篇从《我可能哪里错了》起笔，落到专利撰写这个真刀真枪的场景里。
+
+若只是拿证，AI 的顺服就是顺水推舟；若真要护城守关，就必须切到审查员模式，让它查新、质疑创造性、逼问权利要求边界，把那些“该怼没怼”的地方记进负日志。到这里，这套心法才算补上最后一道关门闸：**会借力，也要会刹车。**
+
 
 ---
 
@@ -106,7 +117,8 @@
 2. **小有所成**：搭起 ② 模板，建起你的法则文件夹，用 ③ 闭环收敛打磨每个模块。
 3. **游历江湖**：碰到老项目用 ⑧，多设备管理用 ⑨，合规审计用 ⑩。
 4. **破境冲关**：用 ⑬ 拆解整合驯服复杂系统，用 ④ 决策切换避免死胡同。
-5. **一代宗师**：言出法随，即刻收敛，踏入五层进化之巅。
+5. **专业守关**：读 ⑭ AI 的谄媚与专利，把“顺着写”和“审查怼”做成可切换流程。
+6. **一代宗师**：言出法随，即刻收敛，踏入五层进化之巅。
 
 ---
 
@@ -130,6 +142,7 @@
 | 🧠 [以不变应万变](https://x-itg.github.io/aboutmore/tk.html) | 从 AI 编程到生活法则的认知升维 |
 | 🪄 [用工程魔法打败生活魔法](https://x-itg.github.io/aboutmore/fw.html) | 一套思想体系的七种不正经应用 |
 | ❤️ [我用调试 AI 的方法，学会了经营感情](https://x-itg.github.io/aboutmore/sc.html) | 当工程法则走出代码，走进亲密关系 |
+| 🧭 [乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html) | 十四篇技术文章一篇看完 |
 | 💬 [我可能哪里错了](https://x-itg.github.io/aboutmore/cc.html) | 当 AI 总在顺着你，反驳反而成了稀缺品 |
 
 ## 🎭 侠士自述
@@ -140,7 +153,7 @@
 我编程手速不快，但我定义法则，AI 在法则内出招。
 我凌晨两点盯过示波器，也被 Bug 反复揍过。后来发现，那些淤青才是最好的秘笈。
 
-我把这些心得写成十三篇文章，开源于 [x-itg.github.io](https://x-itg.github.io)，不藏私。
+我把这些心得写成十四篇文章，开源于 [x-itg.github.io](https://x-itg.github.io)，不藏私。
 若你也是那个在深夜独对屏幕的侠客，这套心法，或许能让你少走几段夜路。
 
 **言出法随，即刻收敛。**
