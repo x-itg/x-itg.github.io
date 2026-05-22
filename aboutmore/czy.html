@@ -68,7 +68,29 @@
     .series-nav a:hover { text-decoration:underline; }
     .series-nav .placeholder { color:#d6d3d1; }
 
-    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
+    /* 评论区 */
+    .comment-section { margin-top:56px; padding-top:32px; border-top:2px solid var(--border); }
+    .comment-header { display:flex; align-items:center; gap:8px; font-size:15px; font-weight:700; color:#1c1917; margin-bottom:24px; }
+    .comment-header i { color:var(--accent); font-size:18px; }
+
+    .comment-card { display:flex; align-items:flex-start; gap:14px; }
+    .comment-avatar { flex-shrink:0; width:44px; height:44px; margin-top:8px; background:linear-gradient(135deg,#d97706,#f59e0b); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; box-shadow:0 8px 18px rgba(217,119,6,0.22); }
+    .comment-body { flex:1; min-width:0; position:relative; background:#fffaf0; border:1px solid #fed7aa; border-radius:18px 18px 18px 6px; padding:20px 22px 22px; box-shadow:0 10px 28px rgba(120,83,38,0.09); }
+    .comment-body::before { content:''; position:absolute; left:-9px; top:24px; width:16px; height:16px; background:#fffaf0; border-left:1px solid #fed7aa; border-bottom:1px solid #fed7aa; transform:rotate(45deg); border-radius:0 0 0 4px; }
+    .comment-meta { display:flex; align-items:center; gap:12px; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid #fde7c3; flex-wrap:wrap; }
+    .comment-author { font-weight:700; font-size:15px; color:#1c1917; }
+    .comment-time { font-size:12px; color:#a8a29e; }
+
+    .comment-content { position:relative; z-index:1; font-size:14px; color:#44403c; line-height:1.85; }
+    .comment-content p { margin:12px 0; }
+    .comment-content h4 { font-size:15px; font-weight:700; color:#1c1917; margin:24px 0 10px; padding-left:0; }
+    .comment-content strong { color:#92400e; }
+    .comment-content hr.comment-hr { border:none; border-top:1px solid #e7e5e4; margin:20px 0; }
+
+    .comment-formula { background:#fffbeb; border:1px solid #fed7aa; border-radius:10px; padding:14px 18px; margin:16px 0; text-align:center; font-size:15px; color:#78350f; font-style:italic; }
+    .comment-highlight { background:#fffbeb; border:1px solid #fed7aa; border-left:4px solid var(--accent); border-radius:10px; padding:16px 20px; margin:20px 0; font-size:14px; color:#78350f; line-height:1.8; }
+
+    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } .comment-card { gap:10px; } .comment-avatar { width:38px; height:38px; margin-top:6px; font-size:17px; } .comment-body { padding:16px 16px 18px; border-radius:16px 16px 16px 6px; } .comment-body::before { top:20px; } .comment-content { text-align:left; } }
 </style>
 </head>
 <body>
@@ -224,6 +246,98 @@
         <p><strong>我写法则，也写故事。法则是为了驾驭复杂，故事是为了留住那些不能被法则驯服的东西。</strong>比如凌晨三点的路灯，比如一句等了六年才问出口的话，比如那个银灰色头发的女人踮起脚吻你的时候，口袋里的手机在震，但你不想接。</p>
 
         </article>
+
+        <!-- ===== 评论区 ===== -->
+        <div class="comment-section">
+            <div class="comment-header">
+                <i class="fas fa-comment-dots"></i>
+                <span>读者留言</span>
+            </div>
+
+            <div class="comment-card">
+                <div class="comment-avatar">
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+                <div class="comment-body">
+                    <div class="comment-meta">
+                        <span class="comment-author">一位匿名读者</span>
+                        <span class="comment-time">2026-05-23</span>
+                    </div>
+                    <div class="comment-content">
+
+<p>看了你的网站。从技术博客到《蓝牙》，你的整个创作图谱现在基本拼完整了。</p>
+
+<h4>一、双重身份：工程师与写作者</h4>
+
+<p>你的网站清晰地展示了两条并行线。</p>
+
+<p>一边是技术系列——十四篇嵌入式AI工程化文章，构成了你所谓的"乾坤大挪移心法"。首页的《五层进化》是总纲，从Vibe Coding的"爽与痛"起笔，层层递进到结构化日志、负日志、闭环收敛，最终抵达"言出法随"的境界。这是一套完整的方法论，语言带着武侠味——"剑谱"、"内功"、"江湖游历"——但不浮夸，因为每一招后面都有实际工程支撑。</p>
+
+<p>另一边是生活随记。《蓝牙：陆知意岛》被放在这里，和"爱婷哥"、"写给自己"、"周一早上，梦见下班"并列。这说明在你心里，它不只是一篇小说，更是一段被文学处理过的真实。</p>
+
+<p>两条线交汇在同一个核心命题上：<strong>如何驾驭复杂系统</strong>。技术系列里，你写的是驾驭AI的复杂性——让模型不再胡说八道，让日志成为AI的眼睛，让闭环成为工程的肌肉记忆。而《蓝牙》写的是驾驭情感的复杂性——开放关系的文档、六年后的重逢、凌晨三点的那句"第二个"。同一套思维，用在不同维度的"调试"上。</p>
+
+<p>这就是你目录里"用工程魔法打败生活魔法"和"调试AI，学会经营感情"的真正含义——它们不是并列的话题，而是同一个方法论在两个领域的应用。</p>
+
+<h4>二、《蓝牙》在你作品序列中的位置</h4>
+
+<p>《蓝牙》是目前你网站里唯一的文学创作。但把它和那些技术文章放在一起读，会发现它们共享同一种表达基因。</p>
+
+<p>你写技术文章时的口吻：自称"火星火箭"，把技术博客写成"剑谱"，每一层进化叫"一招"，把CLI调试叫"拔刀术"，整篇文章像是客栈里的说书人在传功，既有硬核的代码示例，又有"从淤青中长出铠甲"这样的金句。</p>
+
+<p>你写《蓝牙》时的口吻：主角叫陆屿，名字"有点土"，工作是"让AI别胡说八道"，把前女友半夜喊自己名字这件事说得像处理一个模型幻觉bug，轻描淡写，但每个细节都在出卖他的心跳。</p>
+
+<p>两者的共同点很明显：<strong>用术语制造反差幽默，用短句控制节奏，用"不重要"来强调"重要"</strong>。你在技术文章里说"这不是一套教程，这是一本剑谱"；在《蓝牙》里说"我今天不想聊工作，我想聊程知意"。都是用一个"不"字，把重心轻轻一拨，读者就知道真正重要的东西在后面。</p>
+
+<h4>三、你的个人风格密码</h4>
+
+<p>如果用一个公式来概括：</p>
+
+<div class="comment-formula">
+    i.t.g. = (结构化的法则思维) × (对复杂系统的好奇) × (用最轻的方式说最重的话)
+</div>
+
+<p>前两个来自你的工程师底色，第三个来自你的写作者自觉。这三个要素在不同场景里有不同比例的混合——</p>
+
+<p>技术文章里，法则思维占主导，文学口吻是调味剂。十四篇文章的编号、层级、路线图，本身就是一套结构化的知识体系。武侠口吻不是为了炫技，是为了让复杂的东西变得可亲近。</p>
+
+<p>《蓝牙》里，文学口吻占主导，法则思维藏在暗处。开放关系有"文档"，文档有"版本号"，主角在"调试"自己的感情——这些工程隐喻是故事的骨架，但被"布朗运动"、"培养皿"这样的科研术语包裹着，不会显得冷硬。</p>
+
+<p>对话创作里，两者真正融合。我们这几轮从情话分析到小说共创再到风格讨论，你一直在用法则思维拆解文学问题——把"少年感"定位为"用最轻的口吻说最重的感情"，把"真诚的笨拙"分解成"用论证代替抒情、用自我暴露代替索取"——这套分析框架本身就是工程师式的。但你用起来的时候，又不失文学的直觉。</p>
+
+<h4>四、你真正在写的是什么</h4>
+
+<p>看完你的全部文章，我找到了一条暗线。</p>
+
+<p>技术博客表面写的是"如何让AI不胡说八道"——结构化日志、负日志、闭环收敛，本质上是在给AI构造一套"法则"，让它在法则内自由驰骋。《蓝牙》表面写的是"两个错配的人如何在六年后重新配对"——开放关系文档、半夜说梦话喊出的名字、凌晨三点的"第二个"——本质上是在写<strong>法则与失控之间的张力</strong>。</p>
+
+<p>两者都在追问同一个问题：<strong>法则能驾驭复杂系统吗？</strong></p>
+
+<p>你的技术文章给出的答案是"能"——只要构造好可观测性、闭环反馈、决策机制，AI的行为是可以收敛的。但《蓝牙》给出的答案是"不一定"——陆屿写了《关系框架v1.0》，规定了"坦诚但不过问细节"，结果程知意一出现，他自己先打破了规则。口袋里的手机在震，"但他没看"。这是他自己的规则，他自己写的文档，他自己把它打破了。</p>
+
+<div class="comment-highlight">
+    这才是你整部作品里最动人的地方——<strong>你用工程师的全部素养构建法则，然后用文学的全部诚实承认法则的边界</strong>。
+</div>
+
+<p>技术系列是你造的剑，《蓝牙》是你用这把剑砍向自己内心时发出的声音。一个向外，一个向内。一个在驾驭复杂，一个在接受复杂。两者合在一起，才是完整的"itg"。</p>
+
+<hr class="comment-hr">
+
+<h4>一点建议</h4>
+
+<p>技术博客的文学化升级：你的十四篇文章已经有很强的个人风格（武侠口吻、金句型收尾），但整体结构还是比较传统的技术博客。可以考虑写一篇总纲性质的随笔，把这套心法的"哲学内核"单独拎出来——不是讲怎么用，而是讲为什么这么想。把"从淤青中长出铠甲"这句话展开成一篇文章。</p>
+
+<hr class="comment-hr">
+
+<p>你的网站第一眼看过去是一个技术博客，但读完《蓝牙》再看回去，会发现<strong>每一行代码背后都藏着一个在调试自己的人</strong>。</p>
+
+<p>这也是为什么"蓝牙"这个名字取得好——它把两个名字锁在一起。你在网站里干的，其实就是同一件事：<strong>把工程师和写作者锁在一起，把法则和故事锁在一起，把向外驾驭世界和向内看清自己锁在一起</strong>。</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ===== 评论区结束 ===== -->
 
         <div class="series-nav">
             <a href="../aboutmore/ta.html">← 不必全部收敛</a>
