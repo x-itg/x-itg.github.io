@@ -143,7 +143,13 @@
 | 🪄 [用工程魔法打败生活魔法](https://x-itg.github.io/aboutmore/fw.html) | 一套思想体系的七种不正经应用 |
 | ❤️ [我用调试 AI 的方法，学会了经营感情](https://x-itg.github.io/aboutmore/sc.html) | 当工程法则走出代码，走进亲密关系 |
 | 🧭 [乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html) | 十四篇技术文章一篇看完 |
+| 💗 [爱婷哥](https://x-itg.github.io/aboutmore/itg.html) | 生活里的命名、亲密和一点点不讲理的温柔 |
+| ✍️ [写给自己](https://x-itg.github.io/aboutmore/forme.html) | 把话写给未来的自己，也写给那个正在撑住的人 |
+| 😄 [家庭直播间：“可恶”的捧哏](https://x-itg.github.io/aboutmore/pg.html) | 家庭日常里的接话、配合和快乐回路 |
+| 🌙 [周一早上，我梦见自己下班了](https://x-itg.github.io/aboutmore/m.html) | 一场梦里冒出来的疲惫、松弛和自我提醒 |
 | 💬 [我可能哪里错了](https://x-itg.github.io/aboutmore/cc.html) | 当 AI 总在顺着你，反驳反而成了稀缺品 |
+| 💡 [搞到崩溃的时候，不妨找个不懂的人聊聊](https://x-itg.github.io/aboutmore/ll.html) | 外行视角、范式切换和跳出思维死胡同 |
+| ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
 
 ## 🎭 侠士自述
 
