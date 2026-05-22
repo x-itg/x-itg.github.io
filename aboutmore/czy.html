@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蓝牙：陆知意岛 | itg</title>
+<meta name="description" content="陆屿的陆，程知意的知意，陆地上的一座岛。一个AI工程师等了六年的故事，关于错配、走散与回到原点。">
+<meta name="keywords" content="蓝牙,故事,短篇小说,AI工程师,陆知意岛">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="蓝牙：陆知意岛 | itg">
+<meta property="og:description" content="陆屿的陆，程知意的知意，陆地上的一座岛。一个AI工程师等了六年的故事。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/czy.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/czy.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #fefce8; --card-bg: #ffffff; --text: #292524;
+        --text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
+        --border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
+        background: var(--bg); color: var(--text); line-height: 1.9; -webkit-font-smoothing: antialiased;
+    }
+    .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
+
+    .sidebar {
+        width:240px; position:sticky; top:0; height:100vh; overflow-y:auto;
+        padding:32px 16px; border-right:1px solid var(--border);
+        background:var(--sidebar-bg); flex-shrink:0;
+    }
+    .sidebar .logo { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:8px; }
+    .sidebar .logo a { color:var(--accent); text-decoration:none; }
+    .sidebar .logo a:hover { opacity:0.75; }
+    .sidebar .nav-section { margin-bottom:20px; }
+    .sidebar .nav-section h3 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary); margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+    .sidebar .nav-section ul { list-style:none; }
+    .sidebar .nav-section li { margin-bottom:4px; }
+    .sidebar .nav-section a { display:block; padding:6px 10px; font-size:13px; color:var(--text); text-decoration:none; border-radius:6px; transition:background 0.15s; }
+    .sidebar .nav-section a:hover, .sidebar .nav-section a.active { background:rgba(217,119,6,0.1); color:var(--accent); }
+    .sidebar .nav-section a i { width:20px; color:var(--accent); }
+    .sidebar .back-home { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; }
+    .sidebar .back-home a { color:var(--text-secondary); text-decoration:none; }
+    .sidebar .back-home a:hover { color:var(--accent); }
+
+    .main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+    .main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+    .main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
+    .main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.3px; }
+    .main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
+    .main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
+    .main-content p { margin:14px 0; font-size:15px; color:#44403c; text-align:justify; }
+    .main-content p:first-letter { margin-left:0; }
+    .main-content strong { color:#1c1917; font-weight:600; }
+    .main-content .story-divider { text-align:center; margin:28px 0; color:#d6d3d1; font-size:14px; letter-spacing:6px; }
+    .main-content blockquote { border-left:3px solid var(--accent-light); padding:12px 20px; margin:20px 0; background:#fffcf5; border-radius:0 8px 8px 0; font-size:15px; color:#78350f; }
+
+    .insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
+    .insight-box strong { color:#92400e; }
+    .section-divider { display:flex; align-items:center; gap:12px; margin:36px 0; color:#d6d3d1; }
+    .section-divider::before, .section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+    .section-divider i { font-size:12px; }
+
+    .series-nav { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); display:flex; justify-content:space-between; font-size:14px; }
+    .series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
+    .series-nav a:hover { text-decoration:underline; }
+    .series-nav .placeholder { color:#d6d3d1; }
+
+    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
+</style>
+</head>
+<body>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="logo"><a href="../index.html"><i class="fas fa-home"></i> itg</a></div>
+        <div class="nav-section">
+            <h3>生活随记</h3>
+            <ul>
+                <li><a href="../about.html"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
+                <li><a href="../aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
+                <li><a href="../aboutmore/fw.html"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
+                <li><a href="../aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
+                <li><a href="../aboutmore/wx.html"><i class="fas fa-compass"></i> 心法总览</a></li>
+                <li><a href="../aboutmore/itg.html"><i class="fas fa-heart-pulse"></i> 爱婷哥</a></li>
+                <li><a href="../aboutmore/forme.html"><i class="fas fa-pen-fancy"></i> 写给自己</a></li>
+                <li><a href="../aboutmore/pg.html"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</a></li>
+                <li><a href="../aboutmore/m.html"><i class="fas fa-moon"></i> 周一早上，梦见下班</a></li>
+                <li><a href="../aboutmore/cc.html"><i class="fas fa-comments"></i> 我可能哪里错了</a></li>
+                <li><a href="../aboutmore/ll.html"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</a></li>
+                <li><a href="../aboutmore/ta.html"><i class="fas fa-infinity"></i> 不必全部收敛</a></li>
+                <li><a href="../aboutmore/czy.html" class="active"><i class="fas fa-feather"></i> 蓝牙：陆知意岛</a></li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <h3>技术系列</h3>
+            <ul>
+                <li><a href="../index.html"><i class="fas fa-microchip"></i> 嵌入式AI工程化</a></li>
+            </ul>
+        </div>
+        <div class="back-home">
+            <a href="../index.html">← 返回首页</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="article-header">
+            <span class="series-tag">短篇小说</span>
+            <h1>蓝牙：陆知意岛</h1>
+            <p class="subtitle">陆屿的陆，程知意的知意，陆地上的一座岛</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 生活随记</p>
+        </header>
+
+        <article>
+
+        <p>我叫陆屿。这个名字有点土，我妈取的。说陆是陆地，屿是小岛。陆地上面有座岛，听着挺诗意。后来我做了AI，同事叫我岛神，因为我解决过几个大模型幻觉的案子——就是AI胡说八道，我让它别胡说八道。</p>
+
+        <p>但我今天不想聊工作。我想聊程知意。</p>
+
+        <div class="story-divider">· · ·</div>
+
+        <p>她爸给她取这个名字，我不知道是"知行合一"那个知，还是"知了"那个知。但她这个人跟名字完全相反。她什么都不知道。或者说，假装什么都不知道。我们在一起两年，她没问过一次"爱不爱我"，没查过一次手机，没闹过一次脾气。好得不像真人。后来我明白了，她不是好，她是真的不在乎这些。</p>
+
+        <p>分开的原因很土——她要去欧洲读博，我刚拿到国内offer。我说要不要异地，她说不要。干脆利落，跟实验结果一样。那天吃完饭她站起来就走了，我把那盘大盘鸡全吃完了。然后回公司改bug改到凌晨三点。同事说岛神真拼。我说没事，就是想不通一个问题。</p>
+
+        <p>什么问题我没说。</p>
+
+        <div class="story-divider">· · ·</div>
+
+        <p>六年后她发来一条微信：<em>我回国了。</em>我刚开完会，看到这四个字在锁屏上，会议室冷气开太大了，冻得我手指僵住。就是那种，你明明已经忘了这个人，但她一出现，你的手指先于你的大脑做出了反应。</p>
+
+        <p>约在奥体的一家夜店。我到的时候她已经在角落卡座了。头发漂成银灰色，锁骨上有个纹身。我凑近看，是一段DNA螺旋。我以前认识的程知意连打针都怕，抽血能出一手汗。现在她锁骨上纹着双螺旋。</p>
+
+        <p>"做实验做不出来，一生气就去漂了头。"她说，"漂了三次，顺便纹的。"</p>
+
+        <p>"你们搞科研的还搞这个。"</p>
+
+        <p>"搞科研的也是人。"</p>
+
+        <p>她说话还是那样。陈述句，句号，不拖泥带水。以前我觉得这是酷，后来知道这其实是一种防御机制。用最精确的语言解剖别人，同时保护自己不被解剖。但我注意到她转酒杯的手指有点抖。不知道是冷，还是紧张。夜店冷气开得很足，她只穿一件吊带。</p>
+
+        <p>我问她结婚没。她说离了。对方是瑞士人，实验室同事。结婚一年，离了半年。用英语吵架，后来发现连吵架都吵不明白，就算了。我问为什么吵。</p>
+
+        <p>她转着酒杯，银灰色头发在蓝色灯光下泛紫。"因为我有一天半夜说梦话，"她说，"喊了你的名字。"</p>
+
+        <p>音乐很吵，灯光很乱。有人在旁边尖叫，好像有人过生日。我不知道该说什么。喊了我的名字。六年后，在另一个大陆，用另一种语言生活的时候，她半夜喊了我的名字。</p>
+
+        <p>她站起来拉我进舞池。我们都不会跳，就是晃。她银发甩来甩去完全不跟拍。我也是乱晃。像两个在培养皿里挣扎的细胞，做着毫无意义的布朗运动。但那一刻我比过去六年任何时候都清醒。她没有变。她还是那个在读书会上说"自指就是镜子照镜子"的女生。还是那个在雨里忽然说"你是喜欢我吧"的女生。时间在她身上做了很多事——给她一个博士学位，一段失败的婚姻，一头银灰色的头发，一个DNA纹身。但她的核，那个十几年前让我心动的核，还在。</p>
+
+        <div class="story-divider">· · ·</div>
+
+        <p>凌晨三点从夜店出来，街上很冷。她把我的外套披上，我问她这次回国待多久。</p>
+
+        <p>"不走了。申了高校的教职，过了。"</p>
+
+        <p>"你什么时候申的。"</p>
+
+        <p>"半年前。面试的时候没告诉你。怕分心。"</p>
+
+        <p>"你半年不跟我说一声，现在回国第一件事就是把我叫出来。"</p>
+
+        <p>"对。"</p>
+
+        <p>"对什么对。"</p>
+
+        <p>路灯很亮，北京三月的风吹得人脸疼。她锁骨上那个DNA纹身，双螺旋，A配T，C配G。精密的、完美的配对法则。但人是会错配的。我花了六年证明这个。</p>
+
+        <p>然后她踮起脚吻我。嘴唇有点干，带着酒味和冷空气。口袋里的手机震了一下。我知道是谁，但我没看。这是我自己的规则，我自己写的文档。</p>
+
+        <p>她松开我，退后一步，眼眶有点红。</p>
+
+        <p>"你们那个文档，"她说，"有没有写前女友怎么办。"</p>
+
+        <p>"没有。"</p>
+
+        <p>"那你要不要加一条。"</p>
+
+        <p>我看着她锁骨上的双螺旋。然后问了一个我自己都没想到的问题。那个问题我在心里放了六年，从来没想过会在凌晨三点的街头问出来。但看着她眼眶红红的样子，我觉得再不问就老了。</p>
+
+        <p><strong>"程知意，你当初说不要异地的时候，是觉得我不值得，还是觉得自己不配。"</strong></p>
+
+        <p>风吹过来，头发遮住她半边脸。过了很久。</p>
+
+        <p><strong>"第二个。"</strong>她说。</p>
+
+        <p>我没有说话。我忽然想起高中时候读过的那个故事。一个叫Harald的国王，用两个字母拼成了一个新的符号，把两个名字锁在一起。那个符号后来叫蓝牙。六年前在雨里，她问我你是喜欢我吧。六年后在路灯下，她告诉我她觉得自己不配。这六年里，她去欧洲，做科研，发Nature子刊，漂头发，纹身，离婚。我以为她什么都知道，其实她什么都不知道。不知道我一直在等她后悔，不知道自己值得被等。</p>
+
+        <p>我伸手把她被风吹乱的头发拢到耳后。她的耳朵很凉。</p>
+
+        <p>"程知意。"我说。</p>
+
+        <p>"嗯。"</p>
+
+        <p>"那个文档，我会加一条。"</p>
+
+        <p>她抬头看我。</p>
+
+        <p><strong>"前女友不在前女友条款里。另外起一章。"</strong></p>
+
+        <p>她愣了一下，然后笑了。眼睛弯成那个弧度，那个十六岁时在读书会上说"海报好看"的弧度。</p>
+
+        <p>"新章节叫什么。"她问。</p>
+
+        <p><strong>"蓝牙。"</strong></p>
+
+        <p>路灯很亮。风吹着她的银发，锁骨上的双螺旋在灯光下若隐若现。A配T，C配G。完美的配对法则。人不是碱基，人会错配，会走散，会绕地球一圈然后回到原点。但那天晚上站在街头，我忽然觉得，也许有些东西从来就没有错配过。</p>
+
+        <div class="section-divider"><i class="fas fa-feather"></i></div>
+
+        <h2><i class="fas fa-info-circle"></i> 关于这个故事</h2>
+
+        <div class="insight-box">
+            <p>这篇叫《蓝牙-陆知意岛》。陆屿的陆，程知意的知意，陆地上的一座岛。名字拼在一起，就是整个故事的密码。</p>
+            <p>为什么叫"蓝牙"？因为蓝牙那个标志，是北欧古字母H和B拼在一起。Harald Bluetooth，一个统一了丹麦和挪威的国王。他的标志就是把两个名字锁在一起。</p>
+            <p>陆屿和程知意，也是两个名字锁在一起。</p>
+        </div>
+
+        <p>写这个故事，其实想写的是一种少年感。不是年纪，是那种人老心不老的状态。陆屿做着AI，同事们叫他岛神，但他看到那条消息的时候，手指还是会僵住。程知意在欧洲漂了三次头发，锁骨上纹着DNA，但她还是会说梦话，还是会喊出那个名字。他们一个在旧金山，一个在苏黎世，绕了地球大半圈，最后在北京凌晨三点的路灯下，问的还是一个十六岁才会问的问题——你是觉得我不值得，还是觉得自己不配。</p>
+
+        <p>我想写的，就是这种感觉。不管经历了多少事，结婚、离婚、漂洋过海、发论文、改Bug，在面对某个人的时候，你还是会回到最原来的样子。那种笨拙的、直接的、不知道从哪里来的勇气，还在。它没有被时间磨掉，也没有被法则驯服。</p>
+
+        <p><strong>我写法则，也写故事。法则是为了驾驭复杂，故事是为了留住那些不能被法则驯服的东西。</strong>比如凌晨三点的路灯，比如一句等了六年才问出口的话，比如那个银灰色头发的女人踮起脚吻你的时候，口袋里的手机在震，但你不想接。</p>
+
+        </article>
+
+        <div class="series-nav">
+            <a href="../aboutmore/ta.html">← 不必全部收敛</a>
+            <span class="placeholder">·</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

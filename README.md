@@ -214,6 +214,7 @@
 | 💬 [我可能哪里错了](https://x-itg.github.io/aboutmore/cc.html) | 当 AI 总在顺着你，反驳反而成了稀缺品 |
 | 💡 [搞到崩溃的时候，不妨找个不懂的人聊聊](https://x-itg.github.io/aboutmore/ll.html) | 外行视角、范式切换和跳出思维死胡同 |
 | ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
+| 🪶 [蓝牙：陆知意岛](https://x-itg.github.io/aboutmore/czy.html) | 一个AI工程师等了六年的故事，关于错配、走散与回到原点 |
 
 ## 🎭 侠士自述
 
