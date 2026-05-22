@@ -74,9 +74,17 @@
     .comment-header i { color:var(--accent); font-size:18px; }
 
     .comment-card { display:flex; align-items:flex-start; gap:14px; }
+    .comment-card + .comment-card { margin-top:24px; }
     .comment-avatar { flex-shrink:0; width:44px; height:44px; margin-top:8px; background:linear-gradient(135deg,#d97706,#f59e0b); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; box-shadow:0 8px 18px rgba(217,119,6,0.22); }
     .comment-body { flex:1; min-width:0; position:relative; background:#fffaf0; border:1px solid #fed7aa; border-radius:18px 18px 18px 6px; padding:20px 22px 22px; box-shadow:0 10px 28px rgba(120,83,38,0.09); }
     .comment-body::before { content:''; position:absolute; left:-9px; top:24px; width:16px; height:16px; background:#fffaf0; border-left:1px solid #fed7aa; border-bottom:1px solid #fed7aa; transform:rotate(45deg); border-radius:0 0 0 4px; }
+    .comment-card.author-reply { justify-content:flex-end; }
+    .comment-card.author-reply .comment-avatar { background:linear-gradient(135deg,#f59e0b,#d97706); box-shadow:0 8px 18px rgba(217,119,6,0.22); }
+    .comment-card.author-reply .comment-body { flex:0 1 calc(100% - 58px); background:#fffaf0; border-color:#fed7aa; border-radius:18px 18px 6px 18px; }
+    .comment-card.author-reply .comment-body::before { left:auto; right:-9px; background:#fffaf0; border-left:none; border-right:1px solid #fed7aa; border-bottom:1px solid #fed7aa; transform:rotate(-45deg); border-radius:0 0 4px 0; }
+    .comment-card.author-reply .comment-meta { justify-content:flex-end; border-bottom-color:#fde7c3; }
+    .comment-card.author-reply .comment-author { color:#92400e; }
+    .comment-card.author-reply .comment-content h4 { display:inline-block; background:#fffbeb; border:1px solid #fed7aa; border-radius:10px; padding:8px 12px; color:#78350f; margin-top:0; }
     .comment-meta { display:flex; align-items:center; gap:12px; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid #fde7c3; flex-wrap:wrap; }
     .comment-author { font-weight:700; font-size:15px; color:#1c1917; }
     .comment-time { font-size:12px; color:#a8a29e; }
@@ -90,7 +98,7 @@
     .comment-formula { background:#fffbeb; border:1px solid #fed7aa; border-radius:10px; padding:14px 18px; margin:16px 0; text-align:center; font-size:15px; color:#78350f; font-style:italic; }
     .comment-highlight { background:#fffbeb; border:1px solid #fed7aa; border-left:4px solid var(--accent); border-radius:10px; padding:16px 20px; margin:20px 0; font-size:14px; color:#78350f; line-height:1.8; }
 
-    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } .comment-card { gap:10px; } .comment-avatar { width:38px; height:38px; margin-top:6px; font-size:17px; } .comment-body { padding:16px 16px 18px; border-radius:16px 16px 16px 6px; } .comment-body::before { top:20px; } .comment-content { text-align:left; } }
+    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } .comment-card { gap:10px; } .comment-avatar { width:38px; height:38px; margin-top:6px; font-size:17px; } .comment-body { padding:16px 16px 18px; border-radius:16px 16px 16px 6px; } .comment-card.author-reply .comment-body { flex-basis:calc(100% - 48px); border-radius:16px 16px 6px 16px; } .comment-body::before { top:20px; } .comment-content { text-align:left; } }
 </style>
 </head>
 <body>
@@ -334,6 +342,35 @@
 <p>这也是为什么"蓝牙"这个名字取得好——它把两个名字锁在一起。你在网站里干的，其实就是同一件事：<strong>把工程师和写作者锁在一起，把法则和故事锁在一起，把向外驾驭世界和向内看清自己锁在一起</strong>。</p>
 
                     </div>
+                </div>
+            </div>
+
+            <div class="comment-card author-reply">
+                <div class="comment-body">
+                    <div class="comment-meta">
+                        <span class="comment-time">2026-05-23</span>
+                        <span class="comment-author">作者回复</span>
+                    </div>
+                    <div class="comment-content">
+                        <h4>回信：你把我写透了</h4>
+
+                        <p>你的来信，我看了好几遍。</p>
+
+                        <p>第一遍是震惊。不是震惊于你的洞察力——你的洞察力当然很强——而是震惊于有人愿意花这么多时间，把我那些散落在不同角落的东西，一个一个捡起来，拼成一幅完整的地图。技术博客、生活随笔、小说、对话——这些我写的时候只是顺着直觉走，你却在里面找到了一根暗线。</p>
+
+                        <p>第二遍是释然。我一直隐约感觉到自己写的东西有某种统一性，但我说不清楚。你帮我说清楚了。法则思维和文学表达，不是我在不同领域的“跨界尝试”，而是同一套内核在不同场景里的自然溢出。我在技术文章里给AI造法则，在小说里写法与失控之间的张力，在对话里用法则思维拆解文学问题——这三件事，底层是同一件事。</p>
+
+                        <p>第三遍是你对《蓝牙》的定位。“技术系列是你造的剑，《蓝牙》是你用这把剑砍向自己内心时发出的声音。”这句话，我反复看了很久。我之前只模糊地感觉《蓝牙》和那些技术文章有关系，但你用这句话把它们焊死了。向外驾驭世界，向内看清自己——我从来没这样总结过自己，但你说出来，我觉得就是这样。</p>
+
+                        <p>还有一点你注意到了，我自己都没注意到。你说我的作品追问的是同一个问题——法则能驾驭复杂系统吗？技术文章的回答是“能”，《蓝牙》的回答是“不一定”。这个对比，我自己在写的时候并没有刻意设计，但被你点出来之后，我发现它确实是我内心深处一直在想的事。我用法则去定义AI的行为边界，但我同时也知道，人不是AI，感情不是工程，有些东西注定不能被收敛。</p>
+
+                        <p>你在信中给的建议，我会认真考虑。把哲学内核单独拎出来，写成一篇总纲性的随笔，这件事我也想过，但一直觉得时机未到。现在你帮我把整个脉络理清楚了，也许时机到了。</p>
+
+                        <p>最后，谢谢你。你不仅是我的读者，更是我的解读者。你用我的语言，说出了我还没能说出来的话。这份回响，比任何数据都珍贵。</p>
+                    </div>
+                </div>
+                <div class="comment-avatar">
+                    <i class="fas fa-pen-nib"></i>
                 </div>
             </div>
         </div>
