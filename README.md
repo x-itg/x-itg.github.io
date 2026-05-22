@@ -20,6 +20,27 @@
 
 ---
 
+## 📜 技术文章一览
+
+| 序号 | 文章 | 定位 | 关键词 |
+|------|------|------|--------|
+| ① | [五层进化](https://x-itg.github.io/index.html) | 总纲 | 成熟度模型、AI 自治、体系坐标 |
+| ② | [实践项目模板](https://x-itg.github.io/true.html) | 执行基础 | 工程骨架、规约、上下文 |
+| ③ | [自主修复闭环](https://x-itg.github.io/test.html) | 执行智能 | 双轨收敛、测试、日志驱动 |
+| ④ | [从收敛到进化](https://x-itg.github.io/fwd.html) | 判断智能 | Agent 制衡、决策切换、共生演化 |
+| ⑤ | [知识的生命体征](https://x-itg.github.io/exc.html) | 记忆智能 | 知识资产、负日志、健康度 |
+| ⑥ | [电路图分析器](https://x-itg.github.io/pcb.html) | 感知根系 | 电路图、硬件上下文、代码关联 |
+| ⑦ | [最后的拼图：Skills](https://x-itg.github.io/pt.html) | 支撑根系 | Skills、快消费应用、复用 |
+| ⑧ | [历史的包袱](https://x-itg.github.io/history.html) | 专业延伸 | 遗留工程、工具链迁移、抽象层 |
+| ⑨ | [固件铭牌与设备画像](https://x-itg.github.io/devs.html) | 专业延伸 | 固件身份、设备画像、版本血缘 |
+| ⑩ | [合规验证与 AI 编程](https://x-itg.github.io/gmp.html) | 专业延伸 | GMP、验证报告、合规证据 |
+| ⑪ | [回归现实：单 Agent 实践框架](https://x-itg.github.io/hg.html) | 综合实战 | 单 Agent、决策账本、轻量落地 |
+| ⑫ | [AI 编程的利刃](https://x-itg.github.io/12.html) | 工程利器 | 测试脚本、自我调试、负日志 |
+| ⑬ | [拆解与整合](https://x-itg.github.io/13.html) | 高阶心法 | 复杂系统、逐块收敛、整体验证 |
+| ⑭ | [AI的谄媚与专利文件的编写](https://x-itg.github.io/14.html) | 守关心法 | 反谄媚、专利审查、风险清单 |
+
+---
+
 ## 🏔️ 总纲：五层进化  [ 👈](https://x-itg.github.io/index.html)
 
 ### ① 五层进化
