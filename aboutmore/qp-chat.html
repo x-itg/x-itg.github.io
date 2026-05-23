@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陆知意岛：失控时空 · 对话版 | itg</title>
+<meta name="description" content="以聊天记录的形式还原'陆知意岛：失控时空'——程知意、陆屿、苏敏之间的每一句对话。">
+<meta name="keywords" content="陆知意岛,失控时空,聊天记录,短篇小说,对话">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="陆知意岛：失控时空 · 对话版 | itg">
+<meta property="og:description" content="以聊天记录的形式还原'陆知意岛：失控时空'——程知意、陆屿、苏敏之间的每一句对话。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/qp-chat.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/qp-chat.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #fefce8; --card-bg: #ffffff; --text: #292524;
+        --text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
+        --border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
+        background: var(--bg); color: var(--text); line-height: 1.9; -webkit-font-smoothing: antialiased;
+    }
+    .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
+
+    .sidebar {
+        width:240px; position:sticky; top:0; height:100vh; overflow-y:auto;
+        padding:32px 16px; border-right:1px solid var(--border);
+        background:var(--sidebar-bg); flex-shrink:0;
+    }
+    .sidebar .logo { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:8px; }
+    .sidebar .logo a { color:var(--accent); text-decoration:none; }
+    .sidebar .logo a:hover { opacity:0.75; }
+    .sidebar .nav-section { margin-bottom:20px; }
+    .sidebar .nav-section h3 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary); margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+    .sidebar .nav-section ul { list-style:none; }
+    .sidebar .nav-section li { margin-bottom:4px; }
+    .sidebar .nav-section a { display:block; padding:6px 10px; font-size:13px; color:var(--text); text-decoration:none; border-radius:6px; transition:background 0.15s; }
+    .sidebar .nav-section a:hover, .sidebar .nav-section a.active { background:rgba(217,119,6,0.1); color:var(--accent); }
+    .sidebar .nav-section a i { width:20px; color:var(--accent); }
+    .sidebar .back-home { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; }
+    .sidebar .back-home a { color:var(--text-secondary); text-decoration:none; }
+    .sidebar .back-home a:hover { color:var(--accent); }
+
+    .main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+    .main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+    .main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
+    .main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.3px; }
+    .main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
+    .main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
+    .main-content .chat-note { font-size:13px; color:#a8a29e; margin-top:8px; padding:10px 14px; background:#fafaf9; border-radius:8px; border:1px solid var(--border); }
+    .main-content .chat-note i { margin-right:6px; color:var(--accent); }
+
+    /* ===== 聊天界面 ===== */
+    .chat-container {
+        background: #f5f0eb; border-radius: 18px; padding: 24px 20px 32px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.06); margin: 24px 0;
+    }
+
+    /* 场景标题 */
+    .scene-header {
+        text-align: center; padding: 14px 16px; margin: 20px 0 16px;
+        font-size: 13px; font-weight: 600; color: #57534e;
+        background: rgba(255,255,255,0.7); border-radius: 10px;
+        border: 1px dashed #d6d3d1; letter-spacing: 1px;
+    }
+    .scene-header i { margin-right: 6px; color: var(--accent); }
+
+    /* 章节标题 */
+    .part-header {
+        text-align: center; margin: 28px 0 4px;
+    }
+    .part-header .part-badge {
+        display: inline-block; background: var(--accent); color: #fff;
+        font-size: 12px; font-weight: 700; padding: 6px 18px; border-radius: 20px;
+        letter-spacing: 2px;
+    }
+
+    /* 系统消息（场景描述/旁白） */
+    .sys-msg {
+        text-align: center; margin: 14px auto; max-width: 90%;
+        font-size: 13px; line-height: 1.8;
+    }
+    .sys-msg .sys-bubble {
+        display: inline-block; background: rgba(120,113,108,0.1); color: #78716c;
+        padding: 8px 16px; border-radius: 20px; font-style: italic;
+    }
+    .sys-msg .sys-bubble i { margin-right: 4px; }
+
+    /* 叙事段落（较长描写） */
+    .narration {
+        text-align: left; margin: 14px 16px; padding: 14px 18px;
+        background: rgba(255,255,255,0.6); border-radius: 12px;
+        border-left: 3px solid #d6d3d1;
+        font-size: 14px; color: #57534e; line-height: 1.8;
+    }
+    .narration i { color: #a8a29e; }
+
+    /* 时间戳分隔 */
+    .time-divider {
+        text-align: center; margin: 8px 0; font-size: 11px; color: #a8a29e;
+        display: flex; align-items: center; gap: 10px;
+    }
+    .time-divider::before, .time-divider::after { content:''; flex:1; height:1px; background:#d6d3d1; }
+
+    /* 消息行 */
+    .msg { display: flex; align-items: flex-end; gap: 8px; margin: 6px 0; padding: 0 8px; }
+
+    /* 左侧消息（程知意、瑞士丈夫） */
+    .msg-left { justify-content: flex-start; }
+    .msg-left .avatar {
+        width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0; color: #fff;
+    }
+    .msg-left .avatar.cheng { background: linear-gradient(135deg,#d97706,#f59e0b); }
+    .msg-left .avatar.husband { background: linear-gradient(135deg,#64748b,#94a3b8); }
+    .avatar::before {
+        font-family: "Font Awesome 6 Free"; font-weight: 900;
+        font-size: 17px;
+    }
+    .avatar.cheng::before { content: "\f471"; }  /* dna */
+    .avatar.lu::before { content: "\f2db"; }     /* microchip */
+    .avatar.min::before { content: "\f52d"; }    /* feather */
+    .avatar.husband::before { content: "\f6fc"; } /* mountain */
+    .msg-left .bubble {
+        background: #fff; color: #292524;
+        padding: 10px 16px; border-radius: 18px 18px 18px 4px;
+        max-width: 80%; font-size: 15px; line-height: 1.7;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .msg-left .bubble .stage { color: #a8a29e; font-size: 13px; font-style: italic; }
+
+    /* 右侧消息（陆屿、苏敏） */
+    .msg-right { justify-content: flex-end; }
+    .msg-right .avatar {
+        width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0; color: #fff;
+    }
+    .msg-right .avatar.lu { background: linear-gradient(135deg,#6366f1,#818cf8); }
+    .msg-right .avatar.min { background: linear-gradient(135deg,#8b5cf6,#a78bfa); }
+    .msg-right .bubble {
+        background: linear-gradient(135deg,#6366f1,#818cf8); color: #fff;
+        padding: 10px 16px; border-radius: 18px 18px 4px 18px;
+        max-width: 80%; font-size: 15px; line-height: 1.7;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .msg-right .bubble.min-bubble {
+        background: linear-gradient(135deg,#8b5cf6,#a78bfa);
+    }
+    .msg-right .bubble .stage { color: rgba(255,255,255,0.7); font-size: 13px; font-style: italic; }
+
+    /* 带文本前的轻提示 */
+    .msg .bubble .pause-tag {
+        display: inline-block; font-size: 12px; color: #a8a29e;
+        font-style: italic; margin-right: 4px;
+    }
+    .msg-right .bubble .pause-tag { color: rgba(255,255,255,0.7); }
+
+    /* 连续对话时隐藏头像 */
+    .msg-continue { margin-top: -4px; }
+    .msg-continue .avatar { visibility: hidden; }
+
+    .series-nav { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); display:flex; justify-content:space-between; font-size:14px; }
+    .series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
+    .series-nav a:hover { text-decoration:underline; }
+    .series-nav .placeholder { color:#d6d3d1; }
+
+    @media (max-width:768px) {
+        .sidebar { display:none; }
+        .main-content { padding:24px 16px 60px; }
+        .main-content h1 { font-size:26px; }
+        .chat-container { padding: 16px 10px 24px; border-radius: 14px; }
+        .msg { padding: 0 4px; }
+        .msg-left .bubble, .msg-right .bubble { max-width: 88%; font-size: 14px; padding: 9px 13px; }
+        .msg-left .avatar, .msg-right .avatar { width: 32px; height: 32px; }
+        .avatar::before { font-size: 15px; }
+        .narration { margin: 12px 8px; padding: 12px 14px; font-size: 13px; }
+        .scene-header { font-size: 12px; padding: 10px 12px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="logo"><a href="../index.html"><i class="fas fa-home"></i> itg</a></div>
+        <div class="nav-section">
+            <h3>生活随记</h3>
+            <ul>
+                <li><a href="../about.html"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
+                <li><a href="../aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
+                <li><a href="../aboutmore/fw.html"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
+                <li><a href="../aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
+                <li><a href="../aboutmore/wx.html"><i class="fas fa-compass"></i> 心法总览</a></li>
+                <li><a href="../aboutmore/itg.html"><i class="fas fa-heart-pulse"></i> 爱婷哥</a></li>
+                <li><a href="../aboutmore/forme.html"><i class="fas fa-pen-fancy"></i> 写给自己</a></li>
+                <li><a href="../aboutmore/pg.html"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</a></li>
+                <li><a href="../aboutmore/m.html"><i class="fas fa-moon"></i> 周一早上，梦见下班</a></li>
+                <li><a href="../aboutmore/cc.html"><i class="fas fa-comments"></i> 我可能哪里错了</a></li>
+                <li><a href="../aboutmore/ll.html"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</a></li>
+                <li><a href="../aboutmore/ta.html"><i class="fas fa-infinity"></i> 不必全部收敛</a></li>
+                <li><a href="../aboutmore/czy.html"><i class="fas fa-feather"></i> 蓝牙：陆知意岛</a></li>
+                <li><a href="../aboutmore/qp-chat.html" class="active"><i class="fas fa-comment-dots"></i> 失控时空·对话版</a></li>
+                <li><a href="../aboutmore/czjs.html"><i class="fas fa-flask"></i> 会话的碰撞</a></li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <h3>技术系列</h3>
+            <ul>
+                <li><a href="../index.html"><i class="fas fa-microchip"></i> 嵌入式AI工程化</a></li>
+            </ul>
+        </div>
+        <div class="back-home">
+            <a href="../index.html">← 返回首页</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="article-header">
+            <span class="series-tag">短篇小说·对话版</span>
+            <h1>陆知意岛：失控时空</h1>
+            <p class="subtitle">以聊天记录的形式，还原程知意与陆屿的七年</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 生活随记</p>
+            <div class="chat-note">
+                <i class="fas fa-info-circle"></i> 这是剧本《陆知意岛：失控时空》的对话版。人物气泡颜色：<span style="color:#d97706;font-weight:600;">程知意</span> · <span style="color:#6366f1;font-weight:600;">陆屿</span> · <span style="color:#8b5cf6;font-weight:600;">苏敏</span> · 灰色旁白为场景叙述。推荐阅读完 <a href="czy.html" style="color:var(--accent);">蓝牙：陆知意岛</a> 后再浏览此页。
+            </div>
+        </header>
+
+        <!-- ===== 聊天记录 ===== -->
+        <div class="chat-container">
+
+            <!-- ===== 第一部分 ===== -->
+            <div class="part-header"><span class="part-badge">第一部分 · 初识</span></div>
+
+            <div class="scene-header"><i class="fas fa-cloud-rain"></i> 读书会结束后，雨天。学校南门。</div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">你是喜欢我吧。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">……</div>
+            </div>
+
+            <div class="msg msg-left msg-continue">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">你不说话我就当你默认了。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你怎么知道的。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">你看我的时候，不是那种"看一眼"的看。是那种，好像一直在等我看回去的看。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">……那你看了吗。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">看了。好几次。你都没发现。</div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble"><i class="fas fa-pause-circle"></i> 沉默</span></div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">所以你到底是不是。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble"><span class="stage">（停顿）</span> 是。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">好。那我也告诉你。我也是。走吧，雨大了。</div>
+            </div>
+
+            <div class="time-divider">三个月后</div>
+
+            <div class="scene-header"><i class="fas fa-door-open"></i> 在一起三个月后。陆屿宿舍。</div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你从来不问我。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">问什么。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">问我爱不爱你。问我去哪了。问我有没有想你。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">我需要问吗。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">不需要吗。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">你爱不爱我，你说不说都一样。你去哪了，你想说就说。你想我，你自然会告诉我。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你这样让我觉得你不在乎。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble"><span class="stage">（停顿）</span> 我在乎的方式，可能不是你习惯的那种。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">那是什么。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">我不问，是因为我信你。信一个人，比问一个人，要难得多。你要是习惯被人查岗，我可以学。但我不一定学得会。</div>
+            </div>
+
+            <!-- ===== 第二部分 ===== -->
+            <div class="part-header" style="margin-top:40px;"><span class="part-badge">第二部分 · 分离</span></div>
+
+            <div class="scene-header"><i class="fas fa-utensils"></i> 新疆馆子。散伙饭。</div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">瑞士那边的offer下来了。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">嗯。我这边也签了。下个月入职。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">那……</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">要不要异地。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble"><span class="stage">（停顿很久）</span> 不要。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">为什么。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">异地太累了。我们在两个国家，时差七个小时。你做AI，我做实验，都是那种一进去就忘了时间的。我们会变成那种一个月发一次"你还好吗"然后不知道回什么的人。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你不试怎么知道。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">因为我了解自己。也了解你。我们都不是那种擅长维持的人。我们擅长的是——<span class="stage">（停顿）</span></div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">是什么。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">擅长的是，在同一个房间里，各自做各自的事，不说话，但知道对方在。异地就没有这个了。没有房间，没有不说话但知道你在。只剩手机屏幕上那些字。我不想要那样的。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">那你要什么。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">我要最好的。如果做不到最好，我就不要。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你从来都是这样。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">不好吗。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">好。好得让人受不了。</div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble"><i class="fas fa-pause-circle"></i> 长停顿</span></div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">你到了给我发消息。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">嗯。</div>
+            </div>
+
+            <div class="narration"><i class="fas fa-quote-left"></i> 程知意站起来，转身走了。陆屿坐着，看着那盘大盘鸡。拿起筷子，继续吃。</div>
+
+            <div class="time-divider">六年后</div>
+
+            <div class="scene-header"><i class="fas fa-birthday-cake"></i> 陆屿三十岁生日当晚</div>
+
+            <div class="narration">
+                <i class="fas fa-mobile-alt"></i> 手机亮起。一条来自海外号码的短信：<strong>生日快乐。</strong>
+                <br><br>
+                陆屿盯着屏幕。打了三个字：<em>你是谁。</em> 删掉。又打：<em>程知意？</em> 删掉。
+                <br><br>
+                最后只打了两个字：<strong>谢谢。</strong>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble">那边没再回复。</span></div>
+
+            <div class="scene-header" style="margin-top:20px;"><i class="fas fa-flask"></i> 同一时间。苏黎世。实验室。凌晨。</div>
+
+            <div class="narration">
+                <i class="fas fa-mobile-alt"></i> 程知意坐在电脑前，屏幕上是实验数据。旁边手机亮着，上面是那个"谢谢"。她看了一会儿，把手机翻过去。屏幕朝下。
+                <br><br>
+                一分钟后，她又翻过来。点进那个号码，手指悬在"删除对话"上。三秒。然后她删掉了。
+            </div>
+
+            <!-- ===== 第三部分 ===== -->
+            <div class="part-header" style="margin-top:40px;"><span class="part-badge">第三部分 · 重逢前奏</span></div>
+
+            <div class="scene-header"><i class="fas fa-globe-europe"></i> 程知意回国前一个月。苏黎世。她和丈夫的对话。<span style="color:#a8a29e;font-size:12px;font-style:italic;">（全程用夹杂德语和中文的英文交流）</span></div>
+
+            <div class="msg msg-right" style="justify-content:flex-start;">
+                <div class="avatar husband">夫</div>
+                <div class="bubble" style="background:#fff;color:#292524;border-radius:18px 18px 18px 4px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">You sleep no good, lately. Schatz?<br><span style="color:#a8a29e;font-size:13px;">（你最近睡不好。亲爱的？）</span></div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">Experiment ... pressure. You know.<br><span style="color:#a8a29e;font-size:13px;">（实验压力大。你知道的。）</span></div>
+            </div>
+
+            <div class="msg msg-right" style="justify-content:flex-start;">
+                <div class="avatar husband">夫</div>
+                <div class="bubble" style="background:#fff;color:#292524;border-radius:18px 18px 18px 4px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">Every night you call this name. Luyu. When you ... in sleep.<br><span style="color:#a8a29e;font-size:13px;">（你每天晚上喊这个名字。Luyu。睡着的时候。）</span></div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble">程知意沉默</span></div>
+
+            <div class="msg msg-right" style="justify-content:flex-start;">
+                <div class="avatar husband">夫</div>
+                <div class="bubble" style="background:#fff;color:#292524;border-radius:18px 18px 18px 4px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">It is not a cat. Or ... ein Hund. Right?<br><span style="color:#a8a29e;font-size:13px;">（不是猫。或者狗。对吗。）</span></div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble"><span class="stage">（停顿）</span> No. Not cat. Is ... person.</div>
+            </div>
+
+            <div class="msg msg-right" style="justify-content:flex-start;">
+                <div class="avatar husband">夫</div>
+                <div class="bubble" style="background:#fff;color:#292524;border-radius:18px 18px 18px 4px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">So was ist es. What is it.<br><span style="color:#a8a29e;font-size:13px;">（那是什么。）</span></div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">Somebody. I know ... a long time ago. 在国内的时候。<br><span style="color:#a8a29e;font-size:13px;">（我以前认识的一个人。在国内的时候。）</span></div>
+            </div>
+
+            <div class="msg msg-right" style="justify-content:flex-start;">
+                <div class="avatar husband">夫</div>
+                <div class="bubble" style="background:#fff;color:#292524;border-radius:18px 18px 18px 4px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">You still ... in your head, him. Thinking. Immer noch.<br><span style="color:#a8a29e;font-size:13px;">（你还在想他。一直都在。）</span></div>
+            </div>
+
+            <div class="msg msg-right" style="justify-content:flex-start;">
+                <div class="avatar husband">夫</div>
+                <div class="bubble" style="background:#fff;color:#292524;border-radius:18px 18px 18px 4px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">I ... I can feel it. When you say his name, your body is ... anders. Not here.<br><span style="color:#a8a29e;font-size:13px;">（我感觉得到。你喊他名字的时候，你身体——不一样。不在这里。）</span></div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble">程知意没有回答。长久的沉默。窗外是苏黎世灰蓝色的天空。</span></div>
+
+            <div class="scene-header" style="margin-top:20px;"><i class="fas fa-city"></i> 同一时间段。北京。陆屿和苏敏的对话。</div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">你最近老走神。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">有吗。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">有。昨天晚上我跟你说话，你盯着手机看了半天。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">我有个老同学要回国了。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">谁。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">高中同学。很久没见了。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">男的女的。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">女的。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble"><span class="stage">（停顿）</span> 你那个文档里没写这条。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">什么。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">老同学回国。女的。你走神。这算不算需要同步的事项。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">……算。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">那你同步吧。</div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble">陆屿沉默</span></div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">算了。别同步了。你还没想清楚的时候，别说话。这是你自己写的规则——坦诚，但不强迫。你忘了。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">我没忘。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">你是没忘。你是不知道怎么把她的名字放进咱们那个文档里。对吧。</div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble">陆屿没回答。</span></div>
+
+            <!-- ===== 第四部分 ===== -->
+            <div class="part-header" style="margin-top:40px;"><span class="part-badge">第四部分 · 重逢</span></div>
+
+            <div class="scene-header"><i class="fas fa-music"></i> Echo酒吧。灯光红蓝交错。</div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">你一点都没变。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">是吗。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">嗯。还是喜欢把事情搞得很复杂。不想负责，又不想完全放开。所以发明一个词叫开放关系。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你倒是一针见血。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">习惯了。做实验，一针见血是基本要求。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你头发怎么回事。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">漂的。做实验做不出来，一生气就去漂了头。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">漂了几次。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">三次。头皮都快掉了。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">纹身呢。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">DNA双螺旋。好看吗。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">太像你了。连纹身都是科研梗。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble"><span class="stage">（笑）</span> 不然呢，纹个"前男友"？</div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble">两人同时笑了，然后笑声同时收了。</span></div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你离婚了。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">嗯。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">为什么。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">他半夜听到我喊你的名字。</div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble"><i class="fas fa-music"></i> 音乐忽然变得很重。灯光从蓝切成红。</span></div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你喊了。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">喊了。不止一次。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你以前不说梦话。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">以前也不漂头发。人变，梦也变。</div>
+            </div>
+
+            <div class="narration"><i class="fas fa-cocktail"></i> 她转着酒杯。手指有点抖。</div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">他说他听不懂Luyu是什么意思。我说是我以前养的一只猫。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">猫。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">猫。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你把我说成猫。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">那不然呢。说你是我前男友？他连"前男友"这个词都听不懂。我们之间只能交流最基本的东西。吃饭。睡觉。实验数据。更深的东西，用翻译软件翻出来就已经失真了。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你需要一个人工智能。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">我需要什么。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">不是翻译软件。是真的能翻译的。把你说不出来的东西翻成能说出来的。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">我试过了。不行的。问题不是语言。问题是他半夜听到我喊别的男人的名字，我解释不了。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble"><span class="stage">（转着酒杯，看着他）</span> 所以——你难道不想跟我睡吗。</div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble"><i class="fas fa-brain"></i> 陆屿没说话。他在想苏敏。苏敏从不会把话说到这个地步。她会等，然后点头。但程知意把这句话直接放在桌上，像放下最后一张牌。同一句话换成苏敏说出来，他无法想象。</span></div>
+
+            <div class="sys-msg"><span class="sys-bubble">陆屿看着她。红蓝色的光在她锁骨上的纹身流动。双螺旋。他看见自己的喉结动了一下。</span></div>
+
+            <div class="sys-msg"><span class="sys-bubble">长久的沉默。DJ换了一首歌。</span></div>
+
+            <div class="time-divider">同一时刻</div>
+
+            <div class="scene-header"><i class="fas fa-couch"></i> 苏敏的公寓。她一个人坐在沙发上。</div>
+
+            <div class="narration">
+                <i class="fas fa-mobile-alt"></i> 苏敏给陆屿发消息：<em>今晚回来吗。</em>
+                <br><br>
+                三分钟。没有回复。
+                <br><br>
+                又发了一条：<em>算了。不用回。我自己锁门。</em>
+                <br><br>
+                <span style="color:#a8a29e;">她把手机放在茶几上。屏幕上陆屿的对话框还亮着。上面是两天前的一条消息："周六晚上有个朋友约我，奥体那边。晚点回来。"</span>
+                <br><br>
+                <span style="color:#a8a29e;">外面的人看到她，以为她永远轻声细语、不急不慢。只有陆屿知道——那个说话从不大声的女人，关了灯之后会咬他的肩膀。有一次他笑着说她像换了个人。她没有反驳。第二天晚上，他后背多了几道印子。</span>
+            </div>
+
+            <div class="scene-header" style="margin-top:20px;"><i class="fas fa-street-view"></i> Echo酒吧外。凌晨三点。路灯下。</div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">我申了教职。过了。下个月入职。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">什么时候申的。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">半年前。面试的时候没告诉你。怕分心。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">你半年不跟我说一声，现在回国第一件事就是把我叫出来。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">对。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">对什么对。</div>
+            </div>
+
+            <div class="narration"><i class="fas fa-wind"></i> 风吹过来。她头发乱了。</div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble"><span class="stage">（忽然）</span> 你们那个文档，有没有写前女友怎么办。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">没有。</div>
+            </div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">那你要不要加一条。</div>
+            </div>
+
+            <div class="narration">陆屿看着她锁骨上的DNA纹身。双螺旋。A配T。C配G。</div>
+
+            <div class="msg msg-right">
+                <div class="avatar lu">陆</div>
+                <div class="bubble">程知意。你当初说不要异地的时候——是觉得我不值得，还是觉得自己不配。</div>
+            </div>
+
+            <div class="narration">程知意愣住。风吹着她的银发。她的嘴唇动了动。过了很久。</div>
+
+            <div class="msg msg-left">
+                <div class="avatar cheng">程</div>
+                <div class="bubble">第二个。</div>
+            </div>
+
+            <div class="narration"><i class="fas fa-fire"></i> 她踮起脚吻他。嘴唇干燥，带着酒和冷空气的味道。六年的距离在这个吻里碎成粉末。她的手扣住他的后颈，他把她拉近，力气大得她自己都愣了一下。口袋里手机在震，他没管。</div>
+
+            <div class="sys-msg"><span class="sys-bubble"><i class="fas fa-hourglass-end"></i> 那天晚上他没有回家。窗帘没有拉。银白色的头发散在枕头上，在路灯的光里像一小片极地。但到了最后——反倒是她先停了。说那种话的时候她眼睛都不眨，真到了那一步，她反而比他紧张。她的手攥着床单，指节发白。他没有继续。他停下来，看着她。她没看他。她只是把脸埋进他肩窝里，不说话。</span></div>
+
+            <div class="sys-msg"><span class="sys-bubble"><i class="fas fa-compress"></i> 那三天里他回过一次家。苏敏的手指碰到他后背的时候，他脑子里闪过一个银灰色的影子。他翻身，把那个影子压在枕头底下。</span></div>
+
+            <!-- ===== 第五部分 ===== -->
+            <div class="part-header" style="margin-top:40px;"><span class="part-badge">第五部分 · 失控</span></div>
+
+            <div class="scene-header"><i class="fas fa-home"></i> 陆屿和苏敏的公寓。三天后。深夜。</div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">你见过她了。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">嗯。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">你那个老同学。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">嗯。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">你打算什么时候告诉我。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">现在。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">现在太晚了。你应该在去见她之前告诉我。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">文档里说——</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble"><span class="stage">（打断）</span> 别跟我提文档。文档也是你写的。规则也是你定的。你自己先破了。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">我没破。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">你没破吗。你凌晨四点才回来。你衬衫上有别人的味道。你回来以后没说过一句完整的话。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">还有。我已经不记得你上一次看我的时候，是在看我了。</div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble">长久的沉默。</span></div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">苏敏，我和她……</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">别。别跟我说细节。这是你自己定的规矩——坦诚但不过问细节。我在遵守你的规矩。你倒想破了？</div>
+            </div>
+
+            <div class="sys-msg"><span class="sys-bubble">陆屿沉默</span></div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble"><span style="font-size:14px;">（声音轻下来）</span> 陆屿，我不是生气你见前女友。我是生气你没告诉我。你以前跟我说，开放关系最重要的不是自由，是信任。你说你被以前那种互相防着的感情搞怕了。你说要找一个能信的人。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">我记得。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">那你信我了吗。你去见她，你心里那个东西连你自己都怕，你跟我说过吗。你没有。你怕跟我说了，我会说不行。你怕我给你的自由收回去。所以你先去做，然后再回来用规则套。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">我没这么想。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">你是没这么想。但你这么做了。</div>
+            </div>
+
+            <div class="narration"><i class="fas fa-person-walking"></i> 苏敏站起来，走到窗边。背对着他。</div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">你知道吗。其实我可以接受你心里有别人。我自己也有过几个，这很正常。但我受不了你拿文档当挡箭牌。你以前说，法则是为了驾驭复杂。但你现在不是在驾驭，你是在躲。你躲在你自己写的法则后面，不敢看我，也不敢看你自己。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">我跟你吵得再凶，你碰我的时候，我从来没推开过你。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">但你也从来不知道。你不碰我的时候——我有多想要你。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);"><span class="stage">（沉默良久）</span> 那你想怎么办。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">我不知道。我只知道，你那个文档，需要更新了。不是加一条关于前女友的条款。</div>
+            </div>
+
+            <div class="msg msg-left" style="justify-content:flex-end;">
+                <div class="avatar lu" style="background:linear-gradient(135deg,#6366f1,#818cf8);">陆</div>
+                <div class="bubble" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:18px 18px 4px 18px;max-width:80%;font-size:15px;line-height:1.7;box-shadow:0 1px 4px rgba(0,0,0,0.04);">那是什么。</div>
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">加一条关于诚实的。不是对我诚实——是对你自己诚实。你连自己都还没看清楚，就来跟我谈规则。</div>
+            </div>
+
+            <div class="narration">
+                <i class="fas fa-person-walking"></i> 她从窗边转过身。眼眶有点红，但声音很稳。
+            </div>
+
+            <div class="msg msg-right">
+                <div class="avatar min">苏</div>
+                <div class="bubble min-bubble">陆屿。你先想清楚你是谁。想清楚了再来找我。如果到时候我还在的话。</div>
+            </div>
+
+            <div class="narration">
+                <i class="fas fa-door-open"></i> 她走进卧室。门没关，但也没再说话。客厅只剩下陆屿一个人。
+                <br><br>
+                <i class="fas fa-mobile-alt"></i> 手机亮了一下，程知意发来一条消息：<strong>睡了吗。</strong>
+                <br><br>
+                两个女人在他脑子里同时站着。一个在门那边，一个在这条消息里。苏敏会等。程知意会问。他要的不是选择题，但生活替他选好了。
+                <br><br>
+                他看着那条消息。手指悬在屏幕上。很久。没有回。
+            </div>
+
+        </div>
+        <!-- ===== 聊天记录结束 ===== -->
+
+        <div class="series-nav">
+            <a href="czy.html">← 蓝牙：陆知意岛（小说版）</a>
+            <a href="czjs.html">会话的碰撞 →</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
