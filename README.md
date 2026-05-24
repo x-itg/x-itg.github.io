@@ -10,14 +10,23 @@
 
 # 嵌入式 AI 工程化 · 乾坤大挪移心法
 
-> **一套从嵌入式物理世界痛点生长出来的AI工程化方法论。**
-> **也是从同一个人的实践中自然长出的文学实验与创作手记。**
+> **一套从嵌入式物理世界淤青中长出的AI工程化方法论，也是一场从同一个人生命里自然溢出的文学实验。**
 >
 > 我是 **itg**，**火星火箭**。你能在这里借AI的力，打代码的Bug，驯复杂系统的野兽；也能在这里看到一个工程师如何用同一套法则，去理解代码、经营感情、创作小说、审视自己。
 
 👉 **在线阅读：[https://x-itg.github.io](https://x-itg.github.io)**
 
 👉 **文章总览：[乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html)**
+
+---
+
+## 🧠 核心哲学
+
+- **意图定义者 > 代码执行者**：人的核心价值从"编写指令"跃迁为"定义约束和边界"。
+- **可观测性即权利**：结构化日志是 AI 在物理世界中的"眼睛"；正日志记录"发生了什么"，负日志捕获"应该发生却未发生"。
+- **闭环是思维，契约是边界**：每一次修改必须有新日志驱动；用提示词模板和规约文件限制 AI 的输出空间。
+- **共生而非替代**：人保有最终裁决权，AI 负责追踪分歧、展示后果、请求决策。
+- **法则从实践中来**：真正的规律不是从书本到书本，而是从实践到理论——从淤青中长出铠甲。
 
 ---
 
@@ -187,38 +196,28 @@
 
 ---
 
-## 🧠 核心哲学
-
-- **意图定义者 > 代码执行者**：人的核心价值从"编写指令"跃迁为"定义约束和边界"。
-- **可观测性即权利**：结构化日志是 AI 在物理世界中的"眼睛"；正日志记录"发生了什么"，负日志捕获"应该发生却未发生"。
-- **闭环是思维，契约是边界**：每一次修改必须有新日志驱动；用提示词模板和规约文件限制 AI 的输出空间。
-- **共生而非替代**：人保有最终裁决权，AI 负责追踪分歧、展示后果、请求决策。
-- **法则从实践中来**：真正的规律不是从书本到书本，而是从实践到理论——从淤青中长出铠甲。
-
----
-
 ## 🌿 生活随记
 
 用相同的工程思维审视日常世界：
 
 | 文章 | 主题 |
 |------|------|
-| 🪶 [我找到了一套法则](https://x-itg.github.io/about.html) | 凌晨两点的示波器，是灵感的起点 |
-| 🧠 [以不变应万变](https://x-itg.github.io/aboutmore/tk.html) | 从 AI 编程到生活法则的认知升维 |
-| 🪄 [用工程魔法打败生活魔法](https://x-itg.github.io/aboutmore/fw.html) | 一套思想体系的七种不正经应用 |
-| ❤️ [我用调试 AI 的方法，学会了经营感情](https://x-itg.github.io/aboutmore/sc.html) | 当工程法则走出代码，走进亲密关系 |
-| 🧭 [乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html) | 十四篇技术文章一篇看完 |
-| 💗 [爱婷哥](https://x-itg.github.io/aboutmore/itg.html) | 生活里的命名、亲密和一点点不讲理的温柔 |
-| ✍️ [写给自己](https://x-itg.github.io/aboutmore/forme.html) | 把话写给未来的自己，也写给那个正在撑住的人 |
-| 😄 [家庭直播间：“可恶”的捧哏](https://x-itg.github.io/aboutmore/pg.html) | 家庭日常里的接话、配合和快乐回路 |
-| 🌙 [周一早上，我梦见自己下班了](https://x-itg.github.io/aboutmore/m.html) | 一场梦里冒出来的疲惫、松弛和自我提醒 |
-| 💬 [我可能哪里错了](https://x-itg.github.io/aboutmore/cc.html) | 当 AI 总在顺着你，反驳反而成了稀缺品 |
-| 💡 [搞到崩溃的时候，不妨找个不懂的人聊聊](https://x-itg.github.io/aboutmore/ll.html) | 外行视角、范式切换和跳出思维死胡同 |
-| ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
-| 🪶 [蓝牙：陆知意岛](https://x-itg.github.io/aboutmore/czy.html) | 一个AI工程师等了六年的故事，关于错配、走散与回到原点 |
-| 💬 [失控时空·对话版](https://x-itg.github.io/aboutmore/qp-chat.html) | 以聊天气泡还原陆知意岛的每一句对话，三种语言的破碎与碰撞 |
-| ⚗️ [会话的碰撞](https://x-itg.github.io/aboutmore/czjs.html) | 两个AI窗口交叉之后，发生了化学反应 |
-| 🧬 [四层结构：创作体系](https://x-itg.github.io/aboutmore/fr.html) | 理论·人格·文学·元创作——同一套内核的四层自然生长 |
+| `[总纲]` 🪶 [我找到了一套法则](https://x-itg.github.io/about.html) | 凌晨两点的示波器，是灵感的起点 |
+| `[认知]` 🧠 [以不变应万变](https://x-itg.github.io/aboutmore/tk.html) | 从 AI 编程到生活法则的认知升维 |
+| `[心法]` 🪄 [用工程魔法打败生活魔法](https://x-itg.github.io/aboutmore/fw.html) | 一套思想体系的七种不正经应用 |
+| `[关系]` ❤️ [我用调试 AI 的方法，学会了经营感情](https://x-itg.github.io/aboutmore/sc.html) | 当工程法则走出代码，走进亲密关系 |
+| `[索引]` 🧭 [乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html) | 十四篇技术文章一篇看完 |
+| `[家庭]` 💗 [爱婷哥](https://x-itg.github.io/aboutmore/itg.html) | 生活里的命名、亲密和一点点不讲理的温柔 |
+| `[自省]` ✍️ [写给自己](https://x-itg.github.io/aboutmore/forme.html) | 把话写给未来的自己，也写给那个正在撑住的人 |
+| `[日常]` 😄 [家庭直播间：“可恶”的捧哏](https://x-itg.github.io/aboutmore/pg.html) | 家庭日常里的接话、配合和快乐回路 |
+| `[日常]` 🌙 [周一早上，我梦见自己下班了](https://x-itg.github.io/aboutmore/m.html) | 一场梦里冒出来的疲惫、松弛和自我提醒 |
+| `[思辨]` 💬 [我可能哪里错了](https://x-itg.github.io/aboutmore/cc.html) | 当 AI 总在顺着你，反驳反而成了稀缺品 |
+| `[方法]` 💡 [搞到崩溃的时候，不妨找个不懂的人聊聊](https://x-itg.github.io/aboutmore/ll.html) | 外行视角、范式切换和跳出思维死胡同 |
+| `[哲思]` ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
+| `[小说]` 🪶 [蓝牙：陆知意岛](https://x-itg.github.io/aboutmore/czy.html) | 一个AI工程师等了六年的故事，关于错配、走散与回到原点 |
+| `[小说]` 💬 [失控时空·对话版](https://x-itg.github.io/aboutmore/qp-chat.html) | 以聊天气泡还原陆知意岛的每一句对话，三种语言的破碎与碰撞 |
+| `[创作]` ⚗️ [会话的碰撞](https://x-itg.github.io/aboutmore/czjs.html) | 两个AI窗口交叉之后，发生了化学反应 |
+| `[体系]` 🧬 [四层结构：创作体系](https://x-itg.github.io/aboutmore/fr.html) | 理论·人格·文学·元创作——同一套内核的四层自然生长 |
 
 ## 🎭 侠士自述
 
@@ -234,6 +233,12 @@
 
 **言出法随，即刻收敛。**
 —— itg，火星火箭，乾坤大挪移传人。
+
+---
+
+## 🔧 关于本站
+
+本站用 GitHub Pages 搭建，无框架，纯手写 HTML/CSS。所有文章用 Markdown 转写，结构件用 AI agent 自动维护。这本身就是"法则驾驭复杂"的实践样本。
 
 ---
 
