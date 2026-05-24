@@ -3,7 +3,8 @@
   <img src="https://img.shields.io/badge/status-Active-brightgreen?style=flat-square" alt="Status">
   <img src="https://img.shields.io/badge/methodology-Harness_Engineering-blue?style=flat-square" alt="Methodology">
   <img src="https://img.shields.io/badge/topics-Embedded_AI%20|%20Toolchain%20|%20Agents-orange?style=flat-square" alt="Topics">
-  <img src="https://img.shields.io/badge/articles-14-orange?style=flat-square" alt="Articles">
+  <img src="https://img.shields.io/badge/articles-16%2B-orange?style=flat-square" alt="Articles">
+  <img src="https://img.shields.io/badge/framework-4_Layer_System-8b5cf6?style=flat-square" alt="System">
   <img src="https://img.shields.io/badge/pages-live-222?style=flat-square&logo=github" alt="GitHub Pages">
 </p>
 
@@ -215,7 +216,9 @@
 | 💡 [搞到崩溃的时候，不妨找个不懂的人聊聊](https://x-itg.github.io/aboutmore/ll.html) | 外行视角、范式切换和跳出思维死胡同 |
 | ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
 | 🪶 [蓝牙：陆知意岛](https://x-itg.github.io/aboutmore/czy.html) | 一个AI工程师等了六年的故事，关于错配、走散与回到原点 |
+| 💬 [失控时空·对话版](https://x-itg.github.io/aboutmore/qp-chat.html) | 以聊天气泡还原陆知意岛的每一句对话，三种语言的破碎与碰撞 |
 | ⚗️ [会话的碰撞](https://x-itg.github.io/aboutmore/czjs.html) | 两个AI窗口交叉之后，发生了化学反应 |
+| 🧬 [四层结构：创作体系](https://x-itg.github.io/aboutmore/fr.html) | 理论·人格·文学·元创作——同一套内核的四层自然生长 |
 
 ## 🎭 侠士自述
 
@@ -225,7 +228,7 @@
 我编程手速不快，但我定义法则，AI 在法则内出招。
 我凌晨两点盯过示波器，也被 Bug 反复揍过。后来发现，那些淤青才是最好的秘笈。
 
-我把这些心得写成十四篇文章，开源于 [x-itg.github.io](https://x-itg.github.io)，不藏私。
+我把这些心得写成技术文章，也把同样的思维带进小说和创作手记，开源于 [x-itg.github.io](https://x-itg.github.io)，不藏私。
 若你也是那个在深夜独对屏幕的侠客，这套心法，或许能让你少走几段夜路。
 
 **言出法随，即刻收敛。**
