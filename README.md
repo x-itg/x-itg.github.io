@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/status-Active-brightgreen?style=flat-square" alt="Status">
   <img src="https://img.shields.io/badge/methodology-Harness_Engineering-blue?style=flat-square" alt="Methodology">
   <img src="https://img.shields.io/badge/topics-Embedded_AI%20|%20Toolchain%20|%20Agents-orange?style=flat-square" alt="Topics">
-  <img src="https://img.shields.io/badge/articles-16%2B-orange?style=flat-square" alt="Articles">
+  <img src="https://img.shields.io/badge/articles-17%2B-orange?style=flat-square" alt="Articles">
   <img src="https://img.shields.io/badge/framework-4_Layer_System-8b5cf6?style=flat-square" alt="System">
   <img src="https://img.shields.io/badge/pages-live-222?style=flat-square&logo=github" alt="GitHub Pages">
 </p>
@@ -215,9 +215,12 @@
 | `[方法]` 💡 [搞到崩溃的时候，不妨找个不懂的人聊聊](https://x-itg.github.io/aboutmore/ll.html) | 外行视角、范式切换和跳出思维死胡同 |
 | `[哲思]` ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
 | `[小说]` 🪶 [蓝牙：陆知意岛](https://x-itg.github.io/aboutmore/czy.html) | 一个AI工程师等了六年的故事，关于错配、走散与回到原点 |
-| `[小说]` 💬 [失控时空·对话版](https://x-itg.github.io/aboutmore/qp-chat.html) | 以聊天气泡还原陆知意岛的每一句对话，三种语言的破碎与碰撞 |
+| `[小说实验]` 💬 [失控时空·对话版](https://x-itg.github.io/aboutmore/qp-chat.html) | 以聊天气泡还原陆知意岛的每一句对话，让叙事退后、语言顶到最前面 |
+| `[小说实验]` 🎮 [失控时刻：有趣玩家](https://x-itg.github.io/aboutmore/jsxm.html) | 把关系写成文档、批注和文件夹，一篇形式与内容互相咬合的“副本叙事” |
 | `[创作]` ⚗️ [会话的碰撞](https://x-itg.github.io/aboutmore/czjs.html) | 两个AI窗口交叉之后，发生了化学反应 |
 | `[体系]` 🧬 [四层结构：创作体系](https://x-itg.github.io/aboutmore/fr.html) | 理论·人格·文学·元创作——同一套内核的四层自然生长 |
+
+这组生活随记已经不只是零散随笔，而是在逐渐长成一个共享母题的创作系统：工程法则进入关系，关系进入小说，小说再反过来解释创作方法本身。
 
 ## 🎭 侠士自述
 
