@@ -48,11 +48,11 @@
     }
     .sidebar .logo a { color: var(--accent); text-decoration: none; }
     .sidebar .logo a:hover { opacity: 0.75; }
-    .sidebar .nav-section { margin-bottom: 20px; }
+    .sidebar .nav-section { margin-bottom: 12px; }
     .sidebar .nav-section h3 {
-        font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
-        color: var(--text-secondary); margin-bottom: 10px;
-        padding-bottom: 6px; border-bottom: 1px solid var(--border);
+        font-size: 0; line-height: 0; color: transparent;
+        margin: 0 0 8px; padding-bottom: 0;
+        height: 0; overflow: hidden; border-bottom: 1px solid var(--border);
     }
     .sidebar .nav-section ul { list-style: none; }
     .sidebar .nav-section li { margin-bottom: 4px; }
@@ -140,6 +140,76 @@
     .trait-card h4 { font-size:14px; color:#1c1917; font-weight:600; margin-bottom:4px; }
     .trait-card p { font-size:12px; color:#a8a29e; margin:0; text-align:center; }
 
+    .catalog-shell {
+        margin: 28px 0;
+        padding: 24px;
+        background: linear-gradient(180deg, #fffdf8 0%, #fff7ed 100%);
+        border: 1px solid #fed7aa;
+        border-radius: 18px;
+        box-shadow: 0 10px 24px rgba(217,119,6,0.08);
+    }
+    .catalog-intro {
+        margin-bottom: 18px;
+        padding: 14px 16px;
+        background: rgba(255,255,255,0.78);
+        border: 1px dashed #fdba74;
+        border-radius: 12px;
+        font-size: 14px;
+        color: #78350f;
+    }
+    .catalog-intro strong { color: #92400e; }
+    .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+    .catalog-card {
+        background: rgba(255,255,255,0.9);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px;
+        position: relative;
+        overflow: hidden;
+    }
+    .catalog-card::before {
+        content: attr(data-layer);
+        position: absolute;
+        top: 14px;
+        right: 16px;
+        font-size: 11px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #d6d3d1;
+    }
+    .catalog-card h3 {
+        margin: 0 0 8px;
+        font-size: 17px;
+        color: #1c1917;
+    }
+    .catalog-card p {
+        margin: 0 0 12px;
+        font-size: 14px;
+        color: #57534e;
+        text-align: left;
+    }
+    .catalog-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .catalog-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #fffbeb;
+        border: 1px solid #fde68a;
+        font-size: 12px;
+        color: #92400e;
+        white-space: nowrap;
+    }
+
     .keyword-tag {
         display:inline-block; background:#ffedd5; color:#9a3412;
         font-size:13px; font-weight:600; padding:2px 10px; border-radius:4px; margin:0 2px;
@@ -157,6 +227,7 @@
         .main-content { padding:24px 16px 60px; }
         .author-header h1 { font-size:26px; }
         .traits-grid { grid-template-columns:1fr; }
+        .catalog-grid { grid-template-columns:1fr; }
         .quote-block { padding:20px 18px; font-size:14px; }
     }
 </style>
@@ -167,13 +238,18 @@
     <aside class="sidebar">
         <div class="logo"><a href="index.html"><i class="fas fa-home"></i> itg</a></div>
         <div class="nav-section">
-            <h3>生活随记</h3>
+            <h3>&nbsp;</h3>
             <ul>
                 <li><a href="about.html" class="active"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
                 <li><a href="aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
                 <li><a href="aboutmore/fw.html"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
                 <li><a href="aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
                 <li><a href="aboutmore/wx.html"><i class="fas fa-compass"></i> 心法总览</a></li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <h3>&nbsp;</h3>
+            <ul>
                 <li><a href="aboutmore/itg.html"><i class="fas fa-heart-pulse"></i> 爱婷哥</a></li>
                 <li><a href="aboutmore/forme.html"><i class="fas fa-pen-fancy"></i> 写给自己</a></li>
                 <li><a href="aboutmore/pg.html"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</a></li>
@@ -181,9 +257,19 @@
                 <li><a href="aboutmore/cc.html"><i class="fas fa-comments"></i> 我可能哪里错了</a></li>
                 <li><a href="aboutmore/ll.html"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</a></li>
                 <li><a href="aboutmore/ta.html"><i class="fas fa-infinity"></i> 不必全部收敛</a></li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <h3>&nbsp;</h3>
+            <ul>
                 <li><a href="aboutmore/czy.html"><i class="fas fa-feather"></i> 蓝牙：陆知意岛</a></li>
                 <li><a href="aboutmore/qp-chat.html"><i class="fas fa-comment-dots"></i> 失控时空·对话版</a></li>
                 <li><a href="aboutmore/jsxm.html"><i class="fas fa-gamepad"></i> 失控时刻：有趣玩家</a></li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <h3>&nbsp;</h3>
+            <ul>
                 <li><a href="aboutmore/czjs.html"><i class="fas fa-flask"></i> 会话的碰撞</a></li>
                 <li><a href="aboutmore/fr.html"><i class="fas fa-layer-group"></i> 四层结构：创作体系</a></li>
             </ul>
@@ -271,6 +357,58 @@
             <p>我每天回读自己的文章，优化概念，做一些验证。不是为了考试，不是为了晋升。我是在持续地做一件事：<strong>让自己配得上自己发现的法则。</strong></p>
             <p>每一条法则，我都在问自己：我还在遵守它吗？我有没有偷懒绕过去？我有没有在实践中发现它的新边界？</p>
             <p>同时，我也在等。等下一个凌晨两点的示波器时刻，等下一个让我隐约感觉到但还说不清楚的规律。我享受这个等待，因为我知道，一旦它来，我就有了新的素材——又一条法则可以从痛苦的裂缝里被提炼出来，被写进我的体系。</p>
+
+            <div class="section-divider"><i class="fas fa-layer-group"></i></div>
+
+            <h2>这组文章怎么读</h2>
+            <div class="catalog-shell">
+                <div class="catalog-intro">
+                    <strong>这不是一排随手记下来的生活片段。</strong>它更像一张逐层展开的地图：先在工程里定义法则，再用生活去验证它，接着在文学里承认它的边界，最后把整套创作引擎公开出来。
+                </div>
+                <div class="catalog-grid">
+                    <section class="catalog-card" data-layer="Layer 1">
+                        <h3>理论层 · 法则的建立</h3>
+                        <p>先把那些在深夜调试里摸到的规律写清楚，变成可复用的思维工具。</p>
+                        <div class="catalog-list">
+                            <span class="catalog-chip"><i class="fas fa-feather-alt"></i> 我找到了一套法则</span>
+                            <span class="catalog-chip"><i class="fas fa-brain"></i> 以不变应万变</span>
+                            <span class="catalog-chip"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</span>
+                            <span class="catalog-chip"><i class="fas fa-heart"></i> 调试AI，学会经营感情</span>
+                            <span class="catalog-chip"><i class="fas fa-compass"></i> 心法总览</span>
+                        </div>
+                    </section>
+                    <section class="catalog-card" data-layer="Layer 2">
+                        <h3>人格层 · 法则的生活检验</h3>
+                        <p>法则不只活在代码里，也活在家里、关系里、疲惫里，活在一个人每天怎么过日子里。</p>
+                        <div class="catalog-list">
+                            <span class="catalog-chip"><i class="fas fa-heart-pulse"></i> 爱婷哥</span>
+                            <span class="catalog-chip"><i class="fas fa-pen-fancy"></i> 写给自己</span>
+                            <span class="catalog-chip"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</span>
+                            <span class="catalog-chip"><i class="fas fa-moon"></i> 周一早上，梦见下班</span>
+                            <span class="catalog-chip"><i class="fas fa-comments"></i> 我可能哪里错了</span>
+                            <span class="catalog-chip"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</span>
+                            <span class="catalog-chip"><i class="fas fa-infinity"></i> 不必全部收敛</span>
+                        </div>
+                    </section>
+                    <section class="catalog-card" data-layer="Layer 3">
+                        <h3>文学层 · 法则的边界实验</h3>
+                        <p>当法则遇到感情、错配和失控，它不再只是方法论，而开始长出故事。</p>
+                        <div class="catalog-list">
+                            <span class="catalog-chip"><i class="fas fa-feather"></i> 蓝牙：陆知意岛</span>
+                            <span class="catalog-chip"><i class="fas fa-comment-dots"></i> 失控时空·对话版</span>
+                            <span class="catalog-chip"><i class="fas fa-gamepad"></i> 失控时刻：有趣玩家</span>
+                        </div>
+                    </section>
+                    <section class="catalog-card" data-layer="Layer 4">
+                        <h3>元创作层 · 引擎的公开</h3>
+                        <p>最后不只交出作品，也把作品是怎么被制造出来的，一并交出来。</p>
+                        <div class="catalog-list">
+                            <span class="catalog-chip"><i class="fas fa-flask"></i> 会话的碰撞</span>
+                            <span class="catalog-chip"><i class="fas fa-layer-group"></i> 四层结构：创作体系</span>
+                        </div>
+                    </section>
+                </div>
+            </div>
 
             <div class="section-divider"><i class="fas fa-user"></i></div>
 

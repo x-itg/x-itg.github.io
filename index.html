@@ -636,6 +636,129 @@
         .main-content > .card:hover {
             box-shadow: var(--shadow-sm);
         }
+        .layer-portal {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f7fbff 0%, #eef4ff 56%, #f2fbf7 100%);
+            border: 1px solid #dbe7ff;
+        }
+        .layer-portal::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at top right, rgba(59, 130, 246, 0.16), transparent 28%),
+                radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.12), transparent 26%);
+            pointer-events: none;
+        }
+        .portal-shell {
+            position: relative;
+            z-index: 1;
+        }
+        .portal-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.32rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(30, 58, 138, 0.08);
+            color: #1e3a8a;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .portal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 1rem 0 1.4rem;
+        }
+        .portal-header h2 {
+            margin: 0 0 0.5rem;
+            padding: 0;
+            border: 0;
+            color: #102a5c;
+            font-size: 1.8rem;
+        }
+        .portal-header p {
+            margin: 0;
+            max-width: 720px;
+            color: #4b5563;
+        }
+        .portal-entry {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.8rem 1rem;
+            border-radius: 14px;
+            background: #102a5c;
+            color: #fff;
+            text-decoration: none;
+            white-space: nowrap;
+            box-shadow: 0 14px 30px rgba(16, 42, 92, 0.14);
+        }
+        .portal-entry:hover {
+            background: #163b84;
+        }
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+        .portal-panel {
+            background: rgba(255, 255, 255, 0.82);
+            border-radius: 18px;
+            padding: 1rem 1rem 1.1rem;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+        }
+        .portal-panel h3 {
+            margin: 0 0 0.45rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+        .portal-panel p {
+            margin: 0 0 0.8rem;
+            font-size: 0.92rem;
+            color: #5b6472;
+            line-height: 1.65;
+        }
+        .portal-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }
+        .portal-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            background: #eef3ff;
+            color: #1e3a8a;
+        }
+        .portal-links a:hover {
+            background: #dbe7ff;
+        }
+        .portal-panel.theory {
+            border-top: 4px solid #3b82f6;
+        }
+        .portal-panel.persona {
+            border-top: 4px solid #f97316;
+        }
+        .portal-panel.story {
+            border-top: 4px solid #10b981;
+        }
+        .portal-panel.meta-story {
+            border-top: 4px solid #8b5cf6;
+        }
         h2 {
             font-size: 24px;
             font-weight: 700;
@@ -679,6 +802,12 @@
             }
             .hero-recommend {
                 padding: 16px;
+            }
+            .portal-header {
+                flex-direction: column;
+            }
+            .portal-entry {
+                white-space: normal;
             }
             h2 {
                 font-size: 21px;
@@ -834,6 +963,56 @@
                 <span>十四篇技术文章的完整路线图，从五层进化读到反谄媚审查，适合作为整套体系的入口。</span>
             </a>
             <p class="meta" style="font-size:13px;color:var(--text-secondary);margin-top:8px;">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
+        </div>
+
+        <div class="card layer-portal">
+            <div class="portal-shell">
+                <div class="portal-kicker"><i class="fas fa-layer-group"></i> 另一条入口</div>
+                <div class="portal-header">
+                    <div>
+                        <h2>法则与故事 · 四层入口</h2>
+                        <p>如果技术文章讲的是系统怎样成形，这组文章讲的是这些法则怎样进入关系、人物、叙事和创作本身。可以从总序进入，也可以直接挑一层切入。</p>
+                    </div>
+                    <a class="portal-entry" href="about.html"><i class="fas fa-feather-alt"></i> 进入总序</a>
+                </div>
+                <div class="portal-grid">
+                    <div class="portal-panel theory">
+                        <h3><i class="fas fa-brain"></i> 法则层</h3>
+                        <p>先看法则如何建立，再看它怎样跨到认知、关系和总览。</p>
+                        <div class="portal-links">
+                            <a href="about.html">总序</a>
+                            <a href="aboutmore/tk.html">以不变应万变</a>
+                            <a href="aboutmore/wx.html">心法总览</a>
+                        </div>
+                    </div>
+                    <div class="portal-panel persona">
+                        <h3><i class="fas fa-heart"></i> 人格层</h3>
+                        <p>法则落进日常之后，会变成自我校准、关系摩擦和慢慢收束。</p>
+                        <div class="portal-links">
+                            <a href="aboutmore/itg.html">爱婷哥</a>
+                            <a href="aboutmore/ll.html">找个不懂的人聊聊</a>
+                            <a href="aboutmore/ta.html">不必全部收敛</a>
+                        </div>
+                    </div>
+                    <div class="portal-panel story">
+                        <h3><i class="fas fa-feather"></i> 文学层</h3>
+                        <p>同一套内核被放进小说、对话和结构实验，检验它的边界与弹性。</p>
+                        <div class="portal-links">
+                            <a href="aboutmore/czy.html">蓝牙：陆知意岛</a>
+                            <a href="aboutmore/qp-chat.html">失控时空</a>
+                            <a href="aboutmore/jsxm.html">有趣玩家</a>
+                        </div>
+                    </div>
+                    <div class="portal-panel meta-story">
+                        <h3><i class="fas fa-flask"></i> 元创作层</h3>
+                        <p>最后把写作引擎本身翻出来，让读者看到方法、拆解和体系总图。</p>
+                        <div class="portal-links">
+                            <a href="aboutmore/czjs.html">会话的碰撞</a>
+                            <a href="aboutmore/fr.html">四层结构</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="card" id="sec0">
