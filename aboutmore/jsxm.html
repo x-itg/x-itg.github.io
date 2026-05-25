@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>失控时刻：有趣玩家 | itg</title>
+<meta name="description" content="把关系写成文档的人，遇见了唯一不想被文档收编的人。陆屿、程知意、苏敏与阿七之间的文件夹叙事。">
+<meta name="keywords" content="失控时刻,有趣玩家,短篇小说,陆屿,阿七,程知意,苏敏">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="失控时刻：有趣玩家 | itg">
+<meta property="og:description" content="把关系写成文档的人，遇见了唯一不想被文档收编的人。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/jsxm.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/jsxm.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #fefce8;
+        --text: #292524;
+        --text-secondary: #78716c;
+        --accent: #d97706;
+        --accent-green: #3f6212;
+        --border: #e7e5e4;
+        --sidebar-bg: #fff7ed;
+        --panel-bg: #fffcf5;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
+        background: radial-gradient(circle at top right, rgba(217,119,6,0.08), transparent 26%), linear-gradient(180deg, #fffaf0 0%, var(--bg) 100%);
+        color: var(--text);
+        line-height: 1.9;
+        -webkit-font-smoothing: antialiased;
+    }
+    .layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: 100vh; }
+    .sidebar {
+        width: 240px;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        padding: 32px 16px;
+        border-right: 1px solid var(--border);
+        background: var(--sidebar-bg);
+        flex-shrink: 0;
+    }
+    .sidebar .logo { font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+    .sidebar .logo a { color: var(--accent); text-decoration: none; }
+    .sidebar .logo a:hover { opacity: 0.75; }
+    .sidebar .nav-section { margin-bottom: 20px; }
+    .sidebar .nav-section h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+    .sidebar .nav-section ul { list-style: none; }
+    .sidebar .nav-section li { margin-bottom: 4px; }
+    .sidebar .nav-section a { display: block; padding: 6px 10px; font-size: 13px; color: var(--text); text-decoration: none; border-radius: 6px; transition: background 0.15s; }
+    .sidebar .nav-section a:hover, .sidebar .nav-section a.active { background: rgba(217,119,6,0.1); color: var(--accent); }
+    .sidebar .nav-section a i { width: 20px; color: var(--accent); }
+    .sidebar .back-home { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; }
+    .sidebar .back-home a { color: var(--text-secondary); text-decoration: none; }
+    .sidebar .back-home a:hover { color: var(--accent); }
+    .main-content { flex: 1; min-width: 0; max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
+    .article-header { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 2px solid var(--border); }
+    .series-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #ffedd5;
+        color: #9a3412;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 999px;
+        margin-bottom: 12px;
+        letter-spacing: 0.4px;
+    }
+    h1 {
+        font-family: "Noto Serif SC", "Songti SC", Georgia, serif;
+        font-size: 34px;
+        font-weight: 700;
+        color: #1c1917;
+        margin-bottom: 10px;
+        letter-spacing: -0.4px;
+    }
+    .subtitle { font-size: 15px; color: var(--text-secondary); margin-bottom: 10px; }
+    .meta { font-size: 13px; color: #a8a29e; }
+    .story-console {
+        background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,252,245,0.96));
+        border: 1px solid #fed7aa;
+        border-radius: 22px;
+        box-shadow: 0 18px 40px rgba(120,83,38,0.10);
+        overflow: hidden;
+    }
+    .console-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 18px;
+        background: linear-gradient(90deg, #fff7ed, #fffbeb);
+        border-bottom: 1px solid #fed7aa;
+    }
+    .console-dots { display: flex; gap: 8px; }
+    .console-dots span { width: 10px; height: 10px; border-radius: 50%; background: #fdba74; }
+    .console-dots span:nth-child(2) { background: #fbbf24; }
+    .console-dots span:nth-child(3) { background: #bef264; }
+    .console-title { font-size: 12px; color: #78716c; letter-spacing: 0.6px; }
+    .console-status { font-size: 12px; color: var(--accent-green); background: #ecfccb; border: 1px solid #bef264; border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+    .console-body { padding: 22px; }
+    .status-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 22px; }
+    .status-card { background: var(--panel-bg); border: 1px solid #fed7aa; border-radius: 16px; padding: 16px; min-height: 122px; }
+    .status-card .label { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: #9a3412; margin-bottom: 8px; }
+    .status-card strong { display: block; font-size: 16px; color: #1c1917; margin-bottom: 6px; }
+    .status-card p { font-size: 13px; color: #57534e; line-height: 1.75; }
+    .folder-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+    .folder-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: #fff; border: 1px solid var(--border); font-size: 13px; color: #57534e; }
+    .folder-chip i { color: var(--accent); }
+    .story-note { margin-bottom: 24px; padding: 16px 18px; background: linear-gradient(135deg, #fffbeb, #fefce8); border: 1px solid #fde68a; border-left: 4px solid var(--accent); border-radius: 14px; font-size: 14px; color: #78350f; }
+    .chapter-card { background: rgba(255,255,255,0.86); border: 1px solid #e7e5e4; border-radius: 20px; padding: 22px 22px 20px; margin-bottom: 18px; box-shadow: 0 10px 24px rgba(28,25,23,0.04); }
+    .chapter-card::before { content: attr(data-path); display: inline-block; margin-bottom: 12px; font-size: 11px; letter-spacing: 0.9px; text-transform: uppercase; color: #a8a29e; }
+    .chapter-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .chapter-index { width: 42px; height: 42px; border-radius: 14px; background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; box-shadow: 0 8px 18px rgba(217,119,6,0.18); }
+    .chapter-title strong { display: block; font-size: 22px; color: #1c1917; }
+    .chapter-title span { font-size: 13px; color: #a8a29e; }
+    .chapter-card p { margin: 12px 0; font-size: 15px; color: #44403c; text-align: justify; }
+    .note-block { margin: 18px 0; padding: 16px 18px; background: #fff7ed; border: 1px solid #fdba74; border-radius: 16px; transform: rotate(-1deg); box-shadow: 0 10px 20px rgba(217,119,6,0.08); }
+    .note-block .note-title { font-size: 12px; font-weight: 700; color: #9a3412; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+    .note-block ol { padding-left: 20px; color: #78350f; }
+    .note-block li { margin: 8px 0; }
+    .review-block { margin: 18px 0; border-radius: 16px; overflow: hidden; border: 1px solid #d6d3d1; }
+    .review-row { display: grid; grid-template-columns: 96px 1fr; }
+    .review-row + .review-row { border-top: 1px solid #e7e5e4; }
+    .review-row .who { padding: 14px; background: #fafaf9; font-size: 13px; color: #78716c; font-weight: 600; }
+    .review-row .what { padding: 14px 16px; background: #fff; font-size: 14px; color: #44403c; }
+    .ending-board { margin-top: 10px; padding: 18px; background: linear-gradient(135deg, #1c1917, #292524); border-radius: 18px; color: #fefce8; }
+    .ending-board .board-label { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; color: #fde68a; margin-bottom: 10px; }
+    .ending-board p { color: rgba(255,252,245,0.88); }
+    .series-nav { margin-top: 30px; padding-top: 24px; border-top: 2px solid var(--border); display: flex; justify-content: space-between; font-size: 14px; gap: 16px; }
+    .series-nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .series-nav a:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+        .sidebar { display: none; }
+        .main-content { padding: 24px 16px 60px; }
+        h1 { font-size: 28px; }
+        .console-topbar { flex-wrap: wrap; }
+        .status-grid { grid-template-columns: 1fr; }
+        .console-body { padding: 16px; }
+        .chapter-card { padding: 18px 16px; border-radius: 16px; }
+        .chapter-head { align-items: flex-start; }
+        .review-row { grid-template-columns: 1fr; }
+        .review-row .who { border-bottom: 1px solid #e7e5e4; }
+        .series-nav { flex-direction: column; }
+    }
+</style>
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="logo"><a href="../index.html"><i class="fas fa-home"></i> itg</a></div>
+        <div class="nav-section">
+            <h3>生活随记</h3>
+            <ul>
+                <li><a href="../about.html"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
+                <li><a href="../aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
+                <li><a href="../aboutmore/fw.html"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
+                <li><a href="../aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
+                <li><a href="../aboutmore/wx.html"><i class="fas fa-compass"></i> 心法总览</a></li>
+                <li><a href="../aboutmore/itg.html"><i class="fas fa-heart-pulse"></i> 爱婷哥</a></li>
+                <li><a href="../aboutmore/forme.html"><i class="fas fa-pen-fancy"></i> 写给自己</a></li>
+                <li><a href="../aboutmore/pg.html"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</a></li>
+                <li><a href="../aboutmore/m.html"><i class="fas fa-moon"></i> 周一早上，梦见下班</a></li>
+                <li><a href="../aboutmore/cc.html"><i class="fas fa-comments"></i> 我可能哪里错了</a></li>
+                <li><a href="../aboutmore/ll.html"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</a></li>
+                <li><a href="../aboutmore/ta.html"><i class="fas fa-infinity"></i> 不必全部收敛</a></li>
+                <li><a href="../aboutmore/czy.html"><i class="fas fa-feather"></i> 蓝牙：陆知意岛</a></li>
+                <li><a href="../aboutmore/qp-chat.html"><i class="fas fa-comment-dots"></i> 失控时空·对话版</a></li>
+                <li><a href="../aboutmore/jsxm.html" class="active"><i class="fas fa-gamepad"></i> 失控时刻：有趣玩家</a></li>
+                <li><a href="../aboutmore/czjs.html"><i class="fas fa-flask"></i> 会话的碰撞</a></li>
+                <li><a href="../aboutmore/fr.html"><i class="fas fa-layer-group"></i> 四层结构：创作体系</a></li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <h3>技术系列</h3>
+            <ul>
+                <li><a href="../index.html"><i class="fas fa-microchip"></i> 嵌入式AI工程化</a></li>
+            </ul>
+        </div>
+        <div class="back-home"><a href="../index.html">← 返回首页</a></div>
+    </aside>
+    <div class="main-content">
+        <header class="article-header">
+            <span class="series-tag"><i class="fas fa-gamepad"></i> 短篇小说</span>
+            <h1>失控时刻：有趣玩家</h1>
+            <p class="subtitle">这一次不是对话版，也不是常规长文，而是一份被拆进“过去 / 现在 / 副本”目录里的关系草稿。</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 生活随记</p>
+        </header>
+        <article class="story-console">
+            <div class="console-topbar">
+                <div class="console-dots"><span></span><span></span><span></span></div>
+                <div class="console-title">relationship-framework / story-view / v3.0-draft</div>
+                <div class="console-status">文件同步中</div>
+            </div>
+            <div class="console-body">
+                <div class="status-grid">
+                    <div class="status-card"><span class="label">FORMAT</span><strong>文件夹叙事</strong><p>把人物、章节和情绪拆成目录层级，让这篇小说的“文档感”直接变成页面结构。</p></div>
+                    <div class="status-card"><span class="label">CORE CONFLICT</span><strong>系统要重写</strong><p>陆屿不是不会选，而是不肯承认旧的规则已经撑不住新的需求。</p></div>
+                    <div class="status-card"><span class="label">SPECIAL CHARACTER</span><strong>阿七不归档</strong><p>她不是某个条款，而是唯一一个拒绝进入“文档管理范围”的活人变量。</p></div>
+                </div>
+                <div class="folder-strip">
+                    <span class="folder-chip"><i class="fas fa-folder"></i> 过去 / 程知意</span>
+                    <span class="folder-chip"><i class="fas fa-folder-open"></i> 现在 / 苏敏</span>
+                    <span class="folder-chip"><i class="fas fa-ghost"></i> 副本 / 阿七</span>
+                    <span class="folder-chip"><i class="fas fa-note-sticky"></i> 便签 / 非结构化数据</span>
+                </div>
+                <div class="story-note">这页保留原小说的全部章节内容，但换成“版本草稿”式展示。故事里不断提到文档、版本、批注、文件夹，所以页面也按这个逻辑来排，让形式和内容对上。</div>
+                <section class="chapter-card" data-path="root://part-01/intake"><div class="chapter-head"><div class="chapter-index">01</div><div class="chapter-title"><strong>一</strong><span>第一条注释，把旧版本重新激活</span></div></div><p>程知意从苏黎世回来的第三天，发来一条消息：你那个文档，加我了吗。</p><p>陆屿盯着屏幕。苏敏在浴室洗澡，水声哗哗地响。他打了几个字，删掉。又打，又删。最后只回了一个字：没。</p><p>她秒回：那我自己加。</p><p>陆屿还没反应过来，手机又震了一下。程知意发来一张截图。他的《关系框架v1.0》，被她用红色标注笔圈出了第三章第七款，旁边手写了两个字：程某。</p><p>她说：这条归我了。</p></section>
+                <section class="chapter-card" data-path="root://part-02/new-player"><div class="chapter-head"><div class="chapter-index">02</div><div class="chapter-title"><strong>二</strong><span>副本入口，在酒吧和游戏之间打开</span></div></div><p>阿七是他在工体一家酒吧认识的。</p><p>凌晨一点。他陪客户喝完第三轮，坐在吧台角落等代驾。一个女孩在旁边打游戏，手机壳是夜光的，上面印着几个字：别跟我讲道理。</p><p>她输了，手机往吧台上一拍，嘴里骂了句什么，转头看见他在看。她也不躲，直接把手机往他手里一塞：你来。输了三局了，换个手气。</p><p>他不会，老实说了。她翻了个白眼：那你的人生不完整。然后教他怎么走位，怎么切后排，手指在屏幕上点得飞快，指甲是荧光绿的，和手机壳一个色。她凑得很近，头发扫在他手臂上，带着一股椰子味。不是香水，是洗发水。超市货架上最便宜的那种。</p><p>他送她回家。出租车上她靠在他肩上睡着了，手机屏幕还亮着，游戏界面上一个大大的“DEFEAT”。下车的时候她醒了，眯着眼看他。</p><p>你叫什么。</p><p>陆屿。</p><p>陆地的陆，岛屿的屿？</p><p>对。</p><p>她笑了一下：这么有文化的名字，配你浪费了。我叫阿七。七月的七。记住了。</p><p>然后她走了。第三天她在游戏里加他好友。他收到通知的时候正在和苏敏吃饭，看了一眼，把手机翻过去。苏敏说谁啊。他说同事。</p></section>
+                <section class="chapter-card" data-path="root://part-03/voice-chat"><div class="chapter-head"><div class="chapter-index">03</div><div class="chapter-title"><strong>三</strong><span>文档第一次遇到拒绝被收编的人</span></div></div><p>后来他问她，为什么叫阿七。</p><p>她说：因为我打游戏永远第七名。然后补了一句：但我交男朋友永远第一名。</p><p>她说这话的时候他们在吃烧烤，路边摊，油烟呛得人眼睛疼。她穿着拖鞋，脚趾上涂着斑驳的绿色指甲油，一只手举着羊肉串，另一只手在回消息。她手机壳换了，新的上面印着：关你屁事。</p><p>陆屿说你这手机壳怎么换得这么勤。她说淘宝九块九包邮，每周换一个，不重样。做人嘛，最重要的就是新鲜感。</p><p>后来有一天晚上，苏敏睡了。他一个人在客厅打游戏，阿七忽然在语音里问：你有女朋友吗。</p><p>他说有。</p><p>几个。</p><p>一个。</p><p>那还好。我还以为你是那种养鱼的人。</p><p>他沉默了一下。阿七在那边打了个哈欠：那你喜欢她吗。</p><p>喜欢。</p><p>喜欢到什么程度。</p><p>他想了想：喜欢到，我给她写了一本文档。</p><p>阿七笑到打嗝：你这个人有病吧。然后她说：那你给我也写一个。</p><p>陆屿说：你不是不在文档管理范围内。</p><p>语音那头忽然安静了。过了好几秒，阿七才开口，语气没变，还是那种吊儿郎当的调子：对。我不在。所以你别管我在哪。</p><p>她挂了语音。</p></section>
+                <section class="chapter-card" data-path="root://part-04/rollback-risk"><div class="chapter-head"><div class="chapter-index">04</div><div class="chapter-title"><strong>四</strong><span>旧情回国，系统开始出现裂缝</span></div></div><p>程知意回来以后，一切开始裂。</p><p>那天在酒吧，灯光红蓝交错。她漂了银发，锁骨上纹着DNA双螺旋。她说他半夜听到我喊你的名字。她说我说你是我以前养的一只猫。她转着酒杯，手指有点抖，然后把杯子搁在桌上，看着他。</p><p>所以——她停顿了一下。红蓝色的光在她锁骨上流动。双螺旋。你难道不想跟我走吗。</p><p>陆屿没说话。他在想苏敏。苏敏从不会把话说到这个地步。</p><p>同一时刻，苏敏一个人坐在沙发上。她发消息：今晚回来吗。三分钟，没回。又发：算了，不用回，我自己锁门。她把手机放在茶几上。外面的人看到她，以为她永远轻声细语、不急不慢。只有陆屿知道，那个说话从不大声的女人，关了灯之后会咬他的肩膀。她年轻的时候为一个人去过医院，一个人填表，一个人回家。后来她就明白了：温柔能留住人，但留不住想走的人。</p><p>凌晨三点。路灯下。程知意说我申了教职，过了。她说：你们那个文档，有没有写前女友怎么办。陆屿说没有。她说：那你要不要加一条。</p><p>他看着她锁骨上的双螺旋。A配T，C配G。然后他问了一个在心里放了很久的问题。她愣了很久，风吹着她的银发。然后她说：第二个。</p><p>她踮起脚。</p></section>
+                <section class="chapter-card" data-path="root://part-05/debug"><div class="chapter-head"><div class="chapter-index">05</div><div class="chapter-title"><strong>五</strong><span>第一个发现异常的人，不是现任，也不是前任</span></div></div><p>阿七是第一个发现他不对劲的人。</p><p>他们在常去的那家网吧，包夜，一人一罐红牛。阿七连输了三局，把键盘往前一推，转过椅子看他。他盯着屏幕，但明显没在看游戏。他的角色站在安全区发呆，周围的玩家跑来跑去，他动都不动。</p><p>阿七伸手在他脸前晃了晃：魂呢。</p><p>他回过神：嗯。</p><p>嗯什么嗯。你今晚死几次了，我都不好意思说你是我带的。</p><p>他没接话。阿七把自己那罐红牛打开，喝了一口，然后说：你那个文档，是不是出bug了。</p><p>陆屿转头看她。她没看他，盯着屏幕，手指在键盘上随意敲着，控制角色原地转圈。</p><p>不用这么看我。我又不瞎。你最近走神走得，连游戏里的小兵都比你专注。</p><p>她转过来，翘着二郎腿，荧光绿的指甲敲着易拉罐：说说。我帮你debug。虽然我不会写代码，但我特别会看人翻车。</p><p>陆屿没说话。阿七也没催。她只是安静地喝红牛，等他开口。等了大概三分钟。</p><p>然后他说了。程知意，苏敏，那个文档，凌晨三点的路灯，衬衫上的味道，洗衣机，凉掉的茶，锁骨上的双螺旋，A配T，C配G。他说得乱七八糟，没有时间线，没有逻辑，像一个系统崩溃的人在写最后一份日志，想到哪写到哪。</p><p>阿七听完了。她没笑。她只是把红牛罐放在桌上，转过来正对着他。</p><p>所以你这盘棋，同时在跟三个人下。</p><p>陆屿没说话。</p><p>一个老玩家，顶级的，回来抢你的号。一个现任，稳，但稳得让人心里发毛。还有一个——她指了指自己，精神小妹，打游戏永远第七名，不在任何人的文档里。</p><p>她站起来：走。</p><p>去哪。</p><p>出去透透气。你这脑子需要重启一下。</p></section>
+                <section class="chapter-card" data-path="root://part-06/rewrite-needed"><div class="chapter-head"><div class="chapter-index">06</div><div class="chapter-title"><strong>六</strong><span>阿七给出的判断，不是修 bug，而是需求变了</span></div></div><p>阿七带他去了一个他没去过的地方。不是酒吧，不是网吧，不是烧烤摊。是一个小区的天台，十七楼，没锁门。她显然是常客，熟门熟路地翻过一根废弃的通风管，坐在天台边缘，腿悬在外面晃。</p><p>陆屿站在她后面。她说：坐下来。怕什么，我在这里坐了两年了，一次没掉下去。</p><p>他坐下来。北京的天上没什么星星，但是有很多灯光，望京那片写字楼还在加班，整个城市像一块半死不活的电路板。</p><p>阿七说：我告诉你一个秘密。</p><p>什么。</p><p>我前男友也像你这样。觉得自己什么都能搞定。工作，感情，法则。以为自己写几个文档就能管住所有人。后来他翻车了，四角同时塌方。</p><p>陆屿没说话。</p><p>你知道他最后跟我说什么吗。他说，阿七，我这辈子最轻松的时候，就是跟你在一起的时候。因为你不跟我讲道理。</p><p>她转头看他：所以你那个文档，我一个字都不想看。不是看不懂，是不想看。你把自己绕进去的样子，太难看了。</p><p>她把腿收回来，盘坐在天台边缘，面对着他：你跟我老实说，你是不是觉得自己特别牛，同时喜欢三个女的，三个都舍不得放。</p><p>陆屿沉默了很久。然后他说：不是。</p><p>那是什么。</p><p>我谁都不想放。不是因为舍不得。是因为一旦放了，整个系统就要重写。</p><p>阿七没说话。她只是伸手，把他肩膀上一根头发拈下来。银灰色的。她看了一眼，没问是谁的。只是把头发放在他手心里，然后站起来。</p><p>陆屿。系统崩溃，不是bug。是需求变了。</p></section>
+                <section class="chapter-card" data-path="root://part-07/sticky-note"><div class="chapter-head"><div class="chapter-index">07</div><div class="chapter-title"><strong>七</strong><span>真正有效的文档，最后只剩一张便签</span></div></div><p>阿七给他开了一份新的“文档”。不是Shared Note，是一张皱巴巴的便利贴，上面用圆珠笔写了三行字：</p><div class="note-block"><div class="note-title">Sticky Note / A7 Review</div><ol><li>程知意：你不欠她的。她选的那天，你没选。</li><li>苏敏：你欠她的。但不是欠感情，是欠诚实。</li><li>阿七：你是唯一一个让我觉得，不在文档里也挺好的人。别毁了这个。</li></ol></div><p>他把便利贴翻过来。背面还有一行字，写在最底下，字迹歪歪扭扭，像写到一半笔没墨了：</p><div class="note-block"><div class="note-title">Back Side</div><p>4. 你自己：你打游戏真的很菜。但是菜得挺可爱的。</p></div><p>陆屿看完，把便利贴叠成一个很小的方块，放进口袋里。</p><p>后来苏敏问他口袋里鼓鼓的是什么，他说，一个朋友写的便签。苏敏没追问。她只是把他衬衫从裤腰里抽出来，扔进洗衣机。动作很轻。他没躲。</p></section>
+                <section class="chapter-card" data-path="root://part-08/confession"><div class="chapter-head"><div class="chapter-index">08</div><div class="chapter-title"><strong>八</strong><span>诚实不是补条款，而是整体升级版本</span></div></div><p>程知意坐在地板上，背靠着床沿。电脑屏幕亮着，是她刚写了一半的论文。她没在看论文。她在看陆屿的手机定位。</p><p>她拿起手机，打开和他的对话框。最后一条消息停在她写的“这条归我了。”她又发了一条：文档我也改了。人我也要。然后手机关掉，屏幕朝下，搁在地板上。窗外有鸟叫，天快亮了。她在苏黎世的时候，每天都是这个时间起床。跑胶，等结晶。现在不用了。现在她只想等一个人。等了六年，不差这一会儿。</p><p>苏敏已经三天没跟陆屿说话。每天晚上她做两个人的饭，放在桌上，自己吃完自己那份，把剩的那份盖上保鲜膜，放进冰箱。他回来以后自己热。</p><p>第三天晚上，他回来得早。苏敏在沙发上看手机。他坐在她旁边，很久。然后他说：我跟她有过。苏敏没抬头。我知道。不是以前。是最近。苏敏把手机放下，看着他。</p><p>那个文档，他说，我会更新。不是加条款。是更新整个版本。苏敏没说话。但有一条我得告诉你。他停了很久，像在调试一个不收敛的系统。我没办法把她删掉。</p><p>苏敏还是不说话。她只是伸手，把他的领口翻好。动作很轻。然后她站起来，走进了卧室。门没关。</p></section>
+                <section class="chapter-card" data-path="root://part-09/folders"><div class="chapter-head"><div class="chapter-index">09</div><div class="chapter-title"><strong>九</strong><span>写不完的文档，最后被阿七逼着写完</span></div></div><p>周末，阿七约他去网吧。他到了发现她没开机，坐在门口的台阶上吃冰棍。老冰棍，一块钱一根的那种，糖水冻的，咬下去咯嘣响。</p><p>她递给他一根。他接过来，在她旁边坐下。他们就这么坐着吃冰棍，谁也不说话。街上人来人往，有遛狗的，有带孩子的，有送外卖的电动车嗖地过去。阿七把冰棍棍子叼在嘴里，腾出手翻包，翻了半天翻出来一包辣条，撕开，分他一半。</p><p>然后她说：我问你一个问题。</p><p>嗯。</p><p>你那个文档，现在怎么样了。</p><p>苏敏写了个新版本。程知意还在往旧版本上加注释。</p><p>你呢。</p><p>我还没想好。</p><p>阿七把冰棍棍子从嘴里拿出来，精准地丢进三步外的垃圾桶。她站起来，拍拍裤子，对他伸出手。他愣了一下，被她一把拽起来。</p><p>你今天必须把文档写完。我陪着你写。</p><p>他们在网吧角落开了台机子。陆屿打开文档，对着空白页面发呆。阿七在旁边打游戏，声音开得很小，偶尔瞥他一眼。</p><p>写到凌晨两点。他发给她。她点开，从头看到尾。看完，把手机放下。</p><p>你终于学会了。她说。</p><p>学会什么。</p><p>把三个人的名字，放在三个不同的文件夹里。</p><p>他没说话。她转过来，荧光绿的指甲在键盘上敲了几下，在他的文档末尾加了一行标注：阿七审阅。予以通过。附带条件：以后打游戏不许选射手，你太菜了。</p></section>
+                <section class="chapter-card" data-path="root://part-10/reviewers"><div class="chapter-head"><div class="chapter-index">10</div><div class="chapter-title"><strong>十</strong><span>一个被移出正文，一个批准新版本</span></div></div><p>程知意站在窗边，看着窗外。手机亮了，屏幕上是陆屿的对话框。她点开，看到那份新文档。里面没有她。她盯着那个页面看了很久。然后她笑了。不是苦笑，是那种被人看穿了之后的、没办法的笑。她把手机放在桌上。论文还没写完，明天还要去实验室。窗外，北京的早晨灰蒙蒙的，和苏黎世不一样。但她想，算了，不回去了。她把陆屿的对话框关了，打开了实验数据。</p><p>苏敏看完那份新文档的时候，在厨房洗碗。她擦干手，拿起手机，从头看到尾。末了在文档末尾加了一行批注：苏敏审阅。版本更新批准。保留随时回滚的权利。她放下手机，继续洗碗。水很热，蒸汽模糊了厨房的窗户。</p><div class="review-block"><div class="review-row"><div class="who">程知意</div><div class="what">被移出正文之后，没有闹，也没有追。她把对话框关掉，回到实验数据。</div></div><div class="review-row"><div class="who">苏敏</div><div class="what">在新文档末尾留下批注：版本更新批准。保留随时回滚的权利。</div></div></div></section>
+                <section class="chapter-card" data-path="root://part-11/simple-mode"><div class="chapter-head"><div class="chapter-index">11</div><div class="chapter-title"><strong>十一</strong><span>高难度副本打不动，就先学会一对一组队</span></div></div><p>一周后。凌晨。阿七打游戏输了，情绪上来了，非要找个人说说话。翻了一遍通讯录，翻到陆屿。发了个表情，没打字。陆屿秒回：又输了。她说放屁。然后把手机往枕头旁边一扔，盯着天花板。天花板上有一条裂缝，从灯座延伸到墙角。她每天睡觉前都盯着那条裂缝看，看了大半年。她忽然拿起手机，又给他发了一条：陆屿。你那个菜鸡水平，不适合玩高难度副本。</p><p>他问：那我适合玩什么。</p><p>玩简单的。</p><p>比如。</p><p>比如，只跟一个人组队。</p></section>
+                <section class="chapter-card" data-path="root://appendix/afterword"><div class="chapter-head"><div class="chapter-index">AF</div><div class="chapter-title"><strong>后记</strong><span>命名之后，不代表关系结束，只代表关系被看清</span></div></div><p>他还是没有选。但这次不一样。这次不是手指悬在屏幕上不敢按，而是把三个人的名字放在了三个不同的文件夹里。一个叫过去，一个叫现在，一个叫副本。程知意是过去。苏敏是现在。阿七是副本——还没打通的、不知道会掉什么装备的副本。阿七知道自己在哪个文件夹里。她不在乎。她是唯一一个不在任何文档管理范围内的人。她自己就是一个单独的服务器。</p><p>陆屿偶尔还是会跟她打游戏。每次输了她就骂，赢了就说菜鸡互啄。有一次他问她：你那个前男友后来怎么样了。阿七说：不知道。翻车以后就没联系了。但你知道他翻车以后第一个找的人是谁吗。陆屿摇头。阿七指了指自己：我。他说什么。她说：他说，阿七，你这辈子有没有觉得，有些规则是自己给自己挖的坑。</p><p>她说完停了很久。然后说：你知道我为什么不进你的文档吗。不是因为你写的不好。是因为我见过一个人，被自己的规则压死。我不想再看一次。</p><p>她把手机壳拆下来，换了一个新的。上面印着四个字：去他妈的。</p></section>
+                <section class="chapter-card" data-path="root://part-12/night-watch"><div class="chapter-head"><div class="chapter-index">12</div><div class="chapter-title"><strong>十二</strong><span>凌晨三点，显示器边上那张便签还在</span></div></div><p>凌晨三点。苏敏从卧室里出来倒水喝，路过陆屿的书房。门半开着，屏幕上是一个打开的文档，标题写着：《关系框架v3.0（草稿）》。旁边是一张皱巴巴的便利贴，被透明胶带粘在显示器边缘。上面四行圆珠笔字，其中最后一行写着：菜得挺可爱的。</p><p>她把他的杯子拿去倒满温水，放回他手边。他没醒。</p></section>
+                <section class="chapter-card" data-path="root://closing/final-note"><div class="chapter-head"><div class="chapter-index">ED</div><div class="chapter-title"><strong>尾声</strong><span>最后留下来的不是文档，是一张愿意继续组队的便签</span></div></div><p>阿七的便利贴一直在他口袋里。直到有一天洗衣服忘了拿出来，被洗衣机搅成纸浆。他发现的时候，口袋里只剩一点白色的絮。</p><p>他在垃圾桶里翻了一会儿。找到了，但上面的字已经全模糊了。他把那团纸絮捏在手心里，站了很久。然后他打开手机，给她发消息：便利贴烂了。再写一张。不要文档，要便签。</p><p>阿七秒回：行。这次涨价了，得请我吃三顿烧烤。</p><p>然后她发来一张照片。新的便利贴，上面还是那四行字，但第四行改了：陆屿，你打游戏还是很菜。但是组队的话，算我一个。</p><p>下面是第五行，新加的：</p><p>——但是别写文档了。你写文档的样子真的很像个产品经理。</p><div class="ending-board"><div class="board-label"><i class="fas fa-note-sticky"></i> Final Sticky Note</div><p>陆屿把那张照片存进手机。屏幕暗下去的时候，他在黑色的玻璃上，看到了自己正在笑。他把手机放在茶几上。茶几上还有一杯水，温的。卧室的门没关。窗外，北京的夜安静得像一行没写完的代码。他拿起笔，在便利贴背面写了最后一行字：法则有边界，但你不归法则管。</p><p>他把便利贴贴在了显示器上，然后关掉了文档。今晚不写文档了。今晚，打游戏。</p></div></section>
+            </div>
+        </article>
+        <div class="series-nav"><a href="../aboutmore/qp-chat.html">← 失控时空·对话版</a><a href="../aboutmore/czjs.html">会话的碰撞 →</a></div>
+    </div>
+</div>
+</body>
+</html>
