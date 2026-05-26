@@ -65,14 +65,6 @@ LAYER_ITEM_META = {
     "special": ("保留实验页", "保留实验页"),
 }
 
-STATION_GROUP_ICONS = {
-    "技术主线": "🧭",
-    "法则层": "📚",
-    "人格层": "🫶",
-    "文学层": "🪶",
-    "元创作层": "🧰",
-}
-
 FILE_ICONS = {
     "about.html": "📖",
     "aboutmore/tk.html": "🧭",
@@ -97,14 +89,6 @@ FILE_ICONS = {
 }
 
 VISIBLE_LAYERS = ["law", "persona", "literature", "meta"]
-
-STATION_GROUPS = [
-    ("技术主线", [("index.html", "回到十六篇技术文章的母体")]),
-    ("法则层", [("about.html", "总序与法则迁移")]),
-    ("人格层", [("aboutmore/itg.html", "日常、关系与自省")]),
-    ("文学层", [("aboutmore/czy.html", "故事与边界实验")]),
-    ("元创作层", [("aboutmore/fr.html", "引擎与创作说明")]),
-]
 
 LAYER_GROUPS = {
     "law": [(file_name, title) for file_name, title, layer in VISIBLE_FLOW if layer == "law"],
@@ -239,23 +223,6 @@ def build_sidebar(base_indent: str, current_file: str, eol: str) -> str:
         f"{i2}<p>{layer_desc}</p>",
         f"{i1}</div>",
     ]
-
-    open_station = " open" if layer == "law" else ""
-    lines.extend([
-        f'{i1}<details class="site-sidebar__group"{open_station}>',
-        build_group_summary(i2, unit, "站点层级", "技术、法则、小说与体系的总地图", eol),
-        f'{i2}<div class="site-sidebar__group-body">',
-        f"{i3}<ul>",
-    ])
-    for group_title, entries in STATION_GROUPS:
-        target, desc = entries[0]
-        active = False
-        if group_title == "技术主线":
-            active = current_file == "index.html"
-        elif FILE_TO_LAYER[current_file] != "special":
-            active = group_title.startswith({"law": "法则层", "persona": "人格层", "literature": "文学层", "meta": "元创作层"}[layer])
-        lines.append(build_link(i4, unit, group_title, desc, href(current_file, target), active, eol, STATION_GROUP_ICONS.get(group_title)))
-    lines.extend([f"{i3}</ul>", f"{i2}</div>", f"{i1}</details>"])
 
     layers_to_render = [layer] if layer == "special" else VISIBLE_LAYERS
     for layer_name in layers_to_render:
