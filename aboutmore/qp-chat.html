@@ -1055,5 +1055,24 @@
     </div>
 </div>
 
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .inland-security-footer { position: fixed; z-index: 10; bottom: 0; right: 0; width: fit-content; display: flex; justify-content: flex-end; }
+    .tooltip-container { position: relative; }
+    .trigger-content { display: flex; }
+    .x-itg-link { display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 0.85rem; background: rgba(46,111,80,0.92); color: #fff; text-decoration: none; border-top-left-radius: 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .x-itg-link:hover { background: rgba(46,111,80,1); }
+    @media (max-width: 640px) { .inland-security-footer { position: static; width: 100%; justify-content: center; margin: 24px 0; } .x-itg-link { border-radius: 999px; } }
+</style>
+
 </body>
 </html>
