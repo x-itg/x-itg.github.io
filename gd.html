@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>始于工程，服务生活</title>
+<meta name="description" content="第15篇技术文章。从AI工程补丁谈到人生思维工具：当AI越来越强，真正升值的不是技巧本身，而是定义边界、感知异常、闭环修正的思维方式。">
+<meta name="keywords" content="AI工程化,工程思维,负日志,闭环收敛,决策切换,知识生命体征,人生方法论">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="始于工程，服务生活">
+<meta property="og:description" content="当AI越来越强，技术补丁会贬值，但工程思维在生活中的价值反而会继续升高。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/gd.html">
+<link rel="canonical" href="https://x-itg.github.io/gd.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+	:root {
+		--bg: #f7f6f2; --card-bg: #ffffff; --text: #2f3a33; --text-secondary: #68756d;
+		--accent: #2e6f50; --accent-soft: #3f8a63; --border: #dfe7df; --highlight: #eef7f0;
+		--link: #2563eb; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); --radius: 6px; --radius-lg: 10px;
+	}
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+	body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.85; -webkit-font-smoothing: antialiased; }
+	.layout { display: flex; max-width: 1400px; margin: 0 auto; padding: 1.5rem 1rem; gap: 1.5rem; }
+	.sidebar-series::-webkit-scrollbar, .sidebar-toc::-webkit-scrollbar { width: 4px; }
+	.sidebar-series::-webkit-scrollbar-track, .sidebar-toc::-webkit-scrollbar-track { background: transparent; }
+	.sidebar-series::-webkit-scrollbar-thumb, .sidebar-toc::-webkit-scrollbar-thumb { background: #d0d7de; border-radius: 2px; }
+	.sidebar-toc { width: 170px; flex-shrink: 0; position: sticky; top: 1.5rem; align-self: start; max-height: calc(100vh - 3rem); overflow-y: auto; background: #f8fafc; border-radius: 0.8rem; border: 1px solid #eef2f8; padding: 1rem 0; }
+	.sidebar-toc h3 { font-size: 0.8rem; font-weight: 600; padding: 0 1rem 0.6rem; color: #1e3a8a; }
+	.sidebar-toc nav ul { list-style: none; padding: 0 0.5rem; }
+	.sidebar-toc nav li { margin: 0.15rem 0; }
+	.sidebar-toc nav a { display: block; padding: 0.35rem 0.8rem; color: #4a6a8a; text-decoration: none; border-radius: 0.4rem; font-size: 0.78rem; transition: 0.2s; line-height: 1.4; }
+	.sidebar-toc nav a:hover { background: #eef3ff; color: #1e40af; }
+	.sidebar-toc nav a i { width: 1.2rem; color: #7a9ac9; font-size: 0.7rem; }
+	.main-content { flex: 1; min-width: 0; }
+	.container { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
+.article-header { margin-bottom: 40px; }
+	.article-header .series-tag { display: inline-block; background: var(--accent); color: #fff; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 3px; letter-spacing: 0.5px; margin-bottom: 16px; }
+	.article-header h1 { font-size: 34px; font-weight: 700; line-height: 1.35; margin-bottom: 12px; letter-spacing: -0.3px; }
+	.article-header .subtitle { font-size: 17px; color: var(--text-secondary); font-weight: 400; margin-bottom: 18px; }
+	.article-header .meta { font-size: 13px; color: #8896a4; }
+	h2 { font-size: 24px; font-weight: 700; margin: 52px 0 16px; padding-top: 24px; border-top: 2px solid var(--border); letter-spacing: -0.2px; }
+	p { margin: 14px 0; }
+	strong { color: #1f2b24; }
+	ul { margin: 14px 0; padding-left: 24px; }
+	li { margin: 6px 0; }
+	a { color: var(--link); }
+	.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px 28px; margin: 24px 0; box-shadow: var(--shadow-sm); }
+	.card.accent-left { border-left: 4px solid var(--accent-soft); }
+	.insight-box { background: var(--highlight); border: 1px solid #cfe3d4; border-radius: var(--radius); padding: 20px 24px; margin: 24px 0; color: #355443; }
+	blockquote { margin: 18px 0; padding: 16px 20px; background: #f8fafc; border-left: 4px solid #94a3b8; border-radius: 0 var(--radius) var(--radius) 0; color: #334155; }
+@media (max-width: 900px) { .layout { flex-direction: column; } .sidebar-series, .sidebar-toc { width: 100%; position: static; max-height: none; overflow-y: visible; } }
+	@media (max-width: 640px) { .container { padding: 20px 16px 60px; } .article-header h1 { font-size: 28px; } h2 { font-size: 22px; } .series-nav { flex-direction: column; } }
+</style>
+<link rel="stylesheet" href="assets/site-sidebar.css">
+</head>
+<body>
+<div class="layout">
+	<aside class="site-sidebar site-sidebar--tech">
+		<div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-sun"></i> 技术主线</a></div>
+		<div class="site-sidebar__intro">
+			<span class="site-sidebar__eyebrow">当前支线</span>
+			<strong>技术主线 · 内核反照</strong>
+			<p>这是从技术翻回生活的桥面，后面的非技术文章都从这里接上。</p>
+		</div>
+		<details class="site-sidebar__group">
+			<summary>总纲</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="index.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+						<span>
+							<span class="site-sidebar__link-title">五层进化</span>
+							<span class="site-sidebar__link-meta">总纲 · 定义整个体系的坐标系和成熟度框架</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>核心主线</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="true.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧱</span>
+						<span>
+							<span class="site-sidebar__link-title">实践项目模板</span>
+							<span class="site-sidebar__link-meta">执行基础 · 把方法论固化为可落地的工程骨架</span>
+						</span>
+					</a></li>
+					<li><a href="test.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🛠️</span>
+						<span>
+							<span class="site-sidebar__link-title">自主修复闭环</span>
+							<span class="site-sidebar__link-meta">执行智能 · 双轨收敛让系统在既定路径上自我修正</span>
+						</span>
+					</a></li>
+					<li><a href="fwd.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧠</span>
+						<span>
+							<span class="site-sidebar__link-title">从收敛到进化</span>
+							<span class="site-sidebar__link-meta">演化与判断智能 · 引入Agent性格制衡与决策切换</span>
+						</span>
+					</a></li>
+					<li><a href="exc.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🫀</span>
+						<span>
+							<span class="site-sidebar__link-title">知识的生命体征</span>
+							<span class="site-sidebar__link-meta">记忆智能 · 知识资产生命周期管理与免疫记忆</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>根系能力</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="pcb.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🔎</span>
+						<span>
+							<span class="site-sidebar__link-title">电路图分析器</span>
+							<span class="site-sidebar__link-meta">感知根系 · 打通物理世界与数字世界</span>
+						</span>
+					</a></li>
+					<li><a href="pt.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧩</span>
+						<span>
+							<span class="site-sidebar__link-title">最后的拼图：Skills</span>
+							<span class="site-sidebar__link-meta">支撑根系 · 快消费应用即时方法</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>专业延伸</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="history.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">📦</span>
+						<span>
+							<span class="site-sidebar__link-title">历史的包袱</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 遗留工程与AI迁移策略</span>
+						</span>
+					</a></li>
+					<li><a href="devs.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🏷️</span>
+						<span>
+							<span class="site-sidebar__link-title">固件铭牌与设备画像</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 固件数字身份与协同管理</span>
+						</span>
+					</a></li>
+					<li><a href="gmp.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">📜</span>
+						<span>
+							<span class="site-sidebar__link-title">合规验证与AI编程</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 从"事后补文档"到"事前建法则"</span>
+						</span>
+					</a></li>
+					<li><a href="14.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">⚖️</span>
+						<span>
+							<span class="site-sidebar__link-title">AI谄媚与专利</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 在拿证与保护之间切换审查模式</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>实战与心法</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="hg.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🎯</span>
+						<span>
+							<span class="site-sidebar__link-title">回归现实：单Agent实践框架</span>
+							<span class="site-sidebar__link-meta">综合实战 · 将完整法则体系落地为可立即上手的工程实践</span>
+						</span>
+					</a></li>
+					<li><a href="12.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
+						<span>
+							<span class="site-sidebar__link-title">AI编程的利刃</span>
+							<span class="site-sidebar__link-meta">工程利器 · 同步生成测试脚本让AI自我调试</span>
+						</span>
+					</a></li>
+					<li><a href="py.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🐍</span>
+						<span>
+							<span class="site-sidebar__link-title">批量修改，先问该不该用脚本</span>
+							<span class="site-sidebar__link-meta">工程利器 · 先判断模式，再把批量改造交给脚本执行</span>
+						</span>
+					</a></li>
+					<li><a href="13.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧵</span>
+						<span>
+							<span class="site-sidebar__link-title">拆解与整合</span>
+							<span class="site-sidebar__link-meta">工程心法 · 驾驭复杂系统的完整工程法则</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group" open>
+			<summary>内核反照</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="gd.html" class="site-sidebar__link site-sidebar__article-link is-active">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+						<span>
+							<span class="site-sidebar__link-title">始于工程，服务生活</span>
+							<span class="site-sidebar__link-meta">内核反照 · 工程法则从技术补丁长成生活工具</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group" open>
+			<summary>走出技术</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="about.html" class="site-sidebar__link">
+						<span class="site-sidebar__link-title">总序 · 我找到了一套法则</span>
+						<span class="site-sidebar__link-meta">从技术回到整站总叙事。</span>
+					</a></li>
+					<li><a href="aboutmore/wx.html" class="site-sidebar__link">
+						<span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+						<span class="site-sidebar__link-meta">从技术、生活到文学的一张路线图。</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
+	</aside>
+	<aside class="sidebar-toc">
+		<h3><i class="fas fa-list"></i> 本章导览</h3>
+		<nav>
+			<ul>
+				<li><a href="#starting"><i class="fas fa-seedling"></i> 起点问题</a></li>
+				<li><a href="#devalue"><i class="fas fa-chart-line"></i> 技术侧贬值</a></li>
+				<li><a href="#transfer"><i class="fas fa-people-arrows"></i> 向生活迁移</a></li>
+				<li><a href="#evergreen"><i class="fas fa-compass"></i> 补丁与思维</a></li>
+				<li><a href="#calm"><i class="fas fa-water"></i> 为什么不慌</a></li>
+				<li><a href="#landing"><i class="fas fa-map-signs"></i> 体系落点</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<div class="main-content">
+		<div class="container">
+			<header class="article-header">
+				<span class="series-tag">内核反照 · 方法外延</span>
+				<a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
+				<h1>始于工程，服务生活</h1>
+				<p class="subtitle">当AI越来越强，技术补丁会过时，但工程思维在生活里的价值反而会继续升高</p>
+				<p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列 · 第15篇</p>
+			</header>
+
+			<section id="starting">
+				<h2>从一个后续问题开始</h2>
+				<p>我最近在琢磨一件事。</p>
+				<p>写完前十四篇技术文章之后，我搭出了一套嵌入式AI工程化体系。负日志、闭环收敛、决策切换、知识生命体征，这些听起来很唬人的概念，本质上都在做同一件事：<strong>给AI补短板</strong>。</p>
+				<div class="card accent-left">
+					<p style="margin-top:0;"><strong>负日志</strong>补的是AI“看不见物理世界”的短板；<strong>闭环收敛</strong>补的是AI“修一个Bug引入三个Bug”的短板；<strong>决策切换</strong>补的是AI“在错误方向越走越深从不主动停下来”的短板；<strong>知识生命体征</strong>补的是AI“不知道哪份文档已经腐烂”的短板。</p>
+				</div>
+				<p>我花了大量时间去设计这些机制，让AI在我定义的法则里安全运行。然后我突然意识到一个问题：<strong>如果AI本身的能力在快速提升，这些补丁还需要吗？</strong></p>
+			</section>
+
+			<section id="devalue">
+				<h2>工程技巧，会在技术领域慢慢贬值吗</h2>
+				<p>以前AI不会自己看日志，负日志是刚需。现在AI的上下文窗口越来越大，多模态能力越来越强，它自己能“看见”更多东西了。</p>
+				<p>以前AI修Bug不靠谱，闭环收敛是刚需。现在AI的推理能力越来越强，它自己能判断“修完这里别把那里搞坏了”。</p>
+				<p>以前AI不懂什么时候该放弃一条路，决策切换是刚需。现在AI自己能评估路径的成功率，甚至能主动提出替代方案。</p>
+				<blockquote>工程技巧的重要性，在技术领域确实在降低。那些我曾经引以为傲的“法则”，正在被AI一步步内化成它自己的能力。我以前是给它装外挂，现在它自己慢慢长出了这些能力。</blockquote>
+				<p>如果只看技术面，这个结论并不难受，反而很正常。真正值得问的不是“这些机制会不会过时”，而是“它们背后的思维会流向哪里”。</p>
+			</section>
+
+			<section id="transfer">
+				<h2>从补AI的短板，到补人的盲区</h2>
+				<p>我一点不慌。因为这些工程技巧，在另一个地方正在变得更值钱。</p>
+				<p>我以前拿负日志去发现系统里那些“应该发生但没发生”的故障。后来我发现，感情里全是这种故障。你期待对方在你疲惫时给你一个拥抱，这个期待没有发生。你不会说出来，但心里悄悄记了一笔。十笔、一百笔之后，你会发现自己不知道从什么时候开始，对这段关系感到疲惫了。</p>
+				<p>负日志教会我一件事：如果你不说，对方可能永远不知道你需要那个拥抱。所以现在，我会直接说：“亲爱的，下次我看起来很累的时候，如果你能给我一个拥抱，我会感觉特别幸福。”这不是在给感情装监控，这是在用工程思维经营关系。</p>
+				<div class="insight-box"><strong>当“应该发生却没有发生”被明确标出来，很多关系问题就不再只是情绪，而变成了可以沟通、可以修复的异常。</strong></div>
+				<p>我以前拿闭环收敛去让AI每次修复Bug后同步增强测试。后来我发现，家庭里也需要这个。答应女儿周末去公园，结果临时加班取消了。这不只是“这次没去成”的问题，这是承诺系统出现了一个Bug。如果我只道歉不修复，这个Bug下次还会复现。</p>
+				<p>所以我会和她一起商量：下次爸爸答应你之前，先确认日历里没有冲突，再设一个提前提醒。如果还是做不到，爸爸会主动告诉你，然后我们重新约定时间。这是在用工程思维守护承诺。</p>
+				<p>我以前拿决策切换去让AI在错误路径上及时止损。后来我发现，人生里最需要这个。一段关系在持续消耗你，一个工作在重复消耗你，一个执念在无声消耗你。你投入了很多，所以舍不得放弃。但工程思维告诉我：<strong>沉默成本不是成本。该降级降级，该切换切换。</strong></p>
+				<p>我以前拿知识生命体征去追踪文档的热度和健康度。后来我发现，自己的精神状态也需要这个。对工作的热情是不是在下降？对家人的关注度是不是在衰减？身体是不是已经在报警了但你没注意？我给自己建了一个“精神健康仪表盘”，定期巡检。这是在用工程思维保养自己。</p>
+			</section>
+
+			<section id="evergreen">
+				<h2>补丁会过时，思维不会</h2>
+				<p>AI会越来越强，那些曾经用来补它短板的工程技巧，在技术领域确实会慢慢失去必要性。但那些工程技巧背后所代表的思维方式，<strong>定义边界、感知异常、闭环修正、决策切换、版本管理</strong>，这些永远不会过时。</p>
+				<p>因为技术领域的补丁会被AI内化，但人生领域的短板永远不会被AI补齐。AI能帮你写代码，但不能帮你判断这段感情还值不值得继续。AI能帮你管理文档，但不能帮你发现你今天忽略了孩子的某个期待。AI能帮你优化路径，但不能帮你决定这条路是不是你真正想走的。</p>
+				<div class="card">
+					<p style="margin-top:0;">那些工程技巧，从补AI的短板开始，最终变成了补人的思维盲区的工具。它们在技术领域贬值，在人生领域升值。</p>
+				</div>
+			</section>
+
+			<section id="calm">
+				<h2>所以，我一点都不慌</h2>
+				<p>当别人问我，AI越来越强，你写的那套体系会不会过时？我说不会。不是因为它有多高深，而是因为它从一开始就不只是写给AI看的。</p>
+				<p>负日志、闭环收敛、决策切换、知识生命体征，这些东西，我每天都在自己身上用。我在技术领域教AI怎么变强，在人生领域教自己怎么变得清醒、温柔、有边界。这两件事，用的是同一套内核。</p>
+				<blockquote>工程技巧在技术领域是补丁，在非技术领域是思维工具。补丁会过时，思维工具不会。</blockquote>
+			</section>
+
+			<section id="landing">
+				<h2>这篇为什么值得放进文章体系</h2>
+				<p>这篇文章不是从体系外面岔出去的抒情随笔，它更像整套技术文章的一个落点说明。</p>
+				<ul>
+					<li><strong>它解释了体系的长期价值：</strong>不是某个具体外挂还能管多久，而是这套工程法则最终会变成怎样的通用思维工具。</li>
+					<li><strong>它把技术文章和生活文章接上了：</strong>前十四篇在讲如何让AI在法则内工作，这一篇说明为什么这些法则最后也会反过来塑造人。</li>
+					<li><strong>它给整套系列补了一个终章视角：</strong>始于工程，穿过生活，抵达自己。</li>
+				</ul>
+				<div class="insight-box"><strong>如果前十四篇在回答“如何把AI带进工程”，这一篇回答的是“当AI越来越强之后，这套工程思维最终还会留下什么”。</strong></div>
+				<p>这就是我不慌的原因。也是我这套体系最终的落点。</p>
+			</section>
+
+			<div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
+			    <strong>系列导航：</strong>
+			    <a href="index.html">① 五层进化</a> ·
+			    <a href="true.html">② 实践项目模板</a> ·
+			    <a href="test.html">③ 自主修复闭环</a> ·
+			    <a href="fwd.html">④ 从收敛到进化</a> ·
+			    <a href="exc.html">⑤ 知识的生命体征</a> ·
+			    <a href="pcb.html">⑥ 电路图分析器</a> ·
+			    <a href="pt.html">⑦ 最后的拼图：Skills</a> ·
+			    <a href="history.html">⑧ 历史的包袱</a> ·
+			    <a href="devs.html">⑨ 固件铭牌与设备画像</a> ·
+			    <a href="gmp.html">⑩ 合规验证与AI编程</a> ·
+			    <a href="hg.html">⑪ 回归现实：单Agent实践框架</a> ·
+			    <a href="12.html">⑫ AI编程的利刃</a> ·
+			    <a href="py.html">⑬ 批量修改，先问该不该用脚本</a> ·
+			    <a href="13.html">⑭ 拆解与整合</a> ·
+			    <a href="14.html">⑮ AI谄媚与专利</a> ·
+			    <a href="gd.html">⑯ 始于工程，服务生活</a>
+			</div>
+
+<div class="series-nav">
+    <a href="14.html">← AI谄媚与专利</a>
+    <a href="aboutmore/wx.html">乾坤大挪移心法总览 →</a>
+</div>
+<div style="text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);color:#8896a4;font-size:13px;">
+				<a href="about.html" style="color:#2e6f50;text-decoration:none;">关于作者</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
+        </div>
+    </div>
+</div>
+</body>
+</html>

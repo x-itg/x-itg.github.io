@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>批量修改，先问该不该用脚本 | 为AI编程工程化立宪</title>
+<meta name="description" content="批量修改代码时，先判断该直接改、先分析，还是先生成脚本。选对模式，省下的不只是 Token，还有返工和风险。">
+<meta name="keywords" content="AI编程,批量修改,脚本生成,Python脚本,Token成本,工程判断">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="批量修改，先问该不该用脚本 | 为AI编程工程化立宪">
+<meta property="og:description" content="批量修改前先判断模式：直接改、先分析、还是生成脚本。这是比具体工具更值钱的工程判断。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/py.html">
+<link rel="canonical" href="https://x-itg.github.io/py.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+	:root {
+		--bg: #f8f9fa;
+		--card-bg: #ffffff;
+		--text: #2c3e50;
+		--text-secondary: #5a6c7d;
+		--accent: #c0392b;
+		--accent-soft: #e74c3c;
+		--border: #e0e4e8;
+		--code-bg: #1e293b;
+		--code-text: #e2e8f0;
+		--highlight: #fef9e7;
+		--link: #2980b9;
+		--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--radius: 6px;
+		--radius-lg: 10px;
+	}
+
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+
+	body {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+		background: var(--bg);
+		color: var(--text);
+		line-height: 1.8;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	.container {
+		max-width: 780px;
+		margin: 0 auto;
+		padding: 40px 24px 80px;
+	}
+
+	.top-nav {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 48px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid var(--border);
+		font-size: 14px;
+		color: var(--text-secondary);
+	}
+
+	.top-nav a { color: var(--link); text-decoration: none; transition: color 0.2s; }
+	.top-nav a:hover { color: var(--accent); }
+	.top-nav .sep { color: #c0c7cf; }
+
+	.article-header { margin-bottom: 48px; }
+	.article-header .series-tag {
+		display: inline-block; background: var(--accent); color: #fff;
+		font-size: 12px; font-weight: 600; padding: 3px 10px;
+		border-radius: 3px; letter-spacing: 0.5px; margin-bottom: 16px;
+	}
+	.article-header h1 {
+		font-size: 32px; font-weight: 700; line-height: 1.35;
+		margin-bottom: 12px; letter-spacing: -0.3px;
+	}
+	.article-header .subtitle {
+		font-size: 17px; color: var(--text-secondary); font-weight: 400; margin-bottom: 20px;
+	}
+	.article-header .meta { font-size: 13px; color: #8896a4; }
+
+	h2 {
+		font-size: 24px; font-weight: 700; margin: 56px 0 16px;
+		padding-top: 24px; border-top: 2px solid var(--border);
+		letter-spacing: -0.2px;
+	}
+	h3 {
+		font-size: 19px; font-weight: 600; margin: 36px 0 12px; color: #1a1a2e;
+	}
+	p { margin: 14px 0; }
+	strong { color: #1a1a2e; }
+	ul, ol { margin: 14px 0; padding-left: 24px; }
+	li { margin: 6px 0; }
+
+	.card {
+		background: var(--card-bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		padding: 28px 30px;
+		margin: 28px 0;
+		box-shadow: var(--shadow-sm);
+	}
+
+	.card.accent-left { border-left: 4px solid var(--accent); }
+	.card.tip { background: #f0f7ff; border-color: #b3d4fc; }
+
+	.insight-box {
+		background: var(--highlight);
+		border: 1px solid #f0d78c;
+		border-radius: var(--radius);
+		padding: 20px 24px;
+		margin: 24px 0;
+		font-style: italic;
+		color: #6b4c1e;
+	}
+
+	.insight-box strong { color: #4a340f; }
+
+	.decision-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		margin: 28px 0;
+	}
+
+	.decision-card {
+		background: var(--card-bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		padding: 22px;
+		box-shadow: var(--shadow-sm);
+	}
+
+	.decision-card h3 {
+		margin: 0 0 10px;
+		font-size: 18px;
+	}
+
+	code {
+		font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+		font-size: 13px;
+	}
+
+	p code, li code {
+		background: #eef1f5;
+		padding: 2px 6px;
+		border-radius: 3px;
+		color: #c0392b;
+		font-size: 12px;
+	}
+
+	@media (max-width: 640px) {
+		.container { padding: 20px 16px 60px; }
+		.article-header h1 { font-size: 26px; }
+		h2 { font-size: 21px; }
+		.decision-grid { grid-template-columns: 1fr; }
+	}
+
+	.layout {
+		display: flex;
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 1.5rem 1rem;
+		gap: 1.5rem;
+	}
+
+	.sidebar-toc {
+		width: 170px;
+		flex-shrink: 0;
+		position: sticky;
+		top: 1.5rem;
+		align-self: start;
+		max-height: calc(100vh - 3rem);
+		overflow-y: auto;
+		background: #f8fafc;
+		border-radius: 0.8rem;
+		border: 1px solid #eef2f8;
+		padding: 1rem 0;
+	}
+
+	.sidebar-toc h3 {
+		font-size: 0.8rem;
+		font-weight: 600;
+		padding: 0 1rem 0.6rem;
+		color: #1e3a8a;
+	}
+
+	.sidebar-toc nav ul { list-style: none; padding: 0 0.5rem; }
+	.sidebar-toc nav li { margin: 0.15rem 0; }
+	.sidebar-toc nav a {
+		display: block;
+		padding: 0.35rem 0.8rem;
+		color: #4a6a8a;
+		text-decoration: none;
+		border-radius: 0.4rem;
+		font-size: 0.78rem;
+		transition: 0.2s;
+		line-height: 1.4;
+	}
+	.sidebar-toc nav a:hover { background: #eef3ff; color: #1e40af; }
+	.sidebar-toc nav a i { width: 1.2rem; color: #7a9ac9; font-size: 0.7rem; }
+
+	.main-content { flex: 1; min-width: 0; }
+
+	@media (max-width: 900px) {
+		.layout { flex-direction: column; }
+		.sidebar-series, .sidebar-toc { width: 100%; position: static; max-height: none; overflow-y: visible; }
+	}
+</style>
+<link rel="stylesheet" href="assets/site-sidebar.css">
+</head>
+<body>
+<div class="layout">
+	<aside class="site-sidebar site-sidebar--tech">
+		<div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-sun"></i> 技术主线</a></div>
+		<div class="site-sidebar__intro">
+			<span class="site-sidebar__eyebrow">当前支线</span>
+			<strong>技术主线 · 实战与心法</strong>
+			<p>完整法则压进真实工作流，验证能否长期落地。</p>
+		</div>
+		<details class="site-sidebar__group">
+			<summary>总纲</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="index.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+						<span>
+							<span class="site-sidebar__link-title">五层进化</span>
+							<span class="site-sidebar__link-meta">总纲 · 定义整个体系的坐标系和成熟度框架</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>核心主线</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="true.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧱</span>
+						<span>
+							<span class="site-sidebar__link-title">实践项目模板</span>
+							<span class="site-sidebar__link-meta">执行基础 · 把方法论固化为可落地的工程骨架</span>
+						</span>
+					</a></li>
+					<li><a href="test.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🛠️</span>
+						<span>
+							<span class="site-sidebar__link-title">自主修复闭环</span>
+							<span class="site-sidebar__link-meta">执行智能 · 双轨收敛让系统在既定路径上自我修正</span>
+						</span>
+					</a></li>
+					<li><a href="fwd.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧠</span>
+						<span>
+							<span class="site-sidebar__link-title">从收敛到进化</span>
+							<span class="site-sidebar__link-meta">演化与判断智能 · 引入Agent性格制衡与决策切换</span>
+						</span>
+					</a></li>
+					<li><a href="exc.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🫀</span>
+						<span>
+							<span class="site-sidebar__link-title">知识的生命体征</span>
+							<span class="site-sidebar__link-meta">记忆智能 · 知识资产生命周期管理与免疫记忆</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>根系能力</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="pcb.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🔎</span>
+						<span>
+							<span class="site-sidebar__link-title">电路图分析器</span>
+							<span class="site-sidebar__link-meta">感知根系 · 打通物理世界与数字世界</span>
+						</span>
+					</a></li>
+					<li><a href="pt.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧩</span>
+						<span>
+							<span class="site-sidebar__link-title">最后的拼图：Skills</span>
+							<span class="site-sidebar__link-meta">支撑根系 · 快消费应用即时方法</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>专业延伸</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="history.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">📦</span>
+						<span>
+							<span class="site-sidebar__link-title">历史的包袱</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 遗留工程与AI迁移策略</span>
+						</span>
+					</a></li>
+					<li><a href="devs.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🏷️</span>
+						<span>
+							<span class="site-sidebar__link-title">固件铭牌与设备画像</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 固件数字身份与协同管理</span>
+						</span>
+					</a></li>
+					<li><a href="gmp.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">📜</span>
+						<span>
+							<span class="site-sidebar__link-title">合规验证与AI编程</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 从"事后补文档"到"事前建法则"</span>
+						</span>
+					</a></li>
+					<li><a href="14.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">⚖️</span>
+						<span>
+							<span class="site-sidebar__link-title">AI谄媚与专利</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 在拿证与保护之间切换审查模式</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group" open>
+			<summary>实战与心法</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="hg.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🎯</span>
+						<span>
+							<span class="site-sidebar__link-title">回归现实：单Agent实践框架</span>
+							<span class="site-sidebar__link-meta">综合实战 · 将完整法则体系落地为可立即上手的工程实践</span>
+						</span>
+					</a></li>
+					<li><a href="12.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
+						<span>
+							<span class="site-sidebar__link-title">AI编程的利刃</span>
+							<span class="site-sidebar__link-meta">工程利器 · 同步生成测试脚本让AI自我调试</span>
+						</span>
+					</a></li>
+					<li><a href="py.html" class="site-sidebar__link site-sidebar__article-link is-active">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🐍</span>
+						<span>
+							<span class="site-sidebar__link-title">批量修改，先问该不该用脚本</span>
+							<span class="site-sidebar__link-meta">工程利器 · 先判断模式，再把批量改造交给脚本执行</span>
+						</span>
+					</a></li>
+					<li><a href="13.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧵</span>
+						<span>
+							<span class="site-sidebar__link-title">拆解与整合</span>
+							<span class="site-sidebar__link-meta">工程心法 · 驾驭复杂系统的完整工程法则</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>内核反照</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="gd.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+						<span>
+							<span class="site-sidebar__link-title">始于工程，服务生活</span>
+							<span class="site-sidebar__link-meta">内核反照 · 工程法则从技术补丁长成生活工具</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>走出技术</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="about.html" class="site-sidebar__link">
+						<span class="site-sidebar__link-title">总序 · 我找到了一套法则</span>
+						<span class="site-sidebar__link-meta">从技术回到整站总叙事。</span>
+					</a></li>
+					<li><a href="aboutmore/wx.html" class="site-sidebar__link">
+						<span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+						<span class="site-sidebar__link-meta">从技术、生活到文学的一张路线图。</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
+	</aside>
+	<aside class="sidebar-toc">
+		<h3><i class="fas fa-list"></i> 本章导览</h3>
+		<nav>
+			<ul>
+				<li><a href="#mode-choice"><i class="fas fa-code-branch"></i> 两种模式</a></li>
+				<li><a href="#rules"><i class="fas fa-ruler"></i> 两条规则</a></li>
+				<li><a href="#direct-edit"><i class="fas fa-coins"></i> 直接改的成本</a></li>
+				<li><a href="#script-mode"><i class="fas fa-terminal"></i> 脚本省在哪</a></li>
+				<li><a href="#good-case"><i class="fas fa-check-circle"></i> 该用脚本</a></li>
+				<li><a href="#bad-case"><i class="fas fa-exclamation-circle"></i> 不该用脚本</a></li>
+				<li><a href="#summary"><i class="fas fa-compass"></i> 一句话总结</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<div class="main-content">
+		<div class="container">
+
+		<header class="article-header">
+			<span class="series-tag">工程利器 · 批量改造</span>
+			<a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
+			<h1>批量修改，先问该不该用脚本</h1>
+			<p class="subtitle">在直接改、先分析、生成脚本之间切换模式，才是真正省 Token 的工程判断</p>
+			<p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
+		</header>
+
+		<section>
+			<p>我做 AI 辅助开发这么久，攒了不少省钱的小技巧。其中最管用、也最容易被滥用的一招是：<strong>批量操作，别急着让 Agent 直接改代码。先判断该不该生成脚本。</strong></p>
+			<p>很多人一看到“几十个文件一起改”，第一反应就是让 Agent 直接动手。它当然能改，但问题不在“能不能改”，而在<strong>你是不是选对了执行模式</strong>。模式选错了，白烧 Token；模式选对了，一轮对话能省下后面三四轮返工。</p>
+		</section>
+
+		<section>
+			<h2 id="mode-choice">两种模式，选对就是省钱</h2>
+			<div class="decision-grid">
+				<div class="decision-card">
+					<h3>模式一：直接改</h3>
+					<p>Agent 逐个文件分析，逐个修改。每一步都是一轮对话，每一步都在消耗 Token。改漏了，把错误贴回去再改；改错了，再来一轮。</p>
+				</div>
+				<div class="decision-card">
+					<h3>模式二：生成脚本</h3>
+					<p>Agent 输出一个可执行的 Python 脚本。你审阅脚本，运行，一次完成所有修改。脚本同时输出变更日志；有问题，改脚本重跑，而不是逐个文件返工。</p>
+				</div>
+			</div>
+			<p>两种模式各有适用场景。选错模式，要么白花钱，要么白花时间。选对模式，省下的不只是这一轮对话，而是后续整串来回。</p>
+		</section>
+
+		<section>
+			<h2 id="rules">怎么选？两条规则就够了</h2>
+			<h3>规则一：可复用的，或者重复修改量大的，生成脚本</h3>
+			<p>什么叫“可复用”？下次遇到类似任务，改两个参数就能继续用。什么叫“重复修改量大”？同一类修改模式在几十个文件里反复出现。</p>
+			<p>这种场景用脚本，省的不只是这一次的 Token。生成一次，复用十次，每次省三轮对话，十次就是三十轮。脚本本身还是一份决策记录：改了哪些文件、改了什么、什么时候改的，全都可以落进日志。</p>
+
+			<h3>规则二：重复量大但不可复用的，让 Agent 先给建议，再决定怎么改</h3>
+			<p>这类任务需要人的判断介入。最优流程不是直接让 Agent 动手，而是先让它分析影响范围、列出修改方案、指出风险。你确认方案后，再决定让它直接改，还是生成一个一次性脚本。</p>
+			<p>这中间多了一步人工审阅，但这正是省钱的关键。方案审对了，后面省下的不止是 Token，还有返工的时间。方案审错了，跑完才发现方向不对，再回头改，那才是真金白银打水漂。</p>
+
+			<div class="insight-box">
+				<strong>两个条件都不满足，就直接改。</strong> 修改量小、不可复用，直接让 Agent 改完审阅，最快。为这种任务写脚本，等于用牛刀杀鸡，牛刀本身还费油。
+			</div>
+		</section>
+
+		<section>
+			<h2 id="direct-edit">为什么直接改容易费钱</h2>
+			<p>很多人习惯让 Agent 直接操作文件。这其实是把 AI 当成了一个“会改代码的编辑器”，但它不是编辑器，它是按轮次计费的。</p>
+			<p>Agent 直接改代码，交互模式天然就是反复来回。让它改一个文件，它改了；跑一遍测试，发现两个地方漏了；把错误贴回去，它再改；改完再跑，又引入一个新问题；你再补上下文，它再动手。每一步都在烧 Token。</p>
+			<p>如果遇到复杂的批量修改，来回三四轮是常事，而且完全没有复现性。下次遇到同样的任务，还是得从头再来一遍。这种模式最大的浪费，不是某一次输出长了，而是<strong>每一轮都在重新建立同一份上下文</strong>。</p>
+		</section>
+
+		<section>
+			<h2 id="script-mode">生成脚本，省在哪</h2>
+			<p>让 Agent 生成脚本，交互模式就完全变了。Agent 不是直接改代码，而是输出一个可执行、带注释的脚本。你审阅一遍，通过，运行。脚本做完所有修改，同时输出一份完整的变更日志。</p>
+			<p>如果运行结果有问题，把变更日志和错误信息贴回给 Agent，Agent 改脚本，你再运行。这个循环里，每一轮都在同一个脚本文件上迭代，而不是在几十个分散的源文件上来回跳转。</p>
+			<div class="card accent-left">
+				<p style="margin-top:0;"><strong>还有个关键细节：</strong>让 Agent 生成脚本时，同时生成一份恢复脚本。万一批量改完发现方向不对，一键恢复，回到原点。这和闭环收敛是一回事：有回滚机制兜底，人才敢放手让系统自己跑。</p>
+			</div>
+		</section>
+
+		<section>
+			<h2 id="good-case">一个该用脚本的例子</h2>
+			<p>项目需要把所有源文件里的函数名 <code>old_func</code> 替换成 <code>new_func</code>，同步更新头文件引用，最后跑一遍测试。</p>
+			<p>这个任务完美符合“可复用且重复量大”的标准。如果直接改：让它改第一处，发现头文件没同步，再让它补；补完跑测试，挂了，把错误贴回去；它说还有三处漏了，再改。三四轮对话，Token 哗哗地烧。</p>
+			<p>如果生成脚本：一轮对话，Agent 输出脚本和恢复脚本。审阅通过，运行，不到十秒，整个项目改完，变更日志清清楚楚。直接改要三四轮，生成脚本只要一轮，这就是模式选择的差价。</p>
+		</section>
+
+		<section>
+			<h2 id="bad-case">一个不该用脚本的例子</h2>
+			<p>还是替换函数名，但加了条件：有三处是故意保留的兼容逻辑，不能改，其他的都要改。</p>
+			<p>这个任务不满足“可复用”的标准。规则需要逐例判断：哪三处是兼容逻辑？为什么不能改？脚本无法自动做这个判断。硬让 Agent 生成脚本，它大概率会无差别全部替换，然后在注释里写一句“请手动检查并恢复”。</p>
+			<p><strong>正确做法</strong>是让 Agent 先给建议：把包含 <code>old_func</code> 的文件逐一列出来，对每个文件给出“该不该改”的分析。你来确认，Agent 来执行。虽然多花了分析那一轮，但保证了正确性。在这种需要逐例判断的任务上，省下来的 Token 不够填出错的坑。</p>
+		</section>
+
+		<section>
+			<h2 id="summary">一句话总结</h2>
+			<p>批量修改，先判断：可复用或重复量大的，生成脚本；重复量大但不可复用的，先让 Agent 给建议，再决定怎么改；两个都不满足的，直接改。</p>
+			<p>生成脚本时，别忘了让 Agent 同时输出一份恢复脚本，留好回滚的退路。省 Token 的核心不是“用脚本”，而是<strong>用对模式</strong>。模式选对了，省下的不止是 Token，是返工的时间、出错的风险，以及下次不必从头再来的重复劳动。</p>
+			<div class="card tip">
+				<p style="margin-top:0;"><strong>法则不是死规则，是活的判断框架。</strong> 在正确的场景选择正确的工具，这个判断力本身，才是整套方法论里最值钱的部分。</p>
+			</div>
+		</section>
+
+		<div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
+		    <strong>系列导航：</strong>
+		    <a href="index.html">① 五层进化</a> ·
+		    <a href="true.html">② 实践项目模板</a> ·
+		    <a href="test.html">③ 自主修复闭环</a> ·
+		    <a href="fwd.html">④ 从收敛到进化</a> ·
+		    <a href="exc.html">⑤ 知识的生命体征</a> ·
+		    <a href="pcb.html">⑥ 电路图分析器</a> ·
+		    <a href="pt.html">⑦ 最后的拼图：Skills</a> ·
+		    <a href="history.html">⑧ 历史的包袱</a> ·
+		    <a href="devs.html">⑨ 固件铭牌与设备画像</a> ·
+		    <a href="gmp.html">⑩ 合规验证与AI编程</a> ·
+		    <a href="hg.html">⑪ 回归现实：单Agent实践框架</a> ·
+		    <a href="12.html">⑫ AI编程的利刃</a> ·
+		    <a href="py.html">⑬ 批量修改，先问该不该用脚本</a> ·
+		    <a href="13.html">⑭ 拆解与整合</a> ·
+		    <a href="14.html">⑮ AI谄媚与专利</a> ·
+		    <a href="gd.html">⑯ 始于工程，服务生活</a>
+		</div>
+
+<div class="series-nav">
+    <a href="12.html">← AI编程的利刃</a>
+    <a href="13.html">拆解与整合 →</a>
+</div>
+<div style="text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);color:#8896a4;font-size:13px;">
+			<a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a>
+		</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
+        </div>
+    </div>
+</div>
+</body>
+</html>
