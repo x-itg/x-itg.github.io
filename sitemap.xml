@@ -6,22 +6,27 @@
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://x-itg.github.io/true.html</loc>
-        <lastmod>2026-05-14</lastmod>
+        <loc>https://x-itg.github.io/12.html</loc>
+        <lastmod>2026-05-26</lastmod>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://x-itg.github.io/test.html</loc>
-        <lastmod>2026-05-14</lastmod>
+        <loc>https://x-itg.github.io/13.html</loc>
+        <lastmod>2026-05-26</lastmod>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://x-itg.github.io/fwd.html</loc>
-        <lastmod>2026-05-14</lastmod>
+        <loc>https://x-itg.github.io/14.html</loc>
+        <lastmod>2026-05-22</lastmod>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://x-itg.github.io/pcb.html</loc>
+        <loc>https://x-itg.github.io/about.html</loc>
+        <lastmod>2026-05-14</lastmod>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/devs.html</loc>
         <lastmod>2026-05-14</lastmod>
         <priority>0.8</priority>
     </url>
@@ -31,7 +36,32 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://x-itg.github.io/fwd.html</loc>
+        <lastmod>2026-05-14</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/gd.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/gmp.html</loc>
+        <lastmod>2026-05-14</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/hg.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://x-itg.github.io/history.html</loc>
+        <lastmod>2026-05-14</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/pcb.html</loc>
         <lastmod>2026-05-14</lastmod>
         <priority>0.8</priority>
     </url>
@@ -41,33 +71,48 @@
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://x-itg.github.io/devs.html</loc>
-        <lastmod>2026-05-14</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://x-itg.github.io/gmp.html</loc>
-        <lastmod>2026-05-14</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://x-itg.github.io/14.html</loc>
-        <lastmod>2026-05-22</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://x-itg.github.io/gd.html</loc>
+        <loc>https://x-itg.github.io/py.html</loc>
         <lastmod>2026-05-26</lastmod>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://x-itg.github.io/about.html</loc>
+        <loc>https://x-itg.github.io/test.html</loc>
         <lastmod>2026-05-14</lastmod>
-        <priority>0.6</priority>
+        <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://x-itg.github.io/aboutmore/tk.html</loc>
+        <loc>https://x-itg.github.io/true.html</loc>
         <lastmod>2026-05-14</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/cc.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/czjs.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/czy.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/ff.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/forme.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/fr.html</loc>
+        <lastmod>2026-05-26</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
@@ -76,8 +121,13 @@
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://x-itg.github.io/aboutmore/sc.html</loc>
-        <lastmod>2026-05-14</lastmod>
+        <loc>https://x-itg.github.io/aboutmore/itg.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/jsxm.html</loc>
+        <lastmod>2026-05-26</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
@@ -86,8 +136,38 @@
         <priority>0.5</priority>
     </url>
     <url>
+        <loc>https://x-itg.github.io/aboutmore/m.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/pg.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/qp-chat.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/sc.html</loc>
+        <lastmod>2026-05-14</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://x-itg.github.io/aboutmore/ta.html</loc>
         <lastmod>2026-05-20</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/tk.html</loc>
+        <lastmod>2026-05-14</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/wx.html</loc>
+        <lastmod>2026-05-26</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
