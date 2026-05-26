@@ -30,25 +30,6 @@
     }
     .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
 
-    .sidebar {
-        width:240px; position:sticky; top:0; height:100vh; overflow-y:auto;
-        padding:32px 16px; border-right:1px solid var(--border);
-        background:var(--sidebar-bg); flex-shrink:0;
-    }
-    .sidebar .logo { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:8px; }
-    .sidebar .logo a { color:var(--accent); text-decoration:none; }
-    .sidebar .logo a:hover { opacity:0.75; }
-    .sidebar .nav-section { margin-bottom:12px; }
-    .sidebar .nav-section h3 { font-size:0; line-height:0; color:transparent; margin:0 0 8px; padding-bottom:0; height:0; overflow:hidden; border-bottom:1px solid var(--border); }
-    .sidebar .nav-section ul { list-style:none; }
-    .sidebar .nav-section li { margin-bottom:4px; }
-    .sidebar .nav-section a { display:block; padding:6px 10px; font-size:13px; color:var(--text); text-decoration:none; border-radius:6px; transition:background 0.15s; }
-    .sidebar .nav-section a:hover, .sidebar .nav-section a.active { background:rgba(217,119,6,0.1); color:var(--accent); }
-    .sidebar .nav-section a i { width:20px; color:var(--accent); }
-    .sidebar .back-home { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:13px; }
-    .sidebar .back-home a { color:var(--text-secondary); text-decoration:none; }
-    .sidebar .back-home a:hover { color:var(--accent); }
-
     .main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
     .main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
     .main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
@@ -62,12 +43,7 @@
     .insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
     .insight-box strong { color:#92400e; }
 
-    .series-nav { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); display:flex; justify-content:space-between; font-size:14px; }
-    .series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
-    .series-nav a:hover { text-decoration:underline; }
-    .series-nav .placeholder { color:#d6d3d1; }
-
-    /* ===== 四层结构图 ===== */
+/* ===== 四层结构图 ===== */
     .layer-stack { margin: 32px 0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
 
     .layer-item { padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; cursor: pointer; transition: all 0.2s; position: relative; }
@@ -150,7 +126,6 @@
     .letter-divider i { font-size:12px; }
 
     @media (max-width:768px) {
-        .sidebar { display:none; }
         .main-content { padding:24px 16px 60px; }
         .main-content h1 { font-size:26px; }
         .layer-item { padding: 16px 18px; gap: 12px; flex-direction: column; }
@@ -158,61 +133,260 @@
         .letter-body { padding: 20px 16px 18px; }
     }
 </style>
+<link rel="stylesheet" href="../assets/site-sidebar.css">
 </head>
 <body>
 
 <div class="layout">
-    <aside class="sidebar">
-        <div class="logo"><a href="../index.html"><i class="fas fa-home"></i> itg</a></div>
-        <div class="nav-section">
-            <h3>&nbsp;</h3>
-            <ul>
-                <li><a href="../about.html"><i class="fas fa-feather-alt"></i> 我找到了一套法则</a></li>
-                <li><a href="../aboutmore/tk.html"><i class="fas fa-brain"></i> 以不变应万变</a></li>
-                <li><a href="../aboutmore/fw.html"><i class="fas fa-wand-magic-sparkles"></i> 工程魔法</a></li>
-                <li><a href="../aboutmore/sc.html"><i class="fas fa-heart"></i> 调试AI，学会经营感情</a></li>
-                <li><a href="../aboutmore/wx.html"><i class="fas fa-compass"></i> 心法总览</a></li>
-            </ul>
+    <aside class="site-sidebar site-sidebar--story">
+        <div class="site-sidebar__brand"><a href="../about.html"><i class="fas fa-feather-alt"></i> 法则与故事</a></div>
+        <div class="site-sidebar__intro">
+            <span class="site-sidebar__eyebrow">站点坐标</span>
+            <strong>法则与故事 · 元创作层</strong>
+            <p>这里公开引擎，解释这些作品如何被组织和生成。</p>
         </div>
-        <div class="nav-section">
-            <h3>&nbsp;</h3>
-            <ul>
-                <li><a href="../aboutmore/itg.html"><i class="fas fa-heart-pulse"></i> 爱婷哥</a></li>
-                <li><a href="../aboutmore/forme.html"><i class="fas fa-pen-fancy"></i> 写给自己</a></li>
-                <li><a href="../aboutmore/pg.html"><i class="fas fa-face-laugh-wink"></i> 家庭直播间</a></li>
-                <li><a href="../aboutmore/m.html"><i class="fas fa-moon"></i> 周一早上，梦见下班</a></li>
-                <li><a href="../aboutmore/cc.html"><i class="fas fa-comments"></i> 我可能哪里错了</a></li>
-                <li><a href="../aboutmore/ll.html"><i class="fas fa-lightbulb"></i> 找个不懂的人聊聊</a></li>
-                <li><a href="../aboutmore/ta.html"><i class="fas fa-infinity"></i> 不必全部收敛</a></li>
-            </ul>
-        </div>
-        <div class="nav-section">
-            <h3>&nbsp;</h3>
-            <ul>
-                <li><a href="../aboutmore/czy.html"><i class="fas fa-feather"></i> 蓝牙：陆知意岛</a></li>
-                <li><a href="../aboutmore/qp-chat.html"><i class="fas fa-comment-dots"></i> 失控时空·对话版</a></li>
-                <li><a href="../aboutmore/jsxm.html"><i class="fas fa-gamepad"></i> 失控时刻：有趣玩家</a></li>
-            </ul>
-        </div>
-        <div class="nav-section">
-            <h3>&nbsp;</h3>
-            <ul>
-                <li><a href="../aboutmore/czjs.html"><i class="fas fa-flask"></i> 会话的碰撞</a></li>
-                <li><a href="../aboutmore/fr.html" class="active"><i class="fas fa-layer-group"></i> 四层结构：创作体系</a></li>
-            </ul>
-        </div>
-        <div class="nav-section">
-            <h3>技术系列</h3>
-            <ul>
-                <li><a href="../index.html"><i class="fas fa-microchip"></i> 嵌入式AI工程化</a></li>
-            </ul>
-        </div>
-        <div class="back-home">
-            <a href="../index.html">← 返回首页</a>
-        </div>
+        <details class="site-sidebar__group">
+            <summary>
+                <span class="site-sidebar__summary-text">站点层级</span>
+                <span class="site-sidebar__summary-meta">技术、法则、小说与体系的总地图</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../index.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">技术主线</span>
+                            <span class="site-sidebar__link-meta">回到十六篇技术文章的母体</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../about.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📚</span>
+                        <span>
+                            <span class="site-sidebar__link-title">法则层</span>
+                            <span class="site-sidebar__link-meta">总序与法则迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🫶</span>
+                        <span>
+                            <span class="site-sidebar__link-title">人格层</span>
+                            <span class="site-sidebar__link-meta">日常、关系与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/czy.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪶</span>
+                        <span>
+                            <span class="site-sidebar__link-title">文学层</span>
+                            <span class="site-sidebar__link-meta">故事与边界实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧰</span>
+                        <span>
+                            <span class="site-sidebar__link-title">元创作层</span>
+                            <span class="site-sidebar__link-meta">引擎与创作说明</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--law">
+            <summary>
+                <span class="site-sidebar__summary-text">法则层</span>
+                <span class="site-sidebar__summary-meta">法则主线与迁移起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../about.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📖</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我找到了一套法则</span>
+                            <span class="site-sidebar__link-meta">法则相关文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/tk.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">以不变应万变</span>
+                            <span class="site-sidebar__link-meta">法则相关文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fw.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪄</span>
+                        <span>
+                            <span class="site-sidebar__link-title">工程魔法</span>
+                            <span class="site-sidebar__link-meta">法则相关文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/sc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">调试AI，学会经营感情</span>
+                            <span class="site-sidebar__link-meta">法则相关文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">乾坤大挪移心法 · 文章总览</span>
+                            <span class="site-sidebar__link-meta">法则相关文章</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--persona">
+            <summary>
+                <span class="site-sidebar__summary-text">人格层</span>
+                <span class="site-sidebar__summary-meta">日常、关系与自省现场</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">爱婷哥</span>
+                            <span class="site-sidebar__link-meta">人格相关文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/forme.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📝</span>
+                        <span>
+                            <span class="site-sidebar__link-title">写给自己</span>
+                            <span class="site-sidebar__link-meta">人格相关文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/pg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎤</span>
+                        <span>
+                            <span class="site-sidebar__link-title">家庭直播间</span>
+                            <span class="site-sidebar__link-meta">人格相关文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/m.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌙</span>
+                        <span>
+                            <span class="site-sidebar__link-title">周一早上，梦见下班</span>
+                            <span class="site-sidebar__link-meta">人格相关文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/cc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我可能哪里错了</span>
+                            <span class="site-sidebar__link-meta">人格相关文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ll.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">找个不懂的人聊聊</span>
+                            <span class="site-sidebar__link-meta">人格相关文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">♾️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">不必全部收敛</span>
+                            <span class="site-sidebar__link-meta">人格相关文章</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--literature">
+            <summary>
+                <span class="site-sidebar__summary-text">小说层</span>
+                <span class="site-sidebar__summary-meta">小说、对话与失控实验</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czy.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📘</span>
+                        <span>
+                            <span class="site-sidebar__link-title">蓝牙：陆知意岛</span>
+                            <span class="site-sidebar__link-meta">小说与对话作品</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/qp-chat.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·对话版</span>
+                            <span class="site-sidebar__link-meta">小说与对话作品</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jsxm.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎮</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时刻：有趣玩家</span>
+                            <span class="site-sidebar__link-meta">小说与对话作品</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--meta" open>
+            <summary>
+                <span class="site-sidebar__summary-text">体系层</span>
+                <span class="site-sidebar__summary-meta">体系说明与创作引擎</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czjs.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧪</span>
+                        <span>
+                            <span class="site-sidebar__link-title">会话的碰撞</span>
+                            <span class="site-sidebar__link-meta">当前体系文章</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🏛️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">四层结构：创作体系</span>
+                            <span class="site-sidebar__link-meta">当前体系文章</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>
+                <span class="site-sidebar__summary-text">技术源头</span>
+                <span class="site-sidebar__summary-meta">从工程桥面回看整套法则的起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../gd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+                        <span>
+                            <span class="site-sidebar__link-title">桥面 · 始于工程，服务生活</span>
+                            <span class="site-sidebar__link-meta">从技术过桥，进入生活与叙事。</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+                            <span class="site-sidebar__link-meta">按地图理解技术与非技术的整体关系。</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
     </aside>
-
-    <div class="main-content">
+<aside class="sidebar-toc sidebar-toc--story">
+    <h3><span class="sidebar-toc__icon" aria-hidden="true">🏛️</span> 本章导航</h3>
+    <nav>
+        <ul>
+            <li><a href="#层与层之间不是分类是生长">层与层之间：不是分类，是生长</a></li>
+            <li><a href="#每层证明什么">每层证明什么</a></li>
+            <li><a href="#一种常见的误读">一种常见的误读</a></li>
+            <li><a href="#后记这篇页面是怎么来的">后记：这篇页面是怎么来的</a></li>
+        </ul>
+    </nav>
+</aside>
+<div class="main-content">
         <header class="article-header">
             <span class="series-tag">元创作层 · 体系总纲</span>
             <h1>四层结构：我的创作体系</h1>
@@ -297,7 +471,7 @@
 
         <!-- ===== 层间关系 ===== -->
 
-        <h2><i class="fas fa-arrows-alt-v"></i> 层与层之间：不是分类，是生长</h2>
+        <h2 id="层与层之间不是分类是生长"><i class="fas fa-arrows-alt-v"></i> 层与层之间：不是分类，是生长</h2>
 
         <p>
             这四层不是四种不同类型的文章被强行归类到一起的。它们之间有精确的因果链。
@@ -321,7 +495,7 @@
 
         <div class="section-divider"><i class="fas fa-list-check"></i></div>
 
-        <h2><i class="fas fa-check-double"></i> 每层证明什么</h2>
+        <h2 id="每层证明什么"><i class="fas fa-check-double"></i> 每层证明什么</h2>
 
         <p>
             拆开来看，每一层都在回答一个特定的追问：
@@ -340,7 +514,7 @@
 
         <div class="section-divider"><i class="fas fa-sync-alt"></i></div>
 
-        <h2><i class="fas fa-crosshairs"></i> 一种常见的误读</h2>
+        <h2 id="一种常见的误读"><i class="fas fa-crosshairs"></i> 一种常见的误读</h2>
 
         <p>
             这套体系被构建的过程中，出现过一个反复的偏移——用传统文学的滤镜去看一个工程师的创作。
@@ -373,7 +547,7 @@
 
         <!-- ===== 后记 ===== -->
 
-        <h2><i class="fas fa-compass"></i> 后记：这篇页面是怎么来的</h2>
+        <h2 id="后记这篇页面是怎么来的"><i class="fas fa-compass"></i> 后记：这篇页面是怎么来的</h2>
 
         <p>
             以上这四层结构，是我一直在构建的思想体系。在一场深夜创作《失控时空·对话版》的对话中，AI帮我把它从直觉层面的感知，外化成了可视化的结构图。
@@ -407,9 +581,9 @@
 
         <div class="series-nav">
             <a href="../aboutmore/czjs.html">← 会话的碰撞</a>
-            <span class="placeholder">·</span>
+            <a href="../index.html">五层进化 →</a>
         </div>
-    </div>
+</div>
 </div>
 
 <div class="inland-security-footer">
@@ -419,17 +593,11 @@
                 <span>itg · -lvgl-</span>
             </a>
         </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
+        </div>
     </div>
 </div>
-
-<style>
-    .inland-security-footer { position: fixed; z-index: 10; bottom: 0; right: 0; width: fit-content; display: flex; justify-content: flex-end; }
-    .tooltip-container { position: relative; }
-    .trigger-content { display: flex; }
-    .x-itg-link { display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 0.85rem; background: rgba(46,111,80,0.92); color: #fff; text-decoration: none; border-top-left-radius: 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-    .x-itg-link:hover { background: rgba(46,111,80,1); }
-    @media (max-width: 640px) { .inland-security-footer { position: static; width: 100%; justify-content: center; margin: 24px 0; } .x-itg-link { border-radius: 999px; } }
-</style>
-
 </body>
 </html>
