@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://x-itg.github.io/sitemap.xml
+Sitemap: https://x-itg.github.io/sitemap_index.xml
