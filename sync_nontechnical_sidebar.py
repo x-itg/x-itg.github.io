@@ -382,7 +382,7 @@ def build_series_nav(indent: str, current_file: str, eol: str) -> str:
     titles = {file_name: title for file_name, title, _ in VISIBLE_FLOW}
     index = flow_files.index(current_file)
     prev_target = ("gd.html", "⑯ 始于工程，服务生活") if index == 0 else (flow_files[index - 1], titles[flow_files[index - 1]])
-    next_target = ("index.html", "五层进化") if index == len(flow_files) - 1 else (flow_files[index + 1], titles[flow_files[index + 1]])
+    next_target = ("index.html", "首页入口") if index == len(flow_files) - 1 else (flow_files[index + 1], titles[flow_files[index + 1]])
     return eol.join([
         f'{indent}<div class="series-nav">',
         f'{indent}{unit}<a href="{href(current_file, prev_target[0])}">← {prev_target[1]}</a>',

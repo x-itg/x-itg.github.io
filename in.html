@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AI嵌入式编程调试 | 五层进化 · 完整闭环工程</title>
+    <meta name="description" content="一套完整的嵌入式AI工程化方法论体系，涵盖五层进化模型、负日志、闭环收敛等核心概念，为AI在嵌入式开发中定义法则。">
+    <meta name="keywords" content="嵌入式,AI编程,负日志,闭环收敛,五层进化,工程化">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="AI嵌入式编程调试 | 五层进化 · 完整闭环工程">
+    <meta property="og:description" content="一套完整的嵌入式AI工程化方法论体系，涵盖五层进化模型、负日志、闭环收敛等核心概念，为AI在嵌入式开发中定义法则。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://x-itg.github.io/in.html">
+    <link rel="canonical" href="https://x-itg.github.io/in.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/site-sidebar.css">
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --accent: #c0392b;
+            --border: #e0e4e8;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+            --highlight: #fef9e7;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 8px;
+            --radius-lg: 14px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.75;
+        }
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 16px 80px;
+            gap: 24px;
+        }
+        .sidebar-toc {
+            width: 180px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 24px;
+            align-self: start;
+            background: #f8fafc;
+            border-radius: 14px;
+            border: 1px solid #e8edf4;
+            padding: 14px 10px;
+        }
+        .sidebar-toc h3 { font-size: 13px; padding: 0 10px 8px; color: #143b69; }
+        .sidebar-toc ul { list-style: none; }
+        .sidebar-toc a {
+            display: block;
+            text-decoration: none;
+            color: #47627f;
+            border-radius: 10px;
+            padding: 8px 10px;
+            font-size: 13px;
+        }
+        .sidebar-toc a:hover { background: #eef4ff; color: #1f4f86; }
+        .sidebar-toc i { width: 18px; color: #7f98b7; }
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .hero {
+            background: linear-gradient(135deg, #ffffff, #f0f6ff);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: #eef4ff;
+            color: #204a79;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-size: 38px;
+            line-height: 1.22;
+            letter-spacing: -0.04em;
+            margin-bottom: 12px;
+        }
+        .hero .sub { color: var(--text-secondary); font-size: 18px; }
+        .hero-recommend {
+            display: block;
+            margin-top: 20px;
+            padding: 16px 18px;
+            border-radius: 14px;
+            border: 1px solid #f0d99a;
+            background: var(--highlight);
+            color: #664914;
+            text-decoration: none;
+        }
+        .hero-recommend strong { display: block; color: #4b350f; margin-bottom: 4px; }
+        .meta { margin-top: 12px; font-size: 13px; color: var(--text-secondary); }
+        .card, .merged-section {
+            margin-top: 24px;
+            background: var(--card-bg);
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            padding: 28px 30px;
+            box-shadow: var(--shadow-sm);
+        }
+        .merged-section { border-top: 4px solid #3b82f6; }
+        .level-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 14px;
+            border-radius: 999px;
+            background: #eef4ff;
+            color: #214b80;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+        h2 { font-size: 28px; margin-bottom: 12px; letter-spacing: -0.03em; }
+        h3 { font-size: 20px; margin: 22px 0 10px; }
+        h4 { font-size: 17px; margin-bottom: 8px; }
+        p { margin: 12px 0; }
+        .grid-2, .grid-3 { display: grid; gap: 16px; margin-top: 16px; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        .insight-box, .technique-card, .principle-card, .workflow-step, .key-takeaway {
+            border-radius: 14px;
+            padding: 16px 18px;
+            border: 1px solid #e7ecf3;
+            background: #fbfcfe;
+        }
+        .insight-box { background: linear-gradient(180deg, #eef5ff 0%, #f8fbff 100%); border-color: #d8e6fa; }
+        .principle-card { background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: #f7d36f; }
+        .workflow-step { display: flex; gap: 14px; align-items: flex-start; }
+        .step-number {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #3b82f6;
+            color: white;
+            font-weight: 700;
+        }
+        .code-block {
+            margin: 14px 0;
+            padding: 16px;
+            border-radius: 12px;
+            background: var(--code-bg);
+            color: var(--code-text);
+            overflow-x: auto;
+        }
+        .code-block pre {
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family: "JetBrains Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .quote, .highlight {
+            margin-top: 16px;
+            padding: 16px 18px;
+            border-radius: 14px;
+        }
+        .quote { background: #f5f3ff; border-left: 4px solid #8b5cf6; }
+        .highlight { background: #f9f4df; border-left: 4px solid var(--accent); color: #634914; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .stat-item {
+            padding: 14px;
+            text-align: center;
+            border-radius: 14px;
+            background: #f8fafc;
+            border: 1px solid #e8edf4;
+        }
+        .stat-value { font-size: 22px; font-weight: 700; color: #2563eb; }
+        .concept-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14px; }
+        .concept-table th { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 10px; text-align: left; }
+        .concept-table td { padding: 10px; border-bottom: 1px solid #e7ecf3; vertical-align: top; }
+        .bottom-series-links, .series-nav, footer {
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+footer { color: #7b8795; font-size: 13px; }
+        @media (max-width: 980px) {
+            .layout { flex-direction: column; }
+            .sidebar-toc, .site-sidebar { position: static; width: 100%; }
++            .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 720px) {
+            .hero { padding: 24px 20px; }
+            .hero h1 { font-size: 30px; }
+            .card, .merged-section { padding: 22px 18px; }
++            .stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <aside class="site-sidebar site-sidebar--tech">
+        <div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-sun"></i> 技术主线</a></div>
+        <div class="site-sidebar__intro">
+            <span class="site-sidebar__eyebrow">当前支线</span>
+            <strong>技术主线 · 总纲</strong>
+            <p>定义体系坐标，后续所有工程法则都从这里分叉。</p>
+        </div>
+        <details class="site-sidebar__group" open>
+            <summary>总纲</summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="in.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">五层进化</span>
+                            <span class="site-sidebar__link-meta">总纲 · 定义整个体系的坐标系和成熟度框架</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>核心主线</summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="true.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧱</span>
+                        <span>
+                            <span class="site-sidebar__link-title">实践项目模板</span>
+                            <span class="site-sidebar__link-meta">执行基础 · 把方法论固化为可落地的工程骨架</span>
+                        </span>
+                    </a></li>
+                    <li><a href="test.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🛠️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">自主修复闭环</span>
+                            <span class="site-sidebar__link-meta">执行智能 · 双轨收敛让系统在既定路径上自我修正</span>
+                        </span>
+                    </a></li>
+                    <li><a href="fwd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧠</span>
+                        <span>
+                            <span class="site-sidebar__link-title">从收敛到进化</span>
+                            <span class="site-sidebar__link-meta">演化与判断智能 · 引入Agent性格制衡与决策切换</span>
+                        </span>
+                    </a></li>
+                    <li><a href="exc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🫀</span>
+                        <span>
+                            <span class="site-sidebar__link-title">知识的生命体征</span>
+                            <span class="site-sidebar__link-meta">记忆智能 · 知识资产生命周期管理与免疫记忆</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>根系能力</summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="pcb.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🔎</span>
+                        <span>
+                            <span class="site-sidebar__link-title">电路图分析器</span>
+                            <span class="site-sidebar__link-meta">感知根系 · 打通物理世界与数字世界</span>
+                        </span>
+                    </a></li>
+                    <li><a href="pt.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧩</span>
+                        <span>
+                            <span class="site-sidebar__link-title">最后的拼图：Skills</span>
+                            <span class="site-sidebar__link-meta">支撑根系 · 快消费应用即时方法</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>专业延伸</summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="history.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📦</span>
+                        <span>
+                            <span class="site-sidebar__link-title">历史的包袱</span>
+                            <span class="site-sidebar__link-meta">专业延伸 · 遗留工程与AI迁移策略</span>
+                        </span>
+                    </a></li>
+                    <li><a href="ocd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧰</span>
+                        <span>
+                            <span class="site-sidebar__link-title">被忽视的工具链组合</span>
+                            <span class="site-sidebar__link-meta">专业延伸 · 用开源命令行工具把AI接入真实硬件调试</span>
+                        </span>
+                    </a></li>
+                    <li><a href="devs.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🏷️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">固件铭牌与设备画像</span>
+                            <span class="site-sidebar__link-meta">专业延伸 · 固件数字身份与协同管理</span>
+                        </span>
+                    </a></li>
+                    <li><a href="gmp.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📜</span>
+                        <span>
+                            <span class="site-sidebar__link-title">合规验证与AI编程</span>
+                            <span class="site-sidebar__link-meta">专业延伸 · 从"事后补文档"到"事前建法则"</span>
+                        </span>
+                    </a></li>
+                    <li><a href="14.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">⚖️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">AI谄媚与专利</span>
+                            <span class="site-sidebar__link-meta">专业延伸 · 在拿证与保护之间切换审查模式</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>实战与心法</summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="hg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎯</span>
+                        <span>
+                            <span class="site-sidebar__link-title">回归现实：单Agent实践框架</span>
+                            <span class="site-sidebar__link-meta">综合实战 · 将完整法则体系落地为可立即上手的工程实践</span>
+                        </span>
+                    </a></li>
+                    <li><a href="12.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">AI编程的利刃</span>
+                            <span class="site-sidebar__link-meta">工程利器 · 同步生成测试脚本让AI自我调试</span>
+                        </span>
+                    </a></li>
+                    <li><a href="py.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🐍</span>
+                        <span>
+                            <span class="site-sidebar__link-title">批量修改，先问该不该用脚本</span>
+                            <span class="site-sidebar__link-meta">工程利器 · 先判断模式，再把批量改造交给脚本执行</span>
+                        </span>
+                    </a></li>
+                    <li><a href="13.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧵</span>
+                        <span>
+                            <span class="site-sidebar__link-title">拆解与整合</span>
+                            <span class="site-sidebar__link-meta">工程心法 · 驾驭复杂系统的完整工程法则</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>内核反照</summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="gd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+                        <span>
+                            <span class="site-sidebar__link-title">始于工程，服务生活</span>
+                            <span class="site-sidebar__link-meta">内核反照 · 工程法则从技术补丁长成生活工具</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>走出技术</summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="about.html" class="site-sidebar__link">
+                        <span class="site-sidebar__link-title">总序 · 我找到了一套法则</span>
+                        <span class="site-sidebar__link-meta">从技术回到整站总叙事。</span>
+                    </a></li>
+                    <li><a href="aboutmore/wx.html" class="site-sidebar__link">
+                        <span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+                        <span class="site-sidebar__link-meta">从技术、生活到文学的一张路线图。</span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
+    </aside>
+    <aside class="sidebar-toc">
+        <h3><i class="fas fa-list"></i> 本章导览</h3>
+        <nav>
+            <ul>
+                <li><a href="#sec0"><i class="fas fa-feather-alt"></i> 起点：Vibe Coding</a></li>
+                <li><a href="#sec1"><i class="fas fa-eye"></i> 第一招：双向可观测性</a></li>
+                <li><a href="#sec2"><i class="fas fa-folder-tree"></i> 第二招：统一上下文</a></li>
+                <li><a href="#sec3"><i class="fas fa-people-arrows"></i> 第三招：多模型协作</a></li>
+                <li><a href="#sec4"><i class="fas fa-terminal"></i> 第四招：CLI闭环</a></li>
+                <li><a href="#sec5"><i class="fas fa-gem"></i> 第五招：完整闭环工程</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <section class="hero">
+            <div class="badge"><i class="fas fa-microchip"></i> 真实验证 · 嵌入式 AI 工程化</div>
+            <h1>从“摸黑调试”到“拨云见日”<br>AI 编程调试的五层进化</h1>
+            <p class="sub">结构化日志、负日志、CLI 闭环、多模型协作和 Vibe+Verify，不是五个技巧，而是一条完整工程链路。</p>
+            <a class="hero-recommend" href="index.html">
+                <strong><i class="fas fa-compass"></i> 若你是首次来访，请先回首页入口</strong>
+                <span>首页现在只负责入口分发；这一页是技术总纲正文，专门用来把整条技术主线的骨架一次讲清楚。</span>
+            </a>
+            <div class="meta">itg · 公众号: 火星火箭 · 嵌入式 AI 工程化系列</div>
+        </section>
+
+        <section class="card" id="sec0">
+            <div class="level-badge"><i class="fas fa-feather-alt"></i> 第零层 · 起点</div>
+            <h2>Vibe Coding 的爽与痛</h2>
+            <p>Vibe Coding 让生成速度第一次压倒了人类手写，但它在嵌入式里格外脆弱。你可以五分钟得到一个驱动框架，却很难在第六分钟确认它是不是在真实硬件上按你的时序活着。</p>
+            <div class="grid-2">
+                <div class="insight-box"><h4><i class="fas fa-clock"></i> 实时性约束</h4><p>中断、超时、时钟树和总线时序不会因为代码看起来“像对的”就放你过去。</p></div>
+                <div class="insight-box"><h4><i class="fas fa-eye-slash"></i> 可观测性缺失</h4><p>没有结构化日志，AI 只能猜你现在死在初始化、状态机、还是硬件边界。</p></div>
+                <div class="insight-box"><h4><i class="fas fa-puzzle-piece"></i> 上下文割裂</h4><p>单文件修改无法表达协议、工程目录、测试脚本和烧录链路之间的依赖。</p></div>
+                <div class="insight-box"><h4><i class="fas fa-terminal"></i> 反馈周期过长</h4><p>只要还停留在“人手动编译、烧录、点按键、复制日志”，AI 就不可能真正进入闭环。</p></div>
+            </div>
+            <div class="highlight"><i class="fas fa-lightbulb"></i> 第一性结论：AI 的问题不是“会不会写代码”，而是“能不能看见代码在系统里有没有真的生效”。</div>
+        </section>
+
+        <section class="card" id="sec1">
+            <div class="level-badge"><i class="fas fa-eye"></i> 第一招 · 双向可观测性</div>
+            <h2>结构化日志 + 负日志</h2>
+            <p>传统日志只记录“发生了什么”，但大量嵌入式问题的根因其实是“应该发生却没有发生”。负日志就是把这种缺失显式写进系统里。</p>
+            <div class="code-block"><pre>#define LOG_STATE(state, epoch) \
+    LOG("INFO", "state=%s epoch=%d", state_to_str(state), epoch)
+
+#define EXPECT_WITHIN(ms, event_name, condition) do { \
+    uint32_t start = get_tick_ms(); \
+    while (!(condition)) { \
+        if ((get_tick_ms() - start) > (ms)) { \
+            LOG("NEGATIVE", "%s expected '%s' within %dms", __func__, event_name, ms); \
+            break; \
+        } \
+    } \
+} while(0)</pre></div>
+            <div class="grid-3">
+                <div class="principle-card"><h4>显式声明期望</h4><p>从“我怀疑没有收到 COMMIT”变成“系统明确声明 50ms 内必须收到 COMMIT”。</p></div>
+                <div class="principle-card"><h4>暴露静默失败</h4><p>中断没触发、状态没迁移、epoch 不一致，这些过去最难抓的缺失会被主动抛出来。</p></div>
+                <div class="principle-card"><h4>让 AI 直接诊断</h4><p>AI 不再从几十行杂乱 printf 里猜，而是从一条负日志开始逆推根因。</p></div>
+            </div>
+            <div class="quote">正日志记录事实，负日志记录缺失的事实。两者叠在一起，AI 才真正拥有“看见系统”的能力。</div>
+        </section>
+
+        <section class="card" id="sec2">
+            <div class="level-badge"><i class="fas fa-folder-tree"></i> 第二招 · 全局视角</div>
+            <h2>统一工程上下文</h2>
+            <p>AI 不是在读一个文件，而是在读一个工程。只有把固件、上位机、文档、日志和规则一起摆在它面前，它才可能做出稳定判断。</p>
+            <div class="code-block"><pre>project/
+├── firmware/                # 固件源代码
+├── host/                    # CLI 调试与测试工具
+├── docs/                    # 协议、硬件、接线和规范
+├── logs/                    # 运行日志与异常样本
+├── .vscode/tasks.json       # 一键自动化命令
+└── agents.md                # AI 协作规约</pre></div>
+            <div class="grid-2">
+                <div class="technique-card"><h4><i class="fas fa-file-alt"></i> 文档也是上下文</h4><p>协议说明和硬件连接图不是附录，而是状态判断和修复建议的边界条件。</p></div>
+                <div class="technique-card"><h4><i class="fas fa-history"></i> 日志资产化</h4><p>典型日志和异常日志变成可复用样本，让 AI 逐步拥有项目记忆。</p></div>
+                <div class="technique-card"><h4><i class="fas fa-scale-balanced"></i> agents.md 约束行为</h4><p>把“先查负日志”“先映射状态码”“先跑健康检查”写成规约，而不是靠临场提醒。</p></div>
+                <div class="technique-card"><h4><i class="fas fa-network-wired"></i> 让目录表达结构</h4><p>目录本身就是低成本知识图谱，决定了 AI 能否快速理解谁依赖谁。</p></div>
+            </div>
+            <div class="highlight"><i class="fas fa-chart-line"></i> 上下文一旦统一，AI 的诊断质量不再靠运气，而开始靠结构稳定输出。</div>
+        </section>
+
+        <section class="card" id="sec3">
+            <div class="level-badge"><i class="fas fa-people-arrows"></i> 第三招 · 分工协作</div>
+            <h2>多模型协作：低成本写，高性能审</h2>
+            <p>不是所有任务都要最强模型。真正省钱的方式不是“全程便宜”或“全程最强”，而是让不同模型只干自己最擅长的部分。</p>
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-value">$0.05</div><div>模板生成</div></div>
+                <div class="stat-item"><div class="stat-value">$0.30</div><div>根因诊断</div></div>
+                <div class="stat-item"><div class="stat-value">60%</div><div>常见降本幅度</div></div>
+                <div class="stat-item"><div class="stat-value">~$0.70</div><div>中等问题总成本</div></div>
+            </div>
+            <div class="workflow-step"><div class="step-number">1</div><div><h4>模板生成交给低成本模型</h4><p>驱动骨架、CLI 框架、任务清单和目录约束都属于高重复结构化产出。</p></div></div>
+            <div class="workflow-step"><div class="step-number">2</div><div><h4>Diff 审查和根因分析交给高性能模型</h4><p>深度推理场景才值得付更高单价，比如理解负日志链路、状态机冲突和修复取舍。</p></div></div>
+            <div class="workflow-step"><div class="step-number">3</div><div><h4>日志预处理再次交给低成本模型</h4><p>先把长日志压缩成关键事件和缺失事件，再交给高性能模型做最终判断。</p></div></div>
+        </section>
+
+        <section class="card" id="sec4">
+            <div class="level-badge"><i class="fas fa-terminal"></i> 第四招 · CLI 闭环</div>
+            <h2>让 AI 也拥有“执行权”</h2>
+            <p>只要测试链路仍然依赖人手操作，AI 就只是顾问。CLI 的作用不是优雅，而是把执行权交还给自动化。</p>
+            <div class="grid-2">
+                <div class="technique-card">
+                    <h4><i class="fas fa-plug"></i> 设备与总线</h4>
+                    <div class="code-block"><pre>python host/cli_can.py --send 0x123 01020304
+python host/cli_can.py --listen --timeout 5
+python host/cli_can.py --ping</pre></div>
+                </div>
+                <div class="technique-card">
+                    <h4><i class="fas fa-satellite-dish"></i> 日志与命令</h4>
+                    <div class="code-block"><pre>python host/cli_serial.py COM3 115200
+python host/cli_serial.py COM3 115200 "show state"</pre></div>
+                </div>
+            </div>
+            <div class="code-block"><pre>{
+  "label": "full_loop",
+  "dependsOn": ["build", "flash", "monitor_log", "cli_test"],
+  "group": { "kind": "test", "isDefault": true }
+}</pre></div>
+            <div class="highlight"><i class="fas fa-robot"></i> 当 build、flash、monitor 和 cli_test 都能命令化，AI 就不再停在“建议修改”，而能走到“执行回归”。</div>
+        </section>
+
+        <section class="merged-section" id="sec5">
+            <div class="level-badge"><i class="fas fa-gem"></i> 第五招 · 完整闭环工程</div>
+            <h2>Vibe+Verify：把前四招固化成工程飞轮</h2>
+            <p>前四招解决的是单点能力，第五招解决的是“如何把它们长期保持为一套可复制工程资产”。</p>
+            <h3>1. 契约生成</h3>
+            <div class="code-block"><pre>模板生成必须满足：
+1. 固件包含结构化日志和负日志
+2. host/ 下具备可调用 CLI
+3. tasks.json 可一键 full_loop
+4. agents.md 写清状态映射和行为准则
+5. 输出完整可运行工程，而不是碎片代码</pre></div>
+            <h3>2. 一键 full_loop</h3>
+            <div class="code-block"><pre>$ make full_loop
+[BUILD] build completed
+[FLASH] device updated
+[LOG] collecting logs/current.log
+[TEST] ANNOUNCE -> COMMIT
+[FAIL] expected 'COMMIT' within 50ms
+[ACTION] AI reads log, proposes diff, reruns loop</pre></div>
+            <h3>3. 人机共情</h3>
+            <p>把状态码映射、硬件名称、已知陷阱和约束写进 agents.md，让“共情”从个人习惯升级成团队契约。</p>
+            <h3>4. 飞轮效应</h3>
+            <div class="grid-2">
+                <div class="key-takeaway"><h4><i class="fas fa-database"></i> 案例库</h4><p>每修复一次问题，就沉淀一次“负日志模式 + 修复 diff”的经验样本。</p></div>
+                <div class="key-takeaway"><h4><i class="fas fa-filter"></i> 低成本前置过滤</h4><p>越多结构化经验进入案例库，后续问题就越接近低成本匹配而不是高成本重新推理。</p></div>
+            </div>
+            <table class="concept-table">
+                <thead><tr><th>行业概念</th><th>这里的升级</th><th>关键差异</th></tr></thead>
+                <tbody>
+                    <tr><td>传统日志</td><td>结构化正日志</td><td>不只写“到了哪”，还写状态、epoch、关键参数。</td></tr>
+                    <tr><td>断言</td><td>负日志</td><td>不是程序崩掉式判断，而是对“缺失事件”的持续记录。</td></tr>
+                    <tr><td>Debug Loop</td><td>CLI 自动闭环</td><td>从人工回归变成 AI 可执行回归。</td></tr>
+                    <tr><td>System Prompt</td><td>agents.md</td><td>从一次性提示升级成项目内可版本化契约。</td></tr>
+                </tbody>
+            </table>
+            <div class="quote">最终目标不是“让 AI 写得更快”，而是“让 AI 进入一个能自证、能回归、能积累记忆的工程系统”。</div>
+        </section>
+
+        <div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
+            <strong>系列导航：</strong>
+            <a href="in.html">① 五层进化</a> ·
+            <a href="true.html">② 实践项目模板</a> ·
+            <a href="test.html">③ 自主修复闭环</a> ·
+            <a href="fwd.html">④ 从收敛到进化</a> ·
+            <a href="exc.html">⑤ 知识的生命体征</a> ·
+            <a href="pcb.html">⑥ 电路图分析器</a> ·
+            <a href="pt.html">⑦ 最后的拼图：Skills</a> ·
+            <a href="history.html">⑧ 历史的包袱</a> ·
+            <a href="ocd.html">⑨ 被忽视的工具链组合</a> ·
+            <a href="devs.html">⑩ 固件铭牌与设备画像</a> ·
+            <a href="gmp.html">⑪ 合规验证与AI编程</a> ·
+            <a href="hg.html">⑫ 回归现实：单Agent实践框架</a> ·
+            <a href="12.html">⑬ AI编程的利刃</a> ·
+            <a href="py.html">⑭ 批量修改，先问该不该用脚本</a> ·
+            <a href="13.html">⑮ 拆解与整合</a> ·
+            <a href="14.html">⑯ AI谄媚与专利</a> ·
+            <a href="gd.html">⑰ 始于工程，服务生活</a>
+        </div>
+
+<div class="series-nav">
+    <a href="aboutmore/wx.html">← 乾坤大挪移心法总览</a>
+    <a href="true.html">实践项目模板 →</a>
+</div>
+<footer>
+            <i class="fas fa-code"></i> 五层进化 + 负日志 + CLI 闭环 + agents.md · 结构化日志 · 自动化测试 · Vibe+Verify · <a href="about.html">关于作者</a>
+        </footer>
+    </main>
+</div>
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
+        </div>
+    </div>
+</div>
+</body>
+</html>

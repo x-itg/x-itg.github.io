@@ -18,7 +18,7 @@
 
 👉 **文章总览：[乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html)**
 
-首次来访：先读 [《五层进化》](https://x-itg.github.io/index.html)。
+首次来访：先读 [首页入口](https://x-itg.github.io/index.html)，再进入 [《五层进化》](https://x-itg.github.io/in.html)。
 技术主线负责把法则讲清楚，法则与故事负责解释它为什么能走出工程。
 
 ---
@@ -37,7 +37,7 @@
 
 | 序号 | 文章 | 定位 | 关键词 |
 |------|------|------|--------|
-| ① | [五层进化](https://x-itg.github.io/index.html) | 总纲 | 成熟度模型、AI 自治、体系坐标 |
+| ① | [五层进化](https://x-itg.github.io/in.html) | 总纲 | 成熟度模型、AI 自治、体系坐标 |
 | ② | [实践项目模板](https://x-itg.github.io/true.html) | 执行基础 | 工程骨架、规约、上下文 |
 | ③ | [自主修复闭环](https://x-itg.github.io/test.html) | 执行智能 | 双轨收敛、测试、日志驱动 |
 | ④ | [从收敛到进化](https://x-itg.github.io/fwd.html) | 判断智能 | Agent 制衡、决策切换、共生演化 |
@@ -64,7 +64,7 @@
 
 > 江湖上的武功，都分个几流几等。这套心法也分五层，从“摸黑瞎打”到“言出法随”。第一层，Vibe Coding，凭感觉出招，漏洞百出。第五层，AI 自治，人在旁边喝茶，系统自己修炼。
 >
-> [阅读全文](https://x-itg.github.io/index.html)
+> [阅读全文](https://x-itg.github.io/in.html)
 
 </details>
 
