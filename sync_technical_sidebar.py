@@ -46,49 +46,25 @@ BRIDGES = [
 ]
 
 SECTION_META = {
-    "in.html": ("技术主线 · 总纲", "定义体系坐标，后续所有工程法则都从这里分叉。"),
-    "index.html": ("技术主线 · 入口页", "从这里进入技术主线，再决定是先读总纲还是先看整张地图。"),
-    "true.html": ("技术主线 · 核心主线", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
-    "test.html": ("技术主线 · 核心主线", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
-    "fwd.html": ("技术主线 · 核心主线", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
-    "exc.html": ("技术主线 · 核心主线", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
-    "pcb.html": ("技术主线 · 根系能力", "这里补齐感知与支撑，让体系能真正接入物理世界。"),
-    "pt.html": ("技术主线 · 根系能力", "这里补齐感知与支撑，让体系能真正接入物理世界。"),
-    "history.html": ("技术主线 · 专业延伸", "法则进入遗留工程、设备身份与合规场景。"),
-    "ocd.html": ("技术主线 · 专业延伸", "把开源工具链、硬件状态和AI执行闭环接到同一条命令线上。"),
-    "devs.html": ("技术主线 · 专业延伸", "法则进入遗留工程、设备身份与合规场景。"),
-    "gmp.html": ("技术主线 · 专业延伸", "法则进入遗留工程、设备身份与合规场景。"),
-    "hg.html": ("技术主线 · 实战与心法", "完整法则压进真实工作流，验证能否长期落地。"),
-    "12.html": ("技术主线 · 实战与心法", "完整法则压进真实工作流，验证能否长期落地。"),
-    "py.html": ("技术主线 · 实战与心法", "完整法则压进真实工作流，验证能否长期落地。"),
-    "13.html": ("技术主线 · 实战与心法", "完整法则压进真实工作流，验证能否长期落地。"),
-    "14.html": ("技术主线 · 专业延伸", "这里开始守关，要求法则不仅会借力，也会刹车。"),
-    "gd.html": ("技术主线 · 内核反照", "这是从技术翻回生活的桥面，后面的非技术文章都从这里接上。"),
+    "in.html": ("T · 嵌入式AI工程化", "定义体系坐标，后续所有工程法则都从这里分叉。"),
+    "index.html": ("T · 嵌入式AI工程化", "从这里进入技术主线，再决定是先读总纲还是先看整张地图。"),
+    "true.html": ("T · 嵌入式AI工程化", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
+    "test.html": ("T · 嵌入式AI工程化", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
+    "fwd.html": ("T · 嵌入式AI工程化", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
+    "exc.html": ("T · 嵌入式AI工程化", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
+    "pcb.html": ("T · 嵌入式AI工程化", "这里补齐感知与支撑，让体系能真正接入物理世界。"),
+    "pt.html": ("T · 嵌入式AI工程化", "这里补齐感知与支撑，让体系能真正接入物理世界。"),
+    "history.html": ("T · 嵌入式AI工程化", "法则进入遗留工程、设备身份与合规场景。"),
+    "ocd.html": ("T · 嵌入式AI工程化", "把开源工具链、硬件状态和AI执行闭环接到同一条命令线上。"),
+    "devs.html": ("T · 嵌入式AI工程化", "法则进入遗留工程、设备身份与合规场景。"),
+    "gmp.html": ("T · 嵌入式AI工程化", "法则进入遗留工程、设备身份与合规场景。"),
+    "hg.html": ("T · 嵌入式AI工程化", "完整法则压进真实工作流，验证能否长期落地。"),
+    "12.html": ("T · 嵌入式AI工程化", "完整法则压进真实工作流，验证能否长期落地。"),
+    "py.html": ("T · 嵌入式AI工程化", "完整法则压进真实工作流，验证能否长期落地。"),
+    "13.html": ("T · 嵌入式AI工程化", "完整法则压进真实工作流，验证能否长期落地。"),
+    "14.html": ("T · 嵌入式AI工程化", "这里开始守关，要求法则不仅会借力，也会刹车。"),
+    "gd.html": ("T · 嵌入式AI工程化", "这是从技术翻回生活的桥面，后面的非技术文章都从这里接上。"),
 }
-
-CIRCLED_NUMBERS = [
-    "①",
-    "②",
-    "③",
-    "④",
-    "⑤",
-    "⑥",
-    "⑦",
-    "⑧",
-    "⑨",
-    "⑩",
-    "⑪",
-    "⑫",
-    "⑬",
-    "⑭",
-    "⑮",
-    "⑯",
-    "⑰",
-    "⑱",
-    "⑲",
-    "⑳",
-]
-
 
 def detect_eol(text: str) -> str:
     return "\r\n" if "\r\n" in text else "\n"
@@ -221,7 +197,7 @@ def build_sidebar(base_indent: str, active_file: str, eol: str) -> str:
     title, desc = SECTION_META[active_file]
     lines = [
         f'{base_indent}<aside class="site-sidebar site-sidebar--tech">',
-        f'{i1}<div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-sun"></i> 技术主线</a></div>',
+        f'{i1}<div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-sun"></i> T · 嵌入式AI工程化</a></div>',
         f'{i1}<div class="site-sidebar__intro">',
         f'{i2}<span class="site-sidebar__eyebrow">当前支线</span>',
         f"{i2}<strong>{title}</strong>",
@@ -290,9 +266,8 @@ def build_series_nav(indent: str, active_file: str, eol: str) -> str:
 
 def build_bottom_series_links(indent: str, eol: str) -> str:
     parts = []
-    for index, (file_name, _, title, _) in enumerate(TECH_ITEMS, start=1):
-        number = CIRCLED_NUMBERS[index - 1] if index <= len(CIRCLED_NUMBERS) else f"{index}."
-        parts.append(f'<a href="{file_name}">{number} {title}</a>')
+    for file_name, _, title, _ in TECH_ITEMS:
+        parts.append(f'<a href="{file_name}">{title}</a>')
     joined = f" ·{eol}{indent}    ".join(parts)
     lines = [
         f'{indent}<div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">',

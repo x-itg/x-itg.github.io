@@ -34,34 +34,34 @@ FILE_TO_LAYER = {file_name: layer for file_name, _, layer in VISIBLE_FLOW}
 FILE_TO_LAYER["aboutmore/ff.html"] = "special"
 
 LAYER_META = {
-    "law": ("法则与故事 · 法则层", "先解释法则怎么建立，再解释它为什么能走出工程。"),
-    "persona": ("法则与故事 · 人格层", "法则落进家庭、关系、疲惫与自省，开始接受生活检验。"),
-    "literature": ("法则与故事 · 文学层", "当法则遇到错配、感情与失控，它开始长出故事。"),
-    "meta": ("法则与故事 · 元创作层", "这里公开引擎，解释这些作品如何被组织和生成。"),
-    "special": ("法则与故事 · 特别页", "保留的隐藏实验，不放进公开流转顺序里。"),
+    "law": ("L1 · 法则", "解释法则如何建立，并验证它为什么能走出工程。"),
+    "persona": ("L2 · 人", "把法则放进家庭、关系、疲惫与自省，接受生活检验。"),
+    "literature": ("L3 · 小说", "当法则遇到错配、感情与失控，开始长出故事。"),
+    "meta": ("L4 · 创作", "公开创作引擎，解释作品如何被组织和生成。"),
+    "special": ("L4 · 创作", "保留的隐藏实验，不放进公开流转顺序里。"),
 }
 
 LAYER_LABELS = {
-    "law": "法则层",
-    "persona": "人格层",
-    "literature": "小说层",
-    "meta": "体系层",
-    "special": "特别页",
+    "law": "L1 · 法则",
+    "persona": "L2 · 人",
+    "literature": "L3 · 小说",
+    "meta": "L4 · 创作",
+    "special": "L4 · 创作",
 }
 
 LAYER_SUMMARY_META = {
     "law": "法则主线与迁移起点",
     "persona": "日常、关系与自省现场",
     "literature": "小说、对话与失控实验",
-    "meta": "体系说明与创作引擎",
+    "meta": "创作方法与引擎说明",
     "special": "保留实验页",
 }
 
 LAYER_ITEM_META = {
-    "law": ("当前法则文章", "法则相关文章"),
-    "persona": ("当前人格文章", "人格相关文章"),
-    "literature": ("当前小说作品", "小说与对话作品"),
-    "meta": ("当前体系文章", "体系与引擎说明"),
+    "law": ("法则起点", "法则与迁移"),
+    "persona": ("关系现场", "日常与自省"),
+    "literature": ("叙事实验", "小说与对话"),
+    "meta": ("创作结构", "方法与引擎"),
     "special": ("保留实验页", "保留实验页"),
 }
 
@@ -216,7 +216,7 @@ def build_sidebar(base_indent: str, current_file: str, eol: str) -> str:
     layer_title, layer_desc = LAYER_META[layer]
     lines = [
         f'{base_indent}<aside class="site-sidebar site-sidebar--story">',
-        f'{i1}<div class="site-sidebar__brand"><a href="{href(current_file, "about.html")}"><i class="fas fa-feather-alt"></i> 法则与故事</a></div>',
+        f'{i1}<div class="site-sidebar__brand"><a href="{href(current_file, "about.html")}"><i class="fas fa-feather-alt"></i> L1-L4 · 法则与故事</a></div>',
         f'{i1}<div class="site-sidebar__intro">',
         f'{i2}<span class="site-sidebar__eyebrow">站点坐标</span>',
         f"{i2}<strong>{layer_title}</strong>",
@@ -242,7 +242,7 @@ def build_sidebar(base_indent: str, current_file: str, eol: str) -> str:
     bridge_open = " open" if current_file == "aboutmore/wx.html" else ""
     lines.extend([
         f'{i1}<details class="site-sidebar__group"{bridge_open}>',
-        build_group_summary(i2, unit, "技术源头", "从工程桥面回看整套法则的起点", eol),
+        build_group_summary(i2, unit, "T · 嵌入式AI工程化", "从工程桥面回看整套法则的起点", eol),
         f'{i2}<div class="site-sidebar__group-body">',
         f"{i3}<ul>",
     ])
@@ -381,7 +381,7 @@ def build_series_nav(indent: str, current_file: str, eol: str) -> str:
     flow_files = [item[0] for item in VISIBLE_FLOW]
     titles = {file_name: title for file_name, title, _ in VISIBLE_FLOW}
     index = flow_files.index(current_file)
-    prev_target = ("gd.html", "⑯ 始于工程，服务生活") if index == 0 else (flow_files[index - 1], titles[flow_files[index - 1]])
+    prev_target = ("gd.html", "始于工程，服务生活") if index == 0 else (flow_files[index - 1], titles[flow_files[index - 1]])
     next_target = ("index.html", "首页入口") if index == len(flow_files) - 1 else (flow_files[index + 1], titles[flow_files[index + 1]])
     return eol.join([
         f'{indent}<div class="series-nav">',
