@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>批量修改，先问该不该用脚本 | 为AI编程工程化立宪</title>
-<meta name="description" content="批量修改代码时，先判断该直接改、先分析，还是先生成脚本。选对模式，省下的不只是 Token，还有返工和风险。">
-<meta name="keywords" content="AI编程,批量修改,脚本生成,Python脚本,Token成本,工程判断">
+<title>一套被忽视的工具链组合：ARM GCC + OpenOCD + GDB | 为AI编程工程化立宪</title>
+<meta name="description" content="用 ARM GCC、OpenOCD 和 GDB 这套开源命令行工具链，把 AI 直接接入嵌入式编译、烧录、调试和回归验证闭环。">
+<meta name="keywords" content="ARM GCC,OpenOCD,GDB,嵌入式,AI调试,HardFault,开源工具链">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="批量修改，先问该不该用脚本 | 为AI编程工程化立宪">
-<meta property="og:description" content="批量修改前先判断模式：直接改、先分析、还是生成脚本。这是比具体工具更值钱的工程判断。">
+<meta property="og:title" content="一套被忽视的工具链组合：ARM GCC + OpenOCD + GDB | 为AI编程工程化立宪">
+<meta property="og:description" content="把开源命令行工具链接到 AI 工作流，让硬件调试、烧录和回归验证真正自动化。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://x-itg.github.io/py.html">
-<link rel="canonical" href="https://x-itg.github.io/py.html">
+<meta property="og:url" content="https://x-itg.github.io/ocd.html">
+<link rel="canonical" href="https://x-itg.github.io/ocd.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
 	:root {
@@ -20,12 +20,10 @@
 		--text: #2c3e50;
 		--text-secondary: #5a6c7d;
 		--accent: #c0392b;
-		--accent-soft: #e74c3c;
 		--border: #e0e4e8;
 		--code-bg: #1e293b;
 		--code-text: #e2e8f0;
 		--highlight: #fef9e7;
-		--link: #2980b9;
 		--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
 		--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
 		--radius: 6px;
@@ -48,43 +46,46 @@
 		padding: 40px 24px 80px;
 	}
 
-	.top-nav {
-		display: flex;
-		align-items: center;
-		gap: 12px;
-		margin-bottom: 48px;
-		padding-bottom: 20px;
-		border-bottom: 1px solid var(--border);
-		font-size: 14px;
-		color: var(--text-secondary);
-	}
-
-	.top-nav a { color: var(--link); text-decoration: none; transition: color 0.2s; }
-	.top-nav a:hover { color: var(--accent); }
-	.top-nav .sep { color: #c0c7cf; }
-
 	.article-header { margin-bottom: 48px; }
 	.article-header .series-tag {
-		display: inline-block; background: var(--accent); color: #fff;
-		font-size: 12px; font-weight: 600; padding: 3px 10px;
-		border-radius: 3px; letter-spacing: 0.5px; margin-bottom: 16px;
+		display: inline-block;
+		background: var(--accent);
+		color: #fff;
+		font-size: 12px;
+		font-weight: 600;
+		padding: 3px 10px;
+		border-radius: 3px;
+		letter-spacing: 0.5px;
+		margin-bottom: 16px;
 	}
 	.article-header h1 {
-		font-size: 32px; font-weight: 700; line-height: 1.35;
-		margin-bottom: 12px; letter-spacing: -0.3px;
+		font-size: 32px;
+		font-weight: 700;
+		line-height: 1.35;
+		margin-bottom: 12px;
+		letter-spacing: -0.3px;
 	}
 	.article-header .subtitle {
-		font-size: 17px; color: var(--text-secondary); font-weight: 400; margin-bottom: 20px;
+		font-size: 17px;
+		color: var(--text-secondary);
+		font-weight: 400;
+		margin-bottom: 20px;
 	}
 	.article-header .meta { font-size: 13px; color: #8896a4; }
 
 	h2 {
-		font-size: 24px; font-weight: 700; margin: 56px 0 16px;
-		padding-top: 24px; border-top: 2px solid var(--border);
+		font-size: 24px;
+		font-weight: 700;
+		margin: 56px 0 16px;
+		padding-top: 24px;
+		border-top: 2px solid var(--border);
 		letter-spacing: -0.2px;
 	}
 	h3 {
-		font-size: 19px; font-weight: 600; margin: 36px 0 12px; color: #1a1a2e;
+		font-size: 19px;
+		font-weight: 600;
+		margin: 36px 0 12px;
+		color: #1a1a2e;
 	}
 	p { margin: 14px 0; }
 	strong { color: #1a1a2e; }
@@ -99,7 +100,6 @@
 		margin: 28px 0;
 		box-shadow: var(--shadow-sm);
 	}
-
 	.card.accent-left { border-left: 4px solid var(--accent); }
 	.card.tip { background: #f0f7ff; border-color: #b3d4fc; }
 
@@ -112,47 +112,30 @@
 		font-style: italic;
 		color: #6b4c1e;
 	}
-
 	.insight-box strong { color: #4a340f; }
 
-	.decision-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
-		margin: 28px 0;
+	pre {
+		background: var(--code-bg);
+		color: var(--code-text);
+		padding: 20px 24px;
+		border-radius: var(--radius);
+		overflow-x: auto;
+		font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+		font-size: 13px;
+		line-height: 1.7;
+		margin: 20px 0;
+		box-shadow: var(--shadow-md);
 	}
-
-	.decision-card {
-		background: var(--card-bg);
-		border: 1px solid var(--border);
-		border-radius: var(--radius-lg);
-		padding: 22px;
-		box-shadow: var(--shadow-sm);
-	}
-
-	.decision-card h3 {
-		margin: 0 0 10px;
-		font-size: 18px;
-	}
-
 	code {
 		font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
 		font-size: 13px;
 	}
-
 	p code, li code {
 		background: #eef1f5;
 		padding: 2px 6px;
 		border-radius: 3px;
 		color: #c0392b;
 		font-size: 12px;
-	}
-
-	@media (max-width: 640px) {
-		.container { padding: 20px 16px 60px; }
-		.article-header h1 { font-size: 26px; }
-		h2 { font-size: 21px; }
-		.decision-grid { grid-template-columns: 1fr; }
 	}
 
 	.layout {
@@ -176,14 +159,12 @@
 		border: 1px solid #eef2f8;
 		padding: 1rem 0;
 	}
-
 	.sidebar-toc h3 {
 		font-size: 0.8rem;
 		font-weight: 600;
 		padding: 0 1rem 0.6rem;
 		color: #1e3a8a;
 	}
-
 	.sidebar-toc nav ul { list-style: none; padding: 0 0.5rem; }
 	.sidebar-toc nav li { margin: 0.15rem 0; }
 	.sidebar-toc nav a {
@@ -198,12 +179,22 @@
 	}
 	.sidebar-toc nav a:hover { background: #eef3ff; color: #1e40af; }
 	.sidebar-toc nav a i { width: 1.2rem; color: #7a9ac9; font-size: 0.7rem; }
+	.sidebar-toc::-webkit-scrollbar { width: 4px; }
+	.sidebar-toc::-webkit-scrollbar-track { background: transparent; }
+	.sidebar-toc::-webkit-scrollbar-thumb { background: #d0d7de; border-radius: 2px; }
 
 	.main-content { flex: 1; min-width: 0; }
 
 	@media (max-width: 900px) {
 		.layout { flex-direction: column; }
-		.sidebar-series, .sidebar-toc { width: 100%; position: static; max-height: none; overflow-y: visible; }
+		.site-sidebar, .sidebar-toc { width: 100%; position: static; max-height: none; overflow-y: visible; }
+	}
+
+	@media (max-width: 640px) {
+		.container { padding: 20px 16px 60px; }
+		.article-header h1 { font-size: 26px; }
+		h2 { font-size: 21px; }
+		pre { padding: 14px 16px; font-size: 12px; }
 	}
 </style>
 <link rel="stylesheet" href="assets/site-sidebar.css">
@@ -214,8 +205,8 @@
 		<div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-sun"></i> 技术主线</a></div>
 		<div class="site-sidebar__intro">
 			<span class="site-sidebar__eyebrow">当前支线</span>
-			<strong>技术主线 · 实战与心法</strong>
-			<p>完整法则压进真实工作流，验证能否长期落地。</p>
+			<strong>技术主线 · 专业延伸</strong>
+			<p>把开源工具链、硬件状态和AI执行闭环接到同一条命令线上。</p>
 		</div>
 		<details class="site-sidebar__group">
 			<summary>总纲</summary>
@@ -287,7 +278,7 @@
 				</ul>
 			</div>
 		</details>
-		<details class="site-sidebar__group">
+		<details class="site-sidebar__group" open>
 			<summary>专业延伸</summary>
 			<div class="site-sidebar__group-body">
 				<ul>
@@ -298,7 +289,7 @@
 							<span class="site-sidebar__link-meta">专业延伸 · 遗留工程与AI迁移策略</span>
 						</span>
 					</a></li>
-					<li><a href="ocd.html" class="site-sidebar__link site-sidebar__article-link">
+					<li><a href="ocd.html" class="site-sidebar__link site-sidebar__article-link is-active">
 						<span class="site-sidebar__article-icon" aria-hidden="true">🧰</span>
 						<span>
 							<span class="site-sidebar__link-title">被忽视的工具链组合</span>
@@ -329,7 +320,7 @@
 				</ul>
 			</div>
 		</details>
-		<details class="site-sidebar__group" open>
+		<details class="site-sidebar__group">
 			<summary>实战与心法</summary>
 			<div class="site-sidebar__group-body">
 				<ul>
@@ -347,7 +338,7 @@
 							<span class="site-sidebar__link-meta">工程利器 · 同步生成测试脚本让AI自我调试</span>
 						</span>
 					</a></li>
-					<li><a href="py.html" class="site-sidebar__link site-sidebar__article-link is-active">
+					<li><a href="py.html" class="site-sidebar__link site-sidebar__article-link">
 						<span class="site-sidebar__article-icon" aria-hidden="true">🐍</span>
 						<span>
 							<span class="site-sidebar__link-title">批量修改，先问该不该用脚本</span>
@@ -399,131 +390,140 @@
 		<h3><i class="fas fa-list"></i> 本章导览</h3>
 		<nav>
 			<ul>
-				<li><a href="#mode-choice"><i class="fas fa-code-branch"></i> 两种模式</a></li>
-				<li><a href="#rules"><i class="fas fa-ruler"></i> 两条规则</a></li>
-				<li><a href="#direct-edit"><i class="fas fa-coins"></i> 直接改的成本</a></li>
-				<li><a href="#script-mode"><i class="fas fa-terminal"></i> 脚本省在哪</a></li>
-				<li><a href="#good-case"><i class="fas fa-check-circle"></i> 该用脚本</a></li>
-				<li><a href="#bad-case"><i class="fas fa-exclamation-circle"></i> 不该用脚本</a></li>
-				<li><a href="#summary"><i class="fas fa-compass"></i> 一句话总结</a></li>
+				<li><a href="#pain-points"><i class="fas fa-triangle-exclamation"></i> 为什么老是卡住</a></li>
+				<li><a href="#toolchain"><i class="fas fa-screwdriver-wrench"></i> 组合拳是什么</a></li>
+				<li><a href="#hardfault"><i class="fas fa-bug"></i> HardFault 直达根因</a></li>
+				<li><a href="#pipeline"><i class="fas fa-gears"></i> 编译烧录验证闭环</a></li>
+				<li><a href="#observability"><i class="fas fa-wave-square"></i> 输出与数据回流</a></li>
+				<li><a href="#automation"><i class="fas fa-robot"></i> 无人值守回归</a></li>
+				<li><a href="#essence"><i class="fas fa-compass"></i> 这套组合拳的精髓</a></li>
 			</ul>
 		</nav>
 	</aside>
 
 	<div class="main-content">
 		<div class="container">
+			<header class="article-header">
+				<span class="series-tag">专业延伸 · 开源工具链</span>
+				<a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
+				<h1>一套被忽视的工具链组合：ARM GCC + OpenOCD + GDB</h1>
+				<p class="subtitle">把 AI 从“只会写代码”推进到“能感知硬件状态、能自己闭环验证”的命令行工作流</p>
+				<p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
+			</header>
 
-		<header class="article-header">
-			<span class="series-tag">工程利器 · 批量改造</span>
-			<a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
-			<h1>批量修改，先问该不该用脚本</h1>
-			<p class="subtitle">在直接改、先分析、生成脚本之间切换模式，才是真正省 Token 的工程判断</p>
-			<p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
-		</header>
+			<section>
+				<h2 id="pain-points">为什么很多 AI 嵌入式调试还停在半路</h2>
+				<p>如果你在嵌入式开发里用 AI，大概率早就碰过这些卡点。AI 代码能写，但它看不见你的板子；寄存器名能编，但它可能现场瞎编一个根本不存在的外设位；出了 HardFault，真正辛苦的定位工作还是得你自己翻手册、读寄存器、猜根因。</p>
+				<p>更麻烦的是，很多团队的编译、烧录、验证流程还锁在 IDE 里。人得手动点菜单、切窗口、盯串口，AI 只能停在对话框里等你转述结果。再叠上商业 IDE 的授权成本，Keil、IAR 这种闭环对小团队并不轻。</p>
+				<p><strong>问题不在 AI 不够聪明，而在工具链没有把硬件状态暴露成 AI 能直接操作的语言。</strong></p>
+			</section>
 
-		<section>
-			<p>我做 AI 辅助开发这么久，攒了不少省钱的小技巧。其中最管用、也最容易被滥用的一招是：<strong>批量操作，别急着让 Agent 直接改代码。先判断该不该生成脚本。</strong></p>
-			<p>很多人一看到“几十个文件一起改”，第一反应就是让 Agent 直接动手。它当然能改，但问题不在“能不能改”，而在<strong>你是不是选对了执行模式</strong>。模式选错了，白烧 Token；模式选对了，一轮对话能省下后面三四轮返工。</p>
-		</section>
-
-		<section>
-			<h2 id="mode-choice">两种模式，选对就是省钱</h2>
-			<div class="decision-grid">
-				<div class="decision-card">
-					<h3>模式一：直接改</h3>
-					<p>Agent 逐个文件分析，逐个修改。每一步都是一轮对话，每一步都在消耗 Token。改漏了，把错误贴回去再改；改错了，再来一轮。</p>
+			<section>
+				<h2 id="toolchain">这套组合拳，为什么恰好能接上 AI</h2>
+				<p>我这些年做嵌入式 AI 工程化，越来越明确地依赖一套常被忽视的组合：<strong>ARM GCC + OpenOCD + GDB</strong>。它们有三个共同点：开源、命令行驱动、可脚本化。</p>
+				<p>这三个特性叠起来，意义就变了。AI 不再只是帮你补代码，而是可以直接参与编译、烧录、断点、寄存器读取、内存导出和回归验证。它接触到的不是“你描述过的结果”，而是<strong>第一手的硬件状态</strong>。</p>
+				<div class="card accent-left">
+					<p style="margin-top:0;"><strong>关键变化：</strong>当开发链路从图形界面变成命令接口，AI 的角色就会从“码农”升级成“副驾驶”。它不仅能生成代码，还能读取现场、执行流程、回传证据。</p>
 				</div>
-				<div class="decision-card">
-					<h3>模式二：生成脚本</h3>
-					<p>Agent 输出一个可执行的 Python 脚本。你审阅脚本，运行，一次完成所有修改。脚本同时输出变更日志；有问题，改脚本重跑，而不是逐个文件返工。</p>
+				<pre><code>make -j8
+openocd -f interface/stlink.cfg -f target/stm32f4x.cfg \
+  -c "program build/app.elf verify reset exit"
+arm-none-eabi-gdb build/app.elf \
+  -ex "target remote :3333" \
+  -ex "monitor reset halt"</code></pre>
+			</section>
+
+			<section>
+				<h2 id="hardfault">出了 HardFault，AI 能直接帮你盯住根因</h2>
+				<p>传统 HardFault 调试经常是这样的：停机，读寄存器，抄一堆数值，翻 Cortex-M 手册，定位到底是越权访问、总线错误、未对齐访问还是除零。这个流程并不需要“灵感”，它需要的是快速、稳定、完整地读取证据。</p>
+				<p>而 OpenOCD 正好把这些证据暴露成了命令接口。只要把控制口交给 AI，它就能自己读取 CFSR、HFSR、BFAR、MMFAR 和通用寄存器，自行拼出异常现场。</p>
+				<pre><code>telnet localhost 4444
+&gt; halt
+&gt; reg
+&gt; mdw 0xE000ED28 1   # CFSR
+&gt; mdw 0xE000ED2C 1   # HFSR
+&gt; mdw 0xE000ED38 1   # BFAR
+&gt; mdw 0xE000ED34 1   # MMFAR</code></pre>
+				<p>这样一来，AI 不必等你总结“我怀疑是内存踩坏了”。它可以直接从寄存器值推回异常类型，再结合 PC、LR、SP 和栈帧信息去判断问题更像空指针、栈溢出、非法外设访问还是编译器优化带来的错觉。</p>
+				<div class="insight-box">
+					<strong>真正高价值的不是 AI 会不会解释 HardFault，</strong>而是它能不能直接拿到故障寄存器、内存和栈现场。先看到现场，后谈分析，顺序不能反。
 				</div>
+			</section>
+
+			<section>
+				<h2 id="pipeline">编译、烧录、验证，AI 才能真正一键走通</h2>
+				<p>一旦进入命令行工具链，编译和烧录就不再是“你点一下，AI 等一下”的协作模式。AI 改完代码，可以立刻调用构建命令、执行烧录、校验固件、重启目标板，然后继续跑测试。</p>
+				<p>对嵌入式来说，这一步尤其重要。很多所谓“AI 编程”卡住，不是因为模型写不出代码，而是因为它无法进入烧录后的真实反馈回路。命令行工具链把这个堵点直接拆了。</p>
+				<pre><code>make -j$(nproc)
+openocd -f interface/stlink.cfg -f target/stm32f4x.cfg \
+  -c "init" \
+  -c "reset halt" \
+  -c "program build/app.elf verify" \
+  -c "reset run" \
+  -c "shutdown"</code></pre>
+				<p>如果增量编译和重新链接足够快，改一行代码到硬件验证可以稳定进入秒级闭环。你在 IDE 里点菜单的时间，AI 已经能跑几十轮“改代码-烧录-验证”了。</p>
+			</section>
+
+			<section>
+				<h2 id="observability">不占串口，也能把设备输出和数据带回来</h2>
+				<p>很多板子串口资源并不宽裕。调试期串口被别的外设占了，或者日志一多影响时序，传统手段就开始别扭。这时 OpenOCD + GDB 的另一层价值就出来了。</p>
+				<p>你可以用 semihosting 把 <code>printf</code> 直接打到调试控制台，不占物理串口；也可以用 GDB 直接导出 RAM 缓冲区，把 ADC、DMA 或算法中间结果抓成 CSV，再交给 Python 自动分析。</p>
+				<pre><code>arm-none-eabi-gdb build/app.elf \
+  -ex "target remote :3333" \
+  -ex "dump binary memory capture.bin 0x20002000 0x20002800" \
+  -ex "quit"
+
+python tools/analyze_fft.py capture.bin</code></pre>
+				<p>这样，AI 不只是“看到有没有打印”，而是能拿到原始数据做二次判断。滤波器到底有没有抑制高频噪声，DMA 环形缓冲是不是覆盖了旧样本，这些都可以直接回流到分析脚本里。</p>
+			</section>
+
+			<section>
+				<h2 id="automation">跨硬件与仿真的自动化测试，才是真的无人值守</h2>
+				<p>这套链路还有一个特别现实的好处：不管你跑真板还是 QEMU，本质上都可以被 GDB 驱动。AI 可以自动加载测试固件、注入测试输入、读回 RAM 中的断言结果，再决定下一轮该修哪一块。</p>
+				<p>配合 Python 脚本后，夜里跑回归就不是一句口号了。你睡觉的时候，AI 能把测试固件刷进去，执行用例，读取内存，汇总失败点，第二天你看到的是已经整理过的异常证据，而不是一堆没上下文的串口截图。</p>
+				<div class="card tip">
+					<p style="margin-top:0;"><strong>无人值守的前提不是 AI 更强，</strong>而是构建、烧录、调试、采样、验证每一步都能被命令化、脚本化、回传化。</p>
+				</div>
+			</section>
+
+			<section>
+				<h2 id="essence">最后真正重要的，不是工具名，而是翻译层</h2>
+				<p>ARM GCC、OpenOCD、GDB 本身都不是新东西。真正关键的是，你有没有把它们输出的编译结果、寄存器状态、断点现场、测试数据，翻译成一套 AI 能持续消费的证据流。</p>
+				<p>一旦这层翻译建立起来，你定义法则，AI 就能在法则内执行：编译、烧录、读寄存器、抓内存、跑脚本、分析结果、继续收敛。人不再承担机械搬运信息的工作，而是只负责方向、边界和最终裁决。</p>
+				<p>这套组合拳的精髓，从来不只是“全开源、没版权风险”。那只是门槛。真正的价值在于，它把硬件状态、编译输出和调试数据都变成了 AI 能直接操作的语言。</p>
+				<div class="insight-box">
+					<strong>你负责定义法则，AI 负责执行和反馈。</strong>工具链只是在中间搭了一座桥，让物理世界第一次能够被工程化地喂给 AI。
+				</div>
+			</section>
+
+			<div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
+			    <strong>系列导航：</strong>
+			    <a href="index.html">① 五层进化</a> ·
+			    <a href="true.html">② 实践项目模板</a> ·
+			    <a href="test.html">③ 自主修复闭环</a> ·
+			    <a href="fwd.html">④ 从收敛到进化</a> ·
+			    <a href="exc.html">⑤ 知识的生命体征</a> ·
+			    <a href="pcb.html">⑥ 电路图分析器</a> ·
+			    <a href="pt.html">⑦ 最后的拼图：Skills</a> ·
+			    <a href="history.html">⑧ 历史的包袱</a> ·
+			    <a href="ocd.html">⑨ 被忽视的工具链组合</a> ·
+			    <a href="devs.html">⑩ 固件铭牌与设备画像</a> ·
+			    <a href="gmp.html">⑪ 合规验证与AI编程</a> ·
+			    <a href="hg.html">⑫ 回归现实：单Agent实践框架</a> ·
+			    <a href="12.html">⑬ AI编程的利刃</a> ·
+			    <a href="py.html">⑭ 批量修改，先问该不该用脚本</a> ·
+			    <a href="13.html">⑮ 拆解与整合</a> ·
+			    <a href="14.html">⑯ AI谄媚与专利</a> ·
+			    <a href="gd.html">⑰ 始于工程，服务生活</a>
 			</div>
-			<p>两种模式各有适用场景。选错模式，要么白花钱，要么白花时间。选对模式，省下的不只是这一轮对话，而是后续整串来回。</p>
-		</section>
-
-		<section>
-			<h2 id="rules">怎么选？两条规则就够了</h2>
-			<h3>规则一：可复用的，或者重复修改量大的，生成脚本</h3>
-			<p>什么叫“可复用”？下次遇到类似任务，改两个参数就能继续用。什么叫“重复修改量大”？同一类修改模式在几十个文件里反复出现。</p>
-			<p>这种场景用脚本，省的不只是这一次的 Token。生成一次，复用十次，每次省三轮对话，十次就是三十轮。脚本本身还是一份决策记录：改了哪些文件、改了什么、什么时候改的，全都可以落进日志。</p>
-
-			<h3>规则二：重复量大但不可复用的，让 Agent 先给建议，再决定怎么改</h3>
-			<p>这类任务需要人的判断介入。最优流程不是直接让 Agent 动手，而是先让它分析影响范围、列出修改方案、指出风险。你确认方案后，再决定让它直接改，还是生成一个一次性脚本。</p>
-			<p>这中间多了一步人工审阅，但这正是省钱的关键。方案审对了，后面省下的不止是 Token，还有返工的时间。方案审错了，跑完才发现方向不对，再回头改，那才是真金白银打水漂。</p>
-
-			<div class="insight-box">
-				<strong>两个条件都不满足，就直接改。</strong> 修改量小、不可复用，直接让 Agent 改完审阅，最快。为这种任务写脚本，等于用牛刀杀鸡，牛刀本身还费油。
-			</div>
-		</section>
-
-		<section>
-			<h2 id="direct-edit">为什么直接改容易费钱</h2>
-			<p>很多人习惯让 Agent 直接操作文件。这其实是把 AI 当成了一个“会改代码的编辑器”，但它不是编辑器，它是按轮次计费的。</p>
-			<p>Agent 直接改代码，交互模式天然就是反复来回。让它改一个文件，它改了；跑一遍测试，发现两个地方漏了；把错误贴回去，它再改；改完再跑，又引入一个新问题；你再补上下文，它再动手。每一步都在烧 Token。</p>
-			<p>如果遇到复杂的批量修改，来回三四轮是常事，而且完全没有复现性。下次遇到同样的任务，还是得从头再来一遍。这种模式最大的浪费，不是某一次输出长了，而是<strong>每一轮都在重新建立同一份上下文</strong>。</p>
-		</section>
-
-		<section>
-			<h2 id="script-mode">生成脚本，省在哪</h2>
-			<p>让 Agent 生成脚本，交互模式就完全变了。Agent 不是直接改代码，而是输出一个可执行、带注释的脚本。你审阅一遍，通过，运行。脚本做完所有修改，同时输出一份完整的变更日志。</p>
-			<p>如果运行结果有问题，把变更日志和错误信息贴回给 Agent，Agent 改脚本，你再运行。这个循环里，每一轮都在同一个脚本文件上迭代，而不是在几十个分散的源文件上来回跳转。</p>
-			<div class="card accent-left">
-				<p style="margin-top:0;"><strong>还有个关键细节：</strong>让 Agent 生成脚本时，同时生成一份恢复脚本。万一批量改完发现方向不对，一键恢复，回到原点。这和闭环收敛是一回事：有回滚机制兜底，人才敢放手让系统自己跑。</p>
-			</div>
-		</section>
-
-		<section>
-			<h2 id="good-case">一个该用脚本的例子</h2>
-			<p>项目需要把所有源文件里的函数名 <code>old_func</code> 替换成 <code>new_func</code>，同步更新头文件引用，最后跑一遍测试。</p>
-			<p>这个任务完美符合“可复用且重复量大”的标准。如果直接改：让它改第一处，发现头文件没同步，再让它补；补完跑测试，挂了，把错误贴回去；它说还有三处漏了，再改。三四轮对话，Token 哗哗地烧。</p>
-			<p>如果生成脚本：一轮对话，Agent 输出脚本和恢复脚本。审阅通过，运行，不到十秒，整个项目改完，变更日志清清楚楚。直接改要三四轮，生成脚本只要一轮，这就是模式选择的差价。</p>
-		</section>
-
-		<section>
-			<h2 id="bad-case">一个不该用脚本的例子</h2>
-			<p>还是替换函数名，但加了条件：有三处是故意保留的兼容逻辑，不能改，其他的都要改。</p>
-			<p>这个任务不满足“可复用”的标准。规则需要逐例判断：哪三处是兼容逻辑？为什么不能改？脚本无法自动做这个判断。硬让 Agent 生成脚本，它大概率会无差别全部替换，然后在注释里写一句“请手动检查并恢复”。</p>
-			<p><strong>正确做法</strong>是让 Agent 先给建议：把包含 <code>old_func</code> 的文件逐一列出来，对每个文件给出“该不该改”的分析。你来确认，Agent 来执行。虽然多花了分析那一轮，但保证了正确性。在这种需要逐例判断的任务上，省下来的 Token 不够填出错的坑。</p>
-		</section>
-
-		<section>
-			<h2 id="summary">一句话总结</h2>
-			<p>批量修改，先判断：可复用或重复量大的，生成脚本；重复量大但不可复用的，先让 Agent 给建议，再决定怎么改；两个都不满足的，直接改。</p>
-			<p>生成脚本时，别忘了让 Agent 同时输出一份恢复脚本，留好回滚的退路。省 Token 的核心不是“用脚本”，而是<strong>用对模式</strong>。模式选对了，省下的不止是 Token，是返工的时间、出错的风险，以及下次不必从头再来的重复劳动。</p>
-			<div class="card tip">
-				<p style="margin-top:0;"><strong>法则不是死规则，是活的判断框架。</strong> 在正确的场景选择正确的工具，这个判断力本身，才是整套方法论里最值钱的部分。</p>
-			</div>
-		</section>
-
-		<div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
-		    <strong>系列导航：</strong>
-		    <a href="index.html">① 五层进化</a> ·
-		    <a href="true.html">② 实践项目模板</a> ·
-		    <a href="test.html">③ 自主修复闭环</a> ·
-		    <a href="fwd.html">④ 从收敛到进化</a> ·
-		    <a href="exc.html">⑤ 知识的生命体征</a> ·
-		    <a href="pcb.html">⑥ 电路图分析器</a> ·
-		    <a href="pt.html">⑦ 最后的拼图：Skills</a> ·
-		    <a href="history.html">⑧ 历史的包袱</a> ·
-		    <a href="ocd.html">⑨ 被忽视的工具链组合</a> ·
-		    <a href="devs.html">⑩ 固件铭牌与设备画像</a> ·
-		    <a href="gmp.html">⑪ 合规验证与AI编程</a> ·
-		    <a href="hg.html">⑫ 回归现实：单Agent实践框架</a> ·
-		    <a href="12.html">⑬ AI编程的利刃</a> ·
-		    <a href="py.html">⑭ 批量修改，先问该不该用脚本</a> ·
-		    <a href="13.html">⑮ 拆解与整合</a> ·
-		    <a href="14.html">⑯ AI谄媚与专利</a> ·
-		    <a href="gd.html">⑰ 始于工程，服务生活</a>
-		</div>
 
 <div class="series-nav">
-    <a href="12.html">← AI编程的利刃</a>
-    <a href="13.html">拆解与整合 →</a>
+    <a href="history.html">← 历史的包袱</a>
+    <a href="devs.html">固件铭牌与设备画像 →</a>
 </div>
 <div style="text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);color:#8896a4;font-size:13px;">
-			<a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a>
-		</div>
-
+				<a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a>
+			</div>
 		</div>
 	</div>
 </div>

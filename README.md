@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/status-Active-brightgreen?style=flat-square" alt="Status">
   <img src="https://img.shields.io/badge/methodology-Harness_Engineering-blue?style=flat-square" alt="Methodology">
   <img src="https://img.shields.io/badge/topics-Embedded_AI%20|%20Toolchain%20|%20Agents-orange?style=flat-square" alt="Topics">
-  <img src="https://img.shields.io/badge/articles-17%2B-orange?style=flat-square" alt="Articles">
+  <img src="https://img.shields.io/badge/articles-18%2B-orange?style=flat-square" alt="Articles">
   <img src="https://img.shields.io/badge/framework-4_Layer_System-8b5cf6?style=flat-square" alt="System">
   <img src="https://img.shields.io/badge/pages-live-222?style=flat-square&logo=github" alt="GitHub Pages">
 </p>
@@ -42,14 +42,15 @@
 | ⑥ | [电路图分析器](https://x-itg.github.io/pcb.html) | 感知根系 | 电路图、硬件上下文、代码关联 |
 | ⑦ | [最后的拼图：Skills](https://x-itg.github.io/pt.html) | 支撑根系 | Skills、快消费应用、复用 |
 | ⑧ | [历史的包袱](https://x-itg.github.io/history.html) | 专业延伸 | 遗留工程、工具链迁移、抽象层 |
-| ⑨ | [固件铭牌与设备画像](https://x-itg.github.io/devs.html) | 专业延伸 | 固件身份、设备画像、版本血缘 |
-| ⑩ | [合规验证与 AI 编程](https://x-itg.github.io/gmp.html) | 专业延伸 | GMP、验证报告、合规证据 |
-| ⑪ | [回归现实：单 Agent 实践框架](https://x-itg.github.io/hg.html) | 综合实战 | 单 Agent、决策账本、轻量落地 |
-| ⑫ | [AI 编程的利刃](https://x-itg.github.io/12.html) | 工程利器 | 测试脚本、自我调试、负日志 |
-| ⑬ | [批量修改，先问该不该用脚本](https://x-itg.github.io/py.html) | 工程利器 | 模式判断、脚本生成、批量改造 |
-| ⑭ | [拆解与整合](https://x-itg.github.io/13.html) | 高阶心法 | 复杂系统、逐块收敛、整体验证 |
-| ⑮ | [AI的谄媚与专利文件的编写](https://x-itg.github.io/14.html) | 守关心法 | 反谄媚、专利审查、风险清单 |
-| ⑯ | [始于工程，服务生活](https://x-itg.github.io/gd.html) | 内核反照 | 工程法则、人生方法、思维外延 |
+| ⑨ | [被忽视的工具链组合](https://x-itg.github.io/ocd.html) | 专业延伸 | ARM GCC、OpenOCD、GDB、硬件闭环 |
+| ⑩ | [固件铭牌与设备画像](https://x-itg.github.io/devs.html) | 专业延伸 | 固件身份、设备画像、版本血缘 |
+| ⑪ | [合规验证与 AI 编程](https://x-itg.github.io/gmp.html) | 专业延伸 | GMP、验证报告、合规证据 |
+| ⑫ | [回归现实：单 Agent 实践框架](https://x-itg.github.io/hg.html) | 综合实战 | 单 Agent、决策账本、轻量落地 |
+| ⑬ | [AI 编程的利刃](https://x-itg.github.io/12.html) | 工程利器 | 测试脚本、自我调试、负日志 |
+| ⑭ | [批量修改，先问该不该用脚本](https://x-itg.github.io/py.html) | 工程利器 | 模式判断、脚本生成、批量改造 |
+| ⑮ | [拆解与整合](https://x-itg.github.io/13.html) | 高阶心法 | 复杂系统、逐块收敛、整体验证 |
+| ⑯ | [AI的谄媚与专利文件的编写](https://x-itg.github.io/14.html) | 守关心法 | 反谄媚、专利审查、风险清单 |
+| ⑰ | [始于工程，服务生活](https://x-itg.github.io/gd.html) | 内核反照 | 工程法则、人生方法、思维外延 |
 
 ---
 
@@ -128,7 +129,16 @@
 </details>
 
 <details>
-<summary>⑨ 固件铭牌与设备画像：给兵器刻名</summary>
+<summary>⑨ 被忽视的工具链组合：开源三件套</summary>
+
+> ARM GCC、OpenOCD、GDB 不是简单的替代工具，而是一座桥。它把编译、烧录、寄存器、内存和测试结果都翻译成 AI 能直接执行和分析的命令流。
+>
+> [阅读全文](https://x-itg.github.io/ocd.html)
+
+</details>
+
+<details>
+<summary>⑩ 固件铭牌与设备画像：给兵器刻名</summary>
 
 > 行走江湖，兵器都要刻个名。每个固件自带“身份证”，组合关系、版本血缘一目了然。从此不怕搞混自家刀剑。
 >
@@ -137,7 +147,7 @@
 </details>
 
 <details>
-<summary>⑩ 合规验证与 AI 编程：事前建法则</summary>
+<summary>⑪ 合规验证与 AI 编程：事前建法则</summary>
 
 > 官府查得严？从“事后补文档”变成“事前建法则”。GMP 合规、21 CFR Part 11，AI 顺手就把验证报告给签了。
 >
@@ -146,7 +156,7 @@
 </details>
 
 <details>
-<summary>⑪ 回归现实：单 Agent 实践框架</summary>
+<summary>⑫ 回归现实：单 Agent 实践框架</summary>
 
 > 不等多 Agent 大阵了。一个人、一个 AI、一套法则文件夹，马上就能开练。决策账本、知识体征、Skills 模板……十八般武艺样样精简。
 >
@@ -155,7 +165,7 @@
 </details>
 
 <details>
-<summary>⑫ AI 编程的利刃：拔刀术</summary>
+<summary>⑬ AI 编程的利刃：拔刀术</summary>
 
 > 让 AI 写代码时顺便生成测试脚本，带上负日志。跑起来，两股日志汇成洪流，AI 自己读、自己改、自己收功。你只需要在旁边轻轻“嗯”一声。
 >
@@ -164,7 +174,7 @@
 </details>
 
 <details>
-<summary>⑬ 批量修改，先问该不该用脚本：模式判断</summary>
+<summary>⑭ 批量修改，先问该不该用脚本：模式判断</summary>
 
 > 批量修改不是一上来就让 Agent 逐文件硬改，而是先判断这次任务该直接改、先分析，还是先生成脚本。模式选对了，省下的不只是 Token，还有返工和风险。
 >
@@ -173,7 +183,7 @@
 </details>
 
 <details>
-<summary>⑭ 拆解与整合：高阶奥义</summary>
+<summary>⑮ 拆解与整合：高阶奥义</summary>
 
 > 遇上复杂系统，别硬拼。用“拆解”把它大卸八块，每个小块独立调教、单独收敛。再用“整合”一块块拼回去——每次只拼一块，拼完立刻全系统比试。
 >
@@ -184,7 +194,7 @@
 </details>
 
 <details>
-<summary>⑮ AI的谄媚与专利文件的编写：守关心法</summary>
+<summary>⑯ AI的谄媚与专利文件的编写：守关心法</summary>
 
 > 练功练到后来，最怕的不是 AI 不听话，而是它太听话。你说这是绝世神功，它立刻替你写成开宗立派；你说效果显著，它很少追问一句：证据何在？这一篇从《我可能哪里错了》起笔，落到专利撰写这个真刀真枪的场景里。
 >
@@ -195,9 +205,9 @@
 </details>
 
 <details>
-<summary>⑯ 始于工程，服务生活：内核反照</summary>
+<summary>⑰ 始于工程，服务生活：内核反照</summary>
 
-> 当前十五篇文章把法则铺进了工程，这一篇回头解释它们为什么不会随着模型能力增长而失效。会过时的是“给AI补短板”的具体补丁，不会过时的是它背后的思维方式：定义边界、感知异常、闭环修正、决策切换。
+> 当前十六篇文章把法则铺进了工程，这一篇回头解释它们为什么不会随着模型能力增长而失效。会过时的是“给AI补短板”的具体补丁，不会过时的是它背后的思维方式：定义边界、感知异常、闭环修正、决策切换。
 >
 > 当这些法则从技术场景迁移到关系、家庭、人生选择里，它们就不再只是工程技巧，而变成了帮助人保持清醒、温柔和有边界的思维工具。
 >
@@ -209,12 +219,12 @@
 
 ## ⚡ 大侠，这套心法怎么练？
 
-1. **初窥门径**：先读 ⑫ 利刃，明天就试试让 AI 自己写测试、自己改。
+1. **初窥门径**：先读 ⑬ 利刃，明天就试试让 AI 自己写测试、自己改。
 2. **小有所成**：搭起 ② 模板，建起你的法则文件夹，用 ③ 闭环收敛打磨每个模块。
-3. **游历江湖**：碰到老项目用 ⑧，多设备管理用 ⑨，合规审计用 ⑩。
-4. **破境冲关**：先读 ⑬，看批量改造时如何选对执行模式；再用 ⑭ 拆解整合驯服复杂系统，用 ④ 决策切换避免死胡同。
-5. **专业守关**：读 ⑮ AI 的谄媚与专利，把“顺着写”和“审查怼”做成可切换流程。
-6. **回望内核**：读 ⑯《始于工程，服务生活》，看这套工程法则为什么最终会穿过技术、落回人生。
+3. **游历江湖**：碰到老项目用 ⑧，想把 AI 接进真实硬件调试先读 ⑨，多设备管理用 ⑩，合规审计用 ⑪。
+4. **破境冲关**：先读 ⑭，看批量改造时如何选对执行模式；再用 ⑮ 拆解整合驯服复杂系统，用 ④ 决策切换避免死胡同。
+5. **专业守关**：读 ⑯ AI 的谄媚与专利，把“顺着写”和“审查怼”做成可切换流程。
+6. **回望内核**：读 ⑰《始于工程，服务生活》，看这套工程法则为什么最终会穿过技术、落回人生。
 7. **一代宗师**：言出法随，即刻收敛，踏入五层进化之巅。
 
 ---

@@ -61,6 +61,11 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://x-itg.github.io/ocd.html</loc>
+        <lastmod>2026-05-27</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://x-itg.github.io/pcb.html</loc>
         <lastmod>2026-05-14</lastmod>
         <priority>0.8</priority>
