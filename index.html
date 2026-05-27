@@ -164,10 +164,36 @@
             color: var(--text-secondary);
             margin-bottom: 14px;
         }
-        .table-wrap {
-            overflow-x: auto;
+        .summary-group {
+            margin-bottom: 12px;
             border: 1px solid var(--border);
             border-radius: 12px;
+            background: #ffffff;
+            overflow: hidden;
+        }
+        .summary-group summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 12px 14px;
+            background: #f4f7fb;
+            color: #294866;
+            font-weight: 600;
+        }
+        .summary-group summary::-webkit-details-marker {
+            display: none;
+        }
+        .summary-group summary::before {
+            content: "+";
+            display: inline-block;
+            width: 1rem;
+            margin-right: 0.4rem;
+            color: #58718e;
+        }
+        .summary-group[open] summary::before {
+            content: "-";
+        }
+        .table-wrap {
+            overflow-x: auto;
             background: #ffffff;
         }
         .summary-table table {
@@ -305,56 +331,114 @@
 
         <section class="summary-table" id="overview-table">
             <h2>总表</h2>
-            <p>把技术主线、生活外延、小说实验和创作引擎压成一张表。</p>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>板块</th>
-                            <th>序</th>
-                            <th>文章</th>
-                            <th>定位</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>T</strong></td><td>1</td><td><a href="in.html">五层进化</a></td><td>总纲 · 成熟度模型 / AI 自治 / 体系坐标</td></tr>
-                        <tr><td><strong>T</strong></td><td>2</td><td><a href="true.html">实践项目模板</a></td><td>执行基础 · 工程骨架 / 规约 / 上下文</td></tr>
-                        <tr><td><strong>T</strong></td><td>3</td><td><a href="test.html">自主修复闭环</a></td><td>执行智能 · 双轨收敛 / 测试 / 日志驱动</td></tr>
-                        <tr><td><strong>T</strong></td><td>4</td><td><a href="fwd.html">从收敛到进化</a></td><td>判断智能 · Agent 制衡 / 决策切换 / 共生演化</td></tr>
-                        <tr><td><strong>T</strong></td><td>5</td><td><a href="exc.html">知识的生命体征</a></td><td>记忆智能 · 知识资产 / 负日志 / 健康度</td></tr>
-                        <tr><td><strong>T</strong></td><td>6</td><td><a href="pcb.html">电路图分析器</a></td><td>感知根系 · 电路图 / 硬件上下文 / 代码关联</td></tr>
-                        <tr><td><strong>T</strong></td><td>7</td><td><a href="pt.html">最后的拼图：Skills</a></td><td>支撑根系 · Skills / 复用 / 快消费应用</td></tr>
-                        <tr><td><strong>T</strong></td><td>8</td><td><a href="history.html">历史的包袱</a></td><td>专业延伸 · 遗留工程 / 工具链迁移 / 抽象层</td></tr>
-                        <tr><td><strong>T</strong></td><td>9</td><td><a href="ocd.html">被忽视的工具链组合</a></td><td>专业延伸 · ARM GCC / OpenOCD / GDB / 硬件闭环</td></tr>
-                        <tr><td><strong>T</strong></td><td>A</td><td><a href="devs.html">固件铭牌与设备画像</a></td><td>专业延伸 · 固件身份 / 设备画像 / 版本血缘</td></tr>
-                        <tr><td><strong>T</strong></td><td>B</td><td><a href="gmp.html">合规验证与 AI 编程</a></td><td>专业延伸 · GMP / 验证报告 / 合规证据</td></tr>
-                        <tr><td><strong>T</strong></td><td>C</td><td><a href="hg.html">回归现实：单 Agent 实践框架</a></td><td>综合实战 · 单 Agent / 决策账本 / 轻量落地</td></tr>
-                        <tr><td><strong>T</strong></td><td>D</td><td><a href="12.html">AI 编程的利刃</a></td><td>工程利器 · 测试脚本 / 自我调试 / 负日志</td></tr>
-                        <tr><td><strong>T</strong></td><td>E</td><td><a href="py.html">批量修改，先问该不该用脚本</a></td><td>工程利器 · 模式判断 / 脚本生成 / 批量改造</td></tr>
-                        <tr><td><strong>T</strong></td><td>F</td><td><a href="13.html">拆解与整合</a></td><td>高阶心法 · 复杂系统 / 逐块收敛 / 整体验证</td></tr>
-                        <tr><td><strong>T</strong></td><td>G</td><td><a href="14.html">AI的谄媚与专利文件的编写</a></td><td>守关心法 · 反谄媚 / 专利审查 / 风险清单</td></tr>
-                        <tr><td><strong>T</strong></td><td>H</td><td><a href="gd.html">始于工程，服务生活</a></td><td>内核反照 · 工程法则 / 人生方法 / 思维外延</td></tr>
-                        <tr><td><strong>L1</strong></td><td>1</td><td><a href="about.html">我找到了一套法则</a></td><td>总序 · 把法则写清楚</td></tr>
-                        <tr><td><strong>L1</strong></td><td>2</td><td><a href="aboutmore/tk.html">以不变应万变</a></td><td>认知 · 从 AI 编程推到生活法则</td></tr>
-                        <tr><td><strong>L1</strong></td><td>3</td><td><a href="aboutmore/fw.html">工程魔法</a></td><td>心法 · 用工程法则处理生活问题</td></tr>
-                        <tr><td><strong>L1</strong></td><td>4</td><td><a href="aboutmore/sc.html">调试AI，学会经营感情</a></td><td>关系 · 工程法则进入亲密关系</td></tr>
-                        <tr><td><strong>L1</strong></td><td>5</td><td><a href="aboutmore/wx.html">乾坤大挪移心法 · 文章总览</a></td><td>索引 · 技术主线全图</td></tr>
-                        <tr><td><strong>L2</strong></td><td>1</td><td><a href="aboutmore/itg.html">爱婷哥</a></td><td>家庭 · 命名、亲密与温柔</td></tr>
-                        <tr><td><strong>L2</strong></td><td>2</td><td><a href="aboutmore/forme.html">写给自己</a></td><td>自省 · 写给未来的自己</td></tr>
-                        <tr><td><strong>L2</strong></td><td>3</td><td><a href="aboutmore/pg.html">家庭直播间</a></td><td>日常 · 配合、接话与快乐回路</td></tr>
-                        <tr><td><strong>L2</strong></td><td>4</td><td><a href="aboutmore/m.html">周一早上，梦见下班</a></td><td>日常 · 疲惫、松弛与提醒</td></tr>
-                        <tr><td><strong>L2</strong></td><td>5</td><td><a href="aboutmore/cc.html">我可能哪里错了</a></td><td>思辨 · 反驳比顺从更稀缺</td></tr>
-                        <tr><td><strong>L2</strong></td><td>6</td><td><a href="aboutmore/ll.html">找个不懂的人聊聊</a></td><td>方法 · 外行视角与范式切换</td></tr>
-                        <tr><td><strong>L2</strong></td><td>7</td><td><a href="aboutmore/ta.html">不必全部收敛</a></td><td>哲思 · 给生活保留余味</td></tr>
-                        <tr><td><strong>L3</strong></td><td>1</td><td><a href="aboutmore/czy.html">蓝牙：陆知意岛</a></td><td>小说 · 错配、走散与回到原点</td></tr>
-                        <tr><td><strong>L3</strong></td><td>2</td><td><a href="aboutmore/qp-chat.html">失控时空·对话版</a></td><td>实验 · 让语言顶到最前面</td></tr>
-                        <tr><td><strong>L3</strong></td><td>3</td><td><a href="aboutmore/jsxm.html">失控时刻：有趣玩家</a></td><td>实验 · 文档式副本叙事</td></tr>
-                        <tr><td><strong>L4</strong></td><td>1</td><td><a href="aboutmore/czjs.html">会话的碰撞</a></td><td>创作 · 两个 AI 窗口的化学反应</td></tr>
-                        <tr><td><strong>L4</strong></td><td>2</td><td><a href="aboutmore/fr.html">四层结构：创作体系</a></td><td>体系 · 理论 / 人格 / 文学 / 元创作</td></tr>
-                        <tr><td><strong>尾声</strong></td><td>后记</td><td>侠士自述</td><td>始于工程，穿过生活，抵达文学，再在元创作里解释自己</td></tr>
-                    </tbody>
-                </table>
-            </div>
+            <p>文章导航。</p>
+            <details class="summary-group" open>
+                <summary>T · 嵌入式AI工程化</summary>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>序</th><th>文章</th><th>定位</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td><a href="in.html">五层进化</a></td><td>总纲 · 成熟度模型 / AI 自治 / 体系坐标</td></tr>
+                            <tr><td>2</td><td><a href="true.html">实践项目模板</a></td><td>执行基础 · 工程骨架 / 规约 / 上下文</td></tr>
+                            <tr><td>3</td><td><a href="test.html">自主修复闭环</a></td><td>执行智能 · 双轨收敛 / 测试 / 日志驱动</td></tr>
+                            <tr><td>4</td><td><a href="fwd.html">从收敛到进化</a></td><td>判断智能 · Agent 制衡 / 决策切换 / 共生演化</td></tr>
+                            <tr><td>5</td><td><a href="exc.html">知识的生命体征</a></td><td>记忆智能 · 知识资产 / 负日志 / 健康度</td></tr>
+                            <tr><td>6</td><td><a href="pcb.html">电路图分析器</a></td><td>感知根系 · 电路图 / 硬件上下文 / 代码关联</td></tr>
+                            <tr><td>7</td><td><a href="pt.html">最后的拼图：Skills</a></td><td>支撑根系 · Skills / 复用 / 快消费应用</td></tr>
+                            <tr><td>8</td><td><a href="history.html">历史的包袱</a></td><td>专业延伸 · 遗留工程 / 工具链迁移 / 抽象层</td></tr>
+                            <tr><td>9</td><td><a href="ocd.html">被忽视的工具链组合</a></td><td>专业延伸 · ARM GCC / OpenOCD / GDB / 硬件闭环</td></tr>
+                            <tr><td>A</td><td><a href="devs.html">固件铭牌与设备画像</a></td><td>专业延伸 · 固件身份 / 设备画像 / 版本血缘</td></tr>
+                            <tr><td>B</td><td><a href="gmp.html">合规验证与 AI 编程</a></td><td>专业延伸 · GMP / 验证报告 / 合规证据</td></tr>
+                            <tr><td>C</td><td><a href="hg.html">回归现实：单 Agent 实践框架</a></td><td>综合实战 · 单 Agent / 决策账本 / 轻量落地</td></tr>
+                            <tr><td>D</td><td><a href="12.html">AI 编程的利刃</a></td><td>工程利器 · 测试脚本 / 自我调试 / 负日志</td></tr>
+                            <tr><td>E</td><td><a href="py.html">批量修改，先问该不该用脚本</a></td><td>工程利器 · 模式判断 / 脚本生成 / 批量改造</td></tr>
+                            <tr><td>F</td><td><a href="13.html">拆解与整合</a></td><td>高阶心法 · 复杂系统 / 逐块收敛 / 整体验证</td></tr>
+                            <tr><td>G</td><td><a href="14.html">AI的谄媚与专利文件的编写</a></td><td>守关心法 · 反谄媚 / 专利审查 / 风险清单</td></tr>
+                            <tr><td>H</td><td><a href="gd.html">始于工程，服务生活</a></td><td>内核反照 · 工程法则 / 人生方法 / 思维外延</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+            <details class="summary-group">
+                <summary>L1 · 法则</summary>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>序</th><th>文章</th><th>定位</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td><a href="about.html">我找到了一套法则</a></td><td>总序 · 把法则写清楚</td></tr>
+                            <tr><td>2</td><td><a href="aboutmore/tk.html">以不变应万变</a></td><td>认知 · 从 AI 编程推到生活法则</td></tr>
+                            <tr><td>3</td><td><a href="aboutmore/fw.html">工程魔法</a></td><td>心法 · 用工程法则处理生活问题</td></tr>
+                            <tr><td>4</td><td><a href="aboutmore/sc.html">调试AI，学会经营感情</a></td><td>关系 · 工程法则进入亲密关系</td></tr>
+                            <tr><td>5</td><td><a href="aboutmore/wx.html">乾坤大挪移心法 · 文章总览</a></td><td>索引 · 技术主线全图</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+            <details class="summary-group">
+                <summary>L2 · 人</summary>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>序</th><th>文章</th><th>定位</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td><a href="aboutmore/itg.html">爱婷哥</a></td><td>家庭 · 命名、亲密与温柔</td></tr>
+                            <tr><td>2</td><td><a href="aboutmore/forme.html">写给自己</a></td><td>自省 · 写给未来的自己</td></tr>
+                            <tr><td>3</td><td><a href="aboutmore/pg.html">家庭直播间</a></td><td>日常 · 配合、接话与快乐回路</td></tr>
+                            <tr><td>4</td><td><a href="aboutmore/m.html">周一早上，梦见下班</a></td><td>日常 · 疲惫、松弛与提醒</td></tr>
+                            <tr><td>5</td><td><a href="aboutmore/cc.html">我可能哪里错了</a></td><td>思辨 · 反驳比顺从更稀缺</td></tr>
+                            <tr><td>6</td><td><a href="aboutmore/ll.html">找个不懂的人聊聊</a></td><td>方法 · 外行视角与范式切换</td></tr>
+                            <tr><td>7</td><td><a href="aboutmore/ta.html">不必全部收敛</a></td><td>哲思 · 给生活保留余味</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+            <details class="summary-group">
+                <summary>L3 · 小说</summary>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>序</th><th>文章</th><th>定位</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td><a href="aboutmore/czy.html">蓝牙：陆知意岛</a></td><td>小说 · 错配、走散与回到原点</td></tr>
+                            <tr><td>2</td><td><a href="aboutmore/qp-chat.html">失控时空·对话版</a></td><td>实验 · 让语言顶到最前面</td></tr>
+                            <tr><td>3</td><td><a href="aboutmore/jsxm.html">失控时刻：有趣玩家</a></td><td>实验 · 文档式副本叙事</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+            <details class="summary-group">
+                <summary>L4 · 创作</summary>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>序</th><th>文章</th><th>定位</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td><a href="aboutmore/czjs.html">会话的碰撞</a></td><td>创作 · 两个 AI 窗口的化学反应</td></tr>
+                            <tr><td>2</td><td><a href="aboutmore/fr.html">四层结构：创作体系</a></td><td>体系 · 理论 / 人格 / 文学 / 元创作</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+            <details class="summary-group">
+                <summary>尾声</summary>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>序</th><th>文章</th><th>定位</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>后记</td><td>侠士自述</td><td>始于工程，穿过生活，抵达文学，再在元创作里解释自己</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
         </section>
 
         <footer>
