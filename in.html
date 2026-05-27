@@ -37,26 +37,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
             line-height: 1.75;
         }
-        .layout {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 24px 16px 80px;
-            gap: 24px;
-        }
-        .sidebar-toc {
-            width: 180px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 24px;
-            align-self: start;
-            background: #f8fafc;
-            border-radius: 14px;
-            border: 1px solid #e8edf4;
-            padding: 14px 10px;
-        }
-        .sidebar-toc h3 { font-size: 13px; padding: 0 10px 8px; color: #143b69; }
-        .sidebar-toc ul { list-style: none; }
+.sidebar-toc ul { list-style: none; }
         .sidebar-toc a {
             display: block;
             text-decoration: none;
@@ -206,8 +187,7 @@
         }
 footer { color: #7b8795; font-size: 13px; }
         @media (max-width: 980px) {
-            .layout { flex-direction: column; }
-            .sidebar-toc, .site-sidebar { position: static; width: 100%; }
+.sidebar-toc, .site-sidebar { position: static; width: 100%; }
 +            .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @media (max-width: 720px) {

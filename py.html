@@ -155,55 +155,10 @@
 		.decision-grid { grid-template-columns: 1fr; }
 	}
 
-	.layout {
-		display: flex;
-		max-width: 1400px;
-		margin: 0 auto;
-		padding: 1.5rem 1rem;
-		gap: 1.5rem;
-	}
-
-	.sidebar-toc {
-		width: 170px;
-		flex-shrink: 0;
-		position: sticky;
-		top: 1.5rem;
-		align-self: start;
-		max-height: calc(100vh - 3rem);
-		overflow-y: auto;
-		background: #f8fafc;
-		border-radius: 0.8rem;
-		border: 1px solid #eef2f8;
-		padding: 1rem 0;
-	}
-
-	.sidebar-toc h3 {
-		font-size: 0.8rem;
-		font-weight: 600;
-		padding: 0 1rem 0.6rem;
-		color: #1e3a8a;
-	}
-
-	.sidebar-toc nav ul { list-style: none; padding: 0 0.5rem; }
-	.sidebar-toc nav li { margin: 0.15rem 0; }
-	.sidebar-toc nav a {
-		display: block;
-		padding: 0.35rem 0.8rem;
-		color: #4a6a8a;
-		text-decoration: none;
-		border-radius: 0.4rem;
-		font-size: 0.78rem;
-		transition: 0.2s;
-		line-height: 1.4;
-	}
-	.sidebar-toc nav a:hover { background: #eef3ff; color: #1e40af; }
-	.sidebar-toc nav a i { width: 1.2rem; color: #7a9ac9; font-size: 0.7rem; }
-
-	.main-content { flex: 1; min-width: 0; }
+.main-content { flex: 1; min-width: 0; }
 
 	@media (max-width: 900px) {
-		.layout { flex-direction: column; }
-		.sidebar-series, .sidebar-toc { width: 100%; position: static; max-height: none; overflow-y: visible; }
+.sidebar-series, .sidebar-toc { width: 100%; position: static; max-height: none; overflow-y: visible; }
 	}
 </style>
 <link rel="stylesheet" href="assets/site-sidebar.css">

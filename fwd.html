@@ -54,45 +54,8 @@
         padding: 40px 24px 80px;
     }
 
-    .layout {
-        display: flex;
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 1.5rem 1rem;
-        gap: 2rem;
-    }
-    /* ===== 三栏布局（方案B） ===== */
-    .sidebar-toc {
-        width: 170px;
-        flex-shrink: 0;
-        position: sticky;
-        top: 1.5rem;
-        align-self: start;
-        max-height: calc(100vh - 3rem);
-        overflow-y: auto;
-        background: #f8fafc;
-        border-radius: 0.8rem;
-        border: 1px solid #eef2f8;
-        padding: 1rem 0;
-    }
-    .sidebar-toc h3 {
-        font-size: 0.8rem; font-weight: 600;
-        padding: 0 1rem 0.6rem; color: #1e3a8a;
-    }
-    .sidebar-toc nav ul { list-style: none; padding: 0 0.5rem; }
-    .sidebar-toc nav li { margin: 0.15rem 0; }
-    .sidebar-toc nav a {
-        display: block; padding: 0.35rem 0.8rem; color: #4a6a8a;
-        text-decoration: none; border-radius: 0.4rem;
-        font-size: 0.78rem; transition: 0.2s; line-height: 1.4;
-    }
-    .sidebar-toc nav a:hover { background: #eef3ff; color: #1e40af; }
-    .sidebar-toc nav a i { width: 1.2rem; color: #7a9ac9; font-size: 0.7rem; }
-    .sidebar-toc::-webkit-scrollbar { width: 4px; }
-    .sidebar-toc::-webkit-scrollbar-track { background: transparent; }
-    .sidebar-toc::-webkit-scrollbar-thumb { background: #d0d7de; border-radius: 2px; }
-
-    .main-content { flex: 1; min-width: 0; }
+/* ===== 三栏布局（方案B） ===== */
+.main-content { flex: 1; min-width: 0; }
 
 .article-header {
         margin-bottom: 48px;
@@ -340,10 +303,7 @@
     }
 
     @media (max-width: 780px) {
-        .layout {
-            flex-direction: column;
-        }
-        .sidebar {
+.sidebar {
             width: 100%;
             position: static;
         }
@@ -368,7 +328,7 @@
         <div class="site-sidebar__intro">
             <span class="site-sidebar__eyebrow">当前支线</span>
             <strong>T · 嵌入式AI工程化</strong>
-            <p>执行、判断与记忆能力在这里长成稳定的工程主干。</p>
+            <p>引入性格制衡与决策切换。</p>
         </div>
         <details class="site-sidebar__group">
             <summary>总纲</summary>

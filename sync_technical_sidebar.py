@@ -48,10 +48,10 @@ BRIDGES = [
 SECTION_META = {
     "in.html": ("T · 嵌入式AI工程化", "定义体系坐标，后续所有工程法则都从这里分叉。"),
     "index.html": ("T · 嵌入式AI工程化", "从这里进入技术主线，再决定是先读总纲还是先看整张地图。"),
-    "true.html": ("T · 嵌入式AI工程化", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
-    "test.html": ("T · 嵌入式AI工程化", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
-    "fwd.html": ("T · 嵌入式AI工程化", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
-    "exc.html": ("T · 嵌入式AI工程化", "执行、判断与记忆能力在这里长成稳定的工程主干。"),
+    "true.html": ("T · 嵌入式AI工程化", "把方法论压成可复用的工程骨架。"),
+    "test.html": ("T · 嵌入式AI工程化", "双轨收敛让系统能自检自修。"),
+    "fwd.html": ("T · 嵌入式AI工程化", "引入性格制衡与决策切换。"),
+    "exc.html": ("T · 嵌入式AI工程化", "让知识资产具备健康度与唤醒机制。"),
     "pcb.html": ("T · 嵌入式AI工程化", "这里补齐感知与支撑，让体系能真正接入物理世界。"),
     "pt.html": ("T · 嵌入式AI工程化", "这里补齐感知与支撑，让体系能真正接入物理世界。"),
     "history.html": ("T · 嵌入式AI工程化", "法则进入遗留工程、设备身份与合规场景。"),
@@ -92,7 +92,7 @@ def strip_css_rules(text: str, selectors: list[str]) -> str:
 
 
 def remove_generated_sidebar_css(text: str, eol: str) -> str:
-    return strip_css_rules(
+    cleaned = strip_css_rules(
         text,
         [
             ".site-sidebar",
@@ -159,8 +159,81 @@ def remove_generated_sidebar_css(text: str, eol: str) -> str:
             ".series-nav",
             ".series-nav a",
             ".series-nav a:hover",
+            ".sidebar-toc",
+            ".sidebar-toc h3",
+            ".sidebar-toc nav ul",
+            ".sidebar-toc nav li",
+            ".sidebar-toc nav a",
+            ".sidebar-toc nav a:hover",
+            ".sidebar-toc nav a i",
+            ".sidebar-toc::-webkit-scrollbar",
+            ".sidebar-toc::-webkit-scrollbar-track",
+            ".sidebar-toc::-webkit-scrollbar-thumb",
         ],
     )
+    return remove_sidebar_media_blocks(cleaned)
+
+
+def remove_sidebar_media_blocks(text: str) -> str:
+    media_start = re.compile(r"@media[^\{]*\{", re.MULTILINE)
+    sidebar_tokens = (".sidebar-toc", ".site-sidebar", ".sidebar-series")
+    allowed_selectors = (
+        ".layout",
+        ".sidebar-toc",
+        ".sidebar-toc h3",
+        ".sidebar-toc nav ul",
+        ".sidebar-toc nav li",
+        ".sidebar-toc nav a",
+        ".sidebar-toc nav a:hover",
+        ".sidebar-toc nav a i",
+        ".site-sidebar",
+        ".sidebar-series",
+    )
+    out: list[str] = []
+    cursor = 0
+
+    for match in media_start.finditer(text):
+        start = match.start()
+        if start < cursor:
+            continue
+
+        i = match.end() - 1
+        depth = 0
+        end = None
+        while i < len(text):
+            ch = text[i]
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    end = i + 1
+                    break
+            i += 1
+
+        if end is None:
+            break
+
+        block = text[start:end]
+        selectors = re.findall(r"(^|\})\s*([^@][^\{]+)\{", block, re.MULTILINE)
+        normalized_selectors = []
+        for _, selector_group in selectors:
+            for selector in selector_group.split(","):
+                normalized = " ".join(selector.split())
+                if normalized:
+                    normalized_selectors.append(normalized)
+
+        is_sidebar_block = (
+            any(token in block for token in sidebar_tokens)
+            and normalized_selectors
+            and all(selector in allowed_selectors for selector in normalized_selectors)
+        )
+        if is_sidebar_block:
+            out.append(text[cursor:start])
+            cursor = end
+
+    out.append(text[cursor:])
+    return "".join(out)
 
 
 def build_article_link(indent: str, unit: str, item: tuple[str, str, str, str], active_file: str, eol: str) -> str:
