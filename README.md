@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/status-Active-brightgreen?style=flat-square" alt="Status">
   <img src="https://img.shields.io/badge/methodology-Harness_Engineering-blue?style=flat-square" alt="Methodology">
   <img src="https://img.shields.io/badge/topics-Embedded_AI%20|%20Toolchain%20|%20Agents-orange?style=flat-square" alt="Topics">
-  <img src="https://img.shields.io/badge/articles-18%2B-orange?style=flat-square" alt="Articles">
+  <img src="https://img.shields.io/badge/tech_series-17-orange?style=flat-square" alt="Tech Series">
   <img src="https://img.shields.io/badge/framework-4_Layer_System-8b5cf6?style=flat-square" alt="System">
   <img src="https://img.shields.io/badge/pages-live-222?style=flat-square&logo=github" alt="GitHub Pages">
 </p>
@@ -17,6 +17,9 @@
 👉 **在线阅读：[https://x-itg.github.io](https://x-itg.github.io)**
 
 👉 **文章总览：[乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html)**
+
+首次来访：先读 [《五层进化》](https://x-itg.github.io/index.html)。
+技术主线负责把法则讲清楚，法则与故事负责解释它为什么能走出工程。
 
 ---
 
@@ -243,7 +246,7 @@
 | `[认知]` 🧠 [以不变应万变](https://x-itg.github.io/aboutmore/tk.html) | 从 AI 编程到生活法则的认知升维 |
 | `[心法]` 🪄 [用工程魔法打败生活魔法](https://x-itg.github.io/aboutmore/fw.html) | 一套思想体系的七种不正经应用 |
 | `[关系]` ❤️ [我用调试 AI 的方法，学会了经营感情](https://x-itg.github.io/aboutmore/sc.html) | 当工程法则走出代码，走进亲密关系 |
-| `[索引]` 🧭 [乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html) | 十六篇技术文章一篇看完 |
+| `[索引]` 🧭 [乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html) | 十七篇技术文章一篇看完 |
 
 ### Layer 2 · 人格层 · 法则的生活检验
 
