@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>失控时空：终极玩家 · 终极玩家 | itg</title>
+<meta name="description" content="当北京成为一座感情的地图，每一条街都是一段记忆的轨迹。">
+<meta name="keywords" content="失控时空,终极玩家,终极玩家,加里,陆屿,苏敏,程知意">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="失控时空：终极玩家 · 终极玩家 | itg">
+<meta property="og:description" content="当北京成为一座感情的地图，每一条街都是一段记忆的轨迹。" />
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/gary.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/gary.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #fefce8; --card-bg: #ffffff; --text: #292524;
+        --text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
+        --border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
+        --track-bg: #1a1a2e;
+        --loc-yellow: #f59e0b; --loc-blue: #3b82f6; --loc-purple: #8b5cf6;
+        --loc-green: #10b981; --loc-red: #ef4444; --loc-pink: #ec4899;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        font-family: "Noto Serif SC","Source Han Serif SC","Songti SC",-apple-system,sans-serif;
+        background: var(--bg); color: var(--text); line-height: 1.95; -webkit-font-smoothing: antialiased;
+    }
+    .layout { display:flex; max-width:1240px; margin:0 auto; min-height:100vh; }
+
+    .main-content { flex:1; min-width:0; padding:40px 24px 80px; }
+    .main-content .article-header { margin-bottom:20px; padding-bottom:20px; border-bottom:2px solid var(--border); }
+    .main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
+    .main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:8px; }
+    .main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
+    .main-content .meta { font-size:13px; color:#a8a29e; }
+
+/* ===== 终极玩家 - 蛇形线路 ===== */
+    .city-track { margin: 24px 0; border-radius: 20px; overflow: hidden; position: relative; }
+    .route-graph {
+        position: absolute;
+        inset: 58px 0 20px 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.9;
+    }
+    .route-graph svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .route-graph path {
+        fill: none;
+        stroke: url(#routeGradient);
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.22));
+    }
+    .city-track > *:not(.route-graph) {
+        position: relative;
+        z-index: 1;
+    }
+    .track-intro {
+        background: var(--track-bg); color: #94a3b8; border-radius: 20px 20px 0 0;
+        padding: 16px 24px; font-size: 13px;
+        display: flex; align-items: center; gap: 10px;
+    }
+    .track-intro i { color: var(--loc-green); }
+    .track-intro .route-name {
+        margin-left: auto; font-size: 11px; letter-spacing: 2px;
+        background: #2d2d4a; padding: 3px 10px; border-radius: 8px;
+        color: var(--loc-yellow);
+    }
+
+    .stop-row {
+        display: grid;
+        grid-template-columns: 92px minmax(0, 1fr);
+        background: var(--track-bg);
+        position: relative;
+        align-items: stretch;
+    }
+    .stop-row:nth-child(even) {
+        grid-template-columns: minmax(0, 1fr) 92px;
+    }
+
+    .track-column {
+        width: 92px; position: relative;
+        display: flex; flex-direction: column; align-items: center;
+        background: var(--track-bg); min-height: 100%; padding-top: 18px;
+    }
+    .track-column.right-side { width: 90px; }
+    .stop-row:nth-child(even) .track-column {
+        grid-column: 2;
+    }
+    .stop-row:nth-child(odd) .track-column {
+        grid-column: 1;
+    }
+    .stop-row:nth-child(even) .chapter-card {
+        grid-column: 1;
+        margin: 8px 0 8px 8px;
+    }
+    .stop-row:nth-child(odd) .chapter-card {
+        grid-column: 2;
+        margin: 8px 8px 8px 0;
+    }
+
+    .stop-pin {
+        width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 15px; font-weight: 700; color: #fff; z-index: 2;
+        box-shadow: 0 0 0 5px var(--track-bg), 0 0 0 8px rgba(255,255,255,0.06);
+        transition: transform 0.2s; margin-top: 8px;
+    }
+    .stop-pin:hover { transform: scale(1.15); }
+    .stop-pin.c1 { background: var(--loc-yellow); }
+    .stop-pin.c2 { background: var(--loc-blue); }
+    .stop-pin.c3 { background: var(--loc-purple); }
+    .stop-pin.c4 { background: var(--loc-green); }
+    .stop-pin.c5 { background: var(--loc-red); }
+    .stop-pin.c6 { background: var(--loc-pink); }
+    .stop-pin.c7 { background: var(--loc-red); }
+    .stop-pin.c8 { background: var(--loc-blue); }
+    .stop-pin.c9 { background: var(--loc-yellow); }
+    .stop-pin.c10 { background: var(--loc-green); }
+
+    .track-leg {
+        flex: 1; width: 4px; min-width: 4px; z-index: 1; min-height: 28px;
+        margin: 8px 0 0; border-radius: 999px;
+    }
+    .track-leg.l1 { background: linear-gradient(to bottom,var(--loc-yellow),var(--loc-blue)); }
+    .track-leg.l2 { background: linear-gradient(to bottom,var(--loc-blue),var(--loc-purple)); }
+    .track-leg.l3 { background: linear-gradient(to bottom,var(--loc-purple),var(--loc-green)); }
+    .track-leg.l4 { background: linear-gradient(to bottom,var(--loc-green),var(--loc-red)); }
+    .track-leg.l5 { background: linear-gradient(to bottom,var(--loc-red),var(--loc-pink)); }
+    .track-leg.l6 { background: linear-gradient(to bottom,var(--loc-pink),var(--loc-red)); }
+    .track-leg.l7 { background: linear-gradient(to bottom,var(--loc-red),var(--loc-blue)); }
+    .track-leg.l8 { background: linear-gradient(to bottom,var(--loc-blue),var(--loc-yellow)); }
+    .track-leg.l9 { background: linear-gradient(to bottom,var(--loc-yellow),var(--loc-green)); }
+    .track-column::after {
+        content: "";
+        position: absolute;
+        top: 49px;
+        width: 34px;
+        height: 4px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.7));
+        opacity: 0.72;
+    }
+    .stop-row:nth-child(odd) .track-column::after {
+        right: -14px;
+    }
+    .stop-row:nth-child(even) .track-column::after {
+        left: -14px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,255,255,0));
+    }
+
+    .chapter-card {
+        flex: 1; min-width: 0; background: #fff; border-radius: 14px;
+        padding: 28px 30px; margin: 8px 8px 8px 0;
+        border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        position: relative;
+    }
+    .chapter-card .ch-label {
+        font-size: 11px; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .chapter-card .ch-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .chapter-card .ch-location { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+    .chapter-card .ch-location i { margin-right: 4px; color: var(--accent); }
+    .chapter-card h3 { font-size: 19px; font-weight: 700; color: #1c1917; margin-bottom: 14px; }
+    .chapter-card p { font-size: 14px; color: #44403c; text-align: justify; margin: 12px 0; line-height: 1.95; }
+    .chapter-card p:last-child { margin-bottom: 0; }
+    .chapter-card strong { color: #1c1917; }
+    .chapter-card em { color: #78350f; font-style: italic; }
+
+    .ch-highlight {
+        background: #fffbeb; border-left: 4px solid var(--accent);
+        border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0;
+        font-size: 14px; color: #78350f; line-height: 1.9;
+    }
+
+    /* 蛇形走线：偶数站右偏、奇数站左偏，模拟公交/地铁蜿蜒 */
+    .city-track > .stop-row:nth-child(even) .stop-pin { transform: translateX(8px); }
+    .city-track > .stop-row:nth-child(odd)  .stop-pin { transform: translateX(-8px); }
+    .city-track > .stop-row:nth-child(even) .track-leg { margin-left: 14px; }
+    .city-track > .stop-row:nth-child(odd)  .track-leg { margin-left: -2px; }
+    .city-track > .stop-row:nth-child(even) .stop-pin:hover { transform: translateX(8px) scale(1.15); }
+    .city-track > .stop-row:nth-child(odd)  .stop-pin:hover { transform: translateX(-8px) scale(1.15); }
+
+    .end-marker {
+        text-align: center; padding: 20px; color: #94a3b8;
+        font-size: 12px; letter-spacing: 3px;
+        background: var(--track-bg); border-radius: 0 0 20px 20px;
+        border-top: 2px dashed #2d2d4a;
+    }
+
+    @media (max-width:768px) {
+        .main-content { padding:24px 10px 60px; }
+        .main-content h1 { font-size: 24px; }
+        .route-graph { inset: 52px 0 16px 0; }
+        .stop-row { grid-template-columns: 64px minmax(0, 1fr); }
+        .stop-row:nth-child(even) { grid-template-columns: minmax(0, 1fr) 64px; }
+        .track-column { width: 64px; padding-top: 14px; }
+        .stop-pin { width: 32px; height: 32px; font-size: 12px; margin-top: 6px; }
+        .track-leg { width: 3px; min-width: 3px; margin-top: 6px; }
+        .track-column::after { width: 20px; top: 36px; height: 3px; }
+        .city-track > .stop-row:nth-child(even) .stop-pin,
+        .city-track > .stop-row:nth-child(odd) .stop-pin,
+        .city-track > .stop-row:nth-child(even) .stop-pin:hover,
+        .city-track > .stop-row:nth-child(odd) .stop-pin:hover { transform: translateX(0); }
+        .chapter-card { padding: 16px 14px; margin: 4px 4px 4px 0; border-radius: 10px; }
+        .chapter-card h3 { font-size: 16px; }
+    }
+</style>
+<link rel="stylesheet" href="../assets/site-sidebar.css">
+</head>
+<body>
+
+<div class="layout">
+    <aside class="site-sidebar site-sidebar--story">
+        <div class="site-sidebar__brand"><a href="../about.html"><i class="fas fa-feather-alt"></i> L1-L4 · 法则与故事</a></div>
+        <div class="site-sidebar__intro">
+            <span class="site-sidebar__eyebrow">站点坐标</span>
+            <strong>L3 · 小说</strong>
+            <p>当法则遇到错配、感情与失控，开始长出故事。</p>
+        </div>
+        <details class="site-sidebar__group site-sidebar__group--law">
+            <summary>
+                <span class="site-sidebar__summary-text">L1 · 法则</span>
+                <span class="site-sidebar__summary-meta">法则主线与迁移起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../about.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📖</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我找到了一套法则</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/tk.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">以不变应万变</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fw.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪄</span>
+                        <span>
+                            <span class="site-sidebar__link-title">工程魔法</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/sc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">调试AI，学会经营感情</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">乾坤大挪移心法 · 文章总览</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--persona">
+            <summary>
+                <span class="site-sidebar__summary-text">L2 · 人</span>
+                <span class="site-sidebar__summary-meta">日常、关系与自省现场</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">爱婷哥</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/forme.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📝</span>
+                        <span>
+                            <span class="site-sidebar__link-title">写给自己</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/pg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎤</span>
+                        <span>
+                            <span class="site-sidebar__link-title">家庭直播间</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/m.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌙</span>
+                        <span>
+                            <span class="site-sidebar__link-title">周一早上，梦见下班</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/cc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我可能哪里错了</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ll.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">找个不懂的人聊聊</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">♾️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">不必全部收敛</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--literature" open>
+            <summary>
+                <span class="site-sidebar__summary-text">L3 · 小说</span>
+                <span class="site-sidebar__summary-meta">小说、对话与失控实验</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czy.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📘</span>
+                        <span>
+                            <span class="site-sidebar__link-title">蓝牙：陆知意岛</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/qp-chat.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·对话版</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/gary.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📍</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·终极玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jsxm.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎮</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时刻·有趣玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--meta">
+            <summary>
+                <span class="site-sidebar__summary-text">L4 · 创作</span>
+                <span class="site-sidebar__summary-meta">创作方法与引擎说明</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czjs.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧪</span>
+                        <span>
+                            <span class="site-sidebar__link-title">会话的碰撞</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🏛️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">四层结构：创作体系</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>
+                <span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>
+                <span class="site-sidebar__summary-meta">从工程桥面回看整套法则的起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../gd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+                        <span>
+                            <span class="site-sidebar__link-title">桥面 · 始于工程，服务生活</span>
+                            <span class="site-sidebar__link-meta">从技术过桥，进入生活与叙事。</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+                            <span class="site-sidebar__link-meta">按地图理解技术与非技术的整体关系。</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
+    </aside>
+        <aside class="sidebar-toc sidebar-toc--story">
+        <h3><span class="sidebar-toc__icon" aria-hidden="true">📍</span> 本章导航</h3>
+        <nav>
+            <ul>
+                <li><a href="#top">返回开头</a></li>
+            </ul>
+        </nav>
+    </aside>
+<div class="main-content">
+        <header class="article-header">
+            <span class="series-tag">短篇小说 · 终极玩家</span>
+            <h1>失控时空：终极玩家</h1>
+            <p class="subtitle">当一座城市变成感情的地图，每一条街都是一段记忆的轨迹</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 生活随记</p>
+        </header>
+
+        <div class="city-track">
+            <div class="track-intro">
+                <i class="fas fa-location-dot"></i> 北京终极玩家 · 十个位置 · 四重人物网络
+                <span class="route-name">M10 · 失控线</span>
+            </div>
+            <div class="route-graph" aria-hidden="true">
+                <svg viewBox="0 0 1000 1600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fbbf24" />
+                            <stop offset="20%" stop-color="#ec4899" />
+                            <stop offset="40%" stop-color="#8b5cf6" />
+                            <stop offset="60%" stop-color="#3b82f6" />
+                            <stop offset="80%" stop-color="#10b981" />
+                            <stop offset="100%" stop-color="#f59e0b" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M 520 30 L 360 170 L 660 300 L 320 440 L 690 580 L 350 720 L 650 860 L 310 1000 L 700 1140 L 390 1280 L 610 1410 L 500 1540" />
+                </svg>
+            </div>
+
+            <!-- ===== Stop 1 ===== -->
+            <div class="stop-row">
+                <div class="track-column">
+                    <div class="stop-pin c1">1</div>
+                    <div class="track-leg l1"></div>
+                </div>
+                <div class="chapter-card">
+                    <div class="ch-label"><span class="ch-dot" style="background:var(--loc-yellow);"></span> ONE</div>
+                    <div class="ch-location"><i class="fas fa-map-marker-alt"></i> 苏敏公寓楼下 · 深夜</div>
+                    <h3>初遇灯火</h3>
+                    <p>加里·程第一次见到陆屿，是在苏敏公寓的楼下。</p>
+                    <p>他骑一辆改装过的死飞，车架上缠满了LED灯带，在深夜的北京街头像一条发光的蛇。苏敏从单元门走出来，加里朝她挥手，用那种外国人特有的、过于热情的中文喊："苏——敏——！"</p>
+                    <p>苏敏走过去，加里递给她一束自己扎的花。不是花店买的，是他在798旁边的荒地里摘的狗尾巴草和野菊，用一根剥了皮的电线捆着。苏敏接过来，低头看了一眼，笑了。那个笑里有三层意思：第一层是"你真幼稚"，第二层是"但我喜欢"，第三层是"我不会告诉你我喜欢"。</p>
+                    <p>她没告诉他。她只是把狗尾巴草插在餐桌上的矿泉水瓶里，养了整整一周，直到它们集体秃顶。</p>
+                    <p>后来陆屿问她那是谁。她说，前男友。美国人。在央美学雕塑，毕业了没走，在北京漂着，像一粒卡在排水口和滤网之间的咖啡渣。他能用三弦拉巴赫，能用焊枪在铁板上烧出山水画，能在一个下午把苏敏的厨房改造成暗房。</p>
+                    <p><em>"他是我见过最有才华的人，"</em>苏敏说，顿了顿，<em>"但也是最没法一起过日子的人。"</em></p>
+                    <p>陆屿没问为什么分手。他只是记住了那个名字——加里·程。一个外国人的名字前面，冠着一个中国姓。那个姓是苏敏给的。她跟他说，在中国你得有个姓。加里问她姓什么好，她说程。他说为什么。她说，不为什么，好听。</p>
+                    <div class="ch-highlight">她没说真话。真话是——程是程知意的程。她在加里身上闻到了某种和程知意相似的味道。她不能把程知意的姓给她的前男友，但她给了。这个念头让她觉得自己既可笑又不可理喻。但她没有改口。</div>
+                </div>
+            </div>
+
+            <!-- ===== Stop 2 ===== -->
+            <div class="stop-row">
+                <div class="track-column">
+                    <div class="stop-pin c2">2</div>
+                    <div class="track-leg l2"></div>
+                </div>
+                <div class="chapter-card">
+                    <div class="ch-label"><span class="ch-dot" style="background:var(--loc-blue);"></span> TWO</div>
+                    <div class="ch-location"><i class="fas fa-map-marker-alt"></i> 结构生物学年会 · 会议中心</div>
+                    <h3>天台心跳</h3>
+                    <p>程知意再次听到加里·程这个名字，是在一次结构生物学的年会上。她刚做完关于一种冷门古菌蛋白质折叠路径的报告。茶歇时有人拍她肩膀，转身就看到一个棕色卷发的男人，穿着一件洗到领口发毛的牛仔衬衫，怀里抱着一台便携合成器，像抱着一只猫。</p>
+                    <p><em>"你的报告我听了前半段，然后我受不了了。"</em></p>
+                    <p><em>"哪里讲错了？"</em></p>
+                    <p><em>"不是错，是太美了。你的蛋白质折叠动画太他妈美了。我坐在第三排，心跳加速，手心出汗，像看了一场演唱会。我必须去门口透口气。对不起。"</em></p>
+                    <p>程知意不知道该说什么。她已经很久没遇到这种说话完全不经过大脑皮层的人。他的中文流利，但每一个字的尾音都往上飘，像是每个句子都在问问题，但实际上他只是在陈述。</p>
+                    <p>那天晚上，他们在会议中心的天台上聊到凌晨三点。不是约会，是两个被同一种东西迷住的人，在确认对方是不是同类。聊蛋白质的折叠，聊巴赫的赋格，聊人类为什么总是在凌晨三点醒来。程知意说那是因为褪黑素分泌达到峰值。加里说不对，是因为这个时间点活人最少，亡灵最多。她说你有证据吗。他说没有，但你需要证据吗。<strong>你是一个科学家，但你的眼睛告诉我，你相信那些你不能证明的东西。</strong></p>
+                    <p>后来加里追过她。她拒绝的方式很干脆："我心里有个人。"加里说，我知道，你说梦话会喊他名字吗。她没回答。但她的沉默就是答案。</p>
+                </div>
+            </div>
+
+            <!-- ===== Stop 3 ===== -->
+            <div class="stop-row">
+                <div class="track-column">
+                    <div class="stop-pin c3">3</div>
+                    <div class="track-leg l3"></div>
+                </div>
+                <div class="chapter-card">
+                    <div class="ch-label"><span class="ch-dot" style="background:var(--loc-purple);"></span> THREE</div>
+                    <div class="ch-location"><i class="fas fa-map-marker-alt"></i> 陆屿家的厨房 · 一个普通的夜晚</div>
+                    <h3>厨房微光</h3>
+                    <p>陆屿第一次认真端详苏敏，是在他们认识的一个月后。那天晚上她来他家，他做饭。厨房很小，两个人转不开身。他切葱的时候她在旁边洗菜，水龙头开得很小，细细的水流，像怕吵醒什么东西。他把葱下锅，油溅起来，她往后退了一步，正好撞到他胸口。他说小心，她没说话。他低头，看到她耳根红了。</p>
+                    <p>那个瞬间他知道了两件事：<strong>第一，她想让他碰她；第二，她在克制自己不主动碰他。</strong>这两种念头同时存在在她身体里，像两个互相制衡的Agent，在后台跑着谁也赢不了的攻防战。</p>
+                    <p>后来他们在一起了。苏敏从来不主动。不是她不想，是她把"想要"这件事编码成了一种反向信号。她不说不，但她也不会说"我要"。她用沉默代替请求，用不动代替等待。关灯之后她会咬他肩膀，会在他后背上留下几道抓痕。但天一亮，她就恢复到那个轻声细语、永远在做计划和需求评审的产品经理。有时候陆屿看着她坐在餐桌前做周报，很难把这个人跟昨晚那个把他翻过来、骑在他身上、低头跟他说"别停"的人联系到一起。</p>
+                </div>
+            </div>
+
+            <!-- ===== Stop 4 ===== -->
+            <div class="stop-row">
+                <div class="track-column">
+                    <div class="stop-pin c4">4</div>
+                    <div class="track-leg l4"></div>
+                </div>
+                <div class="chapter-card">
+                    <div class="ch-label"><span class="ch-dot" style="background:var(--loc-green);"></span> FOUR</div>
+                    <div class="ch-location"><i class="fas fa-map-marker-alt"></i> 工体 · 凌晨</div>
+                    <h3>深夜待机</h3>
+                    <p>阿七第一次注意到陆屿，是在工体的一个凌晨。她打游戏输了，情绪上来，站在路边准备打车回家。然后她看到一个男的从一辆黑色雅阁里出来，站在车门口。他站在那里的样子，像一台正在等待指令的设备。不是迷茫，是待机。</p>
+                    <p>她本来已经走过他了。然后她退了回来。<em>"喂。你会打游戏吗。"</em></p>
+                    <p><em>"不会。"</em></p>
+                    <p><em>"那你的人生不完整。来，我教你。"</em></p>
+                    <p>她教他打了一局。他很菜，但他有一种奇怪的专注力。他听她讲操作的时候，像在听一个需求文档。<em>"这个技能的冷却时间是多久，为什么你要我先按A再按B，如果我跳过第一步会怎么样。"</em>她烦了，说你怎么这么烦。他说，<em>"规则。我必须先理解规则。"</em></p>
+                    <p>后来她告诉过他她的前男友。那人特别爱写计划，周末去哪玩写计划，吵架怎么写道歉信写计划，连上床都写计划。有一次她在他口袋里翻到一张纸条，上面写着：<em>阿七生气了，解决方案：一，买她最爱喝的红豆奶茶；二，不要解释，直接说对不起。</em>后面还有一个手写备注：<em>测试环境：上次吵架（详见吵架日志第12条）。</em></p>
+                    <p>后来他翻车了——不是因为她离开他，是因为他把这种模式用在了下一个女朋友身上，被当众处刑挂到了朋友圈。后来陆屿问她前男友的事，她说：</p>
+                    <div class="ch-highlight"><em>"他把我当成Bug。你把我当成彩蛋。Bug是要修的。彩蛋是等着被人发现的。"</em></div>
+                </div>
+            </div>
+
+            <!-- ===== Stop 5 ===== -->
+            <div class="stop-row">
+                <div class="track-column">
+                    <div class="stop-pin c5">5</div>
+                    <div class="track-leg l5"></div>
+                </div>
+                <div class="chapter-card">
+                    <div class="ch-label"><span class="ch-dot" style="background:var(--loc-red);"></span> FIVE</div>
+                    <div class="ch-location"><i class="fas fa-map-marker-alt"></i> 苏敏的床 · 做完爱之后</div>
+                    <h3>床褶星图</h3>
+                    <p>苏敏有一个习惯，做完爱之后会背对着陆屿侧躺，把被子拉到肩膀，露出一截后颈。那个姿态不是疏远，是某种只有她自己知道的仪式。在那几分钟的安静里，她的手指在床单上划着肉眼看不见的轨迹。</p>
+                    <p>加里·程曾把那个轨迹录下来，用3D建模重建了一个旋转的星系。<em>"你的潜意识在画一个星系。"</em>他把打印出来的模型送给她。她没有收。不是因为不喜欢，是因为太贵重了。贵重到如果她收下，就等于承认自己还没忘掉他。</p>
+                    <p>她不确定陆屿有没有那样看过她。陆屿看她的方式，是产品经理看竞品分析报告——全面、冷静，带着想搞清楚所有参数的职业本能，但少了一点加里那种狂热的、盲目的、不想搞清只想沉醉的光。但他会在凌晨从公司回来，轻轻推开门，在黑暗中看她。她有时候醒着，但装睡。她感觉到他的目光落在她脸上，<strong>像一行查询语句，在执行某个她不知道的SELECT操作。</strong></p>
+                </div>
+            </div>
+
+            <!-- ===== Stop 6 ===== -->
+            <div class="stop-row">
+                <div class="track-column">
+                    <div class="stop-pin c6">6</div>
+                    <div class="track-leg l6"></div>
+                </div>
+                <div class="chapter-card">
+                    <div class="ch-label"><span class="ch-dot" style="background:var(--loc-pink);"></span> SIX</div>
+                    <div class="ch-location"><i class="fas fa-map-marker-alt"></i> 798 · 独立书店</div>
+                    <h3>线缝肖像</h3>
+                    <p>陆屿是在798的一家独立书店再次见到加里的。加里在那里办了一个小型个展，主题叫<strong>"The Woman I Don't Know"——我认识不了的那个女人。</strong></p>
+                    <p>整个展厅只有一件作品：一面墙上，用几千根不同颜色的线，绣出一幅巨大的肖像。走近看，每一根线都对应着一张标签，上面写着日期、时间、一句话。比如<em>"她今天在厨房发了四十秒呆"、"她的左手比右手大一毫米，所以她的戒指总是往一边歪"、"她睡觉的时候磨牙，但不是每天，是每隔三天，我记录了一百一十七个夜晚"。</em></p>
+                    <p>还有一张写着：<em>"她有一次问我会不会有一天忘记她。我说我正在用每一根线把你钉在时间里。她说，疼不疼。我说，我的疼，不是你的疼。"</em></p>
+                    <p>标签的日期跨度是三年。三年里，加里·程记录了苏敏每一个她自己都没注意到的细节。他把这些细节重新缝合，却不是她的肖像——那是一张陌生的、苏敏自己都不认识的脸。</p>
+                    <p>陆屿站在这面墙前，站了很久。然后他在角落里找到了加里。加里正坐在地上，用一把旧螺丝刀修理一台老式幻灯机。</p>
+                    <p><em>"你是陆屿。"</em>加里没抬头。<em>"我在苏敏的手机里见过你的照片。你在她的通讯录里叫'文档先生'。她每次给你发消息前都会停顿三秒。平均三秒。所以你在她心里，需要攒三秒勇气才能开口说话。"</em></p>
+                    <p>加里停下手里的动作，抬起头看陆屿。他比陆屿想象的更老一些，眼角有细密的皱纹，棕色的卷发里夹杂着灰白色的发丝。但他的眼神还是那种——带着一点狂热、一点天真、一点"我知道这很疯但我不在乎"的光。</p>
+                    <div class="ch-highlight"><em>"陆屿，你现在可以记住她的样子。你觉得你永远会记得。但你不会。你会忘记。你会忘记得比我更快。因为你不记录。"</em></div>
+                    <p>陆屿站起来，走到那面墙前，从口袋里掏出手机，打开备忘录。他打了三个字：<em>苏敏的。</em>然后他删掉了。他把手机放回口袋。他做不到。他这辈子都在用法则去定义和记录世界，但他记录不了苏敏。不是因为苏敏不可记录，是因为一旦开始记录，就证明他怕失去她。<strong>而他还没准备好承认自己在怕什么。</strong></p>
+                </div>
+            </div>
+
+            <!-- ===== Stop 7 ===== -->
+            <div class="stop-row">
+                <div class="track-column">
+                    <div class="stop-pin c7">7</div>
+                    <div class="track-leg l7"></div>
+                </div>
+                <div class="chapter-card">
+                    <div class="ch-label"><span class="ch-dot" style="background:var(--loc-red);"></span> SEVEN</div>
+                    <div class="ch-location"><i class="fas fa-map-marker-alt"></i> 展厅 · 深夜散场</div>
+                    <h3>散场回声</h3>
+                    <p>深夜。展厅空了。加里在角落收拾他的线，一根一根卷好。苏敏在旁边帮他拆标签，一张一张，小心地撕下来。拆到"左颊笑纹分叉点"那张时，她的手停了一瞬。</p>
+                    <p><em>"加里。"</em></p>
+                    <p><em>"嗯。"</em></p>
+                    <p><em>"你真的数了。"</em></p>
+                    <p><em>"数了。一百一十七个晚上。其实是一百一十九。最后两个晚上我没记。因为那两天我们在吵架。"</em></p>
+                    <p>苏敏把那张标签捏在手里，沉默了很久。</p>
+                    <p><em>"你当时为什么不拉住我。哪怕拉一次。拉一下。"</em></p>
+                    <div class="ch-highlight">加里抬起头看她。他的手指还停在半空中，捏着一根从墙上拆下来的蓝线。<em>"因为你在哭。你每次让我别走的时候都在哭。我分不清你是真的想让我留下，还是只是害怕自己一个人。你的眼泪告诉我你在怕什么，但它不告诉我是怕我走，还是怕没人来。"</em></div>
+                    <p>苏敏没说话。她只是把那张标签折成一个很小的方块，放进外套口袋里。</p>
+                    <p><em>"你知道吗，"</em>她没有看他，<em>"他最像你的地方是，你们都不肯问我要不要。"</em></p>
+                    <p><em>"你没回答。"</em></p>
+                    <p><em>"你没问。"</em></p>
+                    <p>她在出租车上握着那张叠成小方块的标签，指尖不断抚过纸张的折痕，像在反复调试一个始终无法收敛的参数。车窗外是深夜的北京，路灯在视野里一盏一盏往后退。这座城市从不记住任何人的脸，但她记住了加里的脸。也记住了陆屿的脸。也记住了那三年里每天半夜压在她腰椎上的、他胳膊的重量。</p>
+                    <p>在展厅尽头，加里还在卷他的线。他用指尖捻住线头，一圈一圈往拇指上绕，像在缠一个看不见的线轴。</p>
+                </div>
+            </div>
+
+            <!-- ===== Stop 8 ===== -->
+            <div class="stop-row">
+                <div class="track-column">
+                    <div class="stop-pin c8">8</div>
+                    <div class="track-leg l8"></div>
+                </div>
+                <div class="chapter-card">
+                    <div class="ch-label"><span class="ch-dot" style="background:var(--loc-blue);"></span> EIGHT</div>
+                    <div class="ch-location"><i class="fas fa-map-marker-alt"></i> 会议中心天台 · 同一时刻</div>
+                    <h3>月下折叠</h3>
+                    <p>而在天台上的同一时刻，程知意和加里之间，隔着一段沉默。</p>
+                    <p>程知意在看望远镜。目镜里的月亮模糊成一团，焦距不对，但她也懒得调。她忽然想起加里曾经追过她时，她问他的那个问题。她以为他会说氨基酸序列，或者巴赫的某个赋格。但他说，是你。你在等一个人。你一直在折叠自己，想把自己折成他能接住的样子。但那个最低能量态——那个最稳定的、不会自己散掉的结构——不是折出来的。是本来就有的。</p>
+                    <p><em>"加里，"</em>她放下望远镜，<em>"你当年说我一直在折叠自己。我想了很久。你说得对。但你漏了一个步骤。蛋白质折叠需要伴侣蛋白。它不能自己折。它需要一个外力，一个分子伴侣，帮它找到正确的路径。你找到了你的伴侣蛋白吗。"</em></p>
+                    <p>加里没有回答。她也没追问。风从楼宇间穿过，吹着她的银发往一个方向飘，像一行被编译过度的、暂时找不到匹配对象的单链DNA。</p>
+                </div>
+            </div>
+
+            <!-- ===== Stop 9 ===== -->
+            <div class="stop-row">
+                <div class="track-column">
+                    <div class="stop-pin c9">9</div>
+                    <div class="track-leg l9"></div>
+                </div>
+                <div class="chapter-card">
+                    <div class="ch-label"><span class="ch-dot" style="background:var(--loc-yellow);"></span> NINE</div>
+                    <div class="ch-location"><i class="fas fa-map-marker-alt"></i> Echo酒吧 · 凌晨两点</div>
+                    <h3>酒杯余温</h3>
+                    <p>程知意坐在角落的卡座，桌上放着一杯没动的酒。她每次来都点同一杯，但从不喝完。点酒不是为了喝，是为了让自己的手指有事可做。转酒杯。转杯沿。转杯底在木桌上画看不见的螺旋。</p>
+                    <p>陆屿推开门进来。他穿过空荡荡的舞池走到她面前。她没起身，只是把手从酒杯上移开，像让出一个位置。</p>
+                    <p><em>"你怎么还在这儿。"</em></p>
+                    <p><em>"等你。"</em></p>
+                    <p><em>"你怎么知道我会来。"</em></p>
+                    <p><em>"不知道。但如果你不来，我就把这一杯喝完然后回家。这是最后一杯了。这杯喝完，我就不来了。"</em></p>
+                    <p>陆屿看着她。她说话还是那样——陈述句，句号，不拖泥带水。但他注意到她握着杯子的手，关节发白。</p>
+                    <p><em>"程知意。你在苏黎世那几年，每年我生日，你都用翻译软件搜我的名字。搜完就删。你怕什么。"</em></p>
+                    <div class="ch-highlight">她转过来，眼睛里有一种他没见过的东西——不是泪，是认。是在一个问题上被困了多年、终于决定放弃求解的认。<br><br><em>"我怕我发了消息，你不回。我怕你回了，但不是我想听的话。我怕你说了我想听的话，但我已经在瑞士，你已经在国内，我们中间隔了七个小时的时差。我怕你问我当初为什么不跟你异地。我怕我回答你，然后你发现我不是你记忆里的那个人。我怕你发现我是那个先走的人。先走的人没资格回来找你。"</em></div>
+                    <p><em>"我也怕你根本不在乎。"</em></p>
+                    <p><em>"程知意。"</em></p>
+                    <p><em>"嗯。"</em></p>
+                    <p><em>"我每年你生日也搜过你的名字。用谷歌学术。不是搜名字，是搜你的研究领域。看你的论文，看你的合作者列表。看你引用过谁，被谁引用过。我看不懂你的论文。但我看懂了你的轨迹。你从苏黎世到日内瓦，从博后到独立PI，你每一步我都知道。我从来没告诉过你。也没有告诉过苏敏。我只是每年在你生日那天，打开谷歌学术，输入那个冷门蛋白质的名字。"</em></p>
+                    <p>程知意没有说话。她只是重新握住杯子，转动它，然后把剩下的半杯酒喝完。冰已经化完了，酒被稀释成水的颜色。她说：<em>"你为什么不来苏黎世看我。"</em></p>
+                    <p><em>"你从来没叫我。"</em></p>
+                    <p><em>"我叫了。每天晚上都在叫。只是你没听到。"</em></p>
+                </div>
+            </div>
+
+            <!-- ===== 终点 ===== -->
+            <div class="stop-row">
+                <div class="track-column">
+                    <div class="stop-pin c10">10</div>
+                </div>
+                <div class="chapter-card">
+                    <div class="ch-label"><span class="ch-dot" style="background:var(--loc-green);"></span> FINAL</div>
+                    <div class="ch-location"><i class="fas fa-map-marker-alt"></i> 工体 · 路灯下 · 凌晨</div>
+                    <h3>7M知意</h3>
+                    <p>阿七站在工体的路灯下面，帆布袋斜挎在肩上，里面还是那半瓶可乐。今晚的局散了。她看着他们各自离开——苏敏往东，程知意往西，陆屿站在她们中间的位置，像一颗被三个不同力场拉扯的粒子。</p>
+                    <p>她打开手机，给陆屿发了一条消息。</p>
+                    <p><em>"你们这盘棋，下了多少年了。"</em></p>
+                    <p><em>"不知道。好像一直在下。"</em></p>
+                    <p><em>"那你知道你现在是输是赢吗。"</em></p>
+                    <p><em>"不知道。"</em></p>
+                    <div class="ch-highlight"><em>"那你别下了。棋局可以重新开。但落子不要悔。"</em></div>
+                    <p>陆屿看着手机屏幕。他想起女儿悔棋的时候，总会仰起头问他："爸爸，我可以调试吗？"他记得自己总是点头。他容许她重新来，因为她还小，还在学习规则。</p>
+                    <p>但这个世界上，总有些事情，是不允许调试的。比如等了太久的人。比如说了太晚的话。比如那个凌晨，他站在走廊尽头，看着她走进登机口，没有喊她的名字。</p>
+                </div>
+            </div>
+
+            <div class="end-marker">
+                <i class="fas fa-circle" style="color:var(--loc-green);font-size:6px;"></i>
+                工体 · 终点站
+                <i class="fas fa-circle" style="color:var(--loc-green);font-size:6px;"></i>
+            </div>
+        </div>
+
+        <div class="series-nav">
+            <a href="../aboutmore/qp-chat.html">← 失控时空·对话版</a>
+            <a href="../aboutmore/jsxm.html">失控时刻·有趣玩家 →</a>
+        </div>
+</div>
+</div>
+
+</body>
+</html>

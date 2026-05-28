@@ -24,7 +24,8 @@ VISIBLE_FLOW = [
     ("aboutmore/ta.html", "不必全部收敛", "persona"),
     ("aboutmore/czy.html", "蓝牙：陆知意岛", "literature"),
     ("aboutmore/qp-chat.html", "失控时空·对话版", "literature"),
-    ("aboutmore/jsxm.html", "失控时刻：有趣玩家", "literature"),
+    ("aboutmore/gary.html", "失控时空·终极玩家", "literature"),
+    ("aboutmore/jsxm.html", "失控时刻·有趣玩家", "literature"),
     ("aboutmore/czjs.html", "会话的碰撞", "meta"),
     ("aboutmore/fr.html", "四层结构：创作体系", "meta"),
 ]
@@ -80,6 +81,7 @@ FILE_ICONS = {
     "aboutmore/ta.html": "♾️",
     "aboutmore/czy.html": "📘",
     "aboutmore/qp-chat.html": "💭",
+    "aboutmore/gary.html": "📍",
     "aboutmore/jsxm.html": "🎮",
     "aboutmore/czjs.html": "🧪",
     "aboutmore/fr.html": "🏛️",

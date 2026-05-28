@@ -270,7 +270,7 @@
 |------|------|
 | `[小说]` 🪶 [蓝牙：陆知意岛](https://x-itg.github.io/aboutmore/czy.html) | 一个AI工程师等了六年的故事，关于错配、走散与回到原点 |
 | `[小说实验]` 💬 [失控时空·对话版](https://x-itg.github.io/aboutmore/qp-chat.html) | 以聊天气泡还原陆知意岛的每一句对话，让叙事退后、语言顶到最前面 |
-| `[小说实验]` 🎮 [失控时刻：有趣玩家](https://x-itg.github.io/aboutmore/jsxm.html) | 把关系写成文档、批注和文件夹，一篇形式与内容互相咬合的“副本叙事” |
+| `[小说实验]` 🎮 [失控时刻·有趣玩家](https://x-itg.github.io/aboutmore/jsxm.html) | 把关系写成文档、批注和文件夹，一篇形式与内容互相咬合的“副本叙事” |
 
 ### Layer 4 · 元创作层 · 引擎的公开
 
