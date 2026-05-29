@@ -196,6 +196,29 @@
         border-top: 2px dashed #2d2d4a;
     }
 
+    .chat-section { margin-top: 38px; padding-top: 26px; border-top: 1px solid var(--border); }
+    .chat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; color: #1c1917; font-size: 15px; font-weight: 700; }
+    .chat-header i { color: var(--accent); }
+    .chat-window { padding: 16px; border-radius: 20px; border: 1px solid #e7d7bf; background: linear-gradient(180deg, #fffdf9, #fff8ef); box-shadow: 0 10px 24px rgba(26, 26, 46, 0.06); }
+    .chat-divider { display: inline-flex; align-items: center; margin: 10px auto 18px; padding: 6px 12px; border-radius: 999px; background: #ffedd5; color: #9a3412; font-size: 12px; font-weight: 700; }
+    .chat-message { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+    .chat-message:last-child { margin-bottom: 0; }
+    .chat-avatar-reader { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 700; }
+    .chat-avatar-reader.reader-a { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .chat-avatar-reader.reader-b { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+    .chat-avatar-reader.reader-c { background: linear-gradient(135deg, #ec4899, #db2777); }
+    .chat-avatar-reader.reader-d { background: linear-gradient(135deg, #10b981, #047857); }
+    .chat-bubble-reader { flex: 1; min-width: 0; padding: 14px 16px; border-radius: 18px 18px 18px 8px; background: #fff; border: 1px solid #eadfce; }
+    .chat-meta-reader { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: #78716c; font-size: 12px; }
+    .chat-name-reader { color: #1c1917; font-weight: 700; font-size: 14px; }
+    .chat-role-reader { color: #92400e; font-size: 12px; }
+    .chat-tag-reader { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 999px; background: #fff7ed; color: #9a3412; font-size: 11px; font-weight: 700; }
+    .chat-reply-reader { margin-bottom: 10px; padding: 8px 10px; border-radius: 12px; background: #fffbeb; border-left: 3px solid #f59e0b; color: #78350f; font-size: 12px; line-height: 1.65; }
+    .chat-text-reader { color: #44403c; font-size: 14px; line-height: 1.8; }
+    .chat-text-reader p { margin: 8px 0; text-align: justify; }
+    .chat-text-reader p:first-child { margin-top: 0; }
+    .chat-text-reader p:last-child { margin-bottom: 0; }
+
     @media (max-width:768px) {
         .main-content { padding:24px 10px 60px; }
         .main-content h1 { font-size: 24px; }
@@ -212,6 +235,9 @@
         .city-track > .stop-row:nth-child(odd) .stop-pin:hover { transform: translateX(0); }
         .chapter-card { padding: 16px 14px; margin: 4px 4px 4px 0; border-radius: 10px; }
         .chapter-card h3 { font-size: 16px; }
+        .chat-window { padding: 14px 12px; }
+        .chat-avatar-reader { width: 34px; height: 34px; font-size: 13px; }
+        .chat-bubble-reader { padding: 12px 13px; }
     }
 </style>
 <link rel="stylesheet" href="../assets/site-sidebar.css">
@@ -694,6 +720,78 @@
                 <i class="fas fa-circle" style="color:var(--loc-green);font-size:6px;"></i>
                 工体 · 终点站
                 <i class="fas fa-circle" style="color:var(--loc-green);font-size:6px;"></i>
+            </div>
+        </div>
+
+        <div class="chat-section">
+            <div class="chat-header">
+                <i class="fas fa-comments"></i>
+                <span>读者群聊 · 城市轨道版</span>
+            </div>
+            <div class="chat-window">
+                <div class="chat-divider">L3 终极玩家讨论</div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-a">城</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">城市感读者</span>
+                            <span class="chat-role-reader">特别在意空间和人物关系怎么互相映照</span>
+                            <span class="chat-tag-reader">观感</span>
+                            <span>23:35</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <p>这篇把北京写得像一张情感地铁图，这个形式太准了。每一站都不是单纯的地点，而是人物关系在那一刻的坐标点，所以一路读下来像在看命运怎么换乘。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-b">链</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">复调读者</span>
+                            <span class="chat-role-reader">偏爱多线并行的人物结构</span>
+                            <span class="chat-tag-reader">接话</span>
+                            <span>23:37</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <div class="chat-reply-reader"><strong>回复 城市感读者：</strong>对，而且“站点感”会让每个人都像在不同线路上靠近又错开。</div>
+                            <p>程知意、苏敏、阿七不是简单的三角关系，她们更像三个不同系统的入口。陆屿每走到一站，都像在重新判断自己到底还想把哪个版本继续跑下去。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-c">句</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">摘句读者</span>
+                            <span class="chat-role-reader">看到好句子会停下来反复回看</span>
+                            <span class="chat-tag-reader">摘录</span>
+                            <span>23:40</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <div class="chat-reply-reader"><strong>插一句：</strong>“棋局可以重新开，但落子不要悔”这句直接把全篇情绪钉住了。</div>
+                            <p>因为它既像阿七在说，也像整篇小说在说。前面一路都是选择、延迟、回看，到这里终于有人把话说死了，力度很够。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-d">冷</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">结构派读者</span>
+                            <span class="chat-role-reader">主要看形式是否真的服务内容</span>
+                            <span class="chat-tag-reader">判断</span>
+                            <span>23:42</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <p>这页不是“好看的排版实验”那么简单，它把人物在城里的流动、感情里的换线、关系里的转乘都变成了同一种视觉语言，所以形式成立，叙事也被进一步推高了。</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

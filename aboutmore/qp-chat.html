@@ -146,6 +146,29 @@
     .msg-continue { margin-top: -4px; }
     .msg-continue .avatar { visibility: hidden; }
 
+    .chat-section { margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .chat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; color: #1c1917; font-size: 15px; font-weight: 700; }
+    .chat-header i { color: var(--accent); }
+    .chat-window { padding: 16px; border-radius: 20px; border: 1px solid #e7d7bf; background: linear-gradient(180deg, #fffdf9, #fff8ef); box-shadow: 0 10px 24px rgba(120, 83, 38, 0.08); }
+    .chat-divider { display: inline-flex; align-items: center; margin: 10px auto 18px; padding: 6px 12px; border-radius: 999px; background: #ffedd5; color: #9a3412; font-size: 12px; font-weight: 700; }
+    .chat-message { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+    .chat-message:last-child { margin-bottom: 0; }
+    .chat-avatar-reader { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 700; }
+    .chat-avatar-reader.reader-a { background: linear-gradient(135deg, #d97706, #b45309); }
+    .chat-avatar-reader.reader-b { background: linear-gradient(135deg, #6366f1, #4338ca); }
+    .chat-avatar-reader.reader-c { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+    .chat-avatar-reader.reader-d { background: linear-gradient(135deg, #0f766e, #115e59); }
+    .chat-bubble-reader { flex: 1; min-width: 0; padding: 14px 16px; border-radius: 18px 18px 18px 8px; background: #fff; border: 1px solid #eadfce; }
+    .chat-meta-reader { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: #78716c; font-size: 12px; }
+    .chat-name-reader { color: #1c1917; font-weight: 700; font-size: 14px; }
+    .chat-role-reader { color: #92400e; font-size: 12px; }
+    .chat-tag-reader { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 999px; background: #fff7ed; color: #9a3412; font-size: 11px; font-weight: 700; }
+    .chat-reply-reader { margin-bottom: 10px; padding: 8px 10px; border-radius: 12px; background: #fffbeb; border-left: 3px solid #f59e0b; color: #78350f; font-size: 12px; line-height: 1.65; }
+    .chat-text-reader { color: #44403c; font-size: 14px; line-height: 1.8; }
+    .chat-text-reader p { margin: 8px 0; text-align: justify; }
+    .chat-text-reader p:first-child { margin-top: 0; }
+    .chat-text-reader p:last-child { margin-bottom: 0; }
+
 @media (max-width:768px) {
         .main-content { padding:24px 16px 60px; }
         .main-content h1 { font-size:26px; }
@@ -156,6 +179,9 @@
         .avatar::before { font-size: 15px; }
         .narration { margin: 12px 8px; padding: 12px 14px; font-size: 13px; }
         .scene-header { font-size: 12px; padding: 10px 12px; }
+        .chat-window { padding: 14px 12px; }
+        .chat-avatar-reader { width: 34px; height: 34px; font-size: 13px; }
+        .chat-bubble-reader { padding: 12px 13px; }
     }
 </style>
 <link rel="stylesheet" href="../assets/site-sidebar.css">
@@ -1204,6 +1230,78 @@
 
         </div>
         <!-- ===== 聊天记录结束 ===== -->
+
+        <div class="chat-section">
+            <div class="chat-header">
+                <i class="fas fa-comments"></i>
+                <span>读者群聊 · 对话体实验</span>
+            </div>
+            <div class="chat-window">
+                <div class="chat-divider">L3 小说讨论</div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-a">对</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">对话体读者</span>
+                            <span class="chat-role-reader">偏爱纯对白推进的小说</span>
+                            <span class="chat-tag-reader">首评</span>
+                            <span>23:18</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <p>这篇最厉害的是把很多作者会拿旁白交代掉的东西，全压进了人物对话和停顿里。谁在退、谁在逼、谁在装没事，几乎都靠一句话里的节奏差异自己露出来。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-b">追</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">系列读者</span>
+                            <span class="chat-role-reader">会和《蓝牙》互相对照着读</span>
+                            <span class="chat-tag-reader">接话</span>
+                            <span>23:20</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <div class="chat-reply-reader"><strong>回复 对话体读者：</strong>对，而且和《蓝牙》放一起读，特别能看出同一个故事换一种叙述协议后，张力会怎么变。</div>
+                            <p>正文版更像慢慢回看一段命运，对话版则像你被直接拉进现场，连沉默和打字停顿都成了情节的一部分，代入感会更凶。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-c">情</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">普通读者</span>
+                            <span class="chat-role-reader">更容易被人物之间的错位刺到</span>
+                            <span class="chat-tag-reader">代入</span>
+                            <span>23:23</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <div class="chat-reply-reader"><strong>插一句：</strong>这种页面形式让我第一次很直观地感受到，为什么有些话看着只是几行字，实际上像刀子一样。</div>
+                            <p>因为聊天窗口太熟了。每个人都经历过盯着消息框、删掉又重打、等对方回复的那种时刻，所以这篇会把人直接拽回自己生活里的某种瞬间。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-d">冷</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">冷面读者</span>
+                            <span class="chat-role-reader">会看结构，不轻易煽情</span>
+                            <span class="chat-tag-reader">收束</span>
+                            <span>23:27</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <p>对话体最怕变成“只剩形式感”，这篇没掉进去。形式之所以成立，是因为人物本来就被困在消息、回复、未发送、删除记录这种媒介里，它不是套皮，而是结构和内容对上了。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="series-nav">
             <a href="../aboutmore/czy.html">← 蓝牙：陆知意岛</a>
