@@ -276,6 +276,10 @@ def build_sidebar(base_indent: str, active_file: str, eol: str) -> str:
         f"{i2}<strong>{title}</strong>",
         f"{i2}<p>{desc}</p>",
         f"{i1}</div>",
+        f'{i1}<div class="site-sidebar__quick-links">',
+        f'{i2}<a href="index.html" class="site-sidebar__quick-link site-sidebar__quick-link--primary"><i class="fas fa-house"></i><span>首页入口</span></a>',
+        f'{i2}<a href="aboutmore/wx.html" class="site-sidebar__quick-link"><i class="fas fa-map"></i><span>站点总览</span></a>',
+        f"{i1}</div>",
     ]
     for group_title, items in GROUPS:
         open_attr = " open" if any(item[0] == active_file for item in items) else ""
