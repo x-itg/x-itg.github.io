@@ -230,6 +230,10 @@ def build_sidebar(base_indent: str, current_file: str, eol: str) -> str:
         f"{i2}<strong>{layer_title}</strong>",
         f"{i2}<p>{layer_desc}</p>",
         f"{i1}</div>",
+        f'{i1}<div class="site-sidebar__quick-links">',
+        f'{i2}<a href="{href(current_file, "index.html")}" class="site-sidebar__quick-link site-sidebar__quick-link--primary"><i class="fas fa-house"></i><span>首页入口</span></a>',
+        f'{i2}<a href="{href(current_file, "aboutmore/wx.html")}" class="site-sidebar__quick-link"><i class="fas fa-map"></i><span>站点总览</span></a>',
+        f"{i1}</div>",
     ]
 
     layers_to_render = [layer] if layer == "special" else VISIBLE_LAYERS

@@ -100,6 +100,48 @@
     line-height: 1.68;
 }
 
+.site-sidebar__quick-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.48rem;
+    margin-bottom: 0.88rem;
+}
+
+.site-sidebar__quick-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.38rem;
+    min-height: 2.2rem;
+    padding: 0.52rem 0.62rem;
+    border-radius: 0.9rem;
+    border: 1px solid var(--sidebar-border-strong);
+    background: rgba(255, 250, 242, 0.94);
+    color: var(--sidebar-accent-deep);
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1.2;
+    box-shadow: 0 8px 16px rgba(145, 90, 32, 0.06);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, color 0.16s ease;
+}
+
+.site-sidebar__quick-link i {
+    font-size: 0.76rem;
+}
+
+.site-sidebar__quick-link:hover {
+    transform: translateY(-1px);
+    color: #7d4618;
+    background: rgba(255, 244, 226, 0.98);
+    box-shadow: 0 10px 18px rgba(145, 90, 32, 0.1);
+}
+
+.site-sidebar__quick-link--primary {
+    background: linear-gradient(135deg, rgba(235, 177, 118, 0.3), rgba(255, 247, 234, 0.98));
+    border-color: rgba(181, 102, 44, 0.38);
+}
+
 .site-sidebar__group {
     margin-bottom: 0.72rem;
     border: 1px solid var(--sidebar-border);
@@ -628,6 +670,10 @@ body:has(.site-sidebar--tech) a:hover {
     .site-sidebar__intro {
         padding: 0.9rem 0.9rem 0.95rem;
     }
+
+    .site-sidebar__quick-links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 768px) {
@@ -657,6 +703,18 @@ body:has(.site-sidebar--tech) a:hover {
     .site-sidebar__intro p {
         font-size: 0.7rem;
         line-height: 1.6;
+    }
+
+    .site-sidebar__quick-links {
+        gap: 0.42rem;
+        margin-bottom: 0.72rem;
+    }
+
+    .site-sidebar__quick-link {
+        min-height: 2.05rem;
+        padding: 0.48rem 0.55rem;
+        border-radius: 0.8rem;
+        font-size: 0.66rem;
     }
 
     .site-sidebar__group {
