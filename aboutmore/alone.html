@@ -15,9 +15,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
 	:root {
-		--bg: #0a0d16;
-		--bg-glow: rgba(52, 211, 153, 0.08);
-		--bg-glow-2: rgba(244, 114, 182, 0.08);
+		--bg: #fff8e8;
+		--bg-glow: rgba(251, 191, 36, 0.18);
+		--bg-glow-2: rgba(245, 158, 11, 0.12);
+		--page-deep: rgba(8, 12, 23, 0.9);
+		--page-deep-soft: rgba(17, 24, 39, 0.82);
 		--card-bg: rgba(14, 18, 32, 0.82);
 		--card-soft: rgba(255, 255, 255, 0.05);
 		--text: #eef2ff;
@@ -36,13 +38,33 @@
 		background:
 			radial-gradient(circle at 10% 0%, var(--bg-glow), transparent 26%),
 			radial-gradient(circle at 88% 12%, var(--bg-glow-2), transparent 24%),
-			linear-gradient(180deg, #070910 0%, #0b1120 38%, #090d18 100%);
+			linear-gradient(180deg, #fffdf6 0%, #fff7e8 42%, #fef3df 100%);
 		color: var(--text);
 		line-height: 1.95;
 		-webkit-font-smoothing: antialiased;
 	}
 	.layout { display: flex; max-width: 1320px; margin: 0 auto; min-height: 100vh; }
-	.main-content { flex: 1; min-width: 0; max-width: 860px; margin: 0 auto; padding: 40px 24px 88px; }
+	.main-content {
+		flex: 1;
+		min-width: 0;
+		max-width: 860px;
+		margin: 0 auto;
+		padding: 40px 24px 88px;
+		position: relative;
+		isolation: isolate;
+	}
+	.main-content::before {
+		content: "";
+		position: absolute;
+		inset: 18px 6px 24px;
+		border-radius: 32px;
+		background:
+			radial-gradient(circle at top, rgba(103, 232, 249, 0.08), transparent 28%),
+			linear-gradient(180deg, var(--page-deep) 0%, var(--page-deep-soft) 52%, rgba(12, 18, 32, 0.92) 100%);
+		box-shadow: 0 30px 70px rgba(15, 23, 42, 0.28);
+		border: 1px solid rgba(148, 163, 184, 0.12);
+		z-index: -1;
+	}
 	.article-header {
 		margin-bottom: 28px;
 		padding: 28px 30px;
@@ -322,6 +344,7 @@
 	}
 	@media (max-width: 768px) {
 		.main-content { padding: 24px 14px 72px; }
+		.main-content::before { inset: 10px 0 16px; border-radius: 24px; }
 		.article-header { padding: 22px 18px; border-radius: 22px; }
 		h1 { font-size: 28px; }
 		.chapter-head,
