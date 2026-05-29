@@ -361,11 +361,21 @@
 	.chat-header {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 		gap: 10px;
 		margin-bottom: 18px;
 		color: #f8fafc;
 		font-size: 15px;
 		font-weight: 700;
+	}
+	.chat-header::after {
+		content: "附记：本区评论为作者写入的虚拟文本，用于叙事延伸，并非实时留言。";
+		flex-basis: 100%;
+		margin-left: 28px;
+		color: rgba(226, 232, 240, 0.76);
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 1.6;
 	}
 	.chat-header i { color: var(--accent-3); }
 	.chat-window {
