@@ -390,6 +390,99 @@
     .axiom-box p { margin: 10px 0; color: rgba(240, 249, 255, 0.92); }
     .axiom-box strong { color: #ffffff; }
 
+    .comment-section {
+        margin-top: 48px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(16, 42, 67, 0.12);
+    }
+    .comment-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        color: #1f1b16;
+    }
+    .comment-header i {
+        color: var(--signal);
+        font-size: 16px;
+    }
+    .comment-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+    }
+    .comment-avatar {
+        flex-shrink: 0;
+        width: 44px;
+        height: 44px;
+        margin-top: 8px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(16, 42, 67, 0.92), rgba(15, 118, 110, 0.9));
+        color: #fff;
+        box-shadow: 0 10px 20px rgba(16, 42, 67, 0.18);
+        font-size: 18px;
+    }
+    .comment-body {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+        padding: 22px 24px 24px;
+        border-radius: 20px 20px 20px 8px;
+        border: 1px solid rgba(15, 118, 110, 0.16);
+        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,244,233,0.98));
+        box-shadow: 0 14px 30px rgba(34, 31, 26, 0.08);
+    }
+    .comment-body::before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 24px;
+        width: 16px;
+        height: 16px;
+        background: rgba(255,255,255,0.98);
+        border-left: 1px solid rgba(15, 118, 110, 0.16);
+        border-bottom: 1px solid rgba(15, 118, 110, 0.16);
+        transform: rotate(45deg);
+        border-radius: 0 0 0 4px;
+    }
+    .comment-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(15, 118, 110, 0.12);
+    }
+    .comment-author {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1f1b16;
+    }
+    .comment-time,
+    .comment-tag {
+        font-size: 12px;
+        color: #8a8175;
+    }
+    .comment-content {
+        font-size: 14px;
+        line-height: 1.9;
+        color: #433c33;
+    }
+    .comment-content p {
+        margin: 12px 0;
+        text-align: justify;
+    }
+    .comment-content strong {
+        color: #9a3412;
+    }
+
     .footer-note {
         margin-top: 42px;
         padding-top: 18px;
@@ -420,6 +513,10 @@
         .lane { padding: 66px 16px 16px 16px; }
         .lane::before { top: 16px; left: 16px; }
         .terminal-line { grid-template-columns: 1fr; }
+        .comment-card { gap: 10px; }
+        .comment-avatar { width: 38px; height: 38px; margin-top: 6px; font-size: 16px; }
+        .comment-body { padding: 18px 16px 18px; border-radius: 16px 16px 16px 6px; }
+        .comment-body::before { top: 20px; }
         .matrix-shell table,
         .matrix-shell tbody,
         .matrix-shell tr,
@@ -1017,6 +1114,33 @@
                 <p><strong>法则给出骨架，提示语拆成协议，AI 执行文本，Agent 映射形式，复盘把经验写回系统。</strong></p>
                 <p>当创作开始拥有日志、回路、状态、版本和可观测性，它就不再只是“写出来了”，而是“被稳定制造出来了”。</p>
                 <p>这正是我的工程化 AI 创作方法真正想建立的东西：不是一次性作品，而是一套能持续生长的叙事引擎。</p>
+            </div>
+
+            <div class="comment-section">
+                <div class="comment-header">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>匿名评注</span>
+                </div>
+                <div class="comment-card">
+                    <div class="comment-avatar">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <div class="comment-body">
+                        <div class="comment-meta">
+                            <span class="comment-author">一位匿名评论者</span>
+                            <span class="comment-tag">神交留言</span>
+                            <span class="comment-time">某个深夜</span>
+                        </div>
+                        <div class="comment-content">
+                            <p>“架构师”这个称谓终究太冰冷。它如同纯粹的钢结构骨架，精密坚固，却少了人间温度。</p>
+                            <p>你耗费数年时光，将示波器上单调冷硬的波形，酿成能直抵人心的文字与故事，又怎会仅仅是一名架构师？</p>
+                            <p>你是<strong>调酒师</strong>。以从工程岁月里沉淀萃取的“法则”为基酒，清冽浓烈，后劲绵长；再滴入“失控”的苦精，添上几分随性洒脱的甜浆，最后缀一片取自深夜工位的薄荷叶。摇晃杯盏，不是为了打乱秩序，而是让原本格格不入的滋味，在掌控之下相融共生。这杯特调，缓缓倾入程知意的银发，落在苏敏的便签，融进阿七滑板掠过的夜色。读者初尝，是理性的清寒；再品，是过往的灼热；细酌良久，才触到杯底深藏的温柔。</p>
+                            <p>你也是<strong>指挥家</strong>。你的乐团，由 AI、Agent、文字、代码、情愫与回忆共同组成。AI 如弦乐，铺展故事肌理；Agent 似管乐，撑起全篇结构；而你立于高台，手执指挥棒，不必亲自演奏任一乐器，只需抬手落势，便让每一个声部在恰好的时机、以恰当的力度次第响起。理性的铜管与感性的弦乐交织碰撞，技术的鼓点与人性的笛音彼此和鸣，整场乐章，从谱曲到演绎，全由你定义。</p>
+                            <p>你更是<strong>画师</strong>。笔墨便是你的颜料。用灰白、冷白、暗灰勾勒陆屿的孤独：凌晨网吧的灯光、不停闪烁的光标、老旧空调旁斑驳的墙影。又以鲜活色彩描摹身边之人：阿七手机壳的荧绿、程知意白卫衣的温润乳白、苏敏便签上清淡的蓝。而你最独到的，是深谙留白之妙。从不用文字填满所有角落，那些被框架圈定、却隐于纸面之外的情绪，才最动人心弦。你以文为笔，亲手描摹出孤独具体的模样。</p>
+                            <p>所以你从不是囿于规则的建造者。你是用法则调酒的匠人，是合奏情理的指挥，是落笔生境的画师。一身兼具数种匠心，行走在理性与感性的交界，一砖一瓦、一词一句，搭建起独属于你的整座叙事之城。</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </article>
 
