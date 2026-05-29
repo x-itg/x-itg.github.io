@@ -349,6 +349,10 @@
         font-weight: 700;
         font-size: 14px;
     }
+    .chat-role {
+        color: #7b6f61;
+        font-size: 12px;
+    }
     .chat-tag {
         display: inline-flex;
         align-items: center;
@@ -371,6 +375,19 @@
     .chat-text p:first-child { margin-top: 0; }
     .chat-text p:last-child { margin-bottom: 0; }
     .chat-text strong { color: #9a3412; }
+    .chat-reply {
+        margin-bottom: 10px;
+        padding: 9px 11px;
+        border-radius: 12px;
+        background: rgba(15, 118, 110, 0.07);
+        border-left: 3px solid rgba(15, 118, 110, 0.42);
+        color: #5c544a;
+        font-size: 12px;
+        line-height: 1.65;
+    }
+    .chat-reply strong {
+        color: #0f766e;
+    }
     .chat-quote {
         margin-top: 8px;
         padding: 10px 12px;
@@ -842,14 +859,15 @@
                     <div class="chat-avatar reader-a">研</div>
                     <div class="chat-bubble">
                         <div class="chat-meta">
-                            <span class="chat-name">研究型读者</span>
+                            <span class="chat-name">工程师读者</span>
+                            <span class="chat-role">做过系统架构，也写过流程文档</span>
                             <span class="chat-tag">深度长评</span>
                             <span>22:14</span>
                         </div>
                         <div class="chat-text">
-                            <p>这篇《工程化AI创作方法论》跳出了当下 AI 写作“工具化使用”的浅层思路，是一套极具落地价值的原创创作体系。它把嵌入式工程里的闭环、规约、版本管理、可观测性完整迁移到文学创作，清晰划分出<strong>人定规则、AI 执行、Agent 优化、复盘迭代</strong>的权责边界，牢牢守住了人类在世界观、美学、结构上的顶层主导权。</p>
-                            <p>整套流水线逻辑严谨、链路完整，从顶层架构设计、指令拆解、人工精修，再到形式标准化与元数据沉淀，把灵感式创作转化为可管控、可演化的系统工程。而“玩家系列”作为落地样本，也直观印证了这套方法论的可行性。</p>
-                            <p>最难得的是内核思考：承认 AI 的执行能力，却不放弃创作者的核心表达权；用工程思维约束创作，却给文学留白与情感失控留足空间。既是技术思维的跨界延伸，也是对 AI 时代创作者身份的清醒定义。</p>
+                            <p>我先抛个比较硬一点的判断：这篇不是在聊“怎么用 AI 帮忙写作”，而是在定义一套<strong>创作控制系统</strong>。你把嵌入式工程里那套闭环、规约、版本管理、可观测性整个搬到了文学创作里，而且权责边界划得非常清楚，谁定规则、谁执行、谁优化、谁复盘，一点都不含混。</p>
+                            <p>这点对真正做过工程的人来说特别有说服力，因为它不是概念拼贴，而是完整链路。从顶层架构设计、指令拆解、人工精修，到形式标准化与资产沉淀，已经是能落地的系统工程了。再拿“玩家系列”去对照，会发现这套协议不是说得漂亮，是真有样本支撑。</p>
+                            <p>我最认同的一点是：你承认 AI 的执行力，但没有把世界观、美学和结构主权让出去。这个边界一旦守住，AI 才是工具；边界一旦没了，作者就只剩下提示词管理员了。</p>
                         </div>
                     </div>
                 </div>
@@ -858,12 +876,14 @@
                     <div class="chat-avatar reader-b">简</div>
                     <div class="chat-bubble">
                         <div class="chat-meta">
-                            <span class="chat-name">简洁派留言</span>
+                            <span class="chat-name">普通读者</span>
+                            <span class="chat-role">平时不研究方法论，但会认真看故事</span>
                             <span class="chat-tag">短评</span>
                             <span>22:16</span>
                         </div>
                         <div class="chat-text">
-                            <p>把工程逻辑搬进文学创作，这个思路新颖又扎实。不靠 AI 投机取巧，而是用架构、迭代、闭环搭起完整创作系统，人掌方向，工具落地，每一步都清晰可控。</p>
+                            <div class="chat-reply"><strong>回复 工程师读者：</strong>我也有同感，不过我不是从“系统”这个角度看的，我是觉得这套东西居然一点都不硬邦邦。</div>
+                            <p>把工程逻辑搬进文学创作，本来很容易写得特别干，但这篇没有。不靠 AI 投机取巧，而是用架构、迭代、闭环把创作搭起来，同时还把人的表达权抓得很紧，这就让人觉得很稳。</p>
                         </div>
                     </div>
                 </div>
@@ -872,12 +892,13 @@
                     <div class="chat-avatar reader-c">置</div>
                     <div class="chat-bubble">
                         <div class="chat-meta">
-                            <span class="chat-name">置顶党</span>
+                            <span class="chat-name">长期关注者</span>
+                            <span class="chat-role">一路从技术文章追到小说层</span>
                             <span class="chat-tag">一句话</span>
                             <span>22:17</span>
                         </div>
                         <div class="chat-text">
-                            <p>以工程规约立创作框架，以人为核心定表达内核。让文学创作告别随性灵感，成为一套可迭代、可复盘、持续生长的系统化工程，理性为基，笔墨生情。</p>
+                            <p>如果让我像博客留言一样只留一句，那就是：以工程规约立创作框架，以人为核心定表达内核。理性给出骨架，笔墨慢慢生情。</p>
                         </div>
                     </div>
                 </div>
@@ -888,14 +909,16 @@
                     <div class="chat-avatar reader-d">串</div>
                     <div class="chat-bubble">
                         <div class="chat-meta">
-                            <span class="chat-name">串联型读者</span>
+                            <span class="chat-name">长期关注者</span>
+                            <span class="chat-role">整套 T-L4 基本都读过</span>
                             <span class="chat-tag">全链路读后感</span>
                             <span>22:23</span>
                         </div>
                         <div class="chat-text">
-                            <p>从底层嵌入式工程心法，到法则思辨、生活自省，再到《蓝牙》《失控时空》《孤独玩家》等系列小说，最后落脚到这套工程化 AI 创作协议，整座内容宇宙终于形成了闭环。</p>
-                            <p>你最鲜明的特质，就是把<strong>工程的秩序</strong>与<strong>人性的失控</strong>融在一起。技术文章里，你用负日志、闭环收敛驯服复杂系统；落笔小说时，你又坦然书写情感里的错配、遗憾与身不由己。规则一次次试图定义边界，但人物又一次次冲破预设，这种张力特别成立。</p>
-                            <p>叙事手法也在践行你的方法论：纯文本、对话体、复调叙事、文件夹式、日志式实验一层层往上推，意象系统却始终稳定。读到这里会发现，L4 不是对作品的解释说明，而是把整套体系的根骨翻出来给人看。</p>
+                            <div class="chat-reply"><strong>接上面一句：</strong>我觉得这篇最妙的地方，是它终于把前面那些小说和技术文章为什么能共存，解释清楚了。</div>
+                            <p>从底层嵌入式工程心法，到法则思辨、生活自省，再到《蓝牙》《失控时空》《孤独玩家》这些小说，最后落到这套工程化 AI 创作协议，整座内容宇宙终于闭起来了。之前是隐约能感觉到它们共用一套骨架，这篇等于把骨架直接亮出来。</p>
+                            <p>你最鲜明的特质，就是把<strong>工程的秩序</strong>和<strong>人性的失控</strong>放在一起写，而且不是硬拧。技术文章里你相信边界和收敛，小说里你又承认有些东西规则兜不住，这种张力反而让整个体系更真实。</p>
+                            <p>再回头看那些形式实验，就会更明白：纯文本、对话体、复调、文件夹式、日志式，不是为了花样，而是你在按自己的方法论一步步推进叙事试验。</p>
                         </div>
                     </div>
                 </div>
@@ -904,13 +927,15 @@
                     <div class="chat-avatar reader-a">感</div>
                     <div class="chat-bubble">
                         <div class="chat-meta">
-                            <span class="chat-name">感性读者</span>
+                            <span class="chat-name">文学读者</span>
+                            <span class="chat-role">更在意气质、节奏和余味</span>
                             <span class="chat-tag">文艺向</span>
                             <span>22:29</span>
                         </div>
                         <div class="chat-text">
-                            <p>从示波器的冰冷波形，到字里行间的人间烟火与爱恨离别，一路读下来，像看见两种人格在文字里共生。你擅长搭建规则，可真正动人的地方，是你并不迷信规则能抵达所有人心。</p>
-                            <p>理性为骨，温柔为魂。你用工程之道搭建创作的殿堂，又用故事把殿堂里的烟火、遗憾和孤独一层层点亮，这种“理工诗意”很难得。</p>
+                            <div class="chat-reply"><strong>回复 长期关注者：</strong>对，我也是因为这个才觉得不是“技术人跨界写点故事”那么简单。</div>
+                            <p>从示波器的冰冷波形，到字里行间的人间烟火与爱恨离别，一路读下来，像看见两种人格在同一套文字里共生。你擅长搭建规则，但真正动人的地方，是你并不迷信规则能抵达所有人心。</p>
+                            <p>所以我会觉得这套东西最珍贵的，不只是方法论，而是气质。理性为骨，温柔为魂。你用工程之道搭建创作的殿堂，又用故事把殿堂里的烟火、遗憾和孤独慢慢点亮，这种“理工诗意”真的有辨识度。</p>
                         </div>
                     </div>
                 </div>
@@ -920,11 +945,13 @@
                     <div class="chat-bubble">
                         <div class="chat-meta">
                             <span class="chat-name">普通读者</span>
+                            <span class="chat-role">更容易被人物和细节打动</span>
                             <span class="chat-tag">互动留言</span>
                             <span>22:31</span>
                         </div>
                         <div class="chat-text">
-                            <p>一边是严谨的工程创作体系，一边是满是烟火与遗憾的故事。看着主角困在自己写下的规则里，再看着你用规则去创作故事，这种呼应太有巧思了，越读越有味道。</p>
+                            <div class="chat-reply"><strong>插一句：</strong>我不是专业读者，但前面你们说的“规则兜不住人心”这个点，我完全能感受到。</div>
+                            <p>一边是严谨的工程创作体系，一边是满是烟火与遗憾的故事。看着人物困在自己写下的规则里，再看着作者用规则去创作这些故事，这种呼应真的很巧，越想越有味道。</p>
                         </div>
                     </div>
                 </div>
@@ -936,13 +963,15 @@
                     <div class="chat-bubble">
                         <div class="chat-meta">
                             <span class="chat-name">长期观察者</span>
+                            <span class="chat-role">看完整站后回头再留评</span>
                             <span class="chat-tag">综合长评</span>
                             <span>22:40</span>
                         </div>
                         <div class="chat-text">
-                            <p>你的整套 T-L1-L2-L3-L4 文章体系，在中文个人创作领域属于极其罕见的自生长、自闭环、自证悟的完整思想体系。它从嵌入式 AI 工程的硬核实战生根，逐层跃迁到思维法则、生活实践、文学实验、元创作复盘，全程共用一套底层逻辑，内核统一、层层递进、自洽互通。</p>
-                            <p>最核心的优势是<strong>技术不空洞，人文不悬浮</strong>。你用工程理性搭建骨架，用生活与文学填充温度，同时让整套体系自带可复盘、可迭代、可验证的工程属性，所以它不是内容集合，而是一套持续生长的思想与叙事系统。</p>
-                            <p>人格层面也很鲜明：极致严谨的工程师、独立悟道的法则定义者、又柔软包容的写作者与思想者。以工程立骨，以法则立身，以温柔立心，以叙事立境，以自证立世，这种统一性很难复制。</p>
+                            <div class="chat-reply"><strong>总结一下前面的讨论：</strong>如果把整站一起看，这篇其实不只是方法总结，更像是给整个体系补了一张“结构图”。</div>
+                            <p>你的整套 T-L1-L2-L3-L4 文章体系，在中文个人创作领域确实很少见。它从嵌入式 AI 工程的硬核实战生根，逐层跃迁到思维法则、生活实践、文学实验、元创作复盘，全程共用一套底层逻辑，内核统一、层层递进、自洽互通，没有碎片化拼贴感。</p>
+                            <p>最核心的优势还是那句：<strong>技术不空洞，人文不悬浮</strong>。你用工程理性搭骨架，用生活与文学填温度，同时让整套体系自带可复盘、可迭代、可验证的工程属性，所以它不是静态内容集合，而是一套持续生长、持续进化的思想与叙事系统。</p>
+                            <p>落到人格层面也很统一：极致严谨的工程师、独立悟道的法则定义者、又柔软包容的写作者与思想者。你没有陷在“理性”和“感性”二选一里，而是把两者做成了同一套东西的两面。</p>
                         </div>
                     </div>
                 </div>
@@ -951,12 +980,13 @@
                     <div class="chat-avatar reader-d">短</div>
                     <div class="chat-bubble">
                         <div class="chat-meta">
-                            <span class="chat-name">路过但记住了</span>
+                            <span class="chat-name">路过读者</span>
+                            <span class="chat-role">第一次来，但已经记住风格了</span>
                             <span class="chat-tag">短留言</span>
                             <span>22:43</span>
                         </div>
                         <div class="chat-text">
-                            <p>从工程法则到文学故事，再到完整创作方法论，整套体系逻辑贯通、风格独树一帜。秩序与失控碰撞，理性与温柔相融，确实少见。</p>
+                            <p>我这种第一次来的都能看出来，这不是普通的“技术文章 + 几篇小说”拼盘。从工程法则到文学故事，再到完整创作方法论，整套体系逻辑是通的，而且风格真的很统一。</p>
                             <div class="chat-quote">秩序是创作的底气，失控是故事的灵魂，工程思维与文学表达在这里真正合流。</div>
                         </div>
                     </div>
@@ -966,11 +996,13 @@
                     <div class="chat-avatar reader-a">海</div>
                     <div class="chat-bubble">
                         <div class="chat-meta">
-                            <span class="chat-name">海报党</span>
+                            <span class="chat-name">摘句读者</span>
+                            <span class="chat-role">专门来捞可摘录句子</span>
                             <span class="chat-tag">金句摘录</span>
                             <span>22:45</span>
                         </div>
                         <div class="chat-text">
+                            <div class="chat-reply"><strong>最后借楼收一句：</strong>这句很适合直接当整组评论的收尾。</div>
                             <p>以工程规约驭笔墨，以人情失控写故事；理性筑架构，温柔写人心。</p>
                         </div>
                     </div>
