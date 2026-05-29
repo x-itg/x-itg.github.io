@@ -301,6 +301,16 @@
 
 这组文章围绕同一个技术母题向外展开：工程法则进入关系，关系进入小说，小说再反过来解释创作方法本身。它们不是技术主线之外的岔路，而是主轴在生活、叙事和方法论自述中的外延与折射。
 
+## 🧩 分层点评模板
+
+为了让 L1-L4 页面后续追加点评时不再重复拷贝局部样式，站点现在统一提供了共享样式文件 `assets/article-comments.css`。
+
+- `layer-comments layer-comments--review`：L1 用，少量、理性、像评注。
+- `layer-comments layer-comments--excerpt`：L2 用，少量对话摘录，保留活人感但不做热闹群聊。
+- `layer-comments layer-comments--chat`：L3/L4 用，完整群聊/评论窗口，更适合实验页和方法页。
+
+新增页面时只需要在页头额外引入一次：`<link rel="stylesheet" href="../assets/article-comments.css">`，再按层级选择对应的 HTML 结构即可。页面自身继续保留内容语气差异，但点评区的视觉骨架不再分散维护。
+
 ## 🎭 侠士自述
 
 我是 **itg**，一个还在修炼的程序员。没有大派背景，靠着自己琢磨，在这 AI 乱世里，悟出了这门"乾坤大挪移"心法。
