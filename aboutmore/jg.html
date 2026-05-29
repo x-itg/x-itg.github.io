@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>架构定乾坤，笔墨随法则：我的工程化AI创作方法论 | itg</title>
+<meta name="description" content="把闭环、规约、迭代、版本管理与可观测性完整迁移到文学创作领域，一套可管控、可迭代、可演化的工程化 AI 创作体系。">
+<meta name="keywords" content="AI创作,创作方法论,工程化创作,元创作,Agent,文学实验,叙事实验">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="架构定乾坤，笔墨随法则：我的工程化AI创作方法论 | itg">
+<meta property="og:description" content="把嵌入式工程里的闭环、规约、迭代、版本管理与可观测性，完整迁移到文学创作领域。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/jg.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/jg.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #f7f4ea;
+        --panel: #fffdf8;
+        --panel-2: #f8f3e5;
+        --text: #26231e;
+        --muted: #756c60;
+        --accent: #0f766e;
+        --accent-soft: #d9f2ef;
+        --signal: #c2410c;
+        --signal-soft: #ffedd5;
+        --line: #d9d2c2;
+        --shadow: 0 16px 40px rgba(38, 35, 30, 0.08);
+        --radius: 16px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
+        background:
+            radial-gradient(circle at top right, rgba(15, 118, 110, 0.08), transparent 22%),
+            linear-gradient(180deg, #faf7ef 0%, #f4efe1 100%);
+        color: var(--text);
+        line-height: 1.9;
+        -webkit-font-smoothing: antialiased;
+    }
+    .layout { display: flex; max-width: 1280px; margin: 0 auto; min-height: 100vh; }
+    .main-content { flex: 1; min-width: 0; max-width: 760px; margin: 0 auto; padding: 40px 24px 88px; position: relative; }
+    .article-header {
+        margin-bottom: 34px;
+        padding: 24px 26px 28px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(248,243,229,0.96));
+        border: 1px solid rgba(15, 118, 110, 0.14);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+    }
+    .article-header::before {
+        content: "CREATIVE LAB / V1.0";
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: rgba(15, 118, 110, 0.4);
+        font-weight: 700;
+    }
+    .series-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 999px;
+        margin-bottom: 14px;
+    }
+    h1 { font-size: 31px; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.4px; }
+    .subtitle { font-size: 15px; color: var(--muted); margin-bottom: 10px; }
+    .meta { font-size: 13px; color: #9a9488; }
+    p { margin: 14px 0; font-size: 15px; color: #3d372f; text-align: justify; }
+    strong { color: #1f1b16; }
+    h2 {
+        font-size: 22px;
+        margin: 46px 0 16px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid rgba(15, 118, 110, 0.18);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    h2 i { color: var(--accent); }
+    h3 { font-size: 18px; margin: 26px 0 12px; color: #1f1b16; }
+    ul { margin: 14px 0 14px 22px; color: #3d372f; }
+    li { margin: 8px 0; }
+
+    .lab-note {
+        margin: 26px 0;
+        padding: 18px 22px;
+        border-left: 4px solid var(--signal);
+        background: linear-gradient(135deg, rgba(255, 237, 213, 0.85), rgba(255, 251, 235, 0.92));
+        border-radius: 0 14px 14px 0;
+        color: #8b4513;
+    }
+    .lab-note strong { color: #9a3412; }
+
+    .spec-shell {
+        margin: 30px 0;
+        background: rgba(255,255,255,0.92);
+        border: 1px solid rgba(15, 118, 110, 0.12);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+    }
+    .spec-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+        padding: 16px 20px;
+        background: linear-gradient(90deg, rgba(15, 118, 110, 0.12), rgba(15, 118, 110, 0.03));
+        border-bottom: 1px solid rgba(15, 118, 110, 0.12);
+    }
+    .spec-title { font-size: 13px; font-weight: 700; letter-spacing: 1.5px; color: var(--accent); }
+    .spec-version { font-size: 12px; color: #6f8c89; }
+    .spec-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        padding: 18px 20px 20px;
+    }
+    .spec-card {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: linear-gradient(180deg, #fffdf8 0%, #fbf8ef 100%);
+    }
+    .spec-card span {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: #8f887b;
+        margin-bottom: 6px;
+    }
+    .spec-card strong { font-size: 15px; display: block; margin-bottom: 6px; }
+    .spec-card p { font-size: 13px; margin: 0; text-align: left; color: #5b5347; }
+
+    .pipeline-step {
+        position: relative;
+        margin: 22px 0;
+        padding: 22px 22px 20px 74px;
+        border: 1px solid rgba(15, 118, 110, 0.14);
+        border-radius: 20px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(248,243,229,0.88));
+        box-shadow: var(--shadow);
+    }
+    .pipeline-step::before {
+        content: attr(data-step);
+        position: absolute;
+        top: 22px;
+        left: 20px;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 800;
+        font-size: 14px;
+        box-shadow: 0 10px 18px rgba(15, 118, 110, 0.18);
+    }
+    .pipeline-step h3 { margin-top: 0; }
+    .pipeline-meta {
+        display: inline-flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .pipeline-meta span {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(15, 118, 110, 0.08);
+        color: var(--accent);
+    }
+
+    .series-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+        background: rgba(255,255,255,0.92);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+    }
+    .series-table th,
+    .series-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(217, 210, 194, 0.7);
+        text-align: left;
+        vertical-align: top;
+        font-size: 14px;
+    }
+    .series-table th {
+        background: rgba(15, 118, 110, 0.08);
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    .series-table tr:last-child td { border-bottom: none; }
+
+    .value-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin: 24px 0;
+    }
+    .value-card {
+        padding: 18px 16px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(248,243,229,0.9));
+        border: 1px solid rgba(194, 65, 12, 0.14);
+        box-shadow: var(--shadow);
+    }
+    .value-card .value-no {
+        display: inline-flex;
+        width: 28px;
+        height: 28px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--signal-soft);
+        color: var(--signal);
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+    .value-card h3 { margin: 0 0 8px; font-size: 17px; }
+    .value-card p { margin: 0; font-size: 14px; text-align: left; }
+
+    .axiom-box {
+        margin-top: 32px;
+        padding: 24px 24px 22px;
+        border-radius: 22px;
+        background: linear-gradient(135deg, rgba(15, 118, 110, 0.94), rgba(12, 74, 110, 0.92));
+        color: #effcf9;
+        box-shadow: 0 18px 38px rgba(15, 118, 110, 0.18);
+    }
+    .axiom-box p { color: rgba(239, 252, 249, 0.92); margin: 10px 0; }
+    .axiom-box strong { color: #ffffff; }
+
+    .footer-note { margin-top: 42px; padding-top: 18px; border-top: 1px solid var(--line); text-align: center; font-size: 13px; color: #9a9488; }
+
+    @media (max-width: 900px) {
+        .spec-grid, .value-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+        .main-content { padding: 24px 16px 64px; }
+        h1 { font-size: 27px; }
+        .article-header { padding: 22px 18px 24px; }
+        .pipeline-step { padding: 70px 18px 18px 18px; }
+        .pipeline-step::before { top: 18px; left: 18px; }
+        .series-table, .series-table tbody, .series-table tr, .series-table td, .series-table th { display: block; width: 100%; }
+        .series-table thead { display: none; }
+        .series-table td { padding: 10px 14px; }
+    }
+</style>
+<link rel="stylesheet" href="../assets/site-sidebar.css">
+</head>
+<body>
+
+<div class="layout">
+    <aside class="site-sidebar site-sidebar--story">
+        <div class="site-sidebar__brand"><a href="../about.html"><i class="fas fa-feather-alt"></i> L1-L4 · 法则与故事</a></div>
+        <div class="site-sidebar__intro">
+            <span class="site-sidebar__eyebrow">站点坐标</span>
+            <strong>L4 · 创作</strong>
+            <p>公开创作引擎，解释作品如何被组织和生成。</p>
+        </div>
+        <details class="site-sidebar__group site-sidebar__group--law">
+            <summary>
+                <span class="site-sidebar__summary-text">L1 · 法则</span>
+                <span class="site-sidebar__summary-meta">法则主线与迁移起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../about.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📖</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我找到了一套法则</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/tk.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">以不变应万变</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fw.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪄</span>
+                        <span>
+                            <span class="site-sidebar__link-title">工程魔法</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/sc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">调试AI，学会经营感情</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">乾坤大挪移心法 · 文章总览</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--persona">
+            <summary>
+                <span class="site-sidebar__summary-text">L2 · 人</span>
+                <span class="site-sidebar__summary-meta">日常、关系与自省现场</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">爱婷哥</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/forme.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📝</span>
+                        <span>
+                            <span class="site-sidebar__link-title">写给自己</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/pg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎤</span>
+                        <span>
+                            <span class="site-sidebar__link-title">家庭直播间</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/m.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌙</span>
+                        <span>
+                            <span class="site-sidebar__link-title">周一早上，梦见下班</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/cc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我可能哪里错了</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ll.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">找个不懂的人聊聊</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">♾️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">不必全部收敛</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--literature">
+            <summary>
+                <span class="site-sidebar__summary-text">L3 · 小说</span>
+                <span class="site-sidebar__summary-meta">小说、对话、复调与孤独副本</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czy.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📘</span>
+                        <span>
+                            <span class="site-sidebar__link-title">蓝牙：陆知意岛</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/qp-chat.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·对话版</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/gary.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📍</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·终极玩家</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/alone.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌃</span>
+                        <span>
+                            <span class="site-sidebar__link-title">知意知否·孤独玩家</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jsxm.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎮</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时刻·有趣玩家</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--meta" open>
+            <summary>
+                <span class="site-sidebar__summary-text">L4 · 创作</span>
+                <span class="site-sidebar__summary-meta">创作方法与引擎说明</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czjs.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧪</span>
+                        <span>
+                            <span class="site-sidebar__link-title">会话的碰撞</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🏛️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">四层结构：创作体系</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jg.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">架构定乾坤，笔墨随法则</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>
+                <span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>
+                <span class="site-sidebar__summary-meta">从工程桥面回看整套法则的起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../gd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+                        <span>
+                            <span class="site-sidebar__link-title">桥面 · 始于工程，服务生活</span>
+                            <span class="site-sidebar__link-meta">从技术过桥，进入生活与叙事。</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+                            <span class="site-sidebar__link-meta">按地图理解技术与非技术的整体关系。</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
+    </aside>
+        <aside class="sidebar-toc sidebar-toc--story">
+        <h3><span class="sidebar-toc__icon" aria-hidden="true">🧬</span> 本章导航</h3>
+        <nav>
+            <ul>
+                <li><a href="#一核心理念">一、核心理念</a></li>
+                <li><a href="#二完整创作流水线全链路工程化拆解">二、完整创作流水线（全链路工程化拆解）</a></li>
+                <li><a href="#三系列作品叙事实验的工程化实践">三、系列作品：叙事实验的工程化实践</a></li>
+                <li><a href="#四体系价值与定位">四、体系价值与定位</a></li>
+            </ul>
+        </nav>
+    </aside>
+<div class="main-content">
+        <header class="article-header">
+            <span class="series-tag"><i class="fas fa-flask"></i> 元创作层 · Lab Protocol</span>
+            <h1>架构定乾坤，笔墨随法则：我的工程化AI创作方法论</h1>
+            <p class="subtitle">把闭环、规约、迭代、版本管理、可观测性完整迁移到文学创作领域</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · 元创作层</p>
+        </header>
+
+        <article>
+
+        <div class="spec-shell">
+            <div class="spec-head">
+                <div class="spec-title">CREATIVE SYSTEM SPECIFICATION</div>
+                <div class="spec-version">Protocol Build · JG-01</div>
+            </div>
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <span>MISSION</span>
+                    <strong>工程思维迁移</strong>
+                    <p>把嵌入式工程里的闭环、规约、迭代和可观测性平移到文学创作。</p>
+                </div>
+                <div class="spec-card">
+                    <span>CONTROL</span>
+                    <strong>人定义顶层</strong>
+                    <p>由人负责世界观、结构、美学与边界，AI 与 Agent 在规则内执行。</p>
+                </div>
+                <div class="spec-card">
+                    <span>OUTCOME</span>
+                    <strong>可演化创作系统</strong>
+                    <p>形成一套可管控、可迭代、可复盘、可持续生长的 AI 创作工程体系。</p>
+                </div>
+            </div>
+        </div>
+
+        <p>这套方法始于嵌入式工程实践。我不是把 AI 当作替我写字的捷径，而是把工程里早已证明有效的思维方式，整套迁移到文学创作里：架构先行，规约兜底，版本可追，闭环可收，形式可实验，系统可演化。</p>
+
+        <div class="lab-note">
+            <strong>这里讨论的不是“怎么让 AI 多写一点”，而是“怎么让创作像工程一样可控”。</strong>人负责定义顶层规则、世界观与审美边界，AI 作为执行载体落地内容，Agent 负责形式标准化与创新，最后把整套作品沉淀成一个能持续复用的系统。
+        </div>
+
+        <h2 id="一核心理念"><i class="fas fa-compass-drafting"></i> 一、核心理念</h2>
+
+        <p>这套创作方法延续本站「乾坤大挪移心法」的底层哲学：<strong>意图定义者 &gt; 内容执行者。</strong>AI 当然可以生成文字，但它无法替我完成世界观搭建、叙事伏笔预埋、整体美学控制与结构级判断。因此在整套流程里，顶层设计权、审美裁决权和逻辑控制权始终掌握在人手里。</p>
+        <p>创作在这里不再只是灵感迸发的偶然事件，而是一套有架构、有规约、有版本、有闭环、有边界的系统化工程。AI 写的是内容，Agent 优化的是形式，而我负责定义那条决定作品能长成什么样的主轴。</p>
+
+        <h2 id="二完整创作流水线全链路工程化拆解"><i class="fas fa-gears"></i> 二、完整创作流水线（全链路工程化拆解）</h2>
+
+        <section class="pipeline-step" data-step="01">
+            <div class="pipeline-meta">
+                <span>HUMAN-LED</span>
+                <span>TOP-LEVEL DESIGN</span>
+            </div>
+            <h3>顶层架构设计 · 规则定义</h3>
+            <p>这是整套创作的根基，也是我必须亲自完成的部分。它决定作品的骨架、灵魂和走向。</p>
+            <ul>
+                <li>搭建完整叙事宇宙，统一人物谱系、时间线、地域场景与核心意象体系。</li>
+                <li>规划系列递进脉络，从《蓝牙：陆知意岛》的缘起联结，到《失控时空》的秩序错位，再到「有趣玩家—终极玩家—孤独玩家」的心境演化。</li>
+                <li>预埋跨篇章呼应、延时揭晓的剧情与细节隐喻，为多层阅读空间留足结构余量。</li>
+                <li>划定美学边界，确定冷调克制的文风、留白尺度与情感表达逻辑，锁定专属的理工诗意风格。</li>
+            </ul>
+        </section>
+
+        <section class="pipeline-step" data-step="02">
+            <div class="pipeline-meta">
+                <span>HUMAN PROMPT</span>
+                <span>AI EXECUTION</span>
+            </div>
+            <h3>内容指令输出 · 框架落地</h3>
+            <p>在顶层架构已经固定后，我会把章节结构、情节走向、对话逻辑、意象运用要求拆成精细化创作指令，再交给 AI 做内容填充。</p>
+            <ul>
+                <li>AI 按既定框架、生成人设一致的基础文字、场景铺陈与语句初稿。</li>
+                <li>它只负责填充血肉，无权改动整体结构、伏笔布置、核心立意与风格基调。</li>
+                <li>这样做的目的不是降低创造性，而是把创造性固定在我真正想保留的高位判断上。</li>
+            </ul>
+        </section>
+
+        <section class="pipeline-step" data-step="03">
+            <div class="pipeline-meta">
+                <span>HUMAN REVIEW</span>
+                <span>AESTHETIC CONTROL</span>
+            </div>
+            <h3>人工精修校准 · 审美收口</h3>
+            <p>AI 生成的内容只是毛坯，真正决定质感的，是之后的全量人工精修。</p>
+            <ul>
+                <li>统一语句语感，删减冗余表达，规避模板化、情绪化与空洞化问题。</li>
+                <li>微调台词、动作和情绪落点，强化留白、克制和氛围感。</li>
+                <li>核对意象、隐喻与工程符号的一致性，确保整套系列风格自洽。</li>
+                <li>做闭环校验，检查伏笔、剧情与前后呼应是否完整闭合。</li>
+            </ul>
+        </section>
+
+        <section class="pipeline-step" data-step="04">
+            <div class="pipeline-meta">
+                <span>AGENT ENABLED</span>
+                <span>FORMAT ITERATION</span>
+            </div>
+            <h3>形式创新与标准化 · 版式迭代</h3>
+            <p>Agent 在这里承担的不是“替我写”，而是“帮我让形式成为稳定能力”。它负责把实验过的版式和交互逐步标准化，再继续推进新形式试验。</p>
+            <ul>
+                <li>落地纯对话体、多轨道复调叙事、文档式叙事、双层并行日志式叙事等实验。</li>
+                <li>设计 Feed / Log / Debug / Notification 等工程化标签与模块分区，让形式直接服务内容主题。</li>
+                <li>统一全系列视觉样式、排版规则和功能分区，使形式可复用、可迭代、可规模化维护。</li>
+            </ul>
+        </section>
+
+        <section class="pipeline-step" data-step="05">
+            <div class="pipeline-meta">
+                <span>OPEN RECORD</span>
+                <span>SELF-EVOLUTION</span>
+            </div>
+            <h3>元创作记录 · 体系沉淀</h3>
+            <p>每一篇作品的构思、指令、修改思路和形式设计逻辑，我都会尽量记录下来并对外公开。这样做不是附带动作，而是整套系统完成自演化闭环的关键环节。</p>
+            <ul>
+                <li>把创作行为本身当作独立系统去观测、复盘和优化。</li>
+                <li>沉淀可复用的创作模板、指令范式与排版方案，让经验成为资产。</li>
+                <li>打通站点四层结构：工程心法 → 生活思辨 → 文学叙事 → 元创作方法论，形成完整思维闭环。</li>
+            </ul>
+        </section>
+
+        <h2 id="三系列作品叙事实验的工程化实践"><i class="fas fa-vial-circle-check"></i> 三、系列作品：叙事实验的工程化实践</h2>
+
+        <p>「玩家系列」短篇，是这套创作系统的落地样本。它们并不是零散试写，而是一条在同一规则约束下持续升级的实验链。</p>
+
+        <table class="series-table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>作品</th>
+                    <th>工程化实验定位</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>《蓝牙：陆知意岛》</td>
+                    <td>世界观奠基，确立“联结与孤岛”的核心意象与人物主线。</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>《失控时空·对话版》</td>
+                    <td>极简叙事实验，剥离冗余元素，用纯对话完成情节推进。</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>《失控时空·终极玩家》</td>
+                    <td>多线复调实验，模拟多进程逻辑，编织交错的命运轨道。</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>《失控时刻·有趣玩家》</td>
+                    <td>文档化叙事实验，把文件管理、副本与批注转写成叙事结构。</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>《知意知否·孤独玩家》</td>
+                    <td>双层日志式叙事巅峰，外层城市运转与内层个人心绪并置，诠释“繁华与孤独”的核心反差。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>全系列共用一套意象符号，包括指令、文档、亚稳态、DNA 双螺旋、光标与调试等；共用一套情绪基调和成长逻辑；在风格统一的前提下逐篇推进形式实验。这不是自由散射的创作，而是规则约束下叙事美学与形式创新的结合体。</p>
+
+        <h2 id="四体系价值与定位"><i class="fas fa-microscope"></i> 四、体系价值与定位</h2>
+
+        <div class="value-grid">
+            <section class="value-card">
+                <div class="value-no">1</div>
+                <h3>思维同源</h3>
+                <p>创作体系完整复刻嵌入式 AI 工程方法论，把负日志、闭环收敛、共生演化与契约边界从代码世界平移到文字世界。</p>
+            </section>
+            <section class="value-card">
+                <div class="value-no">2</div>
+                <h3>不可复制性</h3>
+                <p>区别于纯灵感写作和纯 AI 随机生成，这里以人类顶层设计为核心，兼顾思想深度、结构精巧度和美学统一性。</p>
+            </section>
+            <section class="value-card">
+                <div class="value-no">3</div>
+                <h3>长期演化</h3>
+                <p>整套创作系统具备版本迭代、经验沉淀和自我优化能力，像一个持续运行、不断升级的工程系统。</p>
+            </section>
+        </div>
+
+        <div class="axiom-box">
+            <p><strong>法则定方向，AI 行笔墨，形式做表达，复盘促生长。</strong></p>
+            <p>言出法随，即刻收敛；以工程之道，造叙事之境。</p>
+        </div>
+
+                <div class="series-nav">
+            <a href="../aboutmore/fr.html">← 四层结构：创作体系</a>
+            <a href="../index.html">首页入口 →</a>
+        </div>
+<div class="footer-note">创作在这里不是灵感的失控释放，而是有协议、有版本、有实验记录的持续系统。</div>
+
+        </article>
+    </div>
+</div>
+
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
+        </div>
+    </div>
+</div>
+</body>
+</html>

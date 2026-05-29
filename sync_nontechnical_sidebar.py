@@ -29,6 +29,7 @@ VISIBLE_FLOW = [
     ("aboutmore/jsxm.html", "失控时刻·有趣玩家", "literature"),
     ("aboutmore/czjs.html", "会话的碰撞", "meta"),
     ("aboutmore/fr.html", "四层结构：创作体系", "meta"),
+    ("aboutmore/jg.html", "架构定乾坤，笔墨随法则", "meta"),
 ]
 
 FILES = [item[0] for item in VISIBLE_FLOW] + ["aboutmore/ff.html"]
@@ -87,6 +88,7 @@ FILE_ICONS = {
     "aboutmore/jsxm.html": "🎮",
     "aboutmore/czjs.html": "🧪",
     "aboutmore/fr.html": "🏛️",
+    "aboutmore/jg.html": "🧬",
     "aboutmore/ff.html": "🕯️",
     "index.html": "🧭",
     "gd.html": "🌾",
