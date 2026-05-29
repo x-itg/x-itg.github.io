@@ -37,6 +37,16 @@
 
 	.insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
 	.quote-block { background:linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px 28px; margin:28px 0; text-align:center; font-size:15px; color:#78350f; line-height:1.9; }
+	.note-chat { margin-top: 38px; padding-top: 24px; border-top: 1px solid var(--border); }
+	.note-chat__header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: #1c1917; font-size: 15px; font-weight: 700; }
+	.note-chat__header i { color: var(--accent); }
+	.note-chat__list { display: grid; gap: 12px; }
+	.note-chat__item { padding: 14px 16px; border-radius: 16px; background: linear-gradient(180deg, #fffdf8, #fff7ed); border: 1px solid #fed7aa; }
+	.note-chat__meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: #78716c; font-size: 12px; }
+	.note-chat__name { color: #1c1917; font-weight: 700; }
+	.note-chat__role { color: #92400e; }
+	.note-chat__reply { margin-bottom: 8px; padding-left: 10px; border-left: 3px solid #f59e0b; color: #78350f; font-size: 12px; }
+	.note-chat__text { color: #44403c; font-size: 14px; line-height: 1.8; }
 
 @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
 </style>
@@ -317,6 +327,27 @@
 			<p>你会发现很多你以为必须硬扛的难题，其实可以用完全不同的方式绕过去。</p>
 			<p>这不是在贬低同行。同行是你日常合作的伙伴，他们理解你的上下文，能给你最精准的建议。但当你需要的是范式级别的突破，而不是同一个范式内的优化时，你必须去找那些和你在不同世界里思考的人。</p>
 			<p>他们的一句话，可能就帮你拆掉了一堵你从来没想过可以拆的墙。</p>
+			<div class="note-chat">
+				<div class="note-chat__header">
+					<i class="fas fa-comments"></i>
+					<span>对话摘录 · 读后感</span>
+				</div>
+				<div class="note-chat__list">
+					<div class="note-chat__item">
+						<div class="note-chat__meta"><span class="note-chat__name">工程师读者</span><span class="note-chat__role">长期卡问题的人</span><span>简短留言</span></div>
+						<div class="note-chat__text">这篇最有用的不是“去问外行”这句口号，而是把“外行能帮你换圈，不只是帮你加速”这个差别讲明白了。很多人卡住，就是因为一直在原框架里优化。</div>
+					</div>
+					<div class="note-chat__item">
+						<div class="note-chat__meta"><span class="note-chat__name">普通读者</span><span class="note-chat__role">不做技术，但很懂卡壳感</span><span>接话</span></div>
+						<div class="note-chat__reply">回复 工程师读者：对，我读完最大的感觉是，这篇其实也适用于生活里很多死循环。</div>
+						<div class="note-chat__text">有时候不是再想久一点就能想通，而是需要一个根本不按你这套惯性说话的人，把你从原来的轨道上拽出来。</div>
+					</div>
+					<div class="note-chat__item">
+						<div class="note-chat__meta"><span class="note-chat__name">长期关注者</span><span class="note-chat__role">会把 L1-L4 串起来看</span><span>补一句</span></div>
+						<div class="note-chat__text">这篇放在整站里也很关键，因为它其实解释了你后来为什么会愿意把 AI 当成“行业外协作者”，而不是只把它当快一点的工具。</div>
+					</div>
+				</div>
+			</div>
 		</article>
 
 		<div class="series-nav">

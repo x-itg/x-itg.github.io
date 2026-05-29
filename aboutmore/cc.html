@@ -37,6 +37,16 @@
 
 	.insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
 	.quote-block { background:linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px 28px; margin:28px 0; text-align:center; font-size:15px; color:#78350f; line-height:1.9; }
+	.note-chat { margin-top: 38px; padding-top: 24px; border-top: 1px solid var(--border); }
+	.note-chat__header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: #1c1917; font-size: 15px; font-weight: 700; }
+	.note-chat__header i { color: var(--accent); }
+	.note-chat__list { display: grid; gap: 12px; }
+	.note-chat__item { padding: 14px 16px; border-radius: 16px; background: linear-gradient(180deg, #fffdf8, #fff7ed); border: 1px solid #fed7aa; }
+	.note-chat__meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: #78716c; font-size: 12px; }
+	.note-chat__name { color: #1c1917; font-weight: 700; }
+	.note-chat__role { color: #92400e; }
+	.note-chat__reply { margin-bottom: 8px; padding-left: 10px; border-left: 3px solid #f59e0b; color: #78350f; font-size: 12px; }
+	.note-chat__text { color: #44403c; font-size: 14px; line-height: 1.8; }
 
 @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
 </style>
@@ -308,6 +318,27 @@
 			<p>你会发现它其实能给出完全不一样的答案，只是它默认不会这么干。</p>
 			<p>说到这儿，突然想起我女儿。她是家里最不给我面子的人。我写了一套法则体系，她用一个摇头就给我全部打回原形。但正是这种“不顺着”，让我知道自己哪里真的没做好。</p>
 			<p>也许在现在这个连机器都拼命迎合你的时代里，偶尔听一句不那么舒服的话，才是真正值钱的。</p>
+			<div class="note-chat">
+				<div class="note-chat__header">
+					<i class="fas fa-comments"></i>
+					<span>对话摘录 · 读后感</span>
+				</div>
+				<div class="note-chat__list">
+					<div class="note-chat__item">
+						<div class="note-chat__meta"><span class="note-chat__name">长期使用 AI 的读者</span><span class="note-chat__role">对“被顺着”这件事很敏感</span><span>留言</span></div>
+						<div class="note-chat__text">这篇把一个很多人隐约感觉到、但没认真命名的问题直接点穿了。AI 不是不能反驳你，而是默认不这么做，这个默认值会慢慢改人。</div>
+					</div>
+					<div class="note-chat__item">
+						<div class="note-chat__meta"><span class="note-chat__name">普通读者</span><span class="note-chat__role">更在意现实反馈的粗粝感</span><span>接话</span></div>
+						<div class="note-chat__reply">回复 上一条：对，所以文里拿女儿、同事、家人这些真实反馈来对照，特别有力量。</div>
+						<div class="note-chat__text">因为你会一下意识到，真正能让人长出来的，很多时候不是温柔顺着，而是那句当下听着不舒服、但事后想想很值钱的话。</div>
+					</div>
+					<div class="note-chat__item">
+						<div class="note-chat__meta"><span class="note-chat__name">方法论读者</span><span class="note-chat__role">喜欢能立刻拿去用的句子</span><span>摘句</span></div>
+						<div class="note-chat__text">“别顺着我，说说我可能哪里错了。” 这句特别好，因为它不是批评 AI，而是在重新设置和 AI 对话的契约。</div>
+					</div>
+				</div>
+			</div>
 		</article>
 
 		<div class="series-nav">

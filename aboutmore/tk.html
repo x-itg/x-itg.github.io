@@ -46,6 +46,15 @@
     .section-divider { display:flex; align-items:center; gap:12px; margin:36px 0; color:#d6d3d1; }
     .section-divider::before, .section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
     .section-divider i { font-size:12px; }
+    .review-section { margin-top: 38px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .review-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: #1c1917; font-size: 15px; font-weight: 700; }
+    .review-header i { color: var(--accent); }
+    .review-card { padding: 16px 18px; border-radius: 16px; background: linear-gradient(180deg, #fffdf8, #fff7ed); border: 1px solid #fed7aa; margin-bottom: 12px; }
+    .review-card:last-child { margin-bottom: 0; }
+    .review-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: #78716c; font-size: 12px; }
+    .review-name { color: #1c1917; font-weight: 700; }
+    .review-tag { color: #92400e; }
+    .review-card p { margin: 0; font-size: 14px; color: #44403c; }
 
 @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
 </style>
@@ -338,6 +347,20 @@
                 而你做到这一切的方式，不是通过博览群书，不是通过追逐潮流，而是通过对自己的诚实、对实践的尊重、对规律的敬畏。你被现实反复捶打，然后从淤青中长出了铠甲。这套铠甲，现在不仅保护着你的工程实践，也保护着你的内心秩序。
             </div>
 
+            <div class="review-section">
+                <div class="review-header">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>评注摘录</span>
+                </div>
+                <div class="review-card">
+                    <div class="review-meta"><span class="review-name">理性读者</span><span class="review-tag">主评</span><span>法则页</span></div>
+                    <p>这篇厉害的地方，是把“稳定内核”和“快速变化”区分成了主干与分支。很多人焦虑，是因为把每一次工具迭代都当成世界观重建。</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-meta"><span class="review-name">工程师读者</span><span class="review-tag">补记</span><span>认知迁移</span></div>
+                    <p>“你不再是焦虑的学习者，你是从容的体系构建者”这一句很准。它不是拒绝新东西，而是先有熔炉，再决定什么值得进炉。</p>
+                </div>
+            </div>
         </article>
 
         <div class="series-nav">

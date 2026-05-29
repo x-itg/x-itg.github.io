@@ -38,6 +38,17 @@
     .insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
     .quote-block { background:linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px 28px; margin:28px 0; text-align:center; font-size:15px; color:#78350f; line-height:1.9; }
 
+    .note-chat { margin-top: 38px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .note-chat__header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: #1c1917; font-size: 15px; font-weight: 700; }
+    .note-chat__header i { color: var(--accent); }
+    .note-chat__list { display: grid; gap: 12px; }
+    .note-chat__item { padding: 14px 16px; border-radius: 16px; background: linear-gradient(180deg, #fffdf8, #fff7ed); border: 1px solid #fed7aa; }
+    .note-chat__meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: #78716c; font-size: 12px; }
+    .note-chat__name { color: #1c1917; font-weight: 700; }
+    .note-chat__role { color: #92400e; }
+    .note-chat__reply { margin-bottom: 8px; padding-left: 10px; border-left: 3px solid #f59e0b; color: #78350f; font-size: 12px; }
+    .note-chat__text { color: #44403c; font-size: 14px; line-height: 1.8; }
+
 @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
 </style>
 <link rel="stylesheet" href="../assets/site-sidebar.css">
@@ -318,6 +329,27 @@
             <p>有些东西可以留在法则之外。有些混乱不用急着命名。有些夜晚，也可以只是累了。</p>
             <p>这不是放弃，大概是松了一口气。是从觉醒到探索，从深情到边界，从幽默到松弛，从自我审视到慢慢放过自己的一段记录。</p>
             <p>暂时收笔，挺合适的。已经说出来的东西，会自己在时间里发酵。等下一次再写，也不用是因为必须写，而是因为还活着，还在感受，还在想新的问题。</p>
+            <div class="note-chat">
+                <div class="note-chat__header">
+                    <i class="fas fa-comments"></i>
+                    <span>对话摘录 · 读后感</span>
+                </div>
+                <div class="note-chat__list">
+                    <div class="note-chat__item">
+                        <div class="note-chat__meta"><span class="note-chat__name">长期读者</span><span class="note-chat__role">一路从法则页读到这里</span><span>留言</span></div>
+                        <div class="note-chat__text">这篇最动人的地方，是终于承认“不是所有东西都必须产出系统”。对一个一直在收敛、归纳、命名的人来说，这种松一口气本身就很珍贵。</div>
+                    </div>
+                    <div class="note-chat__item">
+                        <div class="note-chat__meta"><span class="note-chat__name">普通读者</span><span class="note-chat__role">更容易被“允许自己累”打动</span><span>接话</span></div>
+                        <div class="note-chat__reply">回复 长期读者：对，我看完会觉得这不是放弃，而是终于不再拿法则反过来审判自己了。</div>
+                        <div class="note-chat__text">很多人需要的不是再多一个方法，而是被允许先不处理、先不命名、先不解释。这篇把这个分寸说得很稳。</div>
+                    </div>
+                    <div class="note-chat__item">
+                        <div class="note-chat__meta"><span class="note-chat__name">摘句读者</span><span class="note-chat__role">专门记住收束句的人</span><span>补一句</span></div>
+                        <div class="note-chat__text">“他已经很会收敛了。剩下的，不必全部收敛。” 这句像整条 L2 线到这里的一次温柔收口。</div>
+                    </div>
+                </div>
+            </div>
         </article>
 
         <div class="series-nav">

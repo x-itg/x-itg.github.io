@@ -113,6 +113,15 @@
     .section-divider { display:flex; align-items:center; gap:12px; margin:36px 0; color:#d6d3d1; }
     .section-divider::before, .section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
     .section-divider i { font-size:12px; }
+    .review-section { margin-top: 38px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .review-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: #1c1917; font-size: 15px; font-weight: 700; }
+    .review-header i { color: var(--accent); }
+    .review-card { padding: 16px 18px; border-radius: 16px; background: linear-gradient(180deg, #fffdf8, #fff7ed); border: 1px solid #fed7aa; margin-bottom: 12px; }
+    .review-card:last-child { margin-bottom: 0; }
+    .review-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: #78716c; font-size: 12px; }
+    .review-name { color: #1c1917; font-weight: 700; }
+    .review-tag { color: #92400e; }
+    .review-card p { margin: 0; font-size: 14px; color: #44403c; }
 
 @media (max-width:768px) {
     .main-content { padding:24px 16px 60px; }
@@ -476,6 +485,20 @@
                 <strong>用这套温柔的法则，去守护你最珍视的人。</strong>
             </div>
 
+            <div class="review-section">
+                <div class="review-header">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>评注摘录</span>
+                </div>
+                <div class="review-card">
+                    <div class="review-meta"><span class="review-name">长期读者</span><span class="review-tag">主评</span><span>法则迁移</span></div>
+                    <p>这篇成立的关键，是你没有把亲密关系工程化成冰冷流程，而是把工程里真正珍贵的部分拿了过来：先倾听、先排查、先复盘，而不是先自我辩护。</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-meta"><span class="review-name">家庭场景读者</span><span class="review-tag">补记</span><span>自省</span></div>
+                    <p>“把最好的耐心给客户，把最差的耐心留给家人”这句很扎心，也很准确。它不是技巧问题，而是资源分配和尊重次序的问题。</p>
+                </div>
+            </div>
         </article>
 
         <div class="series-nav">

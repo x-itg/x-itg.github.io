@@ -48,6 +48,15 @@
     .scene-card h3 i { color:var(--accent); }
     .scene-card .pain { font-size:13px; color:#a8a29e; margin-bottom:10px; font-style:italic; }
     .scene-card p { margin:8px 0; }
+    .review-section { margin-top: 38px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .review-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: #1c1917; font-size: 15px; font-weight: 700; }
+    .review-header i { color: var(--accent); }
+    .review-card { padding: 16px 18px; border-radius: 16px; background: linear-gradient(180deg, #fffdf8, #fff7ed); border: 1px solid #fed7aa; margin-bottom: 12px; }
+    .review-card:last-child { margin-bottom: 0; }
+    .review-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: #78716c; font-size: 12px; }
+    .review-name { color: #1c1917; font-weight: 700; }
+    .review-tag { color: #92400e; }
+    .review-card p { margin: 0; font-size: 14px; color: #44403c; }
 
 @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
 </style>
@@ -363,6 +372,20 @@
 
             <h2 id="结语魔法不在书里在你的淤青里">结语：魔法不在书里，在你的淤青里</h2>
             <p>这套思想体系的每一次延伸，都不是凭空设计，而是被现实逼出来的解法。负日志来自调试的挫败，闭环收敛来自Bug反复横跳的抓狂，决策切换来自AI在死胡同里越挖越深的无奈。把它们用在生活里，不是强行跨界，而是诚实地承认：生活的混乱和工程的混乱，本质上同一种混乱。而我们能用来对抗它的武器，也只有同一套：<strong>定义法则，言出法随</strong>。</p>
+            <div class="review-section">
+                <div class="review-header">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>评注摘录</span>
+                </div>
+                <div class="review-card">
+                    <div class="review-meta"><span class="review-name">跨界读者</span><span class="review-tag">主评</span><span>生活迁移</span></div>
+                    <p>这篇让人信服，是因为它没有把工程思维硬套到生活上，而是把“可观测、可反馈、可修订”的部分抽出来，再看哪些生活混乱也受同样的规律支配。</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-meta"><span class="review-name">普通读者</span><span class="review-tag">短评</span><span>落地感</span></div>
+                    <p>七个场景都不是悬空概念，读完会觉得很多原本靠吵架、硬扛和拖延解决的事，确实可以先把规则说清楚。</p>
+                </div>
+            </div>
         </article>
 
         <div class="series-nav">
