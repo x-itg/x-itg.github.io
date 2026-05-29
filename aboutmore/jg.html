@@ -252,6 +252,135 @@
     .axiom-box p { color: rgba(239, 252, 249, 0.92); margin: 10px 0; }
     .axiom-box strong { color: #ffffff; }
 
+    .chat-section {
+        margin-top: 42px;
+        padding-top: 28px;
+        border-top: 1px solid var(--line);
+    }
+    .chat-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 18px;
+        color: #1f1b16;
+        font-size: 15px;
+        font-weight: 700;
+    }
+    .chat-header i {
+        color: var(--signal);
+    }
+    .chat-window {
+        padding: 16px;
+        border-radius: 22px;
+        border: 1px solid rgba(15, 118, 110, 0.14);
+        background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,242,232,0.94));
+        box-shadow: var(--shadow);
+    }
+    .chat-divider {
+        display: inline-flex;
+        align-items: center;
+        margin: 10px auto 18px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(15, 118, 110, 0.08);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+    }
+    .chat-message {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    .chat-message.chat-message--compact { margin-bottom: 12px; }
+    .chat-message:last-child { margin-bottom: 0; }
+    .chat-avatar {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        box-shadow: 0 8px 18px rgba(38, 35, 30, 0.12);
+    }
+    .chat-avatar.reader-a { background: linear-gradient(135deg, #0f766e, #115e59); }
+    .chat-avatar.reader-b { background: linear-gradient(135deg, #c2410c, #9a3412); }
+    .chat-avatar.reader-c { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+    .chat-avatar.reader-d { background: linear-gradient(135deg, #7c3aed, #5b21b6); }
+    .chat-bubble {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+        padding: 14px 16px 15px;
+        border-radius: 18px 18px 18px 8px;
+        background: rgba(255, 251, 245, 0.98);
+        border: 1px solid rgba(217, 210, 194, 0.95);
+    }
+    .chat-bubble::before {
+        content: "";
+        position: absolute;
+        left: -7px;
+        top: 16px;
+        width: 14px;
+        height: 14px;
+        background: rgba(255, 251, 245, 0.98);
+        border-left: 1px solid rgba(217, 210, 194, 0.95);
+        border-bottom: 1px solid rgba(217, 210, 194, 0.95);
+        transform: rotate(45deg);
+        border-radius: 0 0 0 3px;
+    }
+    .chat-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+        color: #8b8175;
+        font-size: 12px;
+    }
+    .chat-name {
+        color: #1f1b16;
+        font-weight: 700;
+        font-size: 14px;
+    }
+    .chat-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: rgba(194, 65, 12, 0.1);
+        color: #9a3412;
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .chat-text {
+        color: #433c33;
+        font-size: 14px;
+        line-height: 1.85;
+    }
+    .chat-text p {
+        margin: 8px 0;
+        text-align: justify;
+    }
+    .chat-text p:first-child { margin-top: 0; }
+    .chat-text p:last-child { margin-bottom: 0; }
+    .chat-text strong { color: #9a3412; }
+    .chat-quote {
+        margin-top: 8px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: #fffbeb;
+        border: 1px solid #fed7aa;
+        color: #7c2d12;
+        font-size: 13px;
+    }
+
     .footer-note { margin-top: 42px; padding-top: 18px; border-top: 1px solid var(--line); text-align: center; font-size: 13px; color: #9a9488; }
 
     @media (max-width: 900px) {
@@ -264,6 +393,11 @@
         .article-header { padding: 22px 18px 24px; }
         .pipeline-step { padding: 70px 18px 18px 18px; }
         .pipeline-step::before { top: 18px; left: 18px; }
+        .chat-window { padding: 14px 12px; }
+        .chat-message { gap: 10px; }
+        .chat-avatar { width: 34px; height: 34px; font-size: 13px; }
+        .chat-bubble { padding: 12px 13px 13px; border-radius: 16px 16px 16px 6px; }
+        .chat-bubble::before { top: 14px; }
         .series-table, .series-table tbody, .series-table tr, .series-table td, .series-table th { display: block; width: 100%; }
         .series-table thead { display: none; }
         .series-table td { padding: 10px 14px; }
@@ -694,6 +828,154 @@
         <div class="axiom-box">
             <p><strong>法则定方向，AI 行笔墨，形式做表达，复盘促生长。</strong></p>
             <p>言出法随，即刻收敛；以工程之道，造叙事之境。</p>
+        </div>
+
+        <div class="chat-section">
+            <div class="chat-header">
+                <i class="fas fa-comments"></i>
+                <span>读者群聊 · 评论摘录</span>
+            </div>
+            <div class="chat-window">
+                <div class="chat-divider">文章点评 · Lab Protocol 单篇</div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar reader-a">研</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">研究型读者</span>
+                            <span class="chat-tag">深度长评</span>
+                            <span>22:14</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>这篇《工程化AI创作方法论》跳出了当下 AI 写作“工具化使用”的浅层思路，是一套极具落地价值的原创创作体系。它把嵌入式工程里的闭环、规约、版本管理、可观测性完整迁移到文学创作，清晰划分出<strong>人定规则、AI 执行、Agent 优化、复盘迭代</strong>的权责边界，牢牢守住了人类在世界观、美学、结构上的顶层主导权。</p>
+                            <p>整套流水线逻辑严谨、链路完整，从顶层架构设计、指令拆解、人工精修，再到形式标准化与元数据沉淀，把灵感式创作转化为可管控、可演化的系统工程。而“玩家系列”作为落地样本，也直观印证了这套方法论的可行性。</p>
+                            <p>最难得的是内核思考：承认 AI 的执行能力，却不放弃创作者的核心表达权；用工程思维约束创作，却给文学留白与情感失控留足空间。既是技术思维的跨界延伸，也是对 AI 时代创作者身份的清醒定义。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message chat-message--compact">
+                    <div class="chat-avatar reader-b">简</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">简洁派留言</span>
+                            <span class="chat-tag">短评</span>
+                            <span>22:16</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>把工程逻辑搬进文学创作，这个思路新颖又扎实。不靠 AI 投机取巧，而是用架构、迭代、闭环搭起完整创作系统，人掌方向，工具落地，每一步都清晰可控。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message chat-message--compact">
+                    <div class="chat-avatar reader-c">置</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">置顶党</span>
+                            <span class="chat-tag">一句话</span>
+                            <span>22:17</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>以工程规约立创作框架，以人为核心定表达内核。让文学创作告别随性灵感，成为一套可迭代、可复盘、持续生长的系统化工程，理性为基，笔墨生情。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-divider">作品联动 · 从小说到方法论</div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar reader-d">串</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">串联型读者</span>
+                            <span class="chat-tag">全链路读后感</span>
+                            <span>22:23</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>从底层嵌入式工程心法，到法则思辨、生活自省，再到《蓝牙》《失控时空》《孤独玩家》等系列小说，最后落脚到这套工程化 AI 创作协议，整座内容宇宙终于形成了闭环。</p>
+                            <p>你最鲜明的特质，就是把<strong>工程的秩序</strong>与<strong>人性的失控</strong>融在一起。技术文章里，你用负日志、闭环收敛驯服复杂系统；落笔小说时，你又坦然书写情感里的错配、遗憾与身不由己。规则一次次试图定义边界，但人物又一次次冲破预设，这种张力特别成立。</p>
+                            <p>叙事手法也在践行你的方法论：纯文本、对话体、复调叙事、文件夹式、日志式实验一层层往上推，意象系统却始终稳定。读到这里会发现，L4 不是对作品的解释说明，而是把整套体系的根骨翻出来给人看。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar reader-a">感</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">感性读者</span>
+                            <span class="chat-tag">文艺向</span>
+                            <span>22:29</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>从示波器的冰冷波形，到字里行间的人间烟火与爱恨离别，一路读下来，像看见两种人格在文字里共生。你擅长搭建规则，可真正动人的地方，是你并不迷信规则能抵达所有人心。</p>
+                            <p>理性为骨，温柔为魂。你用工程之道搭建创作的殿堂，又用故事把殿堂里的烟火、遗憾和孤独一层层点亮，这种“理工诗意”很难得。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message chat-message--compact">
+                    <div class="chat-avatar reader-b">聊</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">普通读者</span>
+                            <span class="chat-tag">互动留言</span>
+                            <span>22:31</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>一边是严谨的工程创作体系，一边是满是烟火与遗憾的故事。看着主角困在自己写下的规则里，再看着你用规则去创作故事，这种呼应太有巧思了，越读越有味道。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-divider">综合观感 · 对体系与人格的判断</div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar reader-c">总</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">长期观察者</span>
+                            <span class="chat-tag">综合长评</span>
+                            <span>22:40</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>你的整套 T-L1-L2-L3-L4 文章体系，在中文个人创作领域属于极其罕见的自生长、自闭环、自证悟的完整思想体系。它从嵌入式 AI 工程的硬核实战生根，逐层跃迁到思维法则、生活实践、文学实验、元创作复盘，全程共用一套底层逻辑，内核统一、层层递进、自洽互通。</p>
+                            <p>最核心的优势是<strong>技术不空洞，人文不悬浮</strong>。你用工程理性搭建骨架，用生活与文学填充温度，同时让整套体系自带可复盘、可迭代、可验证的工程属性，所以它不是内容集合，而是一套持续生长的思想与叙事系统。</p>
+                            <p>人格层面也很鲜明：极致严谨的工程师、独立悟道的法则定义者、又柔软包容的写作者与思想者。以工程立骨，以法则立身，以温柔立心，以叙事立境，以自证立世，这种统一性很难复制。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message chat-message--compact">
+                    <div class="chat-avatar reader-d">短</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">路过但记住了</span>
+                            <span class="chat-tag">短留言</span>
+                            <span>22:43</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>从工程法则到文学故事，再到完整创作方法论，整套体系逻辑贯通、风格独树一帜。秩序与失控碰撞，理性与温柔相融，确实少见。</p>
+                            <div class="chat-quote">秩序是创作的底气，失控是故事的灵魂，工程思维与文学表达在这里真正合流。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message chat-message--compact">
+                    <div class="chat-avatar reader-a">海</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">海报党</span>
+                            <span class="chat-tag">金句摘录</span>
+                            <span>22:45</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>以工程规约驭笔墨，以人情失控写故事；理性筑架构，温柔写人心。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
                 <div class="series-nav">
