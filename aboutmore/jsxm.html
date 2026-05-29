@@ -109,6 +109,28 @@
     .ending-board { margin-top: 10px; padding: 18px; background: linear-gradient(135deg, #1c1917, #292524); border-radius: 18px; color: #fefce8; }
     .ending-board .board-label { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; color: #fde68a; margin-bottom: 10px; }
     .ending-board p { color: rgba(255,252,245,0.88); }
+    .chat-section { margin-top: 38px; padding-top: 26px; border-top: 1px solid var(--border); }
+    .chat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; color: #1c1917; font-size: 15px; font-weight: 700; }
+    .chat-header i { color: var(--accent); }
+    .chat-window { padding: 16px; border-radius: 20px; border: 1px solid #e7d7bf; background: linear-gradient(180deg, #fffdf9, #fff8ef); box-shadow: 0 10px 24px rgba(120, 83, 38, 0.08); }
+    .chat-divider { display: inline-flex; align-items: center; margin: 10px auto 18px; padding: 6px 12px; border-radius: 999px; background: #ffedd5; color: #9a3412; font-size: 12px; font-weight: 700; }
+    .chat-message { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+    .chat-message:last-child { margin-bottom: 0; }
+    .chat-avatar-reader { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 700; }
+    .chat-avatar-reader.reader-a { background: linear-gradient(135deg, #d97706, #b45309); }
+    .chat-avatar-reader.reader-b { background: linear-gradient(135deg, #65a30d, #3f6212); }
+    .chat-avatar-reader.reader-c { background: linear-gradient(135deg, #7c3aed, #5b21b6); }
+    .chat-avatar-reader.reader-d { background: linear-gradient(135deg, #0f766e, #115e59); }
+    .chat-bubble-reader { flex: 1; min-width: 0; padding: 14px 16px; border-radius: 18px 18px 18px 8px; background: #fff; border: 1px solid #eadfce; }
+    .chat-meta-reader { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: #78716c; font-size: 12px; }
+    .chat-name-reader { color: #1c1917; font-weight: 700; font-size: 14px; }
+    .chat-role-reader { color: #92400e; font-size: 12px; }
+    .chat-tag-reader { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 999px; background: #fff7ed; color: #9a3412; font-size: 11px; font-weight: 700; }
+    .chat-reply-reader { margin-bottom: 10px; padding: 8px 10px; border-radius: 12px; background: #fffbeb; border-left: 3px solid #f59e0b; color: #78350f; font-size: 12px; line-height: 1.65; }
+    .chat-text-reader { color: #44403c; font-size: 14px; line-height: 1.8; }
+    .chat-text-reader p { margin: 8px 0; text-align: justify; }
+    .chat-text-reader p:first-child { margin-top: 0; }
+    .chat-text-reader p:last-child { margin-bottom: 0; }
 @media (max-width: 768px) {
         .main-content { padding: 24px 16px 60px; }
         h1 { font-size: 28px; }
@@ -119,6 +141,9 @@
         .chapter-head { align-items: flex-start; }
         .review-row { grid-template-columns: 1fr; }
         .review-row .who { border-bottom: 1px solid #e7e5e4; }
+        .chat-window { padding: 14px 12px; }
+        .chat-avatar-reader { width: 34px; height: 34px; font-size: 13px; }
+        .chat-bubble-reader { padding: 12px 13px; }
 }
 </style>
 <link rel="stylesheet" href="../assets/site-sidebar.css">
@@ -399,6 +424,78 @@
                 <section class="chapter-card" data-path="root://closing/final-note"><div class="chapter-head"><div class="chapter-index">ED</div><div class="chapter-title"><strong>尾声</strong><span>最后留下来的不是文档，是一张愿意继续组队的便签</span></div></div><p>阿七的便利贴一直在他口袋里。直到有一天洗衣服忘了拿出来，被洗衣机搅成纸浆。他发现的时候，口袋里只剩一点白色的絮。</p><p>他在垃圾桶里翻了一会儿。找到了，但上面的字已经全模糊了。他把那团纸絮捏在手心里，站了很久。然后他打开手机，给她发消息：便利贴烂了。再写一张。不要文档，要便签。</p><p>阿七秒回：行。这次涨价了，得请我吃三顿烧烤。</p><p>然后她发来一张照片。新的便利贴，上面还是那四行字，但第四行改了：陆屿，你打游戏还是很菜。但是组队的话，算我一个。</p><p>下面是第五行，新加的：</p><p>——但是别写文档了。你写文档的样子真的很像个产品经理。</p><div class="ending-board"><div class="board-label"><i class="fas fa-note-sticky"></i> Final Sticky Note</div><p>陆屿把那张照片存进手机。屏幕暗下去的时候，他在黑色的玻璃上，看到了自己正在笑。他把手机放在茶几上。茶几上还有一杯水，温的。卧室的门没关。窗外，北京的夜安静得像一行没写完的代码。他拿起笔，在便利贴背面写了最后一行字：法则有边界，但你不归法则管。</p><p>他把便利贴贴在了显示器上，然后关掉了文档。今晚不写文档了。今晚，打游戏。</p></div></section>
             </div>
         </article>
+
+        <div class="chat-section">
+            <div class="chat-header">
+                <i class="fas fa-comments"></i>
+                <span>读者群聊 · 文件夹叙事</span>
+            </div>
+            <div class="chat-window">
+                <div class="chat-divider">L3 有趣玩家讨论</div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-a">档</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">形式控读者</span>
+                            <span class="chat-role-reader">会先看页面协议再看故事</span>
+                            <span class="chat-tag-reader">首评</span>
+                            <span>23:31</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <p>把关系写成文件夹、批注、便签、审阅记录，这个形式和人物性格太匹配了。陆屿就是那种会把情感也往文档里塞的人，所以整页看起来像一份关系工程案卷，特别准。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-b">阿</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">阿七派读者</span>
+                            <span class="chat-role-reader">一眼就会站到“便签势力”那边</span>
+                            <span class="chat-tag-reader">接话</span>
+                            <span>23:34</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <div class="chat-reply-reader"><strong>回复 形式控读者：</strong>对，但我觉得更妙的是，最后真正有效的不是文档，而是阿七那张皱巴巴的便签。</div>
+                            <p>这一下就把全文的张力拧出来了。你越相信结构，越容易被一个不肯归档的人改写；你越想把关系管得整整齐齐，越会被活人变量把系统打穿。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-c">句</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">普通读者</span>
+                            <span class="chat-role-reader">会被“嘴硬但真诚”的人物打动</span>
+                            <span class="chat-tag-reader">人物感</span>
+                            <span>23:36</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <div class="chat-reply-reader"><strong>插一句：</strong>阿七写的那几条便签，真的像那种嘴上嫌弃你、但其实最知道你哪里卡住的人。</div>
+                            <p>所以这篇好看不只是因为形式新，而是因为人物之间的说话方式、判断方式、相处方式都特别鲜活，能让人记住。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar-reader reader-d">审</div>
+                    <div class="chat-bubble-reader">
+                        <div class="chat-meta-reader">
+                            <span class="chat-name-reader">结构派读者</span>
+                            <span class="chat-role-reader">会看形式是否只是噱头</span>
+                            <span class="chat-tag-reader">判断</span>
+                            <span>23:39</span>
+                        </div>
+                        <div class="chat-text-reader">
+                            <p>这篇成立的根本原因，是页面上的“目录、版本、审阅、便签”都不是装饰，而是人物关系本身的一部分。形式没有站在故事外面表演，而是在故事里面承担叙事任务，这就高级很多。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="series-nav">
             <a href="../aboutmore/alone.html">← 知意知否·孤独玩家</a>
             <a href="../aboutmore/czjs.html">会话的碰撞 →</a>
