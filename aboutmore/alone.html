@@ -353,6 +353,80 @@
 		text-align: center;
 		color: var(--text-secondary);
 	}
+	.chat-section {
+		margin-top: 40px;
+		padding-top: 28px;
+		border-top: 1px solid rgba(180, 195, 255, 0.14);
+	}
+	.chat-header {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 18px;
+		color: #f8fafc;
+		font-size: 15px;
+		font-weight: 700;
+	}
+	.chat-header i { color: var(--accent-3); }
+	.chat-window {
+		padding: 16px;
+		border-radius: 24px;
+		border: 1px solid rgba(180, 195, 255, 0.14);
+		background: linear-gradient(180deg, rgba(11, 17, 32, 0.9), rgba(15, 23, 42, 0.86));
+		box-shadow: var(--shadow);
+	}
+	.chat-divider {
+		display: inline-flex;
+		align-items: center;
+		margin: 10px auto 18px;
+		padding: 6px 12px;
+		border-radius: 999px;
+		background: rgba(249, 168, 212, 0.12);
+		color: var(--accent-2);
+		font-size: 12px;
+		font-weight: 700;
+	}
+	.chat-message {
+		display: flex;
+		align-items: flex-start;
+		gap: 12px;
+		margin-bottom: 14px;
+	}
+	.chat-message:last-child { margin-bottom: 0; }
+	.chat-avatar-reader {
+		flex-shrink: 0;
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+		font-size: 14px;
+		font-weight: 700;
+	}
+	.chat-avatar-reader.reader-a { background: linear-gradient(135deg, #38bdf8, #2563eb); }
+	.chat-avatar-reader.reader-b { background: linear-gradient(135deg, #f472b6, #db2777); }
+	.chat-avatar-reader.reader-c { background: linear-gradient(135deg, #f59e0b, #d97706); }
+	.chat-avatar-reader.reader-d { background: linear-gradient(135deg, #818cf8, #6366f1); }
+	.chat-bubble-reader {
+		flex: 1;
+		min-width: 0;
+		padding: 14px 16px;
+		border-radius: 18px 18px 18px 8px;
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(180, 195, 255, 0.12);
+		backdrop-filter: blur(12px);
+	}
+	.chat-meta-reader { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: var(--text-muted); font-size: 12px; }
+	.chat-name-reader { color: #f8fafc; font-weight: 700; font-size: 14px; }
+	.chat-role-reader { color: var(--accent-3); font-size: 12px; }
+	.chat-tag-reader { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 999px; background: rgba(255,255,255,0.06); color: var(--accent); font-size: 11px; font-weight: 700; }
+	.chat-reply-reader { margin-bottom: 10px; padding: 8px 10px; border-radius: 12px; background: rgba(103, 232, 249, 0.08); border-left: 3px solid rgba(103, 232, 249, 0.52); color: var(--text-secondary); font-size: 12px; line-height: 1.65; }
+	.chat-text-reader { color: var(--text-secondary); font-size: 14px; line-height: 1.85; }
+	.chat-text-reader p { margin: 8px 0; text-align: justify; }
+	.chat-text-reader p:first-child { margin-top: 0; }
+	.chat-text-reader p:last-child { margin-bottom: 0; }
 	@media (max-width: 1080px) {
 		.contrast-hero,
 		.chapter-head,
@@ -372,6 +446,9 @@
 		.ending-card { padding: 18px; }
 		.chapter-index { width: 54px; height: 54px; font-size: 18px; }
 		.chapter-title h2 { font-size: 21px; }
+		.chat-window { padding: 14px 12px; }
+		.chat-avatar-reader { width: 34px; height: 34px; font-size: 13px; }
+		.chat-bubble-reader { padding: 12px 13px; }
 	}
 </style>
 <link rel="stylesheet" href="../assets/site-sidebar.css">
@@ -895,6 +972,78 @@
 			<p>繁华世界没有为任何人暂停。</p>
 			<p>但有人终于学会，在不暂停的世界里，承认自己的孤独，也接受新的组队邀请。</p>
 		</section>
+
+		<div class="chat-section">
+			<div class="chat-header">
+				<i class="fas fa-comments"></i>
+				<span>读者群聊 · 夜色余波</span>
+			</div>
+			<div class="chat-window">
+				<div class="chat-divider">L3 孤独玩家讨论</div>
+
+				<div class="chat-message">
+					<div class="chat-avatar-reader reader-a">夜</div>
+					<div class="chat-bubble-reader">
+						<div class="chat-meta-reader">
+							<span class="chat-name-reader">夜读者</span>
+							<span class="chat-role-reader">总在深夜看这种城市小说</span>
+							<span class="chat-tag-reader">观感</span>
+							<span>23:48</span>
+						</div>
+						<div class="chat-text-reader">
+							<p>这篇最厉害的是“城市还在亮，人已经很孤独”那种持续不散的余波。你不是靠大起大落来写悲伤，而是让整座城市正常运转着，把人的落单衬得更明显。</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="chat-message">
+					<div class="chat-avatar-reader reader-b">组</div>
+					<div class="chat-bubble-reader">
+						<div class="chat-meta-reader">
+							<span class="chat-name-reader">长期关注者</span>
+							<span class="chat-role-reader">一路看着阿七这条线长出来</span>
+							<span class="chat-tag-reader">接话</span>
+							<span>23:50</span>
+						</div>
+						<div class="chat-text-reader">
+							<div class="chat-reply-reader"><strong>回复 夜读者：</strong>是，而且这篇最温柔的地方恰好也在这里。它没有把孤独写成终局，而是写成了“有人开始学会组队”。</div>
+							<p>所以读到最后不会只是难过，会有一种很轻的松动感。像你知道这个人还没通关，但至少不再一个人硬扛了。</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="chat-message">
+					<div class="chat-avatar-reader reader-c">句</div>
+					<div class="chat-bubble-reader">
+						<div class="chat-meta-reader">
+							<span class="chat-name-reader">摘句读者</span>
+							<span class="chat-role-reader">会停在安静句子上很久</span>
+							<span class="chat-tag-reader">摘录</span>
+							<span>23:53</span>
+						</div>
+						<div class="chat-text-reader">
+							<div class="chat-reply-reader"><strong>接上面一句：</strong>“像一粒还没学会落下的光标”这句太狠了，技术感和情绪感在这里一下叠到一起。</div>
+							<p>这种句子只有整站前面的工程语汇和后面的情感余味同时成立时才写得出来，所以我会觉得这篇是整个系列气质最统一的一篇之一。</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="chat-message">
+					<div class="chat-avatar-reader reader-d">冷</div>
+					<div class="chat-bubble-reader">
+						<div class="chat-meta-reader">
+							<span class="chat-name-reader">冷静读者</span>
+							<span class="chat-role-reader">会看人物有没有真正完成变化</span>
+							<span class="chat-tag-reader">判断</span>
+							<span>23:56</span>
+						</div>
+						<div class="chat-text-reader">
+							<p>它好在没有给一个虚假的大团圆。人物没被彻底修好，过去也没有被完全清账，但他们终于从“只会被旧规则卡住”走到了“承认自己需要新的关系方式”。这个收口很克制，也更真。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</article>
 
 		<div class="series-nav">
