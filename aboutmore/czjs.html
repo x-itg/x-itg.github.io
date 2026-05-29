@@ -76,7 +76,30 @@
     .story-card .story-inner .story-ending { margin-top:16px; padding-top:16px; border-top:1px solid #fde68a; font-size:14px; color:#78350f; }
     .story-card .story-inner .story-ending i { color:var(--accent); margin-right:4px; }
 
-@media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } .window-pair { grid-template-columns:1fr; } }
+    .chat-section { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .chat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; color: #1c1917; font-size: 15px; font-weight: 700; }
+    .chat-header i { color: var(--accent); }
+    .chat-window { padding: 16px; border-radius: 20px; border: 1px solid #fde68a; background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,251,235,0.95)); box-shadow: 0 10px 26px rgba(146, 64, 14, 0.08); }
+    .chat-divider { display: inline-flex; align-items: center; margin: 10px auto 18px; padding: 6px 12px; border-radius: 999px; background: #ffedd5; color: #9a3412; font-size: 12px; font-weight: 700; }
+    .chat-message { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+    .chat-message:last-child { margin-bottom: 0; }
+    .chat-avatar { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 700; box-shadow: 0 8px 18px rgba(120, 53, 15, 0.12); }
+    .chat-avatar.reader-a { background: linear-gradient(135deg, #d97706, #b45309); }
+    .chat-avatar.reader-b { background: linear-gradient(135deg, #7c3aed, #5b21b6); }
+    .chat-avatar.reader-c { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+    .chat-avatar.reader-d { background: linear-gradient(135deg, #047857, #065f46); }
+    .chat-bubble { flex: 1; min-width: 0; padding: 14px 16px; border-radius: 18px 18px 18px 8px; background: #fffdf8; border: 1px solid #f3e1c5; }
+    .chat-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; font-size: 12px; color: #78716c; }
+    .chat-name { color: #1c1917; font-weight: 700; font-size: 14px; }
+    .chat-role { color: #92400e; font-size: 12px; }
+    .chat-tag { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 999px; background: #fff7ed; color: #9a3412; font-size: 11px; font-weight: 700; }
+    .chat-reply { margin-bottom: 10px; padding: 8px 10px; border-radius: 12px; background: #fffbeb; border-left: 3px solid #f59e0b; color: #78350f; font-size: 12px; line-height: 1.65; }
+    .chat-text { color: #44403c; font-size: 14px; line-height: 1.82; }
+    .chat-text p { margin: 8px 0; text-align: justify; }
+    .chat-text p:first-child { margin-top: 0; }
+    .chat-text p:last-child { margin-bottom: 0; }
+
+@media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } .window-pair { grid-template-columns:1fr; } .chat-window { padding:14px 12px; } .chat-avatar { width:34px; height:34px; font-size:13px; } .chat-bubble { padding:12px 13px; } }
 </style>
 <link rel="stylesheet" href="../assets/site-sidebar.css">
 </head>
@@ -448,6 +471,78 @@
                 <p style="margin-top:16px;">现在女儿学会了。她每次看到我对着对话框发呆，就会跑过来，不打字，不动鼠标，只踮起脚尖在我耳边说一句："爸爸，这个不能删，我知道的。"然后帮我把窗口最小化，安静地走了。</p>
 
                 <p><strong>好孩子。</strong></p>
+            </div>
+        </div>
+
+        <div class="chat-section">
+            <div class="chat-header">
+                <i class="fas fa-comments"></i>
+                <span>读者群聊 · 方法发现现场</span>
+            </div>
+            <div class="chat-window">
+                <div class="chat-divider">L4 实验读后感</div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar reader-a">窗</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">实验型读者</span>
+                            <span class="chat-role">特别爱看“方法怎么被撞出来”</span>
+                            <span class="chat-tag">起手评</span>
+                            <span>22:48</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>这篇最有意思的地方，不是你总结了一套方法，而是能看到方法诞生的那个瞬间。两个窗口本来各管一摊，结果一交叉，突然出现第三种东西，这种“撞出来”的感觉很真实。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar reader-b">追</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">长期关注者</span>
+                            <span class="chat-role">会把前后文章连起来看</span>
+                            <span class="chat-tag">接话</span>
+                            <span>22:50</span>
+                        </div>
+                        <div class="chat-text">
+                            <div class="chat-reply"><strong>回复 实验型读者：</strong>对，而且它不是凭空冒出来的，前面那些关于保存对话、沉淀素材的文章在这里都接上了。</div>
+                            <p>所以读这篇时会很明显地感觉到，它不是单篇灵感笔记，而是整个创作系统的启动键。你终于把“为什么别删”和“删完之后怎么继续长”这两件事连成了闭环。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar reader-c">写</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">写作者读者</span>
+                            <span class="chat-role">更在意灵感如何稳定复现</span>
+                            <span class="chat-tag">共鸣</span>
+                            <span>22:53</span>
+                        </div>
+                        <div class="chat-text">
+                            <div class="chat-reply"><strong>插一句：</strong>“不需要等灵感，只需要让两个窗口交叉”这句话我直接记下来了。</div>
+                            <p>很多人写创作谈，最后还是回到一种不可复制的神秘感。但这篇不是。它把灵感从“玄学降临”改写成了“有条件可触发的系统现象”，这一步很关键。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-message">
+                    <div class="chat-avatar reader-d">工</div>
+                    <div class="chat-bubble">
+                        <div class="chat-meta">
+                            <span class="chat-name">工程师读者</span>
+                            <span class="chat-role">专门看人怎么把流程搭稳</span>
+                            <span class="chat-tag">收束</span>
+                            <span>22:56</span>
+                        </div>
+                        <div class="chat-text">
+                            <p>这篇真正站住的点，是你没有把 AI 神化成灵感来源，而是把它放回工具位。窗口只是声部，真正把两边推到一起的人还是你自己，所以这篇最后落的不是炫技，而是方法主权。</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
