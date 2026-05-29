@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>像调试代码一样创作：工程化AI写作工作流纪实 | itg</title>
+<meta name="description" content="把创作拆成可观测、可回放、可调试的工程系统，用 Human + AI + Agent 搭建一套可视化的虚拟创作工作流。">
+<meta name="keywords" content="工程化创作,AI写作工作流,元创作,可视化工作流,Agent,创作调试,Human AI Agent">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="像调试代码一样创作：工程化AI写作工作流纪实 | itg">
+<meta property="og:description" content="把文学创作做成一套可观测、可回放、可调试的工程系统。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/gc.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/gc.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #f3efe4;
+        --panel: rgba(255, 252, 245, 0.96);
+        --panel-strong: rgba(255, 249, 238, 0.98);
+        --text: #221f1a;
+        --muted: #6d655b;
+        --line: #d7cdbd;
+        --accent: #0f766e;
+        --accent-soft: rgba(15, 118, 110, 0.1);
+        --signal: #c2410c;
+        --signal-soft: rgba(194, 65, 12, 0.1);
+        --ink: #102a43;
+        --ink-soft: rgba(16, 42, 67, 0.08);
+        --gold: #b45309;
+        --shadow: 0 18px 40px rgba(34, 31, 26, 0.08);
+        --radius: 20px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
+        background:
+            radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 22%),
+            radial-gradient(circle at bottom left, rgba(194, 65, 12, 0.1), transparent 20%),
+            linear-gradient(180deg, #faf7ef 0%, #f0ebde 100%);
+        color: var(--text);
+        line-height: 1.9;
+        -webkit-font-smoothing: antialiased;
+    }
+    .layout { display: flex; max-width: 1320px; margin: 0 auto; min-height: 100vh; }
+    .main-content { flex: 1; min-width: 0; max-width: 780px; margin: 0 auto; padding: 40px 24px 88px; }
+    .article-header {
+        position: relative;
+        margin-bottom: 34px;
+        padding: 26px 28px 30px;
+        border-radius: 26px;
+        background: linear-gradient(145deg, rgba(255,255,255,0.94), rgba(249,242,228,0.94));
+        border: 1px solid rgba(15, 118, 110, 0.14);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+    }
+    .article-header::before {
+        content: "CREATIVE DEBUG TWIN / GC-01";
+        position: absolute;
+        right: 18px;
+        top: 14px;
+        font-size: 11px;
+        letter-spacing: 2px;
+        font-weight: 700;
+        color: rgba(15, 118, 110, 0.38);
+    }
+    .series-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+    }
+    h1 { font-size: 32px; line-height: 1.28; margin-bottom: 12px; letter-spacing: -0.4px; }
+    .subtitle { font-size: 15px; color: var(--muted); margin-bottom: 10px; }
+    .meta { font-size: 13px; color: #948b80; }
+    p { margin: 14px 0; font-size: 15px; color: #3c352d; text-align: justify; }
+    strong { color: #1b1712; }
+    h2 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 46px 0 16px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid rgba(15, 118, 110, 0.16);
+        font-size: 22px;
+    }
+    h2 i { color: var(--accent); }
+    h3 { font-size: 18px; margin: 0 0 10px; color: #1e1913; }
+    ul { margin: 12px 0 12px 22px; color: #3c352d; }
+    li { margin: 8px 0; }
+    a { color: var(--accent); }
+
+    .lead-note {
+        margin: 24px 0;
+        padding: 18px 22px;
+        border-left: 4px solid var(--signal);
+        border-radius: 0 16px 16px 0;
+        background: linear-gradient(135deg, rgba(255, 237, 213, 0.86), rgba(255, 251, 235, 0.95));
+        color: #7c3412;
+    }
+    .lead-note strong { color: #9a3412; }
+
+    .spec-shell,
+    .workflow-board,
+    .terminal-shell,
+    .matrix-shell,
+    .loop-shell,
+    .linkage-shell {
+        margin: 28px 0;
+        border-radius: 24px;
+        background: var(--panel);
+        border: 1px solid rgba(15, 118, 110, 0.12);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+    }
+    .spec-head,
+    .workflow-head,
+    .terminal-head,
+    .matrix-head,
+    .loop-head,
+    .linkage-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        padding: 16px 20px;
+        background: linear-gradient(90deg, rgba(15, 118, 110, 0.12), rgba(16, 42, 67, 0.04));
+        border-bottom: 1px solid rgba(15, 118, 110, 0.12);
+    }
+    .head-title {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1.6px;
+        color: var(--accent);
+    }
+    .head-meta {
+        font-size: 12px;
+        color: #7a7369;
+    }
+
+    .spec-grid,
+    .observability-grid,
+    .linkage-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        padding: 20px;
+    }
+    .spec-card,
+    .metric-card,
+    .link-card {
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,245,234,0.96));
+    }
+    .spec-card span,
+    .metric-card span,
+    .link-card span {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 11px;
+        letter-spacing: 1.1px;
+        color: #8d8579;
+    }
+    .spec-card strong,
+    .metric-card strong,
+    .link-card strong { display: block; margin-bottom: 6px; font-size: 15px; }
+    .spec-card p,
+    .metric-card p,
+    .link-card p { margin: 0; font-size: 13px; text-align: left; color: #5b5348; }
+
+    .workflow-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        padding: 20px;
+        background-image: linear-gradient(rgba(16, 42, 67, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 42, 67, 0.04) 1px, transparent 1px);
+        background-size: 22px 22px;
+    }
+    .lane {
+        position: relative;
+        padding: 18px 18px 16px 70px;
+        border-radius: 20px;
+        border: 1px solid rgba(16, 42, 67, 0.1);
+        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,243,232,0.94));
+        min-height: 200px;
+    }
+    .lane::before {
+        content: attr(data-stage);
+        position: absolute;
+        left: 18px;
+        top: 18px;
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--ink);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        box-shadow: 0 10px 18px rgba(16, 42, 67, 0.18);
+    }
+    .lane-meta {
+        display: inline-flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .lane-meta span {
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        background: var(--accent-soft);
+        color: var(--accent);
+    }
+    .signal-list {
+        margin-top: 12px;
+        display: grid;
+        gap: 10px;
+    }
+    .signal-item {
+        padding: 11px 12px;
+        border-radius: 14px;
+        background: rgba(16, 42, 67, 0.04);
+        border: 1px solid rgba(16, 42, 67, 0.08);
+    }
+    .signal-item strong {
+        display: block;
+        margin-bottom: 2px;
+        font-size: 14px;
+    }
+    .signal-item p {
+        margin: 0;
+        font-size: 13px;
+        text-align: left;
+        color: #5a5248;
+    }
+
+    .status-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0 20px 20px;
+    }
+    .status-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.96);
+        border: 1px solid rgba(15, 118, 110, 0.12);
+        color: #51493f;
+        font-size: 12px;
+    }
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 6px rgba(15, 118, 110, 0.12);
+        animation: pulse 2.4s infinite;
+    }
+    .status-chip.warn .status-dot {
+        background: var(--signal);
+        box-shadow: 0 0 0 6px rgba(194, 65, 12, 0.12);
+    }
+
+    .terminal-shell {
+        background: linear-gradient(180deg, rgba(20, 24, 28, 0.98), rgba(28, 32, 36, 0.98));
+        border-color: rgba(16, 42, 67, 0.28);
+    }
+    .terminal-head {
+        background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+        border-bottom-color: rgba(255,255,255,0.08);
+    }
+    .terminal-head .head-title,
+    .terminal-head .head-meta { color: rgba(241, 245, 249, 0.86); }
+    .terminal-body { padding: 18px 20px 20px; }
+    .terminal-line {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .terminal-line:last-child { border-bottom: none; }
+    .terminal-role {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 30px;
+        padding: 0 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.1px;
+        color: #e2e8f0;
+        background: rgba(148, 163, 184, 0.18);
+    }
+    .terminal-role.human { background: rgba(14, 165, 233, 0.18); color: #bae6fd; }
+    .terminal-role.ai { background: rgba(16, 185, 129, 0.18); color: #bbf7d0; }
+    .terminal-role.agent { background: rgba(245, 158, 11, 0.16); color: #fde68a; }
+    .terminal-role.system { background: rgba(248, 113, 113, 0.16); color: #fecaca; }
+    .terminal-line p {
+        margin: 0;
+        font-family: Consolas, "SFMono-Regular", "Liberation Mono", monospace;
+        font-size: 13px;
+        line-height: 1.8;
+        color: rgba(241, 245, 249, 0.92);
+        text-align: left;
+    }
+
+    .matrix-shell table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .matrix-shell th,
+    .matrix-shell td {
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(215, 205, 189, 0.7);
+        text-align: left;
+        vertical-align: top;
+        font-size: 14px;
+    }
+    .matrix-shell th {
+        background: rgba(15, 118, 110, 0.08);
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    .matrix-shell tr:last-child td { border-bottom: none; }
+
+    .loop-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        padding: 20px;
+    }
+    .loop-card {
+        position: relative;
+        padding: 18px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(194, 65, 12, 0.14);
+        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,247,237,0.98));
+    }
+    .loop-card::after {
+        content: "→";
+        position: absolute;
+        right: -12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        color: rgba(180, 83, 9, 0.4);
+    }
+    .loop-card:last-child::after { display: none; }
+    .loop-card span {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: #9a8873;
+    }
+    .loop-card strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 16px;
+    }
+    .loop-card p { margin: 0; font-size: 13px; text-align: left; color: #5b5348; }
+
+    .axiom-box {
+        margin-top: 34px;
+        padding: 24px 24px 22px;
+        border-radius: 24px;
+        background: linear-gradient(135deg, rgba(16, 42, 67, 0.96), rgba(15, 118, 110, 0.92));
+        box-shadow: 0 18px 38px rgba(16, 42, 67, 0.18);
+    }
+    .axiom-box p { margin: 10px 0; color: rgba(240, 249, 255, 0.92); }
+    .axiom-box strong { color: #ffffff; }
+
+    .footer-note {
+        margin-top: 42px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+        text-align: center;
+        font-size: 13px;
+        color: #948b80;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.1); opacity: 0.76; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    @media (max-width: 960px) {
+        .workflow-grid,
+        .spec-grid,
+        .observability-grid,
+        .loop-grid,
+        .linkage-grid { grid-template-columns: 1fr; }
+        .loop-card::after { display: none; }
+    }
+    @media (max-width: 768px) {
+        .main-content { padding: 24px 16px 68px; }
+        h1 { font-size: 28px; }
+        .article-header { padding: 22px 18px 24px; }
+        .lane { padding: 66px 16px 16px 16px; }
+        .lane::before { top: 16px; left: 16px; }
+        .terminal-line { grid-template-columns: 1fr; }
+        .matrix-shell table,
+        .matrix-shell tbody,
+        .matrix-shell tr,
+        .matrix-shell td,
+        .matrix-shell th { display: block; width: 100%; }
+        .matrix-shell thead { display: none; }
+        .matrix-shell td { padding: 10px 14px; }
+    }
+</style>
+<link rel="stylesheet" href="../assets/site-sidebar.css">
+</head>
+<body>
+
+<div class="layout">
+    <aside class="site-sidebar site-sidebar--story">
+        <div class="site-sidebar__brand"><a href="../about.html"><i class="fas fa-feather-alt"></i> L1-L4 · 法则与故事</a></div>
+        <div class="site-sidebar__intro">
+            <span class="site-sidebar__eyebrow">站点坐标</span>
+            <strong>L4 · 创作</strong>
+            <p>公开创作引擎，解释作品如何被组织和生成。</p>
+        </div>
+        <details class="site-sidebar__group site-sidebar__group--law">
+            <summary>
+                <span class="site-sidebar__summary-text">L1 · 法则</span>
+                <span class="site-sidebar__summary-meta">法则主线与迁移起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../about.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📖</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我找到了一套法则</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/tk.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">以不变应万变</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fw.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪄</span>
+                        <span>
+                            <span class="site-sidebar__link-title">工程魔法</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/sc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">调试AI，学会经营感情</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">乾坤大挪移心法 · 文章总览</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--persona">
+            <summary>
+                <span class="site-sidebar__summary-text">L2 · 人</span>
+                <span class="site-sidebar__summary-meta">日常、关系与自省现场</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">爱婷哥</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/forme.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📝</span>
+                        <span>
+                            <span class="site-sidebar__link-title">写给自己</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/pg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎤</span>
+                        <span>
+                            <span class="site-sidebar__link-title">家庭直播间</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/m.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌙</span>
+                        <span>
+                            <span class="site-sidebar__link-title">周一早上，梦见下班</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/cc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我可能哪里错了</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ll.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">找个不懂的人聊聊</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">♾️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">不必全部收敛</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--literature">
+            <summary>
+                <span class="site-sidebar__summary-text">L3 · 小说</span>
+                <span class="site-sidebar__summary-meta">小说、对话、复调与孤独副本</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czy.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📘</span>
+                        <span>
+                            <span class="site-sidebar__link-title">蓝牙：陆知意岛</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/qp-chat.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·对话版</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/gary.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📍</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·终极玩家</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/alone.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌃</span>
+                        <span>
+                            <span class="site-sidebar__link-title">知意知否·孤独玩家</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jsxm.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎮</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时刻·有趣玩家</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--meta" open>
+            <summary>
+                <span class="site-sidebar__summary-text">L4 · 创作</span>
+                <span class="site-sidebar__summary-meta">创作方法与引擎说明</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czjs.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧪</span>
+                        <span>
+                            <span class="site-sidebar__link-title">会话的碰撞</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🏛️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">四层结构：创作体系</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">架构定乾坤，笔墨随法则</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/gc.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🖥️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">像调试代码一样创作</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>
+                <span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>
+                <span class="site-sidebar__summary-meta">从工程桥面回看整套法则的起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../gd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+                        <span>
+                            <span class="site-sidebar__link-title">桥面 · 始于工程，服务生活</span>
+                            <span class="site-sidebar__link-meta">从技术过桥，进入生活与叙事。</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+                            <span class="site-sidebar__link-meta">按地图理解技术与非技术的整体关系。</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
+    </aside>
+        <aside class="sidebar-toc sidebar-toc--story">
+        <h3><span class="sidebar-toc__icon" aria-hidden="true">🖥️</span> 本章导航</h3>
+        <nav>
+            <ul>
+                <li><a href="#一为什么创作要像工程一样被展开">一、为什么创作要像工程一样被展开</a></li>
+                <li><a href="#二虚拟可视化工作流">二、虚拟可视化工作流</a></li>
+                <li><a href="#三像调试代码一样进行创作对话">三、像调试代码一样进行创作对话</a></li>
+                <li><a href="#四创作系统的可观测性">四、创作系统的可观测性</a></li>
+                <li><a href="#五闭环回路怎样让创作持续进化">五、闭环回路怎样让创作持续进化</a></li>
+                <li><a href="#六这套工作流如何串起-l1-l4">六、这套工作流如何串起 L1-L4</a></li>
+            </ul>
+        </nav>
+    </aside>
+<div class="main-content">
+        <header class="article-header">
+            <span class="series-tag"><i class="fas fa-display"></i> 元创作层 · Workflow Record</span>
+            <h1>像调试代码一样创作：工程化AI写作工作流纪实</h1>
+            <p class="subtitle">把故事生产过程做成一套虚拟可视化工作流，让 Human、AI、Agent 在同一张调试台上协作</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · 元创作层</p>
+        </header>
+
+        <article>
+            <div class="spec-shell">
+                <div class="spec-head">
+                    <div class="head-title">CREATIVE WORKFLOW SPECIFICATION</div>
+                    <div class="head-meta">Protocol Build · GC-01</div>
+                </div>
+                <div class="spec-grid">
+                    <div class="spec-card">
+                        <span>MISSION</span>
+                        <strong>把创作做成可调试系统</strong>
+                        <p>从灵感叙述切换到系统建模，把结构、节奏、伏笔、情绪与版式纳入同一张工程工作流。</p>
+                    </div>
+                    <div class="spec-card">
+                        <span>CONTROL</span>
+                        <strong>人持有顶层控制权</strong>
+                        <p>Human 负责意图与边界，AI 负责内容执行，Agent 负责版式标准化与可视化落地。</p>
+                    </div>
+                    <div class="spec-card">
+                        <span>OUTCOME</span>
+                        <strong>形成可复盘的创作 twin</strong>
+                        <p>每一轮修改都可回看、可验证、可解释，最终沉淀成长期可复用的创作资产。</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>如果说 [aboutmore/jg.html](../aboutmore/jg.html) 解释的是这套方法为什么成立，那么这一篇要正面展示它如何运转。这里不再把创作视为一团不可描述的灵感云，而是把它拆成输入、决策、执行、验证、回收五类动作，像调试固件一样调试故事，像看系统状态一样看一篇文章的生长过程。</p>
+
+            <div class="lead-note">
+                <strong>重点不在于让 AI 帮我多写，而在于让每一轮写作都有边界、有指标、有回放。</strong>我需要的不是一台失控的自动写作机，而是一套受控的创作工位：同一份意图，能够稳定生成结构一致、风格统一、形式可迭代的文本成果。
+            </div>
+
+            <h2 id="一为什么创作要像工程一样被展开"><i class="fas fa-compass-drafting"></i> 一、为什么创作要像工程一样被展开</h2>
+            <p>传统写作叙述常常只描述结果，却不描述中间态。但工程师最依赖的，恰恰是中间态：寄存器值、日志、波形、断点、异常栈。迁移到创作领域以后，同样需要一套中间态系统，去回答几个关键问题：这篇文章的结构是否跑偏，伏笔有没有丢，意象是否统一，章节节奏是否失衡，版式是否真正服务叙事。</p>
+            <p>于是创作不再只是“写完一篇文章”，而是变成“驱动一套创作系统完成一次稳定收敛”。每个环节都可以观测，每次修改都留下痕迹，每个版本都可以解释自己为什么变成现在这样。这正是 L4 元创作层存在的意义，也是它与 L3 小说层、L1 工程法则层天然相连的原因。</p>
+
+            <h2 id="二虚拟可视化工作流"><i class="fas fa-diagram-project"></i> 二、虚拟可视化工作流</h2>
+            <div class="workflow-board">
+                <div class="workflow-head">
+                    <div class="head-title">VIRTUAL CREATION TWIN</div>
+                    <div class="head-meta">Human + AI + Agent · Flow Visibility</div>
+                </div>
+                <div class="workflow-grid">
+                    <section class="lane" data-stage="01">
+                        <div class="lane-meta">
+                            <span>HUMAN</span>
+                            <span>INTENT SPEC</span>
+                        </div>
+                        <h3>意图建模</h3>
+                        <p>先定义作品要解决什么表达问题，再写故事。主题、层级归属、人物关系、核心意象、叙事形式与留白尺度都在这一层被冻结。</p>
+                        <div class="signal-list">
+                            <div class="signal-item">
+                                <strong>输入</strong>
+                                <p>四层架构定位、篇目归属、风格边界、情绪目标。</p>
+                            </div>
+                            <div class="signal-item">
+                                <strong>产物</strong>
+                                <p>结构草图、角色表、章节分层、关键词与禁写项。</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="lane" data-stage="02">
+                        <div class="lane-meta">
+                            <span>HUMAN → AI</span>
+                            <span>PROMPT PACK</span>
+                        </div>
+                        <h3>指令封装</h3>
+                        <p>把含混的灵感压成可执行协议。章节顺序、场景材料、对话逻辑、象征物、双语标签与节奏要求全部被拆成参数。</p>
+                        <div class="signal-list">
+                            <div class="signal-item">
+                                <strong>输入</strong>
+                                <p>章节目标、情节约束、对话限幅、修辞上限、风格样本。</p>
+                            </div>
+                            <div class="signal-item">
+                                <strong>产物</strong>
+                                <p>结构化 prompt、禁改项清单、可扩展片段列表。</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="lane" data-stage="03">
+                        <div class="lane-meta">
+                            <span>AI</span>
+                            <span>CONTENT BUILD</span>
+                        </div>
+                        <h3>文本生成</h3>
+                        <p>AI 负责按协议填充血肉，不负责推翻世界观。它可以扩写、排布、试探语感，但不能越权修改主轴。</p>
+                        <div class="signal-list">
+                            <div class="signal-item">
+                                <strong>观测点</strong>
+                                <p>人物口吻偏差、桥段密度、信息暴露时序、意象重复率。</p>
+                            </div>
+                            <div class="signal-item">
+                                <strong>失败态</strong>
+                                <p>模板化、失真、情绪过载、风格漂移、伏笔断裂。</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="lane" data-stage="04">
+                        <div class="lane-meta">
+                            <span>HUMAN</span>
+                            <span>DEBUG REVIEW</span>
+                        </div>
+                        <h3>人工调试</h3>
+                        <p>这里像代码 review，也像现场调试。删掉虚浮句子，修正节奏，校验情绪曲线，确认跨章呼应闭合。</p>
+                        <div class="signal-list">
+                            <div class="signal-item">
+                                <strong>修正动作</strong>
+                                <p>删冗余、补逻辑、控语感、调温度、压情绪、拉回主题。</p>
+                            </div>
+                            <div class="signal-item">
+                                <strong>版本产物</strong>
+                                <p>v0.1 草稿、v0.7 收束稿、v1.0 可发布稿、v1.1 版式增强稿。</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="lane" data-stage="05">
+                        <div class="lane-meta">
+                            <span>AGENT</span>
+                            <span>FORMAT ENGINE</span>
+                        </div>
+                        <h3>形式仿真</h3>
+                        <p>把故事映射成版式模块。Feed、Log、Debug、Notification、Layer、Queue 这些工程标签，不是装饰，而是把内容转译为界面语言。</p>
+                        <div class="signal-list">
+                            <div class="signal-item">
+                                <strong>形式目标</strong>
+                                <p>让版式成为结构说明书，让读者一眼看到外部世界与内部心绪的分层关系。</p>
+                            </div>
+                            <div class="signal-item">
+                                <strong>输出</strong>
+                                <p>双栏、分层、日志标签、导航跳转、统一的系列视觉协议。</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="lane" data-stage="06">
+                        <div class="lane-meta">
+                            <span>SYSTEM</span>
+                            <span>ARCHIVE LOOP</span>
+                        </div>
+                        <h3>归档与复盘</h3>
+                        <p>发布不是结束，而是进入下一个闭环。工作流、提示语、失败样例、修改依据、版式套路都会进入资产库，作为下一次创作的高质量初始条件。</p>
+                        <div class="signal-list">
+                            <div class="signal-item">
+                                <strong>沉淀资产</strong>
+                                <p>结构模板、风格规范、角色档案、意象字典、版式组件、复盘记录。</p>
+                            </div>
+                            <div class="signal-item">
+                                <strong>系统收益</strong>
+                                <p>越写越稳，越写越快，且越写越能保住“像我”的那条线。</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="status-strip">
+                    <div class="status-chip"><span class="status-dot"></span> Story Structure Locked</div>
+                    <div class="status-chip"><span class="status-dot"></span> Symbol System Synced</div>
+                    <div class="status-chip warn"><span class="status-dot"></span> Emotional Saturation Needs Review</div>
+                    <div class="status-chip"><span class="status-dot"></span> Format Agent Ready</div>
+                </div>
+            </div>
+
+            <h2 id="三像调试代码一样进行创作对话"><i class="fas fa-terminal"></i> 三、像调试代码一样进行创作对话</h2>
+            <p>真正的协作不是一句“帮我写篇文章”，而是多轮调试。Human 下发意图，AI 尝试执行，Agent 把形式映射成稳定组件，系统再把问题显影出来。创作对话因此更像一个带状态回执的调试会话。</p>
+
+            <div class="terminal-shell">
+                <div class="terminal-head">
+                    <div class="head-title">SESSION TRACE · CREATIVE DEBUGGER</div>
+                    <div class="head-meta">Conversation Replay</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="terminal-role human">HUMAN</span>
+                        <p>[SPEC] 新建一篇 L4 文章，目标不是解释理念，而是把创作工作流正面摊开；要求包含可视化流程、虚拟调试台、Human/AI/Agent 分工、可观测指标与四层架构联动。</p>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-role ai">AI</span>
+                        <p>[BUILD] 已按六段流水线生成初稿：意图建模 / Prompt Pack / 内容执行 / 人工调试 / Agent 形式映射 / 发布归档。待确认：语感是否继续保持冷调克制，是否显式连接《知意知否·孤独玩家》。</p>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-role human">HUMAN</span>
+                        <p>[PATCH] 加强“像调试代码一样”的体感，不只列概念，要出现可回放、可排错、可看指标的工作台语言；同时把 L1-L4 的链路写清楚，不要让它像孤立方法页。</p>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-role agent">AGENT</span>
+                        <p>[FORMAT] 已将抽象方法映射为 dashboard：workflow lanes、status strip、terminal trace、observability matrix、feedback loop、layer linkage。版式策略切换为“实验室 + 调试台”。</p>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-role system">SYSTEM</span>
+                        <p>[ALERT] 检测到潜在风险：如果只写流程，容易偏技术说明；需要补充叙事落点，证明它如何服务 L3 小说层，并说明为什么它从嵌入式工程迁移而来。</p>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-role human">HUMAN</span>
+                        <p>[MERGE] 将《知意知否·孤独玩家》的双轨版式作为示例样本，把“外部繁华 / 内部孤独”的分层经验回写进方法层；最终目标不是流程炫技，而是证明形式、内容、思想三者共用同一根法则。</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="四创作系统的可观测性"><i class="fas fa-chart-line"></i> 四、创作系统的可观测性</h2>
+            <p>没有指标的创作，最后容易退化成凭直觉争论。工程化方法最重要的一步，是给创作建立“看得见的状态值”。这些状态值不一定需要精确到数值，但必须能被识别、讨论和回退。</p>
+
+            <div class="observability-grid">
+                <div class="metric-card">
+                    <span>STRUCTURE</span>
+                    <strong>结构闭环</strong>
+                    <p>检查章节是否服务主线，伏笔是否最终回收，叙事能量是否在关键节点完成释放。</p>
+                </div>
+                <div class="metric-card">
+                    <span>STYLE</span>
+                    <strong>语感稳定</strong>
+                    <p>确认句子密度、冷暖温度、留白比例、理工意象是否维持在同一审美带宽内。</p>
+                </div>
+                <div class="metric-card">
+                    <span>SYMBOL</span>
+                    <strong>意象一致</strong>
+                    <p>文档、指令、双螺旋、亚稳态、光标、调试等符号必须共属一套世界，不可各说各话。</p>
+                </div>
+            </div>
+
+            <div class="matrix-shell">
+                <div class="matrix-head">
+                    <div class="head-title">OBSERVABILITY MATRIX</div>
+                    <div class="head-meta">Signals / Failures / Actions</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>监控项</th>
+                            <th>异常表现</th>
+                            <th>调试动作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>人物口吻</td>
+                            <td>台词互相污染，人物说话像同一个模型</td>
+                            <td>回退到角色档案，重新锁定措辞范围、反应速度与沉默方式</td>
+                        </tr>
+                        <tr>
+                            <td>叙事时序</td>
+                            <td>信息揭示过早或过晚，情绪落点漂移</td>
+                            <td>重排章节顺序，调整消息推送节点与闪回比例</td>
+                        </tr>
+                        <tr>
+                            <td>风格边界</td>
+                            <td>出现模板句、煽情句或空转修辞</td>
+                            <td>删繁就简，降低形容词密度，恢复克制与冷调表达</td>
+                        </tr>
+                        <tr>
+                            <td>版式映射</td>
+                            <td>形式好看但不服务内容，只剩装饰感</td>
+                            <td>回到结构意图，确认每个 Feed / Log 模块是否对应真实叙事功能</td>
+                        </tr>
+                        <tr>
+                            <td>体系联动</td>
+                            <td>L4 页面只剩方法术语，看不见 L1-L3 来源</td>
+                            <td>补足链路说明，让工程法则、生活验证、文学实验与元创作记录互为证明</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 id="五闭环回路怎样让创作持续进化"><i class="fas fa-arrows-rotate"></i> 五、闭环回路怎样让创作持续进化</h2>
+            <div class="loop-shell">
+                <div class="loop-head">
+                    <div class="head-title">FEEDBACK LOOP</div>
+                    <div class="head-meta">Observe → Diagnose → Patch → Archive</div>
+                </div>
+                <div class="loop-grid">
+                    <div class="loop-card">
+                        <span>STEP 01</span>
+                        <strong>Observe</strong>
+                        <p>先看文本哪里失真，不急着补字，先找偏差发生在哪一层。</p>
+                    </div>
+                    <div class="loop-card">
+                        <span>STEP 02</span>
+                        <strong>Diagnose</strong>
+                        <p>判断问题是结构级、语言级、版式级，还是世界观级错误。</p>
+                    </div>
+                    <div class="loop-card">
+                        <span>STEP 03</span>
+                        <strong>Patch</strong>
+                        <p>只改决定性变量，避免一次补丁同时破坏别的层面的稳定性。</p>
+                    </div>
+                    <div class="loop-card">
+                        <span>STEP 04</span>
+                        <strong>Archive</strong>
+                        <p>记录这次为何出错、如何修复，变成下一轮创作的免疫记忆。</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>这也是为什么我会把创作手记、结构说明、页面样式、章节标签和方法页一起公开。它们共同组成一个完整的“创作调试现场”。外部读者看到的是文章，内部系统积累的是一套越来越成熟的生产方式。</p>
+
+            <h2 id="六这套工作流如何串起-l1-l4"><i class="fas fa-layer-group"></i> 六、这套工作流如何串起 L1-L4</h2>
+            <div class="linkage-shell">
+                <div class="linkage-head">
+                    <div class="head-title">L1-L4 LINKAGE MAP</div>
+                    <div class="head-meta">Source / Validation / Expression / Reflection</div>
+                </div>
+                <div class="linkage-grid">
+                    <div class="link-card">
+                        <span>L1 · 法则</span>
+                        <strong>源头协议</strong>
+                        <p>法则负责定义什么叫闭环、什么叫收敛、什么叫边界与控制权。</p>
+                    </div>
+                    <div class="link-card">
+                        <span>L2 · 人</span>
+                        <strong>现实检验</strong>
+                        <p>关系、疲惫、自省与生活现场验证这些法则是否真的能落地。</p>
+                    </div>
+                    <div class="link-card">
+                        <span>L3 · 小说</span>
+                        <strong>边界实验</strong>
+                        <p>像 [aboutmore/alone.html](../aboutmore/alone.html) 这样的页面，把外部世界和内部孤独同时拉到前台，证明法则在情感错配中依旧能成立。</p>
+                    </div>
+                    <div class="link-card">
+                        <span>L4 · 创作</span>
+                        <strong>引擎公开</strong>
+                        <p>把上面三层的生成机制反向摊开，让读者看到作品如何被设计、执行、修正与归档。</p>
+                    </div>
+                    <div class="link-card">
+                        <span>T · 工程起点</span>
+                        <strong>方法原乡</strong>
+                        <p>嵌入式工程提供了调试、验证、日志、版本与可观测性这一整套成熟手段。</p>
+                    </div>
+                    <div class="link-card">
+                        <span>SYSTEM VALUE</span>
+                        <strong>长期演化能力</strong>
+                        <p>一旦四层互相喂养，创作就不再依赖偶然灵感，而能稳定地产生新作品与新方法。</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>因此，这篇页面记录的不是一条单独工作流，而是一种把工程调试逻辑迁移到文学创作的总方法。它既解释 [aboutmore/jg.html](../aboutmore/jg.html) 中的方法论如何落地，也解释为什么 [aboutmore/fr.html](../aboutmore/fr.html) 的四层结构不是分类，而是同一套内核在不同介质中的连续生长。</p>
+
+            <div class="axiom-box">
+                <p><strong>法则给出骨架，提示语拆成协议，AI 执行文本，Agent 映射形式，复盘把经验写回系统。</strong></p>
+                <p>当创作开始拥有日志、回路、状态、版本和可观测性，它就不再只是“写出来了”，而是“被稳定制造出来了”。</p>
+                <p>这正是我的工程化 AI 创作方法真正想建立的东西：不是一次性作品，而是一套能持续生长的叙事引擎。</p>
+            </div>
+        </article>
+
+                <div class="series-nav">
+            <a href="../aboutmore/jg.html">← 架构定乾坤，笔墨随法则</a>
+            <a href="../index.html">首页入口 →</a>
+        </div>
+<div class="footer-note">itg · 乾坤大挪移心法 | Human 定义架构，AI 执行文本，Agent 映射形式，系统完成复盘</div>
+    </div>
+</div>
+
+</body>
+</html>
