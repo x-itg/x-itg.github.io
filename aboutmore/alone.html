@@ -56,7 +56,7 @@
 	.main-content::before {
 		content: "";
 		position: absolute;
-		inset: 18px 6px 24px;
+		inset: 168px 6px 24px;
 		border-radius: 32px;
 		background:
 			radial-gradient(circle at top, rgba(103, 232, 249, 0.08), transparent 28%),
@@ -66,31 +66,17 @@
 		z-index: -1;
 	}
 	.article-header {
-		margin-bottom: 28px;
-		padding: 28px 30px;
-		border: 1px solid var(--border);
-		border-radius: 28px;
-		background: linear-gradient(145deg, rgba(11, 16, 30, 0.95), rgba(18, 25, 45, 0.85));
-		box-shadow: var(--shadow);
-		position: relative;
-		overflow: hidden;
-	}
-	.article-header::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(90deg, rgba(103, 232, 249, 0.08), transparent 30%, transparent 70%, rgba(249, 168, 212, 0.08));
-		pointer-events: none;
+		margin-bottom: 24px;
+		padding: 4px 6px 18px;
+		border-bottom: 1px solid rgba(99, 102, 241, 0.18);
+		color: #1e1b3a;
 	}
 	.series-tag {
 		display: inline-flex;
 		align-items: center;
 		gap: 8px;
-		margin-bottom: 14px;
-		padding: 6px 12px;
-		border-radius: 999px;
-		background: rgba(103, 232, 249, 0.12);
-		color: var(--accent);
+		margin-bottom: 12px;
+		color: #6d28d9;
 		font-size: 12px;
 		font-weight: 700;
 		letter-spacing: 0.04em;
@@ -100,9 +86,10 @@
 		line-height: 1.2;
 		letter-spacing: 0.01em;
 		margin-bottom: 10px;
+		color: #1e1b4b;
 	}
 	.subtitle {
-		color: var(--text-secondary);
+		color: #52525b;
 		font-size: 15px;
 		margin-bottom: 8px;
 	}
@@ -114,7 +101,7 @@
 		display: grid;
 		grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
 		gap: 18px;
-		margin: 24px 0 30px;
+		margin: 34px 0 30px;
 	}
 	.city-pulse,
 	.lonely-core,
@@ -208,6 +195,38 @@
 		border-radius: 0 18px 18px 0;
 		background: rgba(249, 168, 212, 0.08);
 		color: var(--text-secondary);
+	}
+	.audio-wave {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 7px;
+		margin: 28px auto 34px;
+		padding: 8px 0;
+		opacity: 0.72;
+	}
+	.audio-wave span {
+		display: block;
+		width: 4px;
+		border-radius: 999px;
+		background: linear-gradient(180deg, rgba(125, 211, 252, 0.2), rgba(244, 114, 182, 0.95), rgba(125, 211, 252, 0.2));
+		box-shadow: 0 0 12px rgba(244, 114, 182, 0.14);
+	}
+	.audio-wave span:nth-child(1) { height: 18px; }
+	.audio-wave span:nth-child(2) { height: 34px; }
+	.audio-wave span:nth-child(3) { height: 24px; }
+	.audio-wave span:nth-child(4) { height: 48px; }
+	.audio-wave span:nth-child(5) { height: 28px; }
+	.audio-wave span:nth-child(6) { height: 54px; }
+	.audio-wave span:nth-child(7) { height: 20px; }
+	.audio-wave span:nth-child(8) { height: 38px; }
+	.audio-wave span:nth-child(9) { height: 16px; }
+	.audio-wave::before,
+	.audio-wave::after {
+		content: "";
+		width: 72px;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.3), transparent);
 	}
 	.chapter-shell {
 		margin: 26px 0;
@@ -344,8 +363,8 @@
 	}
 	@media (max-width: 768px) {
 		.main-content { padding: 24px 14px 72px; }
-		.main-content::before { inset: 10px 0 16px; border-radius: 24px; }
-		.article-header { padding: 22px 18px; border-radius: 22px; }
+		.main-content::before { inset: 156px 0 16px; border-radius: 24px; }
+		.article-header { padding: 2px 2px 16px; }
 		h1 { font-size: 28px; }
 		.chapter-head,
 		.chapter-body,
@@ -586,7 +605,6 @@
 		<span class="series-tag"><i class="fas fa-chess-knight"></i> 短篇小说 · 知意知否</span>
 		<h1>知意知否·孤独玩家</h1>
 		<p class="subtitle">让繁华城市继续发光，让真正孤独的人独自穿过雨夜、机场和凌晨四点的街头</p>
-		<p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · 小说体系</p>
 	</header>
 
 	<section class="contrast-hero">
@@ -621,6 +639,8 @@
 
 	<div class="opening-note">这篇小说延续“陆知意岛 / 失控时空”人物系谱，但形式上把繁华世界放在外层，把个人孤独放在内层。外面始终有人流、航班、婚讯和雪；里面只有一个人对自己的回声。</div>
 
+	<div class="audio-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
 	<article>
 		<section class="chapter-shell">
 			<div class="chapter-head">
@@ -652,6 +672,8 @@
 				</div>
 			</div>
 		</section>
+
+		<div class="audio-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
 		<section class="chapter-shell">
 			<div class="chapter-head">
@@ -838,6 +860,8 @@
 				</div>
 			</div>
 		</section>
+
+		<div class="audio-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
 		<section class="afterglow">
 			<span class="eyebrow"><i class="fas fa-snowflake"></i> Coda</span>
