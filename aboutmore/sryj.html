@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>十日一剑：创作手记 | itg</title>
+<meta name="description" content="从地铁通勤到四层体系成形，复盘 T·L1~L4 在十天内如何被搭建、验证、扩展与公开。">
+<meta name="keywords" content="创作手记,四层结构,T层,L1,L2,L3,L4,AI创作,元创作,创作体系">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="十日一剑：创作手记 | itg">
+<meta property="og:description" content="十天时间，把 T·L1~L4 从通勤中的灵光推成一整套可自解释、可继续生长的创作体系。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/sryj.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/sryj.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="../assets/article-comments.css">
+<link rel="stylesheet" href="../assets/site-sidebar.css">
+<style>
+    :root {
+        --bg: #f4efe6;
+        --panel: rgba(255, 252, 246, 0.94);
+        --panel-strong: rgba(255, 249, 240, 0.98);
+        --text: #201c17;
+        --muted: #6c6257;
+        --line: #dacdbd;
+        --accent: #0f766e;
+        --accent-soft: rgba(15, 118, 110, 0.12);
+        --signal: #b45309;
+        --signal-soft: rgba(180, 83, 9, 0.12);
+        --night: #16324f;
+        --night-soft: rgba(22, 50, 79, 0.08);
+        --shadow: 0 18px 42px rgba(32, 28, 23, 0.08);
+        --radius: 24px;
+        --border: #e6ddd0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: Georgia, "Songti SC", "STSong", "Noto Serif SC", serif;
+        background:
+            radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 24%),
+            radial-gradient(circle at left bottom, rgba(180, 83, 9, 0.1), transparent 20%),
+            linear-gradient(180deg, #faf6ef 0%, #efe8dc 100%);
+        color: var(--text);
+        line-height: 1.92;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .layout { display: flex; max-width: 1360px; margin: 0 auto; min-height: 100vh; }
+    .main-content { flex: 1; min-width: 0; max-width: 820px; margin: 0 auto; padding: 42px 24px 88px; }
+
+    .article-header {
+        position: relative;
+        margin-bottom: 34px;
+        padding: 28px 28px 32px;
+        border-radius: 28px;
+        border: 1px solid rgba(15, 118, 110, 0.14);
+        background:
+            linear-gradient(135deg, rgba(255,255,255,0.96), rgba(248,241,228,0.94)),
+            repeating-linear-gradient(90deg, transparent 0, transparent 46px, rgba(15,118,110,0.03) 46px, rgba(15,118,110,0.03) 47px);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+    }
+
+    .article-header::before {
+        content: "TEN-DAY ENGINE / L4-05";
+        position: absolute;
+        top: 16px;
+        right: 18px;
+        font-size: 11px;
+        letter-spacing: 2px;
+        font-weight: 700;
+        color: rgba(15, 118, 110, 0.38);
+    }
+
+    .series-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    h1 {
+        font-size: 34px;
+        line-height: 1.24;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .subtitle { font-size: 16px; color: var(--muted); margin-bottom: 10px; }
+    .meta { font-size: 13px; color: #92877a; }
+    p { margin: 14px 0; font-size: 16px; color: #3d362e; text-align: justify; }
+    strong { color: #1c1712; }
+
+    h2 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 48px 0 16px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid rgba(15, 118, 110, 0.16);
+        font-size: 23px;
+    }
+
+    h2 i { color: var(--accent); }
+    h3 { font-size: 18px; margin: 0 0 10px; color: #231d16; }
+
+    .lead-box,
+    .engine-shell,
+    .timeline-shell,
+    .layer-shell,
+    .afterglow-shell,
+    .manifest-shell {
+        margin: 28px 0;
+        border-radius: 26px;
+        border: 1px solid rgba(15, 118, 110, 0.12);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+    }
+
+    .lead-box {
+        padding: 18px 22px;
+        border-left: 4px solid var(--signal);
+        border-radius: 0 18px 18px 0;
+        background: linear-gradient(135deg, rgba(255, 237, 213, 0.9), rgba(255, 251, 235, 0.96));
+        color: #7c3412;
+    }
+
+    .lead-box strong { color: #9a3412; }
+
+    .shell-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        padding: 16px 20px;
+        background: linear-gradient(90deg, rgba(15, 118, 110, 0.12), rgba(22, 50, 79, 0.04));
+        border-bottom: 1px solid rgba(15, 118, 110, 0.12);
+    }
+
+    .shell-title {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1.6px;
+        color: var(--accent);
+    }
+
+    .shell-meta { font-size: 12px; color: #7d7469; }
+
+    .engine-grid,
+    .layer-grid,
+    .afterglow-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        padding: 20px;
+    }
+
+    .engine-card,
+    .layer-card,
+    .afterglow-card {
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,243,233,0.96));
+    }
+
+    .engine-card span,
+    .layer-card span,
+    .afterglow-card span {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: #8b8174;
+    }
+
+    .engine-card strong,
+    .layer-card strong,
+    .afterglow-card strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 15px;
+    }
+
+    .engine-card p,
+    .layer-card p,
+    .afterglow-card p {
+        margin: 0;
+        font-size: 13px;
+        color: #5a5147;
+        text-align: left;
+    }
+
+    .timeline-shell {
+        position: relative;
+        padding: 22px 20px 22px 84px;
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0.94), rgba(247,240,228,0.94)),
+            repeating-linear-gradient(180deg, transparent 0, transparent 38px, rgba(22,50,79,0.03) 38px, rgba(22,50,79,0.03) 39px);
+    }
+
+    .timeline-shell::before {
+        content: "";
+        position: absolute;
+        top: 28px;
+        bottom: 28px;
+        left: 42px;
+        width: 3px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, var(--accent), rgba(180, 83, 9, 0.9));
+        box-shadow: 0 0 0 10px rgba(15, 118, 110, 0.05);
+    }
+
+    .timeline-entry {
+        position: relative;
+        margin-bottom: 18px;
+        padding: 18px 18px 16px;
+        border-radius: 20px;
+        border: 1px solid rgba(22, 50, 79, 0.1);
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(4px);
+    }
+
+    .timeline-entry:last-child { margin-bottom: 0; }
+
+    .timeline-entry::before {
+        content: attr(data-day);
+        position: absolute;
+        left: -57px;
+        top: 16px;
+        width: 38px;
+        height: 38px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--night);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        box-shadow: 0 10px 20px rgba(22, 50, 79, 0.22);
+    }
+
+    .timeline-meta {
+        display: inline-flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .timeline-meta span {
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .timeline-entry p { margin: 10px 0 0; font-size: 15px; }
+
+    .quote-ribbon {
+        margin: 22px 0;
+        padding: 18px 20px;
+        border-radius: 22px;
+        background: linear-gradient(135deg, rgba(22, 50, 79, 0.96), rgba(15, 118, 110, 0.92));
+        box-shadow: 0 18px 36px rgba(22, 50, 79, 0.18);
+        color: #eff8ff;
+    }
+
+    .quote-ribbon p { margin: 0; color: rgba(239, 248, 255, 0.94); }
+
+    .manifest-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+        padding: 20px;
+    }
+
+    .manifest-copy,
+    .manifest-stack {
+        padding: 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(15, 118, 110, 0.12);
+        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,244,235,0.95));
+    }
+
+    .manifest-copy p:last-child { margin-bottom: 0; }
+
+    .signal-list {
+        display: grid;
+        gap: 12px;
+    }
+
+    .signal-item {
+        padding: 14px 14px 13px;
+        border-radius: 16px;
+        background: rgba(22, 50, 79, 0.04);
+        border: 1px solid rgba(22, 50, 79, 0.08);
+    }
+
+    .signal-item strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+    }
+
+    .signal-item p {
+        margin: 0;
+        font-size: 13px;
+        text-align: left;
+        color: #5e564b;
+    }
+
+    .footer-note {
+        margin-top: 42px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+        text-align: center;
+        font-size: 13px;
+        color: #978d81;
+    }
+
+    @media (max-width: 980px) {
+        .engine-grid,
+        .layer-grid,
+        .afterglow-grid,
+        .manifest-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .main-content { padding: 24px 16px 64px; }
+        h1 { font-size: 28px; }
+        .article-header { padding: 22px 18px 24px; }
+        .timeline-shell { padding: 18px 16px 18px 66px; }
+        .timeline-shell::before { left: 28px; }
+        .timeline-entry::before { left: -46px; width: 32px; height: 32px; border-radius: 12px; font-size: 11px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="layout">
+    <aside class="site-sidebar site-sidebar--story">
+        <div class="site-sidebar__brand"><a href="../about.html"><i class="fas fa-feather-alt"></i> L1-L4 · 法则与故事</a></div>
+        <div class="site-sidebar__intro">
+            <span class="site-sidebar__eyebrow">站点坐标</span>
+            <strong>L4 · 创作</strong>
+            <p>公开创作引擎，解释作品如何被组织和生成。</p>
+        </div>
+        <div class="site-sidebar__quick-links">
+            <a href="../index.html" class="site-sidebar__quick-link site-sidebar__quick-link--primary"><i class="fas fa-house"></i><span>首页入口</span></a>
+            <a href="../aboutmore/wx.html" class="site-sidebar__quick-link"><i class="fas fa-map"></i><span>站点总览</span></a>
+        </div>
+        <details class="site-sidebar__group site-sidebar__group--law">
+            <summary>
+                <span class="site-sidebar__summary-text">L1 · 法则</span>
+                <span class="site-sidebar__summary-meta">法则主线与迁移起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../about.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📖</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我找到了一套法则</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/tk.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">以不变应万变</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fw.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪄</span>
+                        <span>
+                            <span class="site-sidebar__link-title">工程魔法</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/sc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">调试AI，学会经营感情</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">乾坤大挪移心法 · 文章总览</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--persona">
+            <summary>
+                <span class="site-sidebar__summary-text">L2 · 人</span>
+                <span class="site-sidebar__summary-meta">日常、关系与自省现场</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">爱婷哥</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/forme.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📝</span>
+                        <span>
+                            <span class="site-sidebar__link-title">写给自己</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/pg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎤</span>
+                        <span>
+                            <span class="site-sidebar__link-title">家庭直播间</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/m.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌙</span>
+                        <span>
+                            <span class="site-sidebar__link-title">周一早上，梦见下班</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/cc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我可能哪里错了</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ll.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">找个不懂的人聊聊</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">♾️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">不必全部收敛</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--literature">
+            <summary>
+                <span class="site-sidebar__summary-text">L3 · 小说</span>
+                <span class="site-sidebar__summary-meta">小说、对话、复调与孤独副本</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czy.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📘</span>
+                        <span>
+                            <span class="site-sidebar__link-title">蓝牙：陆知意岛</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/qp-chat.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·对话版</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/gary.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📍</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·终极玩家</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/alone.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌃</span>
+                        <span>
+                            <span class="site-sidebar__link-title">知意知否·孤独玩家</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jsxm.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎮</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时刻·有趣玩家</span>
+                            <span class="site-sidebar__link-meta">小说与对话</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--meta" open>
+            <summary>
+                <span class="site-sidebar__summary-text">L4 · 创作</span>
+                <span class="site-sidebar__summary-meta">创作方法与引擎说明</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czjs.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧪</span>
+                        <span>
+                            <span class="site-sidebar__link-title">会话的碰撞</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🏛️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">四层结构：创作体系</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">架构定乾坤，笔墨随法则</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/sryj.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">十日一剑：创作手记</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/gc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🖥️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">像调试代码一样创作</span>
+                            <span class="site-sidebar__link-meta">创作结构</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>
+                <span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>
+                <span class="site-sidebar__summary-meta">从工程桥面回看整套法则的起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../gd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+                        <span>
+                            <span class="site-sidebar__link-title">桥面 · 始于工程，服务生活</span>
+                            <span class="site-sidebar__link-meta">从技术过桥，进入生活与叙事。</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+                            <span class="site-sidebar__link-meta">按地图理解技术与非技术的整体关系。</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
+    </aside>
+        <aside class="sidebar-toc sidebar-toc--story">
+        <h3><span class="sidebar-toc__icon" aria-hidden="true">⚔️</span> 本章导航</h3>
+        <nav>
+            <ul>
+                <li><a href="#起点不在书桌在地铁车厢">起点不在书桌，在地铁车厢</a></li>
+                <li><a href="#day-1-3t-层把淤青写成法则">Day 1-3：T 层，把淤青写成法则</a></li>
+                <li><a href="#day-4-5l1把法则从代码里拔出来种进生活里">Day 4-5：L1，把法则从代码里拔出来，种进生活里</a></li>
+                <li><a href="#day-6-7l2向内探索也承认法则有边界">Day 6-7：L2，向内探索，也承认法则有边界</a></li>
+                <li><a href="#day-8-9l3用小说补全自我让法则在人性面前失效">Day 8-9：L3，用小说补全自我，让法则在人性面前失效</a></li>
+                <li><a href="#day-10l4公开引擎让体系解释自己">Day 10：L4，公开引擎，让体系解释自己</a></li>
+                <li><a href="#十天之后体系还在持续生长">十天之后：体系还在持续生长</a></li>
+            </ul>
+        </nav>
+    </aside>
+<div class="main-content">
+        <header class="article-header" id="top">
+            <span class="series-tag"><i class="fas fa-train-subway"></i> L4 · 创作手记</span>
+            <h1>十日一剑：创作手记</h1>
+            <p class="subtitle">从地铁通勤里的碎片灵光，到一整套 T·L1~L4 体系成形，这十天不是“想到什么写什么”，而是把一套会继续生长的创作引擎一步步锻出来。</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · L4 元创作层</p>
+        </header>
+
+        <article>
+            <p>整套 T·L1~L4 体系，并不是伏案冥思后一次性推出来的结果。它最初的种子，几乎都埋在每天通勤的地铁车厢里。短短十天，我把这些零散、跳跃、尚未收束的念头，变成了一个有内核、有层次、有路径，也能自己解释自己的作品系统。</p>
+
+            <div class="lead-box">
+                <strong>这十天里最重要的，不是“写了多少篇”，而是完成了四次方向转换。</strong>先从工程淤青里长出法则，再让法则走进生活，随后承认法则并非万能，最后回到创作本身，把整个生成过程公开出来。体系真正成立，靠的不是篇数，而是层与层之间的递进关系。
+            </div>
+
+            <div class="engine-shell">
+                <div class="shell-head">
+                    <div class="shell-title">TEN-DAY SUMMARY</div>
+                    <div class="shell-meta">从灵感捕获到体系自解释</div>
+                </div>
+                <div class="engine-grid">
+                    <div class="engine-card">
+                        <span>起点</span>
+                        <strong>地铁通勤</strong>
+                        <p>在短促、无法深挖的思考窗口里抛出问题，让念头先生成，再等现实与夜晚把它们继续压实。</p>
+                    </div>
+                    <div class="engine-card">
+                        <span>推进器</span>
+                        <strong>双 AI 对话打磨</strong>
+                        <p>灵感不是孤立保存，而是在多轮追问、补充、重排里逐渐获得边界、定义和表达方式。</p>
+                    </div>
+                    <div class="engine-card">
+                        <span>结果</span>
+                        <strong>四层结构成形</strong>
+                        <p>T 定义底层法则，L1 迁移到生活，L2 承认边界，L3 进入文学，L4 公开创作引擎。</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="起点不在书桌在地铁车厢"><i class="fas fa-subway"></i> 起点不在书桌，在地铁车厢</h2>
+            <p>我早就习惯了这样的节奏：通勤路上先把问题抛出来，到了公司后立刻记录。地铁这一段时间很特别，它足够让念头冒头，却又不够长到把问题一次性思考透，这反而给了想法二次沉淀的空间。很多后来被写成完整篇章的核心词，最早都只是备忘录里几行没来得及展开的句子。</p>
+            <p>正是在这样的移动场景里，“收敛”先进入了我的视野。那时我反复被 AI 编码中的返工链条折腾，一个 Bug 修完，往往会再带出三个新问题；再修，又冒出新的隐患。我开始想，能不能把修复动作本身变成一个具备自查能力的闭环，而不是每轮都靠人重新介入盯着跑。</p>
+
+            <div class="quote-ribbon">
+                <p>我后来在笔记里写下过一句话：“这些东西不是凭空想出来的，是从淤青里长出来的。”回头看，这句话几乎就是整个 T 层的起点。</p>
+            </div>
+
+            <h2 id="day-1-3t-层把淤青写成法则"><i class="fas fa-diagram-project"></i> Day 1-3：T 层，把淤青写成法则</h2>
+            <div class="timeline-shell">
+                <div class="timeline-entry" data-day="D1">
+                    <div class="timeline-meta">
+                        <span>问题抛出</span>
+                        <span>闭环收敛</span>
+                    </div>
+                    <h3>从修 Bug 的疲惫里，反推一套可验证的修复结构</h3>
+                    <p>最早成形的念头，是让 AI 在修复代码之后，不只提交改动，还同步生成测试脚本，并埋入特殊日志。这里的日志不再只记录“发生了什么”，而是明确声明“什么结果必须发生”。一旦超时、某事件没有触发、某状态没有达标，它就直接亮出失败信号。</p>
+                </div>
+                <div class="timeline-entry" data-day="D2">
+                    <div class="timeline-meta">
+                        <span>夜间展开</span>
+                        <span>概念成团</span>
+                    </div>
+                    <h3>闭环收敛、负日志、决策切换、共生演化开始互相勾连</h3>
+                    <p>那天晚上我起身开电脑，和 AI 连续聊了数小时。原本孤立的点开始连接起来，闭环收敛不再只是一个修复方法，而是进入了更大的方法论网络。负日志负责看见“该发生却未发生”的缺口，决策切换解决方向错误时该不该继续推进，共生演化则重新定义人和 AI 的协作关系。</p>
+                </div>
+                <div class="timeline-entry" data-day="D3">
+                    <div class="timeline-meta">
+                        <span>T 层定名</span>
+                        <span>物理世界约束</span>
+                    </div>
+                    <h3>法则不止服务写代码，而是服务设备安全地进入现实</h3>
+                    <p>T 层最终被我定义为理论层。它并不是教 AI “怎么写得更快”，而是回答一个更根本的问题：当 AI 生成的代码要去驱动电机、激光、阀门这类真实设备时，我们究竟要建立什么底层法则，才能让它在物理世界里安全、稳定、可验证地运行。</p>
+                </div>
+            </div>
+
+            <div class="layer-shell">
+                <div class="shell-head">
+                    <div class="shell-title">LAYER EXTRACTION</div>
+                    <div class="shell-meta">T 层定义的不是技巧，而是底层规则</div>
+                </div>
+                <div class="layer-grid">
+                    <div class="layer-card">
+                        <span>法则 01</span>
+                        <strong>闭环收敛</strong>
+                        <p>修复、验证、再修复必须形成自动回路，不能靠人类记忆补缝。</p>
+                    </div>
+                    <div class="layer-card">
+                        <span>法则 02</span>
+                        <strong>负日志</strong>
+                        <p>不仅记录已发生事件，更记录未达成结果，让失败具备可见性。</p>
+                    </div>
+                    <div class="layer-card">
+                        <span>法则 03</span>
+                        <strong>决策切换</strong>
+                        <p>长期无进展时不只继续加力，而是重新判断方向是否值得走下去。</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="day-4-5l1把法则从代码里拔出来种进生活里"><i class="fas fa-seedling"></i> Day 4-5：L1，把法则从代码里拔出来，种进生活里</h2>
+            <p>T 层搭起来以后，内容自然开始越界。我在解读负日志时，很快联想到人与人之间的相处。很多关系里的难受，本质上也像一种“该发生却没有发生”的故障状态。期待落空，情绪未被看见，失望没有被及时标识，它们都像生活里的负日志。</p>
+            <p>也是在这个阶段，AI 对我的文字给出了一句很关键的反馈：这些法则似乎不只适用于工程领域。顺着这个判断，我开始主动做迁移测试。CPU 的优先级中断，被我映射到家庭注意力分配；闭环收敛，被我用来处理亲密关系里的反复争执；决策切换，则进入职业选择与方向判断。</p>
+            <p>L1 由此正式成立。它做的事非常明确，就是把工程中的底层法则剥离掉技术外壳，迁移到日常生活、关系经营和人生判断里，让原本只存在于代码里的规律，开始在现实里生根。</p>
+
+            <h2 id="day-6-7l2向内探索也承认法则有边界"><i class="fas fa-heart-crack"></i> Day 6-7：L2，向内探索，也承认法则有边界</h2>
+            <p>L1 写完后，我刻意停了一天。不是没东西写，而是我意识到，前面的内容始终在证明“法则有效”。可生活并不总是需要被解释，也不总是适合被规整。人的疲惫有时没有原因，情绪并不总能归类，爱意也不需要被拆成运行机制。</p>
+            <p>于是 L2 彻底转向内在。我不再拿法则去解释外部世界，而是开始审视自己。我写下专属 ID，写下留给自己的界线，写家庭里的笑闹与尴尬，也写工作日清晨那种游离状态，甚至直接面对 AI 时代里独立思考越来越稀缺的事实。</p>
+            <p>这一层真正重要的收束，是那句“不必全部收敛”。它不是一句抒情，而是一条明确的边界声明。法则当然重要，但并不是万物都必须被法则收编；恰恰是那些无法被彻底规训的部分，构成了更完整的人。</p>
+
+            <h2 id="day-8-9l3用小说补全自我让法则在人性面前失效"><i class="fas fa-book-open"></i> Day 8-9：L3，用小说补全自我，让法则在人性面前失效</h2>
+            <p>当 L2 承认了法则的边界，L3 几乎是顺势打开的。边界之外，并不是空白，而是失控、遗憾、心动、等待、执念这些更加细密的人性地带。这里已经不是分析文能完全承接的区域，于是我开始用小说说话。</p>
+            <p>《蓝牙：陆知意岛》是一个很关键的节点。它让一个试图用规则与文档维持感情秩序的 AI 工程师，最终被一句再简单不过的话击穿。这其实是在做另一种极限测试：技术可以建秩序，但文学能让秩序显出裂缝。之后延展出来的多篇故事，也都不是单纯叙事，而是在不同人物身上投射我自己尚未说出的部分。</p>
+            <p>L3 因此不是“从技术转去写小说”，而是体系走到法则无法覆盖之处后，自然选择了故事这种更能容纳复杂人性的容器。</p>
+
+            <h2 id="day-10l4公开引擎让体系解释自己"><i class="fas fa-gears"></i> Day 10：L4，公开引擎，让体系解释自己</h2>
+            <div class="manifest-shell">
+                <div class="shell-head">
+                    <div class="shell-title">META CREATION LAYER</div>
+                    <div class="shell-meta">把创作过程本身也写进作品系统</div>
+                </div>
+                <div class="manifest-grid">
+                    <div class="manifest-copy">
+                        <p>等 L3 收尾之后，整套内容表面上已经完整，但一个问题随即出现了：如果有人追问，这套体系到底是怎么长出来的，我并不能用一句简单的话说明白。因为真实过程非常零散，来自通勤、深夜对话、多窗口协作、内容重组，以及中途遗失与找回的记录。</p>
+                        <p>所以第十天，我决定把“创作本身”也写进体系里。L4 回到元创作层，专门复盘整个生成过程。我拆解双 AI 协同模式，把技术向与生活向的思考窗口公开，把我自己作为中间调度者的角色明确出来，再用《四层结构：创作体系》把 T、L1、L2、L3 的生长逻辑彻底梳理清楚。</p>
+                        <p>L4 的意义在于，它让体系不仅能被阅读，还能自我阐释。到这里，这些法则、故事与表达不再像偶然灵感，而像一台可以回看、可以复盘、也能够继续复制与演化的创作引擎。</p>
+                    </div>
+                    <div class="manifest-stack">
+                        <div class="signal-list">
+                            <div class="signal-item">
+                                <strong>双窗口协同</strong>
+                                <p>一端偏技术与结构，一端偏生活与表达，我负责统筹、删改、定调与取舍。</p>
+                            </div>
+                            <div class="signal-item">
+                                <strong>层级公开</strong>
+                                <p>不只给出成品，也公开层与层之间为何这样递进、为何必须这样生长。</p>
+                            </div>
+                            <div class="signal-item">
+                                <strong>方法论沉淀</strong>
+                                <p>把一次十天创作提炼成长期可复用的原创方法，而不只是单次灵感记录。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="十天之后体系还在持续生长"><i class="fas fa-chart-line"></i> 十天之后：体系还在持续生长</h2>
+            <div class="afterglow-shell">
+                <div class="shell-head">
+                    <div class="shell-title">POST TEN DAYS</div>
+                    <div class="shell-meta">框架搭成之后，作品群继续扩张</div>
+                </div>
+                <div class="afterglow-grid">
+                    <div class="afterglow-card">
+                        <span>技术向</span>
+                        <strong>持续增补</strong>
+                        <p>技术文章从最初的几篇不断扩展，继续补充单 Agent、工具链组合、AI 特性与守关问题。</p>
+                    </div>
+                    <div class="afterglow-card">
+                        <span>叙事向</span>
+                        <strong>作品群连接</strong>
+                        <p>小说不再停留在单篇，而是长成彼此映照的人物与章节系统，开始拥有自己的互文关系。</p>
+                    </div>
+                    <div class="afterglow-card">
+                        <span>作者向</span>
+                        <strong>角色始终清晰</strong>
+                        <p>AI 像外置思维半球，能协助推进与放大，但握着指挥棒、定义价值与边界的人一直是我自己。</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>回头看，这十天真正完成的，并不是“密集写作”本身，而是一次对规律、自我、表达与创作方式的系统性梳理。先用工程法则解释复杂问题，再把法则迁移到生活，接着承认它的边界，最后用文学和元创作把这些边界也一起收进体系之中。</p>
+            <p>十天筑成骨架，之后的每一篇，都只是继续往这台引擎里加装新的齿轮。它不是一个已经封口的答案，而是一个还会继续生长、继续自我解释、继续向外延展的作品系统。</p>
+
+            <div class="layer-comments layer-comments--chat">
+                <div class="layer-comments__header">
+                    <i class="fas fa-comments"></i>
+                    <span>读者群聊 · 十日创作轨迹</span>
+                    <span class="layer-comments__eyebrow">L4 附记</span>
+                </div>
+                <div class="layer-comments__window">
+                    <div class="layer-comments__divider">关于这篇创作手记</div>
+                    <div class="layer-comments__thread">
+                        <div class="layer-comments__message">
+                            <div class="layer-comments__avatar">时</div>
+                            <div class="layer-comments__bubble">
+                                <div class="layer-comments__meta">
+                                    <span class="layer-comments__name">时间线型读者</span>
+                                    <span class="layer-comments__role">习惯先看生成顺序</span>
+                                    <span class="layer-comments__tag">观察</span>
+                                </div>
+                                <div class="layer-comments__text">这篇最有价值的地方，不只是告诉人“体系用了十天搭成”，而是把每一层为什么在那个时间点出现讲清楚了。它不是流水账，而是把递进逻辑钉在了时间轴上。</div>
+                            </div>
+                        </div>
+                        <div class="layer-comments__message">
+                            <div class="layer-comments__avatar">界</div>
+                            <div class="layer-comments__bubble">
+                                <div class="layer-comments__meta">
+                                    <span class="layer-comments__name">边界感读者</span>
+                                    <span class="layer-comments__role">更在意 L2 与 L3 的转折</span>
+                                    <span class="layer-comments__tag">接话</span>
+                                </div>
+                                <div class="layer-comments__reply"><strong>回复上条：</strong>我觉得关键就在“不必全部收敛”。没有这句承认，后面的小说层就容易被误解成偏航；有了它，L3 反而变成体系必须存在的一层。</div>
+                                <div class="layer-comments__text">也因此，这篇手记其实替整套系统做了一次辩护：它说明从法则走到文学，不是散，而是逻辑上被逼出来的下一步。</div>
+                            </div>
+                        </div>
+                        <div class="layer-comments__message">
+                            <div class="layer-comments__avatar">工</div>
+                            <div class="layer-comments__bubble">
+                                <div class="layer-comments__meta">
+                                    <span class="layer-comments__name">方法论读者</span>
+                                    <span class="layer-comments__role">专看创作引擎怎么公开</span>
+                                    <span class="layer-comments__tag">收束</span>
+                                </div>
+                                <div class="layer-comments__text">前面的 L4 页面分别讲结构、讲协同、讲工作流，这篇则把“为什么是这十天、为什么是这个顺序”补上了。放进整条元创作主线里，它像一张带温度的装配图。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="series-nav">
+                <a href="../aboutmore/jg.html">← 架构定乾坤，笔墨随法则</a>
+                <a href="../aboutmore/gc.html">像调试代码一样创作 →</a>
+            </div>
+<div class="footer-note">
+                &copy; x-itg | 十天成骨，往后生长；人定义内核，AI 负责陪跑与放大
+            </div>
+        </article>
+    </div>
+</div>
+
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
+        </div>
+    </div>
+</div>
+</body>
+</html>

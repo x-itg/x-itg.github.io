@@ -96,6 +96,11 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://x-itg.github.io/aboutmore/alone.html</loc>
+        <lastmod>2026-05-31</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://x-itg.github.io/aboutmore/cc.html</loc>
         <lastmod>2026-05-26</lastmod>
         <priority>0.5</priority>
@@ -131,8 +136,23 @@
         <priority>0.5</priority>
     </url>
     <url>
+        <loc>https://x-itg.github.io/aboutmore/gary.html</loc>
+        <lastmod>2026-05-31</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/gc.html</loc>
+        <lastmod>2026-05-31</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://x-itg.github.io/aboutmore/itg.html</loc>
         <lastmod>2026-05-26</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/jg.html</loc>
+        <lastmod>2026-05-31</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
@@ -163,6 +183,11 @@
     <url>
         <loc>https://x-itg.github.io/aboutmore/sc.html</loc>
         <lastmod>2026-05-14</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://x-itg.github.io/aboutmore/sryj.html</loc>
+        <lastmod>2026-05-31</lastmod>
         <priority>0.5</priority>
     </url>
     <url>
