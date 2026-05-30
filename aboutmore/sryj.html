@@ -53,25 +53,52 @@
     .article-header {
         position: relative;
         margin-bottom: 34px;
-        padding: 28px 28px 32px;
-        border-radius: 28px;
-        border: 1px solid rgba(15, 118, 110, 0.14);
+        padding: 30px 30px 32px;
+        border-radius: 30px;
+        border: 1px solid rgba(15, 118, 110, 0.16);
         background:
-            linear-gradient(135deg, rgba(255,255,255,0.96), rgba(248,241,228,0.94)),
-            repeating-linear-gradient(90deg, transparent 0, transparent 46px, rgba(15,118,110,0.03) 46px, rgba(15,118,110,0.03) 47px);
+            radial-gradient(circle at top right, rgba(15, 118, 110, 0.18), transparent 28%),
+            linear-gradient(135deg, rgba(255,255,255,0.98), rgba(245,237,224,0.96));
         box-shadow: var(--shadow);
         overflow: hidden;
     }
 
     .article-header::before {
-        content: "TEN-DAY ENGINE / L4-05";
+        content: "METRO CREATIVE LINE / L4-05";
         position: absolute;
         top: 16px;
         right: 18px;
         font-size: 11px;
         letter-spacing: 2px;
         font-weight: 700;
-        color: rgba(15, 118, 110, 0.38);
+        color: rgba(15, 118, 110, 0.42);
+    }
+
+    .article-header::after {
+        content: "";
+        position: absolute;
+        inset: auto -50px -90px auto;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(180, 83, 9, 0.12) 0%, rgba(180, 83, 9, 0.02) 58%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .hero-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+        gap: 24px;
+        align-items: stretch;
+    }
+
+    .hero-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 0;
     }
 
     .series-tag {
@@ -87,6 +114,21 @@
         font-weight: 700;
     }
 
+    .hero-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        margin-bottom: 14px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(22, 50, 79, 0.08);
+        color: var(--night);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.3px;
+    }
+
     h1 {
         font-size: 34px;
         line-height: 1.24;
@@ -94,10 +136,309 @@
         letter-spacing: -0.5px;
     }
 
-    .subtitle { font-size: 16px; color: var(--muted); margin-bottom: 10px; }
+    .subtitle { font-size: 16px; color: var(--muted); margin-bottom: 14px; }
     .meta { font-size: 13px; color: #92877a; }
     p { margin: 14px 0; font-size: 16px; color: #3d362e; text-align: justify; }
     strong { color: #1c1712; }
+
+    .hero-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 8px;
+    }
+
+    .hero-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(15, 118, 110, 0.12);
+        color: #5c5348;
+        font-size: 12px;
+    }
+
+    .hero-chip strong {
+        color: var(--accent);
+        font-size: 12px;
+    }
+
+    .metro-hero {
+        position: relative;
+        padding: 20px 18px 18px;
+        border-radius: 24px;
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0.92), rgba(241, 247, 245, 0.92)),
+            repeating-linear-gradient(0deg, transparent 0, transparent 31px, rgba(15,118,110,0.04) 31px, rgba(15,118,110,0.04) 32px);
+        border: 1px solid rgba(15, 118, 110, 0.12);
+        overflow: hidden;
+    }
+
+    .metro-hero::before {
+        content: "COMMUTE MAP";
+        position: absolute;
+        top: 14px;
+        right: 16px;
+        font-size: 10px;
+        letter-spacing: 1.8px;
+        color: rgba(15, 118, 110, 0.42);
+        font-weight: 700;
+    }
+
+    .metro-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 18px;
+        padding: 6px 11px;
+        border-radius: 999px;
+        background: rgba(22, 50, 79, 0.08);
+        color: var(--night);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .metro-map {
+        position: relative;
+        min-height: 164px;
+        padding: 18px 6px 0;
+    }
+
+    .metro-line {
+        position: absolute;
+        left: 8%;
+        right: 8%;
+        height: 6px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #0f766e 0%, #0f766e 46%, #b45309 46%, #b45309 100%);
+        box-shadow: 0 0 0 10px rgba(15, 118, 110, 0.05);
+    }
+
+    .metro-line--top {
+        top: 48px;
+    }
+
+    .metro-line--branch {
+        top: 104px;
+        left: 44%;
+        right: 14%;
+        background: linear-gradient(90deg, #16324f 0%, #16324f 100%);
+        box-shadow: none;
+    }
+
+    .metro-connector {
+        position: absolute;
+        width: 6px;
+        border-radius: 999px;
+        background: #16324f;
+    }
+
+    .metro-connector--down {
+        left: calc(44% - 3px);
+        top: 52px;
+        height: 54px;
+    }
+
+    .metro-station {
+        position: absolute;
+        width: 104px;
+        max-width: 26%;
+        transform: translateX(-50%);
+    }
+
+    .metro-station--start,
+    .metro-station--end {
+        transform: none;
+    }
+
+    .metro-station--start { left: 4%; }
+    .metro-station--end { right: 4%; left: auto; }
+
+    .metro-station--s1 { top: 24px; }
+    .metro-station--s2 { left: 44%; top: 24px; }
+    .metro-station--s3 { top: 24px; }
+    .metro-station--s4 { left: 44%; top: 80px; }
+    .metro-station--s5 { right: 14%; top: 80px; }
+
+    .metro-dot {
+        width: 18px;
+        height: 18px;
+        margin: 0 auto;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        background: var(--accent);
+        box-shadow: 0 8px 18px rgba(15, 118, 110, 0.18);
+    }
+
+    .metro-station--signal .metro-dot { background: var(--signal); }
+    .metro-station--night .metro-dot { background: var(--night); }
+
+    .metro-dot--interchange {
+        width: 24px;
+        height: 24px;
+        border-width: 5px;
+        box-shadow: 0 0 0 6px rgba(22, 50, 79, 0.12), 0 10px 18px rgba(22, 50, 79, 0.18);
+    }
+
+    .metro-label {
+        margin-top: 8px;
+        text-align: center;
+    }
+
+    .metro-station--start .metro-label {
+        text-align: left;
+    }
+
+    .metro-station--end .metro-label {
+        text-align: right;
+    }
+
+    .metro-station--start .metro-dot {
+        margin-left: 0;
+    }
+
+    .metro-station--end .metro-dot {
+        margin-right: 0;
+    }
+
+    .metro-code {
+        display: inline-block;
+        margin-bottom: 5px;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: rgba(15, 118, 110, 0.1);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+    }
+
+    .metro-station--signal .metro-code {
+        background: rgba(180, 83, 9, 0.12);
+        color: var(--signal);
+    }
+
+    .metro-station--night .metro-code {
+        background: rgba(22, 50, 79, 0.1);
+        color: var(--night);
+    }
+
+    .metro-name {
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        color: #2e281f;
+    }
+
+    .metro-desc {
+        display: block;
+        margin-top: 3px;
+        font-size: 11px;
+        line-height: 1.5;
+        color: #7a7065;
+    }
+
+    .metro-stop-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .metro-stop-card {
+        padding: 12px 12px 11px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(15, 118, 110, 0.1);
+    }
+
+    .metro-stop-card--signal {
+        border-color: rgba(180, 83, 9, 0.16);
+    }
+
+    .metro-stop-card--night {
+        border-color: rgba(22, 50, 79, 0.14);
+    }
+
+    .metro-stop-head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 7px;
+    }
+
+    .metro-stop-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 5px rgba(15, 118, 110, 0.1);
+        flex-shrink: 0;
+    }
+
+    .metro-stop-card--signal .metro-stop-dot {
+        background: var(--signal);
+        box-shadow: 0 0 0 5px rgba(180, 83, 9, 0.1);
+    }
+
+    .metro-stop-card--night .metro-stop-dot {
+        background: var(--night);
+        box-shadow: 0 0 0 5px rgba(22, 50, 79, 0.1);
+    }
+
+    .metro-stop-code {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 7px;
+        border-radius: 999px;
+        background: rgba(15, 118, 110, 0.1);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+    }
+
+    .metro-stop-card--signal .metro-stop-code {
+        background: rgba(180, 83, 9, 0.12);
+        color: var(--signal);
+    }
+
+    .metro-stop-card--night .metro-stop-code {
+        background: rgba(22, 50, 79, 0.1);
+        color: var(--night);
+    }
+
+    .metro-stop-title {
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        color: #2d271f;
+    }
+
+    .metro-stop-text {
+        font-size: 12px;
+        line-height: 1.65;
+        color: #6f665b;
+    }
+
+    .metro-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+        padding-top: 14px;
+        border-top: 1px dashed rgba(15, 118, 110, 0.18);
+        color: #6f665c;
+        font-size: 12px;
+    }
+
+    .metro-footer strong {
+        color: var(--night);
+    }
 
     h2 {
         display: flex;
@@ -332,11 +673,16 @@
     }
 
     @media (max-width: 980px) {
+        .hero-grid,
         .engine-grid,
         .layer-grid,
         .afterglow-grid,
         .manifest-grid {
             grid-template-columns: 1fr;
+        }
+
+        .metro-map {
+            min-height: 168px;
         }
     }
 
@@ -344,6 +690,23 @@
         .main-content { padding: 24px 16px 64px; }
         h1 { font-size: 28px; }
         .article-header { padding: 22px 18px 24px; }
+        .hero-grid { gap: 18px; }
+        .hero-kicker { margin-bottom: 12px; }
+        .metro-hero { padding: 18px 14px 16px; }
+        .metro-map { min-height: 178px; padding: 10px 0 0; }
+        .metro-line { left: 10%; right: 10%; }
+        .metro-line--branch { top: 178px; left: 44%; right: 16%; }
+        .metro-line--branch { top: 110px; }
+        .metro-connector--down { left: calc(44% - 3px); top: 50px; height: 64px; }
+        .metro-station { width: 84px; max-width: 28%; }
+        .metro-station--s1,
+        .metro-station--s2,
+        .metro-station--s3 { top: 22px; }
+        .metro-station--s4,
+        .metro-station--s5 { top: 86px; }
+        .metro-stop-grid { grid-template-columns: 1fr; }
+        .metro-name { font-size: 12px; }
+        .metro-desc { font-size: 10px; }
         .timeline-shell { padding: 18px 16px 18px 66px; }
         .timeline-shell::before { left: 28px; }
         .timeline-entry::before { left: -46px; width: 32px; height: 32px; border-radius: 12px; font-size: 11px; }
@@ -600,10 +963,109 @@
     </aside>
 <div class="main-content">
         <header class="article-header" id="top">
-            <span class="series-tag"><i class="fas fa-train-subway"></i> L4 · 创作手记</span>
-            <h1>十日一剑：创作手记</h1>
-            <p class="subtitle">从地铁通勤里的碎片灵光，到一整套 T·L1~L4 体系成形，这十天不是“想到什么写什么”，而是把一套会继续生长的创作引擎一步步锻出来。</p>
-            <p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · L4 元创作层</p>
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <span class="series-tag"><i class="fas fa-train-subway"></i> L4 · 创作手记</span>
+                    <span class="hero-kicker"><i class="fas fa-route"></i> COMMUTE TO SYSTEM MAP</span>
+                    <h1>十日一剑：创作手记</h1>
+                    <p class="subtitle">从地铁通勤里的碎片灵光，到一整套 T·L1~L4 体系成形，这十天不是“想到什么写什么”，而是把一套会继续生长的创作引擎一步步锻出来。</p>
+                    <p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · L4 元创作层</p>
+                    <div class="hero-summary">
+                        <span class="hero-chip"><strong>10 Days</strong> 从通勤到体系</span>
+                        <span class="hero-chip"><strong>5 Stops</strong> T / L1 / L2 / L3 / L4</span>
+                        <span class="hero-chip"><strong>1 Line</strong> 灵感被锻成方法</span>
+                    </div>
+                </div>
+                <div class="metro-hero" aria-hidden="true">
+                    <div class="metro-badge"><i class="fas fa-circle-nodes"></i> 十日创作线路图</div>
+                    <div class="metro-map">
+                        <div class="metro-line metro-line--top"></div>
+                        <div class="metro-connector metro-connector--down"></div>
+                        <div class="metro-line metro-line--branch"></div>
+
+                        <div class="metro-station metro-station--s1 metro-station--start">
+                            <div class="metro-dot"></div>
+                            <div class="metro-label">
+                                <span class="metro-code">D1</span>
+                            </div>
+                        </div>
+
+                        <div class="metro-station metro-station--s2 metro-station--night">
+                            <div class="metro-dot metro-dot--interchange"></div>
+                            <div class="metro-label">
+                                <span class="metro-code">T</span>
+                            </div>
+                        </div>
+
+                        <div class="metro-station metro-station--s3 metro-station--signal metro-station--end">
+                            <div class="metro-dot"></div>
+                            <div class="metro-label">
+                                <span class="metro-code">L1</span>
+                            </div>
+                        </div>
+
+                        <div class="metro-station metro-station--s4 metro-station--night">
+                            <div class="metro-dot"></div>
+                            <div class="metro-label">
+                                <span class="metro-code">L2</span>
+                            </div>
+                        </div>
+
+                        <div class="metro-station metro-station--s5 metro-station--signal metro-station--end">
+                            <div class="metro-dot"></div>
+                            <div class="metro-label">
+                                <span class="metro-code">L3-L4</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metro-stop-grid">
+                        <div class="metro-stop-card">
+                            <div class="metro-stop-head">
+                                <span class="metro-stop-dot"></span>
+                                <span class="metro-stop-code">D1</span>
+                            </div>
+                            <span class="metro-stop-title">通勤起点</span>
+                            <div class="metro-stop-text">地铁抛题，备忘录落点。</div>
+                        </div>
+                        <div class="metro-stop-card metro-stop-card--night">
+                            <div class="metro-stop-head">
+                                <span class="metro-stop-dot"></span>
+                                <span class="metro-stop-code">T</span>
+                            </div>
+                            <span class="metro-stop-title">法则换乘站</span>
+                            <div class="metro-stop-text">闭环收敛、负日志、决策切换开始聚合成理论层。</div>
+                        </div>
+                        <div class="metro-stop-card metro-stop-card--signal">
+                            <div class="metro-stop-head">
+                                <span class="metro-stop-dot"></span>
+                                <span class="metro-stop-code">L1</span>
+                            </div>
+                            <span class="metro-stop-title">生活迁移站</span>
+                            <div class="metro-stop-text">法则离开代码，进入关系、家庭和职业判断。</div>
+                        </div>
+                        <div class="metro-stop-card metro-stop-card--night">
+                            <div class="metro-stop-head">
+                                <span class="metro-stop-dot"></span>
+                                <span class="metro-stop-code">L2</span>
+                            </div>
+                            <span class="metro-stop-title">边界承认站</span>
+                            <div class="metro-stop-text">承认并非万物都要被收敛，自我审视开始成为主线。</div>
+                        </div>
+                        <div class="metro-stop-card metro-stop-card--signal" style="grid-column: 1 / -1;">
+                            <div class="metro-stop-head">
+                                <span class="metro-stop-dot"></span>
+                                <span class="metro-stop-code">L3-L4</span>
+                            </div>
+                            <span class="metro-stop-title">公开终点站</span>
+                            <div class="metro-stop-text">小说补全自我，元创作层回头公开引擎，让体系开始自我解释。</div>
+                        </div>
+                    </div>
+                    <div class="metro-footer">
+                        <span><strong>线路颜色</strong> 绿色代表法则推进，棕色代表现实落地，深蓝代表向内分支。</span>
+                        <span><strong>终点</strong> 十天搭骨架，体系继续生长。</span>
+                    </div>
+                </div>
+            </div>
         </header>
 
         <article>
