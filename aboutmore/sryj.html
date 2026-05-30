@@ -91,14 +91,15 @@
         display: grid;
         grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
         gap: 24px;
-        align-items: stretch;
+        align-items: start;
     }
 
     .hero-copy {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         min-width: 0;
+        padding-top: 18px;
     }
 
     .series-tag {
@@ -136,7 +137,7 @@
         letter-spacing: -0.5px;
     }
 
-    .subtitle { font-size: 16px; color: var(--muted); margin-bottom: 14px; }
+    .subtitle { font-size: 16px; color: var(--muted); margin-bottom: 12px; }
     .meta { font-size: 13px; color: #92877a; }
     p { margin: 14px 0; font-size: 16px; color: #3d362e; text-align: justify; }
     strong { color: #1c1712; }
@@ -145,7 +146,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
-        margin-top: 8px;
+        margin-top: 6px;
     }
 
     .hero-chip {
@@ -167,7 +168,7 @@
 
     .metro-hero {
         position: relative;
-        padding: 20px 18px 18px;
+        padding: 16px 16px 14px;
         border-radius: 24px;
         background:
             linear-gradient(180deg, rgba(255,255,255,0.92), rgba(241, 247, 245, 0.92)),
@@ -191,8 +192,8 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        margin-bottom: 18px;
-        padding: 6px 11px;
+        margin-bottom: 12px;
+        padding: 5px 10px;
         border-radius: 999px;
         background: rgba(22, 50, 79, 0.08);
         color: var(--night);
@@ -203,8 +204,8 @@
 
     .metro-map {
         position: relative;
-        min-height: 164px;
-        padding: 18px 6px 0;
+        min-height: 142px;
+        padding: 16px 4px 0;
     }
 
     .metro-line {
@@ -218,11 +219,11 @@
     }
 
     .metro-line--top {
-        top: 48px;
+        top: 44px;
     }
 
     .metro-line--branch {
-        top: 104px;
+        top: 90px;
         left: 44%;
         right: 14%;
         background: linear-gradient(90deg, #16324f 0%, #16324f 100%);
@@ -238,8 +239,8 @@
 
     .metro-connector--down {
         left: calc(44% - 3px);
-        top: 52px;
-        height: 54px;
+        top: 48px;
+        height: 46px;
     }
 
     .metro-station {
@@ -257,11 +258,11 @@
     .metro-station--start { left: 4%; }
     .metro-station--end { right: 4%; left: auto; }
 
-    .metro-station--s1 { top: 24px; }
-    .metro-station--s2 { left: 44%; top: 24px; }
-    .metro-station--s3 { top: 24px; }
-    .metro-station--s4 { left: 44%; top: 80px; }
-    .metro-station--s5 { right: 14%; top: 80px; }
+    .metro-station--s1 { top: 18px; }
+    .metro-station--s2 { left: 44%; top: 18px; }
+    .metro-station--s3 { top: 18px; }
+    .metro-station--s4 { left: 44%; top: 64px; }
+    .metro-station--s5 { right: 14%; top: 64px; }
 
     .metro-dot {
         width: 18px;
@@ -344,13 +345,13 @@
     .metro-stop-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 12px;
+        gap: 8px;
+        margin-top: 6px;
     }
 
     .metro-stop-card {
-        padding: 12px 12px 11px;
-        border-radius: 16px;
+        padding: 10px 11px 9px;
+        border-radius: 14px;
         background: rgba(255, 255, 255, 0.82);
         border: 1px solid rgba(15, 118, 110, 0.1);
     }
@@ -367,7 +368,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        margin-bottom: 7px;
+        margin-bottom: 6px;
     }
 
     .metro-stop-dot {
@@ -413,14 +414,15 @@
 
     .metro-stop-title {
         display: block;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 700;
         color: #2d271f;
+        line-height: 1.35;
     }
 
     .metro-stop-text {
-        font-size: 12px;
-        line-height: 1.65;
+        font-size: 11px;
+        line-height: 1.55;
         color: #6f665b;
     }
 
@@ -429,8 +431,8 @@
         justify-content: space-between;
         gap: 12px;
         flex-wrap: wrap;
-        margin-top: 18px;
-        padding-top: 14px;
+        margin-top: 10px;
+        padding-top: 10px;
         border-top: 1px dashed rgba(15, 118, 110, 0.18);
         color: #6f665c;
         font-size: 12px;
@@ -681,8 +683,12 @@
             grid-template-columns: 1fr;
         }
 
+        .hero-copy {
+            padding-top: 0;
+        }
+
         .metro-map {
-            min-height: 168px;
+            min-height: 146px;
         }
     }
 
@@ -692,18 +698,18 @@
         .article-header { padding: 22px 18px 24px; }
         .hero-grid { gap: 18px; }
         .hero-kicker { margin-bottom: 12px; }
-        .metro-hero { padding: 18px 14px 16px; }
-        .metro-map { min-height: 178px; padding: 10px 0 0; }
+        .metro-hero { padding: 14px 12px 14px; }
+        .metro-map { min-height: 166px; padding: 10px 0 0; }
         .metro-line { left: 10%; right: 10%; }
-        .metro-line--branch { top: 178px; left: 44%; right: 16%; }
-        .metro-line--branch { top: 110px; }
-        .metro-connector--down { left: calc(44% - 3px); top: 50px; height: 64px; }
+        .metro-line--top { top: 40px; }
+        .metro-line--branch { top: 100px; left: 44%; right: 16%; }
+        .metro-connector--down { left: calc(44% - 3px); top: 44px; height: 58px; }
         .metro-station { width: 84px; max-width: 28%; }
         .metro-station--s1,
         .metro-station--s2,
-        .metro-station--s3 { top: 22px; }
+        .metro-station--s3 { top: 14px; }
         .metro-station--s4,
-        .metro-station--s5 { top: 86px; }
+        .metro-station--s5 { top: 72px; }
         .metro-stop-grid { grid-template-columns: 1fr; }
         .metro-name { font-size: 12px; }
         .metro-desc { font-size: 10px; }
@@ -1033,7 +1039,7 @@
                                 <span class="metro-stop-code">T</span>
                             </div>
                             <span class="metro-stop-title">法则换乘站</span>
-                            <div class="metro-stop-text">闭环收敛、负日志、决策切换开始聚合成理论层。</div>
+                            <div class="metro-stop-text">闭环收敛、负日志、决策切换开始聚合。</div>
                         </div>
                         <div class="metro-stop-card metro-stop-card--signal">
                             <div class="metro-stop-head">
@@ -1041,7 +1047,7 @@
                                 <span class="metro-stop-code">L1</span>
                             </div>
                             <span class="metro-stop-title">生活迁移站</span>
-                            <div class="metro-stop-text">法则离开代码，进入关系、家庭和职业判断。</div>
+                            <div class="metro-stop-text">法则离开代码，进入关系与日常。</div>
                         </div>
                         <div class="metro-stop-card metro-stop-card--night">
                             <div class="metro-stop-head">
@@ -1049,7 +1055,7 @@
                                 <span class="metro-stop-code">L2</span>
                             </div>
                             <span class="metro-stop-title">边界承认站</span>
-                            <div class="metro-stop-text">承认并非万物都要被收敛，自我审视开始成为主线。</div>
+                            <div class="metro-stop-text">不必全部收敛，自我审视转为主线。</div>
                         </div>
                         <div class="metro-stop-card metro-stop-card--signal" style="grid-column: 1 / -1;">
                             <div class="metro-stop-head">
@@ -1057,7 +1063,7 @@
                                 <span class="metro-stop-code">L3-L4</span>
                             </div>
                             <span class="metro-stop-title">公开终点站</span>
-                            <div class="metro-stop-text">小说补全自我，元创作层回头公开引擎，让体系开始自我解释。</div>
+                            <div class="metro-stop-text">小说补全自我，元创作层回头公开引擎。</div>
                         </div>
                     </div>
                     <div class="metro-footer">
