@@ -269,21 +269,50 @@
     .voice-card--chengnian h3 { color: var(--chengnian); }
     .quartet-shell {
         position: relative;
+        padding-top: 56px;
     }
-    .season-ribbon {
-        display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 10px;
-        margin-bottom: 14px;
+    .season-corner-guide {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+        max-width: 420px;
+        z-index: 2;
     }
-    .season-pill {
-        padding: 10px 12px;
+    .season-corner-guide__title {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
         border-radius: 999px;
-        border: 1px solid rgba(93, 76, 59, 0.12);
-        background: rgba(255, 255, 255, 0.7);
-        text-align: center;
+        background: rgba(255, 249, 240, 0.92);
+        border: 1px solid rgba(185, 140, 75, 0.18);
+        color: #7b5c33;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        box-shadow: 0 10px 24px rgba(73, 54, 28, 0.08);
+    }
+    .season-corner-guide__badges {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+    .season-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(93, 76, 59, 0.1);
+        background: rgba(255, 255, 255, 0.78);
         font-size: 12px;
         color: #5f5448;
+        box-shadow: 0 10px 24px rgba(48, 34, 20, 0.05);
     }
     .quartet-grid {
         display: grid;
@@ -432,8 +461,14 @@
         .motif-grid {
             grid-template-columns: 1fr;
         }
-        .season-ribbon {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+        .season-corner-guide {
+            position: static;
+            align-items: flex-start;
+            max-width: none;
+            margin-bottom: 14px;
+        }
+        .season-corner-guide__badges {
+            justify-content: flex-start;
         }
     }
     @media (max-width: 760px) {
@@ -446,9 +481,11 @@
         h1 { font-size: 34px; }
         h2 { font-size: 24px; }
         h3 { font-size: 20px; }
-        .quartet-grid,
-        .season-ribbon {
+        .quartet-grid {
             grid-template-columns: 1fr;
+        }
+        .quartet-shell {
+            padding-top: 0;
         }
     }
 </style>
@@ -841,12 +878,15 @@
             <section>
                 <h2 id="四重奏正文">四重奏正文</h2>
                 <div class="quartet-shell">
-                    <div class="season-ribbon">
-                        <div class="season-pill">2025 · 冬至</div>
-                        <div class="season-pill">2026 · 春分</div>
-                        <div class="season-pill">2027 · 夏至</div>
-                        <div class="season-pill">2027 · 秋分</div>
-                        <div class="season-pill">2028 · 冬至回响</div>
+                    <div class="season-corner-guide">
+                        <div class="season-corner-guide__title"><i class="fas fa-bookmark"></i> 瞬间谱采样</div>
+                        <div class="season-corner-guide__badges">
+                            <span class="season-badge">2025 · 冬至</span>
+                            <span class="season-badge">2026 · 春分</span>
+                            <span class="season-badge">2027 · 夏至</span>
+                            <span class="season-badge">2027 · 秋分</span>
+                            <span class="season-badge">2028 · 冬至回响</span>
+                        </div>
                     </div>
 
                     <div class="quartet-grid">
