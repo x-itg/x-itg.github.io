@@ -315,6 +315,95 @@
             background: #f7fbff;
             text-decoration: none;
         }
+        .novel-overview {
+            margin: 18px 0 24px;
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid #d9e4f2;
+            background: radial-gradient(circle at right top, rgba(36, 95, 156, 0.10), transparent 28%), linear-gradient(135deg, #f8fbff 0%, #fff8ee 54%, #f3f8ff 100%);
+            box-shadow: var(--shadow-md);
+        }
+        .novel-overview__eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #245f9c;
+        }
+        .novel-overview__grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+            gap: 16px;
+            align-items: start;
+        }
+        .novel-overview__main,
+        .novel-overview__rail {
+            border-radius: 16px;
+            background: rgba(255,255,255,0.84);
+            border: 1px solid rgba(191, 210, 232, 0.42);
+            padding: 18px;
+        }
+        .novel-overview__main h3,
+        .novel-overview__rail h3 {
+            margin: 0 0 12px;
+            font-size: 22px;
+            color: #20344e;
+            letter-spacing: -0.03em;
+        }
+        .novel-overview__main p,
+        .novel-overview__rail p {
+            margin: 0 0 12px;
+            color: #5f7388;
+            font-size: 14px;
+        }
+        .novel-overview__main strong {
+            color: #20344e;
+        }
+        .novel-overview__chips,
+        .novel-overview__list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .novel-overview__chips span,
+        .novel-overview__list a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            border: 1px solid #dbe6f3;
+            background: #fbfdff;
+            color: #47627f;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .novel-overview__list a:hover {
+            border-color: #b8cae2;
+            color: #244f86;
+            background: #f7fbff;
+            text-decoration: none;
+        }
+        .novel-overview__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: #244f86;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .novel-overview__cta:hover {
+            background: #193d69;
+            text-decoration: none;
+        }
         footer {
             margin-top: 28px;
             padding-top: 18px;
@@ -330,7 +419,8 @@
             .hero { padding: 24px 20px; }
             .hero h1 { font-size: 32px; }
             .article-flow { padding-top: 18px; }
-            .story-spotlight__grid { grid-template-columns: 1fr; }
+            .story-spotlight__grid,
+            .novel-overview__grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -419,9 +509,43 @@
             <p>如果你想直接看这套体系是怎样在十天内长成四层结构，可以先读 <a href="aboutmore/sryj.html">《十日一剑：创作手记》</a>；如果你更想看创作过程如何被做成“可观测、可回放、可调试”的工作台，再接着读 <a href="aboutmore/gc.html">《像调试代码一样创作》</a>。</p>
         </section>
 
+        <section class="novel-overview" id="l3-fiction-overview">
+            <span class="novel-overview__eyebrow"><i class="fas fa-dna"></i> L3・小说与对话 | 叙事实验体系总览</span>
+            <div class="novel-overview__grid">
+                <div class="novel-overview__main">
+                    <h3>七部作品，一条完整的叙事实验链</h3>
+                    <p>本板块共计七部作品，构成一条逻辑完整、层层递进的<strong>叙事形式实验链</strong>。创作始终围绕核心命题：<strong>叙事形式能否成为内容本身？</strong></p>
+                    <p>依托工程架构思维，打破传统文学的线性叙事范式，依次探索文档目录、纯对话气泡、双栏对照、平行宇宙、复调四重奏、交互意象网络、DNA 双螺旋七大独立叙事形态。每一种形式都从故事内核自然生长，不刻意炫技，让结构、视觉、交互、文字深度共生。</p>
+                    <p>整套作品以「法则与失控」为永恒主题，塑造连贯的人物世界观：理性秩序与人性本心不断碰撞、拉扯、错位、和解。从单视角叙事起步，历经多声部、时空分裂、分层对照、交互式阅读，最终以 <a href="aboutmore/czy.html">《蓝牙：陆知意岛》双螺旋版</a> 回归创作原点。</p>
+                    <p>始于种子，归于圆满。七篇作品首尾呼应、环环相扣，完成<strong>出发 — 探索 — 升华 — 闭环</strong>的完整创作旅程。它不再是传统意义上的短篇故事集，而是一套以代码、架构、交互为工具，以文学为载体的<strong>数字文学实验标本</strong>，也是工程思维与人文情感相融共生的独特创作实践。</p>
+                    <div class="novel-overview__chips">
+                        <span><i class="fas fa-folder-tree"></i> 文档目录</span>
+                        <span><i class="fas fa-comments"></i> 对话气泡</span>
+                        <span><i class="fas fa-columns"></i> 双栏对照</span>
+                        <span><i class="fas fa-globe"></i> 平行宇宙</span>
+                        <span><i class="fas fa-music"></i> 复调四重奏</span>
+                        <span><i class="fas fa-project-diagram"></i> 交互意象网络</span>
+                        <span><i class="fas fa-dna"></i> DNA 双螺旋</span>
+                    </div>
+                    <a href="aboutmore/wx.html" class="novel-overview__cta"><i class="fas fa-book-open"></i><span>查看法则与故事总览</span></a>
+                </div>
+                <div class="novel-overview__rail">
+                    <h3>七篇入口</h3>
+                    <p>建议按“起点 → 变体 → 分裂 → 回环”的顺序阅读，也可以从最感兴趣的形式直接切入。</p>
+                    <div class="novel-overview__list">
+                        <a href="aboutmore/czy.html"><i class="fas fa-dna"></i><span>蓝牙：陆知意岛</span></a>
+                        <a href="aboutmore/qp-chat.html"><i class="fas fa-comment-dots"></i><span>失控时空·对话版</span></a>
+                        <a href="aboutmore/gary.html"><i class="fas fa-map-marker-alt"></i><span>失控时空：终极玩家</span></a>
+                        <a href="aboutmore/alone.html"><i class="fas fa-city"></i><span>知意知否·孤独玩家</span></a>
+                        <a href="aboutmore/mywj.html"><i class="fas fa-orbit"></i><span>知屿之意·命运玩家</span></a>
+                        <a href="aboutmore/party-high.html"><i class="fas fa-music"></i><span>四季Party High玩家</span></a>
+                        <a href="aboutmore/jsxm.html"><i class="fas fa-folder-open"></i><span>失控时刻·有趣玩家</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="summary-table" id="overview-table">
-            <h2>总表</h2>
-            <p>文章导航。</p>
             <section class="story-spotlight">
                 <span class="story-spotlight__eyebrow"><i class="fas fa-orbit"></i> 命运玩家宇宙</span>
                 <div class="story-spotlight__grid">
