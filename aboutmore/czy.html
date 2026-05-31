@@ -15,34 +15,68 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
     :root {
-        --bg: #fefce8; --card-bg: #ffffff; --text: #292524;
+        --bg: #f6f2e9; --card-bg: #ffffff; --text: #292524;
         --text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
         --border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
+        --helix-blue: #2563eb; --helix-blue-soft: #dbeafe;
+        --helix-amber: #b45309; --helix-amber-soft: #ffedd5;
+        --helix-green: #047857; --helix-green-soft: #dcfce7;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", serif;
-        background: var(--bg); color: var(--text); line-height: 1.9; -webkit-font-smoothing: antialiased;
+        background: radial-gradient(circle at 14% 16%, rgba(37,99,235,0.08), transparent 24%), radial-gradient(circle at 86% 18%, rgba(217,119,6,0.08), transparent 22%), linear-gradient(180deg, #fffdf8 0%, var(--bg) 100%);
+        color: var(--text); line-height: 1.9; -webkit-font-smoothing: antialiased;
     }
     .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
 
-    .main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
-    .main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
-    .main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
-    .main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.3px; }
-    .main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
+    .main-content { flex:1; min-width:0; max-width:1020px; margin:0 auto; padding:40px 24px 80px; }
+    .main-content .article-header { margin-bottom:28px; padding:28px 28px 24px; border:1px solid #e5e7eb; border-radius:28px; background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(248,250,252,0.92)); box-shadow:0 18px 38px rgba(28,25,23,0.06); }
+    .main-content .article-header .series-tag { display:inline-flex; align-items:center; gap:8px; background:#eff6ff; color:#1d4ed8; font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; margin-bottom:14px; letter-spacing:0.4px; }
+    .main-content h1 { font-family:"Noto Serif SC", "Songti SC", Georgia, serif; font-size:34px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.4px; }
+    .main-content .subtitle { font-size:15px; color:var(--text-secondary); margin-bottom:8px; }
     .main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
     .main-content p { margin:14px 0; font-size:15px; color:#44403c; text-align:justify; }
     .main-content p:first-letter { margin-left:0; }
     .main-content strong { color:#1c1917; font-weight:600; }
-    .main-content .story-divider { text-align:center; margin:28px 0; color:#d6d3d1; font-size:14px; letter-spacing:6px; }
     .main-content blockquote { border-left:3px solid var(--accent-light); padding:12px 20px; margin:20px 0; background:#fffcf5; border-radius:0 8px 8px 0; font-size:15px; color:#78350f; }
 
-    .insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
-    .insight-box strong { color:#92400e; }
-    .section-divider { display:flex; align-items:center; gap:12px; margin:36px 0; color:#d6d3d1; }
-    .section-divider::before, .section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
-    .section-divider i { font-size:12px; }
+    .dna-article { position:relative; padding-top:8px; }
+    .dna-intro { margin-bottom:26px; padding:22px 24px; background:linear-gradient(135deg, rgba(239,246,255,0.95), rgba(255,247,237,0.95)); border:1px solid #dbeafe; border-radius:24px; box-shadow:0 12px 28px rgba(37,99,235,0.08); }
+    .dna-intro p { margin:0; }
+    .dna-intro strong { color:var(--helix-blue); }
+    .dna-legend { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+    .dna-legend span { display:inline-flex; align-items:center; gap:8px; padding:7px 12px; border-radius:999px; background:rgba(255,255,255,0.84); border:1px solid #e5e7eb; font-size:12px; font-weight:600; color:#57534e; }
+    .dna-legend .legend-lu i { color:var(--helix-blue); }
+    .dna-legend .legend-cheng i { color:var(--helix-amber); }
+    .dna-legend .legend-cross i { color:var(--helix-green); }
+    .dna-helix { position:relative; display:grid; gap:26px; }
+    .dna-helix::before { content:""; position:absolute; top:0; bottom:0; left:50%; width:6px; transform:translateX(-50%); border-radius:999px; background:linear-gradient(180deg, rgba(37,99,235,0.18), rgba(217,119,6,0.18), rgba(4,120,87,0.18)); box-shadow:0 0 0 10px rgba(255,255,255,0.55); }
+    .helix-entry { position:relative; display:grid; grid-template-columns:minmax(0, 1fr) 128px minmax(0, 1fr); gap:18px; align-items:stretch; }
+    .helix-axis { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; z-index:1; }
+    .helix-axis::before { content:""; position:absolute; left:10px; right:10px; top:50%; height:2px; transform:translateY(-50%); background:linear-gradient(90deg, rgba(37,99,235,0.24), rgba(217,119,6,0.24)); }
+    .helix-entry:nth-child(even) .helix-axis::before { background:linear-gradient(90deg, rgba(217,119,6,0.24), rgba(37,99,235,0.24)); }
+    .helix-node { position:relative; z-index:2; width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, #fff, #eff6ff); border:1px solid #bfdbfe; color:var(--helix-blue); font-size:13px; font-weight:800; letter-spacing:0.6px; box-shadow:0 10px 24px rgba(37,99,235,0.12); }
+    .helix-pair { position:relative; z-index:2; display:inline-flex; align-items:center; justify-content:center; padding:4px 10px; border-radius:999px; background:rgba(255,255,255,0.88); border:1px solid #e5e7eb; font-size:11px; color:#78716c; text-transform:uppercase; letter-spacing:0.6px; }
+    .helix-card { position:relative; padding:20px 20px 18px; border-radius:24px; border:1px solid #e7e5e4; background:rgba(255,255,255,0.94); box-shadow:0 18px 36px rgba(28,25,23,0.06); }
+    .helix-card::before { content:""; position:absolute; top:16px; width:42px; height:6px; border-radius:999px; opacity:0.55; }
+    .helix-card--lu { background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(239,246,255,0.92)); border-color:#dbeafe; }
+    .helix-card--lu::before { right:18px; background:linear-gradient(90deg, #60a5fa, #2563eb); }
+    .helix-card--cheng { background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,247,237,0.92)); border-color:#fed7aa; }
+    .helix-card--cheng::before { left:18px; background:linear-gradient(90deg, #fdba74, #d97706); }
+    .helix-card--cross { grid-column:1 / -1; margin:2px 58px 0; background:linear-gradient(135deg, rgba(240,253,244,0.98), rgba(255,251,235,0.96)); border-color:#bbf7d0; text-align:center; }
+    .helix-card--cross::before { left:50%; transform:translateX(-50%); background:linear-gradient(90deg, #34d399, #f59e0b); }
+    .helix-label { display:inline-flex; align-items:center; gap:8px; margin-bottom:12px; padding:5px 10px; border-radius:999px; background:rgba(255,255,255,0.82); border:1px solid rgba(229,231,235,0.9); font-size:12px; font-weight:700; color:#57534e; }
+    .helix-card--lu .helix-label i { color:var(--helix-blue); }
+    .helix-card--cheng .helix-label i { color:var(--helix-amber); }
+    .helix-card--cross .helix-label i { color:var(--helix-green); }
+    .helix-title { margin-bottom:10px; font-family:"Noto Serif SC", "Songti SC", Georgia, serif; font-size:24px; color:#111827; line-height:1.35; }
+    .helix-subtitle { margin-bottom:12px; font-size:13px; color:#78716c; }
+    .helix-quote { margin:14px 0; padding:14px 16px; border-radius:18px; background:rgba(255,255,255,0.78); border:1px dashed #cbd5e1; color:#1f2937; font-size:15px; }
+    .helix-card--cheng .helix-quote { border-color:#fdba74; }
+    .helix-card--cross .helix-quote { border-color:#86efac; background:rgba(255,255,255,0.72); }
+    .helix-note { margin-top:12px; padding:12px 14px; border-radius:16px; background:rgba(255,255,255,0.68); border:1px solid #e5e7eb; font-size:14px; color:#57534e; }
+    .helix-card p { margin:10px 0; }
 
 /* 评论区 */
     .layer-comments { margin-top:56px; padding-top:32px; border-top:2px solid var(--border); }
@@ -52,7 +86,25 @@
     .layer-comments__avatar.reader-d { background: linear-gradient(135deg, #7c3aed, #5b21b6); }
     .layer-comments__avatar.reader-e { background: linear-gradient(135deg, #c2410c, #9a3412); }
 
-    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
+    @media (max-width:960px) {
+        .main-content { max-width:760px; }
+        .dna-helix::before { left:32px; transform:none; }
+        .helix-entry { grid-template-columns:64px minmax(0, 1fr); gap:14px; }
+        .helix-axis { grid-row:1 / span 2; }
+        .helix-axis::before { top:10px; bottom:10px; left:50%; right:auto; width:2px; height:auto; transform:translateX(-50%); background:linear-gradient(180deg, rgba(37,99,235,0.24), rgba(217,119,6,0.24)); }
+        .helix-card--cross { grid-column:2; margin:0; text-align:left; }
+    }
+    @media (max-width:768px) {
+        .sidebar { display:none; }
+        .main-content { padding:24px 16px 60px; }
+        .main-content .article-header { padding:22px 18px 20px; border-radius:22px; }
+        .main-content h1 { font-size:28px; }
+        .dna-intro { padding:18px 16px; border-radius:20px; }
+        .helix-entry { grid-template-columns:56px minmax(0, 1fr); }
+        .helix-node { width:50px; height:50px; font-size:12px; }
+        .helix-card { padding:18px 16px 16px; border-radius:20px; }
+        .helix-title { font-size:21px; }
+    }
 </style>
 <link rel="stylesheet" href="../assets/site-sidebar.css">
 <link rel="stylesheet" href="../assets/article-comments.css">
@@ -309,128 +361,196 @@
     <h3><span class="sidebar-toc__icon" aria-hidden="true">📘</span> 本章导航</h3>
     <nav>
         <ul>
-            <li><a href="#关于这个故事">关于这个故事</a></li>
+            <li><a href="#dna-helix">双螺旋正文</a></li>
+            <li><a href="#关于这个故事">蓝牙注释</a></li>
         </ul>
     </nav>
 </aside>
 <div class="main-content">
         <header class="article-header">
-            <span class="series-tag">文学层 · 小说</span>
+            <span class="series-tag"><i class="fas fa-dna"></i> 文学层 · DNA 双螺旋版</span>
             <h1>蓝牙：陆知意岛</h1>
             <p class="subtitle">陆屿的陆，程知意的知意，陆地上的一座岛</p>
             <p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · 文学层</p>
         </header>
 
-        <article>
+        <article class="dna-article" id="dna-helix">
+            <div class="dna-intro">
+                <p><strong>这次不再顺着讲完整篇长文，</strong>而是把《蓝牙：陆知意岛》拆成两条彼此缠绕的链。左侧是陆屿如何理解这段关系，右侧是程知意真正显露出来的信息，中间节点负责把“命名、错配、重连、对问、重新命名”串成一条双螺旋。</p>
+                <div class="dna-legend">
+                    <span class="legend-lu"><i class="fas fa-satellite-dish"></i> 陆屿视角 / 他以为自己在判断</span>
+                    <span class="legend-cheng"><i class="fas fa-vial"></i> 程知意显露 / 她一直在克制暴露</span>
+                    <span class="legend-cross"><i class="fas fa-link"></i> 交叉节点 / 两条链终于对齐</span>
+                </div>
+            </div>
 
-        <p>我叫陆屿。这个名字有点土，我妈取的。说陆是陆地，屿是小岛。陆地上面有座岛，听着挺诗意。后来我做了AI，同事叫我岛神，因为我解决过几个大模型幻觉的案子——就是AI胡说八道，我让它别胡说八道。</p>
+            <div class="dna-helix">
+                <section class="helix-entry">
+                    <div class="helix-card helix-card--lu">
+                        <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
+                        <h2 class="helix-title">岛的命名</h2>
+                        <div class="helix-subtitle">他先介绍自己，再承认自己真正想说的是她</div>
+                        <p>我叫陆屿。陆是陆地，屿是小岛。后来我做 AI，同事叫我岛神，因为我会让那些胡说八道的大模型闭嘴。</p>
+                        <p>可一到这件事上，我立刻不想谈工作了。所有理性、所有工程感、所有对错误输出的校正能力，都在一句话里失效：</p>
+                        <div class="helix-quote">“但我今天不想聊工作。我想聊程知意。”</div>
+                    </div>
+                    <div class="helix-axis">
+                        <span class="helix-node">A-T</span>
+                        <span class="helix-pair">name / origin</span>
+                    </div>
+                    <div class="helix-card helix-card--cheng">
+                        <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
+                        <h2 class="helix-title">知意这两个字</h2>
+                        <div class="helix-subtitle">名字像“知道”，她却总把真正的部分藏起来</div>
+                        <p>她爸给她取“知意”，听起来像知行合一，像永远冷静、永远明白。但陆屿回忆里的她恰恰相反。</p>
+                        <p>她两年里没有追问过爱不爱、没有查过手机、没有闹过脾气。表面上像不在乎，实际上像把情绪全封装起来，不让任何人读取。</p>
+                    </div>
+                </section>
 
-        <p>但我今天不想聊工作。我想聊程知意。</p>
+                <section class="helix-entry">
+                    <div class="helix-card helix-card--lu">
+                        <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
+                        <h2 class="helix-title">第一次错配</h2>
+                        <div class="helix-subtitle">他把分开理解成“不够在乎”</div>
+                        <p>分开的原因很土。她去欧洲读博，他拿到国内 offer。他提异地，她说不要，干脆得像实验结果。</p>
+                        <p>她站起来就走，他一个人把那盘大盘鸡吃完，回去改 bug 到凌晨三点。别人以为他只是想不通技术问题，其实他想不通的是：为什么她连犹豫都没有。</p>
+                        <div class="helix-note">陆屿当时的结论是：她不是真的在乎这些，所以才走得这么利落。</div>
+                    </div>
+                    <div class="helix-axis">
+                        <span class="helix-node">C-G</span>
+                        <span class="helix-pair">split</span>
+                    </div>
+                    <div class="helix-card helix-card--cheng">
+                        <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
+                        <h2 class="helix-title">防御性决断</h2>
+                        <div class="helix-subtitle">她没有闹，也没有求，因为更早地替自己判了输</div>
+                        <p>她说话一直是陈述句、句号、不拖泥带水。后来陆屿才意识到，这不是酷，而是一种防御机制。</p>
+                        <p>她不是没有情绪，她只是更习惯在情绪发生之前就做切断。她把“不要异地”说得像客观结论，像把自己先从实验里移出去。</p>
+                    </div>
+                </section>
 
-        <div class="story-divider">· · ·</div>
+                <section class="helix-entry">
+                    <div class="helix-card helix-card--lu">
+                        <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
+                        <h2 class="helix-title">六年后重新扫描</h2>
+                        <div class="helix-subtitle">锁屏上四个字，就让旧设备重新被发现</div>
+                        <p>六年后她发来一句：<em>我回国了。</em> 他刚开完会，冷气吹得手指发僵，但更早失控的是肌肉记忆。大脑还没反应，身体已经先承认了她仍是可连接设备。</p>
+                        <p>到奥体夜店见面时，他第一眼先看见银灰头发，第二眼看见锁骨上的 DNA 纹身。她已经不是记忆里那个怕打针的人，可他立刻认出：核没变。</p>
+                    </div>
+                    <div class="helix-axis">
+                        <span class="helix-node">01</span>
+                        <span class="helix-pair">discover</span>
+                    </div>
+                    <div class="helix-card helix-card--cheng">
+                        <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
+                        <h2 class="helix-title">改造过的外壳</h2>
+                        <div class="helix-subtitle">银发、纹身、离婚，都是六年留下的壳层</div>
+                        <p>她说“做实验做不出来，一生气就去漂了头。漂了三次，顺便纹的。” 表面是轻描淡写，实际上每一层变化都对应一次生活重构。</p>
+                        <p>她已经结过婚又离过婚，对方是瑞士实验室同事。她能把这些信息说得像履历，但说得越平，越说明真正疼的地方已经被压到句子后面。</p>
+                    </div>
+                </section>
 
-        <p>她爸给她取这个名字，我不知道是"知行合一"那个知，还是"知了"那个知。但她这个人跟名字完全相反。她什么都不知道。或者说，假装什么都不知道。我们在一起两年，她没问过一次"爱不爱我"，没查过一次手机，没闹过一次脾气。好得不像真人。后来我明白了，她不是好，她是真的不在乎这些。</p>
+                <section class="helix-entry">
+                    <div class="helix-card helix-card--lu">
+                        <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
+                        <h2 class="helix-title">夜店里的识别误差</h2>
+                        <div class="helix-subtitle">他先看到纹身，再看到她其实在发抖</div>
+                        <p>音乐很吵，灯光很乱，她转酒杯的手指有点抖。他一开始以为那只是冷，后来才意识到那可能是另一种紧张。</p>
+                        <p>她说梦话时喊过他的名字。六年后，在另一个大陆、另一种语言的婚姻里，她半夜喊的还是他。这让陆屿第一次意识到，自己以为已经结束的东西，其实从未彻底下线。</p>
+                    </div>
+                    <div class="helix-axis">
+                        <span class="helix-node">02</span>
+                        <span class="helix-pair">signal</span>
+                    </div>
+                    <div class="helix-card helix-card--cheng">
+                        <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
+                        <h2 class="helix-title">她真实的恐惧</h2>
+                        <div class="helix-subtitle">最稳定的语言系统，也会在深夜泄露底层数据</div>
+                        <div class="helix-quote">“因为我有一天半夜说梦话，喊了你的名字。”</div>
+                        <p>这不是浪漫台词，而是一次意外暴露。她平常把自己包得很紧，可梦话绕过了理性，替她把没处理完的情感直接发送出来。</p>
+                        <p>所以她看起来像在解剖别人，实际上一直在防止别人解剖自己。</p>
+                    </div>
+                </section>
 
-        <p>分开的原因很土——她要去欧洲读博，我刚拿到国内offer。我说要不要异地，她说不要。干脆利落，跟实验结果一样。那天吃完饭她站起来就走了，我把那盘大盘鸡全吃完了。然后回公司改bug改到凌晨三点。同事说岛神真拼。我说没事，就是想不通一个问题。</p>
+                <section class="helix-entry">
+                    <div class="helix-card helix-card--lu">
+                        <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
+                        <h2 class="helix-title">规则依旧，系统已乱</h2>
+                        <div class="helix-subtitle">他还记得自己的文档和边界，但手已经开始背叛规则</div>
+                        <p>凌晨三点从夜店出来，她说自己不走了，半年前就申请了教职，只是没告诉他，怕分心。</p>
+                        <p>路灯下他盯着那段双螺旋。A 配 T，C 配 G，精密、完美、可验证。可人不是碱基，人会错配。于是当她吻过来、口袋里的手机震动时，他没有看。这是第一次，规则仍在，但执行失败。</p>
+                    </div>
+                    <div class="helix-axis">
+                        <span class="helix-node">03</span>
+                        <span class="helix-pair">drift</span>
+                    </div>
+                    <div class="helix-card helix-card--cheng">
+                        <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
+                        <h2 class="helix-title">主动回国</h2>
+                        <div class="helix-subtitle">她不是路过北京，她是带着明确意图回来</div>
+                        <p>“不走了。申了高校的教职，过了。” 这不是偶然回国的通知，而是已经做完长期部署之后，才把他叫出来。</p>
+                        <p>她甚至承认，面试时没说，是怕分心。她看起来总像在切断，其实只是怕一旦说出口，自己就没法维持原来的稳定姿态。</p>
+                    </div>
+                </section>
 
-        <p>什么问题我没说。</p>
+                <section class="helix-entry">
+                    <div class="helix-card helix-card--cross">
+                        <div class="helix-label"><i class="fas fa-link"></i> 交叉节点</div>
+                        <h2 class="helix-title">真正的问题不是值不值得，是敢不敢承认自己也想被选</h2>
+                        <div class="helix-quote">“程知意，你当初说不要异地的时候，是觉得我不值得，还是觉得自己不配。”</div>
+                        <div class="helix-quote">“第二个。”</div>
+                        <p>这一刻双轨第一次真正相交。陆屿终于把六年没问出口的问题抛出来，程知意也第一次把防御机制里的核心变量说清楚。</p>
+                        <p>她不是不在乎，也不是不心动，而是从更早的时候就替自己判了“不配被等”。前面所有利落、冷静、句号、离开，都是这两个字的延迟反应。</p>
+                    </div>
+                    <div class="helix-axis">
+                        <span class="helix-node">X</span>
+                        <span class="helix-pair">align</span>
+                    </div>
+                </section>
 
-        <div class="story-divider">· · ·</div>
+                <section class="helix-entry">
+                    <div class="helix-card helix-card--lu">
+                        <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
+                        <h2 class="helix-title">另外起一章</h2>
+                        <div class="helix-subtitle">他终于承认，有些人不能被塞回旧分类</div>
+                        <p>他想起 Harald Bluetooth 的故事，两个字母锁成一个新的标记。然后他伸手拢好她被风吹乱的头发，说那个文档会加一条。</p>
+                        <div class="helix-quote">“前女友不在前女友条款里。另外起一章。”</div>
+                        <p>这句话的核心不是浪漫，而是重新命名。命名意味着陆屿终于承认，她不是旧版本残留，不是异常 case，而是需要独立章节的新结构。</p>
+                    </div>
+                    <div class="helix-axis">
+                        <span class="helix-node">04</span>
+                        <span class="helix-pair">rename</span>
+                    </div>
+                    <div class="helix-card helix-card--cheng">
+                        <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
+                        <h2 class="helix-title">终于被正确读取</h2>
+                        <div class="helix-subtitle">她愣住，不是因为没想到他会说话，而是没想到他终于读懂</div>
+                        <p>她先愣了一下，再笑。那个弧度又回到十六岁，说明她被碰到的不是成年人外壳，而是更早的核。</p>
+                        <p>当她问“新章节叫什么”，其实是在确认：这次不是临时连接，不是旧情回访，而是一种被重新定义、重新纳入、但不再被旧词汇误伤的关系。</p>
+                    </div>
+                </section>
 
-        <p>六年后她发来一条微信：<em>我回国了。</em>我刚开完会，看到这四个字在锁屏上，会议室冷气开太大了，冻得我手指僵住。就是那种，你明明已经忘了这个人，但她一出现，你的手指先于你的大脑做出了反应。</p>
-
-        <p>约在奥体的一家夜店。我到的时候她已经在角落卡座了。头发漂成银灰色，锁骨上有个纹身。我凑近看，是一段DNA螺旋。我以前认识的程知意连打针都怕，抽血能出一手汗。现在她锁骨上纹着双螺旋。</p>
-
-        <p>"做实验做不出来，一生气就去漂了头。"她说，"漂了三次，顺便纹的。"</p>
-
-        <p>"你们搞科研的还搞这个。"</p>
-
-        <p>"搞科研的也是人。"</p>
-
-        <p>她说话还是那样。陈述句，句号，不拖泥带水。以前我觉得这是酷，后来知道这其实是一种防御机制。用最精确的语言解剖别人，同时保护自己不被解剖。但我注意到她转酒杯的手指有点抖。不知道是冷，还是紧张。夜店冷气开得很足，她只穿一件吊带。</p>
-
-        <p>我问她结婚没。她说离了。对方是瑞士人，实验室同事。结婚一年，离了半年。用英语吵架，后来发现连吵架都吵不明白，就算了。我问为什么吵。</p>
-
-        <p>她转着酒杯，银灰色头发在蓝色灯光下泛紫。"因为我有一天半夜说梦话，"她说，"喊了你的名字。"</p>
-
-        <p>音乐很吵，灯光很乱。有人在旁边尖叫，好像有人过生日。我不知道该说什么。喊了我的名字。六年后，在另一个大陆，用另一种语言生活的时候，她半夜喊了我的名字。</p>
-
-        <p>她站起来拉我进舞池。我们都不会跳，就是晃。她银发甩来甩去完全不跟拍。我也是乱晃。像两个在培养皿里挣扎的细胞，做着毫无意义的布朗运动。但那一刻我比过去六年任何时候都清醒。她没有变。她还是那个在读书会上说"自指就是镜子照镜子"的女生。还是那个在雨里忽然说"你是喜欢我吧"的女生。时间在她身上做了很多事——给她一个博士学位，一段失败的婚姻，一头银灰色的头发，一个DNA纹身。但她的核，那个十几年前让我心动的核，还在。</p>
-
-        <div class="story-divider">· · ·</div>
-
-        <p>凌晨三点从夜店出来，街上很冷。她把我的外套披上，我问她这次回国待多久。</p>
-
-        <p>"不走了。申了高校的教职，过了。"</p>
-
-        <p>"你什么时候申的。"</p>
-
-        <p>"半年前。面试的时候没告诉你。怕分心。"</p>
-
-        <p>"你半年不跟我说一声，现在回国第一件事就是把我叫出来。"</p>
-
-        <p>"对。"</p>
-
-        <p>"对什么对。"</p>
-
-        <p>路灯很亮，北京三月的风吹得人脸疼。她锁骨上那个DNA纹身，双螺旋，A配T，C配G。精密的、完美的配对法则。但人是会错配的。我花了六年证明这个。</p>
-
-        <p>然后她踮起脚吻我。嘴唇有点干，带着酒味和冷空气。口袋里的手机震了一下。我知道是谁，但我没看。这是我自己的规则，我自己写的文档。</p>
-
-        <p>她松开我，退后一步，眼眶有点红。</p>
-
-        <p>"你们那个文档，"她说，"有没有写前女友怎么办。"</p>
-
-        <p>"没有。"</p>
-
-        <p>"那你要不要加一条。"</p>
-
-        <p>我看着她锁骨上的双螺旋。然后问了一个我自己都没想到的问题。那个问题我在心里放了六年，从来没想过会在凌晨三点的街头问出来。但看着她眼眶红红的样子，我觉得再不问就老了。</p>
-
-        <p><strong>"程知意，你当初说不要异地的时候，是觉得我不值得，还是觉得自己不配。"</strong></p>
-
-        <p>风吹过来，头发遮住她半边脸。过了很久。</p>
-
-        <p><strong>"第二个。"</strong>她说。</p>
-
-        <p>我没有说话。我忽然想起高中时候读过的那个故事。一个叫Harald的国王，用两个字母拼成了一个新的符号，把两个名字锁在一起。那个符号后来叫蓝牙。六年前在雨里，她问我你是喜欢我吧。六年后在路灯下，她告诉我她觉得自己不配。这六年里，她去欧洲，做科研，发Nature子刊，漂头发，纹身，离婚。我以为她什么都知道，其实她什么都不知道。不知道我一直在等她后悔，不知道自己值得被等。</p>
-
-        <p>我伸手把她被风吹乱的头发拢到耳后。她的耳朵很凉。</p>
-
-        <p>"程知意。"我说。</p>
-
-        <p>"嗯。"</p>
-
-        <p>"那个文档，我会加一条。"</p>
-
-        <p>她抬头看我。</p>
-
-        <p><strong>"前女友不在前女友条款里。另外起一章。"</strong></p>
-
-        <p>她愣了一下，然后笑了。眼睛弯成那个弧度，那个十六岁时在读书会上说"海报好看"的弧度。</p>
-
-        <p>"新章节叫什么。"她问。</p>
-
-        <p><strong>"蓝牙。"</strong></p>
-
-        <p>路灯很亮。风吹着她的银发，锁骨上的双螺旋在灯光下若隐若现。A配T，C配G。完美的配对法则。人不是碱基，人会错配，会走散，会绕地球一圈然后回到原点。但那天晚上站在街头，我忽然觉得，也许有些东西从来就没有错配过。</p>
-
-        <div class="section-divider"><i class="fas fa-feather"></i></div>
-
-        <h2 id="关于这个故事"><i class="fas fa-info-circle"></i> 关于这个故事</h2>
-
-        <div class="insight-box">
-            <p>这篇叫《蓝牙-陆知意岛》。陆屿的陆，程知意的知意，陆地上的一座岛。名字拼在一起，就是整个故事的密码。</p>
-            <p>为什么叫"蓝牙"？因为蓝牙那个标志，是北欧古字母H和B拼在一起。Harald Bluetooth，一个统一了丹麦和挪威的国王。他的标志就是把两个名字锁在一起。</p>
-            <p>陆屿和程知意，也是两个名字锁在一起。</p>
-        </div>
-
-        <p>写这个故事，其实想写的是一种少年感。不是年纪，是那种人老心不老的状态。陆屿做着AI，同事们叫他岛神，但他看到那条消息的时候，手指还是会僵住。程知意在欧洲漂了三次头发，锁骨上纹着DNA，但她还是会说梦话，还是会喊出那个名字。他们一个在旧金山，一个在苏黎世，绕了地球大半圈，最后在北京凌晨三点的路灯下，问的还是一个十六岁才会问的问题——你是觉得我不值得，还是觉得自己不配。</p>
-
-        <p>我想写的，就是这种感觉。不管经历了多少事，结婚、离婚、漂洋过海、发论文、改Bug，在面对某个人的时候，你还是会回到最原来的样子。那种笨拙的、直接的、不知道从哪里来的勇气，还在。它没有被时间磨掉，也没有被法则驯服。</p>
-
-        <p><strong>我写法则，也写故事。法则是为了驾驭复杂，故事是为了留住那些不能被法则驯服的东西。</strong>比如凌晨三点的路灯，比如一句等了六年才问出口的话，比如那个银灰色头发的女人踮起脚吻你的时候，口袋里的手机在震，但你不想接。</p>
-
+                <section class="helix-entry">
+                    <div class="helix-card helix-card--lu">
+                        <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
+                        <h2 class="helix-title" id="关于这个故事">蓝牙注释</h2>
+                        <div class="helix-subtitle">作者解释标题，也解释陆屿为什么会被这一章改写</div>
+                        <p>《蓝牙：陆知意岛》这个名字，本身就是拼合。陆屿的陆，程知意的知意，陆地上的一座岛；而蓝牙符号，本来也是把两个名字锁在一起。</p>
+                        <p>陆屿这样的人擅长建法则、写文档、替复杂系统立边界，但他最动人的部分恰恰在于：面对某个人时，他还是会回到最原来的样子。</p>
+                    </div>
+                    <div class="helix-axis">
+                        <span class="helix-node">HB</span>
+                        <span class="helix-pair">appendix</span>
+                    </div>
+                    <div class="helix-card helix-card--cheng">
+                        <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
+                        <h2 class="helix-title">法则以外的那部分</h2>
+                        <div class="helix-subtitle">她让“配对法则”第一次承认活人并不总按公式运行</div>
+                        <p>她在欧洲漂过头发、纹过 DNA、结过婚又离过婚，可最后仍然会在梦里喊出那个名字。这篇想写的不是年少旧情复燃，而是少年感没有死。</p>
+                        <p><strong>法则是为了驾驭复杂，故事是为了留住那些不能被法则驯服的东西。</strong> 比如凌晨三点的路灯，比如一句等了六年才问出口的话，比如一个看起来冷静的人终于承认，她不是不爱，只是一直觉得自己不配。</p>
+                    </div>
+                </section>
+            </div>
         </article>
 
         <!-- ===== 评论区 ===== -->
