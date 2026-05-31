@@ -630,6 +630,46 @@
         margin: 0;
         color: #52463b;
     }
+    .motif-console__panel-footer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px dashed rgba(93, 76, 59, 0.12);
+    }
+    .motif-console__match-meta {
+        font-size: 12px;
+        color: #6b5d4f;
+    }
+    .motif-console__jump-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 11px;
+        border: 1px solid rgba(185, 140, 75, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 249, 238, 0.92);
+        color: #6a4f2a;
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+        transition: transform 220ms ease, background-color 220ms ease, border-color 220ms ease, opacity 220ms ease;
+    }
+    .motif-console__jump-btn:hover,
+    .motif-console__jump-btn:focus-visible {
+        transform: translateY(-1px);
+        background: rgba(255, 244, 222, 0.96);
+        border-color: rgba(185, 140, 75, 0.26);
+        outline: none;
+    }
+    .motif-console__jump-btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+    }
     .motif-console__grid {
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1224,6 +1264,10 @@
                                 <strong><i class="fas fa-lightbulb"></i> 当前意象</strong>
                                 <h3>环形连接正在待机</h3>
                                 <p>从下方选择一个意象节点。它会在四宫格里显露出真正的跨声部回响。</p>
+                                <div class="motif-console__panel-footer">
+                                    <span class="motif-console__match-meta" id="motif-match-meta">共命中 0 处</span>
+                                    <button class="motif-console__jump-btn" id="motif-next-hit" type="button" disabled><i class="fas fa-location-arrow"></i> 下一处</button>
+                                </div>
                             </div>
                         </div>
                         <div class="motif-console__grid">
@@ -1452,6 +1496,8 @@
     const motifGuide = document.getElementById("motif-guide");
     const motifGuideDismiss = document.getElementById("motif-guide-dismiss");
     const motifModeBadge = document.getElementById("motif-mode-badge");
+    const motifMatchMeta = document.getElementById("motif-match-meta");
+    const motifNextHitButton = document.getElementById("motif-next-hit");
     const motifNodes = Array.from(document.querySelectorAll(".motif-node"));
     const movementCards = Array.from(document.querySelectorAll(".movement-card[data-motifs]"));
     const motifLinks = Array.from(document.querySelectorAll(".motif-link[data-motif-ref]"));
@@ -1465,18 +1511,40 @@
     const consoleConnections = [];
     const consoleDots = [];
     const networkConnections = [];
+    let currentPrimaryCode = "";
+    let currentMatchIndex = -1;
     let focusResetTimer = 0;
     let consoleMode = "auto";
 
     const getMotifCodes = (card) => (card.dataset.motifs || "").split(/\s+/).filter(Boolean);
 
-    const focusMatchedCard = (code) => {
-        if (!code) {
+    const getMatchingCards = (code) => movementCards.filter((card) => getMotifCodes(card).includes(code));
+
+    const isCardFullyVisible = (card) => {
+        const rect = card.getBoundingClientRect();
+        return rect.top >= 96 && rect.bottom <= window.innerHeight - 72;
+    };
+
+    const updateMatchMeta = (code = "", matchIndex = -1) => {
+        if (!motifMatchMeta || !motifNextHitButton) {
             return;
         }
 
-        const targetCard = movementCards.find((card) => getMotifCodes(card).includes(code));
+        const matches = code ? getMatchingCards(code) : [];
+        if (!matches.length) {
+            motifMatchMeta.textContent = "共命中 0 处";
+            motifNextHitButton.disabled = true;
+            return;
+        }
+
+        const safeIndex = matchIndex >= 0 ? matchIndex + 1 : 1;
+        motifMatchMeta.textContent = `共命中 ${matches.length} 处 · 当前 ${safeIndex}/${matches.length}`;
+        motifNextHitButton.disabled = matches.length < 2;
+    };
+
+    const focusMatchedCard = (targetCard, code = "") => {
         if (!targetCard) {
+            updateMatchMeta(code, -1);
             return;
         }
 
@@ -1494,6 +1562,48 @@
             targetCard.classList.remove("is-jump-focus");
             targetCard.removeAttribute("tabindex");
         }, 2200);
+    };
+
+    const jumpToMotifMatch = (code, mode = "nearest") => {
+        const matches = getMatchingCards(code);
+        if (!matches.length) {
+            currentPrimaryCode = code;
+            currentMatchIndex = -1;
+            updateMatchMeta(code, -1);
+            return;
+        }
+
+        let targetIndex = 0;
+        if (mode === "next" && currentPrimaryCode === code && currentMatchIndex >= 0) {
+            targetIndex = (currentMatchIndex + 1) % matches.length;
+        } else {
+            const viewportCenter = window.innerHeight * 0.5;
+            const incompleteMatches = matches
+                .map((card, index) => ({
+                    card,
+                    index,
+                    rect: card.getBoundingClientRect(),
+                }))
+                .filter(({ card }) => !isCardFullyVisible(card));
+
+            const pool = incompleteMatches.length ? incompleteMatches : matches.map((card, index) => ({
+                card,
+                index,
+                rect: card.getBoundingClientRect(),
+            }));
+
+            pool.sort((left, right) => {
+                const leftDistance = Math.abs((left.rect.top + left.rect.bottom) * 0.5 - viewportCenter);
+                const rightDistance = Math.abs((right.rect.top + right.rect.bottom) * 0.5 - viewportCenter);
+                return leftDistance - rightDistance;
+            });
+            targetIndex = pool[0] ? pool[0].index : 0;
+        }
+
+        currentPrimaryCode = code;
+        currentMatchIndex = targetIndex;
+        updateMatchMeta(code, targetIndex);
+        focusMatchedCard(matches[targetIndex], code);
     };
 
     const updateModeBadge = (primaryCode = "") => {
@@ -1662,6 +1772,7 @@
 
     const setMotifState = (codes = [], primaryCode = "") => {
         const activeCodes = Array.from(new Set(codes.filter(Boolean)));
+        currentPrimaryCode = primaryCode || currentPrimaryCode;
         motifNodes.forEach((node) => {
             const nodeCode = node.dataset.motifCode || "";
             node.classList.toggle("is-active", nodeCode === primaryCode && Boolean(primaryCode));
@@ -1684,8 +1795,11 @@
         updateConsoleNetworkState(activeCodes, primaryCode);
         updateNetworkState(activeCodes);
         updateModeBadge(primaryCode);
+        updateMatchMeta(primaryCode, currentPrimaryCode === primaryCode ? currentMatchIndex : -1);
 
         if (!primaryCode) {
+            currentPrimaryCode = "";
+            currentMatchIndex = -1;
             heading.textContent = "环形连接正在待机";
             description.textContent = "从下方选择一个意象节点。它会在四宫格里显露出真正的跨声部回响。";
             return;
@@ -1737,8 +1851,17 @@
         node.addEventListener("focus", activate);
         node.addEventListener("click", () => {
             activate();
-            focusMatchedCard(node.dataset.motifCode || "");
+            jumpToMotifMatch(node.dataset.motifCode || "", "nearest");
         });
+    });
+
+    motifNextHitButton && motifNextHitButton.addEventListener("click", () => {
+        if (!currentPrimaryCode) {
+            return;
+        }
+        consoleMode = "manual";
+        setMotifState([currentPrimaryCode], currentPrimaryCode);
+        jumpToMotifMatch(currentPrimaryCode, "next");
     });
 
     motifConsole.addEventListener("mouseleave", () => {
