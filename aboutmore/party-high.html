@@ -315,14 +315,45 @@
         box-shadow: 0 10px 24px rgba(48, 34, 20, 0.05);
     }
     .quartet-grid {
+        position: relative;
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 14px;
         align-items: start;
     }
+    .quartet-grid__network {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        overflow: visible;
+    }
+    .quartet-grid__path {
+        fill: none;
+        stroke: rgba(185, 140, 75, 0.12);
+        stroke-width: 1.45;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    .quartet-grid__node {
+        fill: rgba(255, 250, 240, 0.88);
+        stroke: rgba(185, 140, 75, 0.18);
+        stroke-width: 1.15;
+    }
+    .quartet-grid__path.is-related {
+        stroke: rgba(185, 140, 75, 0.24);
+        filter: drop-shadow(0 0 10px rgba(185, 140, 75, 0.18));
+    }
+    .quartet-grid__node.is-related {
+        fill: rgba(255, 247, 232, 0.98);
+        stroke: rgba(185, 140, 75, 0.28);
+    }
     .voice-lane {
         padding: 18px;
         position: relative;
+        z-index: 1;
     }
     .voice-lane::after {
         content: "";
@@ -611,6 +642,9 @@
     @media (max-width: 1120px) {
         .quartet-grid {
             grid-template-columns: 1fr;
+        }
+        .quartet-grid__network {
+            display: none;
         }
     }
     @media (max-width: 1120px) {
@@ -1098,6 +1132,7 @@
                     </div>
 
                     <div class="quartet-grid">
+                        <svg class="quartet-grid__network" aria-hidden="true"></svg>
                         <div class="voice-lane voice-lane--zhiyi">
                             <div class="lane-head">
                                 <span><i class="fas fa-flask"></i> 第一声部 · 程知意</span>
@@ -1289,20 +1324,103 @@
 <div class="footer-note">附记：本页把“四重奏 + 瞬间谱”直接做成四声部并置阅读器。竖读时看见人物各自的人生演变，横读时听见同一季节里的复调回响；十个共享意象则负责把四条声部重新闭成一个环。</div>
 <script>
 (() => {
+    const svgNs = "http://www.w3.org/2000/svg";
     const consolePanel = document.getElementById("motif-panel");
     const quartetGrid = document.querySelector(".quartet-grid");
+    const quartetNetwork = document.querySelector(".quartet-grid__network");
     const motifConsole = document.querySelector(".motif-console");
     const motifNodes = Array.from(document.querySelectorAll(".motif-node"));
     const movementCards = Array.from(document.querySelectorAll(".movement-card[data-motifs]"));
     const motifLinks = Array.from(document.querySelectorAll(".motif-link[data-motif-ref]"));
 
-    if (!consolePanel || !quartetGrid || !motifConsole || !motifNodes.length || !movementCards.length) {
+    if (!consolePanel || !quartetGrid || !quartetNetwork || !motifConsole || !motifNodes.length || !movementCards.length) {
         return;
     }
 
     const heading = consolePanel.querySelector("h3");
     const description = consolePanel.querySelector("p");
+    const networkConnections = [];
     let consoleMode = "auto";
+
+    const getMotifCodes = (card) => (card.dataset.motifs || "").split(/\s+/).filter(Boolean);
+
+    const updateNetworkGeometry = () => {
+        if (window.innerWidth <= 1120) {
+            return;
+        }
+
+        const gridRect = quartetGrid.getBoundingClientRect();
+        quartetNetwork.setAttribute("viewBox", `0 0 ${Math.max(gridRect.width, 1)} ${Math.max(gridRect.height, 1)}`);
+
+        networkConnections.forEach((connection) => {
+            const [leftCard, rightCard] = connection.cards;
+            const leftRect = leftCard.getBoundingClientRect();
+            const rightRect = rightCard.getBoundingClientRect();
+            const startX = leftRect.right - gridRect.left - 18;
+            const startY = leftRect.top - gridRect.top + (leftRect.height * 0.5);
+            const endX = rightRect.left - gridRect.left + 18;
+            const endY = rightRect.top - gridRect.top + (rightRect.height * 0.5);
+            const bend = Math.max((endX - startX) * 0.28, 56);
+
+            connection.path.setAttribute("d", `M ${startX} ${startY} C ${startX + bend} ${startY}, ${endX - bend} ${endY}, ${endX} ${endY}`);
+            connection.startNode.setAttribute("cx", `${startX}`);
+            connection.startNode.setAttribute("cy", `${startY}`);
+            connection.endNode.setAttribute("cx", `${endX}`);
+            connection.endNode.setAttribute("cy", `${endY}`);
+        });
+    };
+
+    const ensureNetwork = () => {
+        quartetNetwork.innerHTML = "";
+        networkConnections.length = 0;
+
+        const lanes = Array.from(quartetGrid.querySelectorAll(".voice-lane"));
+        const lanePairs = [
+            [lanes[0], lanes[1]],
+            [lanes[2], lanes[3]],
+        ].filter(([leftLane, rightLane]) => leftLane && rightLane);
+
+        lanePairs.forEach(([leftLane, rightLane]) => {
+            const leftCards = Array.from(leftLane.querySelectorAll(".movement-card[data-motifs]"));
+            const rightCards = Array.from(rightLane.querySelectorAll(".movement-card[data-motifs]"));
+            const total = Math.min(leftCards.length, rightCards.length);
+
+            for (let index = 0; index < total; index += 1) {
+                const path = document.createElementNS(svgNs, "path");
+                path.setAttribute("class", "quartet-grid__path");
+
+                const startNode = document.createElementNS(svgNs, "circle");
+                startNode.setAttribute("class", "quartet-grid__node");
+                startNode.setAttribute("r", "4.5");
+
+                const endNode = document.createElementNS(svgNs, "circle");
+                endNode.setAttribute("class", "quartet-grid__node");
+                endNode.setAttribute("r", "4.5");
+
+                quartetNetwork.appendChild(path);
+                quartetNetwork.appendChild(startNode);
+                quartetNetwork.appendChild(endNode);
+
+                networkConnections.push({
+                    cards: [leftCards[index], rightCards[index]],
+                    path,
+                    startNode,
+                    endNode,
+                });
+            }
+        });
+
+        updateNetworkGeometry();
+    };
+
+    const updateNetworkState = (activeCodes = []) => {
+        networkConnections.forEach((connection) => {
+            const isRelated = activeCodes.length > 0 && connection.cards.some((card) => getMotifCodes(card).some((code) => activeCodes.includes(code)));
+            connection.path.classList.toggle("is-related", isRelated);
+            connection.startNode.classList.toggle("is-related", isRelated);
+            connection.endNode.classList.toggle("is-related", isRelated);
+        });
+    };
 
     const setMotifState = (codes = [], primaryCode = "") => {
         const activeCodes = Array.from(new Set(codes.filter(Boolean)));
@@ -1319,12 +1437,13 @@
         quartetGrid.classList.toggle("is-motif-filtering", activeCodes.length > 0);
 
         movementCards.forEach((card) => {
-            const motifs = (card.dataset.motifs || "").split(/\s+/).filter(Boolean);
+            const motifs = getMotifCodes(card);
             const isPrimaryMatch = Boolean(primaryCode) && motifs.includes(primaryCode);
             const isRelated = activeCodes.some((code) => motifs.includes(code));
             card.classList.toggle("is-motif-match", isPrimaryMatch);
             card.classList.toggle("is-motif-related", isRelated);
         });
+        updateNetworkState(activeCodes);
 
         if (!primaryCode) {
             heading.textContent = "环形连接正在待机";
@@ -1364,7 +1483,7 @@
             return;
         }
 
-        const motifs = (bestCard.dataset.motifs || "").split(/\s+/).filter(Boolean);
+        const motifs = getMotifCodes(bestCard);
         setMotifState(motifs, motifs[0] || "");
     };
 
@@ -1403,9 +1522,11 @@
         });
     };
 
+    ensureNetwork();
     syncFromScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
+    window.addEventListener("resize", ensureNetwork, { passive: true });
 })();
 </script>
 </body>
