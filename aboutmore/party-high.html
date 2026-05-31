@@ -460,26 +460,126 @@
         z-index: 0;
         pointer-events: none;
         opacity: 0.75;
-    }
-    .motif-console__network svg {
-        display: block;
         width: 100%;
         height: 100%;
     }
-    .motif-console__network path {
+    .motif-console__path {
         fill: none;
         stroke: rgba(185, 140, 75, 0.14);
-        stroke-width: 1.5;
+        stroke-width: 1.4;
         stroke-linecap: round;
         stroke-linejoin: round;
+        transition: stroke 220ms ease, stroke-width 220ms ease, opacity 220ms ease, filter 220ms ease;
     }
-    .motif-console__network .network-accent {
-        stroke: rgba(90, 123, 100, 0.18);
+    .motif-console__path.is-secondary {
+        stroke: rgba(90, 123, 100, 0.16);
     }
-    .motif-console__network circle {
+    .motif-console__path.is-related {
+        stroke: rgba(185, 140, 75, 0.24);
+        opacity: 0.98;
+    }
+    .motif-console__path.is-primary {
+        stroke: rgba(185, 140, 75, 0.34);
+        stroke-width: 2.1;
+        filter: drop-shadow(0 0 10px rgba(185, 140, 75, 0.22));
+        opacity: 1;
+    }
+    .motif-console__dot {
         fill: rgba(255, 250, 240, 0.92);
         stroke: rgba(185, 140, 75, 0.2);
         stroke-width: 1.2;
+        transition: fill 220ms ease, stroke 220ms ease, opacity 220ms ease, transform 220ms ease;
+    }
+    .motif-console__dot.is-related {
+        fill: rgba(255, 246, 229, 0.98);
+        stroke: rgba(185, 140, 75, 0.28);
+        opacity: 1;
+    }
+    .motif-console__dot.is-primary {
+        fill: rgba(255, 239, 209, 1);
+        stroke: rgba(185, 140, 75, 0.4);
+    }
+    .motif-guide {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: start;
+        margin-bottom: 14px;
+        padding: 12px 14px;
+        border-radius: 18px;
+        border: 1px solid rgba(185, 140, 75, 0.16);
+        background: linear-gradient(180deg, rgba(255, 250, 242, 0.96), rgba(248, 240, 226, 0.9));
+    }
+    .motif-guide.is-hidden {
+        display: none;
+    }
+    .motif-guide__meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+    .motif-guide__eyebrow,
+    .motif-guide__status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 9px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    .motif-guide__eyebrow {
+        color: #6d5534;
+        background: rgba(255,255,255,0.82);
+        border: 1px solid rgba(185, 140, 75, 0.16);
+    }
+    .motif-guide__status {
+        color: #315044;
+        background: rgba(240, 248, 243, 0.9);
+        border: 1px solid rgba(90, 123, 100, 0.16);
+    }
+    .motif-guide p {
+        margin: 0 0 10px;
+        color: #5a4d41;
+    }
+    .motif-guide__steps {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .motif-guide__steps span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.82);
+        border: 1px solid rgba(93, 76, 59, 0.1);
+        font-size: 12px;
+        color: #65584c;
+    }
+    .motif-guide__dismiss {
+        align-self: center;
+        padding: 8px 12px;
+        border: 0;
+        border-radius: 999px;
+        background: rgba(47, 39, 31, 0.08);
+        color: #4c4136;
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background-color 220ms ease, color 220ms ease, transform 220ms ease;
+    }
+    .motif-guide__dismiss:hover,
+    .motif-guide__dismiss:focus-visible {
+        background: rgba(47, 39, 31, 0.14);
+        color: #2f271f;
+        transform: translateY(-1px);
+        outline: none;
     }
     .motif-console__intro {
         display: grid;
@@ -604,6 +704,11 @@
         box-shadow: 0 20px 36px rgba(67, 48, 22, 0.1);
         background: linear-gradient(180deg, rgba(255, 251, 243, 0.98), rgba(248, 241, 230, 0.92));
     }
+    .movement-card.is-jump-focus {
+        border-color: rgba(185, 140, 75, 0.34);
+        box-shadow: 0 0 0 3px rgba(185, 140, 75, 0.14), 0 24px 44px rgba(67, 48, 22, 0.12);
+        background: linear-gradient(180deg, rgba(255, 248, 236, 0.99), rgba(248, 240, 225, 0.94));
+    }
     .quartet-grid.is-motif-filtering .movement-card:not(.is-motif-match) {
         opacity: 0.52;
         filter: saturate(0.78);
@@ -687,6 +792,21 @@
         }
         .motif-console {
             padding: 16px;
+        }
+        .motif-guide {
+            grid-template-columns: 1fr;
+        }
+        .movement-card {
+            padding: 16px 15px;
+        }
+        .movement-card p {
+            font-size: 14px;
+            line-height: 1.82;
+        }
+        .movement-card p + p {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(93, 76, 59, 0.14);
         }
     }
 </style>
@@ -1079,22 +1199,21 @@
                 <h2 id="四重奏正文">四重奏正文</h2>
                 <div class="quartet-shell">
                     <div class="motif-console" aria-label="共享意象控制台">
-                        <div class="motif-console__network" aria-hidden="true">
-                            <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
-                                <path d="M90 206 C180 122, 255 124, 336 206 S505 288, 584 206 S747 124, 826 206 S995 288, 1110 170"></path>
-                                <path class="network-accent" d="M90 120 C182 194, 255 196, 336 120 S505 46, 584 120 S747 194, 826 120 S995 46, 1110 138"></path>
-                                <path d="M90 206 L90 120 M336 206 L336 120 M584 206 L584 120 M826 206 L826 120 M1110 170 L1110 138"></path>
-                                <circle cx="90" cy="206" r="8"></circle>
-                                <circle cx="336" cy="206" r="8"></circle>
-                                <circle cx="584" cy="206" r="8"></circle>
-                                <circle cx="826" cy="206" r="8"></circle>
-                                <circle cx="1110" cy="170" r="8"></circle>
-                                <circle cx="90" cy="120" r="8"></circle>
-                                <circle cx="336" cy="120" r="8"></circle>
-                                <circle cx="584" cy="120" r="8"></circle>
-                                <circle cx="826" cy="120" r="8"></circle>
-                                <circle cx="1110" cy="138" r="8"></circle>
-                            </svg>
+                        <svg class="motif-console__network" aria-hidden="true"></svg>
+                        <div class="motif-guide" id="motif-guide">
+                            <div>
+                                <div class="motif-guide__meta">
+                                    <span class="motif-guide__eyebrow"><i class="fas fa-compass"></i> 阅读导引</span>
+                                    <span class="motif-guide__status" id="motif-mode-badge"><i class="fas fa-wave-square"></i> 自动巡航中</span>
+                                </div>
+                                <p>第一次进入这页，可以把它当成一张可调试的复调谱面：先点一个意象，再滚动正文，最后看上下两层虫洞回路怎样一起响应。</p>
+                                <div class="motif-guide__steps">
+                                    <span><i class="fas fa-hand-pointer"></i> 先点意象节点</span>
+                                    <span><i class="fas fa-arrows-up-down"></i> 再滚动四宫格</span>
+                                    <span><i class="fas fa-share-nodes"></i> 看连线一起带亮</span>
+                                </div>
+                            </div>
+                            <button class="motif-guide__dismiss" id="motif-guide-dismiss" type="button">收起导引</button>
                         </div>
                         <div class="motif-console__intro">
                             <div>
@@ -1328,21 +1447,140 @@
     const consolePanel = document.getElementById("motif-panel");
     const quartetGrid = document.querySelector(".quartet-grid");
     const quartetNetwork = document.querySelector(".quartet-grid__network");
+    const consoleNetwork = document.querySelector(".motif-console__network");
     const motifConsole = document.querySelector(".motif-console");
+    const motifGuide = document.getElementById("motif-guide");
+    const motifGuideDismiss = document.getElementById("motif-guide-dismiss");
+    const motifModeBadge = document.getElementById("motif-mode-badge");
     const motifNodes = Array.from(document.querySelectorAll(".motif-node"));
     const movementCards = Array.from(document.querySelectorAll(".movement-card[data-motifs]"));
     const motifLinks = Array.from(document.querySelectorAll(".motif-link[data-motif-ref]"));
 
-    if (!consolePanel || !quartetGrid || !quartetNetwork || !motifConsole || !motifNodes.length || !movementCards.length) {
+    if (!consolePanel || !quartetGrid || !quartetNetwork || !consoleNetwork || !motifConsole || !motifNodes.length || !movementCards.length) {
         return;
     }
 
     const heading = consolePanel.querySelector("h3");
     const description = consolePanel.querySelector("p");
+    const consoleConnections = [];
+    const consoleDots = [];
     const networkConnections = [];
+    let focusResetTimer = 0;
     let consoleMode = "auto";
 
     const getMotifCodes = (card) => (card.dataset.motifs || "").split(/\s+/).filter(Boolean);
+
+    const focusMatchedCard = (code) => {
+        if (!code) {
+            return;
+        }
+
+        const targetCard = movementCards.find((card) => getMotifCodes(card).includes(code));
+        if (!targetCard) {
+            return;
+        }
+
+        movementCards.forEach((card) => card.classList.remove("is-jump-focus"));
+        window.clearTimeout(focusResetTimer);
+
+        targetCard.classList.add("is-jump-focus");
+        targetCard.setAttribute("tabindex", "-1");
+        targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+        window.requestAnimationFrame(() => {
+            targetCard.focus({ preventScroll: true });
+        });
+
+        focusResetTimer = window.setTimeout(() => {
+            targetCard.classList.remove("is-jump-focus");
+            targetCard.removeAttribute("tabindex");
+        }, 2200);
+    };
+
+    const updateModeBadge = (primaryCode = "") => {
+        if (!motifModeBadge) {
+            return;
+        }
+        const icon = consoleMode === "manual" ? "fa-hand-pointer" : "fa-wave-square";
+        const label = consoleMode === "manual"
+            ? `手动锁定${primaryCode ? ` · ${primaryCode}` : ""}`
+            : `${primaryCode ? `自动巡航 · ${primaryCode}` : "自动巡航中"}`;
+        motifModeBadge.innerHTML = `<i class="fas ${icon}"></i> ${label}`;
+    };
+
+    const setGuideVisibility = (hidden) => {
+        if (!motifGuide) {
+            return;
+        }
+        motifGuide.classList.toggle("is-hidden", hidden);
+        try {
+            window.localStorage.setItem("party-high-guide-dismissed", hidden ? "1" : "0");
+        } catch (error) {
+            // Ignore storage failures and keep the guide functional for this session.
+        }
+    };
+
+    const ensureConsoleNetwork = () => {
+        if (window.innerWidth <= 1120) {
+            return;
+        }
+
+        consoleNetwork.innerHTML = "";
+        consoleConnections.length = 0;
+        consoleDots.length = 0;
+
+        const consoleRect = motifConsole.getBoundingClientRect();
+        consoleNetwork.setAttribute("viewBox", `0 0 ${Math.max(consoleRect.width, 1)} ${Math.max(consoleRect.height, 1)}`);
+
+        const anchors = motifNodes.map((node) => {
+            const rect = node.getBoundingClientRect();
+            return {
+                code: node.dataset.motifCode || "",
+                x: rect.left - consoleRect.left + (rect.width * 0.5),
+                y: rect.top - consoleRect.top + (rect.height * 0.5),
+            };
+        });
+
+        const ringPairs = anchors.map((anchor, index) => [anchor, anchors[(index + 1) % anchors.length], index >= 5]);
+        const bridgePairs = [0, 1, 2, 3, 4]
+            .map((index) => [anchors[index], anchors[index + 5], false])
+            .filter(([start, end]) => start && end);
+
+        [...ringPairs, ...bridgePairs].forEach(([start, end, secondary]) => {
+            if (!start || !end) {
+                return;
+            }
+            const path = document.createElementNS(svgNs, "path");
+            path.setAttribute("class", `motif-console__path${secondary ? " is-secondary" : ""}`);
+            const bendY = Math.abs(end.x - start.x) < 40 ? 48 : 26;
+            const midY = Math.min(start.y, end.y) - bendY;
+            path.setAttribute("d", `M ${start.x} ${start.y} C ${start.x} ${midY}, ${end.x} ${midY}, ${end.x} ${end.y}`);
+            consoleNetwork.appendChild(path);
+            consoleConnections.push({ path, codes: [start.code, end.code] });
+        });
+
+        anchors.forEach((anchor) => {
+            const dot = document.createElementNS(svgNs, "circle");
+            dot.setAttribute("class", "motif-console__dot");
+            dot.setAttribute("cx", `${anchor.x}`);
+            dot.setAttribute("cy", `${anchor.y}`);
+            dot.setAttribute("r", "6");
+            consoleNetwork.appendChild(dot);
+            consoleDots.push({ dot, code: anchor.code });
+        });
+    };
+
+    const updateConsoleNetworkState = (activeCodes = [], primaryCode = "") => {
+        consoleConnections.forEach((connection) => {
+            const hasPrimary = Boolean(primaryCode) && connection.codes.includes(primaryCode);
+            const isRelated = activeCodes.length > 0 && connection.codes.some((code) => activeCodes.includes(code));
+            connection.path.classList.toggle("is-related", isRelated);
+            connection.path.classList.toggle("is-primary", hasPrimary);
+        });
+        consoleDots.forEach(({ dot, code }) => {
+            dot.classList.toggle("is-related", activeCodes.includes(code));
+            dot.classList.toggle("is-primary", code === primaryCode && Boolean(primaryCode));
+        });
+    };
 
     const updateNetworkGeometry = () => {
         if (window.innerWidth <= 1120) {
@@ -1443,7 +1681,9 @@
             card.classList.toggle("is-motif-match", isPrimaryMatch);
             card.classList.toggle("is-motif-related", isRelated);
         });
+        updateConsoleNetworkState(activeCodes, primaryCode);
         updateNetworkState(activeCodes);
+        updateModeBadge(primaryCode);
 
         if (!primaryCode) {
             heading.textContent = "环形连接正在待机";
@@ -1495,7 +1735,10 @@
         };
         node.addEventListener("mouseenter", activate);
         node.addEventListener("focus", activate);
-        node.addEventListener("click", activate);
+        node.addEventListener("click", () => {
+            activate();
+            focusMatchedCard(node.dataset.motifCode || "");
+        });
     });
 
     motifConsole.addEventListener("mouseleave", () => {
@@ -1510,6 +1753,10 @@
         syncFromScroll();
     });
 
+    motifGuideDismiss && motifGuideDismiss.addEventListener("click", () => {
+        setGuideVisibility(true);
+    });
+
     let ticking = false;
     const onScroll = () => {
         if (ticking) {
@@ -1522,10 +1769,20 @@
         });
     };
 
+    try {
+        if (window.localStorage.getItem("party-high-guide-dismissed") === "1") {
+            setGuideVisibility(true);
+        }
+    } catch (error) {
+        // Ignore storage failures and leave the guide visible.
+    }
+
+    ensureConsoleNetwork();
     ensureNetwork();
     syncFromScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
+    window.addEventListener("resize", ensureConsoleNetwork, { passive: true });
     window.addEventListener("resize", ensureNetwork, { passive: true });
 })();
 </script>
