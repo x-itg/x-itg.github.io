@@ -177,6 +177,91 @@
         white-space: nowrap;
     }
 
+    .story-constellation {
+        margin: 30px 0;
+        padding: 24px;
+        border-radius: 20px;
+        border: 1px solid #f3cfa1;
+        background: radial-gradient(circle at 85% 18%, rgba(59, 130, 246, 0.10), transparent 22%), radial-gradient(circle at 10% 0%, rgba(249, 168, 212, 0.12), transparent 20%), linear-gradient(135deg, #fffaf1 0%, #fff2df 52%, #fff8ef 100%);
+        box-shadow: 0 14px 28px rgba(217,119,6,0.08);
+    }
+    .story-constellation__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #8b5e1f;
+    }
+    .story-constellation__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.12fr) minmax(260px, 0.88fr);
+        gap: 16px;
+    }
+    .story-constellation__main,
+    .story-constellation__side {
+        padding: 18px;
+        border-radius: 16px;
+        border: 1px solid rgba(251, 191, 36, 0.18);
+        background: rgba(255,255,255,0.78);
+    }
+    .story-constellation__main h3,
+    .story-constellation__side h3 {
+        margin: 0 0 8px;
+        font-size: 20px;
+        color: #1c1917;
+    }
+    .story-constellation__main p,
+    .story-constellation__side p {
+        margin: 0 0 12px;
+        font-size: 14px;
+        color: #5f564c;
+        text-align: left;
+    }
+    .story-constellation__tracks,
+    .story-constellation__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .story-constellation__tracks span,
+    .story-constellation__links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        font-size: 12px;
+        text-decoration: none;
+        border: 1px solid #f2dfbd;
+        background: #fffaf2;
+        color: #8a4d14;
+    }
+    .story-constellation__links a:hover {
+        color: #245f9c;
+        border-color: #cddded;
+        background: #f7fbff;
+    }
+    .story-constellation__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: linear-gradient(135deg,#d97706,#f59e0b);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .story-constellation__cta:hover {
+        color: #fff;
+        text-decoration: none;
+        background: linear-gradient(135deg,#c05f00,#dd8a00);
+    }
+
     .keyword-tag {
         display:inline-block; background:#ffedd5; color:#9a3412;
         font-size:13px; font-weight:600; padding:2px 10px; border-radius:4px; margin:0 2px;
@@ -187,6 +272,7 @@
         .author-header h1 { font-size:26px; }
         .traits-grid { grid-template-columns:1fr; }
         .catalog-grid { grid-template-columns:1fr; }
+        .story-constellation__grid { grid-template-columns:1fr; }
         .quote-block { padding:20px 18px; font-size:14px; }
     }
 </style>
@@ -586,6 +672,35 @@
                     </section>
                 </div>
             </div>
+
+            <section class="story-constellation">
+                <span class="story-constellation__eyebrow"><i class="fas fa-orbit"></i> 命运玩家宇宙</span>
+                <div class="story-constellation__grid">
+                    <div class="story-constellation__main">
+                        <h3>当这一层开始长出“宇宙感”</h3>
+                        <p>如果说《蓝牙：陆知意岛》还是起点，《失控时空》系列是在扩散人物轨道，那么《知屿之意·命运玩家》已经把这一组故事压成一个可反复进入的阅读宇宙：双时空对冲、十环回响、配角群星同时发光。</p>
+                        <div class="story-constellation__tracks">
+                            <span><i class="fas fa-house"></i> 回家支线</span>
+                            <span><i class="fas fa-road"></i> 不归支线</span>
+                            <span><i class="fas fa-ring"></i> 十环虫洞</span>
+                            <span><i class="fas fa-star"></i> 配角星图</span>
+                        </div>
+                        <p style="margin-top:12px;">它不是又一篇小说目录项，而是这一层最适合被当作专题入口来读的一页。</p>
+                        <a href="aboutmore/mywj.html" class="story-constellation__cta"><i class="fas fa-book-open"></i><span>进入《知屿之意·命运玩家》</span></a>
+                    </div>
+                    <div class="story-constellation__side">
+                        <h3>同宇宙轨道</h3>
+                        <p>可以沿着人物和情绪递进，从起点一路进入宿命闭环。</p>
+                        <div class="story-constellation__links">
+                            <a href="aboutmore/czy.html"><i class="fas fa-feather"></i><span>陆知意岛</span></a>
+                            <a href="aboutmore/qp-chat.html"><i class="fas fa-comment-dots"></i><span>失控时空·对话版</span></a>
+                            <a href="aboutmore/gary.html"><i class="fas fa-map-marker-alt"></i><span>终极玩家</span></a>
+                            <a href="aboutmore/alone.html"><i class="fas fa-city"></i><span>孤独玩家</span></a>
+                            <a href="aboutmore/mywj.html"><i class="fas fa-orbit"></i><span>命运玩家</span></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <div class="section-divider"><i class="fas fa-compass-drafting"></i></div>
 

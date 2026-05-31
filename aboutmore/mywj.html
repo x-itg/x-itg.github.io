@@ -32,6 +32,7 @@
         --shadow: 0 24px 60px rgba(38, 28, 18, 0.12);
         --radius: 24px;
     }
+    html { scroll-behavior: smooth; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
         font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
@@ -45,17 +46,17 @@
     }
     .layout {
         display: flex;
-        max-width: 1660px;
+        max-width: 1800px;
         margin: 0 auto;
         min-height: 100vh;
     }
     .main-content {
         flex: 1;
         min-width: 0;
-        padding: 38px 22px 84px;
+        padding: 34px 18px 84px;
     }
     .story-shell {
-        max-width: 1180px;
+        max-width: 1380px;
         margin: 0 auto;
     }
     .article-header {
@@ -220,6 +221,77 @@
     .structure-item.left strong { color: var(--left); }
     .structure-item.center strong { color: var(--center); }
     .structure-item.right strong { color: var(--right); }
+    .structure-diagram {
+        margin-top: 18px;
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.58);
+        border: 1px solid rgba(101, 82, 58, 0.12);
+    }
+    .structure-diagram__track {
+        display: grid;
+        grid-template-columns: 1fr auto 0.76fr auto 1fr;
+        gap: 10px;
+        align-items: center;
+    }
+    .structure-diagram__node {
+        min-height: 74px;
+        padding: 14px;
+        border-radius: 18px;
+        border: 1px solid rgba(101, 82, 58, 0.12);
+        background: rgba(255, 252, 247, 0.92);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .structure-diagram__node strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 13px;
+    }
+    .structure-diagram__node span {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.65;
+    }
+    .structure-diagram__node.left-node strong { color: var(--left); }
+    .structure-diagram__node.center-node strong { color: var(--center); }
+    .structure-diagram__node.right-node strong { color: var(--right); }
+    .structure-diagram__connector {
+        color: var(--gold);
+        font-size: 18px;
+        opacity: 0.78;
+    }
+    .reading-routes {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+    .reading-route {
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(101, 82, 58, 0.12);
+        background: rgba(255, 255, 255, 0.62);
+    }
+    .reading-route strong {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        font-size: 13px;
+        color: #3c3025;
+    }
+    .reading-route p {
+        margin: 0;
+        font-size: 13px;
+        color: #5f5448;
+    }
+    .reading-route code {
+        font-family: "Consolas", "SFMono-Regular", monospace;
+        font-size: 12px;
+        color: #6d5534;
+    }
     .roles-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -267,11 +339,55 @@
     .role-card--aqi h3 { color: var(--center); }
     .role-card--chengnian .role-tag,
     .role-card--chengnian h3 { color: var(--right); }
+    .roles-bridge {
+        margin: -8px 0 28px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.58);
+        border-left: 3px solid var(--gold);
+        color: #594e43;
+        font-size: 14px;
+    }
+    .hero-card,
+    .hero-halo,
+    .section-lead,
+    .role-card,
+    .chapter-card,
+    .ring-card,
+    .ending-card {
+        transition:
+            transform 520ms cubic-bezier(.21,1,.24,1),
+            opacity 420ms ease,
+            box-shadow 420ms ease,
+            border-color 420ms ease,
+            background-color 420ms ease;
+    }
+    body.js-motion-enabled .hero-card,
+    body.js-motion-enabled .hero-halo,
+    body.js-motion-enabled .section-lead,
+    body.js-motion-enabled .role-card,
+    body.js-motion-enabled .chapter-card,
+    body.js-motion-enabled .ring-card,
+    body.js-motion-enabled .ending-card {
+        opacity: 0;
+        transform: translateY(26px);
+    }
+    body.js-motion-enabled .hero-halo {
+        transform: translateY(26px) scale(0.97);
+    }
+    body.js-motion-enabled .is-visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    .role-card.is-visible:nth-child(2),
+    .role-card.is-visible:nth-child(4) {
+        transition-delay: 90ms;
+    }
     .tri-orbit {
         position: relative;
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.88fr) minmax(0, 1fr);
-        gap: 18px;
+        grid-template-columns: minmax(0, 1.14fr) minmax(300px, 0.8fr) minmax(0, 1.14fr);
+        gap: 16px;
         align-items: start;
     }
     .tri-orbit::before {
@@ -288,10 +404,35 @@
     .column-frame {
         padding: 16px;
         position: relative;
+        transition: transform 420ms ease, box-shadow 420ms ease, border-color 420ms ease;
     }
     .column-frame.left { background: linear-gradient(180deg, rgba(143, 91, 63, 0.08), rgba(255, 252, 247, 0.82)); }
     .column-frame.center { background: linear-gradient(180deg, rgba(90, 123, 100, 0.08), rgba(255, 252, 247, 0.82)); }
     .column-frame.right { background: linear-gradient(180deg, rgba(53, 89, 123, 0.08), rgba(255, 252, 247, 0.82)); }
+    .column-frame::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border-radius: 20px;
+        border: 1px solid transparent;
+        pointer-events: none;
+        transition: border-color 360ms ease, box-shadow 360ms ease;
+    }
+    .column-frame.is-lane-active {
+        transform: translateY(-2px);
+    }
+    .column-frame.left.is-lane-active::after {
+        border-color: rgba(143, 91, 63, 0.28);
+        box-shadow: inset 0 0 0 1px rgba(143, 91, 63, 0.08), 0 0 0 1px rgba(143, 91, 63, 0.04);
+    }
+    .column-frame.center.is-lane-active::after {
+        border-color: rgba(90, 123, 100, 0.28);
+        box-shadow: inset 0 0 0 1px rgba(90, 123, 100, 0.08), 0 0 0 1px rgba(90, 123, 100, 0.04);
+    }
+    .column-frame.right.is-lane-active::after {
+        border-color: rgba(53, 89, 123, 0.28);
+        box-shadow: inset 0 0 0 1px rgba(53, 89, 123, 0.08), 0 0 0 1px rgba(53, 89, 123, 0.04);
+    }
     .lane-head {
         position: sticky;
         top: 18px;
@@ -302,6 +443,7 @@
         background: rgba(255, 252, 247, 0.9);
         border: 1px solid rgba(101, 82, 58, 0.12);
         backdrop-filter: blur(12px);
+        transition: transform 360ms ease, box-shadow 360ms ease, border-color 360ms ease, background-color 360ms ease;
     }
     .lane-head span {
         display: inline-flex;
@@ -321,12 +463,75 @@
         font-size: 13px;
         color: var(--muted);
     }
+    .column-frame.left.is-lane-active .lane-head {
+        border-color: rgba(143, 91, 63, 0.22);
+        box-shadow: 0 16px 28px rgba(143, 91, 63, 0.08);
+        background: rgba(255, 248, 243, 0.96);
+    }
+    .column-frame.center.is-lane-active .lane-head {
+        border-color: rgba(90, 123, 100, 0.22);
+        box-shadow: 0 16px 28px rgba(90, 123, 100, 0.08);
+        background: rgba(248, 253, 249, 0.96);
+    }
+    .column-frame.right.is-lane-active .lane-head {
+        border-color: rgba(53, 89, 123, 0.22);
+        box-shadow: 0 16px 28px rgba(53, 89, 123, 0.08);
+        background: rgba(247, 251, 255, 0.96);
+    }
     .chapter-card {
         margin-bottom: 14px;
         padding: 18px 18px 16px;
         border-radius: 20px;
         background: rgba(255, 255, 255, 0.72);
         border: 1px solid rgba(101, 82, 58, 0.12);
+    }
+    .card-link {
+        display: flex;
+        justify-content: flex-end;
+        margin: -2px 0 10px;
+    }
+    .group-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(101, 82, 58, 0.12);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    .group-badge::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.72);
+    }
+    .chapter-card.is-active-chapter,
+    .ring-card.is-active-chapter {
+        transform: translateY(-4px) scale(1.008);
+        box-shadow: 0 26px 48px rgba(38, 28, 18, 0.14);
+    }
+    .chapter-card.is-group-active,
+    .ring-card.is-group-active {
+        border-color: rgba(201, 159, 81, 0.22);
+        box-shadow: 0 18px 36px rgba(64, 49, 26, 0.1);
+    }
+    .left .chapter-card.is-active-chapter {
+        border-color: rgba(143, 91, 63, 0.24);
+        background: linear-gradient(180deg, rgba(255, 251, 247, 0.96), rgba(255, 247, 241, 0.88));
+    }
+    .center .ring-card.is-active-chapter {
+        border-color: rgba(90, 123, 100, 0.24);
+        background: linear-gradient(180deg, rgba(250, 255, 251, 0.96), rgba(241, 247, 242, 0.88));
+    }
+    .right .chapter-card.is-active-chapter {
+        border-color: rgba(53, 89, 123, 0.24);
+        background: linear-gradient(180deg, rgba(249, 252, 255, 0.96), rgba(241, 246, 251, 0.88));
     }
     .chapter-card:last-child { margin-bottom: 0; }
     .chapter-meta {
@@ -337,6 +542,7 @@
         margin-bottom: 10px;
         font-size: 12px;
         color: var(--muted);
+        flex-wrap: wrap;
     }
     .chapter-code {
         display: inline-flex;
@@ -351,6 +557,36 @@
     .left .chapter-code { background: var(--left-soft); color: var(--left); }
     .center .chapter-code { background: var(--center-soft); color: var(--center); }
     .right .chapter-code { background: var(--right-soft); color: var(--right); }
+    .chapter-meta span:last-child {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.72);
+        border: 1px solid rgba(101, 82, 58, 0.12);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+    }
+    .left .chapter-meta span:last-child {
+        color: var(--left);
+        border-color: rgba(143, 91, 63, 0.14);
+    }
+    .center .chapter-meta span:last-child {
+        color: var(--center);
+        border-color: rgba(90, 123, 100, 0.14);
+    }
+    .right .chapter-meta span:last-child {
+        color: var(--right);
+        border-color: rgba(53, 89, 123, 0.14);
+    }
+    .left .group-badge { color: var(--left); }
+    .center .group-badge { color: var(--center); }
+    .right .group-badge { color: var(--right); }
+    .is-group-active .group-badge {
+        background: rgba(255, 248, 231, 0.94);
+        border-color: rgba(201, 159, 81, 0.22);
+        box-shadow: 0 10px 20px rgba(90, 69, 31, 0.08);
+    }
     .chapter-card p:last-child { margin-bottom: 0; }
     .support-note {
         margin-top: 14px;
@@ -384,6 +620,19 @@
         border-radius: 50%;
         border: 1px solid rgba(90, 123, 100, 0.22);
         background: radial-gradient(circle, rgba(90, 123, 100, 0.14), transparent 68%);
+    }
+    .ring-orbit-mark {
+        position: absolute;
+        top: 30px;
+        left: 31px;
+        width: 30px;
+        display: grid;
+        gap: 2px;
+        justify-items: center;
+        color: var(--center);
+        font-size: 12px;
+        opacity: 0.88;
+        z-index: 1;
     }
     .ring-card h3 {
         margin-left: 74px;
@@ -439,6 +688,15 @@
         font-size: 13px;
         color: #605549;
     }
+    .sidebar-toc a {
+        transition: background-color 220ms ease, color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+    }
+    .sidebar-toc a.is-active {
+        color: #274d3a;
+        background: linear-gradient(90deg, rgba(90, 123, 100, 0.14), rgba(185, 140, 75, 0.06));
+        box-shadow: inset 2px 0 0 var(--center);
+        transform: translateX(2px);
+    }
     @media (max-width: 1320px) {
         .tri-orbit {
             grid-template-columns: 1fr;
@@ -454,7 +712,9 @@
         .hero-orbit,
         .roles-grid,
         .structure-grid,
-        .echo-grid {
+        .echo-grid,
+        .reading-routes,
+        .structure-diagram__track {
             grid-template-columns: 1fr;
         }
         h1 { font-size: 32px; }
@@ -728,17 +988,6 @@
         </details>
         <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
     </aside>
-        <aside class="sidebar-toc sidebar-toc--story">
-        <h3><span class="sidebar-toc__icon" aria-hidden="true">🪐</span> 本章导航</h3>
-        <nav>
-            <ul>
-                <li><a href="#结构说明">结构说明</a></li>
-                <li><a href="#配角星图">配角星图</a></li>
-                <li><a href="#三轨正文">三轨正文</a></li>
-                <li><a href="#终评-分叉口之后">终评 · 分叉口之后</a></li>
-            </ul>
-        </nav>
-    </aside>
 <div class="main-content">
         <div class="story-shell">
             <header class="article-header" id="top">
@@ -763,6 +1012,34 @@
                         <div class="structure-item right">
                             <strong>右列：世界B · 倒序</strong>
                             <span>他没有回去，时间逆向回溯，每一个后来都在替那个凌晨继续支付代价。</span>
+                        </div>
+                    </div>
+                    <div class="structure-diagram">
+                        <div class="structure-diagram__track">
+                            <div class="structure-diagram__node left-node">
+                                <strong>左轨</strong>
+                                <span>世界A 正序推进，承载完整情节主体。</span>
+                            </div>
+                            <div class="structure-diagram__connector" aria-hidden="true">→</div>
+                            <div class="structure-diagram__node center-node">
+                                <strong>虫洞中轴</strong>
+                                <span>十环意象负责回响、闭环和互文对照。</span>
+                            </div>
+                            <div class="structure-diagram__connector" aria-hidden="true">←</div>
+                            <div class="structure-diagram__node right-node">
+                                <strong>右轨</strong>
+                                <span>世界B 倒序回溯，用后来反照最初选择。</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reading-routes">
+                        <div class="reading-route">
+                            <strong><i class="fas fa-shuffle"></i> 推荐读法：逐组对照</strong>
+                            <p><code>A1 → C1 → B1</code>，再继续 <code>A2 → C2 → B2</code>。适合体验双时空对冲和意象回响。</p>
+                        </div>
+                        <div class="reading-route">
+                            <strong><i class="fas fa-book-open-reader"></i> 线性读法：单轨沉浸</strong>
+                            <p>先完整读左列，再读中列，最后读右列。适合把它当成两条命运线与一条注释轨来品读。</p>
                         </div>
                     </div>
                 </div>
@@ -822,6 +1099,7 @@
                         </ul>
                     </article>
                 </div>
+                <p class="roles-bridge">四位角色，构成两个时空里完整的人间侧写：有人把日常守住，有人为记忆命名，有人负责提醒退场时机，也有人把迟到的命运重新带回棋盘。</p>
             </section>
 
             <section>
@@ -834,8 +1112,9 @@
                             <p>时间向前生长，代价不消失，只是被日常慢慢吸收、稀释、重新命名。</p>
                         </div>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="01">
                             <div class="chapter-meta"><span class="chapter-code">A1</span><span>洗衣机 / 剩饭 / 热水</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 01</span></div>
                             <h3>洗衣机在蜕皮</h3>
                             <p>那个凌晨，他回了家。</p>
                             <p>苏敏坐在客厅里，茶几上搁着一杯凉掉的茶。她没有问，他也没有说。她只是站起来，把他衬衫从裤腰里抽出来，扔进洗衣机，倒洗衣液，按键，启动。滚筒开始转。她转身回卧室，路过他身边的时候停了一下。<br>“厨房有剩饭。”<br>然后门关上了，声音很轻。</p>
@@ -847,8 +1126,9 @@
                             <div class="support-note left-note"><strong>配角微光 · 苏敏</strong>她在这一章里几乎没有情绪宣告，却用最少的动作把这段婚姻从悬崖边重新拖回厨房与卧室。她不追问，不代表不痛；她给剩饭和热水，是在给这段关系一次现实世界里的重启权限。</div>
                         </article>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="02">
                             <div class="chapter-meta"><span class="chapter-code">A2</span><span>调试 / 悔棋 / 草稿中</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 02</span></div>
                             <h3>她把悔棋叫调试</h3>
                             <p>女儿开始学象棋。她记得很快，但每局都输。输急了会把“马”挪回原来的位置，抬头看他，理直气壮：“爸爸，我正在调试呢。”</p>
                             <p>这个词从他嘴里偷来的。他在书房开电话会议，说“这个Bug还没调通”、“换个参数试试”、“先回退一版”。她全听进去了，然后安在了自己悔棋的场景上。他没有戳穿。</p>
@@ -862,8 +1142,9 @@
                             <p>他吃出来了，没说。她把头埋在碗里，也没说。</p>
                         </article>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="03">
                             <div class="chapter-meta"><span class="chapter-code">A3</span><span>苏黎世 / 句号 / 旧喜欢</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 03</span></div>
                             <h3>苏黎世只有一个句号</h3>
                             <p>程知意后来回了瑞士。走之前没告诉他，到了才发消息，就四个字：到了苏黎世。<br>他回，好。<br>她没有再回，他也没有再发。</p>
                             <p>几个月后他在朋友圈看到她发了一张照片。苏黎世湖边的雪，配文是一个句号。只有一个句号。</p>
@@ -873,8 +1154,9 @@
                             <p>女儿点点头，继续吃饭。苏敏把水龙头重新打开，水流细细的，像一场没有下完的雨。</p>
                         </article>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="04">
                             <div class="chapter-meta"><span class="chapter-code">A4</span><span>798 / 多肉 / 笑纹分叉</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 04</span></div>
                             <h3>左颊笑纹分叉点</h3>
                             <p>苏敏和Gary在798偶遇过一次。那天陆屿也在，三个人站在那家独立书店门口，中间隔着几盆蔫了的多肉。Gary还是老样子，棕色卷发乱得像干草，抱着一台便携合成器。</p>
                             <p>他说：“苏敏，你的左手还是比右手大一毫米吗。”<br>苏敏把手藏进口袋里，说，你还在记这些。<br>Gary说，习惯了，改不掉。</p>
@@ -890,8 +1172,9 @@
                             <div class="support-note left-note"><strong>配角微光 · Gary</strong>Gary的魅力不在“旧情未了”，而在他总能替细节争取命名权。他记住一毫米、笑纹、握手与风铃声，让人意识到有些爱不是占有，而是长期而精准的注视。</div>
                         </article>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="05">
                             <div class="chapter-meta"><span class="chapter-code">A5</span><span>退游 / 取消置顶 / 彩色朋友</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 05</span></div>
                             <h3>一个彩色的朋友</h3>
                             <p>阿七最后还是退游了。</p>
                             <p>凌晨发来消息：号卖了，以后不玩了。<br>陆屿说，怎么突然不玩了。<br>她说不是突然，想了很久了。新号主是个小学生，比我更菜，你要不要加他好友。<br>他说不用。<br>她说那你怎么办，以后没人骂你了。<br>他说，习惯了。</p>
@@ -905,8 +1188,9 @@
                             <div class="support-note left-note"><strong>配角微光 · 阿七</strong>阿七的分量在于她从不正经地说重话。她看起来最像支线人物，却总能在别人还卡在主线里的时候，先一步懂得什么时候该退、什么时候该把“组队”还给对方自己决定。</div>
                         </article>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="06">
                             <div class="chapter-meta"><span class="chapter-code">A6</span><span>象棋班 / 蜗牛 / 黄昏</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 06</span></div>
                             <h3>想念的念</h3>
                             <p>女儿的象棋班里转来一个新同学。姓程，单名一个念，想念的念。</p>
                             <p>女儿回家说：“她下棋从来不悔棋，输了也会把马放回原位，说自己在调试。”<br>陆屿手里的筷子停了一下。苏敏看了他一眼。他继续吃饭。</p>
@@ -927,8 +1211,10 @@
                             <p>这些意象不属于任何一个世界，却同时存在于两个世界。它们围成一个闭合的圆环——不是线性连接，不是一一对应。是从任何一点进入，都能在相邻的节点里听见来自另一个平行世界的回声。</p>
                         </div>
 
-                        <article class="ring-card">
+                        <article class="ring-card" data-echo-group="01">
                             <div class="chapter-meta"><span class="chapter-code">C1</span><span>雨 / 雪 / 同一件事物</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 01</span></div>
+                            <div class="ring-orbit-mark" aria-hidden="true"><i class="fas fa-umbrella"></i><i class="fas fa-snowflake"></i></div>
                             <h3>雨的分身</h3>
                             <p>同一场命运，在两个世界里只是换了物理形态。</p>
                             <div class="echo-grid">
@@ -937,8 +1223,10 @@
                             </div>
                         </article>
 
-                        <article class="ring-card">
+                        <article class="ring-card" data-echo-group="02">
                             <div class="chapter-meta"><span class="chapter-code">C2</span><span>光标 / 空白 / 待机</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 02</span></div>
+                            <div class="ring-orbit-mark" aria-hidden="true"><i class="fas fa-i-cursor"></i><i class="fas fa-terminal"></i></div>
                             <h3>光标停在空白处</h3>
                             <p>有些故事推进了，有些故事没有；光标的姿态却一样。</p>
                             <div class="echo-grid">
@@ -947,8 +1235,10 @@
                             </div>
                         </article>
 
-                        <article class="ring-card">
+                        <article class="ring-card" data-echo-group="03">
                             <div class="chapter-meta"><span class="chapter-code">C3</span><span>白卫衣 / 深处 / 旧颜色</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 03</span></div>
+                            <div class="ring-orbit-mark" aria-hidden="true"><i class="fas fa-shirt"></i><i class="fas fa-suitcase"></i></div>
                             <h3>白卫衣挂在衣柜深处</h3>
                             <p>衣柜的深处是时间最会藏身的地方。</p>
                             <div class="echo-grid">
@@ -957,8 +1247,10 @@
                             </div>
                         </article>
 
-                        <article class="ring-card">
+                        <article class="ring-card" data-echo-group="04">
                             <div class="chapter-meta"><span class="chapter-code">C4</span><span>便签 / 背面 / 补写的话</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 04</span></div>
+                            <div class="ring-orbit-mark" aria-hidden="true"><i class="fas fa-note-sticky"></i><i class="fas fa-envelope-open-text"></i></div>
                             <h3>便签的背面</h3>
                             <p>最重要的话，总爱写在被忽略的那一面。</p>
                             <div class="echo-grid">
@@ -967,8 +1259,10 @@
                             </div>
                         </article>
 
-                        <article class="ring-card">
+                        <article class="ring-card" data-echo-group="05">
                             <div class="chapter-meta"><span class="chapter-code">C5</span><span>悔棋 / 调试 / 另一代人</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 05</span></div>
+                            <div class="ring-orbit-mark" aria-hidden="true"><i class="fas fa-chess-board"></i><i class="fas fa-chess-knight"></i></div>
                             <h3>悔棋的两种结局</h3>
                             <p>同一个动作，在不同的孩子身上，长成了两种人生教育。</p>
                             <div class="echo-grid">
@@ -977,8 +1271,10 @@
                             </div>
                         </article>
 
-                        <article class="ring-card">
+                        <article class="ring-card" data-echo-group="06">
                             <div class="chapter-meta"><span class="chapter-code">C6</span><span>茶 / 糖 / 习惯迁移</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 06</span></div>
+                            <div class="ring-orbit-mark" aria-hidden="true"><i class="fas fa-mug-saucer"></i><i class="fas fa-glass-water"></i></div>
                             <h3>茶的变奏</h3>
                             <p>一杯茶的苦与甜，在两个世界里承担着不同的修复工作。</p>
                             <div class="echo-grid">
@@ -987,8 +1283,10 @@
                             </div>
                         </article>
 
-                        <article class="ring-card">
+                        <article class="ring-card" data-echo-group="07">
                             <div class="chapter-meta"><span class="chapter-code">C7</span><span>凌晨三点 / 回响 / 另一种缺席</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 07</span></div>
+                            <div class="ring-orbit-mark" aria-hidden="true"><i class="fas fa-bed"></i><i class="fas fa-bell"></i></div>
                             <h3>凌晨三点的两种回响</h3>
                             <p>同一个时间点，在不同的家里响起不同的缺失。</p>
                             <div class="echo-grid">
@@ -997,8 +1295,10 @@
                             </div>
                         </article>
 
-                        <article class="ring-card">
+                        <article class="ring-card" data-echo-group="08">
                             <div class="chapter-meta"><span class="chapter-code">C8</span><span>棋盘 / 归处 / 储藏室</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 08</span></div>
+                            <div class="ring-orbit-mark" aria-hidden="true"><i class="fas fa-table-cells-large"></i><i class="fas fa-box-archive"></i></div>
                             <h3>棋盘的两种归处</h3>
                             <p>棋盘既能留在客厅，也能被盖上防尘布；它们都在保存一种未完成。</p>
                             <div class="echo-grid">
@@ -1007,8 +1307,10 @@
                             </div>
                         </article>
 
-                        <article class="ring-card">
+                        <article class="ring-card" data-echo-group="09">
                             <div class="chapter-meta"><span class="chapter-code">C9</span><span>空调 / 需求变更 / 深夜发呆</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 09</span></div>
+                            <div class="ring-orbit-mark" aria-hidden="true"><i class="fas fa-fan"></i><i class="fas fa-screwdriver-wrench"></i></div>
                             <h3>坏掉的空调与需求变更</h3>
                             <p>系统是否崩溃，往往不是最核心的问题；真正难的是接受需求已经换了。</p>
                             <div class="echo-grid">
@@ -1017,8 +1319,10 @@
                             </div>
                         </article>
 
-                        <article class="ring-card">
+                        <article class="ring-card" data-echo-group="10">
                             <div class="chapter-meta"><span class="chapter-code">C10</span><span>组队 / 退场 / 过期邀请</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 10</span></div>
+                            <div class="ring-orbit-mark" aria-hidden="true"><i class="fas fa-users"></i><i class="fas fa-hourglass-end"></i></div>
                             <h3>组队邀请已过期</h3>
                             <p>邀请存在过，不代表它会永远有效；可真正难忘的，恰恰是那一刻的悬停。</p>
                             <div class="echo-grid">
@@ -1036,8 +1340,9 @@
                             <p>时间逆向回溯，不是为了倒带，而是为了看清每一个后来都怎样被最初那一步改写。</p>
                         </div>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="06">
                             <div class="chapter-meta"><span class="chapter-code">B6</span><span>慕尼黑 / 未发送 / 省略号</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 06</span></div>
                             <h3>雪落在未发送的消息上</h3>
                             <p>多年后的某个凌晨，慕尼黑下雪了。</p>
                             <p>陆屿站在阳台上，手机屏幕朝下放在栏杆上。雪落在屏幕上，一粒一粒，像一行永远不会被按下发送键的省略号。</p>
@@ -1049,8 +1354,9 @@
                             <p>他把她删了。</p>
                         </article>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="05">
                             <div class="chapter-meta"><span class="chapter-code">B5</span><span>置顶 / 取消置顶 / 调试</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 05</span></div>
                             <h3>置顶与取消置顶之间</h3>
                             <p>阿七是离开北京后唯一还保持联系的人。</p>
                             <p>她偶尔发游戏邀请，凌晨一两点，准时得像定时任务。他有时候接受，有时候拒绝。接受被骂菜，拒绝被骂怂。但他们从来没有加过别的队友，她也没有。他们是彼此好友列表里唯一的好友。</p>
@@ -1061,8 +1367,9 @@
                             <p>他把阿七的置顶取消了。然后他又加回来。然后又取消。光标来来回回，像女儿小时候悔棋时在棋盘上画箭头——每个箭头都在找一个新的方向，每个方向都在说“我只是在调试”。</p>
                         </article>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="04">
                             <div class="chapter-meta"><span class="chapter-code">B4</span><span>邮件 / 便签 / 握手</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 04</span></div>
                             <h3>记忆的衰减曲线</h3>
                             <p>苏敏婚后第三年，Gary给陆屿发了一封邮件。</p>
                             <p>他说，我在整理旧物时发现了一张便签，上面有你的名字和电话号码。我想了三天要不要扔掉。最后没扔。</p>
@@ -1074,8 +1381,9 @@
                             <div class="support-note right-note"><strong>配角微光 · Gary</strong>在这个世界里，Gary的魅力更锋利。他没有得到“主角位”，却把自己活成了一个会自我更新的装置：他既能放手，也能精准地把一张便签送回该抵达的人那里。</div>
                         </article>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="03">
                             <div class="chapter-meta"><span class="chapter-code">B3</span><span>四秒 / 失眠 / 程念出生</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 03</span></div>
                             <h3>你犹豫了四秒</h3>
                             <p>程知意在婚后第三年开始失眠。</p>
                             <p>不是睡不着，是睡着了却在梦里继续醒着。她在梦里反复经过同一个机场安检口，每一次都回头，每一次都看不到人。醒来枕头是湿的。</p>
@@ -1089,8 +1397,9 @@
                             <p>然后她把女儿抱近一点，低声说了一句只有她自己能听见的话：“不是想念的念，是念旧的念。你爸爸这辈子都在念旧。念一份框架、一个文档、一个凌晨三点不回家的人。”</p>
                         </article>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="02">
                             <div class="chapter-meta"><span class="chapter-code">B2</span><span>离心机 / 分层 / 旧版本日志</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 02</span></div>
                             <h3>离心力甩出的那一层</h3>
                             <p>女儿会走路的那年春天，程知意在慕尼黑大学的实验楼里收到了一条消息。</p>
                             <p>苏敏发来的。就一行字：他把你的名字从文档里删掉了。</p>
@@ -1101,8 +1410,9 @@
                             <p>她当时没有回答。现在知道了——不是陆屿，是自己。只是这个结构，花了十几年才找到。</p>
                         </article>
 
-                        <article class="chapter-card">
+                        <article class="chapter-card" data-echo-group="01">
                             <div class="chapter-meta"><span class="chapter-code">B1</span><span>路灯 / 分叉口 / 第二个</span></div>
+                            <div class="card-link"><span class="group-badge">互文组 01</span></div>
                             <h3>路灯下的分叉口</h3>
                             <p>那个凌晨，他没有回家。</p>
                             <p>陆屿站在路灯下，看着程知意的银发被风吹乱。她踮起脚，嘴唇有酒和冷空气的味道。六年的距离在这个动作里碎成粉末。他的手扣住她的后颈，她攥紧他外套的下摆，指节发白。</p>
@@ -1134,5 +1444,121 @@
     <a href="../aboutmore/jsxm.html">失控时刻·有趣玩家 →</a>
 </div>
 <div class="footer-note">附记：本页将小说正文完整保留为三轨并置阅读器。左列与右列分别维护时间方向，中列负责回声与闭环；配角星图是新增呈现层，不替代原文，只把原本已存在的魅力从暗处提亮。</div>
+<script>
+(() => {
+    const body = document.body;
+    body.classList.add("js-motion-enabled");
+
+    const motionTargets = Array.from(document.querySelectorAll(
+        ".hero-card, .hero-halo, .section-lead, .role-card, .chapter-card, .ring-card, .ending-card"
+    ));
+
+    if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: "0px 0px -8% 0px",
+            threshold: 0.12,
+        });
+        motionTargets.forEach((target) => revealObserver.observe(target));
+    } else {
+        motionTargets.forEach((target) => target.classList.add("is-visible"));
+    }
+
+    const laneMap = new Map([
+        ["left", document.querySelector(".column-frame.left")],
+        ["center", document.querySelector(".column-frame.center")],
+        ["right", document.querySelector(".column-frame.right")],
+    ]);
+    const chapterTargets = Array.from(document.querySelectorAll(".column-frame.left .chapter-card, .column-frame.center .ring-card, .column-frame.right .chapter-card"));
+    const groupMembers = new Map();
+    chapterTargets.forEach((card) => {
+        const groupId = card.dataset.echoGroup;
+        if (!groupId) {
+            return;
+        }
+        const bucket = groupMembers.get(groupId) || [];
+        bucket.push(card);
+        groupMembers.set(groupId, bucket);
+    });
+    const headingLinks = Array.from(document.querySelectorAll(".sidebar-toc a"));
+    const sectionMap = headingLinks
+        .map((link) => {
+            const id = decodeURIComponent((link.getAttribute("href") || "").slice(1));
+            return [document.getElementById(id), link];
+        })
+        .filter(([section]) => Boolean(section));
+
+    const setActiveChapter = (card) => {
+        chapterTargets.forEach((item) => item.classList.toggle("is-active-chapter", item === card));
+        chapterTargets.forEach((item) => item.classList.remove("is-group-active"));
+        laneMap.forEach((lane) => lane && lane.classList.remove("is-lane-active"));
+        if (!card) {
+            return;
+        }
+        const lane = card.closest(".column-frame");
+        lane && lane.classList.add("is-lane-active");
+        const groupId = card.dataset.echoGroup;
+        if (!groupId) {
+            return;
+        }
+        (groupMembers.get(groupId) || []).forEach((item) => item.classList.add("is-group-active"));
+    };
+
+    const updateSectionHighlight = () => {
+        let activeLink = null;
+        for (const [section, link] of sectionMap) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 180) {
+                activeLink = link;
+            }
+        }
+        if (!activeLink && sectionMap.length) {
+            activeLink = sectionMap[0][1];
+        }
+        headingLinks.forEach((link) => link.classList.toggle("is-active", link === activeLink));
+    };
+
+    const pickActiveCard = () => {
+        let bestCard = null;
+        let bestDistance = Number.POSITIVE_INFINITY;
+        chapterTargets.forEach((card) => {
+            const rect = card.getBoundingClientRect();
+            if (rect.bottom < 120 || rect.top > window.innerHeight * 0.72) {
+                return;
+            }
+            const distance = Math.abs(rect.top - 150);
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                bestCard = card;
+            }
+        });
+        setActiveChapter(bestCard || chapterTargets[0] || null);
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+        if (ticking) {
+            return;
+        }
+        ticking = true;
+        window.requestAnimationFrame(() => {
+            pickActiveCard();
+            updateSectionHighlight();
+            ticking = false;
+        });
+    };
+
+    pickActiveCard();
+    updateSectionHighlight();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+})();
+</script>
 </body>
 </html>

@@ -231,6 +231,90 @@
         .summary-table a:hover {
             text-decoration: underline;
         }
+        .story-spotlight {
+            margin: 18px 0 22px;
+            padding: 22px;
+            border-radius: 18px;
+            border: 1px solid #e5d4bd;
+            background: radial-gradient(circle at right top, rgba(36, 95, 156, 0.12), transparent 28%), linear-gradient(135deg, #fffaf2 0%, #f7efe1 58%, #f3f7fb 100%);
+            box-shadow: var(--shadow-md);
+        }
+        .story-spotlight__eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #8a5b18;
+        }
+        .story-spotlight__grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+            gap: 16px;
+            align-items: stretch;
+        }
+        .story-spotlight__main,
+        .story-spotlight__rail {
+            border-radius: 16px;
+            background: rgba(255,255,255,0.82);
+            border: 1px solid rgba(191, 162, 123, 0.18);
+            padding: 18px;
+        }
+        .story-spotlight__main h3,
+        .story-spotlight__rail h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #2f2418;
+        }
+        .story-spotlight__main p,
+        .story-spotlight__rail p {
+            color: #645849;
+            margin: 0 0 12px;
+            font-size: 14px;
+        }
+        .story-spotlight__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: #244f86;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .story-spotlight__cta:hover {
+            background: #193d69;
+            text-decoration: none;
+        }
+        .story-spotlight__chips,
+        .story-spotlight__list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .story-spotlight__chips span,
+        .story-spotlight__list a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            border: 1px solid #e9dbc6;
+            background: #fff9f1;
+            color: #6e5230;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .story-spotlight__list a:hover {
+            border-color: #b8cae2;
+            color: #244f86;
+            background: #f7fbff;
+            text-decoration: none;
+        }
         footer {
             margin-top: 28px;
             padding-top: 18px;
@@ -246,6 +330,7 @@
             .hero { padding: 24px 20px; }
             .hero h1 { font-size: 32px; }
             .article-flow { padding-top: 18px; }
+            .story-spotlight__grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -337,6 +422,32 @@
         <section class="summary-table" id="overview-table">
             <h2>总表</h2>
             <p>文章导航。</p>
+            <section class="story-spotlight">
+                <span class="story-spotlight__eyebrow"><i class="fas fa-orbit"></i> 命运玩家宇宙</span>
+                <div class="story-spotlight__grid">
+                    <div class="story-spotlight__main">
+                        <h3>从“陆知意岛”走到“三轨宿命”</h3>
+                        <p>如果你想直接进入这一组小说里最完整、最具结构实验感的一页，可以从《知屿之意·命运玩家》切入。它把归家与不归并排展开，再用十环共生意象把所有失去、迟到与回声缝回一个圆环。</p>
+                        <div class="story-spotlight__chips">
+                            <span><i class="fas fa-house"></i> 世界A · 正序</span>
+                            <span><i class="fas fa-road"></i> 世界B · 倒序</span>
+                            <span><i class="fas fa-ring"></i> 十环共生</span>
+                            <span><i class="fas fa-chess-knight"></i> 命运玩家</span>
+                        </div>
+                        <a href="aboutmore/mywj.html" class="story-spotlight__cta"><i class="fas fa-book-open"></i><span>进入专题页</span></a>
+                    </div>
+                    <div class="story-spotlight__rail">
+                        <h3>同宇宙入口</h3>
+                        <p>这几篇可以按“起点 → 失控 → 孤独 → 宿命”一路读过去。</p>
+                        <div class="story-spotlight__list">
+                            <a href="aboutmore/czy.html"><i class="fas fa-feather"></i><span>蓝牙：陆知意岛</span></a>
+                            <a href="aboutmore/gary.html"><i class="fas fa-map-marker-alt"></i><span>失控时空：终极玩家</span></a>
+                            <a href="aboutmore/alone.html"><i class="fas fa-city"></i><span>知意知否·孤独玩家</span></a>
+                            <a href="aboutmore/mywj.html"><i class="fas fa-orbit"></i><span>知屿之意·命运玩家</span></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <details class="summary-group" open>
                 <summary>T · 嵌入式AI工程化</summary>
                 <div class="table-wrap">
