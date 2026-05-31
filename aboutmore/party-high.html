@@ -409,15 +409,59 @@
     .voice-lane--sumin .moment-code { background: rgba(143, 95, 72, 0.12); color: var(--sumin); }
     .voice-lane--aqi .moment-code { background: rgba(76, 139, 108, 0.12); color: var(--aqi); }
     .voice-lane--chengnian .moment-code { background: rgba(140, 95, 167, 0.12); color: var(--chengnian); }
-    .motif-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        margin-top: 18px;
+    .motif-console {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 16px;
+        padding: 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(93, 76, 59, 0.12);
+        background: linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(245, 238, 227, 0.88));
+        box-shadow: 0 20px 48px rgba(51, 36, 20, 0.08);
     }
-    .motif-card {
-        padding: 18px 18px 16px;
-        background: linear-gradient(180deg, rgba(255, 252, 247, 0.94), rgba(244, 238, 228, 0.84));
+    .motif-console > * {
+        position: relative;
+        z-index: 1;
     }
-    .motif-tag {
+    .motif-console__network {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.75;
+    }
+    .motif-console__network svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .motif-console__network path {
+        fill: none;
+        stroke: rgba(185, 140, 75, 0.14);
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    .motif-console__network .network-accent {
+        stroke: rgba(90, 123, 100, 0.18);
+    }
+    .motif-console__network circle {
+        fill: rgba(255, 250, 240, 0.92);
+        stroke: rgba(185, 140, 75, 0.2);
+        stroke-width: 1.2;
+    }
+    .motif-console__intro {
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(340px, 1.08fr);
+        gap: 16px;
+        align-items: start;
+        margin-bottom: 14px;
+    }
+    .motif-console__intro p {
+        margin: 0;
+        color: #55493e;
+    }
+    .motif-console__eyebrow {
         display: inline-flex;
         align-items: center;
         gap: 7px;
@@ -425,12 +469,128 @@
         padding: 5px 10px;
         border-radius: 999px;
         background: rgba(255,255,255,0.8);
-        border: 1px solid rgba(93, 76, 59, 0.1);
+        border: 1px solid rgba(185, 140, 75, 0.18);
         font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: #6d5534;
+    }
+    .motif-console__panel {
+        min-height: 124px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        border: 1px solid rgba(93, 76, 59, 0.1);
+        background: rgba(255, 255, 255, 0.72);
+    }
+    .motif-console__panel strong {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        color: #6e5230;
+        font-size: 13px;
+    }
+    .motif-console__panel h3 {
+        margin-bottom: 8px;
+        font-size: 22px;
+    }
+    .motif-console__panel p {
+        margin: 0;
+        color: #52463b;
+    }
+    .motif-console__grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+    }
+    .motif-node {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        min-height: 88px;
+        padding: 12px 12px 10px;
+        border-radius: 18px;
+        border: 1px solid rgba(93, 76, 59, 0.1);
+        background: rgba(255,255,255,0.72);
+        color: #5a4f44;
+        text-align: left;
+        cursor: pointer;
+        transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease, opacity 220ms ease;
+    }
+    .motif-node:hover,
+    .motif-node:focus-visible,
+    .motif-node.is-active {
+        transform: translateY(-2px);
+        border-color: rgba(185, 140, 75, 0.24);
+        background: rgba(255, 250, 240, 0.96);
+        box-shadow: 0 16px 30px rgba(71, 51, 24, 0.1);
+        outline: none;
+    }
+    .motif-node.is-linked {
+        border-color: rgba(185, 140, 75, 0.2);
+        background: rgba(255, 248, 236, 0.92);
+        box-shadow: 0 12px 24px rgba(71, 51, 24, 0.08);
+    }
+    .motif-node__code {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #7a5a2d;
+    }
+    .motif-node__title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #2f261d;
+        line-height: 1.35;
+    }
+    .motif-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: -2px 0 10px;
+    }
+    .motif-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 9px;
+        border-radius: 999px;
+        border: 1px solid rgba(93, 76, 59, 0.1);
+        background: rgba(255,255,255,0.72);
+        font-size: 11px;
+        color: #6a5d4f;
+        transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease, transform 220ms ease;
+    }
+    .movement-card.is-motif-match {
+        transform: translateY(-3px);
+        border-color: rgba(185, 140, 75, 0.26);
+        box-shadow: 0 20px 36px rgba(67, 48, 22, 0.1);
+        background: linear-gradient(180deg, rgba(255, 251, 243, 0.98), rgba(248, 241, 230, 0.92));
+    }
+    .quartet-grid.is-motif-filtering .movement-card:not(.is-motif-match) {
+        opacity: 0.52;
+        filter: saturate(0.78);
+    }
+    .movement-card.is-motif-related {
+        border-color: rgba(185, 140, 75, 0.18);
+        background: linear-gradient(180deg, rgba(255, 252, 246, 0.96), rgba(249, 244, 235, 0.9));
+    }
+    .motif-link.is-motif-match {
+        background: rgba(255, 246, 229, 0.96);
+        border-color: rgba(185, 140, 75, 0.22);
+        color: #6d4f24;
+        transform: translateY(-1px);
+    }
+    .motif-link.is-motif-related {
+        background: rgba(255, 249, 238, 0.92);
+        border-color: rgba(185, 140, 75, 0.18);
+        color: #7b5f39;
     }
     .ending-card {
         margin-top: 28px;
@@ -458,7 +618,8 @@
         .voice-grid,
         .structure-grid,
         .reading-grid,
-        .motif-grid {
+        .motif-console__intro,
+        .motif-console__grid {
             grid-template-columns: 1fr;
         }
         .season-corner-guide {
@@ -469,6 +630,9 @@
         }
         .season-corner-guide__badges {
             justify-content: flex-start;
+        }
+        .motif-console__network {
+            display: none;
         }
     }
     @media (max-width: 760px) {
@@ -486,6 +650,9 @@
         }
         .quartet-shell {
             padding-top: 0;
+        }
+        .motif-console {
+            padding: 16px;
         }
     }
 </style>
@@ -738,19 +905,18 @@
         </details>
         <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
     </aside>
-        <aside class="sidebar-toc sidebar-toc--story">
-        <h3><span class="sidebar-toc__icon" aria-hidden="true">🎼</span> 本章导航</h3>
-        <nav>
-            <ul>
-                <li><a href="#结构说明">结构说明</a></li>
-                <li><a href="#四声部总谱">四声部总谱</a></li>
-                <li><a href="#声部星图">声部星图</a></li>
-                <li><a href="#四重奏正文">四重奏正文</a></li>
-                <li><a href="#环形连接-十个共享意象">环形连接 · 十个共享意象</a></li>
-                <li><a href="#尾奏">尾奏</a></li>
-            </ul>
-        </nav>
-    </aside>
+<aside class="sidebar-toc sidebar-toc--story">
+    <h3><span class="sidebar-toc__icon" aria-hidden="true">🎼</span> 本章导航</h3>
+    <nav>
+        <ul>
+            <li><a href="#结构说明">结构说明</a></li>
+            <li><a href="#四声部总谱">四声部总谱</a></li>
+            <li><a href="#声部星图">声部星图</a></li>
+            <li><a href="#四重奏正文">四重奏正文</a></li>
+            <li><a href="#尾奏">尾奏</a></li>
+        </ul>
+    </nav>
+</aside>
 <div class="main-content">
         <div class="story-shell">
             <header class="article-header" id="top">
@@ -878,6 +1044,48 @@
             <section>
                 <h2 id="四重奏正文">四重奏正文</h2>
                 <div class="quartet-shell">
+                    <div class="motif-console" aria-label="共享意象控制台">
+                        <div class="motif-console__network" aria-hidden="true">
+                            <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
+                                <path d="M90 206 C180 122, 255 124, 336 206 S505 288, 584 206 S747 124, 826 206 S995 288, 1110 170"></path>
+                                <path class="network-accent" d="M90 120 C182 194, 255 196, 336 120 S505 46, 584 120 S747 194, 826 120 S995 46, 1110 138"></path>
+                                <path d="M90 206 L90 120 M336 206 L336 120 M584 206 L584 120 M826 206 L826 120 M1110 170 L1110 138"></path>
+                                <circle cx="90" cy="206" r="8"></circle>
+                                <circle cx="336" cy="206" r="8"></circle>
+                                <circle cx="584" cy="206" r="8"></circle>
+                                <circle cx="826" cy="206" r="8"></circle>
+                                <circle cx="1110" cy="170" r="8"></circle>
+                                <circle cx="90" cy="120" r="8"></circle>
+                                <circle cx="336" cy="120" r="8"></circle>
+                                <circle cx="584" cy="120" r="8"></circle>
+                                <circle cx="826" cy="120" r="8"></circle>
+                                <circle cx="1110" cy="138" r="8"></circle>
+                            </svg>
+                        </div>
+                        <div class="motif-console__intro">
+                            <div>
+                                <span class="motif-console__eyebrow"><i class="fas fa-orbit"></i> 共享意象控制台</span>
+                                <p>十个共享意象不再独立站在正文外面，而是直接嵌入四重奏正文。悬停或点击任意一个意象，四个声部里与它相关的瞬间会一起被点亮。</p>
+                            </div>
+                            <div class="motif-console__panel" id="motif-panel" aria-live="polite">
+                                <strong><i class="fas fa-lightbulb"></i> 当前意象</strong>
+                                <h3>环形连接正在待机</h3>
+                                <p>从下方选择一个意象节点。它会在四宫格里显露出真正的跨声部回响。</p>
+                            </div>
+                        </div>
+                        <div class="motif-console__grid">
+                            <button class="motif-node" type="button" data-motif-code="C1" data-motif-title="折叠" data-motif-description="程知意用十几年找到最低能量态，苏敏把日常折叠成稳定结构，程念则从小就明白人要折叠很多次，才能成为自己。"><span class="motif-node__code"><i class="fas fa-layer-group"></i> C1</span><span class="motif-node__title">折叠</span></button>
+                            <button class="motif-node" type="button" data-motif-code="C2" data-motif-title="便签" data-motif-description="Gary的标签、阿七的便利贴、程念画在棋盘边的箭头，都把情感压缩进最轻的载体里。"><span class="motif-node__code"><i class="fas fa-note-sticky"></i> C2</span><span class="motif-node__title">便签</span></button>
+                            <button class="motif-node" type="button" data-motif-code="C3" data-motif-title="调试" data-motif-description="陆屿调试代码，程念调试棋局，苏敏调试甜度，阿七调试输局心态，程知意则调试那份亚稳态。"><span class="motif-node__code"><i class="fas fa-screwdriver-wrench"></i> C3</span><span class="motif-node__title">调试</span></button>
+                            <button class="motif-node" type="button" data-motif-code="C4" data-motif-title="最低能量态" data-motif-description="每个人都在寻找自己的稳定点：程知意是自己，苏敏是一杯刚好的热水，阿七是输完还能笑出来的姿态，程念则还在成形。"><span class="motif-node__code"><i class="fas fa-temperature-low"></i> C4</span><span class="motif-node__title">最低能量态</span></button>
+                            <button class="motif-node" type="button" data-motif-code="C5" data-motif-title="白卫衣" data-motif-description="它既是少女时代的程知意，也是多年后衣柜里不肯被丢掉的旧颜色，更是程念看见母亲时那道未消失的投影。"><span class="motif-node__code"><i class="fas fa-shirt"></i> C5</span><span class="motif-node__title">白卫衣</span></button>
+                            <button class="motif-node" type="button" data-motif-code="C6" data-motif-title="雨和雪" data-motif-description="北京的雨、慕尼黑的雪、成都冬夜的白气，都是同一种情绪换了物理形态之后继续落下。"><span class="motif-node__code"><i class="fas fa-cloud-rain"></i> C6</span><span class="motif-node__title">雨和雪</span></button>
+                            <button class="motif-node" type="button" data-motif-code="C7" data-motif-title="光标" data-motif-description="有人在文档里打了又删，有人在对话框里打了又删，有人把下一步画成箭头。光标一直闪，意味着故事从未真正停机。"><span class="motif-node__code"><i class="fas fa-i-cursor"></i> C7</span><span class="motif-node__title">光标</span></button>
+                            <button class="motif-node" type="button" data-motif-code="C8" data-motif-title="左颊笑纹分叉点" data-motif-description="Gary替细节命名，苏敏把命名藏起来，程念却天然长出了那道回响般的细纹，让记忆在下一代人身上继续发光。"><span class="motif-node__code"><i class="fas fa-face-smile"></i> C8</span><span class="motif-node__title">左颊笑纹分叉点</span></button>
+                            <button class="motif-node" type="button" data-motif-code="C9" data-motif-title="组队" data-motif-description="阿七把邀请换成一句“记得自己组队”，程念则更进一步，直接问父亲要不要一起调试，把犹豫从上一代手里接过来重写。"><span class="motif-node__code"><i class="fas fa-users"></i> C9</span><span class="motif-node__title">组队</span></button>
+                            <button class="motif-node" type="button" data-motif-code="C10" data-motif-title="彩蛋" data-motif-description="阿七说自己是彩蛋玩家，Gary记录彩蛋，苏敏收藏彩蛋，程知意像彩蛋本身，而程念第一次说出了最重要的一句：彩蛋也可以自己找到自己。"><span class="motif-node__code"><i class="fas fa-gift"></i> C10</span><span class="motif-node__title">彩蛋</span></button>
+                        </div>
+                    </div>
                     <div class="season-corner-guide">
                         <div class="season-corner-guide__title"><i class="fas fa-bookmark"></i> 瞬间谱采样</div>
                         <div class="season-corner-guide__badges">
@@ -897,32 +1105,36 @@
                                 <p>她的时间不是线性向前，而是不断折叠、回看，再慢慢找到真正能安放自己的结构。</p>
                             </div>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C1 C4 C6 C7">
                                 <div class="moment-meta"><span class="moment-code">Z1</span><span class="moment-season">2025年 · 冬至 · 慕尼黑</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C1">折叠</span><span class="motif-link" data-motif-ref="C4">最低能量态</span><span class="motif-link" data-motif-ref="C6">雨和雪</span><span class="motif-link" data-motif-ref="C7">光标</span></div>
                                 <h3>最低能量态</h3>
                                 <p>实验楼的暖气坏了。程知意裹着大衣坐在离心机前，看蛋白质沉淀在透明试管里缓缓分层。最重的沉在底部，最轻的浮在表面。她忽然想起多年前Gary在天台上问她的那个问题，“你的最低能量态是什么？”她当时没有回答。现在她知道了：不是陆屿，不是任何人，是她自己。只是这个结构，花了十几年才折叠成功。</p>
                                 <p>手机亮了一下。陆屿发来的，就一行字：程念今天在少年宫拿了冠军。她看着这行字，没有回复。窗外慕尼黑下雪了，她想起北京那年没有下的雪，想起她在苏黎世湖边发的那个句号，想起她第一次把程念抱在怀里时说“你叫程念，想念的念”。</p>
                                 <p>她打开陆屿的对话框，打了几个字，又删掉。光标停在空白处，像一个悬停了十几年的休止符。她最终还是没有发送那条消息，只是把手机翻过来，屏幕朝下，搁在实验台上。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C5 C7 C1">
                                 <div class="moment-meta"><span class="moment-code">Z2</span><span class="moment-season">2026年 · 春分 · 北京</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C5">白卫衣</span><span class="motif-link" data-motif-ref="C7">光标</span><span class="motif-link" data-motif-ref="C1">折叠</span></div>
                                 <h3>白卫衣与晚安</h3>
                                 <p>程知意回国开会。酒店房间里，她从行李箱里拿出那件白卫衣，挂在衣柜里，没有穿。她站在衣柜前看了很久，然后关上门，躺在床上，盯着天花板。</p>
                                 <p>陆屿给她发了一条消息：程念问我你以前是什么样的。她说，你怎么说的。他说，我说你以前扎马尾，穿白卫衣，从操场边走过去的时候从来不低头。</p>
                                 <p>程知意把手机放在枕头旁边，屏幕朝上。她想起那个操场，那个下午，那个不敢跟她说话的男生。她那时候走路有点急，像在追什么。后来她追了十几年，追到苏黎世，追回北京，追到慕尼黑，最后发现她追的不是一个人，是一个自己折叠不成的结构。她拿起手机，打了三个字，删掉。又打，又删。最后只发了两个字：晚安。陆屿没有回。但她知道他在看。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C1 C9 C5">
                                 <div class="moment-meta"><span class="moment-code">Z3</span><span class="moment-season">2027年 · 夏至 · 慕尼黑</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C1">折叠</span><span class="motif-link" data-motif-ref="C9">组队</span><span class="motif-link" data-motif-ref="C5">白卫衣</span></div>
                                 <h3>她还在折叠</h3>
                                 <p>程念开始在暑假去北京。程知意送她到机场，在安检口蹲下来，把她的马尾扎紧。“到了给我发消息。”“好。”“别跟你爸顶嘴。”“好。”“把这句话告诉他——说我还在折叠。”</p>
                                 <p>程念看着她。六岁的女孩，眼睛和她父亲一模一样。程念说，妈妈，你为什么要折叠。程知意说，因为人不是蛋白质。蛋白质折叠一次就稳定了，人要折叠很多次。</p>
                                 <p>那天晚上她失眠了。梦里她回到了大学那个读书会，坐在陆屿旁边，笔记本上画满了蛋白质结构图，偷吃一袋小熊饼干。她问，吃吗。他看了她一眼，没有说好，也没有说不好。只是那样看着她，像看一道还没决定要不要解的题目。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C5 C7 C1">
                                 <div class="moment-meta"><span class="moment-code">Z4</span><span class="moment-season">2027年 · 秋分 · 北京</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C5">白卫衣</span><span class="motif-link" data-motif-ref="C7">光标</span><span class="motif-link" data-motif-ref="C1">折叠</span></div>
                                 <h3>已折叠</h3>
                                 <p>陆屿发来一张照片。程念坐在棋盘前，手悬在“马”上方，正在犹豫要不要悔棋。照片角落里，程知意看到了自己的影子，一个穿白卫衣的女人，站在远处，没有走近。</p>
                                 <p>她想起多年前那个凌晨。她站在路灯下，踮起脚，他的嘴唇有酒和冷空气的味道。她问他“那你要不要加一条”，他说“程知意，你当初说不要异地的时候，是觉得我不值得，还是觉得自己不配”。她说“第二个”。</p>
@@ -937,31 +1149,35 @@
                                 <p>她的戏剧性从来不在大吵大闹，而在对温度、体面与关系边界的精确掌握。</p>
                             </div>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C3 C8 C4">
                                 <div class="moment-meta"><span class="moment-code">S1</span><span class="moment-season">2025年 · 冬至 · 北京</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C3">调试</span><span class="motif-link" data-motif-ref="C8">左颊笑纹分叉点</span><span class="motif-link" data-motif-ref="C4">最低能量态</span></div>
                                 <h3>两勺糖</h3>
                                 <p>苏敏站在厨房里，盯着水龙头看了很久。陆屿在书房写文档，女儿在客厅下棋。水龙头没坏，只是她在发呆。她忽然想起Gary说过的话，“你每次在厨房发呆的时候，都是在想一个人。不是在想他，是在想你自己。想你自己为什么要留下来。”</p>
                                 <p>她关上水龙头，往西红柿鸡蛋里放了两勺糖。第一勺是习惯，第二勺是试探。陆屿吃出来了，没说。她把头埋在碗里，也没说。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C2 C8 C6">
                                 <div class="moment-meta"><span class="moment-code">S2</span><span class="moment-season">2026年 · 春分 · 北京</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C2">便签</span><span class="motif-link" data-motif-ref="C8">左颊笑纹分叉点</span><span class="motif-link" data-motif-ref="C6">雨和雪</span></div>
                                 <h3>记忆的衰减曲线</h3>
                                 <p>苏敏在阳台上浇花。多肉从旧公寓搬过来之后已经缓过来了，新长了几片叶子，嫩绿色的，像刚注册的新用户。</p>
                                 <p>Gary给她发了一条消息：我在做一个新的展览。主题是“记忆的衰减曲线”——人会在多久之后忘记另一个人的声音。她看着这条消息，没有回复。不是不想回，是不知道回什么。她知道Gary还记得她的声音，那场展览大概就是在问自己还能记住多久。</p>
                                 <p>她想起Gary曾经给她做的那个3D星系模型。她当时没有收下，因为她觉得太贵重了。现在她想，也许贵重不是问题。问题是收下它，就等于承认自己还没忘掉他。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C4 C9 C3">
                                 <div class="moment-meta"><span class="moment-code">S3</span><span class="moment-season">2026年 · 夏至 · 北京</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C4">最低能量态</span><span class="motif-link" data-motif-ref="C9">组队</span><span class="motif-link" data-motif-ref="C3">调试</span></div>
                                 <h3>下次去现场看</h3>
                                 <p>那天晚上陆屿回来得很早。苏敏在沙发上看手机，他坐过来，很久没有说话。然后他说，程念今天在少年宫拿了冠军。苏敏说，你去看她了。他说，没有，她妈妈发了照片。苏敏说，你存了吗。他说，存了。</p>
                                 <p>苏敏沉默了一会儿，然后站起来，去厨房倒了两杯水。一杯放在他面前，一杯自己端着。她说，下次去现场看。他说，好。</p>
                                 <p>她没有问“她妈妈会不会也在”，他也没有说。他们只是坐在那里，喝着各自的水，听着女儿在客厅里挪棋子的声音。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C2 C8 C10">
                                 <div class="moment-meta"><span class="moment-code">S4</span><span class="moment-season">2027年 · 秋分 · 北京</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C2">便签</span><span class="motif-link" data-motif-ref="C8">左颊笑纹分叉点</span><span class="motif-link" data-motif-ref="C10">彩蛋</span></div>
                                 <h3>星系图前的回头</h3>
                                 <p>苏敏在798的独立书店门口又看到了Gary。这次不是偶遇，是Gary的展览开幕。他给她发了邀请函，她犹豫了三天，最后还是来了。</p>
                                 <p>展厅里那面墙还在，一千张标签重新排列过，不再是苏敏的肖像，而是一幅巨大的、旋转的星系图。Gary站在她旁边，说，我把你的星系放大了。她说，这不是我的。他说，是，也不是。这是所有被你影响过的人，你的轨迹在他们身上留下的引力扰动。</p>
@@ -976,31 +1192,35 @@
                                 <p>她看起来最像插科打诨的人，却总在失控、退场和重组这些时刻，给出最准确的判断。</p>
                             </div>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C10 C6 C7">
                                 <div class="moment-meta"><span class="moment-code">A1</span><span class="moment-season">2025年 · 冬至 · 成都</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C10">彩蛋</span><span class="motif-link" data-motif-ref="C6">雨和雪</span><span class="motif-link" data-motif-ref="C7">光标</span></div>
                                 <h3>被存档的彩蛋</h3>
                                 <p>阿七在成都的一家网吧打游戏。还是那款老游戏，地图没变，英雄没变，只是队友换了一批又一批。她打了一局排位，输了。又打了一局，又输了。她把键盘往前一推，看着屏幕上大大的“DEFEAT”。</p>
                                 <p>网吧老板走过来，说，阿七，有人找你。她抬头，看到一个戴眼镜的男生，手里拿着一个笔记本。他说，你是阿七吗，我看了你在网上的攻略，想请你签名。阿七愣了几秒，然后笑了。她签了名，男生走了之后，她对老板说，我有粉丝了。老板说，你一直有。她说，不一样。以前的粉丝只会骂我菜。</p>
                                 <p>那天晚上她没有发游戏邀请给任何人。只是一个人走出网吧，站在成都的冬夜里，呵出的白气像一列省略号。她打开陆屿的对话框，打了几个字，删掉。光标停在空白处，一闪一闪，像一个被存了档但从未被打开的彩蛋。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C3 C10">
                                 <div class="moment-meta"><span class="moment-code">A2</span><span class="moment-season">2026年 · 春分 · 成都</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C3">调试</span><span class="motif-link" data-motif-ref="C10">彩蛋</span></div>
                                 <h3>输得开心</h3>
                                 <p>阿七做起了游戏主播。不是那种技术型主播，是那种专门教新手怎么输得开心的主播。她的直播间签名是：彩蛋玩家，永远第七。</p>
                                 <p>有一次她连输五局，弹幕都在刷“心态崩了”，她忽然说：“你们知道系统崩溃和需求变更的区别吗？系统崩溃是Bug，需求变更是你不想要原来的东西了。”弹幕安静了一秒，然后炸了。有人问，你以前是做什么的。她说，我以前是彩蛋。现在也是。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C9 C10 C6">
                                 <div class="moment-meta"><span class="moment-code">A3</span><span class="moment-season">2027年 · 夏至 · 成都</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C9">组队</span><span class="motif-link" data-motif-ref="C10">彩蛋</span><span class="motif-link" data-motif-ref="C6">雨和雪</span></div>
                                 <h3>一个彩色的朋友</h3>
                                 <p>阿七收到一条消息。陆屿发来的。就一行字：程念想见你。</p>
                                 <p>她盯着这行字看了很久。她知道程念是谁。她曾经在陆屿的朋友圈里看到过程念的照片，一个扎马尾的女孩，蹲在花坛边看蜗牛。她当时在那张照片下面点了个赞，没有评论。</p>
                                 <p>现在这个女孩想见她。阿七打了几个字：她知道我是谁吗。陆屿说，知道。阿七说，你怎么介绍我的。他说，一个彩色的朋友。阿七笑了。她回：行。让她来。我教她打游戏。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C3 C9 C10">
                                 <div class="moment-meta"><span class="moment-code">A4</span><span class="moment-season">2027年 · 秋分 · 北京</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C3">调试</span><span class="motif-link" data-motif-ref="C9">组队</span><span class="motif-link" data-motif-ref="C10">彩蛋</span></div>
                                 <h3>走路的时候在晃</h3>
                                 <p>程念坐在网吧角落，阿七坐在她旁边。屏幕上是一个新手教学关卡，程念操作的角色正在原地转圈。阿七说，别急，先学会走路再学别的。程念说，你走路的样子和我爸爸不一样。阿七说，哪里不一样。程念说，你走路的时候在晃。</p>
                                 <p>阿七愣了一下。然后笑了。她确实是晃的，她从小就晃，晃着去上学，晃着去打游戏，晃着去天台，晃着去任何地方。原来一个孩子也能看出来。她说，你爸爸走路不晃吗。程念说，不晃。他走路的时候像在等指令。</p>
@@ -1015,52 +1235,39 @@
                                 <p>她继承了上一代的语言系统和情感余波，却没有被困在旧版本里，而是天然站在下一版人生的入口。</p>
                             </div>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C1 C4 C5">
                                 <div class="moment-meta"><span class="moment-code">N1</span><span class="moment-season">2025年 · 冬至 · 慕尼黑</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C1">折叠</span><span class="motif-link" data-motif-ref="C4">最低能量态</span><span class="motif-link" data-motif-ref="C5">白卫衣</span></div>
                                 <h3>想念一个人</h3>
                                 <p>程念第一次问妈妈关于爸爸的事。她说，妈妈，我爸爸叫什么。程知意正在煮红茶，手顿了一下。她说，陆屿。岛屿的屿。程念说，为什么我叫程念。程知意说，因为想念一个人。</p>
                                 <p>程念没有继续问。她低下头继续拼乐高，把一块绿色的积木压在红色的上面，然后拆开，重新拼。她的动作和她父亲一样，拆了拼，拼了拆，每次都在重新定义结构。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C5 C9 C7">
                                 <div class="moment-meta"><span class="moment-code">N2</span><span class="moment-season">2026年 · 春分 · 北京</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C5">白卫衣</span><span class="motif-link" data-motif-ref="C9">组队</span><span class="motif-link" data-motif-ref="C7">光标</span></div>
                                 <h3>走路像在等指令</h3>
                                 <p>程念第一次去北京见陆屿。她在机场看到一个男人站在接机口，手里举着一张纸，上面写着“程念”。她走过去，抬头看他。他没有蹲下来，只是低头看她。他们之间的身高差刚好让她能仔细看清他的脸，和她一样认真的眼睛，嘴角有一点纹路，看起来不太擅长笑。</p>
                                 <p>她说，你就是我爸爸。他说，是。她说，妈妈说你走路像在等指令。陆屿沉默了一会儿。然后他说，你妈妈还说了什么。她说，说你以前不敢跟她说话。后来你敢了，但你已经选了别人。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C3 C2 C9">
                                 <div class="moment-meta"><span class="moment-code">N3</span><span class="moment-season">2026年 · 夏至 · 北京</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C3">调试</span><span class="motif-link" data-motif-ref="C2">便签</span><span class="motif-link" data-motif-ref="C9">组队</span></div>
                                 <h3>爸爸，我正在调试呢</h3>
                                 <p>程念开始学象棋。陆屿教她规则，她记得很快，但每局都输。输急了会把“马”挪回原位，说：爸爸，我正在调试呢。</p>
                                 <p>这个词是从他自己嘴里偷来的。程念在书房外偷听过他开电话会议，他对着屏幕说“这个Bug还没调通”。她学会了，然后安在了悔棋上。陆屿没有戳穿她。他说，行吧，那你调试完了吗。她说，还没，还有几个方案要试试。他把她的车往前推了半步，她说这是A/B测试。把她的炮往左移了一格，她说这是灰度发布。最后他认输了，不是下不过她，是被她用自己创造的语言打败了。</p>
                             </article>
 
-                            <article class="movement-card">
+                            <article class="movement-card" data-motifs="C6 C3 C10 C9">
                                 <div class="moment-meta"><span class="moment-code">N4</span><span class="moment-season">2028年 · 冬至 · 慕尼黑与北京</span></div>
+                                <div class="motif-links"><span class="motif-link" data-motif-ref="C6">雨和雪</span><span class="motif-link" data-motif-ref="C3">调试</span><span class="motif-link" data-motif-ref="C10">彩蛋</span><span class="motif-link" data-motif-ref="C9">组队</span></div>
                                 <h3>不需要调试的东西</h3>
                                 <p>程念站在慕尼黑的雪地里，手里握着手机，屏幕上是陆屿刚发的消息：生日快乐。她回：谢谢爸爸。然后她打开另一个对话框，给程知意发了同样的三个字：到了，安全。</p>
                                 <p>她站在机场安检口外面，回头看了一眼。程知意站在里面，穿着那件白卫衣，头发已经不再是银灰色，她染回了黑色，扎成马尾，和她年轻时一样。程念朝她挥挥手，然后转身。她今年刚满八岁，还不知道什么叫悬停，但她已经学会了悔棋、A/B测试和灰度发布。她知道有些东西需要调试，有些不需要。不需要调试的东西，叫爱。</p>
                             </article>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <section>
-                <h2 id="环形连接-十个共享意象">环形连接 · 十个共享意象</h2>
-                <p>这些意象不属于任何一个声部，却同时存在于四个声部之间。它们像一组跨时空的虫洞，围成闭合的圆环。你可以从任何一个点进入，顺时针读，逆时针读，或者在四个声部之间交叉穿梭。</p>
-                <div class="motif-grid">
-                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-layer-group"></i> C1 · 折叠</span><h3>折叠</h3><p>程知意用十几年找到最低能量态，苏敏把日常也折叠成一种稳定结构，程念则从小就明白人要折叠很多次，才能成为自己。</p></article>
-                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-note-sticky"></i> C2 · 便签</span><h3>便签</h3><p>Gary的标签、阿七的便利贴、程念画在棋盘边的箭头，都是把情感压缩进最轻载体里的方式。</p></article>
-                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-screwdriver-wrench"></i> C3 · 调试</span><h3>调试</h3><p>陆屿调试代码，程念调试棋局，苏敏调试菜的甜度，阿七调试输家的心态，程知意则调试那份始终折叠不成的亚稳态。</p></article>
-                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-temperature-low"></i> C4 · 最低能量态</span><h3>最低能量态</h3><p>每个人都在寻找自己的稳定点：程知意是自己，苏敏是一杯刚好的热水，阿七是一种输完还能笑的姿态，程念则还在成形。</p></article>
-                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-shirt"></i> C5 · 白卫衣</span><h3>白卫衣</h3><p>它既是少女时代的程知意，也是多年后衣柜里不肯被丢掉的旧颜色，还是程念看见母亲时那道未消失的投影。</p></article>
-                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-cloud-rain"></i> C6 · 雨和雪</span><h3>雨和雪</h3><p>北京的雨、慕尼黑的雪、成都冬夜的白气，都是同一种情绪换了物理形态之后继续落下。</p></article>
-                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-i-cursor"></i> C7 · 光标</span><h3>光标</h3><p>有人在文档里打了又删，有人在对话框里打了又删，有人把下一步画成箭头。光标一直闪，意味着故事从未真正停机。</p></article>
-                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-face-smile"></i> C8 · 左颊笑纹分叉点</span><h3>左颊笑纹分叉点</h3><p>Gary替细节命名，苏敏把命名藏起来，程念却天然长出了那道回响般的细纹，让记忆在下一代人身上继续发光。</p></article>
-                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-users"></i> C9 · 组队</span><h3>组队</h3><p>阿七把邀请换成一句“记得自己组队”，程念则更进一步，直接问父亲要不要一起调试，把犹豫从上一代手里接过来重写。</p></article>
-                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-gift"></i> C10 · 彩蛋</span><h3>彩蛋</h3><p>阿七说自己是彩蛋玩家，Gary记录彩蛋，苏敏收藏彩蛋，程知意像彩蛋本身，而程念则第一次说出最重要的一句：彩蛋也可以自己找到自己。</p></article>
                 </div>
             </section>
 
@@ -1080,5 +1287,126 @@
     <a href="../aboutmore/jsxm.html">失控时刻·有趣玩家 →</a>
 </div>
 <div class="footer-note">附记：本页把“四重奏 + 瞬间谱”直接做成四声部并置阅读器。竖读时看见人物各自的人生演变，横读时听见同一季节里的复调回响；十个共享意象则负责把四条声部重新闭成一个环。</div>
+<script>
+(() => {
+    const consolePanel = document.getElementById("motif-panel");
+    const quartetGrid = document.querySelector(".quartet-grid");
+    const motifConsole = document.querySelector(".motif-console");
+    const motifNodes = Array.from(document.querySelectorAll(".motif-node"));
+    const movementCards = Array.from(document.querySelectorAll(".movement-card[data-motifs]"));
+    const motifLinks = Array.from(document.querySelectorAll(".motif-link[data-motif-ref]"));
+
+    if (!consolePanel || !quartetGrid || !motifConsole || !motifNodes.length || !movementCards.length) {
+        return;
+    }
+
+    const heading = consolePanel.querySelector("h3");
+    const description = consolePanel.querySelector("p");
+    let consoleMode = "auto";
+
+    const setMotifState = (codes = [], primaryCode = "") => {
+        const activeCodes = Array.from(new Set(codes.filter(Boolean)));
+        motifNodes.forEach((node) => {
+            const nodeCode = node.dataset.motifCode || "";
+            node.classList.toggle("is-active", nodeCode === primaryCode && Boolean(primaryCode));
+            node.classList.toggle("is-linked", activeCodes.includes(nodeCode));
+        });
+        motifLinks.forEach((link) => {
+            const linkCode = link.dataset.motifRef || "";
+            link.classList.toggle("is-motif-match", linkCode === primaryCode && Boolean(primaryCode));
+            link.classList.toggle("is-motif-related", activeCodes.includes(linkCode));
+        });
+        quartetGrid.classList.toggle("is-motif-filtering", activeCodes.length > 0);
+
+        movementCards.forEach((card) => {
+            const motifs = (card.dataset.motifs || "").split(/\s+/).filter(Boolean);
+            const isPrimaryMatch = Boolean(primaryCode) && motifs.includes(primaryCode);
+            const isRelated = activeCodes.some((code) => motifs.includes(code));
+            card.classList.toggle("is-motif-match", isPrimaryMatch);
+            card.classList.toggle("is-motif-related", isRelated);
+        });
+
+        if (!primaryCode) {
+            heading.textContent = "环形连接正在待机";
+            description.textContent = "从下方选择一个意象节点。它会在四宫格里显露出真正的跨声部回响。";
+            return;
+        }
+
+        const activeNode = motifNodes.find((node) => node.dataset.motifCode === primaryCode);
+        if (!activeNode) {
+            return;
+        }
+        heading.textContent = `${activeNode.dataset.motifCode} · ${activeNode.dataset.motifTitle}`;
+        description.textContent = activeNode.dataset.motifDescription || "";
+    };
+
+    const syncFromScroll = () => {
+        if (consoleMode !== "auto") {
+            return;
+        }
+
+        let bestCard = null;
+        let bestDistance = Number.POSITIVE_INFINITY;
+        movementCards.forEach((card) => {
+            const rect = card.getBoundingClientRect();
+            if (rect.bottom < 140 || rect.top > window.innerHeight * 0.75) {
+                return;
+            }
+            const distance = Math.abs(rect.top - 180);
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                bestCard = card;
+            }
+        });
+
+        if (!bestCard) {
+            setMotifState([], "");
+            return;
+        }
+
+        const motifs = (bestCard.dataset.motifs || "").split(/\s+/).filter(Boolean);
+        setMotifState(motifs, motifs[0] || "");
+    };
+
+    motifNodes.forEach((node) => {
+        const activate = () => {
+            consoleMode = "manual";
+            const code = node.dataset.motifCode || "";
+            setMotifState([code], code);
+        };
+        node.addEventListener("mouseenter", activate);
+        node.addEventListener("focus", activate);
+        node.addEventListener("click", activate);
+    });
+
+    motifConsole.addEventListener("mouseleave", () => {
+        consoleMode = "auto";
+        syncFromScroll();
+    });
+    motifConsole.addEventListener("focusout", (event) => {
+        if (motifConsole.contains(event.relatedTarget)) {
+            return;
+        }
+        consoleMode = "auto";
+        syncFromScroll();
+    });
+
+    let ticking = false;
+    const onScroll = () => {
+        if (ticking) {
+            return;
+        }
+        ticking = true;
+        window.requestAnimationFrame(() => {
+            syncFromScroll();
+            ticking = false;
+        });
+    };
+
+    syncFromScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+})();
+</script>
 </body>
 </html>
