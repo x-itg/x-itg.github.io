@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>四季Party High玩家 | itg</title>
+<meta name="description" content="以四重奏与瞬间谱展开的复调小说：四个声部共享同一时间轴，在折叠、调试、组队与彩蛋里互相照亮。">
+<meta name="keywords" content="四季Party High玩家,程知意,苏敏,阿七,程念,小说,复调,四重奏">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="四季Party High玩家 | itg">
+<meta property="og:description" content="四个声部共享同一条时间轴，读者可以竖读、横读，也可以在十个共享意象里交叉穿梭。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/party-high.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/party-high.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #f8f3ea;
+        --bg-deep: #ecdfcf;
+        --paper: rgba(255, 252, 247, 0.88);
+        --line: rgba(93, 76, 59, 0.16);
+        --ink: #2f271f;
+        --muted: #6d6257;
+        --gold: #b98c4b;
+        --zhiyi: #4d6b8f;
+        --sumin: #8f5f48;
+        --aqi: #4c8b6c;
+        --chengnian: #8c5fa7;
+        --shadow: 0 26px 60px rgba(45, 33, 23, 0.12);
+        --radius: 24px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+        color: var(--ink);
+        line-height: 1.9;
+        background:
+            radial-gradient(circle at 8% 10%, rgba(185, 140, 75, 0.16), transparent 24%),
+            radial-gradient(circle at 92% 10%, rgba(77, 107, 143, 0.12), transparent 20%),
+            linear-gradient(180deg, #fcfaf6 0%, var(--bg) 48%, var(--bg-deep) 100%);
+        -webkit-font-smoothing: antialiased;
+    }
+    .layout {
+        display: flex;
+        max-width: 1860px;
+        margin: 0 auto;
+        min-height: 100vh;
+    }
+    .sidebar-toc {
+        display: none;
+    }
+    .main-content {
+        flex: 1;
+        min-width: 0;
+        padding: 32px 18px 84px;
+    }
+    .story-shell {
+        max-width: 1580px;
+        margin: 0 auto;
+    }
+    .article-header {
+        padding: 12px 0 20px;
+        border-bottom: 1px solid rgba(93, 76, 59, 0.14);
+    }
+    .series-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gold);
+    }
+    h1 {
+        font-size: 42px;
+        line-height: 1.14;
+        margin-bottom: 12px;
+        color: #241c15;
+    }
+    .subtitle {
+        max-width: 64ch;
+        font-size: 16px;
+        color: var(--muted);
+    }
+    .hero-score {
+        margin: 28px 0 24px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+        gap: 18px;
+    }
+    .hero-card,
+    .hero-panel,
+    .voice-card,
+    .voice-lane,
+    .movement-card,
+    .motif-card,
+    .ending-card,
+    .footer-note {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+    }
+    .hero-card,
+    .hero-panel,
+    .ending-card,
+    .footer-note {
+        padding: 24px 26px;
+    }
+    .hero-card p,
+    .hero-panel p,
+    .movement-card p,
+    .motif-card p,
+    .ending-card p,
+    .footer-note p {
+        margin: 10px 0;
+        color: #50463b;
+        text-align: justify;
+    }
+    h2 {
+        font-size: 28px;
+        line-height: 1.24;
+        margin-bottom: 14px;
+        color: #271f17;
+    }
+    h3 {
+        font-size: 22px;
+        line-height: 1.28;
+        margin-bottom: 12px;
+        color: #2e241b;
+    }
+    .structure-grid,
+    .reading-grid,
+    .voice-grid,
+    .motif-grid {
+        display: grid;
+        gap: 14px;
+    }
+    .structure-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 16px;
+    }
+    .structure-item,
+    .reading-mode {
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(93, 76, 59, 0.1);
+        background: rgba(255, 255, 255, 0.58);
+    }
+    .structure-item strong,
+    .reading-mode strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+    .reading-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 16px;
+    }
+    .score-board {
+        display: grid;
+        gap: 10px;
+    }
+    .score-staff {
+        position: relative;
+        padding: 14px 16px 14px 92px;
+        border-radius: 18px;
+        border: 1px solid rgba(93, 76, 59, 0.1);
+        background: rgba(255, 255, 255, 0.56);
+        min-height: 78px;
+        overflow: hidden;
+    }
+    .score-staff::before {
+        content: "";
+        position: absolute;
+        left: 92px;
+        right: 18px;
+        top: 50%;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(185, 140, 75, 0.18), rgba(77, 107, 143, 0.2), rgba(140, 95, 167, 0.18));
+    }
+    .staff-label {
+        position: absolute;
+        left: 18px;
+        top: 18px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    .staff-label.zhiyi { color: var(--zhiyi); }
+    .staff-label.sumin { color: var(--sumin); }
+    .staff-label.aqi { color: var(--aqi); }
+    .staff-label.chengnian { color: var(--chengnian); }
+    .staff-notes {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        position: relative;
+        z-index: 1;
+    }
+    .staff-note {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: currentColor;
+        box-shadow: 0 0 0 6px rgba(255,255,255,0.7);
+    }
+    .staff-caption {
+        margin-top: 10px;
+        font-size: 13px;
+        color: var(--muted);
+    }
+    .section-lead {
+        margin: 8px 0 26px;
+        padding: 18px 20px;
+        border-left: 4px solid var(--gold);
+        border-radius: 0 18px 18px 0;
+        background: rgba(185, 140, 75, 0.08);
+        color: #55493f;
+    }
+    .voice-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin: 18px 0 28px;
+    }
+    .voice-card {
+        padding: 18px;
+        background: rgba(255, 253, 249, 0.92);
+    }
+    .voice-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 10px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+    .voice-card p {
+        font-size: 14px;
+        color: #564c41;
+    }
+    .voice-card ul {
+        list-style: none;
+        margin-top: 10px;
+    }
+    .voice-card li {
+        padding: 8px 0;
+        border-top: 1px dashed rgba(93, 76, 59, 0.14);
+        font-size: 13px;
+        color: #665a4d;
+    }
+    .voice-card li:first-child {
+        padding-top: 0;
+        border-top: 0;
+    }
+    .voice-card--zhiyi .voice-tag,
+    .voice-card--zhiyi h3 { color: var(--zhiyi); }
+    .voice-card--sumin .voice-tag,
+    .voice-card--sumin h3 { color: var(--sumin); }
+    .voice-card--aqi .voice-tag,
+    .voice-card--aqi h3 { color: var(--aqi); }
+    .voice-card--chengnian .voice-tag,
+    .voice-card--chengnian h3 { color: var(--chengnian); }
+    .quartet-shell {
+        position: relative;
+    }
+    .season-ribbon {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+    .season-pill {
+        padding: 10px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(93, 76, 59, 0.12);
+        background: rgba(255, 255, 255, 0.7);
+        text-align: center;
+        font-size: 12px;
+        color: #5f5448;
+    }
+    .quartet-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        align-items: start;
+    }
+    .voice-lane {
+        padding: 18px;
+        position: relative;
+    }
+    .voice-lane::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border-radius: 18px;
+        border: 1px solid transparent;
+        pointer-events: none;
+    }
+    .voice-lane--zhiyi {
+        background: linear-gradient(180deg, rgba(77, 107, 143, 0.08), rgba(255, 252, 247, 0.86));
+    }
+    .voice-lane--sumin {
+        background: linear-gradient(180deg, rgba(143, 95, 72, 0.08), rgba(255, 252, 247, 0.86));
+    }
+    .voice-lane--aqi {
+        background: linear-gradient(180deg, rgba(76, 139, 108, 0.08), rgba(255, 252, 247, 0.86));
+    }
+    .voice-lane--chengnian {
+        background: linear-gradient(180deg, rgba(140, 95, 167, 0.08), rgba(255, 252, 247, 0.86));
+    }
+    .lane-head {
+        position: static;
+        margin-bottom: 14px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: rgba(255, 252, 247, 0.94);
+        border: 1px solid rgba(93, 76, 59, 0.12);
+        backdrop-filter: blur(12px);
+    }
+    .lane-head span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+    .voice-lane--zhiyi .lane-head span { color: var(--zhiyi); }
+    .voice-lane--sumin .lane-head span { color: var(--sumin); }
+    .voice-lane--aqi .lane-head span { color: var(--aqi); }
+    .voice-lane--chengnian .lane-head span { color: var(--chengnian); }
+    .lane-head p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+    }
+    .movement-card {
+        margin-bottom: 14px;
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(93, 76, 59, 0.12);
+    }
+    .movement-card:last-child {
+        margin-bottom: 0;
+    }
+    .moment-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+    .moment-code,
+    .moment-season {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+    }
+    .moment-season {
+        background: rgba(255,255,255,0.8);
+        border: 1px solid rgba(93, 76, 59, 0.12);
+        color: #65584d;
+    }
+    .voice-lane--zhiyi .moment-code { background: rgba(77, 107, 143, 0.12); color: var(--zhiyi); }
+    .voice-lane--sumin .moment-code { background: rgba(143, 95, 72, 0.12); color: var(--sumin); }
+    .voice-lane--aqi .moment-code { background: rgba(76, 139, 108, 0.12); color: var(--aqi); }
+    .voice-lane--chengnian .moment-code { background: rgba(140, 95, 167, 0.12); color: var(--chengnian); }
+    .motif-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 18px;
+    }
+    .motif-card {
+        padding: 18px 18px 16px;
+        background: linear-gradient(180deg, rgba(255, 252, 247, 0.94), rgba(244, 238, 228, 0.84));
+    }
+    .motif-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.8);
+        border: 1px solid rgba(93, 76, 59, 0.1);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #6d5534;
+    }
+    .ending-card {
+        margin-top: 28px;
+        text-align: center;
+        background: linear-gradient(180deg, rgba(255, 250, 242, 0.96), rgba(244, 236, 224, 0.9));
+    }
+    .ending-card p {
+        max-width: 64ch;
+        margin: 12px auto;
+        text-align: center;
+    }
+    .footer-note {
+        max-width: 1240px;
+        margin: 24px auto 0;
+        font-size: 13px;
+        color: #605549;
+    }
+    @media (max-width: 1120px) {
+        .quartet-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    @media (max-width: 1120px) {
+        .hero-score,
+        .voice-grid,
+        .structure-grid,
+        .reading-grid,
+        .motif-grid {
+            grid-template-columns: 1fr;
+        }
+        .season-ribbon {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+    @media (max-width: 760px) {
+        .main-content {
+            padding: 24px 12px 72px;
+        }
+        .story-shell {
+            max-width: none;
+        }
+        h1 { font-size: 34px; }
+        h2 { font-size: 24px; }
+        h3 { font-size: 20px; }
+        .quartet-grid,
+        .season-ribbon {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+<link rel="stylesheet" href="../assets/site-sidebar.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="site-sidebar site-sidebar--story">
+        <div class="site-sidebar__brand"><a href="../about.html"><i class="fas fa-feather-alt"></i> L1-L4 · 法则与故事</a></div>
+        <div class="site-sidebar__intro">
+            <span class="site-sidebar__eyebrow">站点坐标</span>
+            <strong>L3 · 小说</strong>
+            <p>当法则遇到错配、感情与失控，它开始长出故事，也继续写出边界、代价与孤独余波。</p>
+        </div>
+        <div class="site-sidebar__quick-links">
+            <a href="../index.html" class="site-sidebar__quick-link site-sidebar__quick-link--primary"><i class="fas fa-house"></i><span>首页入口</span></a>
+            <a href="../aboutmore/wx.html" class="site-sidebar__quick-link"><i class="fas fa-map"></i><span>站点总览</span></a>
+        </div>
+        <details class="site-sidebar__group site-sidebar__group--law">
+            <summary>
+                <span class="site-sidebar__summary-text">L1 · 法则</span>
+                <span class="site-sidebar__summary-meta">法则主线与迁移起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../about.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📖</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我找到了一套法则</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/tk.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">以不变应万变</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fw.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪄</span>
+                        <span>
+                            <span class="site-sidebar__link-title">工程魔法</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/sc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">调试AI，学会经营感情</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">乾坤大挪移心法 · 文章总览</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--persona">
+            <summary>
+                <span class="site-sidebar__summary-text">L2 · 人</span>
+                <span class="site-sidebar__summary-meta">日常、关系与自省现场</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">爱婷哥</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/forme.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📝</span>
+                        <span>
+                            <span class="site-sidebar__link-title">写给自己</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/pg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎤</span>
+                        <span>
+                            <span class="site-sidebar__link-title">家庭直播间</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/m.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌙</span>
+                        <span>
+                            <span class="site-sidebar__link-title">周一早上，梦见下班</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/cc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我可能哪里错了</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ll.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">找个不懂的人聊聊</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">♾️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">不必全部收敛</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--literature" open>
+            <summary>
+                <span class="site-sidebar__summary-text">L3 · 小说</span>
+                <span class="site-sidebar__summary-meta">小说、对话、复调与孤独副本</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czy.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📘</span>
+                        <span>
+                            <span class="site-sidebar__link-title">蓝牙：陆知意岛</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/qp-chat.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·对话版</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/gary.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📍</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·终极玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/alone.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌃</span>
+                        <span>
+                            <span class="site-sidebar__link-title">知意知否·孤独玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/mywj.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪐</span>
+                        <span>
+                            <span class="site-sidebar__link-title">知屿之意·命运玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/party-high.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎼</span>
+                        <span>
+                            <span class="site-sidebar__link-title">四季Party High玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jsxm.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎮</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时刻·有趣玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--meta">
+            <summary>
+                <span class="site-sidebar__summary-text">L4 · 创作</span>
+                <span class="site-sidebar__summary-meta">创作方法与引擎说明</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czjs.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧪</span>
+                        <span>
+                            <span class="site-sidebar__link-title">会话的碰撞</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🏛️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">四层结构：创作体系</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">架构定乾坤，笔墨随法则</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/sryj.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">十日一剑：创作手记</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/gc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🖥️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">像调试代码一样创作</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>
+                <span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>
+                <span class="site-sidebar__summary-meta">从工程桥面回看整套法则的起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../gd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+                        <span>
+                            <span class="site-sidebar__link-title">桥面 · 始于工程，服务生活</span>
+                            <span class="site-sidebar__link-meta">从技术过桥，进入生活与叙事。</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+                            <span class="site-sidebar__link-meta">按地图理解技术与非技术的整体关系。</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
+    </aside>
+        <aside class="sidebar-toc sidebar-toc--story">
+        <h3><span class="sidebar-toc__icon" aria-hidden="true">🎼</span> 本章导航</h3>
+        <nav>
+            <ul>
+                <li><a href="#结构说明">结构说明</a></li>
+                <li><a href="#四声部总谱">四声部总谱</a></li>
+                <li><a href="#声部星图">声部星图</a></li>
+                <li><a href="#四重奏正文">四重奏正文</a></li>
+                <li><a href="#环形连接-十个共享意象">环形连接 · 十个共享意象</a></li>
+                <li><a href="#尾奏">尾奏</a></li>
+            </ul>
+        </nav>
+    </aside>
+<div class="main-content">
+        <div class="story-shell">
+            <header class="article-header" id="top">
+                <span class="series-tag"><i class="fas fa-music"></i> L3 · 小说实验 · 四重奏复调</span>
+                <h1>四季Party High玩家</h1>
+                <p class="subtitle">四个声部共享同一条时间轴。你可以竖着读，看一个人的完整演变；也可以横着读，看同一时刻不同人的反应怎样在四季里互相击中。</p>
+            </header>
+
+            <section class="hero-score">
+                <div class="hero-card">
+                    <h2 id="结构说明">结构说明</h2>
+                    <p>这篇小说采用「四重奏 + 瞬间谱」复合结构。程知意、苏敏、阿七、程念各自独立成章，却共享同一条时间轴；每个声部内部再用冬至、春分、夏至、秋分这些关键时间切片，去拼出一个人在时间里的演变轨迹。</p>
+                    <div class="structure-grid">
+                        <div class="structure-item">
+                            <strong>四重奏</strong>
+                            <span>四个角色各自是一个声部，魅力不靠“服务主线”，而靠各自完整的生命走势。</span>
+                        </div>
+                        <div class="structure-item">
+                            <strong>瞬间谱</strong>
+                            <span>不追求连续情节，而追求趋势与回响。读到的不是流水账，是被时间压缩后的性格弧线。</span>
+                        </div>
+                        <div class="structure-item">
+                            <strong>共享时间轴</strong>
+                            <span>同一季节在不同人身上生成不同反应，横向比照时，复调才真正成立。</span>
+                        </div>
+                    </div>
+                    <div class="reading-grid">
+                        <div class="reading-mode">
+                            <strong><i class="fas fa-arrows-up-down"></i> 竖读</strong>
+                            <span>沿一个声部从头读到尾，体验人物完整的人生走势与情绪沉淀。</span>
+                        </div>
+                        <div class="reading-mode">
+                            <strong><i class="fas fa-arrows-left-right"></i> 横读</strong>
+                            <span>按季节切片横向对比，观察同一时刻四个人如何给出完全不同的反应。</span>
+                        </div>
+                        <div class="reading-mode">
+                            <strong><i class="fas fa-shuffle"></i> 交叉读</strong>
+                            <span>在十个共享意象之间穿梭，把折叠、调试、组队与彩蛋拼回同一闭环。</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-panel">
+                    <h2 id="四声部总谱">四声部总谱</h2>
+                    <div class="score-board">
+                        <div class="score-staff">
+                            <span class="staff-label zhiyi">程知意</span>
+                            <div class="staff-notes" style="color: var(--zhiyi);">
+                                <span class="staff-note"></span><span class="staff-note"></span><span class="staff-note"></span><span class="staff-note"></span>
+                            </div>
+                            <div class="staff-caption">折叠、悬停、最低能量态。</div>
+                        </div>
+                        <div class="score-staff">
+                            <span class="staff-label sumin">苏敏</span>
+                            <div class="staff-notes" style="color: var(--sumin);">
+                                <span class="staff-note"></span><span class="staff-note"></span><span class="staff-note"></span><span class="staff-note"></span>
+                            </div>
+                            <div class="staff-caption">守门、命名、把沉默熬成温度。</div>
+                        </div>
+                        <div class="score-staff">
+                            <span class="staff-label aqi">阿七</span>
+                            <div class="staff-notes" style="color: var(--aqi);">
+                                <span class="staff-note"></span><span class="staff-note"></span><span class="staff-note"></span><span class="staff-note"></span>
+                            </div>
+                            <div class="staff-caption">彩蛋、退出机制、把输局讲成新规则。</div>
+                        </div>
+                        <div class="score-staff">
+                            <span class="staff-label chengnian">程念</span>
+                            <div class="staff-notes" style="color: var(--chengnian);">
+                                <span class="staff-note"></span><span class="staff-note"></span><span class="staff-note"></span><span class="staff-note"></span>
+                            </div>
+                            <div class="staff-caption">正在调试中，把上一代人的遗憾改写成新起手式。</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-lead">这一篇的魅力不在谁是主角，而在四个人都没有被压扁成配角。程知意把“折叠”活成一种自我完成，苏敏把“留下来”活成一种温柔的判断力，阿七让幽默承担了退出与重组的功能，程念则像下一代玩家，天然会用调试语言把爱重新命名。</div>
+
+            <section>
+                <h2 id="声部星图">声部星图</h2>
+                <div class="voice-grid">
+                    <article class="voice-card voice-card--zhiyi">
+                        <span class="voice-tag"><i class="fas fa-snowflake"></i> 第一声部</span>
+                        <h3>程知意</h3>
+                        <p>她的魅力不来自“未完成旧爱”，而来自一种极高密度的自我审视能力。她不是被动承受命运，而是在不断折叠自己。</p>
+                        <ul>
+                            <li>她把蛋白质、结构、最低能量态都拿来解释人生。</li>
+                            <li>她不是不爱，而是更晚才学会把爱放回自我结构里。</li>
+                            <li>她的冷静并不冷漠，而是一种高强度自持。</li>
+                        </ul>
+                    </article>
+                    <article class="voice-card voice-card--sumin">
+                        <span class="voice-tag"><i class="fas fa-mug-hot"></i> 第二声部</span>
+                        <h3>苏敏</h3>
+                        <p>她总在厨房、阳台、门口这些最日常的位置发光。她的力量不靠爆发，而靠持续稳定地把关系托住。</p>
+                        <ul>
+                            <li>她看得懂沉默，也知道什么时候不再逼问。</li>
+                            <li>她把加糖、浇花、喝水这些动作变成判断力。</li>
+                            <li>她的锋利始终带着体面，魅力来自成熟分寸。</li>
+                        </ul>
+                    </article>
+                    <article class="voice-card voice-card--aqi">
+                        <span class="voice-tag"><i class="fas fa-gamepad"></i> 第三声部</span>
+                        <h3>阿七</h3>
+                        <p>她把输局、直播、彩蛋和粗口都活成一套自己的哲学。她看起来最不正经，却总是最早看懂规则失效的人。</p>
+                        <ul>
+                            <li>她会把“崩溃”翻译成“需求变更”。</li>
+                            <li>她的幽默不是逃避，而是重写现实的方式。</li>
+                            <li>她是少数能把失败说得比胜利更有魅力的人。</li>
+                        </ul>
+                    </article>
+                    <article class="voice-card voice-card--chengnian">
+                        <span class="voice-tag"><i class="fas fa-chess-knight"></i> 第四声部</span>
+                        <h3>程念</h3>
+                        <p>她不是谜底，而是新的起点。她继承了上一代的语言、眼睛和犹豫，却天然地更接近未来。</p>
+                        <ul>
+                            <li>她会用“调试”“A/B测试”“灰度发布”来命名世界。</li>
+                            <li>她把父母的悬停，改写成下一代的起手式。</li>
+                            <li>她身上有最轻的童真，也有最强的续写力量。</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section>
+                <h2 id="四重奏正文">四重奏正文</h2>
+                <div class="quartet-shell">
+                    <div class="season-ribbon">
+                        <div class="season-pill">2025 · 冬至</div>
+                        <div class="season-pill">2026 · 春分</div>
+                        <div class="season-pill">2027 · 夏至</div>
+                        <div class="season-pill">2027 · 秋分</div>
+                        <div class="season-pill">2028 · 冬至回响</div>
+                    </div>
+
+                    <div class="quartet-grid">
+                        <div class="voice-lane voice-lane--zhiyi">
+                            <div class="lane-head">
+                                <span><i class="fas fa-flask"></i> 第一声部 · 程知意</span>
+                                <h3>最低能量态</h3>
+                                <p>她的时间不是线性向前，而是不断折叠、回看，再慢慢找到真正能安放自己的结构。</p>
+                            </div>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">Z1</span><span class="moment-season">2025年 · 冬至 · 慕尼黑</span></div>
+                                <h3>最低能量态</h3>
+                                <p>实验楼的暖气坏了。程知意裹着大衣坐在离心机前，看蛋白质沉淀在透明试管里缓缓分层。最重的沉在底部，最轻的浮在表面。她忽然想起多年前Gary在天台上问她的那个问题，“你的最低能量态是什么？”她当时没有回答。现在她知道了：不是陆屿，不是任何人，是她自己。只是这个结构，花了十几年才折叠成功。</p>
+                                <p>手机亮了一下。陆屿发来的，就一行字：程念今天在少年宫拿了冠军。她看着这行字，没有回复。窗外慕尼黑下雪了，她想起北京那年没有下的雪，想起她在苏黎世湖边发的那个句号，想起她第一次把程念抱在怀里时说“你叫程念，想念的念”。</p>
+                                <p>她打开陆屿的对话框，打了几个字，又删掉。光标停在空白处，像一个悬停了十几年的休止符。她最终还是没有发送那条消息，只是把手机翻过来，屏幕朝下，搁在实验台上。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">Z2</span><span class="moment-season">2026年 · 春分 · 北京</span></div>
+                                <h3>白卫衣与晚安</h3>
+                                <p>程知意回国开会。酒店房间里，她从行李箱里拿出那件白卫衣，挂在衣柜里，没有穿。她站在衣柜前看了很久，然后关上门，躺在床上，盯着天花板。</p>
+                                <p>陆屿给她发了一条消息：程念问我你以前是什么样的。她说，你怎么说的。他说，我说你以前扎马尾，穿白卫衣，从操场边走过去的时候从来不低头。</p>
+                                <p>程知意把手机放在枕头旁边，屏幕朝上。她想起那个操场，那个下午，那个不敢跟她说话的男生。她那时候走路有点急，像在追什么。后来她追了十几年，追到苏黎世，追回北京，追到慕尼黑，最后发现她追的不是一个人，是一个自己折叠不成的结构。她拿起手机，打了三个字，删掉。又打，又删。最后只发了两个字：晚安。陆屿没有回。但她知道他在看。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">Z3</span><span class="moment-season">2027年 · 夏至 · 慕尼黑</span></div>
+                                <h3>她还在折叠</h3>
+                                <p>程念开始在暑假去北京。程知意送她到机场，在安检口蹲下来，把她的马尾扎紧。“到了给我发消息。”“好。”“别跟你爸顶嘴。”“好。”“把这句话告诉他——说我还在折叠。”</p>
+                                <p>程念看着她。六岁的女孩，眼睛和她父亲一模一样。程念说，妈妈，你为什么要折叠。程知意说，因为人不是蛋白质。蛋白质折叠一次就稳定了，人要折叠很多次。</p>
+                                <p>那天晚上她失眠了。梦里她回到了大学那个读书会，坐在陆屿旁边，笔记本上画满了蛋白质结构图，偷吃一袋小熊饼干。她问，吃吗。他看了她一眼，没有说好，也没有说不好。只是那样看着她，像看一道还没决定要不要解的题目。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">Z4</span><span class="moment-season">2027年 · 秋分 · 北京</span></div>
+                                <h3>已折叠</h3>
+                                <p>陆屿发来一张照片。程念坐在棋盘前，手悬在“马”上方，正在犹豫要不要悔棋。照片角落里，程知意看到了自己的影子，一个穿白卫衣的女人，站在远处，没有走近。</p>
+                                <p>她想起多年前那个凌晨。她站在路灯下，踮起脚，他的嘴唇有酒和冷空气的味道。她问他“那你要不要加一条”，他说“程知意，你当初说不要异地的时候，是觉得我不值得，还是觉得自己不配”。她说“第二个”。</p>
+                                <p>她把那张照片存进手机，备注名：已折叠。然后她打开一个空白文档，打了三个字，又删掉。光标停在空白里，像一颗不肯落下的棋子。</p>
+                            </article>
+                        </div>
+
+                        <div class="voice-lane voice-lane--sumin">
+                            <div class="lane-head">
+                                <span><i class="fas fa-kitchen-set"></i> 第二声部 · 苏敏</span>
+                                <h3>左颊笑纹分叉点</h3>
+                                <p>她的戏剧性从来不在大吵大闹，而在对温度、体面与关系边界的精确掌握。</p>
+                            </div>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">S1</span><span class="moment-season">2025年 · 冬至 · 北京</span></div>
+                                <h3>两勺糖</h3>
+                                <p>苏敏站在厨房里，盯着水龙头看了很久。陆屿在书房写文档，女儿在客厅下棋。水龙头没坏，只是她在发呆。她忽然想起Gary说过的话，“你每次在厨房发呆的时候，都是在想一个人。不是在想他，是在想你自己。想你自己为什么要留下来。”</p>
+                                <p>她关上水龙头，往西红柿鸡蛋里放了两勺糖。第一勺是习惯，第二勺是试探。陆屿吃出来了，没说。她把头埋在碗里，也没说。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">S2</span><span class="moment-season">2026年 · 春分 · 北京</span></div>
+                                <h3>记忆的衰减曲线</h3>
+                                <p>苏敏在阳台上浇花。多肉从旧公寓搬过来之后已经缓过来了，新长了几片叶子，嫩绿色的，像刚注册的新用户。</p>
+                                <p>Gary给她发了一条消息：我在做一个新的展览。主题是“记忆的衰减曲线”——人会在多久之后忘记另一个人的声音。她看着这条消息，没有回复。不是不想回，是不知道回什么。她知道Gary还记得她的声音，那场展览大概就是在问自己还能记住多久。</p>
+                                <p>她想起Gary曾经给她做的那个3D星系模型。她当时没有收下，因为她觉得太贵重了。现在她想，也许贵重不是问题。问题是收下它，就等于承认自己还没忘掉他。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">S3</span><span class="moment-season">2026年 · 夏至 · 北京</span></div>
+                                <h3>下次去现场看</h3>
+                                <p>那天晚上陆屿回来得很早。苏敏在沙发上看手机，他坐过来，很久没有说话。然后他说，程念今天在少年宫拿了冠军。苏敏说，你去看她了。他说，没有，她妈妈发了照片。苏敏说，你存了吗。他说，存了。</p>
+                                <p>苏敏沉默了一会儿，然后站起来，去厨房倒了两杯水。一杯放在他面前，一杯自己端着。她说，下次去现场看。他说，好。</p>
+                                <p>她没有问“她妈妈会不会也在”，他也没有说。他们只是坐在那里，喝着各自的水，听着女儿在客厅里挪棋子的声音。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">S4</span><span class="moment-season">2027年 · 秋分 · 北京</span></div>
+                                <h3>星系图前的回头</h3>
+                                <p>苏敏在798的独立书店门口又看到了Gary。这次不是偶遇，是Gary的展览开幕。他给她发了邀请函，她犹豫了三天，最后还是来了。</p>
+                                <p>展厅里那面墙还在，一千张标签重新排列过，不再是苏敏的肖像，而是一幅巨大的、旋转的星系图。Gary站在她旁边，说，我把你的星系放大了。她说，这不是我的。他说，是，也不是。这是所有被你影响过的人，你的轨迹在他们身上留下的引力扰动。</p>
+                                <p>她看到其中一个标签上写着“她有一次在厨房发呆，盯着水龙头看了很久。我不知道她在想谁，但我知道那个人不是我”。她伸手把那张标签撕下来，握在手心里。Gary说，你可以留着。她说，我已经留了很多东西了。临走前，他问，你的左手还是比右手大一毫米吗。她说，是。然后把手藏进口袋里，走进北京秋天的傍晚。</p>
+                            </article>
+                        </div>
+
+                        <div class="voice-lane voice-lane--aqi">
+                            <div class="lane-head">
+                                <span><i class="fas fa-dice"></i> 第三声部 · 阿七</span>
+                                <h3>彩蛋玩家</h3>
+                                <p>她看起来最像插科打诨的人，却总在失控、退场和重组这些时刻，给出最准确的判断。</p>
+                            </div>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">A1</span><span class="moment-season">2025年 · 冬至 · 成都</span></div>
+                                <h3>被存档的彩蛋</h3>
+                                <p>阿七在成都的一家网吧打游戏。还是那款老游戏，地图没变，英雄没变，只是队友换了一批又一批。她打了一局排位，输了。又打了一局，又输了。她把键盘往前一推，看着屏幕上大大的“DEFEAT”。</p>
+                                <p>网吧老板走过来，说，阿七，有人找你。她抬头，看到一个戴眼镜的男生，手里拿着一个笔记本。他说，你是阿七吗，我看了你在网上的攻略，想请你签名。阿七愣了几秒，然后笑了。她签了名，男生走了之后，她对老板说，我有粉丝了。老板说，你一直有。她说，不一样。以前的粉丝只会骂我菜。</p>
+                                <p>那天晚上她没有发游戏邀请给任何人。只是一个人走出网吧，站在成都的冬夜里，呵出的白气像一列省略号。她打开陆屿的对话框，打了几个字，删掉。光标停在空白处，一闪一闪，像一个被存了档但从未被打开的彩蛋。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">A2</span><span class="moment-season">2026年 · 春分 · 成都</span></div>
+                                <h3>输得开心</h3>
+                                <p>阿七做起了游戏主播。不是那种技术型主播，是那种专门教新手怎么输得开心的主播。她的直播间签名是：彩蛋玩家，永远第七。</p>
+                                <p>有一次她连输五局，弹幕都在刷“心态崩了”，她忽然说：“你们知道系统崩溃和需求变更的区别吗？系统崩溃是Bug，需求变更是你不想要原来的东西了。”弹幕安静了一秒，然后炸了。有人问，你以前是做什么的。她说，我以前是彩蛋。现在也是。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">A3</span><span class="moment-season">2027年 · 夏至 · 成都</span></div>
+                                <h3>一个彩色的朋友</h3>
+                                <p>阿七收到一条消息。陆屿发来的。就一行字：程念想见你。</p>
+                                <p>她盯着这行字看了很久。她知道程念是谁。她曾经在陆屿的朋友圈里看到过程念的照片，一个扎马尾的女孩，蹲在花坛边看蜗牛。她当时在那张照片下面点了个赞，没有评论。</p>
+                                <p>现在这个女孩想见她。阿七打了几个字：她知道我是谁吗。陆屿说，知道。阿七说，你怎么介绍我的。他说，一个彩色的朋友。阿七笑了。她回：行。让她来。我教她打游戏。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">A4</span><span class="moment-season">2027年 · 秋分 · 北京</span></div>
+                                <h3>走路的时候在晃</h3>
+                                <p>程念坐在网吧角落，阿七坐在她旁边。屏幕上是一个新手教学关卡，程念操作的角色正在原地转圈。阿七说，别急，先学会走路再学别的。程念说，你走路的样子和我爸爸不一样。阿七说，哪里不一样。程念说，你走路的时候在晃。</p>
+                                <p>阿七愣了一下。然后笑了。她确实是晃的，她从小就晃，晃着去上学，晃着去打游戏，晃着去天台，晃着去任何地方。原来一个孩子也能看出来。她说，你爸爸走路不晃吗。程念说，不晃。他走路的时候像在等指令。</p>
+                                <p>后来她跟陆屿说，你女儿说你走路像在等指令。陆屿沉默了一会儿，然后说，你怎么说的。阿七说，我说那是因为他在调试。程念问，调试什么。我说，调试自己。她好像听懂了。</p>
+                            </article>
+                        </div>
+
+                        <div class="voice-lane voice-lane--chengnian">
+                            <div class="lane-head">
+                                <span><i class="fas fa-seedling"></i> 第四声部 · 程念</span>
+                                <h3>正在调试中</h3>
+                                <p>她继承了上一代的语言系统和情感余波，却没有被困在旧版本里，而是天然站在下一版人生的入口。</p>
+                            </div>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">N1</span><span class="moment-season">2025年 · 冬至 · 慕尼黑</span></div>
+                                <h3>想念一个人</h3>
+                                <p>程念第一次问妈妈关于爸爸的事。她说，妈妈，我爸爸叫什么。程知意正在煮红茶，手顿了一下。她说，陆屿。岛屿的屿。程念说，为什么我叫程念。程知意说，因为想念一个人。</p>
+                                <p>程念没有继续问。她低下头继续拼乐高，把一块绿色的积木压在红色的上面，然后拆开，重新拼。她的动作和她父亲一样，拆了拼，拼了拆，每次都在重新定义结构。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">N2</span><span class="moment-season">2026年 · 春分 · 北京</span></div>
+                                <h3>走路像在等指令</h3>
+                                <p>程念第一次去北京见陆屿。她在机场看到一个男人站在接机口，手里举着一张纸，上面写着“程念”。她走过去，抬头看他。他没有蹲下来，只是低头看她。他们之间的身高差刚好让她能仔细看清他的脸，和她一样认真的眼睛，嘴角有一点纹路，看起来不太擅长笑。</p>
+                                <p>她说，你就是我爸爸。他说，是。她说，妈妈说你走路像在等指令。陆屿沉默了一会儿。然后他说，你妈妈还说了什么。她说，说你以前不敢跟她说话。后来你敢了，但你已经选了别人。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">N3</span><span class="moment-season">2026年 · 夏至 · 北京</span></div>
+                                <h3>爸爸，我正在调试呢</h3>
+                                <p>程念开始学象棋。陆屿教她规则，她记得很快，但每局都输。输急了会把“马”挪回原位，说：爸爸，我正在调试呢。</p>
+                                <p>这个词是从他自己嘴里偷来的。程念在书房外偷听过他开电话会议，他对着屏幕说“这个Bug还没调通”。她学会了，然后安在了悔棋上。陆屿没有戳穿她。他说，行吧，那你调试完了吗。她说，还没，还有几个方案要试试。他把她的车往前推了半步，她说这是A/B测试。把她的炮往左移了一格，她说这是灰度发布。最后他认输了，不是下不过她，是被她用自己创造的语言打败了。</p>
+                            </article>
+
+                            <article class="movement-card">
+                                <div class="moment-meta"><span class="moment-code">N4</span><span class="moment-season">2028年 · 冬至 · 慕尼黑与北京</span></div>
+                                <h3>不需要调试的东西</h3>
+                                <p>程念站在慕尼黑的雪地里，手里握着手机，屏幕上是陆屿刚发的消息：生日快乐。她回：谢谢爸爸。然后她打开另一个对话框，给程知意发了同样的三个字：到了，安全。</p>
+                                <p>她站在机场安检口外面，回头看了一眼。程知意站在里面，穿着那件白卫衣，头发已经不再是银灰色，她染回了黑色，扎成马尾，和她年轻时一样。程念朝她挥挥手，然后转身。她今年刚满八岁，还不知道什么叫悬停，但她已经学会了悔棋、A/B测试和灰度发布。她知道有些东西需要调试，有些不需要。不需要调试的东西，叫爱。</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 id="环形连接-十个共享意象">环形连接 · 十个共享意象</h2>
+                <p>这些意象不属于任何一个声部，却同时存在于四个声部之间。它们像一组跨时空的虫洞，围成闭合的圆环。你可以从任何一个点进入，顺时针读，逆时针读，或者在四个声部之间交叉穿梭。</p>
+                <div class="motif-grid">
+                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-layer-group"></i> C1 · 折叠</span><h3>折叠</h3><p>程知意用十几年找到最低能量态，苏敏把日常也折叠成一种稳定结构，程念则从小就明白人要折叠很多次，才能成为自己。</p></article>
+                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-note-sticky"></i> C2 · 便签</span><h3>便签</h3><p>Gary的标签、阿七的便利贴、程念画在棋盘边的箭头，都是把情感压缩进最轻载体里的方式。</p></article>
+                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-screwdriver-wrench"></i> C3 · 调试</span><h3>调试</h3><p>陆屿调试代码，程念调试棋局，苏敏调试菜的甜度，阿七调试输家的心态，程知意则调试那份始终折叠不成的亚稳态。</p></article>
+                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-temperature-low"></i> C4 · 最低能量态</span><h3>最低能量态</h3><p>每个人都在寻找自己的稳定点：程知意是自己，苏敏是一杯刚好的热水，阿七是一种输完还能笑的姿态，程念则还在成形。</p></article>
+                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-shirt"></i> C5 · 白卫衣</span><h3>白卫衣</h3><p>它既是少女时代的程知意，也是多年后衣柜里不肯被丢掉的旧颜色，还是程念看见母亲时那道未消失的投影。</p></article>
+                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-cloud-rain"></i> C6 · 雨和雪</span><h3>雨和雪</h3><p>北京的雨、慕尼黑的雪、成都冬夜的白气，都是同一种情绪换了物理形态之后继续落下。</p></article>
+                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-i-cursor"></i> C7 · 光标</span><h3>光标</h3><p>有人在文档里打了又删，有人在对话框里打了又删，有人把下一步画成箭头。光标一直闪，意味着故事从未真正停机。</p></article>
+                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-face-smile"></i> C8 · 左颊笑纹分叉点</span><h3>左颊笑纹分叉点</h3><p>Gary替细节命名，苏敏把命名藏起来，程念却天然长出了那道回响般的细纹，让记忆在下一代人身上继续发光。</p></article>
+                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-users"></i> C9 · 组队</span><h3>组队</h3><p>阿七把邀请换成一句“记得自己组队”，程念则更进一步，直接问父亲要不要一起调试，把犹豫从上一代手里接过来重写。</p></article>
+                    <article class="motif-card"><span class="motif-tag"><i class="fas fa-gift"></i> C10 · 彩蛋</span><h3>彩蛋</h3><p>阿七说自己是彩蛋玩家，Gary记录彩蛋，苏敏收藏彩蛋，程知意像彩蛋本身，而程念则第一次说出最重要的一句：彩蛋也可以自己找到自己。</p></article>
+                </div>
+            </section>
+
+            <section class="ending-card">
+                <h2 id="尾奏">尾奏</h2>
+                <p>四个声部同时奏响，十个意象在声部之间来回穿梭。这不是四个人的故事，而是同一个故事被四个棱镜折射。</p>
+                <p>程知意折叠，苏敏守护，阿七晃着走开，程念正在调试。她们没有在任何一个时刻齐聚，却共享同一组时间切片和同一组回响。</p>
+                <p>光标还在闪。茶还在温着。雪还在下。组队邀请没有过期。程念把最后一枚棋子放在棋盘上，不是马，不是车，是一枚她自己画的子。她说，它叫彩蛋。</p>
+                <p>陆屿问，彩蛋怎么走。她说，彩蛋不用走。彩蛋是等着被人发现的。但也可以自己发现自己是彩蛋。就像你可以自己发现自己，不用继续悬停。</p>
+            </section>
+        </div>
+    </div>
+</div>
+
+<div class="series-nav">
+    <a href="../aboutmore/mywj.html">← 知屿之意·命运玩家</a>
+    <a href="../aboutmore/jsxm.html">失控时刻·有趣玩家 →</a>
+</div>
+<div class="footer-note">附记：本页把“四重奏 + 瞬间谱”直接做成四声部并置阅读器。竖读时看见人物各自的人生演变，横读时听见同一季节里的复调回响；十个共享意象则负责把四条声部重新闭成一个环。</div>
+</body>
+</html>
