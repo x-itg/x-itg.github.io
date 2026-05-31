@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知屿之意·命运玩家 | itg</title>
+<meta name="description" content="以双时空对冲和十环共生意象展开的三轨小说：他回家与他不回家，在同一命运虫洞里互相照亮。">
+<meta name="keywords" content="知屿之意,命运玩家,陆屿,程知意,苏敏,Gary,阿七,程念,小说">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="知屿之意·命运玩家 | itg">
+<meta property="og:description" content="左列正序归家，右列倒序不归，中列十环共生意象在两条命运之间闭合成环。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/mywj.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/mywj.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --bg: #f7f1e7;
+        --bg-deep: #efe3cf;
+        --paper: rgba(255, 252, 247, 0.84);
+        --paper-strong: #fffaf2;
+        --ink: #2d261f;
+        --muted: #6f6559;
+        --line: rgba(101, 82, 58, 0.18);
+        --left: #8f5b3f;
+        --left-soft: rgba(143, 91, 63, 0.12);
+        --center: #5a7b64;
+        --center-soft: rgba(90, 123, 100, 0.12);
+        --right: #35597b;
+        --right-soft: rgba(53, 89, 123, 0.12);
+        --gold: #b98c4b;
+        --shadow: 0 24px 60px rgba(38, 28, 18, 0.12);
+        --radius: 24px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+        color: var(--ink);
+        line-height: 1.92;
+        background:
+            radial-gradient(circle at 10% 10%, rgba(185, 140, 75, 0.18), transparent 24%),
+            radial-gradient(circle at 90% 14%, rgba(53, 89, 123, 0.12), transparent 22%),
+            linear-gradient(180deg, #fbf7f0 0%, var(--bg) 46%, var(--bg-deep) 100%);
+        -webkit-font-smoothing: antialiased;
+    }
+    .layout {
+        display: flex;
+        max-width: 1660px;
+        margin: 0 auto;
+        min-height: 100vh;
+    }
+    .main-content {
+        flex: 1;
+        min-width: 0;
+        padding: 38px 22px 84px;
+    }
+    .story-shell {
+        max-width: 1180px;
+        margin: 0 auto;
+    }
+    .article-header {
+        padding: 12px 0 18px;
+        border-bottom: 1px solid rgba(101, 82, 58, 0.14);
+    }
+    .series-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--center);
+        text-transform: uppercase;
+    }
+    h1 {
+        font-size: 40px;
+        line-height: 1.15;
+        letter-spacing: 0.02em;
+        margin-bottom: 12px;
+        color: #261d15;
+    }
+    .subtitle {
+        max-width: 60ch;
+        color: var(--muted);
+        font-size: 16px;
+    }
+    .hero-orbit {
+        margin: 28px 0 24px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+        gap: 18px;
+    }
+    .hero-card,
+    .hero-halo,
+    .role-card,
+    .column-frame,
+    .ring-card,
+    .ending-card,
+    .footer-note {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+    }
+    .hero-card {
+        padding: 24px 26px;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: auto -10% -24px -10%;
+        height: 92px;
+        background:
+            linear-gradient(180deg, transparent, rgba(185, 140, 75, 0.1)),
+            repeating-linear-gradient(90deg, rgba(101, 82, 58, 0.06) 0 10px, transparent 10px 28px);
+        opacity: 0.72;
+    }
+    .hero-card p {
+        margin: 10px 0;
+        color: #4d4338;
+        font-size: 15px;
+        text-align: justify;
+    }
+    .hero-halo {
+        padding: 24px;
+        background:
+            radial-gradient(circle at center, rgba(90, 123, 100, 0.16) 0, rgba(90, 123, 100, 0.08) 26%, transparent 27%),
+            linear-gradient(180deg, rgba(255, 252, 247, 0.94), rgba(246, 239, 228, 0.88));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .halo-core {
+        width: min(100%, 280px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 1px dashed rgba(90, 123, 100, 0.36);
+        position: relative;
+        display: grid;
+        place-items: center;
+        color: #43382d;
+        text-align: center;
+        padding: 34px;
+    }
+    .halo-core::before,
+    .halo-core::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        inset: 16px;
+        border: 1px solid rgba(90, 123, 100, 0.16);
+    }
+    .halo-core::after {
+        inset: 34px;
+        border-color: rgba(185, 140, 75, 0.28);
+    }
+    .halo-core strong {
+        display: block;
+        font-size: 19px;
+        margin-bottom: 10px;
+        color: #2d241b;
+    }
+    .halo-core span {
+        display: block;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.75;
+    }
+    .section-lead {
+        margin: 8px 0 26px;
+        padding: 18px 20px;
+        border-left: 4px solid var(--gold);
+        border-radius: 0 18px 18px 0;
+        background: rgba(185, 140, 75, 0.08);
+        color: #54483d;
+    }
+    h2 {
+        font-size: 28px;
+        line-height: 1.25;
+        margin-bottom: 14px;
+        color: #271e16;
+    }
+    h3 {
+        font-size: 22px;
+        line-height: 1.28;
+        margin-bottom: 12px;
+        color: #2d251d;
+    }
+    h4 {
+        font-size: 15px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+    p {
+        margin: 12px 0;
+        text-align: justify;
+    }
+    .structure-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 16px;
+    }
+    .structure-item {
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.54);
+        border: 1px solid rgba(101, 82, 58, 0.1);
+    }
+    .structure-item strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 15px;
+    }
+    .structure-item.left strong { color: var(--left); }
+    .structure-item.center strong { color: var(--center); }
+    .structure-item.right strong { color: var(--right); }
+    .roles-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin: 18px 0 30px;
+    }
+    .role-card {
+        padding: 18px;
+        background: rgba(255, 253, 249, 0.92);
+    }
+    .role-card .role-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 10px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+    .role-card h3 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+    .role-card p {
+        font-size: 14px;
+        color: #54493e;
+    }
+    .role-card ul {
+        list-style: none;
+        margin-top: 10px;
+    }
+    .role-card li {
+        padding: 8px 0;
+        border-top: 1px dashed rgba(101, 82, 58, 0.14);
+        font-size: 13px;
+        color: #685d50;
+    }
+    .role-card li:first-child { border-top: 0; padding-top: 0; }
+    .role-card--sumin .role-tag,
+    .role-card--sumin h3 { color: var(--left); }
+    .role-card--gary .role-tag,
+    .role-card--gary h3 { color: #7c6540; }
+    .role-card--aqi .role-tag,
+    .role-card--aqi h3 { color: var(--center); }
+    .role-card--chengnian .role-tag,
+    .role-card--chengnian h3 { color: var(--right); }
+    .tri-orbit {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.88fr) minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+    }
+    .tri-orbit::before {
+        content: "";
+        position: absolute;
+        top: 18px;
+        bottom: 18px;
+        left: 50%;
+        width: 1px;
+        background: linear-gradient(180deg, transparent, rgba(90, 123, 100, 0.4), transparent);
+        transform: translateX(-50%);
+        pointer-events: none;
+    }
+    .column-frame {
+        padding: 16px;
+        position: relative;
+    }
+    .column-frame.left { background: linear-gradient(180deg, rgba(143, 91, 63, 0.08), rgba(255, 252, 247, 0.82)); }
+    .column-frame.center { background: linear-gradient(180deg, rgba(90, 123, 100, 0.08), rgba(255, 252, 247, 0.82)); }
+    .column-frame.right { background: linear-gradient(180deg, rgba(53, 89, 123, 0.08), rgba(255, 252, 247, 0.82)); }
+    .lane-head {
+        position: sticky;
+        top: 18px;
+        z-index: 3;
+        padding: 16px 18px;
+        border-radius: 18px;
+        margin-bottom: 14px;
+        background: rgba(255, 252, 247, 0.9);
+        border: 1px solid rgba(101, 82, 58, 0.12);
+        backdrop-filter: blur(12px);
+    }
+    .lane-head span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+    .left .lane-head span { color: var(--left); }
+    .center .lane-head span { color: var(--center); }
+    .right .lane-head span { color: var(--right); }
+    .lane-head p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+    }
+    .chapter-card {
+        margin-bottom: 14px;
+        padding: 18px 18px 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(101, 82, 58, 0.12);
+    }
+    .chapter-card:last-child { margin-bottom: 0; }
+    .chapter-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: var(--muted);
+    }
+    .chapter-code {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    .left .chapter-code { background: var(--left-soft); color: var(--left); }
+    .center .chapter-code { background: var(--center-soft); color: var(--center); }
+    .right .chapter-code { background: var(--right-soft); color: var(--right); }
+    .chapter-card p:last-child { margin-bottom: 0; }
+    .support-note {
+        margin-top: 14px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border-left: 3px solid currentColor;
+        background: rgba(255, 255, 255, 0.62);
+        font-size: 13px;
+    }
+    .support-note.left-note { color: var(--left); }
+    .support-note.center-note { color: var(--center); }
+    .support-note.right-note { color: var(--right); }
+    .support-note strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+    }
+    .ring-card {
+        margin-bottom: 14px;
+        padding: 18px;
+        background: linear-gradient(180deg, rgba(255, 252, 247, 0.9), rgba(244, 239, 230, 0.8));
+        position: relative;
+    }
+    .ring-card::before {
+        content: "";
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 1px solid rgba(90, 123, 100, 0.22);
+        background: radial-gradient(circle, rgba(90, 123, 100, 0.14), transparent 68%);
+    }
+    .ring-card h3 {
+        margin-left: 74px;
+        font-size: 21px;
+    }
+    .ring-card > p {
+        margin-left: 74px;
+        font-size: 13px;
+        color: var(--muted);
+    }
+    .echo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+    }
+    .echo-pane {
+        padding: 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.68);
+        border: 1px solid rgba(101, 82, 58, 0.1);
+    }
+    .echo-pane strong {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+        font-size: 12px;
+    }
+    .echo-pane.a strong { color: var(--left); }
+    .echo-pane.b strong { color: var(--right); }
+    .echo-pane p {
+        margin: 0;
+        font-size: 14px;
+        color: #53493f;
+    }
+    .ending-card {
+        margin-top: 28px;
+        padding: 26px;
+        text-align: center;
+        background: linear-gradient(180deg, rgba(255, 250, 242, 0.94), rgba(245, 237, 224, 0.88));
+    }
+    .ending-card p {
+        max-width: 56ch;
+        margin: 12px auto;
+        text-align: center;
+        color: #51473d;
+    }
+    .footer-note {
+        max-width: 1180px;
+        margin: 24px auto 0;
+        padding: 18px 20px;
+        font-size: 13px;
+        color: #605549;
+    }
+    @media (max-width: 1320px) {
+        .tri-orbit {
+            grid-template-columns: 1fr;
+        }
+        .tri-orbit::before {
+            display: none;
+        }
+        .lane-head {
+            position: static;
+        }
+    }
+    @media (max-width: 980px) {
+        .hero-orbit,
+        .roles-grid,
+        .structure-grid,
+        .echo-grid {
+            grid-template-columns: 1fr;
+        }
+        h1 { font-size: 32px; }
+    }
+    @media (max-width: 768px) {
+        .main-content {
+            padding: 24px 12px 72px;
+        }
+        .story-shell {
+            max-width: none;
+        }
+        h2 { font-size: 24px; }
+        h3 { font-size: 20px; }
+        .hero-card,
+        .hero-halo,
+        .role-card,
+        .column-frame,
+        .ring-card,
+        .ending-card,
+        .footer-note {
+            border-radius: 18px;
+        }
+        .ring-card h3,
+        .ring-card > p {
+            margin-left: 0;
+        }
+        .ring-card::before {
+            display: none;
+        }
+    }
+</style>
+<link rel="stylesheet" href="../assets/site-sidebar.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="site-sidebar site-sidebar--story">
+        <div class="site-sidebar__brand"><a href="../about.html"><i class="fas fa-feather-alt"></i> L1-L4 · 法则与故事</a></div>
+        <div class="site-sidebar__intro">
+            <span class="site-sidebar__eyebrow">站点坐标</span>
+            <strong>L3 · 小说</strong>
+            <p>当法则遇到错配、感情与失控，它开始长出故事，也继续写出边界、代价与孤独余波。</p>
+        </div>
+        <div class="site-sidebar__quick-links">
+            <a href="../index.html" class="site-sidebar__quick-link site-sidebar__quick-link--primary"><i class="fas fa-house"></i><span>首页入口</span></a>
+            <a href="../aboutmore/wx.html" class="site-sidebar__quick-link"><i class="fas fa-map"></i><span>站点总览</span></a>
+        </div>
+        <details class="site-sidebar__group site-sidebar__group--law">
+            <summary>
+                <span class="site-sidebar__summary-text">L1 · 法则</span>
+                <span class="site-sidebar__summary-meta">法则主线与迁移起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../about.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📖</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我找到了一套法则</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/tk.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">以不变应万变</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fw.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪄</span>
+                        <span>
+                            <span class="site-sidebar__link-title">工程魔法</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/sc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">调试AI，学会经营感情</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">乾坤大挪移心法 · 文章总览</span>
+                            <span class="site-sidebar__link-meta">法则与迁移</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--persona">
+            <summary>
+                <span class="site-sidebar__summary-text">L2 · 人</span>
+                <span class="site-sidebar__summary-meta">日常、关系与自省现场</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">爱婷哥</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/forme.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📝</span>
+                        <span>
+                            <span class="site-sidebar__link-title">写给自己</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/pg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎤</span>
+                        <span>
+                            <span class="site-sidebar__link-title">家庭直播间</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/m.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌙</span>
+                        <span>
+                            <span class="site-sidebar__link-title">周一早上，梦见下班</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/cc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪞</span>
+                        <span>
+                            <span class="site-sidebar__link-title">我可能哪里错了</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ll.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">找个不懂的人聊聊</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">♾️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">不必全部收敛</span>
+                            <span class="site-sidebar__link-meta">日常与自省</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--literature" open>
+            <summary>
+                <span class="site-sidebar__summary-text">L3 · 小说</span>
+                <span class="site-sidebar__summary-meta">小说、对话、复调与孤独副本</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czy.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📘</span>
+                        <span>
+                            <span class="site-sidebar__link-title">蓝牙：陆知意岛</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/qp-chat.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·对话版</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/gary.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📍</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时空·终极玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/alone.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌃</span>
+                        <span>
+                            <span class="site-sidebar__link-title">知意知否·孤独玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/mywj.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🪐</span>
+                        <span>
+                            <span class="site-sidebar__link-title">知屿之意·命运玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jsxm.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎮</span>
+                        <span>
+                            <span class="site-sidebar__link-title">失控时刻·有趣玩家</span>
+                            <span class="site-sidebar__link-meta">叙事实验</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group site-sidebar__group--meta">
+            <summary>
+                <span class="site-sidebar__summary-text">L4 · 创作</span>
+                <span class="site-sidebar__summary-meta">创作方法与引擎说明</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../aboutmore/czjs.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧪</span>
+                        <span>
+                            <span class="site-sidebar__link-title">会话的碰撞</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🏛️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">四层结构：创作体系</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/jg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧬</span>
+                        <span>
+                            <span class="site-sidebar__link-title">架构定乾坤，笔墨随法则</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/sryj.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">十日一剑：创作手记</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/gc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🖥️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">像调试代码一样创作</span>
+                            <span class="site-sidebar__link-meta">方法与引擎</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <details class="site-sidebar__group">
+            <summary>
+                <span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>
+                <span class="site-sidebar__summary-meta">从工程桥面回看整套法则的起点</span>
+            </summary>
+            <div class="site-sidebar__group-body">
+                <ul>
+                    <li><a href="../gd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+                        <span>
+                            <span class="site-sidebar__link-title">桥面 · 始于工程，服务生活</span>
+                            <span class="site-sidebar__link-meta">从技术过桥，进入生活与叙事。</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+                            <span class="site-sidebar__link-meta">按地图理解技术与非技术的整体关系。</span>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </details>
+        <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
+    </aside>
+        <aside class="sidebar-toc sidebar-toc--story">
+        <h3><span class="sidebar-toc__icon" aria-hidden="true">🪐</span> 本章导航</h3>
+        <nav>
+            <ul>
+                <li><a href="#结构说明">结构说明</a></li>
+                <li><a href="#配角星图">配角星图</a></li>
+                <li><a href="#三轨正文">三轨正文</a></li>
+                <li><a href="#终评-分叉口之后">终评 · 分叉口之后</a></li>
+            </ul>
+        </nav>
+    </aside>
+<div class="main-content">
+        <div class="story-shell">
+            <header class="article-header" id="top">
+                <span class="series-tag"><i class="fas fa-orbit"></i> L3 · 小说实验 · 三轨闭环</span>
+                <h1>知屿之意 命运玩家</h1>
+                <p class="subtitle">左列正序归家，右列倒序不归，中列十环共生意象没有时间方向，只把宿命压成一个能从任意节点进入的圆环。</p>
+            </header>
+
+            <section class="hero-orbit">
+                <div class="hero-card">
+                    <h2 id="结构说明">结构说明</h2>
+                    <p>本文采用「双时空对冲 + 环形意象闭环」三列架构。内容上保留原始文本的全部细节、小标题、三列关系与终评；呈现上把左右世界做成两条相反方向的命运轨道，把中列十环做成无归属的共振虫洞。</p>
+                    <div class="structure-grid">
+                        <div class="structure-item left">
+                            <strong>左列：世界A · 正序</strong>
+                            <span>他回了家，时间向前生长，日常成为选择之后最慢也最坚固的回声。</span>
+                        </div>
+                        <div class="structure-item center">
+                            <strong>中列：十环共生意象</strong>
+                            <span>它们同时存在于两个世界之间，不站队，不裁决，只负责闭环与回响。</span>
+                        </div>
+                        <div class="structure-item right">
+                            <strong>右列：世界B · 倒序</strong>
+                            <span>他没有回去，时间逆向回溯，每一个后来都在替那个凌晨继续支付代价。</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-halo">
+                    <div class="halo-core">
+                        <div>
+                            <strong>双向宇宙虫洞</strong>
+                            <span>归家 / 不归<br>日常 / 漂泊<br>回声 / 未发送<br>从任意一点进入，都会听见另一个世界的低频震动。</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-lead">这一版额外把配角从“功能性经过”里提亮出来。苏敏不是背景板，她是把疼痛熬成热水与糖的人；Gary不是装置感的旧情人，他是最会为记忆命名的人；阿七不是游戏外设，她是全篇最早看懂“退出机制”的玩家；程念则是让错过长出第二种生命的迟到回执。</div>
+
+            <section>
+                <h2 id="配角星图">配角星图</h2>
+                <div class="roles-grid">
+                    <article class="role-card role-card--sumin">
+                        <span class="role-tag"><i class="fas fa-mug-hot"></i> 日常守门人</span>
+                        <h3>苏敏</h3>
+                        <p>她不把自己写成戏剧性的人，却总在最琐碎的动作里决定关系的温度。她把门轻轻关上，也把糖轻轻放进去。</p>
+                        <ul>
+                            <li>她的回应常常不是台词，而是剩饭、热水、洗衣液和两勺糖。</li>
+                            <li>她的锋利不靠吵闹，而靠知道什么该问，什么不再问。</li>
+                            <li>她让“留下来”有了现实的形状，也让放手保留了体面。</li>
+                        </ul>
+                    </article>
+                    <article class="role-card role-card--gary">
+                        <span class="role-tag"><i class="fas fa-wave-square"></i> 记忆命名者</span>
+                        <h3>Gary</h3>
+                        <p>他会记得左手比右手大一毫米，也会给笑纹分叉起名字。别人处理关系，他处理的是被忽略的命名权。</p>
+                        <ul>
+                            <li>他把旧爱做成展览，不靠喧哗，靠持续而偏执的观察。</li>
+                            <li>他学会握手，不代表他丢了感知；只是把感知带进了别人的现实。</li>
+                            <li>他是全篇最像装置艺术的人物，却一直活得很具体。</li>
+                        </ul>
+                    </article>
+                    <article class="role-card role-card--aqi">
+                        <span class="role-tag"><i class="fas fa-gamepad"></i> 退出机制专家</span>
+                        <h3>阿七</h3>
+                        <p>她踩着滑板、带着荧光绿、把粗口说成友情。她嘴上最轻佻，心里却最先知道什么叫需求变更。</p>
+                        <ul>
+                            <li>她从不提供鸡汤，只提供另一种活法与一句“记得自己组队”。</li>
+                            <li>她懂系统崩溃，更懂人在关系里什么时候该退场。</li>
+                            <li>她像霓虹一样短促，却始终是夜里最不肯熄灭的一道边缘光。</li>
+                        </ul>
+                    </article>
+                    <article class="role-card role-card--chengnian">
+                        <span class="role-tag"><i class="fas fa-chess-knight"></i> 迟到的回执</span>
+                        <h3>程念</h3>
+                        <p>她不是补丁，也不是悬念揭晓后的附属品。她让“想念”和“念旧”从隐痛变成一个会下棋、会看蜗牛的小人。</p>
+                        <ul>
+                            <li>她把上一代人的未完成，长成了下一代人的起手式。</li>
+                            <li>她安静，却不苍白；她像一道题，也像一种新的可能。</li>
+                            <li>她证明命运不是只会收走东西，也会把东西绕一圈送回来。</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section>
+                <h2 id="三轨正文">三轨正文</h2>
+                <div class="tri-orbit">
+                    <div class="column-frame left">
+                        <div class="lane-head">
+                            <span><i class="fas fa-house"></i> 左列 · 世界A · 正序</span>
+                            <h3>他回了家</h3>
+                            <p>时间向前生长，代价不消失，只是被日常慢慢吸收、稀释、重新命名。</p>
+                        </div>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">A1</span><span>洗衣机 / 剩饭 / 热水</span></div>
+                            <h3>洗衣机在蜕皮</h3>
+                            <p>那个凌晨，他回了家。</p>
+                            <p>苏敏坐在客厅里，茶几上搁着一杯凉掉的茶。她没有问，他也没有说。她只是站起来，把他衬衫从裤腰里抽出来，扔进洗衣机，倒洗衣液，按键，启动。滚筒开始转。她转身回卧室，路过他身边的时候停了一下。<br>“厨房有剩饭。”<br>然后门关上了，声音很轻。</p>
+                            <p>陆屿站在玄关，听着洗衣机的水声。衬衫在滚筒里翻卷，像一条正在蜕皮的蛇。他想起程知意刚才在路灯下的样子——银发被风吹乱，锁骨上的双螺旋在灯光里若隐若现。她说“第二个”。她眼眶红了，但没有哭。他忽然觉得，她的眼泪流在了他看不见的地方。</p>
+                            <p>他换了拖鞋，去厨房把剩饭热了。西红柿鸡蛋，苏敏从来不放糖，酸得让人皱眉。他吃了很多年，已经习惯了。吃完洗碗，把凉茶倒掉，重新烧水。水开时卧室传来翻身的声音——苏敏还没睡。他端着两杯热水走进去，从背后轻轻抱住她。她没有躲，也没有回应，只是呼吸渐渐平稳了。</p>
+                            <p>“苏敏。”<br>“嗯。”<br>“明天我去接女儿。”<br>“好。”</p>
+                            <p>他把脸埋进她的后颈。她的味道是洗衣液的淡香、厨房的油烟、长年累月积攒下来的日常。程知意的味道是酒店洗发水、飞机上的消毒巾、永远不会在同一座城市停留超过两周的漂泊。</p>
+                            <p>他选择了日常。</p>
+                            <div class="support-note left-note"><strong>配角微光 · 苏敏</strong>她在这一章里几乎没有情绪宣告，却用最少的动作把这段婚姻从悬崖边重新拖回厨房与卧室。她不追问，不代表不痛；她给剩饭和热水，是在给这段关系一次现实世界里的重启权限。</div>
+                        </article>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">A2</span><span>调试 / 悔棋 / 草稿中</span></div>
+                            <h3>她把悔棋叫调试</h3>
+                            <p>女儿开始学象棋。她记得很快，但每局都输。输急了会把“马”挪回原来的位置，抬头看他，理直气壮：“爸爸，我正在调试呢。”</p>
+                            <p>这个词从他嘴里偷来的。他在书房开电话会议，说“这个Bug还没调通”、“换个参数试试”、“先回退一版”。她全听进去了，然后安在了自己悔棋的场景上。他没有戳穿。</p>
+                            <p>她说把车推半步是A/B测试，把炮移一格是灰度发布，把马横穿整个棋盘是全量上线。他认输了——不是下不过她，是他的专业词汇库被她掏空了。</p>
+                            <p>她用一个偷来的词构建了一整套借口体系，在这个体系里，悔棋不是错误，是迭代；借口不是推卸，是方法论。他天天写法则，最后被她用他写的法则打败了。</p>
+                            <p>后来女儿在少年宫拿了象棋冠军。陆屿举着手机录像，苏敏在旁边碰了碰他胳膊肘：“手别抖。”<br>“没抖。”</p>
+                            <p>其实抖了。他想起了女儿第一次把“马”挪回原位的那个下午。她说是调试，他说好。她一路调试到了冠军领奖台。</p>
+                            <p>而他也在调试自己的人生——从那个凌晨开始，从洗衣机的水声开始，从苏敏那句“厨房有剩饭”开始。</p>
+                            <p>他没有回程知意的消息，把她的对话框折叠了，没有删，只是不再点开。文档还在更新，版本号从v1.0迭代到v4.0，又从v4.0回滚到v2.0，最后他把版本号删掉，只在标题栏留了三个字：“草稿中”。</p>
+                            <p>苏敏偶尔会在上面加批注。她不再说“不予通过”，也不再保留回滚的权利。她只是安静地在文档末尾写着，像在厨房里往那道从不放糖的西红柿鸡蛋里偷偷加了一小勺糖。</p>
+                            <p>他吃出来了，没说。她把头埋在碗里，也没说。</p>
+                        </article>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">A3</span><span>苏黎世 / 句号 / 旧喜欢</span></div>
+                            <h3>苏黎世只有一个句号</h3>
+                            <p>程知意后来回了瑞士。走之前没告诉他，到了才发消息，就四个字：到了苏黎世。<br>他回，好。<br>她没有再回，他也没有再发。</p>
+                            <p>几个月后他在朋友圈看到她发了一张照片。苏黎世湖边的雪，配文是一个句号。只有一个句号。</p>
+                            <p>他盯着那个句号看了很久。苏敏从他身后经过，问他在看什么。他说没什么，按掉了屏幕。苏敏没有追问，只是把他面前凉掉的茶换成了一杯热的。</p>
+                            <p>那天晚上女儿问他：“爸爸，你以前有没有喜欢过别人？”<br>他说，怎么问这个。<br>她说，我同桌说他爸爸以前喜欢过别人。</p>
+                            <p>陆屿沉默了一会儿。苏敏在厨房洗碗，水龙头的声音停了。<br>然后他说：“有。”<br>“那后来呢？”<br>“后来，爸爸认识了妈妈。”</p>
+                            <p>女儿点点头，继续吃饭。苏敏把水龙头重新打开，水流细细的，像一场没有下完的雨。</p>
+                        </article>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">A4</span><span>798 / 多肉 / 笑纹分叉</span></div>
+                            <h3>左颊笑纹分叉点</h3>
+                            <p>苏敏和Gary在798偶遇过一次。那天陆屿也在，三个人站在那家独立书店门口，中间隔着几盆蔫了的多肉。Gary还是老样子，棕色卷发乱得像干草，抱着一台便携合成器。</p>
+                            <p>他说：“苏敏，你的左手还是比右手大一毫米吗。”<br>苏敏把手藏进口袋里，说，你还在记这些。<br>Gary说，习惯了，改不掉。</p>
+                            <p>然后他转向陆屿，伸出手：“你是陆屿。苏敏的手机里，你的备注是‘文档先生’。你知道吗。”<br>苏敏说，Gary。<br>Gary说，好，不说。</p>
+                            <p>然后他挥了挥手，抱紧合成器，走进书店。门上的风铃响了一声。</p>
+                            <p>回去的路上，苏敏沉默了很久。快到家的时候她忽然说：“他以前不会跟人握手。他说手是用来感受东西的，不是用来社交的。”</p>
+                            <p>陆屿没接话。他想起Gary的那个展览——一千张标签，绣成一面墙，每一张都记录着苏敏的一个习惯。有一张写着“她笑的时候左颊的细纹会分叉”，还给它取了名字。</p>
+                            <p>他后来见过那道细纹很多次，但他从来不知道它叫“左颊笑纹分叉点”，也从来不知道它分叉的时候，是她在真笑。</p>
+                            <p>上楼的时候苏敏忽然停了一下，没有回头。<br>“你知道吗，他给那道细纹取过名字。”<br>“知道。”<br>“那他有没有告诉过你，我从来没给任何东西取过名字。”</p>
+                            <p>说完她继续往上走，楼道灯在头顶一闪一闪，像一行被注释掉的代码。</p>
+                            <p>那天晚上苏敏在厨房洗碗时忽然停下来，盯着水龙头看了很久。陆屿问她怎么了，她说没什么，然后继续洗。</p>
+                            <p>但她往那盘西红柿鸡蛋里放了两勺糖。</p>
+                            <div class="support-note left-note"><strong>配角微光 · Gary</strong>Gary的魅力不在“旧情未了”，而在他总能替细节争取命名权。他记住一毫米、笑纹、握手与风铃声，让人意识到有些爱不是占有，而是长期而精准的注视。</div>
+                        </article>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">A5</span><span>退游 / 取消置顶 / 彩色朋友</span></div>
+                            <h3>一个彩色的朋友</h3>
+                            <p>阿七最后还是退游了。</p>
+                            <p>凌晨发来消息：号卖了，以后不玩了。<br>陆屿说，怎么突然不玩了。<br>她说不是突然，想了很久了。新号主是个小学生，比我更菜，你要不要加他好友。<br>他说不用。<br>她说那你怎么办，以后没人骂你了。<br>他说，习惯了。</p>
+                            <p>阿七没有马上回复。过了很久，久到他以为她已经睡了，她又发了一条：“那你记得自己组队。”<br>他说，好。</p>
+                            <p>他把和阿七的聊天记录翻了一遍。从头翻到尾——网吧里的荧光绿指甲，天台上晃动的双腿，系统崩溃不是bug是需求变了，最后一条是她今晚发的：那你记得自己组队。</p>
+                            <p>他看了很久，然后把她置顶取消了。</p>
+                            <p>几个月后女儿问他组队是什么意思。<br>他说，就是找一个人一起打游戏。<br>女儿说，那你找谁。<br>他说，爸爸不打了。<br>女儿说，那你以前跟谁打。<br>他说，一个朋友。<br>女儿问，什么朋友。</p>
+                            <p>他想了想，说：“一个彩色的朋友。”</p>
+                            <p>女儿不懂，他也没有解释。他只是想起阿七的手机壳——夜光的，淘宝九块九包邮，每周换一个，不重样。最后一次见她是那天凌晨，她踩着滑板往工体的方向滑，头也不回地举起手在空中挥了挥。荧光绿的轮子在夜色里划过一道短暂的光痕，然后就拐进了另一条街。</p>
+                            <p>那个手势不是再见，是“明天见”。</p>
+                            <div class="support-note left-note"><strong>配角微光 · 阿七</strong>阿七的分量在于她从不正经地说重话。她看起来最像支线人物，却总能在别人还卡在主线里的时候，先一步懂得什么时候该退、什么时候该把“组队”还给对方自己决定。</div>
+                        </article>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">A6</span><span>象棋班 / 蜗牛 / 黄昏</span></div>
+                            <h3>想念的念</h3>
+                            <p>女儿的象棋班里转来一个新同学。姓程，单名一个念，想念的念。</p>
+                            <p>女儿回家说：“她下棋从来不悔棋，输了也会把马放回原位，说自己在调试。”<br>陆屿手里的筷子停了一下。苏敏看了他一眼。他继续吃饭。</p>
+                            <p>后来去接女儿放学，他在校门口看到了那个女孩。她扎着马尾，穿一件白色卫衣，蹲在花坛边看一只蜗牛。她抬起头，看到陆屿，没有叫叔叔，只是安静地看着他，像在看一道还没决定要不要解的题目。</p>
+                            <p>陆屿蹲下来问她，你叫什么。<br>她说，程念，想念的念，我妈妈取的。<br>他说，好名字。<br>她说，我知道。</p>
+                            <p>她站起来，拍拍膝盖上的土，走到校门口。一个银灰色短发的女人站在那里，背对着夕阳。程念走过去，牵住她的手。女人回过头，隔着操场和半个黄昏的距离，视线轻轻落在陆屿身上。只是停了很短的片刻。然后她低下头，对程念说了句什么。她们一起走了。</p>
+                            <p>陆屿站在原地。女儿拽了拽他的袖子：“爸爸，你认识她妈妈吗？”<br>“认识，很久以前。”<br>“那她叫什么？”</p>
+                            <p>他低下头，把女儿的书包背好。夕阳在他身后拉得很长，像一个永远在追赶但永远追不上的光标。</p>
+                            <p>“程知意。知道的知，心意的意。”</p>
+                            <div class="support-note left-note"><strong>配角微光 · 程念</strong>她一出场，整篇小说的宿命感就不再只是追悔。她看蜗牛、背白卫衣、说“我知道”，那种小小的笃定让她不像谜底，更像一条真正开始往前走的新支线。</div>
+                        </article>
+                    </div>
+
+                    <div class="column-frame center">
+                        <div class="lane-head">
+                            <span><i class="fas fa-ring"></i> 中列 · 十环共生意象</span>
+                            <h3>双向宇宙虫洞</h3>
+                            <p>这些意象不属于任何一个世界，却同时存在于两个世界。它们围成一个闭合的圆环——不是线性连接，不是一一对应。是从任何一点进入，都能在相邻的节点里听见来自另一个平行世界的回声。</p>
+                        </div>
+
+                        <article class="ring-card">
+                            <div class="chapter-meta"><span class="chapter-code">C1</span><span>雨 / 雪 / 同一件事物</span></div>
+                            <h3>雨的分身</h3>
+                            <p>同一场命运，在两个世界里只是换了物理形态。</p>
+                            <div class="echo-grid">
+                                <div class="echo-pane a"><strong><i class="fas fa-umbrella"></i> 世界A</strong><p>父女共撑一把伞，女儿推伞，他推回去，细密的雨把两个人的肩膀都打湿了。苏敏站在校门口，手里有两把伞，但她只是站在雨里，没有走过去。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-snowflake"></i> 世界B</strong><p>慕尼黑的雪落在异国的街道上。她站在实验室窗前，想起他说“北京没下”。雨和雪是同一件事物的两种形态——一个淋湿了归家的路，一个覆盖了不归的夜。</p></div>
+                            </div>
+                        </article>
+
+                        <article class="ring-card">
+                            <div class="chapter-meta"><span class="chapter-code">C2</span><span>光标 / 空白 / 待机</span></div>
+                            <h3>光标停在空白处</h3>
+                            <p>有些故事推进了，有些故事没有；光标的姿态却一样。</p>
+                            <div class="echo-grid">
+                                <div class="echo-pane a"><strong><i class="fas fa-i-cursor"></i> 世界A</strong><p>文档标题栏只剩「草稿中」三个字，光标停在空白的页面左上角，一闪一闪，像一个已经落地但仍在呼吸的句号。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-terminal"></i> 世界B</strong><p>他打开空白文档，打了名字，删掉，又打，又删。光标最后停在空白里，像一个永远等不到指令的待机信号。</p></div>
+                            </div>
+                        </article>
+
+                        <article class="ring-card">
+                            <div class="chapter-meta"><span class="chapter-code">C3</span><span>白卫衣 / 深处 / 旧颜色</span></div>
+                            <h3>白卫衣挂在衣柜深处</h3>
+                            <p>衣柜的深处是时间最会藏身的地方。</p>
+                            <div class="echo-grid">
+                                <div class="echo-pane a"><strong><i class="fas fa-shirt"></i> 世界A</strong><p>女儿从衣柜深处翻出一件旧白卫衣，把脸埋进去，说“有樟脑球的味道”。那是很多年前一个女孩穿过的颜色。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-suitcase"></i> 世界B</strong><p>程知意把同一件白卫衣从行李箱里拿出来，挂在酒店衣柜里，没有穿。她站在衣柜前看了很久，然后关上了门。这件衣服陪她从大学到瑞士，从瑞士回中国，从中国到慕尼黑。陪她的时间，比任何人都长。</p></div>
+                            </div>
+                        </article>
+
+                        <article class="ring-card">
+                            <div class="chapter-meta"><span class="chapter-code">C4</span><span>便签 / 背面 / 补写的话</span></div>
+                            <h3>便签的背面</h3>
+                            <p>最重要的话，总爱写在被忽略的那一面。</p>
+                            <div class="echo-grid">
+                                <div class="echo-pane a"><strong><i class="fas fa-note-sticky"></i> 世界A</strong><p>女儿考试前在他电脑上贴了张便签：爸爸加油，我比你更菜。那是阿七多年前写给他的原话。他看完笑了一下，不知道女儿从哪里学来的——也许是基因。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-envelope-open-text"></i> 世界B</strong><p>他离开苏敏公寓时在门口地上捡起一张被踩过的便签，正面写着「燃气费交到年底了」。多年后在慕尼黑，他发现背面还有一行字：冰箱里有冻饺子，够你吃一阵子。他把便签叠成更小的方块，放回口袋。那个口袋后来再也没有洗过。</p></div>
+                            </div>
+                        </article>
+
+                        <article class="ring-card">
+                            <div class="chapter-meta"><span class="chapter-code">C5</span><span>悔棋 / 调试 / 另一代人</span></div>
+                            <h3>悔棋的两种结局</h3>
+                            <p>同一个动作，在不同的孩子身上，长成了两种人生教育。</p>
+                            <div class="echo-grid">
+                                <div class="echo-pane a"><strong><i class="fas fa-chess-board"></i> 世界A</strong><p>女儿在决赛中把手放在“马”上停了很久，然后没有挪回去。她认输了。后来她说：“不是不想悔棋，是觉得不该悔了。”</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-chess-knight"></i> 世界B</strong><p>他在梦里听见女儿问“爸爸我可以悔棋吗”，他说“可以”。醒来窗外是慕尼黑的雪。他不知道的是，那个叫程念的女孩从来不悔棋，但她每次输棋都会把“马”放回原位，然后轻轻说一句：我正在调试呢。</p></div>
+                            </div>
+                        </article>
+
+                        <article class="ring-card">
+                            <div class="chapter-meta"><span class="chapter-code">C6</span><span>茶 / 糖 / 习惯迁移</span></div>
+                            <h3>茶的变奏</h3>
+                            <p>一杯茶的苦与甜，在两个世界里承担着不同的修复工作。</p>
+                            <div class="echo-grid">
+                                <div class="echo-pane a"><strong><i class="fas fa-mug-saucer"></i> 世界A</strong><p>苏敏每天早上给他泡一杯红茶，放两勺糖，他喝的时候温度刚好。后来女儿也学会泡茶，放三勺糖——太甜了，他每次都喝完，从不说甜。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-glass-water"></i> 世界B</strong><p>程知意从来不喝茶，只喝白水。他说“你这样很没情趣”，她说“我在苏黎世习惯喝热水，因为那里只有热水管”。后来在慕尼黑，她也开始喝茶。红茶，不放糖。喝了一口说，太苦了。他说，苦就对了。她说，你以前不喝苦的东西。他说，习惯了。她沉默了一会儿，然后把他面前那杯也端过来倒进水池里，重新泡了两杯，放了两勺糖。她说：“我也在学。”</p></div>
+                            </div>
+                        </article>
+
+                        <article class="ring-card">
+                            <div class="chapter-meta"><span class="chapter-code">C7</span><span>凌晨三点 / 回响 / 另一种缺席</span></div>
+                            <h3>凌晨三点的两种回响</h3>
+                            <p>同一个时间点，在不同的家里响起不同的缺失。</p>
+                            <div class="echo-grid">
+                                <div class="echo-pane a"><strong><i class="fas fa-bed"></i> 世界A</strong><p>他凌晨三点被女儿的哭声吵醒。她梦到爸爸不见了。他说爸爸在，女儿说“你骗人，梦里的爸爸不在这里”。苏敏从身后抱住他，说：“那就告诉他，爸爸在。”</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-bell"></i> 世界B</strong><p>他凌晨三点收到苏敏的短信：Gary求婚了。他回恭喜，然后去阳台抽烟。慕尼黑的凌晨很安静，只有远处教堂的钟声。他想起苏敏第一次来他家时在厨房洗菜，水龙头开得很小，细细的水流，像怕吵醒什么东西。她回头看了他一眼，耳根红了。那时候不知道，那个耳根红的瞬间，后来会变成一杯凉掉的茶，一盆蔫了的多肉，和一条没有回复的消息。</p></div>
+                            </div>
+                        </article>
+
+                        <article class="ring-card">
+                            <div class="chapter-meta"><span class="chapter-code">C8</span><span>棋盘 / 归处 / 储藏室</span></div>
+                            <h3>棋盘的两种归处</h3>
+                            <p>棋盘既能留在客厅，也能被盖上防尘布；它们都在保存一种未完成。</p>
+                            <div class="echo-grid">
+                                <div class="echo-pane a"><strong><i class="fas fa-table-cells-large"></i> 世界A</strong><p>棋盘放在客厅茶几下面，每周六父女对弈一局。有一次女儿忽然说“爸爸你是不是故意输给我”，他说“没有”。女儿不信，但她没追问。她输了那局，但笑得很开心——因为知道爸爸这次没有让她。她靠自己的实力输了一场真正的比赛。那比赢一百场假赛都开心。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-box-archive"></i> 世界B</strong><p>棋盘放在苏敏公寓同一个位置。Gary把它收进储藏室那天，苏敏说，别扔。他说，好，不扔。他把棋盘放在储藏室最里面的架子上，盖了一层防尘布。然后走出来，关上门。苏敏在客厅等他，手里端着两杯茶。他说，我没有扔。她说，谢谢。后来她再也没有打开过那间储藏室。</p></div>
+                            </div>
+                        </article>
+
+                        <article class="ring-card">
+                            <div class="chapter-meta"><span class="chapter-code">C9</span><span>空调 / 需求变更 / 深夜发呆</span></div>
+                            <h3>坏掉的空调与需求变更</h3>
+                            <p>系统是否崩溃，往往不是最核心的问题；真正难的是接受需求已经换了。</p>
+                            <div class="echo-grid">
+                                <div class="echo-pane a"><strong><i class="fas fa-fan"></i> 世界A</strong><p>网吧角落那台坏掉的空调终于被修好了。但陆屿再也没去过那家网吧——他已经不需要在凌晨对着坏掉的空调发呆了，因为已经没有那么多需要发呆的凌晨。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-screwdriver-wrench"></i> 世界B</strong><p>他在慕尼黑租的公寓空调也坏了。他打电话给房东，用英语说半天，对面没听懂。他忽然想起阿七在天台上说过的话——系统崩溃不是bug，是需求变了。他挂掉电话，打开窗户。雪飘进来，落在地板上，很快化成水渍。他蹲下来用抹布擦干净，然后又擦了一遍。然后在湿漉漉的地板上坐了很久。</p></div>
+                            </div>
+                        </article>
+
+                        <article class="ring-card">
+                            <div class="chapter-meta"><span class="chapter-code">C10</span><span>组队 / 退场 / 过期邀请</span></div>
+                            <h3>组队邀请已过期</h3>
+                            <p>邀请存在过，不代表它会永远有效；可真正难忘的，恰恰是那一刻的悬停。</p>
+                            <div class="echo-grid">
+                                <div class="echo-pane a"><strong><i class="fas fa-users"></i> 世界A</strong><p>阿七偶尔还是会在凌晨发来游戏邀请。他有时候接受，有时候拒绝。有一次他接受了，打完那局阿七忽然说，你知道吗，你现在没那么菜了。他说，进步了？她说，不是，是你终于知道什么时候该退。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-hourglass-end"></i> 世界B</strong><p>阿七的最后一条消息停在凌晨三点的慕尼黑雪夜里：“我退游了，号卖了。换个游戏。你要不要来。”他没有回复。光标悬停。雪落在手机屏幕上，一粒一粒，像一行永远不会被按下的发送键。他想，也许该去换个游戏了。他把手机翻过来，屏幕朝下放在栏杆上。雪继续落。</p></div>
+                            </div>
+                            <div class="support-note center-note"><strong>共生意象注</strong>中列不站在任何人那边。它只是负责提醒：命运常常不是通过宏大事件闭环，而是通过雨、茶、棋盘、空调、便签这种最不起眼的东西，把你带回另一个世界的回声里。</div>
+                        </article>
+                    </div>
+
+                    <div class="column-frame right">
+                        <div class="lane-head">
+                            <span><i class="fas fa-road"></i> 右列 · 世界B · 倒序</span>
+                            <h3>他没有回去</h3>
+                            <p>时间逆向回溯，不是为了倒带，而是为了看清每一个后来都怎样被最初那一步改写。</p>
+                        </div>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">B6</span><span>慕尼黑 / 未发送 / 省略号</span></div>
+                            <h3>雪落在未发送的消息上</h3>
+                            <p>多年后的某个凌晨，慕尼黑下雪了。</p>
+                            <p>陆屿站在阳台上，手机屏幕朝下放在栏杆上。雪落在屏幕上，一粒一粒，像一行永远不会被按下发送键的省略号。</p>
+                            <p>他刚从阿七那里收到一条消息——她退游了，号卖给了一个小学生。她说，换个游戏，你要不要来。他没有回复。光标悬停。凌晨三点。</p>
+                            <p>远处有教堂的钟声传来，隔着雪和玻璃，听起来像来自另一个时代。</p>
+                            <p>他想起很多年前，也是这样一个凌晨，苏敏坐在客厅里等他，茶几上放着一杯凉掉的茶。他没有回去。那杯茶凉了一整夜，第二天早上她自己喝掉了，然后把他的东西收拾进一个纸箱，放在门口。没有标签，没有便条。只有一个纸箱，和一盆蔫了几片叶子的多肉。</p>
+                            <p>他后来再也没有回去过。苏敏和Gary结婚那天，他在苏黎世机场转机，在免税店买了一盒巧克力。付钱的时候他想起那是她的婚礼——他应该送点什么，但不知道送什么。他把巧克力送给了一个在候机厅哭的女孩。女孩说谢谢叔叔。他说，不客气。</p>
+                            <p>然后去登机口，飞慕尼黑。在平流层上他把手机里的旧消息翻了一遍。苏敏的最后一条消息停在很久以前，只有四个字：茶凉了。他一直没回复。</p>
+                            <p>他把她删了。</p>
+                        </article>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">B5</span><span>置顶 / 取消置顶 / 调试</span></div>
+                            <h3>置顶与取消置顶之间</h3>
+                            <p>阿七是离开北京后唯一还保持联系的人。</p>
+                            <p>她偶尔发游戏邀请，凌晨一两点，准时得像定时任务。他有时候接受，有时候拒绝。接受被骂菜，拒绝被骂怂。但他们从来没有加过别的队友，她也没有。他们是彼此好友列表里唯一的好友。</p>
+                            <p>有一次阿七问他，你在慕尼黑过得怎么样。<br>他说还行。<br>她说还行是什么意思。<br>他说，每天早上煮一杯咖啡，写代码写到天黑，再煮一杯咖啡，失眠到天亮。<br>阿七说，你这叫还行？<br>他说，还行。</p>
+                            <p>阿七沉默了一会儿，然后说：“你知道吗，我以前认识一个人，也跟你一样。一个差点被自己的规则压死的人。”</p>
+                            <p>他没有接话。他想起阿七在天台上说过的话——系统崩溃不是bug，是需求变了。她当时站在十七楼的边缘，腿悬在外面晃，荧光绿的指甲在夜色里微微发光。她后来踩着滑板走了，滑板轮子在工体的夜色里划过一道短暂的光痕。</p>
+                            <p>他忽然想起那道荧光绿，像一行永远没被编译的注释。</p>
+                            <p>他把阿七的置顶取消了。然后他又加回来。然后又取消。光标来来回回，像女儿小时候悔棋时在棋盘上画箭头——每个箭头都在找一个新的方向，每个方向都在说“我只是在调试”。</p>
+                        </article>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">B4</span><span>邮件 / 便签 / 握手</span></div>
+                            <h3>记忆的衰减曲线</h3>
+                            <p>苏敏婚后第三年，Gary给陆屿发了一封邮件。</p>
+                            <p>他说，我在整理旧物时发现了一张便签，上面有你的名字和电话号码。我想了三天要不要扔掉。最后没扔。</p>
+                            <p>他说，我在做一个新的展览，关于「记忆的衰减曲线」——人会在多久之后忘记另一个人的声音。我已经快记不住苏敏的声音了，但我还记得她笑的时候左颊有一道细纹会分叉。我给它取过名字。不知道你知不知道。</p>
+                            <p>他说，我把她的东西都还给她了。但那张便签，我觉得应该给你。</p>
+                            <p>陆屿没有回那封邮件。他在慕尼黑的公寓里，坐在那张从二手市场买来的书桌前，把邮件读了三遍。然后把Gary的邮件地址存进通讯录，备注名是：那个学会握手的人。</p>
+                            <p>他去厨房煮了一杯咖啡。窗外的雪还在下，暖气片咔咔地响。他端着咖啡坐回书桌前，打开一个空白文档。光标在标题栏闪烁，像一颗不肯落下的棋子。</p>
+                            <p>他打了几个字，删掉。又打，又删。最后把文档关了，把便签撕碎扔进垃圾桶，想了想，又从垃圾桶里一片片捡起来，仔细拼好，就像多年前某个凌晨拼好阿七那张被洗衣机搅烂的便利贴一样。</p>
+                            <div class="support-note right-note"><strong>配角微光 · Gary</strong>在这个世界里，Gary的魅力更锋利。他没有得到“主角位”，却把自己活成了一个会自我更新的装置：他既能放手，也能精准地把一张便签送回该抵达的人那里。</div>
+                        </article>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">B3</span><span>四秒 / 失眠 / 程念出生</span></div>
+                            <h3>你犹豫了四秒</h3>
+                            <p>程知意在婚后第三年开始失眠。</p>
+                            <p>不是睡不着，是睡着了却在梦里继续醒着。她在梦里反复经过同一个机场安检口，每一次都回头，每一次都看不到人。醒来枕头是湿的。</p>
+                            <p>陆屿睡在她旁边，有时候会被她的动静弄醒。他问她怎么了，她说没什么，翻个身继续睡。但她会把手放在他的胸口，感受心跳，像在确认什么东西还没停。</p>
+                            <p>那天她忽然说，陆屿，你有没有后悔过。<br>他说，后悔什么。<br>她说，后悔选了我。<br>他沉默了一会儿，然后说，没有。<br>她说，你犹豫了。<br>他说，没有。</p>
+                            <p>她说，刚才你沉默的那几秒，我数了。是四秒。平时你回答问题是两秒。多出来的两秒，是她的名字。</p>
+                            <p>他没有说话，她也没有继续问。</p>
+                            <p>窗外慕尼黑的雪开始下了。她忽然想起很多年前，也是这样一个凌晨，她在北京路灯下踮起脚，他的嘴唇有酒和冷空气的味道。那时候不知道这个吻会延续到这么多年后的每一个凌晨，延续成婚姻，延续成失眠，延续成一句她没有说出口的话：我怀孕了。</p>
+                            <p>女儿出生的时候程知意没有告诉陆屿。她把那条编辑好的消息删掉，把手机屏幕朝下放在产房的床头柜上。窗外是慕尼黑的清晨，教堂的钟声敲了六下。</p>
+                            <p>她低头看着怀里那个皱巴巴的小东西，轻声说：“你叫程念。想念的念。”</p>
+                            <p>然后她把女儿抱近一点，低声说了一句只有她自己能听见的话：“不是想念的念，是念旧的念。你爸爸这辈子都在念旧。念一份框架、一个文档、一个凌晨三点不回家的人。”</p>
+                        </article>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">B2</span><span>离心机 / 分层 / 旧版本日志</span></div>
+                            <h3>离心力甩出的那一层</h3>
+                            <p>女儿会走路的那年春天，程知意在慕尼黑大学的实验楼里收到了一条消息。</p>
+                            <p>苏敏发来的。就一行字：他把你的名字从文档里删掉了。</p>
+                            <p>她看着那行字看了很久，然后把手机翻过来，屏幕朝下搁在实验台上。导师走过来问她在看什么，她说没什么，一个旧版本的更新日志。导师走了。</p>
+                            <p>她继续盯着离心机里旋转的蛋白质沉淀，看着它们在透明的试管里慢慢分层——最重的沉在底部，最轻的浮在表面。她忽然觉得，自己就是被离心力甩出来的那一层。漂了这么多年，始终没有找到自己的沉淀相。</p>
+                            <p>那天晚上她失眠了。躺在陆屿旁边，没有把手放在他胸口，只是背对着他，蜷着膝盖，像一个正在自行折叠的蛋白质亚稳态。</p>
+                            <p>她在黑暗里睁着眼睛，想起很久以前Gary在天台上问：“你的最低能量态是什么？”</p>
+                            <p>她当时没有回答。现在知道了——不是陆屿，是自己。只是这个结构，花了十几年才找到。</p>
+                        </article>
+
+                        <article class="chapter-card">
+                            <div class="chapter-meta"><span class="chapter-code">B1</span><span>路灯 / 分叉口 / 第二个</span></div>
+                            <h3>路灯下的分叉口</h3>
+                            <p>那个凌晨，他没有回家。</p>
+                            <p>陆屿站在路灯下，看着程知意的银发被风吹乱。她踮起脚，嘴唇有酒和冷空气的味道。六年的距离在这个动作里碎成粉末。他的手扣住她的后颈，她攥紧他外套的下摆，指节发白。</p>
+                            <p>然后她松开他，退后一步，眼眶红了。她说，那你要不要加一条。</p>
+                            <p>他看着她锁骨上的DNA双螺旋。A配T，C配G，完美的配对法则。</p>
+                            <p>他说：“程知意，你当初说不要异地的时候——是觉得我不值得，还是觉得自己不配。”<br>她说：“第二个。”</p>
+                            <p>他站在那里，身后是小区的门。客厅里那杯茶还在茶几上，正在一点点变凉。苏敏蜷在沙发上，手机屏幕暗了又亮，亮了又暗。洗衣机停了很久，里面的衬衫还没晾。</p>
+                            <p>他不知道自己正站在一生中最重要的那个分叉口上。他只是站在那里，看着程知意的银发被风吹乱。</p>
+                            <p>他知道自己不会回去了。</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ending-card">
+                <h2 id="终评-分叉口之后">终评 · 分叉口之后</h2>
+                <p>两个平行世界，十个共享意象。</p>
+                <p>这不是关于「如果选了另一条路会怎样」的假设游戏——而是关于<strong>无论你选哪条路，那些最重要的事，都会以另一种方式回到你身边</strong>。</p>
+                <p>光标还在闪。雪还在下。组队邀请还在等你接受。</p>
+                <p>分叉口从来不在那个凌晨的路灯下，而在每一个你以为自己已经选完了的、后来的深夜里。</p>
+                <p>人人都是被命运调试的玩家，亦是自己人生的执笔者。<br>知屿之所念，方懂命运之温柔与遗憾。</p>
+            </section>
+        </div>
+    </div>
+</div>
+
+<div class="series-nav">
+    <a href="../aboutmore/alone.html">← 知意知否·孤独玩家</a>
+    <a href="../aboutmore/jsxm.html">失控时刻·有趣玩家 →</a>
+</div>
+<div class="footer-note">附记：本页将小说正文完整保留为三轨并置阅读器。左列与右列分别维护时间方向，中列负责回声与闭环；配角星图是新增呈现层，不替代原文，只把原本已存在的魅力从暗处提亮。</div>
+</body>
+</html>
