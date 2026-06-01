@@ -571,11 +571,49 @@
         <!-- 概述 -->
         <h2 id="overview" style="margin-top: 56px; padding-top: 24px; border-top: 2px solid var(--border);">1. 从“测试-修复”到“测试增强-代码完善”双轨收敛</h2>
         
-        <div class="card philosopher">
-            <strong>📚 核心理念</strong>
-            <p>传统AI调试循环是单向的：运行测试→发现失败→修复代码→重新测试。这种模式忽略了测试本身也可能不完善。本文提出<strong>双轨收敛方法</strong>：AI在修复代码的同时，主动分析测试覆盖的盲区，增加新的测试项目或改进测试方法，使下一轮测试能更充分地验证需求。如此往复，<strong>代码实现与测试套件同步向需求描述收敛</strong>。</p>
-            <p>这一方法建立在前期<strong>“五层进化”工程体系</strong>之上，利用结构化正/负日志、统一项目上下文、CLI自动化闭环和Agent调度，实现完全无人值守的自主迭代。</p>
+        <div style="background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%); border: 1px solid #c4b5fd; border-left: 4px solid #8e44ad; border-radius: 12px; padding: 28px 32px; margin: 32px 0; box-shadow: 0 4px 16px rgba(142, 68, 173, 0.12);">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                <span style="font-size: 32px;">📚</span>
+                <h3 style="margin: 0; font-size: 22px; color: #6b21a8; font-weight: 700;">核心理念</h3>
+            </div>
+            
+            <p style="margin: 16px 0; color: var(--text); font-size: 15px; line-height: 1.8; text-align: left;">
+                传统AI调试循环是单向的：<strong style="color: #dc2626;">运行测试→发现失败→修复代码→重新测试</strong>。这种模式忽略了测试本身也可能不完善。
+            </p>
+            
+            <p style="margin: 16px 0; color: var(--text); font-size: 15px; line-height: 1.8; text-align: left;">
+                本文提出<strong style="color: #8e44ad; font-size: 16px;">双轨收敛方法</strong>：AI在修复代码的同时，主动分析测试覆盖的盲区，增加新的测试项目或改进测试方法，使下一轮测试能更充分地验证需求。如此往复，<strong style="color: #059669; font-size: 16px;">代码实现与测试套件同步向需求描述收敛</strong>。
+            </p>
+            
+            <div style="background: rgba(255, 255, 255, 0.6); border-radius: 8px; padding: 16px 20px; margin-top: 20px; border-left: 3px solid #8e44ad;">
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7; text-align: left;">
+                    <span style="font-size: 18px; margin-right: 8px;">💡</span>
+                    这一方法建立在前期<strong style="color: #8e44ad;">“五层进化”工程体系</strong>之上，利用结构化正/负日志、统一项目上下文、CLI自动化闭环和Agent调度，实现完全无人值守的自主迭代。
+                </p>
+            </div>
         </div>
+
+        <!-- 四个关键要点 -->
+        <div style="display: flex; gap: 12px; margin: 24px 0; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 180px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #fbbf24; border-radius: 8px; padding: 12px 16px; text-align: center;">
+                <div style="font-size: 24px; margin-bottom: 4px;">🔄</div>
+                <div style="font-size: 12px; color: #92400e; font-weight: 600;">双轨迭代</div>
+            </div>
+            <div style="flex: 1; min-width: 180px; background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border: 1px solid #60a5fa; border-radius: 8px; padding: 12px 16px; text-align: center;">
+                <div style="font-size: 24px; margin-bottom: 4px;">🎯</div>
+                <div style="font-size: 12px; color: #1e40af; font-weight: 600;">需求收敛</div>
+            </div>
+            <div style="flex: 1; min-width: 180px; background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border: 1px solid #34d399; border-radius: 8px; padding: 12px 16px; text-align: center;">
+                <div style="font-size: 24px; margin-bottom: 4px;">🤖</div>
+                <div style="font-size: 12px; color: #065f46; font-weight: 600;">自主迭代</div>
+            </div>
+            <div style="flex: 1; min-width: 180px; background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); border: 1px solid #f472b6; border-radius: 8px; padding: 12px 16px; text-align: center;">
+                <div style="font-size: 24px; margin-bottom: 4px;">📊</div>
+                <div style="font-size: 12px; color: #9f1239; font-weight: 600;">覆盖率提升</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 24px 0; color: #6b7280; font-size: 18px;">⬇️ ⬇️ ⬇️</div>
 
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 32px 0;">
             <div style="background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); border-left: 4px solid #c0392b;">
