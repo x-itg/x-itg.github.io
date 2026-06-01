@@ -233,6 +233,70 @@
         .insight-box.cool strong { 
             color: #154360; 
         }
+        .card.philosopher { 
+            border-left: 4px solid #8e44ad; 
+            background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%);
+        }
+        .workflow-step {
+            display: flex;
+            gap: 20px;
+            padding: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 16px;
+        }
+        .step-num {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 32px 0;
+        }
+        .card-light {
+            background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+        .quote {
+            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
+            border: 1px solid #f0d78c;
+            border-left: 4px solid #f39c12;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin: 24px 0;
+            font-style: italic;
+            color: #6b4c1e;
+        }
+        .highlight {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 1px solid #81c784;
+            border-left: 4px solid #4caf50;
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            margin: 24px 0;
+            color: #1b5e20;
+        }
+        .highlight i {
+            margin-right: 8px;
+            color: #4caf50;
+        }
         h2 {
             font-size: 24px;
             font-weight: 700;
@@ -505,60 +569,151 @@
         </div>
 
         <!-- 概述 -->
-        <div class="card" id="overview">
-            <h2>1. 从“测试-修复”到“测试增强-代码完善”双轨收敛</h2>
+        <h2 id="overview" style="margin-top: 56px; padding-top: 24px; border-top: 2px solid var(--border);">1. 从“测试-修复”到“测试增强-代码完善”双轨收敛</h2>
+        
+        <div class="card philosopher">
+            <strong>📚 核心理念</strong>
             <p>传统AI调试循环是单向的：运行测试→发现失败→修复代码→重新测试。这种模式忽略了测试本身也可能不完善。本文提出<strong>双轨收敛方法</strong>：AI在修复代码的同时，主动分析测试覆盖的盲区，增加新的测试项目或改进测试方法，使下一轮测试能更充分地验证需求。如此往复，<strong>代码实现与测试套件同步向需求描述收敛</strong>。</p>
             <p>这一方法建立在前期<strong>“五层进化”工程体系</strong>之上，利用结构化正/负日志、统一项目上下文、CLI自动化闭环和Agent调度，实现完全无人值守的自主迭代。</p>
-            <div class="grid-2">
-                <div class="principle-card">
-                    <h4><i class="fas fa-hammer"></i> 轨1：代码修复</h4>
-                    <p>根据失败日志（尤其是负日志），定位根因，生成git diff修复提案，应用后回归验证。</p>
-                </div>
-                <div class="principle-card">
-                    <h4><i class="fas fa-vial"></i> 轨2：测试增强</h4>
-                    <p>分析已覆盖与未覆盖的需求点，补充新测试用例或优化断言，提升测试的“需求敏感度”。</p>
-                </div>
-                <div class="principle-card">
-                    <h4><i class="fas fa-balance-scale"></i> 收敛判据</h4>
-                    <p>当连续两轮测试均无失败，且需求覆盖率保持100%且无新的负日志出现，视为收敛。</p>
-                </div>
-                <div class="principle-card">
-                    <h4><i class="fas fa-brain"></i> Agent驱动</h4>
-                    <p>一个自治Agent统筹所有步骤：读取日志、生成修复、提出新测试、调度CLI执行、循环直至收敛。</p>
-                </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 32px 0;">
+            <div style="background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); border-left: 4px solid #c0392b;">
+                <h4 style="margin: 0 0 10px; font-size: 17px; color: var(--text); font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-hammer" style="color: #c0392b;"></i> 轨1：代码修复
+                </h4>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">根据失败日志（尤其是负日志），定位根因，生成git diff修复提案，应用后回归验证。</p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); border-left: 4px solid #2980b9;">
+                <h4 style="margin: 0 0 10px; font-size: 17px; color: var(--text); font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-vial" style="color: #2980b9;"></i> 轨2：测试增强
+                </h4>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">分析已覆盖与未覆盖的需求点，补充新测试用例或优化断言，提升测试的“需求敏感度”。</p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); border-left: 4px solid #27ae60;">
+                <h4 style="margin: 0 0 10px; font-size: 17px; color: var(--text); font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-balance-scale" style="color: #27ae60;"></i> 收敛判据
+                </h4>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">当连续两轮测试均无失败，且需求覆盖率保持100%且无新的负日志出现，视为收敛。</p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); border-left: 4px solid #8e44ad;">
+                <h4 style="margin: 0 0 10px; font-size: 17px; color: var(--text); font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-brain" style="color: #8e44ad;"></i> Agent驱动
+                </h4>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">一个自治Agent统筹所有步骤：读取日志、生成修复、提出新测试、调度CLI执行、循环直至收敛。</p>
             </div>
         </div>
 
         <!-- 工程基础（融合文章1） -->
-        <div class="card" id="foundation">
-            <h2>2. 工程基础：让Agent拥有“眼睛”和“双手”</h2>
+        <h2 id="foundation" style="margin-top: 56px; padding-top: 24px; border-top: 2px solid var(--border);">2. 工程基础：让Agent拥有“眼睛”和“双手”</h2>
+        
+        <div class="card engineer">
+            <strong>🛠️ 基础设施</strong>
             <p>迭代收敛离不开前期搭建的嵌入式AI工程模板。以下关键组件为Agent提供了完备的感知与执行能力：</p>
-            <table>
-                <thead><tr><th>组件</th><th>作用</th><th>Agent使用方式</th></tr></thead>
+        </div>
+
+        <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin: 32px 0; box-shadow: var(--shadow-sm);">
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <thead>
+                    <tr style="background: linear-gradient(135deg, #f8fafc 0%, #f0f6ff 100%); border-bottom: 2px solid var(--border);">
+                        <th style="padding: 16px 20px; text-align: left; font-weight: 600; color: var(--text); border-right: 1px solid var(--border);">组件</th>
+                        <th style="padding: 16px 20px; text-align: left; font-weight: 600; color: var(--text); border-right: 1px solid var(--border);">作用</th>
+                        <th style="padding: 16px 20px; text-align: left; font-weight: 600; color: var(--text);">Agent使用方式</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td><strong>结构化正/负日志</strong></td><td>记录“发生了什么”和“应该发生却未发生”的事件</td><td>Agent解析日志，提取失败证据和需求覆盖信息</td></tr>
-                    <tr><td><strong>统一项目上下文</strong></td><td>标准目录结构 + agents.md 让AI理解项目全貌</td><td>Agent自动加载上下文，生成准确修复和测试建议</td></tr>
-                    <tr><td><strong>CLI调试助手</strong></td><td>同时监听RS485总线、控制板串口、上位机日志</td><td>Agent调用助手收集每一次测试的完整日志</td></tr>
-                    <tr><td><strong>VSCode Tasks</strong></td><td>一键编译、烧录、启动监控、运行测试</td><td>Agent通过<code>make full-loop</code>触发整个序列</td></tr>
-                    <tr><td><strong>需求检查点文件</strong></td><td>将需求转化为可验证的日志模式列表</td><td>Agent比对检查点，计算覆盖率并发现漏洞</td></tr>
+                    <tr style="border-bottom: 1px solid var(--border); background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);">
+                        <td style="padding: 16px 20px; border-right: 1px solid var(--border); vertical-align: top;"><strong>结构化正/负日志</strong></td>
+                        <td style="padding: 16px 20px; border-right: 1px solid var(--border); vertical-align: top; color: var(--text-secondary);">记录“发生了什么”和“应该发生却未发生”的事件</td>
+                        <td style="padding: 16px 20px; vertical-align: top; color: var(--text-secondary);">Agent解析日志，提取失败证据和需求覆盖信息</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 16px 20px; border-right: 1px solid var(--border); vertical-align: top;"><strong>统一项目上下文</strong></td>
+                        <td style="padding: 16px 20px; border-right: 1px solid var(--border); vertical-align: top; color: var(--text-secondary);">标准目录结构 + agents.md 让AI理解项目全貌</td>
+                        <td style="padding: 16px 20px; vertical-align: top; color: var(--text-secondary);">Agent自动加载上下文，生成准确修复和测试建议</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border); background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);">
+                        <td style="padding: 16px 20px; border-right: 1px solid var(--border); vertical-align: top;"><strong>CLI调试助手</strong></td>
+                        <td style="padding: 16px 20px; border-right: 1px solid var(--border); vertical-align: top; color: var(--text-secondary);">同时监听RS485总线、控制板串口、上位机日志</td>
+                        <td style="padding: 16px 20px; vertical-align: top; color: var(--text-secondary);">Agent调用助手收集每一次测试的完整日志</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 16px 20px; border-right: 1px solid var(--border); vertical-align: top;"><strong>VSCode Tasks</strong></td>
+                        <td style="padding: 16px 20px; border-right: 1px solid var(--border); vertical-align: top; color: var(--text-secondary);">一键编译、烧录、启动监控、运行测试</td>
+                        <td style="padding: 16px 20px; vertical-align: top; color: var(--text-secondary);">Agent通过<code>make full-loop</code>触发整个序列</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px 20px; border-right: 1px solid var(--border); vertical-align: top;"><strong>需求检查点文件</strong></td>
+                        <td style="padding: 16px 20px; border-right: 1px solid var(--border); vertical-align: top; color: var(--text-secondary);">将需求转化为可验证的日志模式列表</td>
+                        <td style="padding: 16px 20px; vertical-align: top; color: var(--text-secondary);">Agent比对检查点，计算覆盖率并发现漏洞</td>
+                    </tr>
                 </tbody>
             </table>
-            <div class="highlight">
-                <i class="fas fa-check-circle"></i> 这些组件构成了Agent的<strong>感知-执行闭环</strong>，使得Agent可以像人类工程师一样观察硬件行为、修改代码、运行测试。
-            </div>
+        </div>
+
+        <div class="insight-box warm">
+            <i class="fas fa-check-circle" style="margin-right: 8px; color: #27ae60;"></i>
+            这些组件构成了Agent的<strong>感知-执行闭环</strong>，使得Agent可以像人类工程师一样观察硬件行为、修改代码、运行测试。
         </div>
 
         <!-- Agent迭代引擎（融合两部分） -->
-        <div class="card" id="agent">
-            <h2>3. Agent迭代引擎：双轨并行的收敛机制</h2>
+        <h2 id="agent" style="margin-top: 56px; padding-top: 24px; border-top: 2px solid var(--border);">3. Agent迭代引擎：双轨并行的收敛机制</h2>
+        
+        <div class="card engineer">
+            <strong>🤖 核心设计</strong>
             <p>我们设计了一个<code>ConvergenceAgent</code>，它维护两个工作队列：<strong>修复队列</strong>（针对当前失败的代码修改）和<strong>增强队列</strong>（针对未覆盖需求的测试补充）。每一轮迭代，Agent执行以下流程：</p>
-            <div class="workflow-step"><div class="step-num">1</div><div><h4>执行当前测试套件</h4><p>Agent调用CLI工具链：烧录固件 → 启动调试助手 → 运行所有测试脚本 → 收集结构化日志。</p></div></div>
-            <div class="workflow-step"><div class="step-num">2</div><div><h4>分析日志，区分“代码缺陷”与“测试盲区”</h4><p>正/负日志明确指示失败原因：若负日志显示期望事件未发生，可能是代码逻辑错误或时序问题；若某些需求检查点未触发任何相关日志，则是测试覆盖不足。</p></div></div>
-            <div class="workflow-step"><div class="step-num">3</div><div><h4>生成代码修复提案（轨1）</h4><p>对于代码缺陷，Agent利用高性能AI模型分析日志，输出git diff格式的修复。修复后直接应用并重新编译。</p></div></div>
-            <div class="workflow-step"><div class="step-num">4</div><div><h4>生成测试增强提案（轨2）</h4><p>对于未覆盖的需求点，Agent指示低成本AI批量生成补充测试用例（如增加边界参数、故意引入异常、调整时序）。这些新用例加入测试套件。</p></div></div>
-            <div class="workflow-step"><div class="step-num">5</div><div><h4>回归验证</h4><p>使用增强后的测试套件再次运行全流程。若仍有失败，重复步骤2~4。若全部通过且需求覆盖充分，则终止迭代。</p></div></div>
-            <p>该循环的关键在于<strong>步骤2的智能分析</strong>：Agent必须准确判断一个失败是代码Bug还是测试用例设计不当。这依赖于日志的结构化程度以及需求检查点的定义质量。</p>
-            <div class="code-block"><code># ConvergenceAgent 核心伪代码
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px; margin: 32px 0;">
+            <div style="display: flex; gap: 20px; padding: 24px; background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #c0392b, #e74c3c); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);">1</div>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 8px; font-size: 18px; color: var(--text); font-weight: 600;">执行当前测试套件</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">Agent调用CLI工具链：烧录固件 → 启动调试助手 → 运行所有测试脚本 → 收集结构化日志。</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 20px; padding: 24px; background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #c0392b, #e74c3c); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);">2</div>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 8px; font-size: 18px; color: var(--text); font-weight: 600;">分析日志，区分“代码缺陷”与“测试盲区”</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">正/负日志明确指示失败原因：若负日志显示期望事件未发生，可能是代码逻辑错误或时序问题；若某些需求检查点未触发任何相关日志，则是测试覆盖不足。</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 20px; padding: 24px; background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #c0392b, #e74c3c); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);">3</div>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 8px; font-size: 18px; color: var(--text); font-weight: 600;">生成代码修复提案（轨1）</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">对于代码缺陷，Agent利用高性能AI模型分析日志，输出git diff格式的修复。修复后直接应用并重新编译。</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 20px; padding: 24px; background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #c0392b, #e74c3c); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);">4</div>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 8px; font-size: 18px; color: var(--text); font-weight: 600;">生成测试增强提案（轨2）</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">对于未覆盖的需求点，Agent指示低成本AI批量生成补充测试用例（如增加边界参数、故意引入异常、调整时序）。这些新用例加入测试套件。</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 20px; padding: 24px; background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #c0392b, #e74c3c); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);">5</div>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 8px; font-size: 18px; color: var(--text); font-weight: 600;">回归验证</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">使用增强后的测试套件再次运行全流程。若仍有失败，重复步骤2~4。若全部通过且需求覆盖充分，则终止迭代。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box cool">
+            <strong>关键洞察：</strong>该循环的关键在于<strong>步骤2的智能分析</strong>：Agent必须准确判断一个失败是代码Bug还是测试用例设计不当。这依赖于日志的结构化程度以及需求检查点的定义质量。
+        </div>
+
+        <pre style="background: #1e293b; color: #e2e8f0; padding: 20px 24px; border-radius: 6px; font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', 'Consolas', monospace; font-size: 13px; line-height: 1.7; overflow-x: auto; margin: 32px 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);"><code># ConvergenceAgent 核心伪代码
 def converge(project, requirements):
     for iteration in range(MAX_ITER):
         logs = run_all_tests(project)
@@ -579,70 +734,138 @@ def converge(project, requirements):
             augment_test_suite(project, new_test_cases)
 
         # 新测试可能暴露旧代码的问题，继续循环
-</code></div>
-        </div>
+</code></pre>
 
         <!-- 三重迭代循环（深入解析） -->
-        <div class="card" id="loop">
-            <h2>4. 三重迭代循环：修复、测试、方法的递归优化</h2>
+        <h2 id="loop" style="margin-top: 56px; padding-top: 24px; border-top: 2px solid var(--border);">4. 三重迭代循环：修复、测试、方法的递归优化</h2>
+        
+        <div class="card engineer">
+            <strong>🔄 三层循环</strong>
             <p>为使收敛更高效，Agent内部实现了三个层次的迭代，层层递进：</p>
-            <h3>循环A：快速修复循环（秒级）</h3>
-            <p>针对明确的代码语法错误或明显逻辑失误，AI直接输出diff并应用，无需等待完整测试套件结束。利用编译错误作为反馈，<strong>类似“编译-修改-再编译”的快速闭环</strong>。</p>
-            <h3>循环B：功能验证循环（分钟级）</h3>
-            <p>常规测试执行后，AI分析失败日志，修复功能缺陷，并<strong>根据本次失败的经验，调整测试断言或增加相关场景的测试</strong>。例如，发现通讯超时未被正确处理，除了修复超时逻辑，还新增一个“超时后立即再次轮询”的测试用例。</p>
-            <h3>循环C：测试方法论优化循环（项目级）</h3>
-            <p>当多轮迭代仍然无法满足某个需求点时，Agent可能意识到现有的测试手段有局限（如调试助手监听精度不够，需要引入逻辑分析仪）。它会<strong>提出测试方法层面的改进建议</strong>，如升级监听工具的采样率、增加硬件触发条件等，并将此作为新的需求检查点纳入系统。</p>
-            <div class="insight-box">
-                <h4><i class="fas fa-microscope"></i> 循环C实例</h4>
-                <p>项目中偶发RS485帧丢失，软件日志无法捕获。Agent分析后建议：“调试助手增加硬件GPIO触发信号，同步捕捉总线电气波形”。它自动生成一个新的测试脚本，调用示波器API，并将该建议写入<code>agents.md</code>供后续参考。</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px; margin: 32px 0;">
+            <div style="background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%); border: 1px solid #fca5a5; border-left: 4px solid #ef4444; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
+                <h3 style="margin: 0 0 12px; font-size: 19px; color: #991b1b; font-weight: 600;">⚡ 循环A：快速修复循环（秒级）</h3>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">针对明确的代码语法错误或明显逻辑失误，AI直接输出diff并应用，无需等待完整测试套件结束。利用编译错误作为反馈，<strong>类似“编译-修改-再编译”的快速闭环</strong>。</p>
             </div>
+
+            <div style="background: linear-gradient(135deg, #f0f8ff 0%, #e0f2fe 100%); border: 1px solid #93c5fd; border-left: 4px solid #3b82f6; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
+                <h3 style="margin: 0 0 12px; font-size: 19px; color: #1e40af; font-weight: 600;">🔧 循环B：功能验证循环（分钟级）</h3>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">常规测试执行后，AI分析失败日志，修复功能缺陷，并<strong>根据本次失败的经验，调整测试断言或增加相关场景的测试</strong>。例如，发现通讯超时未被正确处理，除了修复超时逻辑，还新增一个“超时后立即再次轮询”的测试用例。</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f0fff4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 4px solid #10b981; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
+                <h3 style="margin: 0 0 12px; font-size: 19px; color: #065f46; font-weight: 600;">🔬 循环C：测试方法论优化循环（项目级）</h3>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">当多轮迭代仍然无法满足某个需求点时，Agent可能意识到现有的测试手段有局限（如调试助手监听精度不够，需要引入逻辑分析仪）。它会<strong>提出测试方法层面的改进建议</strong>，如升级监听工具的采样率、增加硬件触发条件等，并将此作为新的需求检查点纳入系统。</p>
+            </div>
+        </div>
+
+        <div class="insight-box warm">
+            <strong>🔍 循环C实例：</strong>项目中偶发RS485帧丢失，软件日志无法捕获。Agent分析后建议：“调试助手增加硬件GPIO触发信号，同步捕捉总线电气波形”。它自动生成一个新的测试脚本，调用示波器API，并将该建议写入<code>agents.md</code>供后续参考。
         </div>
 
         <!-- 与现有项目集成 -->
-        <div class="card" id="integration">
-            <h2>5. 无缝嵌入你的RS485传感器项目</h2>
+        <h2 id="integration" style="margin-top: 56px; padding-top: 24px; border-top: 2px solid var(--border);">5. 无缝嵌入你的RS485传感器项目</h2>
+        
+        <div class="card action">
+            <strong>🔌 集成步骤</strong>
             <p>以下步骤将收敛Agent部署到之前的嵌入式AI编程模板中：</p>
-            <div class="workflow-step"><div class="step-num">1</div><div><h4>定义需求检查点</h4><p>在 <code>docs/requirements_checkpoints.json</code> 中描述每个功能点期望的日志模式。</p></div></div>
-            <div class="workflow-step"><div class="step-num">2</div><div><h4>放置Agent脚本</h4><p>将 <code>convergence_agent.py</code> 放入项目 <code>tools/</code> 目录，配置串口、波特率等参数。</p></div></div>
-            <div class="workflow-step"><div class="step-num">3</div><div><h4>启动收敛任务</h4><p>执行 <code>python tools/convergence_agent.py --target-coverage 1.0</code> ，Agent接管后续流程。</p></div></div>
-            <div class="workflow-step"><div class="step-num">4</div><div><h4>查看收敛报告</h4><p>迭代结束后，Agent输出代码改动历史、新增测试列表以及最终的需求覆盖矩阵。</p></div></div>
-            <div class="highlight">
-                <i class="fas fa-terminal"></i> 命令行示例：<code>python tools/convergence_agent.py --rs485 COM3 --mcu COM4 --iterations 20</code>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px; margin: 32px 0;">
+            <div style="display: flex; gap: 20px; padding: 24px; background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #27ae60, #22c55e); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);">1</div>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 8px; font-size: 17px; color: var(--text); font-weight: 600;">定义需求检查点</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">在 <code>docs/requirements_checkpoints.json</code> 中描述每个功能点期望的日志模式。</p>
+                </div>
             </div>
+
+            <div style="display: flex; gap: 20px; padding: 24px; background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #27ae60, #22c55e); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);">2</div>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 8px; font-size: 17px; color: var(--text); font-weight: 600;">放置Agent脚本</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">将 <code>convergence_agent.py</code> 放入项目 <code>tools/</code> 目录，配置串口、波特率等参数。</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 20px; padding: 24px; background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #27ae60, #22c55e); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);">3</div>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 8px; font-size: 17px; color: var(--text); font-weight: 600;">启动收敛任务</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">执行 <code>python tools/convergence_agent.py --target-coverage 1.0</code> ，Agent接管后续流程。</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 20px; padding: 24px; background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #27ae60, #22c55e); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);">4</div>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 8px; font-size: 17px; color: var(--text); font-weight: 600;">查看收敛报告</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">迭代结束后，Agent输出代码改动历史、新增测试列表以及最终的需求覆盖矩阵。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <i class="fas fa-terminal"></i> 命令行示例：<code>python tools/convergence_agent.py --rs485 COM3 --mcu COM4 --iterations 20</code>
         </div>
 
         <!-- 收敛演示 -->
-        <div class="card" id="example">
-            <h2>6. 收敛过程演示：一个RS485通讯Bug的闭环</h2>
+        <h2 id="example" style="margin-top: 56px; padding-top: 24px; border-top: 2px solid var(--border);">6. 收敛过程演示：一个RS485通讯Bug的闭环</h2>
+                
+        <div class="card vision">
+            <strong>🧪 实战案例</strong>
             <p>初始状态：协议要求从机在50ms内回复轮询，否则主机应记录超时并重试。现有测试仅有正常轮询，覆盖不足。代码存在一个Bug：超时计数器在重试时未重置，导致第二次超时后误报永久故障。</p>
-            <h3>第1轮迭代</h3>
-            <p>测试脚本正常运行，无失败。但Agent分析需求检查点发现<strong>“通讯超时恢复”需求未被任何日志覆盖</strong>。轨2触发：Agent自动生成一个“故意延迟回复60ms”的测试用例。</p>
-            <h3>第2轮迭代</h3>
-            <p>新测试用例触发了<code>NEGATIVE: POLL_TIMEOUT</code>，但后续重试仍持续超时（因计数器Bug）。轨1触发：AI分析日志，识别到计数器未重置，生成修复diff。</p>
-            <h3>第3轮迭代</h3>
-            <p>代码修复后，重新运行增强版测试。日志显示：首次超时后重试成功，并出现<code>POSITIVE: RETRY_SUCCESS</code>。需求检查点全部满足，收敛终止。</p>
-            <div class="quote">
-                📈 在此过程中，测试用例从1个增加到2个，代码Bug被自动修复，需求覆盖率从60%提升至100%，整个过程耗时约4分钟，无需人工介入。
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 20px; margin: 32px 0;">
+            <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #fbbf24; border-left: 4px solid #f59e0b; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
+                <h3 style="margin: 0 0 12px; font-size: 19px; color: #92400e; font-weight: 600;">🔄 第1轮迭代</h3>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">测试脚本正常运行，无失败。但Agent分析需求检查点发现<strong>“通讯超时恢复”需求未被任何日志覆盖</strong>。轨2触发：Agent自动生成一个“故意延迟回贀60ms”的测试用例。</p>
             </div>
+        
+            <div style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 1px solid #f87171; border-left: 4px solid #ef4444; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
+                <h3 style="margin: 0 0 12px; font-size: 19px; color: #991b1b; font-weight: 600;">🔥 第2轮迭代</h3>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">新测试用例触发了<code>NEGATIVE: POLL_TIMEOUT</code>，但后续重试仍持续超时（因计数器Bug）。轨1触发：AI分析日志，识别到计数器未重置，生成修复diff。</p>
+            </div>
+        
+            <div style="background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border: 1px solid #34d399; border-left: 4px solid #10b981; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
+                <h3 style="margin: 0 0 12px; font-size: 19px; color: #065f46; font-weight: 600;">✅ 第3轮迭代</h3>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">代码修复后，重新运行增强版测试。日志显示：首次超时后重试成功，并出现<code>POSITIVE: RETRY_SUCCESS</code>。需求检查点全部满足，收敛终止。</p>
+            </div>
+        </div>
+        
+        <div class="quote">
+            📈 在此过程中，测试用例从1个增加到2个，代码Bug被自动修复，需求覆盖率从60%提升至100%，整个过程耗时约4分钟，无需人工介入。
         </div>
 
         <!-- 总结 -->
-        <div class="card">
-            <h2>7. 总结：让AI成为持续打磨项目的工匠</h2>
+        <h2 style="margin-top: 56px; padding-top: 24px; border-top: 2px solid var(--border);">7. 总结：让AI成为持续打磨项目的工匠</h2>
+        
+        <div class="card philosopher">
+            <strong>🎯 核心收获</strong>
             <p>通过将“代码修复”与“测试增强”捆绑为双轨迭代，并辅以结构化日志和CLI自动化，我们构建了一个<strong>自治的收敛引擎</strong>。它不再等待人类下达精确的测试指令，而是自主发现短板、完善验证手段，迫使代码实现向需求无限逼近。</p>
-            <div class="grid-2">
-                <div class="card-light">
-                    <h4><i class="fas fa-tools"></i> 代码侧</h4>
-                    <p>每次失败都转化为精确的修复提案，并立即验证。</p>
-                </div>
-                <div class="card-light">
-                    <h4><i class="fas fa-search-plus"></i> 测试侧</h4>
-                    <p>每次覆盖缺失都催生新的测试场景，像“免疫系统”一样完善。</p>
-                </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 32px 0;">
+            <div style="background: linear-gradient(135deg, #f0f8ff 0%, #e0f2fe 100%); border: 1px solid #93c5fd; border-left: 4px solid #3b82f6; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
+                <h4 style="margin: 0 0 12px; font-size: 17px; color: #1e40af; font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-tools" style="color: #3b82f6;"></i> 代码侧
+                </h4>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">每次失败都转化为精确的修复提案，并立即验证。</p>
             </div>
-            <div class="highlight" style="margin-top:1rem;">
-                <p>最终，项目达到一个稳定状态：<strong>代码实现通过所有测试，而测试又完整反映了需求描述</strong>——这正是收敛的本质。</p>
+
+            <div style="background: linear-gradient(135deg, #f0fff4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 4px solid #10b981; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
+                <h4 style="margin: 0 0 12px; font-size: 17px; color: #065f46; font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-search-plus" style="color: #10b981;"></i> 测试侧
+                </h4>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7;">每次覆盖缺失都催生新的测试场景，像“免疫系统”一样完善。</p>
             </div>
+        </div>
+
+        <div class="insight-box decision">
+            <strong>最终目标：</strong>项目达到一个稳定状态：<strong>代码实现通过所有测试，而测试又完整反映了需求描述</strong>——这正是收敛的本质。
         </div>
         <div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
             <strong>系列导航：</strong>
