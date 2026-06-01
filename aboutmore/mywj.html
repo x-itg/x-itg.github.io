@@ -684,6 +684,116 @@
         text-align: center;
         color: #51473d;
     }
+    .final-panels {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.14fr) minmax(320px, 0.86fr);
+        gap: 16px;
+        align-items: stretch;
+    }
+    .final-panel {
+        position: relative;
+        padding: 24px 24px 22px;
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        background: linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(243, 235, 221, 0.88));
+        box-shadow: var(--shadow);
+        overflow: hidden;
+    }
+    .final-panel::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 6px;
+        background: linear-gradient(180deg, rgba(90, 123, 100, 0.84), rgba(185, 140, 75, 0.58));
+    }
+    .final-panel.review-panel::before {
+        background: linear-gradient(180deg, rgba(53, 89, 123, 0.84), rgba(185, 140, 75, 0.58));
+    }
+    .final-panel__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--center);
+    }
+    .review-panel .final-panel__eyebrow {
+        color: var(--right);
+    }
+    .final-panel h2 {
+        margin-bottom: 14px;
+        padding-right: 42px;
+        text-align: left;
+    }
+    .final-panel p {
+        margin: 0;
+        text-align: left;
+        color: #4d4338;
+        max-width: none;
+    }
+    .rule-stack {
+        display: grid;
+        gap: 12px;
+    }
+    .rule-row {
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr);
+        gap: 12px;
+        align-items: start;
+        padding: 10px 0;
+        border-top: 1px solid rgba(101, 82, 58, 0.1);
+    }
+    .rule-row:first-child {
+        border-top: none;
+        padding-top: 0;
+    }
+    .rule-tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 28px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(90, 123, 100, 0.12);
+        color: var(--center);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+    .rule-body strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 15px;
+        color: #2a221a;
+        font-weight: 700;
+    }
+    .rule-body p + p {
+        margin-top: 8px;
+    }
+    .review-grid {
+        display: grid;
+        gap: 12px;
+    }
+    .review-note {
+        padding: 12px 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.66);
+        border: 1px solid rgba(101, 82, 58, 0.1);
+    }
+    .review-note strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #2d251d;
+    }
+    .review-note p + p {
+        margin-top: 8px;
+    }
     .author-commentary {
         margin-top: 22px;
         padding: 24px 26px;
@@ -1289,8 +1399,8 @@
                             <h3>光标停在空白处</h3>
                             <p>有些故事推进了，有些故事没有；光标的姿态却一样。</p>
                             <div class="echo-grid">
-                                <div class="echo-pane a"><strong><i class="fas fa-i-cursor"></i> 世界A</strong><p>文档标题栏只剩「草稿中」三个字，光标停在空白的页面左上角，一闪一闪，像一个已经落地但仍在呼吸的句号。</p></div>
-                                <div class="echo-pane b"><strong><i class="fas fa-terminal"></i> 世界B</strong><p>他打开空白文档，打了名字，删掉，又打，又删。光标最后停在空白里，像一个永远等不到指令的待机信号。</p></div>
+                                <div class="echo-pane a"><strong><i class="fas fa-i-cursor"></i> 世界A</strong><p>文档标题栏只剩「草稿中」三个字，页面空着，他也没再往下写。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-terminal"></i> 世界B</strong><p>他打开空白文档，打了名字，删掉，又打，又删，最后还是关掉了页面。</p></div>
                             </div>
                         </article>
 
@@ -1350,7 +1460,7 @@
                             <p>同一个时间点，在不同的家里响起不同的缺失。</p>
                             <div class="echo-grid">
                                 <div class="echo-pane a"><strong><i class="fas fa-bed"></i> 世界A</strong><p>他凌晨三点被女儿的哭声吵醒。她梦到爸爸不见了。他说爸爸在，女儿说“你骗人，梦里的爸爸不在这里”。苏敏从身后抱住他，说：“那就告诉他，爸爸在。”</p></div>
-                                <div class="echo-pane b"><strong><i class="fas fa-bell"></i> 世界B</strong><p>他凌晨三点收到苏敏的短信：Gary求婚了。他回恭喜，然后去阳台抽烟。慕尼黑的凌晨很安静，只有远处教堂的钟声。他想起苏敏第一次来他家时在厨房洗菜，水龙头开得很小，细细的水流，像怕吵醒什么东西。她回头看了他一眼，耳根红了。那时候不知道，那个耳根红的瞬间，后来会变成一杯凉掉的茶，一盆蔫了的多肉，和一条没有回复的消息。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-bell"></i> 世界B</strong><p>他凌晨三点收到苏敏的短信：Gary求婚了。他回恭喜，然后去阳台抽烟。过了一会儿，他把烟掐了，回屋把手机扣在桌上。</p></div>
                             </div>
                         </article>
 
@@ -1374,7 +1484,7 @@
                             <p>系统是否崩溃，往往不是最核心的问题；真正难的是接受需求已经换了。</p>
                             <div class="echo-grid">
                                 <div class="echo-pane a"><strong><i class="fas fa-fan"></i> 世界A</strong><p>网吧角落那台坏掉的空调终于被修好了。但陆屿再也没去过那家网吧——他已经不需要在凌晨对着坏掉的空调发呆了，因为已经没有那么多需要发呆的凌晨。</p></div>
-                                <div class="echo-pane b"><strong><i class="fas fa-screwdriver-wrench"></i> 世界B</strong><p>他在慕尼黑租的公寓空调也坏了。他打电话给房东，用英语说半天，对面没听懂。他忽然想起阿七在天台上说过的话——系统崩溃不是bug，是需求变了。他挂掉电话，打开窗户。雪飘进来，落在地板上，很快化成水渍。他蹲下来用抹布擦干净，然后又擦了一遍。然后在湿漉漉的地板上坐了很久。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-screwdriver-wrench"></i> 世界B</strong><p>他在慕尼黑租的公寓空调也坏了。他打电话给房东，用英语说半天，对面没听懂。挂掉以后他开窗通风，把地上的水擦干净，坐了一会儿才起身。</p></div>
                             </div>
                         </article>
 
@@ -1386,7 +1496,7 @@
                             <p>邀请存在过，不代表它会永远有效；可真正难忘的，恰恰是那一刻的悬停。</p>
                             <div class="echo-grid">
                                 <div class="echo-pane a"><strong><i class="fas fa-users"></i> 世界A</strong><p>阿七偶尔还是会在凌晨发来游戏邀请。他有时候接受，有时候拒绝。有一次他接受了，打完那局阿七忽然说，你知道吗，你现在没那么菜了。他说，进步了？她说，不是，是你终于知道什么时候该退。</p></div>
-                                <div class="echo-pane b"><strong><i class="fas fa-hourglass-end"></i> 世界B</strong><p>阿七的最后一条消息停在凌晨三点的慕尼黑雪夜里：“我退游了，号卖了。换个游戏。你要不要来。”他没有回复。光标悬停。雪落在手机屏幕上，一粒一粒，像一行永远不会被按下的发送键。他想，也许该去换个游戏了。他把手机翻过来，屏幕朝下放在栏杆上。雪继续落。</p></div>
+                                <div class="echo-pane b"><strong><i class="fas fa-hourglass-end"></i> 世界B</strong><p>阿七的最后一条消息停在凌晨三点的慕尼黑雪夜里：“我退游了，号卖了。换个游戏。你要不要来。”他没有回复。他把手机翻过来，屏幕朝下放在栏杆上，雪一直落。</p></div>
                             </div>
                             <div class="support-note center-note"><strong>共生意象注</strong>雨、茶、棋盘、便签都很小，但会反复回来。</div>
                         </article>
@@ -1404,9 +1514,9 @@
                             <div class="card-link"><span class="group-badge">互文组 06</span></div>
                             <h3>雪落在未发送的消息上</h3>
                             <p>多年后的某个凌晨，慕尼黑下雪了。</p>
-                            <p>陆屿站在阳台上，手机屏幕朝下放在栏杆上。雪落在屏幕上，一粒一粒，像一行永远不会被按下发送键的省略号。</p>
-                            <p>他刚从阿七那里收到一条消息——她退游了，号卖给了一个小学生。她说，换个游戏，你要不要来。他没有回复。光标悬停。凌晨三点。</p>
-                            <p>远处有教堂的钟声传来，隔着雪和玻璃，听起来像来自另一个时代。</p>
+                            <p>陆屿站在阳台上，手机屏幕朝下放在栏杆上。雪落在屏幕上，很快化成水。</p>
+                            <p>他刚从阿七那里收到一条消息。她退游了，号卖给了一个小学生。她说，换个游戏，你要不要来。他没有回复。凌晨三点。</p>
+                            <p>远处教堂的钟声传过来，他站着没动。</p>
                             <p>他想起很多年前，也是这样一个凌晨，苏敏坐在客厅里等他，茶几上放着一杯凉掉的茶。他没有回去。那杯茶凉了一整夜，第二天早上她自己喝掉了，然后把他的东西收拾进一个纸箱，放在门口。没有标签，没有便条。只有一个纸箱，和一盆蔫了几片叶子的多肉。</p>
                             <p>他后来再也没有回去过。苏敏和Gary结婚那天，他在苏黎世机场转机，在免税店买了一盒巧克力。付钱的时候他想起那是她的婚礼——他应该送点什么，但不知道送什么。他把巧克力送给了一个在候机厅哭的女孩。女孩说谢谢叔叔。他说，不客气。</p>
                             <p>然后去登机口，飞慕尼黑。在平流层上他把手机里的旧消息翻了一遍。苏敏的最后一条消息停在很久以前，只有四个字：茶凉了。他一直没回复。</p>
@@ -1418,12 +1528,12 @@
                             <div class="card-link"><span class="group-badge">互文组 05</span></div>
                             <h3>置顶与取消置顶之间</h3>
                             <p>阿七是离开北京后唯一还保持联系的人。</p>
-                            <p>她偶尔发游戏邀请，凌晨一两点，准时得像定时任务。他有时候接受，有时候拒绝。接受被骂菜，拒绝被骂怂。但他们从来没有加过别的队友，她也没有。他们是彼此好友列表里唯一的好友。</p>
+                            <p>她偶尔发游戏邀请，凌晨一两点。他有时候接受，有时候拒绝。接受被骂菜，拒绝被骂怂。但他们从来没有加过别的队友，她也没有。他们是彼此好友列表里唯一的好友。</p>
                             <p>有一次阿七问他，你在慕尼黑过得怎么样。<br>他说还行。<br>她说还行是什么意思。<br>他说，每天早上煮一杯咖啡，写代码写到天黑，再煮一杯咖啡，失眠到天亮。<br>阿七说，你这叫还行？<br>他说，还行。</p>
                             <p>阿七沉默了一会儿，然后说：“你知道吗，我以前认识一个人，也跟你一样。一个差点被自己的规则压死的人。”</p>
                             <p>他没有接话。他想起阿七在天台上说过的话——系统崩溃不是bug，是需求变了。她当时站在十七楼的边缘，腿悬在外面晃，荧光绿的指甲在夜色里微微发光。她后来踩着滑板走了，滑板轮子在工体的夜色里划过一道短暂的光痕。</p>
-                            <p>他忽然想起那道荧光绿，像一行永远没被编译的注释。</p>
-                            <p>他把阿七的置顶取消了。然后他又加回来。然后又取消。光标来来回回，像女儿小时候悔棋时在棋盘上画箭头——每个箭头都在找一个新的方向，每个方向都在说“我只是在调试”。</p>
+                            <p>他忽然想起她的荧光绿指甲。</p>
+                            <p>他把阿七的置顶取消了。然后又加回来。然后又取消。</p>
                         </article>
 
                         <article class="chapter-card" data-echo-group="04">
@@ -1435,7 +1545,7 @@
                             <p>他说，我在做一个新的展览，关于「记忆的衰减曲线」——人会在多久之后忘记另一个人的声音。我已经快记不住苏敏的声音了，但我还记得她笑的时候左颊有一道细纹会分叉。我给它取过名字。不知道你知不知道。</p>
                             <p>他说，我把她的东西都还给她了。但那张便签，我觉得应该给你。</p>
                             <p>陆屿没有回那封邮件。他在慕尼黑的公寓里，坐在那张从二手市场买来的书桌前，把邮件读了三遍。然后把Gary的邮件地址存进通讯录，备注名是：那个学会握手的人。</p>
-                            <p>他去厨房煮了一杯咖啡。窗外的雪还在下，暖气片咔咔地响。他端着咖啡坐回书桌前，打开一个空白文档。光标在标题栏闪烁，像一颗不肯落下的棋子。</p>
+                            <p>他去厨房煮了一杯咖啡。窗外的雪还在下，暖气片咔咔地响。他端着咖啡坐回书桌前，打开一个空白文档。</p>
                             <p>他打了几个字，删掉。又打，又删。最后把文档关了，把便签撕碎扔进垃圾桶，想了想，又从垃圾桶里一片片捡起来，仔细拼好，就像多年前某个凌晨拼好阿七那张被洗衣机搅烂的便利贴一样。</p>
                             <div class="support-note right-note"><strong>配角微光 · Gary</strong>在这个世界里，Gary的魅力更锋利。他没有得到“主角位”，却把自己活成了一个会自我更新的装置：他既能放手，也能精准地把一张便签送回该抵达的人那里。</div>
                         </article>
@@ -1486,13 +1596,85 @@
                 </div>
             </section>
 
-            <section class="ending-card">
-                <h2 id="终评-分叉口之后">终评 · 分叉口之后</h2>
-                <p>两个平行世界，十个共享意象。</p>
-                <p>这不是关于「如果选了另一条路会怎样」的假设游戏——而是关于<strong>无论你选哪条路，那些最重要的事，都会以另一种方式回到你身边</strong>。</p>
-                <p>光标还在闪。雪还在下。组队邀请还在等你接受。</p>
-                <p>分叉口从来不在那个凌晨的路灯下，而在每一个你以为自己已经选完了的、后来的深夜里。</p>
-                <p>人人都是被命运调试的玩家，亦是自己人生的执笔者。<br>知屿之所念，方懂命运之温柔与遗憾。</p>
+            <section class="final-panels">
+                <section class="final-panel rule-panel">
+                    <span class="final-panel__eyebrow"><i class="fas fa-flag"></i> World C / Rule Set</span>
+                    <h2 id="世界c不准写文档">世界C · 不准写文档</h2>
+                    <div class="rule-stack">
+                        <div class="rule-row">
+                            <span class="rule-tag">Rule 01</span>
+                            <div class="rule-body">
+                                <strong>不准写文档</strong>
+                                <p>阿七说，这个世界的第一条规则是，不准写文档。第二条规则，规则由队长制定。陆屿问，谁是队长。阿七说，我。</p>
+                            </div>
+                        </div>
+                        <div class="rule-row">
+                            <span class="rule-tag">Morning</span>
+                            <div class="rule-body">
+                                <strong>早上先醒的是家，不是规则</strong>
+                                <p>早上女儿把脚丫子塞进陆屿脖子里的时候，阿七还在装睡。她没动，被子里还留着昨晚的热气。陆屿把女儿抱起来，说，妈妈要睡觉。女儿说，妈妈每天都要睡觉。陆屿说，妈妈是队长。女儿想了想，说，那我当替补。阿七在被子里笑了。</p>
+                                <p>上周末 Gary 和苏敏的儿子来家里，把女儿拼了一下午的乐高拆成一地零件，又重新搭成了另一种东西。女儿说那是飞船，他说那是状态机。阿七坐在沙发上听着，没评理，继续低头啃冰棍。</p>
+                            </div>
+                        </div>
+                        <div class="rule-row">
+                            <span class="rule-tag">Sticky</span>
+                            <div class="rule-body">
+                                <strong>便签比归档活得久</strong>
+                                <p>这个世界里，阿七的生活是由便利贴组成的。冰箱上贴着“菜得挺可爱的”，显示器上贴着“别写文档了”，女儿的小黑板上贴着“爸爸菜鸡”。纸会皱，会掉，会被拿去折纸飞机，也会被陆屿从垃圾桶里捡回来，用透明胶带慢慢拼好。</p>
+                            </div>
+                        </div>
+                        <div class="rule-row">
+                            <span class="rule-tag">Captain</span>
+                            <div class="rule-body">
+                                <strong>队长负责定方向</strong>
+                                <p>阿七当队长，不是因为她话多，是因为她先动手。滑板轮子松了她拧，发卡断了她粘，女儿摔破膝盖了她先消毒再贴创可贴。陆屿代码卡住的时候她坐在旁边喝可乐，偶尔说一句“你试试那个”。有时管用，有时不管用，但他会真的换个方向看。</p>
+                            </div>
+                        </div>
+                        <div class="rule-row">
+                            <span class="rule-tag">Replay</span>
+                            <div class="rule-body">
+                                <strong>复盘写在行动后面</strong>
+                                <p>他们还是会吵架。阿七说，你答应女儿去动物园，忘了。陆屿不再说下次不会了，直接走到女儿门口认错。女儿问他怪兽打赢了吗，他说打赢了。阿七在客厅听完，把显示器上那张“别写文档了”的便签翻到背面，写了三个字：加一分。</p>
+                            </div>
+                        </div>
+                        <div class="rule-row">
+                            <span class="rule-tag">Answer</span>
+                            <div class="rule-body">
+                                <strong>答案不存档</strong>
+                                <p>女儿问过她，你和爸爸是不是相爱。阿七没正面答，只让她去看显示器上那张皱巴巴的纸。女儿念出来：菜得挺可爱的。阿七说，那就是答案。</p>
+                                <p>在这个平行世界里，没有《关系框架v4.0》，也没有谁替谁存档。只有队长、队员、替补，和每天早上醒来时还都在场的三个人。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="final-panel review-panel">
+                    <span class="final-panel__eyebrow"><i class="fas fa-compass"></i> Closing / Split Point</span>
+                    <h2 id="终评-分叉口之后">终评 · 分叉口之后</h2>
+                    <div class="review-grid">
+                        <div class="review-note">
+                            <strong>结构结论</strong>
+                            <p>三个平行世界，十组回声，再加一条不准写文档的支线。</p>
+                        </div>
+                        <div class="review-note">
+                            <strong>核心判断</strong>
+                            <p>这不是关于「如果选了另一条路会怎样」的假设游戏，而是关于无论你走进哪一个世界，人都会把自己的旧问题重新活一遍。</p>
+                        </div>
+                        <div class="review-note">
+                            <strong>三种余波</strong>
+                            <p>有的世界剩下茶和未回的消息，有的世界剩下便利贴、队长和每天早上的脚步声。</p>
+                        </div>
+                        <div class="review-note">
+                            <strong>真正分叉口</strong>
+                            <p>分叉口从来不在那个凌晨的路灯下，而在每一个你以为自己已经选完了的、后来的深夜里。</p>
+                        </div>
+                        <div class="review-note">
+                            <strong>收束</strong>
+                            <p>人人都是被命运调试的玩家，亦是自己人生的执笔者。</p>
+                            <p>知屿之所念，方懂命运之温柔与遗憾。</p>
+                        </div>
+                    </div>
+                </section>
             </section>
 
             <section class="author-commentary">
