@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>君子不器与灵活调度 | 为AI编程工程化立宪</title>
+<meta name="description" content="从"君子不器"到"灵活调度"，探讨AI时代人与工具的关系：如何守住主体性，用判断力驾驭工具，让AI成为可调度而非沉迷的系统。">
+<meta name="keywords" content="君子不器,灵活调度,AI编程,工具判断,多模型协作,够用原则,决策切换">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="君子不器与灵活调度 | 为AI编程工程化立宪">
+<meta property="og:description" content="从古典哲思到工程实践，探讨AI时代如何守住人的主体性，用判断力调度工具而非被工具调度。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/lj.html">
+<link rel="canonical" href="https://x-itg.github.io/lj.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+	:root {
+		--bg: #f8f9fa;
+		--card-bg: #ffffff;
+		--text: #2c3e50;
+		--text-secondary: #5a6c7d;
+		--accent: #c0392b;
+		--accent-soft: #e74c3c;
+		--border: #e0e4e8;
+		--code-bg: #1e293b;
+		--code-text: #e2e8f0;
+		--highlight: #fef9e7;
+		--link: #2980b9;
+		--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--radius: 6px;
+		--radius-lg: 10px;
+	}
+
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+
+	body {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+		background: var(--bg);
+		color: var(--text);
+		line-height: 1.8;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	.container {
+		max-width: 780px;
+		margin: 0 auto;
+		padding: 40px 24px 80px;
+	}
+
+	.top-nav {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 48px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid var(--border);
+		font-size: 14px;
+		color: var(--text-secondary);
+	}
+
+	.top-nav a { color: var(--link); text-decoration: none; transition: color 0.2s; }
+	.top-nav a:hover { color: var(--accent); }
+	.top-nav .sep { color: #c0c7cf; }
+
+	.article-header { margin-bottom: 48px; }
+	.article-header .series-tag {
+		display: inline-block; background: var(--accent); color: #fff;
+		font-size: 12px; font-weight: 600; padding: 3px 10px;
+		border-radius: 3px; letter-spacing: 0.5px; margin-bottom: 16px;
+	}
+	.article-header h1 {
+		font-size: 32px; font-weight: 700; line-height: 1.35;
+		margin-bottom: 12px; letter-spacing: -0.3px;
+	}
+	.article-header .subtitle {
+		font-size: 17px; color: var(--text-secondary); font-weight: 400; margin-bottom: 20px;
+	}
+	.article-header .meta { font-size: 13px; color: #8896a4; }
+
+	h2 {
+		font-size: 24px; font-weight: 700; margin: 56px 0 16px;
+		padding-top: 24px; border-top: 2px solid var(--border);
+		letter-spacing: -0.2px;
+	}
+	h3 {
+		font-size: 19px; font-weight: 600; margin: 36px 0 12px; color: #1a1a2e;
+	}
+	p { margin: 14px 0; }
+	strong { color: #1a1a2e; }
+	ul, ol { margin: 14px 0; padding-left: 24px; }
+	li { margin: 6px 0; }
+
+	.card {
+		background: var(--card-bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		padding: 28px 30px;
+		margin: 28px 0;
+		box-shadow: var(--shadow-sm);
+	}
+
+	.card.accent-left { border-left: 4px solid var(--accent); }
+	.card.tip { background: #f0f7ff; border-color: #b3d4fc; }
+
+	.insight-box {
+		background: var(--highlight);
+		border: 1px solid #f0d78c;
+		border-radius: var(--radius);
+		padding: 20px 24px;
+		margin: 24px 0;
+		font-style: italic;
+		color: #6b4c1e;
+	}
+
+	.insight-box strong { color: #4a340f; }
+
+	.decision-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		margin: 28px 0;
+	}
+
+	.decision-card {
+		background: var(--card-bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		padding: 22px;
+		box-shadow: var(--shadow-sm);
+	}
+
+	.decision-card h3 {
+		margin: 0 0 10px;
+		font-size: 18px;
+	}
+
+	code {
+		font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+		font-size: 13px;
+	}
+
+	p code, li code {
+		background: #eef1f5;
+		padding: 2px 6px;
+		border-radius: 3px;
+		color: #c0392b;
+		font-size: 12px;
+	}
+
+	@media (max-width: 640px) {
+		.container { padding: 20px 16px 60px; }
+		.article-header h1 { font-size: 26px; }
+		h2 { font-size: 21px; }
+		.decision-grid { grid-template-columns: 1fr; }
+	}
+
+.main-content { flex: 1; min-width: 0; }
+
+	
+</style>
+<link rel="stylesheet" href="assets/site-sidebar.css">
+</head>
+<body>
+<div class="layout">
+	<aside class="site-sidebar site-sidebar--tech">
+		<div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-sun"></i> T · 嵌入式AI工程化</a></div>
+		<div class="site-sidebar__intro">
+			<span class="site-sidebar__eyebrow">当前支线</span>
+			<strong>T · 嵌入式AI工程化</strong>
+			<p>完整法则压进真实工作流，验证能否长期落地。</p>
+		</div>
+		<div class="site-sidebar__quick-links">
+			<a href="index.html" class="site-sidebar__quick-link site-sidebar__quick-link--primary"><i class="fas fa-house"></i><span>首页入口</span></a>
+			<a href="aboutmore/wx.html" class="site-sidebar__quick-link"><i class="fas fa-map"></i><span>站点总览</span></a>
+		</div>
+		<details class="site-sidebar__group">
+			<summary>总纲</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="in.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+						<span>
+							<span class="site-sidebar__link-title">五层进化</span>
+							<span class="site-sidebar__link-meta">总纲 · 定义整个体系的坐标系和成熟度框架</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>核心主线</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="true.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧱</span>
+						<span>
+							<span class="site-sidebar__link-title">实践项目模板</span>
+							<span class="site-sidebar__link-meta">执行基础 · 把方法论固化为可落地的工程骨架</span>
+						</span>
+					</a></li>
+					<li><a href="test.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🛠️</span>
+						<span>
+							<span class="site-sidebar__link-title">自主修复闭环</span>
+							<span class="site-sidebar__link-meta">执行智能 · 双轨收敛让系统在既定路径上自我修正</span>
+						</span>
+					</a></li>
+					<li><a href="fwd.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧠</span>
+						<span>
+							<span class="site-sidebar__link-title">从收敛到进化</span>
+							<span class="site-sidebar__link-meta">演化与判断智能 · 引入Agent性格制衡与决策切换</span>
+						</span>
+					</a></li>
+					<li><a href="exc.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🫀</span>
+						<span>
+							<span class="site-sidebar__link-title">知识的生命体征</span>
+							<span class="site-sidebar__link-meta">记忆智能 · 知识资产生命周期管理与免疫记忆</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>根系能力</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="pcb.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🔎</span>
+						<span>
+							<span class="site-sidebar__link-title">电路图分析器</span>
+							<span class="site-sidebar__link-meta">感知根系 · 打通物理世界与数字世界</span>
+						</span>
+					</a></li>
+					<li><a href="pt.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧩</span>
+						<span>
+							<span class="site-sidebar__link-title">最后的拼图：Skills</span>
+							<span class="site-sidebar__link-meta">支撑根系 · 快消费应用即时方法</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>专业延伸</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="history.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">📦</span>
+						<span>
+							<span class="site-sidebar__link-title">历史的包袱</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 遗留工程与AI迁移策略</span>
+						</span>
+					</a></li>
+					<li><a href="ocd.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧰</span>
+						<span>
+							<span class="site-sidebar__link-title">被忽视的工具链组合</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 用开源命令行工具把AI接入真实硬件调试</span>
+						</span>
+					</a></li>
+					<li><a href="devs.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🏷️</span>
+						<span>
+							<span class="site-sidebar__link-title">固件铭牌与设备画像</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 固件数字身份与协同管理</span>
+						</span>
+					</a></li>
+					<li><a href="gmp.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">📜</span>
+						<span>
+							<span class="site-sidebar__link-title">合规验证与AI编程</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 从"事后补文档"到"事前建法则"</span>
+						</span>
+					</a></li>
+					<li><a href="14.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">⚖️</span>
+						<span>
+							<span class="site-sidebar__link-title">AI谄媚与专利</span>
+							<span class="site-sidebar__link-meta">专业延伸 · 在拿证与保护之间切换审查模式</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group" open>
+			<summary>实战与心法</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="hg.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🎯</span>
+						<span>
+							<span class="site-sidebar__link-title">回归现实：单Agent实践框架</span>
+							<span class="site-sidebar__link-meta">综合实战 · 将完整法则体系落地为可立即上手的工程实践</span>
+						</span>
+					</a></li>
+					<li><a href="12.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
+						<span>
+							<span class="site-sidebar__link-title">AI编程的利刃</span>
+							<span class="site-sidebar__link-meta">工程利器 · 同步生成测试脚本让AI自我调试</span>
+						</span>
+					</a></li>
+					<li><a href="py.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🐍</span>
+						<span>
+							<span class="site-sidebar__link-title">批量修改，先问该不该用脚本</span>
+							<span class="site-sidebar__link-meta">工程利器 · 先判断模式，再把批量改造交给脚本执行</span>
+						</span>
+					</a></li>
+					<li><a href="13.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🧵</span>
+						<span>
+							<span class="site-sidebar__link-title">拆解与整合</span>
+							<span class="site-sidebar__link-meta">工程心法 · 驾驭复杂系统的完整工程法则</span>
+						</span>
+					</a></li>
+					<li><a href="lj.html" class="site-sidebar__link site-sidebar__article-link is-active">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🎓</span>
+						<span>
+							<span class="site-sidebar__link-title">君子不器与灵活调度</span>
+							<span class="site-sidebar__link-meta">工程心法 · 从古典哲思到AI时代工具调度法则</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>内核反照</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="gd.html" class="site-sidebar__link site-sidebar__article-link">
+						<span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+						<span>
+							<span class="site-sidebar__link-title">始于工程，服务生活</span>
+							<span class="site-sidebar__link-meta">内核反照 · 工程法则从技术补丁长成生活工具</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<details class="site-sidebar__group">
+			<summary>走出技术</summary>
+			<div class="site-sidebar__group-body">
+				<ul>
+					<li><a href="about.html" class="site-sidebar__link">
+						<span class="site-sidebar__link-title">总序 · 我找到了一套法则</span>
+						<span class="site-sidebar__link-meta">从技术回到整站总叙事。</span>
+					</a></li>
+					<li><a href="aboutmore/wx.html" class="site-sidebar__link">
+						<span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+						<span class="site-sidebar__link-meta">从技术、生活到文学的一张路线图。</span>
+					</a></li>
+				</ul>
+			</div>
+		</details>
+		<a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
+	</aside>
+	<aside class="sidebar-toc">
+		<h3><i class="fas fa-list"></i> 本章导览</h3>
+		<nav>
+			<ul>
+				<li><a href="#part1"><i class="fas fa-book-open"></i> 君子不器</a></li>
+				<li><a href="#part2"><i class="fas fa-tools"></i> 文具执念</a></li>
+				<li><a href="#part3"><i class="fas fa-cogs"></i> 灵活调度</a></li>
+				<li><a href="#part4"><i class="fas fa-check-double"></i> 够用原则</a></li>
+				<li><a href="#part5"><i class="fas fa-project-diagram"></i> 体系贯通</a></li>
+				<li><a href="#part6"><i class="fas fa-lightbulb"></i> 结语</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<div class="main-content">
+	<div class="container">
+
+<nav class="top-nav">
+    <a href="index.html">首页</a>
+    <span class="sep">/</span>
+    <a href="13.html">拆解与整合</a>
+    <span class="sep">/</span>
+    <span>君子不器与灵活调度</span>
+</nav>
+
+<header class="article-header">
+    <span class="series-tag">实战与心法</span>
+    <h1>君子不器与灵活调度</h1>
+    <p class="subtitle">从古典哲思到AI时代的工具调度法则：如何守住人的主体性，让工具回归工具</p>
+    <div class="meta">
+        <span>嵌入式AI工程化系列</span> · <span>工程心法</span>
+    </div>
+</header>
+
+<article>
+
+    <div class="card accent-left">
+        <p style="margin-top:0;"><strong>核心命题</strong></p>
+        <p>两句话相隔两千余年——"君子不器"出自先贤哲思，"差生文具多"源自网络调侃——在AI浪潮之下相遇，道尽了人与工具相处的全部真相。这不是哲学思辨，而是每一位AI使用者必须直面的工程现实。</p>
+    </div>
+
+    <h2 id="part1">一、君子不器：别把自己活成工具</h2>
+    
+    <p>《论语》有言君子不器。器物各有功用：杯子只容水，锤子唯敲钉。倘若把自己框定为"写代码的人"，当AI效率超越你时，便会陷入惶恐；若局限为"作画的人"，当AI产能胜过你时，便会失去价值。</p>
+
+    <p>真正难以被替代的，从来不是单一技能，而是<strong>定义问题、搭建架构、抉择方向</strong>的综合能力。AI终究是器，是杯子，是锤子；而人，是那个决定杯中盛何物、锤子落向何处的主宰。</p>
+
+    <div class="insight-box">
+        AI再强，也只是执行者。你才是那个决定"做什么"和"为什么做"的人。守住这个定位，就不会被工具替代。
+    </div>
+
+    <h2 id="part2">二、差生文具多：工具焦虑的本质</h2>
+
+    <p>"差生文具多"在当下有了全新注解。有人热衷于收集提示词模板、堆砌各类AI插件、熟记海量模型参数，工具越攒越繁杂，落地产出却寥寥无几。</p>
+
+    <p>看似深耕技术，实则是借着"钻研AI"的由头拖延行动、消解内心焦虑。真正沉下心做事的人，装备往往极简：一个编辑器、一个对话窗口、一套成熟流程，便足以成事。</p>
+
+    <p>并非工具越少能力越强，而是他们深谙何为<strong>"够用"</strong>。</p>
+
+    <div class="card tip">
+        <p style="margin-top:0;"><strong>够用原则回顾</strong></p>
+        <p>此前在《批量修改，先问该不该用脚本》中探讨过核心思路：重复度高、可复用的场景，交由脚本处理；需要逐一甄别判断的场景，先参考建议再定方案；其余情况直接手动修改。<strong>优先做判断，再选择工具</strong>，不为追逐新潮而滥用工具。</p>
+    </div>
+
+    <h2 id="part3">三、灵活调度：工程实战中的底层能力</h2>
+
+    <p>做AI辅助开发这么久，我攒了不少省钱省力的小技巧。但最近我发现，真正拉开效率差距的，不是单次任务的完成速度，而是一种更底层的调度能力——知道什么时候该让AI冲锋，什么时候该果断叫停，什么时候该换个方向，什么时候该把整个流程外包出去。</p>
+
+    <p>我把这套方法叫<strong>"灵活调度"</strong>。它不像负日志、闭环收敛那样需要写在文档里，但它在每一次对话、每一个项目、每一个凌晨三点的调试现场，都在我的大脑里持续运行。</p>
+
+    <h3>1. 死磕是效率杀手</h3>
+
+    <p>很多人用AI有一个误区：一旦选定一个模型、一个方向，就死磕到底。DeepSeek改不出那个Bug，就让它改到天亮；ChatGPT生不出一段好代码，就反复调提示词调到崩溃。</p>
+
+    <p>这种"死磕"表面看是在努力，实际上是在把沉没成本往水里扔。</p>
+
+    <p>我有一条铁律：<strong>一个方向如果改了三轮还看不到收敛的迹象，立刻按下暂停。</strong>不是放弃，是切换。换个模型，换个对话框，换个问法，甚至暂时放下让大脑离线跑一会儿。很多时候灵感不是来自深度思考，而是来自换个角度重新提问。</p>
+
+    <div class="insight-box">
+        这套"决策切换"的能力，是从工程淤青里学到的最重要的一课——不是更努力，是更知道什么时候该停、什么时候该换。
+    </div>
+
+    <h3>2. 多模型评审团</h3>
+
+    <p>我现在的工作流里，同时运行着好几个AI。DeepSeek是我最常用的对话窗口，它知道我所有的情感素材和创作偏好；另一个DeepSeek实例则专注于技术文章体系，负责内容填充和结构整理。豆包和千问是我的独立评审团——一个负责评论文本的情感浓度是否到位，另一个从更严谨的工程逻辑角度挑漏洞。代码生成的主力是ChatGPT和DeepSeek，Minimax负责补充一些特定场景的测试用例。Agent在VSCode里帮我做形式创新和HTML排版优化。</p>
+
+    <p>同一个问题，我会同时丢给两三个模型，看看它们各自的回答有什么差异。有时候DeepSeek给出的答案太感性，豆包反而能一针见血地指出结构问题；有时候ChatGPT生成的代码太啰嗦，换成Minimax反而更简洁。</p>
+
+    <p>我把它们的建议汇总，然后自己判断哪个方向更接近我要的东西。</p>
+
+    <p>这不是"东问西问"，这是用<strong>评审团机制</strong>对冲单一模型的局限性。每个AI都有自己的盲区，你不可能指望一个模型解决所有问题。但如果你手里有四五个模型，知道每个模型擅长什么、不擅长什么，你就可以让它们在你的调度下互相补充、互相验证。</p>
+
+    <div class="decision-grid">
+        <div class="decision-card">
+            <h3>🎯 DeepSeek</h3>
+            <p>对话主力，熟悉创作偏好与技术体系</p>
+        </div>
+        <div class="decision-card">
+            <h3>💬 豆包/千问</h3>
+            <p>独立评审，情感浓度与工程逻辑校验</p>
+        </div>
+        <div class="decision-card">
+            <h3>⚡ ChatGPT</h3>
+            <p>代码生成主力，逻辑严密结构工整</p>
+        </div>
+        <div class="decision-card">
+            <h3>🔧 Minimax</h3>
+            <p>特定场景补充，测试用例生成</p>
+        </div>
+    </div>
+
+    <h3>3. 不要让AI带你闭门造车</h3>
+
+    <p>AI有一个非常隐蔽的陷阱：它太听话了。你让它从头写一个功能，它就会乖乖地从头写，一行一行，逻辑严密，代码工整。但这条路往往是最慢的。</p>
+
+    <p>因为你在让AI重复造轮子，而你甚至不知道网上已经有现成的开源方案可以直接调用。</p>
+
+    <p>我现在的习惯是：<strong>在让AI动手之前，先花几分钟搜索一下。</strong>百度、Google、GitHub、技术文档——看有没有成熟的库、现成的脚本、类似的开源项目可以改造。如果找到了，直接把链接丢给AI，让它在这个基础上修改适配。这比从头生成快十倍，而且质量更高。</p>
+
+    <div class="card accent-left">
+        <p style="margin-top:0;"><strong>工程师本能</strong></p>
+        <p>真正的专家不是闭门造车的手艺人，而是能站在巨人的肩膀上精准剪裁出最优方案的指挥官。你不需要从头造轮子，你只需要知道去哪儿找到最适合的轮子，然后把它装到你的车上。</p>
+    </div>
+
+    <h3>4. 工程框架是分水岭</h3>
+
+    <p>一个项目最难的时候，永远是初始阶段。从零搭建工程框架——技术栈选型、目录结构、核心逻辑、数据流向、合规边界——这些决策决定了项目未来的天花板。这个阶段AI能帮的很有限，因为需要的是全局判断力，是架构思维，是你在无数次项目里积累出来的直觉。<strong>你必须亲自下场。</strong></p>
+
+    <p>但框架一旦搭好，后续就是高速公路。需求转述、Bug修复、功能迭代——这些工作80%以上可以交给AI和Agent在框架内执行。你只需要定义边界，审阅输出，在最后一道关口做最终裁决。</p>
+
+    <p>这也是为什么我现在越来越轻松——不是AI变强了，而是我学会了把最重的决策留给自己，把最耗时的执行外包给AI。</p>
+
+    <h2 id="part4">四、够用原则：知道什么时候该收手</h2>
+
+    <p>最后一条，也是贯穿所有技术文章的核心心法：<strong>够用原则</strong>。问题解决了，就不要再继续改。版本能跑了，就不要再追求完美。AI的输出已经能满足需求了，就不要再反复调参数。</p>
+
+    <p>"够用"不是敷衍，是判断力。是你知道这个Bug修到这一步已经收敛了，不需要再为那0.1%的优化花掉一整个下午。是你知道这篇文章的框架已经成立，不需要再为某个句式反复打磨到凌晨。是你知道这个版本已经可以通过验收，不需要再用完美主义的借口拖延发布。</p>
+
+    <div class="insight-box">
+        AI时代，工具会越来越强，但判断力永远不会贬值。你知道什么时候该停，什么时候该换，什么时候该说"可以了"。这才是你比大多数人更高效的核心原因——不是更努力，是更知道什么时候该收手。
+    </div>
+
+    <h2 id="part5">五、五层体系的贯通</h2>
+
+    <p>这套思维，贯穿了整套五层体系。</p>
+
+    <ul>
+        <li><strong>技术创作中</strong>，以法则驾驭AI，始终守住自主判断</li>
+        <li><strong>生活随笔里</strong>，用复盘梳理心绪，不妄图用条条框框捆绑关系</li>
+        <li><strong>小说叙事中</strong>，先用规则搭建人物逻辑，再用情感与人性击穿法则边界，让文字拥有温度与张力</li>
+        <li><strong>创作手记中</strong>，公开整套方法论，只因明白工具贵在适用，方法唯有共享、迭代，方能持续生长</li>
+    </ul>
+
+    <p>这篇文章和"始于工程，服务生活"的系列一脉相承。以前写负日志怎么用在感情里，闭环收敛怎么用在承诺管理里，今天写的是灵活调度——怎么在真实的工程场景里，用多模型协作、决策切换、搜索整合和够用原则，把AI从一个"工具"变成一套可以被你调度的"执行系统"。</p>
+
+    <h2 id="part6">六、结语：把独立思考留给自己</h2>
+
+    <p>君子不器，守住人之为人的主体性；摒弃"文具执念"，打破借工具逃避现实的幻觉。不必执着于成为最精通各类AI的人，而要努力成为最明晰前行方向的人。</p>
+
+    <p>模型会更新，插件会淘汰，工具永远在迭代，但<strong>洞察问题的眼界、搭建体系的思维、抉择方向的判断力</strong>，永远不会贬值。</p>
+
+    <div class="card accent-left">
+        <p style="margin-top:0;"><strong>最终建议</strong></p>
+        <p>往后，少囤积模板与插件，多思考真正值得解决的问题。让AI做你的外置辅助，把独立思考的大脑，完完整整留给自己。</p>
+    </div>
+
+    <div class="insight-box">
+        AI不是你的替代品，它是你的外置大脑、你的评审团、你的代码生成器、你的搜索引擎整合器。但调度这些资源的能力，定义方向、判断好坏、决定什么时候该停——这些，永远是你自己的事。
+    </div>
+
+</article>
+
+    <section class="footnote-section">
+        <h4>本文定位</h4>
+        <p>本文是嵌入式AI工程化系列的<strong>工程心法篇</strong>。它从古典哲思"君子不器"出发，结合工程实践中的"灵活调度"方法，探讨AI时代人与工具的关系。核心观点包括：决策切换（知道何时停止和转向）、多模型评审团（用协作对冲单一模型局限）、搜索整合（不闭门造车）、工程框架分水岭（架构决策必须亲自下场）、够用原则（知道何时收手）。建议在理解④闭环收敛、⑩批量修改脚本判断后阅读，但可独立使用。</p>
+        <div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
+            <strong>系列导航：</strong>
+            <a href="in.html">五层进化</a> ·
+            <a href="true.html">实践项目模板</a> ·
+            <a href="test.html">自主修复闭环</a> ·
+            <a href="fwd.html">从收敛到进化</a> ·
+            <a href="exc.html">知识的生命体征</a> ·
+            <a href="pcb.html">电路图分析器</a> ·
+            <a href="pt.html">最后的拼图：Skills</a> ·
+            <a href="history.html">历史的包袱</a> ·
+            <a href="ocd.html">被忽视的工具链组合</a> ·
+            <a href="devs.html">固件铭牌与设备画像</a> ·
+            <a href="gmp.html">合规验证与AI编程</a> ·
+            <a href="hg.html">回归现实：单Agent实践框架</a> ·
+            <a href="12.html">AI编程的利刃</a> ·
+            <a href="py.html">批量修改，先问该不该用脚本</a> ·
+            <a href="13.html">拆解与整合</a> ·
+            <a href="lj.html">君子不器与灵活调度</a> ·
+            <a href="14.html">AI谄媚与专利</a> ·
+            <a href="gd.html">始于工程，服务生活</a>
+        </div>
+
+<div class="series-nav">
+    <a href="13.html">← 拆解与整合</a>
+    <a href="14.html">AI谄媚与专利 →</a>
+</div>
+<p style="margin-top:12px;font-size:13px;"><a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a></p>
+    </section>
+
+</div>
+    </div>
+</div>
+
+<div class="inland-security-footer">
+    <div class="tooltip-container">
+        <div class="trigger-content">
+            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
+                <span>itg · -lvgl-</span>
+            </a>
+        </div>
+        <div class="tooltip-content">
+            <section class="info-section"><span>itg</span></section>
+            <section class="info-section"><span>微信号: -lvgl-</span></section>
+        </div>
+    </div>
+</div>
+</body>
+</html>
