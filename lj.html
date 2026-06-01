@@ -98,30 +98,73 @@
 		padding: 28px 30px;
 		margin: 28px 0;
 		box-shadow: var(--shadow-sm);
+		text-align: left;
 	}
 
 	.card.accent-left { border-left: 4px solid var(--accent); }
 	.card.tip { background: #f0f7ff; border-color: #b3d4fc; }
-	.card.philosophy { border-left: 4px solid #8e44ad; background: #faf5ff; }
-	.card.engineer { border-left: 4px solid #2980b9; background: #f0f8ff; }
-	.card.action { border-left: 4px solid #27ae60; background: #f0fff4; }
+	.card.philosophy { 
+		border-left: 4px solid #8e44ad; 
+		background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%); 
+	}
+	.card.engineer { 
+		border-left: 4px solid #2980b9; 
+		background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%); 
+	}
+	.card.action { 
+		border-left: 4px solid #27ae60; 
+		background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%); 
+	}
+	.card p {
+		text-align: left;
+		margin: 0;
+	}
+	.card p:first-child {
+		margin-top: 0;
+	}
+	.card p:last-child {
+		margin-bottom: 0;
+	}
+	.card strong {
+		display: block;
+		color: var(--text);
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
 
 	.insight-box {
-		background: var(--highlight);
+		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
 		border: 1px solid #f0d78c;
+		border-left: 4px solid #f39c12;
 		border-radius: var(--radius);
 		padding: 20px 24px;
 		margin: 24px 0;
 		font-style: italic;
 		color: #6b4c1e;
+		text-align: left;
 	}
 
-	.insight-box strong { color: #4a340f; }
-	.insight-box.decision { background: #e8f4f8; border-color: #a8d4e0; color: #1a5276; }
+	.insight-box strong { color: #4a340f; font-weight: 600; }
+	.insight-box.decision { 
+		background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
+		border-color: #a8d4e0; 
+		border-left-color: #3498db;
+		color: #1a5276; 
+	}
 	.insight-box.decision strong { color: #0e3a57; }
-	.insight-box.warm { background: #fef9e7; border-color: #f0d78c; color: #6b4c1e; }
+	.insight-box.warm { 
+		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
+		border-color: #f0d78c; 
+		border-left-color: #f39c12;
+		color: #6b4c1e; 
+	}
 	.insight-box.warm strong { color: #4a340f; }
-	.insight-box.cool { background: #eaf2f8; border-color: #a9cce3; color: #1f4e79; }
+	.insight-box.cool { 
+		background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
+		border-color: #a9cce3; 
+		border-left-color: #2980b9;
+		color: #1f4e79; 
+	}
 	.insight-box.cool strong { color: #154360; }
 
 	.decision-grid {
