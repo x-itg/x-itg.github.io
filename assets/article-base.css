@@ -1,0 +1,538 @@
+/* ============================================================
+   article-base.css
+   Unified article styles for T (tech) / L1-L4 (humanities) articles.
+   Scoped to pages that have .site-sidebar — novels (L3) and
+   index.html are excluded automatically.
+   ============================================================ */
+
+/* =============================================================
+   1. LAYOUT CONTAINERS
+   ============================================================= */
+body:has(.site-sidebar) .container {
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =============================================================
+   2. TYPOGRAPHY BASELINE
+   ============================================================= */
+body:has(.site-sidebar) h1 {
+    font-weight: 700;
+    line-height: 1.35;
+}
+body:has(.site-sidebar) h2 {
+    font-weight: 700;
+    line-height: 1.35;
+}
+body:has(.site-sidebar) h3 {
+    font-weight: 600;
+    line-height: 1.4;
+}
+body:has(.site-sidebar) h4 {
+    font-weight: 600;
+    line-height: 1.4;
+}
+body:has(.site-sidebar) ul,
+body:has(.site-sidebar) ol {
+    padding-left: 24px;
+}
+
+/* =============================================================
+   3. CARDS
+   ============================================================= */
+body:has(.site-sidebar) .card {
+    border-radius: 10px;
+    padding: 28px 30px;
+    margin: 28px 0;
+    text-align: left;
+}
+body:has(.site-sidebar) .card p {
+    text-align: left;
+    margin: 0;
+}
+body:has(.site-sidebar) .card p:first-child { margin-top: 0; }
+body:has(.site-sidebar) .card p:last-child  { margin-bottom: 0; }
+body:has(.site-sidebar) .card strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+body:has(.site-sidebar) .card.accent-left {
+    border-left: 4px solid var(--accent, #c0392b);
+}
+body:has(.site-sidebar) .card.philosophy,
+body:has(.site-sidebar) .card.philosopher {
+    border-left: 4px solid #8e44ad;
+    background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%);
+}
+body:has(.site-sidebar) .card.engineer {
+    border-left: 4px solid #2980b9;
+    background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%);
+}
+body:has(.site-sidebar) .card.action {
+    border-left: 4px solid #27ae60;
+    background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%);
+}
+body:has(.site-sidebar) .card.vision {
+    border-left: 4px solid #3b82f6;
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+body:has(.site-sidebar) .card.vision:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+body:has(.site-sidebar) .card.tip {
+    background: #f0f7ff;
+    border-color: #b3d4fc;
+}
+body:has(.site-sidebar) .card.green-left {
+    border-left: 4px solid #27ae60;
+}
+body:has(.site-sidebar) .card.blue-left {
+    border-left: 4px solid #3b82f6;
+}
+body:has(.site-sidebar) .card.purple-left {
+    border-left: 4px solid #8b5cf6;
+}
+
+/* =============================================================
+   4. INSIGHT BOXES
+   ============================================================= */
+body:has(.site-sidebar) .insight-box {
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-size: 15px;
+    line-height: 1.8;
+    text-align: left;
+}
+
+/* =============================================================
+   5. QUOTE BLOCKS  (aligned left, never centered)
+   ============================================================= */
+body:has(.site-sidebar) .quote-block {
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 28px 0;
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+/* =============================================================
+   6. CODE — INLINE & BLOCK
+   ============================================================= */
+body:has(.site-sidebar) code {
+    font-family: "JetBrains Mono", "Fira Code", "Cascadia Code",
+                 "SF Mono", "Consolas", "Monaco", monospace;
+    font-size: 13px;
+}
+body:has(.site-sidebar) p code,
+body:has(.site-sidebar) li code,
+body:has(.site-sidebar) td code {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+body:has(.site-sidebar) pre {
+    padding: 16px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin: 16px 0;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+body:has(.site-sidebar) .code-block {
+    border-radius: 1rem;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+}
+body:has(.site-sidebar) .code-block pre {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* =============================================================
+   7. CODE COLLAPSE  (<details> wrapping for long code)
+   ============================================================= */
+.code-collapse {
+    margin: 16px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.code-collapse > summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    list-style: none;
+    padding: 10px 16px;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+    user-select: none;
+    transition: background 0.15s;
+}
+.code-collapse > summary:hover { background: #e2e8f0; }
+.code-collapse > summary::-webkit-details-marker { display: none; }
+.code-collapse > summary::before {
+    content: "\25B6";
+    font-size: 10px;
+    transition: transform 0.2s;
+    color: #64748b;
+}
+.code-collapse[open] > summary::before { transform: rotate(90deg); }
+.code-collapse > summary .line-count {
+    margin-left: auto;
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 500;
+}
+.code-collapse pre {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-top: 1px solid #cbd5e1;
+}
+.code-collapse .code-block {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-top: 1px solid #cbd5e1;
+}
+
+/* =============================================================
+   8. TABLES
+   ============================================================= */
+body:has(.site-sidebar) table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+}
+body:has(.site-sidebar) table th,
+body:has(.site-sidebar) table td {
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: top;
+}
+body:has(.site-sidebar) table th {
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* =============================================================
+   9. BLOCKQUOTES
+   ============================================================= */
+body:has(.site-sidebar) blockquote {
+    padding: 12px 20px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 15px;
+}
+
+/* =============================================================
+   10. SCENE CARDS  (humanities articles)
+   ============================================================= */
+body:has(.site-sidebar) .scene-card {
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+    transition: box-shadow 0.2s;
+}
+body:has(.site-sidebar) .scene-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* =============================================================
+   11. REVIEW / COMMENT SECTIONS
+   ============================================================= */
+body:has(.site-sidebar) .review-section {
+    margin-top: 38px;
+    padding-top: 24px;
+}
+body:has(.site-sidebar) .review-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-size: 15px;
+    font-weight: 700;
+}
+body:has(.site-sidebar) .review-card {
+    padding: 16px 18px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+}
+body:has(.site-sidebar) .review-card:last-child { margin-bottom: 0; }
+body:has(.site-sidebar) .review-card p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* =============================================================
+   12. SECTION DIVIDERS
+   ============================================================= */
+body:has(.site-sidebar) .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 36px 0;
+}
+body:has(.site-sidebar) .section-divider::before,
+body:has(.site-sidebar) .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+}
+body:has(.site-sidebar) .section-divider i { font-size: 12px; }
+
+/* =============================================================
+   13. WORKFLOW STEPS
+   ============================================================= */
+body:has(.site-sidebar) .workflow-step {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+/* =============================================================
+   14. DECISION GRIDS
+   ============================================================= */
+body:has(.site-sidebar) .decision-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin: 28px 0;
+}
+body:has(.site-sidebar) .decision-card {
+    border-radius: 10px;
+    padding: 22px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+body:has(.site-sidebar) .decision-card:hover {
+    transform: translateY(-4px);
+}
+body:has(.site-sidebar) .decision-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+/* =============================================================
+   15. GRIDS
+   ============================================================= */
+body:has(.site-sidebar) .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+body:has(.site-sidebar) .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+/* =============================================================
+   16. LAYER TAGS
+   ============================================================= */
+body:has(.site-sidebar) .layer-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* ============================================================
+   THEME: TECH  (T articles — site-sidebar--tech)
+   ============================================================ */
+body.site-theme-tech p code,
+body.site-theme-tech li code,
+body.site-theme-tech td code {
+    background: #eef1f5;
+    color: #c0392b;
+}
+body.site-theme-tech pre {
+    background: #1e293b;
+    color: #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+body.site-theme-tech blockquote {
+    border-left: 3px solid #c0392b;
+    background: #f8f9fa;
+    color: #5a6c7d;
+}
+body.site-theme-tech table th {
+    background: #f5f7fa;
+    color: #4a5568;
+}
+body.site-theme-tech table td {
+    border-bottom: 1px solid #e0e4e8;
+}
+body.site-theme-tech .quote-block {
+    background: linear-gradient(135deg, #fef9e7, #fef5d7);
+    border: 1px solid #f0d78c;
+    color: #6b4c1e;
+}
+body.site-theme-tech .insight-box {
+    background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
+    border: 1px solid #f0d78c;
+    border-left: 4px solid #f39c12;
+    color: #6b4c1e;
+}
+body.site-theme-tech .insight-box strong { color: #4a340f; }
+body.site-theme-tech .insight-box.decision {
+    background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
+    border: 1px solid #a8d4e0;
+    border-left: 4px solid #3498db;
+    color: #1a5276;
+}
+body.site-theme-tech .insight-box.decision strong { color: #0e3a57; }
+body.site-theme-tech .insight-box.cool {
+    background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
+    border: 1px solid #a9cce3;
+    border-left: 4px solid #2980b9;
+    color: #1f4e79;
+}
+body.site-theme-tech .insight-box.cool strong { color: #154360; }
+body.site-theme-tech .card {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+body.site-theme-tech .workflow-step {
+    background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+    border: 1px solid #e0e4e8;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+body.site-theme-tech .decision-card {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+body.site-theme-tech .code-block {
+    background: #f6fafe;
+    border: 1px solid #e6edf4;
+}
+body.site-theme-tech .code-block pre {
+    color: #0a3858;
+}
+
+/* ============================================================
+   THEME: HUMANITIES  (L1/L2/L4 — site-sidebar--story)
+   ============================================================ */
+body.site-theme-story p code,
+body.site-theme-story li code,
+body.site-theme-story td code {
+    background: #f7ead8;
+    color: #9d5322;
+}
+body.site-theme-story pre {
+    background: #292524;
+    color: #e7e5e4;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+body.site-theme-story blockquote {
+    border-left: 3px solid #d9a15f;
+    background: #fff4e5;
+    color: #6a4a29;
+}
+body.site-theme-story table th {
+    background: #fff4e5;
+    color: #6a4a29;
+}
+body.site-theme-story table td {
+    border-bottom: 1px solid #e7e5e4;
+}
+body.site-theme-story .card {
+    background: rgba(255, 250, 242, 0.98);
+    border-color: #e7d2b0;
+    box-shadow: 0 10px 24px rgba(145, 90, 32, 0.07);
+}
+body.site-theme-story .card.tip {
+    background: #fff4e5;
+    border-color: #e7c99b;
+}
+body.site-theme-story .insight-box {
+    background: #fffbeb;
+    border: none;
+    border-left: 4px solid #d97706;
+    color: #78350f;
+}
+body.site-theme-story .insight-box strong { color: #92400e; }
+body.site-theme-story .quote-block {
+    background: linear-gradient(135deg, #fff7ed, #fffbeb);
+    border: 1px solid #fed7aa;
+    color: #78350f;
+}
+body.site-theme-story .quote-block strong { color: #92400e; }
+body.site-theme-story .scene-card {
+    border-color: #e7e5e4;
+}
+body.site-theme-story .review-card {
+    background: linear-gradient(180deg, #fffdf8, #fff7ed);
+    border: 1px solid #fed7aa;
+}
+body.site-theme-story .decision-card {
+    border-color: #e7d2b0;
+}
+body.site-theme-story .workflow-step {
+    border-color: #e7d2b0;
+}
+body.site-theme-story .section-divider {
+    color: #d6d3d1;
+}
+body.site-theme-story .section-divider::before,
+body.site-theme-story .section-divider::after {
+    background: #e7e5e4;
+}
+
+/* Humanities code-collapse warm theme */
+body.site-theme-story .code-collapse {
+    border-color: #e7d2b0;
+}
+body.site-theme-story .code-collapse > summary {
+    background: #fdf6e9;
+    color: #6a4a29;
+}
+body.site-theme-story .code-collapse > summary:hover {
+    background: #f7ead8;
+}
+body.site-theme-story .code-collapse > summary::before {
+    color: #9b836d;
+}
+body.site-theme-story .code-collapse > summary .line-count {
+    color: #b8a088;
+}
+body.site-theme-story .code-collapse pre {
+    border-top-color: #e7d2b0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    body:has(.site-sidebar) .card { padding: 20px 22px; }
+    body:has(.site-sidebar) .decision-grid { grid-template-columns: 1fr; }
+    body:has(.site-sidebar) .grid-2,
+    body:has(.site-sidebar) .grid-3 { grid-template-columns: 1fr; }
+    body:has(.site-sidebar) .workflow-step { flex-direction: column; gap: 12px; }
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print {
+    .code-collapse { break-inside: avoid; }
+    .code-collapse[open] > summary { display: none; }
+    .code-collapse pre { border-top: none; }
+}

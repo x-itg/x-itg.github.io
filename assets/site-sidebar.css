@@ -387,7 +387,7 @@
     transform: translateX(2px);
 }
 
-body:has(.site-sidebar--story) .layout {
+body.site-theme-story .layout {
     display: flex;
     max-width: 1400px;
     margin: 0 auto;
@@ -396,13 +396,13 @@ body:has(.site-sidebar--story) .layout {
     align-items: flex-start;
 }
 
-body:has(.site-sidebar--story) .main-content {
+body.site-theme-story .main-content {
     flex: 1;
     min-width: 0;
     margin: 0;
 }
 
-body:has(.site-sidebar--tech) {
+body.site-theme-tech {
     --bg: #fdf8ef;
     --card-bg: #fffaf2;
     --text: #3f3328;
@@ -419,7 +419,7 @@ body:has(.site-sidebar--tech) {
         linear-gradient(180deg, #fffdf9 0%, #fdf7ed 38%, #fbf0df 100%);
 }
 
-body:has(.site-sidebar--tech) .layout {
+body.site-theme-tech .layout {
     display: flex;
     max-width: 1400px;
     margin: 0 auto;
@@ -428,95 +428,95 @@ body:has(.site-sidebar--tech) .layout {
     align-items: flex-start;
 }
 
-body:has(.site-sidebar--tech) .main-content {
+body.site-theme-tech .main-content {
     flex: 1;
     min-width: 0;
     margin: 0;
 }
 
-body:has(.site-sidebar--tech) .sidebar-toc {
+body.site-theme-tech .sidebar-toc {
     background: linear-gradient(180deg, #fffaf1 0%, #fff3e1 100%);
     border-color: #ecd8b7;
     box-shadow: 0 12px 22px rgba(145, 90, 32, 0.08);
 }
 
-body:has(.site-sidebar--tech) .sidebar-toc h3 {
+body.site-theme-tech .sidebar-toc h3 {
     color: #9b642f;
 }
 
-body:has(.site-sidebar--tech) .sidebar-toc nav a {
+body.site-theme-tech .sidebar-toc nav a {
     color: #7c6248;
 }
 
-body:has(.site-sidebar--tech) .sidebar-toc nav a:hover {
+body.site-theme-tech .sidebar-toc nav a:hover {
     background: rgba(235, 177, 118, 0.16);
     color: #8f4c1c;
 }
 
-body:has(.site-sidebar--tech) .sidebar-toc nav a i {
+body.site-theme-tech .sidebar-toc nav a i {
     color: #d19459;
 }
 
-body:has(.site-sidebar--tech) .article-header h1,
-body:has(.site-sidebar--tech) h2,
-body:has(.site-sidebar--tech) h3,
-body:has(.site-sidebar--tech) h4,
-body:has(.site-sidebar--tech) strong {
+body.site-theme-tech .article-header h1,
+body.site-theme-tech h2,
+body.site-theme-tech h3,
+body.site-theme-tech h4,
+body.site-theme-tech strong {
     color: #463525;
 }
 
-body:has(.site-sidebar--tech) .article-header .meta {
+body.site-theme-tech .article-header .meta {
     color: #9b836d;
 }
 
-body:has(.site-sidebar--tech) .card,
-body:has(.site-sidebar--tech) table {
+body.site-theme-tech .card,
+body.site-theme-tech table {
     background: rgba(255, 250, 242, 0.98);
     border-color: #e7d2b0;
     box-shadow: 0 10px 24px rgba(145, 90, 32, 0.07);
 }
 
-body:has(.site-sidebar--tech) .card.tip,
-body:has(.site-sidebar--tech) blockquote,
-body:has(.site-sidebar--tech) th {
+body.site-theme-tech .card.tip,
+body.site-theme-tech blockquote,
+body.site-theme-tech th {
     background: #fff4e5;
     border-color: #e7c99b;
     color: #6a4a29;
 }
 
-body:has(.site-sidebar--tech) blockquote {
+body.site-theme-tech blockquote {
     border-left-color: #d9a15f;
 }
 
-body:has(.site-sidebar--tech) p code,
-body:has(.site-sidebar--tech) li code {
+body.site-theme-tech p code,
+body.site-theme-tech li code {
     background: #f7ead8;
     color: #9d5322;
 }
 
-body:has(.site-sidebar--tech) .top-nav {
+body.site-theme-tech .top-nav {
     border-bottom-color: #e6d3b1;
     color: #8a7158;
 }
 
-body:has(.site-sidebar--tech) .top-nav a,
-body:has(.site-sidebar--tech) a {
+body.site-theme-tech .top-nav a,
+body.site-theme-tech a {
     color: #9a6230;
 }
 
-body:has(.site-sidebar--tech) .top-nav a:hover,
-body:has(.site-sidebar--tech) a:hover {
+body.site-theme-tech .top-nav a:hover,
+body.site-theme-tech a:hover {
     color: #7f4318;
 }
 
 @media (max-width: 980px) {
-    body:has(.site-sidebar--tech) .layout {
+    body.site-theme-tech .layout {
         flex-direction: column;
     }
 
-    body:has(.site-sidebar--tech) .site-sidebar,
-    body:has(.site-sidebar--tech) .sidebar-series,
-    body:has(.site-sidebar--tech) .sidebar-toc {
+    body.site-theme-tech .site-sidebar,
+    body.site-theme-tech .sidebar-series,
+    body.site-theme-tech .sidebar-toc {
         width: 100%;
         position: static;
         max-height: none;
@@ -645,7 +645,7 @@ body:has(.site-sidebar--tech) a:hover {
 }
 
 @media (max-width: 900px) {
-    body:has(.site-sidebar) .layout {
+    body.site-theme-tech .layout {
         flex-direction: column;
         padding: 1rem 0.75rem;
     }
@@ -813,4 +813,81 @@ body:has(.site-sidebar--tech) a:hover {
     .site-sidebar__link {
         transition: none;
     }
+}
+
+/* ── 统一侧边栏 · T 子分组 ──────────────────────── */
+
+.site-sidebar__group--tech > .site-sidebar__group-body {
+    padding: 0.32rem;
+}
+
+.site-sidebar__subgroup {
+    margin-bottom: 0.42rem;
+    border: 1px solid rgba(203, 213, 225, 0.5);
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.4);
+    overflow: hidden;
+}
+
+.site-sidebar__subgroup:last-child {
+    margin-bottom: 0;
+}
+
+.site-sidebar__subgroup > summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.7rem;
+    cursor: pointer;
+    color: #475569;
+    font-size: 0.72rem;
+    font-weight: 700;
+    transition: background 0.15s ease;
+}
+
+.site-sidebar__subgroup > summary::-webkit-details-marker {
+    display: none;
+}
+
+.site-sidebar__subgroup > summary::before {
+    content: '\25B8';
+    color: #94a3b8;
+    font-size: 0.65rem;
+    transition: transform 0.15s ease;
+}
+
+.site-sidebar__subgroup[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+.site-sidebar__subgroup > summary:hover {
+    background: rgba(241, 245, 249, 0.8);
+}
+
+.site-sidebar__subgroup[open] > summary {
+    border-bottom: 1px solid rgba(203, 213, 225, 0.35);
+    background: rgba(248, 250, 252, 0.6);
+}
+
+.site-sidebar__subgroup .site-sidebar__group-body {
+    padding: 0.28rem;
+    background: transparent;
+}
+
+.site-sidebar__subgroup .site-sidebar__group-body ul {
+    gap: 0.28rem;
+}
+
+.site-sidebar__subgroup .site-sidebar__link {
+    padding: 0.48rem 0.6rem;
+    font-size: 0.72rem;
+}
+
+.site-sidebar__subgroup .site-sidebar__link-title {
+    font-size: 0.72rem;
+}
+
+.site-sidebar__subgroup .site-sidebar__link-meta {
+    font-size: 0.62rem;
 }
