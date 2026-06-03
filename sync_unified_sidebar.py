@@ -65,15 +65,15 @@ L1_ITEMS = [
     ("aboutmore/wx.html", "🗺️", "乾坤大挪移心法 · 文章总览", "法则起点"),
 ]
 L2_ITEMS = [
-    ("aboutmore/itg.html", "🌞", "爱婷哥", "日常与自省"),
-    ("aboutmore/forme.html", "📝", "写给自己", "日常与自省"),
-    ("aboutmore/pg.html", "🎤", "家庭直播间", "日常与自省"),
-    ("aboutmore/m.html", "🌙", "周一早上，梦见下班", "日常与自省"),
-    ("aboutmore/cc.html", "🪞", "我可能哪里错了", "日常与自省"),
-    ("aboutmore/ll.html", "💬", "找个不懂的人聊聊", "日常与自省"),
-    ("aboutmore/pm.html", "🧠", "他们的提示词，我的交付物", "日常与自省"),
-    ("aboutmore/seconed.html", "🎐", "一秒钟的感动", "日常与自省"),
-    ("aboutmore/ta.html", "♾️", "不必全部收敛", "日常与自省"),
+    ("aboutmore/itg.html", "🌞", "爱婷哥", "家庭·命名与温柔"),
+    ("aboutmore/forme.html", "📝", "写给自己", "自省·书信与期许"),
+    ("aboutmore/pg.html", "🎤", "家庭直播间", "日常·接话与快乐"),
+    ("aboutmore/m.html", "🌙", "周一早上，梦见下班", "日常·疲惫与松弛"),
+    ("aboutmore/cc.html", "🪞", "我可能哪里错了", "思辨·反驳与反思"),
+    ("aboutmore/ll.html", "💬", "找个不懂的人聊聊", "方法·外行与切换"),
+    ("aboutmore/pm.html", "🧠", "他们的提示词，我的交付物", "心法·提示与交付"),
+    ("aboutmore/seconed.html", "🎐", "一秒钟的感动", "亲子·棋盘与奔赴"),
+    ("aboutmore/ta.html", "♾️", "不必全部收敛", "哲思·余味与收敛"),
 ]
 L3_ITEMS = [
     ("aboutmore/czy.html", "📘", "蓝牙：陆知意岛", "小说与对话"),
