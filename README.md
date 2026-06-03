@@ -274,6 +274,7 @@
 | `[日常]` 🌙 [周一早上，我梦见自己下班了](https://x-itg.github.io/aboutmore/m.html) | 一场梦里冒出来的疲惫、松弛和自我提醒 |
 | `[思辨]` 💬 [我可能哪里错了](https://x-itg.github.io/aboutmore/cc.html) | 当 AI 总在顺着你，反驳反而成了稀缺品 |
 | `[方法]` 💡 [搞到崩溃的时候，不妨找个不懂的人聊聊](https://x-itg.github.io/aboutmore/ll.html) | 外行视角、范式切换和跳出思维死胡同 |
+| `[心法]` 🧠 [他们的提示词，我的交付物](https://x-itg.github.io/aboutmore/pm.html) | 把每一次人际交互变成提示词与交付的精准闭环 |
 | `[哲思]` ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
 
 ### Layer 3 · 文学层 · 法则的边界实验

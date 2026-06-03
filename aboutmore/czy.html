@@ -95,7 +95,6 @@
         .helix-card--cross { grid-column:2; margin:0; text-align:left; }
     }
     @media (max-width:768px) {
-        .sidebar { display:none; }
         .main-content { padding:24px 16px 60px; }
         .main-content .article-header { padding:22px 18px 20px; border-radius:22px; }
         .main-content h1 { font-size:28px; }
@@ -112,189 +111,17 @@
 <body class="site-theme-story">
 
 <div class="layout">
-<aside class="site-sidebar">
-    <div class="site-sidebar__brand"><a href="../index.html"><i class="fas fa-compass"></i> 乾坤大挪移心法</a></div>
+<aside class="site-sidebar site-sidebar--story">
+    <div class="site-sidebar__brand"><a href="../about.html"><i class="fas fa-feather-alt"></i> L1-L4 · 法则与故事</a></div>
+    <div class="site-sidebar__intro">
+        <span class="site-sidebar__eyebrow">站点坐标</span>
+        <strong>L3 · 小说</strong>
+        <p>当法则遇到错配、感情与失控，它开始长出故事，也继续写出边界、代价与孤独余波。</p>
+    </div>
     <div class="site-sidebar__quick-links">
         <a href="../index.html" class="site-sidebar__quick-link site-sidebar__quick-link--primary"><i class="fas fa-house"></i><span>首页入口</span></a>
         <a href="../aboutmore/wx.html" class="site-sidebar__quick-link"><i class="fas fa-map"></i><span>站点总览</span></a>
-        <a href="../about.html" class="site-sidebar__quick-link"><i class="fas fa-feather-alt"></i><span>总序法则</span></a>
     </div>
-    <details class="site-sidebar__group site-sidebar__group--tech">
-        <summary>
-            <span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>
-            <span class="site-sidebar__summary-meta">技术主线 · 18 篇</span>
-        </summary>
-        <div class="site-sidebar__group-body">
-            <details class="site-sidebar__subgroup">
-                <summary>总纲</summary>
-                <div class="site-sidebar__group-body">
-                    <ul>
-                    <li><a href="../in.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
-                        <span>
-                            <span class="site-sidebar__link-title">五层进化</span>
-                            <span class="site-sidebar__link-meta">总纲 · 定义整个体系的坐标系和成熟度框架</span>
-                        </span>
-                    </a></li>
-                    </ul>
-                </div>
-            </details>
-            <details class="site-sidebar__subgroup">
-                <summary>核心主线</summary>
-                <div class="site-sidebar__group-body">
-                    <ul>
-                    <li><a href="../true.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🧱</span>
-                        <span>
-                            <span class="site-sidebar__link-title">实践项目模板</span>
-                            <span class="site-sidebar__link-meta">执行基础 · 把方法论固化为可落地的工程骨架</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../test.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🛠️</span>
-                        <span>
-                            <span class="site-sidebar__link-title">自主修复闭环</span>
-                            <span class="site-sidebar__link-meta">执行智能 · 双轨收敛让系统在既定路径上自我修正</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../fwd.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🧠</span>
-                        <span>
-                            <span class="site-sidebar__link-title">从收敛到进化</span>
-                            <span class="site-sidebar__link-meta">演化与判断智能 · 引入Agent性格制衡与决策切换</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../exc.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🫀</span>
-                        <span>
-                            <span class="site-sidebar__link-title">知识的生命体征</span>
-                            <span class="site-sidebar__link-meta">记忆智能 · 知识资产生命周期管理与免疫记忆</span>
-                        </span>
-                    </a></li>
-                    </ul>
-                </div>
-            </details>
-            <details class="site-sidebar__subgroup">
-                <summary>根系能力</summary>
-                <div class="site-sidebar__group-body">
-                    <ul>
-                    <li><a href="../pcb.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🔎</span>
-                        <span>
-                            <span class="site-sidebar__link-title">电路图分析器</span>
-                            <span class="site-sidebar__link-meta">感知根系 · 打通物理世界与数字世界</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../pt.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🧩</span>
-                        <span>
-                            <span class="site-sidebar__link-title">最后的拼图：Skills</span>
-                            <span class="site-sidebar__link-meta">支撑根系 · 快消费应用即时方法</span>
-                        </span>
-                    </a></li>
-                    </ul>
-                </div>
-            </details>
-            <details class="site-sidebar__subgroup">
-                <summary>专业延伸</summary>
-                <div class="site-sidebar__group-body">
-                    <ul>
-                    <li><a href="../history.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">📦</span>
-                        <span>
-                            <span class="site-sidebar__link-title">历史的包袱</span>
-                            <span class="site-sidebar__link-meta">专业延伸 · 遗留工程与AI迁移策略</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../ocd.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🧰</span>
-                        <span>
-                            <span class="site-sidebar__link-title">被忽视的工具链组合</span>
-                            <span class="site-sidebar__link-meta">专业延伸 · 用开源命令行工具把AI接入真实硬件调试</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../devs.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🏷️</span>
-                        <span>
-                            <span class="site-sidebar__link-title">固件铭牌与设备画像</span>
-                            <span class="site-sidebar__link-meta">专业延伸 · 固件数字身份与协同管理</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../gmp.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">📜</span>
-                        <span>
-                            <span class="site-sidebar__link-title">合规验证与AI编程</span>
-                            <span class="site-sidebar__link-meta">专业延伸 · 从"事后补文档"到"事前建法则"</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../14.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">⚖️</span>
-                        <span>
-                            <span class="site-sidebar__link-title">AI谄媚与专利</span>
-                            <span class="site-sidebar__link-meta">专业延伸 · 在拿证与保护之间切换审查模式</span>
-                        </span>
-                    </a></li>
-                    </ul>
-                </div>
-            </details>
-            <details class="site-sidebar__subgroup">
-                <summary>实战与心法</summary>
-                <div class="site-sidebar__group-body">
-                    <ul>
-                    <li><a href="../hg.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🎯</span>
-                        <span>
-                            <span class="site-sidebar__link-title">回归现实：单Agent实践框架</span>
-                            <span class="site-sidebar__link-meta">综合实战 · 将完整法则体系落地为可立即上手的工程实践</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../12.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
-                        <span>
-                            <span class="site-sidebar__link-title">AI编程的利刃</span>
-                            <span class="site-sidebar__link-meta">工程利器 · 同步生成测试脚本让AI自我调试</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../py.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🐍</span>
-                        <span>
-                            <span class="site-sidebar__link-title">批量修改，先问该不该用脚本</span>
-                            <span class="site-sidebar__link-meta">工程利器 · 先判断模式，再把批量改造交给脚本执行</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../13.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🧵</span>
-                        <span>
-                            <span class="site-sidebar__link-title">拆解与整合</span>
-                            <span class="site-sidebar__link-meta">工程心法 · 驾驭复杂系统的完整工程法则</span>
-                        </span>
-                    </a></li>
-                    <li><a href="../lj.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🎓</span>
-                        <span>
-                            <span class="site-sidebar__link-title">君子不器与灵活调度</span>
-                            <span class="site-sidebar__link-meta">工程心法 · 从古典哲思到AI时代工具调度法则</span>
-                        </span>
-                    </a></li>
-                    </ul>
-                </div>
-            </details>
-            <details class="site-sidebar__subgroup">
-                <summary>内核反照</summary>
-                <div class="site-sidebar__group-body">
-                    <ul>
-                    <li><a href="../gd.html" class="site-sidebar__link site-sidebar__article-link">
-                        <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
-                        <span>
-                            <span class="site-sidebar__link-title">始于工程，服务生活</span>
-                            <span class="site-sidebar__link-meta">内核反照 · 工程法则从技术补丁长成生活工具</span>
-                        </span>
-                    </a></li>
-                    </ul>
-                </div>
-            </details>
-        </div>
-    </details>
     <details class="site-sidebar__group site-sidebar__group--law">
         <summary>
             <span class="site-sidebar__summary-text">L1 · 法则</span>
@@ -306,35 +133,35 @@
                     <span class="site-sidebar__article-icon" aria-hidden="true">📖</span>
                     <span>
                         <span class="site-sidebar__link-title">我找到了一套法则</span>
-                        <span class="site-sidebar__link-meta">法则起点</span>
+                        <span class="site-sidebar__link-meta">法则与迁移</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/tk.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
                     <span>
                         <span class="site-sidebar__link-title">以不变应万变</span>
-                        <span class="site-sidebar__link-meta">法则起点</span>
+                        <span class="site-sidebar__link-meta">法则与迁移</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/fw.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🪄</span>
                     <span>
                         <span class="site-sidebar__link-title">工程魔法</span>
-                        <span class="site-sidebar__link-meta">法则起点</span>
+                        <span class="site-sidebar__link-meta">法则与迁移</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/sc.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">💞</span>
                     <span>
                         <span class="site-sidebar__link-title">调试AI，学会经营感情</span>
-                        <span class="site-sidebar__link-meta">法则起点</span>
+                        <span class="site-sidebar__link-meta">法则与迁移</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
                     <span>
                         <span class="site-sidebar__link-title">乾坤大挪移心法 · 文章总览</span>
-                        <span class="site-sidebar__link-meta">法则起点</span>
+                        <span class="site-sidebar__link-meta">法则与迁移</span>
                     </span>
                 </a></li>
             </ul>
@@ -389,6 +216,13 @@
                         <span class="site-sidebar__link-meta">日常与自省</span>
                     </span>
                 </a></li>
+                <li><a href="../aboutmore/pm.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🧠</span>
+                    <span>
+                        <span class="site-sidebar__link-title">他们的提示词，我的交付物</span>
+                        <span class="site-sidebar__link-meta">日常与自省</span>
+                    </span>
+                </a></li>
                 <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">♾️</span>
                     <span>
@@ -410,49 +244,49 @@
                     <span class="site-sidebar__article-icon" aria-hidden="true">📘</span>
                     <span>
                         <span class="site-sidebar__link-title">蓝牙：陆知意岛</span>
-                        <span class="site-sidebar__link-meta">小说与对话</span>
+                        <span class="site-sidebar__link-meta">叙事实验</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/qp-chat.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">💭</span>
                     <span>
                         <span class="site-sidebar__link-title">失控时空·对话版</span>
-                        <span class="site-sidebar__link-meta">小说与对话</span>
+                        <span class="site-sidebar__link-meta">叙事实验</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/gary.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">📍</span>
                     <span>
                         <span class="site-sidebar__link-title">失控时空·终极玩家</span>
-                        <span class="site-sidebar__link-meta">小说与对话</span>
+                        <span class="site-sidebar__link-meta">叙事实验</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/alone.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🌃</span>
                     <span>
                         <span class="site-sidebar__link-title">知意知否·孤独玩家</span>
-                        <span class="site-sidebar__link-meta">小说与对话</span>
+                        <span class="site-sidebar__link-meta">叙事实验</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/mywj.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🪐</span>
                     <span>
                         <span class="site-sidebar__link-title">知屿之意·命运玩家</span>
-                        <span class="site-sidebar__link-meta">小说与对话</span>
+                        <span class="site-sidebar__link-meta">叙事实验</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/party-high.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🎼</span>
                     <span>
                         <span class="site-sidebar__link-title">四季Party High玩家</span>
-                        <span class="site-sidebar__link-meta">小说与对话</span>
+                        <span class="site-sidebar__link-meta">叙事实验</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/jsxm.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🎮</span>
                     <span>
                         <span class="site-sidebar__link-title">失控时刻·有趣玩家</span>
-                        <span class="site-sidebar__link-meta">小说与对话</span>
+                        <span class="site-sidebar__link-meta">叙事实验</span>
                     </span>
                 </a></li>
             </ul>
@@ -503,7 +337,53 @@
             </ul>
         </div>
     </details>
-    <a href="../about.html" class="site-sidebar__footer-link">→ 关于作者</a>
+    <details class="site-sidebar__group">
+        <summary>
+            <span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>
+            <span class="site-sidebar__summary-meta">从工程桥面回看整套法则的起点</span>
+        </summary>
+        <div class="site-sidebar__group-body">
+            <ul>
+                <li><a href="../gd.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+                    <span>
+                        <span class="site-sidebar__link-title">桥面 · 始于工程，服务生活</span>
+                        <span class="site-sidebar__link-meta">从技术过桥，进入生活与叙事。</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                    <span>
+                        <span class="site-sidebar__link-title">总览 · 乾坤大挪移心法</span>
+                        <span class="site-sidebar__link-meta">按地图理解技术与非技术的整体关系。</span>
+                    </span>
+                </a></li>
+            </ul>
+        </div>
+    </details>
+    <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
+</aside>
+<aside class="sidebar-toc sidebar-toc--story">
+    <h3><span class="sidebar-toc__icon" aria-hidden="true">📘</span> 本章导航</h3>
+    <nav>
+        <ul>
+            <li><a href="#岛的命名">岛的命名</a></li>
+            <li><a href="#知意这两个字">知意这两个字</a></li>
+            <li><a href="#第一次错配">第一次错配</a></li>
+            <li><a href="#防御性决断">防御性决断</a></li>
+            <li><a href="#六年后重新扫描">六年后重新扫描</a></li>
+            <li><a href="#改造过的外壳">改造过的外壳</a></li>
+            <li><a href="#夜店里的识别误差">夜店里的识别误差</a></li>
+            <li><a href="#她真实的恐惧">她真实的恐惧</a></li>
+            <li><a href="#规则依旧系统已乱">规则依旧，系统已乱</a></li>
+            <li><a href="#主动回国">主动回国</a></li>
+            <li><a href="#真正的问题不是值不值得是敢不敢承认自己也想被选">真正的问题不是值不值得，是敢不敢承认自己也想被选</a></li>
+            <li><a href="#另外起一章">另外起一章</a></li>
+            <li><a href="#终于被正确读取">终于被正确读取</a></li>
+            <li><a href="#关于这个故事">蓝牙注释</a></li>
+            <li><a href="#法则以外的那部分">法则以外的那部分</a></li>
+        </ul>
+    </nav>
 </aside>
 <div class="main-content">
         <header class="article-header">
@@ -527,7 +407,7 @@
                 <section class="helix-entry">
                     <div class="helix-card helix-card--lu">
                         <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
-                        <h2 class="helix-title">岛的命名</h2>
+                        <h2 class="helix-title" id="岛的命名">岛的命名</h2>
                         <div class="helix-subtitle">他先介绍自己，再承认自己真正想说的是她</div>
                         <p>我叫陆屿。陆是陆地，屿是小岛。后来我做 AI，同事叫我岛神，因为我会让那些胡说八道的大模型闭嘴。</p>
                         <p>可一到这件事上，我立刻不想谈工作了。所有理性、所有工程感、所有对错误输出的校正能力，都在一句话里失效：</p>
@@ -539,7 +419,7 @@
                     </div>
                     <div class="helix-card helix-card--cheng">
                         <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
-                        <h2 class="helix-title">知意这两个字</h2>
+                        <h2 class="helix-title" id="知意这两个字">知意这两个字</h2>
                         <div class="helix-subtitle">名字像“知道”，她却总把真正的部分藏起来</div>
                         <p>她爸给她取“知意”，听起来像知行合一，像永远冷静、永远明白。但陆屿回忆里的她恰恰相反。</p>
                         <p>她两年里没有追问过爱不爱、没有查过手机、没有闹过脾气。表面上像不在乎，实际上像把情绪全封装起来，不让任何人读取。</p>
@@ -549,7 +429,7 @@
                 <section class="helix-entry">
                     <div class="helix-card helix-card--lu">
                         <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
-                        <h2 class="helix-title">第一次错配</h2>
+                        <h2 class="helix-title" id="第一次错配">第一次错配</h2>
                         <div class="helix-subtitle">他把分开理解成“不够在乎”</div>
                         <p>分开的原因很土。她去欧洲读博，他拿到国内 offer。他提异地，她说不要，干脆得像实验结果。</p>
                         <p>她站起来就走，他一个人把那盘大盘鸡吃完，回去改 bug 到凌晨三点。别人以为他只是想不通技术问题，其实他想不通的是：为什么她连犹豫都没有。</p>
@@ -561,7 +441,7 @@
                     </div>
                     <div class="helix-card helix-card--cheng">
                         <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
-                        <h2 class="helix-title">防御性决断</h2>
+                        <h2 class="helix-title" id="防御性决断">防御性决断</h2>
                         <div class="helix-subtitle">她没有闹，也没有求，因为更早地替自己判了输</div>
                         <p>她说话一直是陈述句、句号、不拖泥带水。每一句都收得很紧，像门在身后轻轻落锁。</p>
                         <p>她不是没有情绪，她只是更习惯在情绪发生之前就做切断。她把“不要异地”说得像客观结论，像把自己先从实验里移出去。</p>
@@ -571,7 +451,7 @@
                 <section class="helix-entry">
                     <div class="helix-card helix-card--lu">
                         <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
-                        <h2 class="helix-title">六年后重新扫描</h2>
+                        <h2 class="helix-title" id="六年后重新扫描">六年后重新扫描</h2>
                         <div class="helix-subtitle">锁屏上四个字，就让旧设备重新被发现</div>
                         <p>六年后她发来一句：<em>我回国了。</em> 他刚开完会，冷气吹得手指发僵，但更早失控的是肌肉记忆。大脑还没反应，身体已经先承认了她仍是可连接设备。</p>
                         <p>到奥体夜店见面时，他第一眼先看见银灰头发，第二眼看见锁骨上的 DNA 纹身。她已经不是记忆里那个怕打针的人，可他立刻认出：核没变。</p>
@@ -582,7 +462,7 @@
                     </div>
                     <div class="helix-card helix-card--cheng">
                         <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
-                        <h2 class="helix-title">改造过的外壳</h2>
+                        <h2 class="helix-title" id="改造过的外壳">改造过的外壳</h2>
                         <div class="helix-subtitle">银发、纹身、离婚，都是六年留下的壳层</div>
                         <p>她说“做实验做不出来，一生气就去漂了头。漂了三次，顺便纹的。” 表面是轻描淡写，实际上每一层变化都对应一次生活重构。</p>
                         <p>她已经结过婚又离过婚，对方是瑞士实验室同事。她能把这些信息说得像履历，但说得越平，越说明真正疼的地方已经被压到句子后面。</p>
@@ -592,7 +472,7 @@
                 <section class="helix-entry">
                     <div class="helix-card helix-card--lu">
                         <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
-                        <h2 class="helix-title">夜店里的识别误差</h2>
+                        <h2 class="helix-title" id="夜店里的识别误差">夜店里的识别误差</h2>
                         <div class="helix-subtitle">他先看到纹身，再看到她其实在发抖</div>
                         <p>音乐很吵，灯光很乱，她转酒杯的手指有点抖。他一开始以为那只是冷，后来才意识到那可能是另一种紧张。</p>
                         <p>她说梦话时喊过他的名字。六年后，在另一个大陆、另一种语言的婚姻里，她半夜喊的还是他。这让陆屿第一次意识到，自己以为已经结束的东西，其实从未彻底下线。</p>
@@ -603,7 +483,7 @@
                     </div>
                     <div class="helix-card helix-card--cheng">
                         <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
-                        <h2 class="helix-title">她真实的恐惧</h2>
+                        <h2 class="helix-title" id="她真实的恐惧">她真实的恐惧</h2>
                         <div class="helix-subtitle">最稳定的语言系统，也会在深夜泄露底层数据</div>
                         <div class="helix-quote">“因为我有一天半夜说梦话，喊了你的名字。”</div>
                         <p>她平常把自己包得很紧，可梦话绕过了理性，替她把没处理完的情感直接发送出来。</p>
@@ -614,7 +494,7 @@
                 <section class="helix-entry">
                     <div class="helix-card helix-card--lu">
                         <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
-                        <h2 class="helix-title">规则依旧，系统已乱</h2>
+                        <h2 class="helix-title" id="规则依旧系统已乱">规则依旧，系统已乱</h2>
                         <div class="helix-subtitle">他还记得自己的文档和边界，但手已经开始背叛规则</div>
                         <p>凌晨三点从夜店出来，她说自己不走了，半年前就申请了教职，只是没告诉他，怕分心。</p>
                         <p>路灯下他盯着那段双螺旋。A 配 T，C 配 G，精密、完美、可验证。可人不是碱基，人会错配。于是当她吻过来、口袋里的手机震动时，他没有看。这是第一次，规则仍在，但执行失败。</p>
@@ -625,7 +505,7 @@
                     </div>
                     <div class="helix-card helix-card--cheng">
                         <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
-                        <h2 class="helix-title">主动回国</h2>
+                        <h2 class="helix-title" id="主动回国">主动回国</h2>
                         <div class="helix-subtitle">她不是路过北京，她是带着明确意图回来</div>
                         <p>“不走了。申了高校的教职，过了。” 她像是把长期部署都做完了，才在最后一步把他叫出来。</p>
                         <p>她甚至承认，面试时没说，是怕分心。她看起来总像在切断，其实只是怕一旦说出口，自己就没法维持原来的稳定姿态。</p>
@@ -635,7 +515,7 @@
                 <section class="helix-entry">
                     <div class="helix-card helix-card--cross">
                         <div class="helix-label"><i class="fas fa-link"></i> 交叉节点</div>
-                        <h2 class="helix-title">真正的问题不是值不值得，是敢不敢承认自己也想被选</h2>
+                        <h2 class="helix-title" id="真正的问题不是值不值得是敢不敢承认自己也想被选">真正的问题不是值不值得，是敢不敢承认自己也想被选</h2>
                         <div class="helix-quote">“程知意，你当初说不要异地的时候，是觉得我不值得，还是觉得自己不配。”</div>
                         <div class="helix-quote">“第二个。”</div>
                         <p>这一刻双轨第一次真正相交。陆屿终于把六年没问出口的问题抛出来，程知意也第一次把防御机制里的核心变量说清楚。</p>
@@ -650,7 +530,7 @@
                 <section class="helix-entry">
                     <div class="helix-card helix-card--lu">
                         <div class="helix-label"><i class="fas fa-satellite-dish"></i> 陆屿视角</div>
-                        <h2 class="helix-title">另外起一章</h2>
+                        <h2 class="helix-title" id="另外起一章">另外起一章</h2>
                         <div class="helix-subtitle">他终于承认，有些人不能被塞回旧分类</div>
                         <p>他想起 Harald Bluetooth 的故事，两个字母锁成一个新的标记。然后他伸手拢好她被风吹乱的头发，说那个文档会加一条。</p>
                         <div class="helix-quote">“前女友不在前女友条款里。另外起一章。”</div>
@@ -662,7 +542,7 @@
                     </div>
                     <div class="helix-card helix-card--cheng">
                         <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
-                        <h2 class="helix-title">终于被正确读取</h2>
+                        <h2 class="helix-title" id="终于被正确读取">终于被正确读取</h2>
                         <div class="helix-subtitle">她先愣了一下，像有什么旧东西忽然被碰亮</div>
                         <p>她先愣了一下，再笑。那个弧度很旧，像十六岁还没来得及退场，就被风从更早的地方吹了回来。</p>
                         <p>她问“新章节叫什么”，声音很轻，像是在门口站住，还没有完全走进去。</p>
@@ -683,7 +563,7 @@
                     </div>
                     <div class="helix-card helix-card--cheng">
                         <div class="helix-label"><i class="fas fa-vial"></i> 程知意显露</div>
-                        <h2 class="helix-title">法则以外的那部分</h2>
+                        <h2 class="helix-title" id="法则以外的那部分">法则以外的那部分</h2>
                         <div class="helix-subtitle">她让“配对法则”第一次承认活人并不总按公式运行</div>
                         <p>她在欧洲漂过头发、纹过 DNA、结过婚又离过婚，可最后仍然会在梦里喊出那个名字。很多年过去了，最先醒来的还是那一点没被时间带走的东西。</p>
                         <p><strong>法则之外，总有东西不肯被写进条款。</strong> 比如凌晨三点的路灯，比如等了六年才问出口的话，比如一个看起来很冷静的人，站到最后还是轻轻承认了自己的旧伤。</p>

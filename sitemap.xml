@@ -181,6 +181,11 @@
         <priority>0.5</priority>
     </url>
     <url>
+        <loc>https://x-itg.github.io/aboutmore/pm.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://x-itg.github.io/aboutmore/pg.html</loc>
         <lastmod>2026-05-26</lastmod>
         <priority>0.5</priority>
