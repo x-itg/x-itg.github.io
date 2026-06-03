@@ -71,6 +71,8 @@ L2_ITEMS = [
     ("aboutmore/m.html", "🌙", "周一早上，梦见下班", "日常与自省"),
     ("aboutmore/cc.html", "🪞", "我可能哪里错了", "日常与自省"),
     ("aboutmore/ll.html", "💬", "找个不懂的人聊聊", "日常与自省"),
+    ("aboutmore/pm.html", "🧠", "他们的提示词，我的交付物", "日常与自省"),
+    ("aboutmore/seconed.html", "🎐", "一秒钟的感动", "日常与自省"),
     ("aboutmore/ta.html", "♾️", "不必全部收敛", "日常与自省"),
 ]
 L3_ITEMS = [
@@ -84,10 +86,14 @@ L3_ITEMS = [
 ]
 L4_ITEMS = [
     ("aboutmore/czjs.html", "🧪", "会话的碰撞", "方法与引擎"),
+    ("aboutmore/szdl.html", "🏗️", "从碰撞到分工：三足鼎立", "方法与引擎"),
+    ("aboutmore/yyjk.html", "🔄", "我的创作永不枯竭", "方法与引擎"),
+    ("aboutmore/xg.html", "🏭", "我承认文章都是AI洗稿", "方法与引擎"),
     ("aboutmore/fr.html", "🏛️", "四层结构：创作体系", "方法与引擎"),
     ("aboutmore/jg.html", "🧬", "架构定乾坤，笔墨随法则", "方法与引擎"),
     ("aboutmore/sryj.html", "⚔️", "十日一剑：创作手记", "方法与引擎"),
     ("aboutmore/gc.html", "🖥️", "像调试代码一样创作", "方法与引擎"),
+    ("aboutmore/ng.html", "🔧", "我不用天赋，我只用方法", "方法与引擎"),
 ]
 
 L_SECTIONS = [

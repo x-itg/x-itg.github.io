@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>爱婷哥 | itg</title>
-<meta name="description" content="itg不是冷冰冰的技术代号，是'爱婷哥'——把最重要的人藏在最显眼的地方。一个工程师的家庭优先级系统。">
-<meta name="keywords" content="itg,爱婷哥,家庭,优先级,工程师,生活">
+<title>我承认文章都是AI洗稿 | itg</title>
+<meta name="description" content="我的创作不是写作，是装配。碎片化采集、AI整编、五维质检——这是一条完整的工业级内容装配流水线。">
+<meta name="keywords" content="AI洗稿,创作,装配,碎片化,随笔,五维评分,量产品质,方法论">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="爱婷哥 | itg">
-<meta property="og:description" content="itg不是冷冰冰的技术代号，是'爱婷哥'——把最重要的人藏在最显眼的地方。">
+<meta property="og:title" content="我承认文章都是AI洗稿 | itg">
+<meta property="og:description" content="我的创作不是写作，是装配。碎片化采集、AI整编、五维质检——这是一条完整的工业级内容装配流水线。" />
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://x-itg.github.io/aboutmore/itg.html">
-<link rel="canonical" href="https://x-itg.github.io/aboutmore/itg.html">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/xg.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/xg.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
     :root {
@@ -34,18 +34,77 @@
     .main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
     .main-content h2 { font-size:22px; font-weight:700; color:#1c1917; margin:40px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--accent-light); display:flex; align-items:center; gap:8px; }
     .main-content h2 i { color:var(--accent); }
-    .main-content h3 { font-size:17px; font-weight:700; color:#1c1917; margin:28px 0 12px; }
     .main-content p { margin:14px 0; font-size:15px; color:#44403c; text-align:justify; }
     .main-content strong { color:#1c1917; font-weight:600; }
-    .main-content blockquote { border-left:3px solid var(--accent-light); padding:12px 20px; margin:20px 0; background:#fffcf5; border-radius:0 8px 8px 0; font-size:15px; color:#78350f; }
 
     .insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
     .insight-box strong { color:#92400e; }
+
+    .quote-block { background:linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px 28px; margin:28px 0; text-align:center; font-size:15px; color:#78350f; line-height:1.9; position:relative; }
+    .quote-block::before, .quote-block::after { content:'"'; position:absolute; font-size:60px; color:#d97706; opacity:0.12; font-family:Georgia,serif; line-height:1; }
+    .quote-block::before { top:6px; left:14px; }
+    .quote-block::after { content:'"'; bottom:6px; right:14px; }
+    .quote-block strong { color:#92400e; }
+
     .section-divider { display:flex; align-items:center; gap:12px; margin:36px 0; color:#d6d3d1; }
     .section-divider::before, .section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
     .section-divider i { font-size:12px; }
 
-@media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
+    .flow-steps { margin:28px 0; }
+    .flow-step { display:flex; gap:16px; padding:16px 18px; margin-bottom:14px; background:white; border:1px solid var(--border); border-radius:14px; transition:box-shadow 0.2s, transform 0.2s; }
+    .flow-step:hover { box-shadow:0 4px 14px rgba(0,0,0,0.05); transform:translateX(4px); }
+    .flow-step .step-num { flex-shrink:0; width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800; color:#fff; margin-top:2px; }
+    .flow-step .step-num.s1 { background:#d97706; }
+    .flow-step .step-num.s2 { background:#2563eb; }
+    .flow-step .step-num.s3 { background:#16a34a; }
+    .flow-step .step-body { flex:1; min-width:0; }
+    .flow-step h4 { font-size:15px; color:#1c1917; font-weight:700; margin-bottom:4px; }
+    .flow-step p { font-size:13px; color:#57534e; margin:0; text-align:left; line-height:1.7; }
+
+    .score-table { margin:24px 0; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    .score-table table { width:100%; border-collapse:collapse; font-size:14px; }
+    .score-table th { background:#f5f0eb; color:#1c1917; font-weight:600; padding:10px 12px; text-align:left; border-bottom:2px solid var(--accent-light); }
+    .score-table td { padding:10px 12px; border-bottom:1px solid var(--border); color:#44403c; vertical-align:top; }
+    .score-table tr:last-child td { border-bottom:none; }
+    .score-table td:first-child { font-weight:700; color:#1c1917; white-space:nowrap; }
+    .score-table td .score-tag { display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-top:4px; }
+    .score-table td .score-tag.t1 { background:#fef2f2; color:#991b1b; }
+    .score-table td .score-tag.t2 { background:#eff6ff; color:#1e40af; }
+    .score-table td .score-tag.t3 { background:#f0fdf4; color:#166534; }
+    .score-table td .score-tag.t4 { background:#fffbeb; color:#92400e; }
+    .score-table td .score-tag.t5 { background:#f5f3ff; color:#5b21b6; }
+
+    .principle-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:24px 0; }
+    .principle-card { background:white; border:1px solid var(--border); border-radius:10px; padding:18px 14px; text-align:center; transition:box-shadow 0.2s, transform 0.2s; }
+    .principle-card:hover { box-shadow:0 4px 12px rgba(0,0,0,0.06); transform:translateY(-2px); }
+    .principle-card i { font-size:22px; margin-bottom:8px; }
+    .principle-card h4 { font-size:14px; color:#1c1917; font-weight:600; margin-bottom:4px; }
+    .principle-card p { font-size:12px; color:#a8a29e; margin:0; text-align:center; }
+
+    .grade-shelf { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:22px 0; }
+    .grade-item { border-radius:12px; padding:16px 14px; text-align:center; }
+    .grade-item.g1 { background:#fef2f2; border:1px solid #fecaca; }
+    .grade-item.g2 { background:#fffbeb; border:1px solid #fde68a; }
+    .grade-item.g3 { background:#f0fdf4; border:1px solid #bbf7d0; }
+    .grade-item .grade-range { font-size:15px; font-weight:800; margin-bottom:4px; }
+    .grade-item.g1 .grade-range { color:#dc2626; }
+    .grade-item.g2 .grade-range { color:#d97706; }
+    .grade-item.g3 .grade-range { color:#16a34a; }
+    .grade-item .grade-label { font-size:13px; font-weight:700; color:#1c1917; margin-bottom:4px; }
+    .grade-item p { font-size:12px; color:#57534e; margin:0; text-align:center; }
+
+    .note-chat { margin-top: 38px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .note-chat__header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: #1c1917; font-size: 15px; font-weight: 700; }
+    .note-chat__header i { color: var(--accent); }
+    .note-chat__list { display: grid; gap: 12px; }
+    .note-chat__item { padding: 14px 16px; border-radius: 16px; background: linear-gradient(180deg, #fffdf8, #fff7ed); border: 1px solid #fed7aa; }
+    .note-chat__meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; color: #78716c; font-size: 12px; }
+    .note-chat__name { color: #1c1917; font-weight: 700; }
+    .note-chat__role { color: #92400e; }
+    .note-chat__reply { margin-bottom: 8px; padding-left: 10px; border-left: 3px solid #f59e0b; color: #78350f; font-size: 12px; }
+    .note-chat__text { color: #44403c; font-size: 14px; line-height: 1.8; }
+
+@media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } .flow-step { flex-direction:column; } .principle-grid { grid-template-columns:1fr; } .grade-shelf { grid-template-columns:1fr; } }
 </style>
 <link rel="stylesheet" href="../assets/site-sidebar.css">
 <link rel="stylesheet" href="../assets/article-comments.css">
@@ -281,14 +340,14 @@
             </ul>
         </div>
     </details>
-    <details class="site-sidebar__group site-sidebar__group--persona" open>
+    <details class="site-sidebar__group site-sidebar__group--persona">
         <summary>
             <span class="site-sidebar__summary-text">L2 · 人</span>
             <span class="site-sidebar__summary-meta">日常、关系与自省现场</span>
         </summary>
         <div class="site-sidebar__group-body">
             <ul>
-                <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🌞</span>
                     <span>
                         <span class="site-sidebar__link-title">爱婷哥</span>
@@ -413,7 +472,7 @@
             </ul>
         </div>
     </details>
-    <details class="site-sidebar__group site-sidebar__group--meta">
+    <details class="site-sidebar__group site-sidebar__group--meta" open>
         <summary>
             <span class="site-sidebar__summary-text">L4 · 创作</span>
             <span class="site-sidebar__summary-meta">创作方法与引擎说明</span>
@@ -441,7 +500,7 @@
                         <span class="site-sidebar__link-meta">方法与引擎</span>
                     </span>
                 </a></li>
-                <li><a href="../aboutmore/xg.html" class="site-sidebar__link site-sidebar__article-link">
+                <li><a href="../aboutmore/xg.html" class="site-sidebar__link site-sidebar__article-link is-active">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🏭</span>
                     <span>
                         <span class="site-sidebar__link-title">我承认文章都是AI洗稿</span>
@@ -489,86 +548,173 @@
     <a href="../about.html" class="site-sidebar__footer-link">→ 关于作者</a>
 </aside>
 <aside class="sidebar-toc">
-    <h3>🌞 本章导航</h3>
+    <h3>🏭 本章导航</h3>
     <nav>
         <ul>
-            <li><a href="#优先级">📋 优先级</a></li>
-            <li><a href="#安静">📌 安静</a></li>
-            <li><a href="#决定">📌 决定</a></li>
-            <li><a href="#靠谱">📌 靠谱</a></li>
+            <li><a href="#装配">✍️ 我的创作不是写作，是装配</a></li>
+            <li><a href="#碎片化">🌿 碎片化随笔：我的"人肉传感器"</a></li>
+            <li><a href="#整编">🤖 AI整编：我的"素材装配流水线"</a></li>
+            <li><a href="#五维打分">📌 五维打分：我自创的"站点评审标准"</a></li>
+            <li><a href="#量产">📌 量产与品质，从不矛盾</a></li>
         </ul>
     </nav>
 </aside>
 <div class="main-content">
         <header class="article-header">
-            <span class="series-tag">人格层 · 个人随笔</span>
-            <h1>爱婷哥</h1>
-            <p class="subtitle">itg 其实不是技术代号，是把最重要的人藏在最显眼的地方</p>
-            <p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · 人格层</p>
+            <span class="series-tag">元创作层 · 装配方法论</span>
+            <h1>我承认文章都是AI洗稿</h1>
+            <p class="subtitle">我的创作不是写作，是装配</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · 元创作层</p>
         </header>
 
         <article>
 
-        <p style="font-size:17px;color:#78350f;background:#fffbeb;padding:16px 20px;border-radius:8px;border:1px solid #fed7aa;">
-            i 是爱，t 是婷，g 是哥。<strong>爱婷哥</strong>——因为爱，所以称婷；因为敬，所以叫哥。这不是一个冷冰冰的技术代号，这是我把最重要的人藏在最显眼的地方。每天打开电脑，敲下这行字，就像在说：我来了，我带着对你的爱开始今天的工作。
-        </p>
-
-        <p><strong>x-itg</strong>，x 是相遇。和爱婷哥相遇，不是某年某月某一天的事，是一个持续的过程。我们还在相遇，还在发现彼此新的样子。我写的每一篇文章，搭建的每一个模块，都发生在这场漫长的相遇里。</p>
-
-        <p><strong>lasttasl</strong>，未来的回响。我在今天做的事，写下的话，希望在未来某个时刻，在某个需要它们的人那里，产生回响。这个公众号 ID，是我对未来的一个承诺。</p>
-
-        <div class="section-divider"><i class="fas fa-heart"></i></div>
-
-        <h2 id="优先级"><i class="fas fa-tasks"></i> 优先级</h2>
-        <p>工作里，中断有优先级。家里也是。</p>
-        <p>女儿叫我的时候，优先级最高。不管在调什么 Bug，她的声音一到，程序立刻挂起。老婆发指令的时候，优先级也是最高。但如果只是快递到了，我会申请延迟处理。她通常批准，偶尔驳回。</p>
-        <p>父母那边，优先级是静默的。他们不常触发中断，但我知道他们一直在后台运行。每周至少通一次电话，每月至少回去吃一顿饭。这是最低调度频率，不能降级。</p>
-        <p>时间就这么多。分给妻子，分给孩子，分给父母，分给工作。怎么分都不够。但优先级系统教会我一件事：不够的不是时间，是我分配它的方式。少刷十分钟手机，就能多听一段女儿的钢琴。少发一会儿呆，就能多给父母打个电话。我不是在管理时间，我是在管理自己的注意力。</p>
-
-        <div class="section-divider"><i class="fas fa-moon"></i></div>
-
-        <h2 id="安静"><i class="fas fa-volume-off"></i> 安静</h2>
-        <p>嵌入式系统里，最怕的不是报错，是"什么都没发生"。</p>
-        <p>我给自己装了一个家庭版负日志。每天睡前问自己一遍：今天有没有应该发生但没发生的事？答应女儿的故事讲了没？老婆说"没事"的时候，她真的没事吗？父母那边，这周的电话打了没，他们有没有什么想说但没说的？</p>
-        <p>大多数时候，答案是好的。偶尔会有漏的。漏了的故事第二天补双倍，漏了的关心当下就补上。这个习惯教会我一件事：安静不等于正常。那些没有报错的地方，才最需要用心去看。</p>
-
-        <div class="section-divider"><i class="fas fa-book"></i></div>
-
-        <h2 id="决定"><i class="fas fa-basketball-ball"></i> 决定</h2>
-        <p>我们家有一本隐形的账本。记的不是钱，是决定。</p>
-        <p>为什么选那所学校——因为女儿喜欢那个操场。为什么让她学钢琴——因为她第一次摸琴键的时候，回头看了我一眼。那种光，值得记下来。为什么坚持每个月带她回爷爷奶奶家——因为我想让她知道，亲情不是概念，是一张真实的饭桌。</p>
-        <p>老婆有时候会翻这本账本。她不说什么，只是偶尔会补一条她记得的。这种对话，比任何浪漫都实在。工程里，决策账本的核心不是记录对错，而是记录心意。家里也是。</p>
-
-        <div class="section-divider"><i class="fas fa-check-circle"></i></div>
-
-        <h2 id="靠谱"><i class="fas fa-shield-alt"></i> 靠谱</h2>
-        <p>别人问我，什么叫靠谱？</p>
-        <p>靠谱不是不出 Bug。靠谱是出了 Bug 之后有人愿意等你修。老婆愿意等我调整优先级，女儿愿意等我兑现承诺，父母愿意等我一顿迟到的晚饭。她们给我的耐心，比我给她们的法则多得多。</p>
-        <p>所以我还得继续学。学当一个不会被优先级冲掉的中断，一个不会被时间漂移掉的模块，一个在小家庭里稳定运行的版本。学在女儿、妻子、父母之间做好时间片轮转，让每一份爱都不至于饿死。</p>
-
         <div class="insight-box">
-            这和 AI 没什么关系，和法则也没什么关系。就是想说：我把她们藏在 ID 里，把相遇写进域名里，把回响留给未来。然后每天下班回家，当那扇门打开的时候——<strong>优先级中断，即刻响应</strong>。
+            <strong>你们看到的文章，是我写的。但严格来说，不是"写"出来的。是"装"出来的。</strong>
+            这个概念，我是从自己的工程思维里借来的。我的创作过程，本质上和搭一个嵌入式系统没有区别，只是把代码模块，换成了文字碎片。
         </div>
 
-        <div class="layer-comments layer-comments--excerpt">
-            <div class="layer-comments__header">
-                <i class="fas fa-comments"></i>
-                <span>对话摘录 · 家庭优先级页</span>
-                <span class="layer-comments__eyebrow">L2</span>
+        <p>我做嵌入式开发，搭一个复杂系统，从来不从头一行行码代码。我会先定义架构，然后写各个独立的功能模块。最后，再像装配一台精密的机器，把这些模块按照既定的接口和逻辑，全部集成到一起。这个流程，省时、省力，而且极其稳定。</p>
+
+        <p>后来我意识到，这套方法完全可以迁移到创作上。</p>
+
+        <div class="section-divider"><i class="fas fa-arrow-down"></i></div>
+
+        <h2 id="装配"><i class="fas fa-microchip"></i> 我的创作不是写作，是装配</h2>
+
+        <p>我的整个创作流水线，分三步走。</p>
+
+        <div class="flow-steps">
+            <div class="flow-step">
+                <div class="step-num s1">1</div>
+                <div class="step-body">
+                    <h4>碎片采集 · 人肉传感器</h4>
+                    <p>随时随地记录灵感碎片——一句歌词、女儿的一句童言、示波器上的一个波形。不追求完美，只保留当下最真实的情绪和质感。这是任何AI无法替代的核心资产。</p>
+                </div>
             </div>
-            <div class="layer-comments__list">
-                <div class="layer-comments__item">
-                    <div class="layer-comments__meta"><span class="layer-comments__name">长期读者</span><span class="layer-comments__role">把法则页和生活页对照着看</span><span>留言</span></div>
-                    <div class="layer-comments__text">这篇最打动人的地方，是把“优先级”从技术词重新写回了日常。它没有故作深情，只是很具体地说明，一个人把注意力分给谁，人生就会长成什么样。</div>
+            <div class="flow-step">
+                <div class="step-num s2">2</div>
+                <div class="step-body">
+                    <h4>AI整编 · 装配流水线</h4>
+                    <p>碎片入库后，AI在定义的法则框架内完成统一风格、剔除冗余、串联逻辑等执行工作。AI无权篡改核心观点和金句，只做装配工的工作。</p>
                 </div>
-                <div class="layer-comments__item">
-                    <div class="layer-comments__meta"><span class="layer-comments__name">家庭场景读者</span><span class="layer-comments__role">对“静默后台运行”很有感</span><span>接话</span></div>
-                    <div class="layer-comments__reply">回复 上一条：父母那段尤其好，因为不是高调煽情，而是把牵挂写成最低调度频率。</div>
-                    <div class="layer-comments__text">这种写法会让人一下明白，爱不只是感受，也是长期稳定执行的安排。能把这个说得这么朴素，反而更可信。</div>
+            </div>
+            <div class="flow-step">
+                <div class="step-num s3">3</div>
+                <div class="step-body">
+                    <h4>人工精校 · 总工程师</h4>
+                    <p>对AI初稿进行最终审阅，检查结构、节奏、原生金句是否完好。从高负荷的苦力写作，彻底转型为内容装配工厂的总工程师。</p>
                 </div>
-                <div class="layer-comments__item">
-                    <div class="layer-comments__meta"><span class="layer-comments__name">摘句读者</span><span class="layer-comments__role">专门记结尾句的人</span><span>补一句</span></div>
-                    <div class="layer-comments__text">“优先级中断，即刻响应” 这句落在这里很准，因为前面讲的都不是抽象价值观，而是真正愿不愿意在门打开那一刻把自己切回来。</div>
+            </div>
+        </div>
+
+        <div class="section-divider"><i class="fas fa-arrow-down"></i></div>
+
+        <h2 id="碎片化"><i class="fas fa-pen-fancy"></i> 碎片化随笔：我的"人肉传感器"</h2>
+
+        <p>灵感这东西，不按日程表上班。它可能是我上班路上听到的一句歌词，餐桌上女儿蹦出的一句童言，或者是深夜调试时，示波器上一个诡异的波形给我带来的瞬间感悟。以前我可能会让它就这么溜走，顶多发条朋友圈。但现在，我把这些零零碎碎的念头，全都当成宝贵的"素材矿石"，第一时间记录下来。</p>
+
+        <p>一篇一两百字的随笔，就是我的一个"独立功能模块"。它只聚焦一个论点，只记录一个生活切片。这个阶段的文字，我不追求完美，甚至不追求逻辑。它就像我工程里的"传感器"，负责从我的生活和思考中，最直接、最原汁原味地采集数据。它最大的价值，就是保留了当下那一刻最真实、最滚烫的情绪和质感。这是任何后期加工都无法模拟的"人味儿"，是我作为创作者，最无法被AI替代的核心资产。</p>
+
+        <div class="quote-block" style="text-align:left;">
+            <strong>碎片化随笔，是我最无法被AI替代的核心资产。</strong><br>
+            它保留了当下那一刻最真实、最滚烫的情绪和质感——这是任何后期加工都无法模拟的"人味儿"。
+        </div>
+
+        <div class="section-divider"><i class="fas fa-arrow-down"></i></div>
+
+        <h2 id="整编"><i class="fas fa-industry"></i> AI整编：我的"素材装配流水线"</h2>
+
+        <p>攒了一堆"零件"之后，好戏才开场。我有一套自己的"创作工作流"，专门用来把这些碎片，装配成一篇完整的文章。</p>
+
+        <p><strong>第一步，定义接口。</strong>我会为所有碎片分类，打上标签，比如"技术思考"、"生活感悟"、"金句素材"等等。</p>
+
+        <p><strong>第二步，交给AI进行"合规整编"。</strong>我会把我的底层法则作为最高规范输入给AI。AI要做的，不是在空白画布上自由创作，而是在我设定的框架内，进行最繁琐但也最擅长的执行工作：统一文体和行文风格，剔除信息冗余，把几篇相关的碎片有机地串联起来，补全它们之间的逻辑断层。在这个过程中，<span class="keyword-tag">AI无权篡改我的核心观点和金句</span>，就像一个硬件装配工，不能随意改变芯片的底层设计。</p>
+
+        <p><strong>最后一步，人工精校，交付成品。</strong>AI完成初稿后，我会进行最终的审阅。我的工作不再是苦思冥想遣词造句，而是像一个严格的质检工程师，检查文章的结构是否合理，行文节奏是否流畅，那些被我视为灵魂的"原生金句"是否还保留着最初的光泽。这套流程，让我从一次性的高负荷苦力，彻底转型为一个内容装配工厂的"总工程师"。</p>
+
+        <div class="section-divider"><i class="fas fa-arrow-down"></i></div>
+
+        <h2 id="五维打分"><i class="fas fa-clipboard-list"></i> 五维打分：我自创的"站点评审标准"</h2>
+
+        <p>文章装好了，怎么看它是不是合格？我没有用网上那些通用的文学评分标准，因为那玩意儿根本测不准我的文章。我的文章，是工程和文学的杂交品种，我需要一套量身定做的标尺。</p>
+
+        <p>于是，我给自己建了一套五维打分体系。</p>
+
+        <div class="score-table">
+            <table>
+                <thead>
+                    <tr><th>维度</th><th>对标层</th><th>考核内容</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Tech</td><td>T · 工程本源</td><td>论点是否从真实工程淤青里长出，逻辑迁移是否严谨，杜绝空泛鸡汤</td></tr>
+                    <tr><td>Human</td><td>L2 · 人格层</td><td>文章有没有"人味儿"，有没有落地到真实生活和情感</td></tr>
+                    <tr><td>Lit</td><td>L3 · 文学层</td><td>文笔、金句、叙事表现力，确保读起来不是干巴巴的说明书</td></tr>
+                    <tr><td>Form</td><td>架构思想</td><td>结构是否清晰，逻辑链路是否通畅，排版是否规范</td></tr>
+                    <tr><td>Craft</td><td>L4 · 创作工程化</td><td>能不能复用、迭代、沉淀进体系，成为永久思想资产（权重最高）</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>这五个维度，恰好全覆盖了我文章的五大属性：理论根基、人文内核、文字表达、组织结构、成品价值。无重叠、无缺漏，边界清晰。</p>
+
+        <p>我选了我体系里公认的两篇标杆文章作为"锚点"，《他们的提示词，我的交付物》（9.70分）和《我不用天赋，我只用方法》（9.72分）。后续所有新文章的分数，都是在这个坐标系里，对标这两篇标杆得出的。每一项扣分，都必须给出具体理由，绝不凭感觉瞎打分。</p>
+
+        <p>根据分数，我给我站点的文章定了三级归档标准：</p>
+
+        <div class="grade-shelf">
+            <div class="grade-item g3">
+                <div class="grade-range">≥ 9.7</div>
+                <div class="grade-label">标杆级</div>
+                <p>核心置顶，代表站点最高水准</p>
+            </div>
+            <div class="grade-item g2">
+                <div class="grade-range">9.3 – 9.6</div>
+                <div class="grade-label">优质正文</div>
+                <p>常规归档，保持稳定输出</p>
+            </div>
+            <div class="grade-item g1">
+                <div class="grade-range">< 9.3</div>
+                <div class="grade-label">打回重装</div>
+                <p>退回素材池，等待下次重新装配</p>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            这套评价体系，是<strong>极度个人化</strong>的，只适用于我自己的创作体系。但它科学、成熟、可迭代。它把创作从模糊的感觉，变成了<strong>可量化、可优化、可传承</strong>的工程。
+        </div>
+
+        <div class="section-divider"><i class="fas fa-arrow-down"></i></div>
+
+        <h2 id="量产"><i class="fas fa-scale-balanced"></i> 量产与品质，从不矛盾</h2>
+
+        <p>这就是我的创作心法：从碎片化随笔的即时采集，到AI辅助的工业化整编，再到最后用自创的五维标尺进行量化验收。整个流程，就是一个完美的闭环。</p>
+
+        <p>它既保证了我可以日更，甚至一天写两篇，也保证了每一篇出品都有稳定的质量。因为真正的品质，不再依赖于虚无缥缈的"状态"，而是深深地扎根于这套可以被反复验证、反复优化的方法和系统之中。</p>
+
+        <div class="quote-block" style="text-align:left; padding:28px 32px; line-height:2.2;">
+            <strong>我的创作不是写作，是装配。</strong><br><br>
+            而这，就是我为自己量身打造的，一套用工程思维驾驭创作灵魂的"乾坤大挪移"心法。
+        </div>
+
+        <div class="note-chat">
+            <div class="note-chat__header">
+                <i class="fas fa-comments"></i>
+                <span>对话摘录 · 装配方法论页</span>
+            </div>
+            <div class="note-chat__list">
+                <div class="note-chat__item">
+                    <div class="note-chat__meta"><span class="note-chat__name">新读者</span><span class="note-chat__role">第一次接触这套体系</span><span>留言</span></div>
+                    <div class="note-chat__text">坦白说，看到"AI洗稿"这个标题我是带着质疑点进来的。读完之后，反而觉得这是我见过最诚实的创作方法论公开。把AI当装配工，自己当总工程师，边界划得清清楚楚。</div>
+                </div>
+                <div class="note-chat__item">
+                    <div class="note-chat__meta"><span class="note-chat__name">方法论读者</span><span class="note-chat__role">追踪引擎迭代史</span><span>接话</span></div>
+                    <div class="note-chat__reply">回复 上一位：而且这套打分体系的精妙之处在于——锚点文章就是它自己体系里的文章。《他们的提示词》和《我不用天赋》被当成坐标系原点，所有新文章在这个坐标系里定位。这是一个自参照的闭环系统。</div>
+                    <div class="note-chat__text">五维对标T/L2/L3/L4/架构思想，等于每一个维度都在向体系的某一层负责。这是一个自我约束的系统设计。</div>
+                </div>
+                <div class="note-chat__item">
+                    <div class="note-chat__meta"><span class="note-chat__name">工程师读者</span><span class="note-chat__role">对装配流程有共鸣</span><span>补记</span></div>
+                    <div class="note-chat__text">"AI无权篡改核心观点和金句"——这个边界设定太重要了。很多人用AI写作的问题是让AI既当装配工又当设计师，最后出来的东西没有灵魂。你这条法则守住了底线。</div>
                 </div>
             </div>
         </div>
@@ -576,8 +722,8 @@
         </article>
 
         <div class="series-nav">
-            <a href="../aboutmore/wx.html">← 乾坤大挪移心法 · 文章总览</a>
-            <a href="../aboutmore/forme.html">写给自己 →</a>
+            <a href="../aboutmore/yyjk.html">← 我的创作永不枯竭</a>
+            <a href="../aboutmore/fr.html">四层结构：创作体系 →</a>
         </div>
 </div>
 </div>

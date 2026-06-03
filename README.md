@@ -275,6 +275,7 @@
 | `[思辨]` 💬 [我可能哪里错了](https://x-itg.github.io/aboutmore/cc.html) | 当 AI 总在顺着你，反驳反而成了稀缺品 |
 | `[方法]` 💡 [搞到崩溃的时候，不妨找个不懂的人聊聊](https://x-itg.github.io/aboutmore/ll.html) | 外行视角、范式切换和跳出思维死胡同 |
 | `[心法]` 🧠 [他们的提示词，我的交付物](https://x-itg.github.io/aboutmore/pm.html) | 把每一次人际交互变成提示词与交付的精准闭环 |
+| `[亲子]` 🎐 [一秒钟的感动](https://x-itg.github.io/aboutmore/seconed.html) | 她用空调给我凉意，我用棋盘给她全世界 |
 | `[哲思]` ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
 
 ### Layer 3 · 文学层 · 法则的边界实验
@@ -296,6 +297,9 @@
 | 文章 | 主题 |
 |------|------|
 | `[创作]` ⚗️ [会话的碰撞](https://x-itg.github.io/aboutmore/czjs.html) | 两个AI窗口交叉之后，发生了化学反应 |
+| `[引擎]` 🏗️ [从碰撞到分工：三足鼎立](https://x-itg.github.io/aboutmore/szdl.html) | DeepSeek装配、豆包质检、人裁决——创作引擎2.0的正式说明 |
+| `[自述]` 🔄 [我的创作永不枯竭](https://x-itg.github.io/aboutmore/yyjk.html) | 系统驱动增量创作，元内容与内容双维产出 |
+| `[方法论]` 🏭 [我承认文章都是AI洗稿](https://x-itg.github.io/aboutmore/xg.html) | 碎片采集、AI装配、五维质检——工业级内容流水线的完整说明 |
 | `[体系]` 🧬 [四层结构：创作体系](https://x-itg.github.io/aboutmore/fr.html) | 理论·人格·文学·元创作——同一套内核的四层自然生长 |
 | `[方法论]` 🧪 [架构定乾坤，笔墨随法则](https://x-itg.github.io/aboutmore/jg.html) | 把闭环、规约、迭代与可观测性完整迁移到文学创作领域 |
 | `[纪实]` 🖥️ [像调试代码一样创作](https://x-itg.github.io/aboutmore/gc.html) | 把创作拆成可观测、可回放、可调试的工程系统，正面公开 Human + AI + Agent 的工作流 |
