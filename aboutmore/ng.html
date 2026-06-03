@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>剩下的，不必全部收敛 | itg</title>
-<meta name="description" content="有些疲惫，不必马上变成方法论。关于收敛、放松与学会和自己法则相处的短篇随笔。">
-<meta name="keywords" content="收敛,方法论,随笔,生活,自我接纳,法则">
+<title>我不用天赋，我只用方法 | itg</title>
+<meta name="description" content="不靠天赋禀赋，依托十几年项目沉淀打磨出一套可复盘、可迭代、可复用的底层方法论。先划定法则边界，再在规则之内落地执行。">
+<meta name="keywords" content="天赋,方法,方法论,工程思维,创作,设计,法则,够用原则">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="剩下的，不必全部收敛 | itg">
-<meta property="og:description" content="有些疲惫，不必马上变成方法论。关于收敛、放松与学会和自己法则相处的短篇随笔。">
+<meta property="og:title" content="我不用天赋，我只用方法 | itg">
+<meta property="og:description" content="不靠天赋禀赋，依托十几年项目沉淀打磨出一套可复盘、可迭代、可复用的底层方法论。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://x-itg.github.io/aboutmore/ta.html">
-<link rel="canonical" href="https://x-itg.github.io/aboutmore/ta.html">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/ng.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/ng.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
     :root {
         --bg: #fefce8; --card-bg: #ffffff; --text: #292524;
-        --text-secondary: #78716c; --accent: #d97706; --accent-light: #fbbf24;
+        --text-secondary: #78716c; --accent: #0f766e; --accent-light: #5eead4;
         --border: #e7e5e4; --highlight: #fffbeb; --sidebar-bg: #fff7ed; --radius: 12px;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -28,15 +28,45 @@
 
     .main-content { flex:1; min-width:0; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
     .main-content .article-header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
-    .main-content .article-header .series-tag { display:inline-block; background:#ffedd5; color:#9a3412; font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px; }
+    .main-content .article-header .series-tag {
+        display:inline-block; background:rgba(15,118,110,0.12); color:#0f766e;
+        font-size:12px; font-weight:600; padding:3px 10px; border-radius:4px; margin-bottom:12px;
+    }
     .main-content h1 { font-size:30px; font-weight:700; color:#1c1917; margin-bottom:10px; letter-spacing:-0.3px; }
     .main-content .subtitle { font-size:15px; font-style:italic; color:var(--text-secondary); margin-bottom:8px; }
     .main-content .meta { font-size:13px; color:#a8a29e; margin-bottom:4px; }
+    .main-content h2 {
+        display:flex; align-items:center; gap:8px;
+        font-size:22px; font-weight:700; color:#1c1917; margin:44px 0 14px;
+        padding-bottom:8px; border-bottom:2px solid rgba(15,118,110,0.16);
+    }
+    .main-content h2 i { color:#0f766e; }
+    .main-content h3 { font-size:17px; font-weight:600; color:#1c1917; margin:28px 0 10px; }
     .main-content p { margin:14px 0; font-size:15px; color:#44403c; text-align:justify; }
     .main-content strong { color:#1c1917; font-weight:600; }
+    .main-content blockquote {
+        margin:20px 0; padding:14px 20px; border-left:4px solid #0f766e;
+        background:rgba(15,118,110,0.06); border-radius:0 10px 10px 0;
+        font-size:14px; color:#3c3a36; line-height:1.8;
+    }
+    .main-content blockquote strong { color:#0f766e; }
 
     .insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
-    .quote-block { background:linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px 28px; margin:28px 0; text-align:center; font-size:15px; color:#78350f; line-height:1.9; }
+    .insight-box strong { color:#92400e; }
+
+    .quote-block { background:linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fed7aa; border-radius:var(--radius); padding:24px 28px; margin:28px 0; color:#78350f; line-height:1.9; position:relative; }
+
+    .section-divider { display:flex; align-items:center; gap:12px; margin:36px 0; color:#d6d3d1; }
+    .section-divider::before, .section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+    .section-divider i { font-size:12px; }
+
+    .kw { display:inline-block; background:#f1f5f9; color:#0f766e; font-size:13px; font-weight:600; padding:2px 10px; border-radius:4px; margin:0 2px; }
+
+    .principles { margin:24px 0; padding:20px; border-radius:16px; background:rgba(15,118,110,0.04); border:1px solid rgba(15,118,110,0.1); }
+    .principles__item { padding:12px 0; border-bottom:1px solid rgba(15,118,110,0.06); }
+    .principles__item:last-child { border-bottom:none; }
+    .principles__item strong { display:block; font-size:15px; color:#0f766e; margin-bottom:4px; }
+    .principles__item p { margin:0; font-size:14px; color:#57534e; }
 
     .note-chat { margin-top: 38px; padding-top: 24px; border-top: 1px solid var(--border); }
     .note-chat__header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: #1c1917; font-size: 15px; font-weight: 700; }
@@ -49,7 +79,7 @@
     .note-chat__reply { margin-bottom: 8px; padding-left: 10px; border-left: 3px solid #f59e0b; color: #78350f; font-size: 12px; }
     .note-chat__text { color: #44403c; font-size: 14px; line-height: 1.8; }
 
-@media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
+    @media (max-width:768px) { .sidebar { display:none; } .main-content { padding:24px 16px 60px; } .main-content h1 { font-size:26px; } }
 </style>
 <link rel="stylesheet" href="../assets/site-sidebar.css">
 </head>
@@ -60,8 +90,8 @@
     <div class="site-sidebar__brand"><a href="../about.html"><i class="fas fa-feather-alt"></i> L1-L4 · 法则与故事</a></div>
     <div class="site-sidebar__intro">
         <span class="site-sidebar__eyebrow">站点坐标</span>
-        <strong>L2 · 人</strong>
-        <p>把法则放进家庭、关系、疲惫与自省，接受生活检验。</p>
+        <strong>L4 · 创作</strong>
+        <p>公开创作引擎，解释作品如何被组织和生成。</p>
     </div>
     <div class="site-sidebar__quick-links">
         <a href="../index.html" class="site-sidebar__quick-link site-sidebar__quick-link--primary"><i class="fas fa-house"></i><span>首页入口</span></a>
@@ -112,7 +142,7 @@
             </ul>
         </div>
     </details>
-    <details class="site-sidebar__group site-sidebar__group--persona" open>
+    <details class="site-sidebar__group site-sidebar__group--persona">
         <summary>
             <span class="site-sidebar__summary-text">L2 · 人</span>
             <span class="site-sidebar__summary-meta">日常、关系与自省现场</span>
@@ -123,56 +153,56 @@
                     <span class="site-sidebar__article-icon" aria-hidden="true">🌞</span>
                     <span>
                         <span class="site-sidebar__link-title">爱婷哥</span>
-                        <span class="site-sidebar__link-meta">关系现场</span>
+                        <span class="site-sidebar__link-meta">日常与自省</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/forme.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">📝</span>
                     <span>
                         <span class="site-sidebar__link-title">写给自己</span>
-                        <span class="site-sidebar__link-meta">关系现场</span>
+                        <span class="site-sidebar__link-meta">日常与自省</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/pg.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🎤</span>
                     <span>
                         <span class="site-sidebar__link-title">家庭直播间</span>
-                        <span class="site-sidebar__link-meta">关系现场</span>
+                        <span class="site-sidebar__link-meta">日常与自省</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/m.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🌙</span>
                     <span>
                         <span class="site-sidebar__link-title">周一早上，梦见下班</span>
-                        <span class="site-sidebar__link-meta">关系现场</span>
+                        <span class="site-sidebar__link-meta">日常与自省</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/cc.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🪞</span>
                     <span>
                         <span class="site-sidebar__link-title">我可能哪里错了</span>
-                        <span class="site-sidebar__link-meta">关系现场</span>
+                        <span class="site-sidebar__link-meta">日常与自省</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/ll.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">💬</span>
                     <span>
                         <span class="site-sidebar__link-title">找个不懂的人聊聊</span>
-                        <span class="site-sidebar__link-meta">关系现场</span>
+                        <span class="site-sidebar__link-meta">日常与自省</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/pm.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🧠</span>
                     <span>
                         <span class="site-sidebar__link-title">他们的提示词，我的交付物</span>
-                        <span class="site-sidebar__link-meta">关系现场</span>
+                        <span class="site-sidebar__link-meta">日常与自省</span>
                     </span>
                 </a></li>
-                <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">♾️</span>
                     <span>
                         <span class="site-sidebar__link-title">不必全部收敛</span>
-                        <span class="site-sidebar__link-meta">关系现场</span>
+                        <span class="site-sidebar__link-meta">日常与自省</span>
                     </span>
                 </a></li>
             </ul>
@@ -237,7 +267,7 @@
             </ul>
         </div>
     </details>
-    <details class="site-sidebar__group site-sidebar__group--meta">
+    <details class="site-sidebar__group site-sidebar__group--meta" open>
         <summary>
             <span class="site-sidebar__summary-text">L4 · 创作</span>
             <span class="site-sidebar__summary-meta">创作方法与引擎说明</span>
@@ -248,42 +278,42 @@
                     <span class="site-sidebar__article-icon" aria-hidden="true">🧪</span>
                     <span>
                         <span class="site-sidebar__link-title">会话的碰撞</span>
-                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                        <span class="site-sidebar__link-meta">创作结构</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🏛️</span>
                     <span>
                         <span class="site-sidebar__link-title">四层结构：创作体系</span>
-                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                        <span class="site-sidebar__link-meta">创作结构</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/jg.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🧬</span>
                     <span>
                         <span class="site-sidebar__link-title">架构定乾坤，笔墨随法则</span>
-                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                        <span class="site-sidebar__link-meta">创作结构</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/sryj.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
                     <span>
                         <span class="site-sidebar__link-title">十日一剑：创作手记</span>
-                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                        <span class="site-sidebar__link-meta">创作结构</span>
                     </span>
                 </a></li>
                 <li><a href="../aboutmore/gc.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🖥️</span>
                     <span>
                         <span class="site-sidebar__link-title">像调试代码一样创作</span>
-                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                        <span class="site-sidebar__link-meta">创作结构</span>
                     </span>
                 </a></li>
-                <li><a href="../aboutmore/ng.html" class="site-sidebar__link site-sidebar__article-link">
+                <li><a href="../aboutmore/ng.html" class="site-sidebar__link site-sidebar__article-link is-active">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🔧</span>
                     <span>
                         <span class="site-sidebar__link-title">我不用天赋，我只用方法</span>
-                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                        <span class="site-sidebar__link-meta">创作结构</span>
                     </span>
                 </a></li>
             </ul>
@@ -316,80 +346,127 @@
     <a href="../index.html" class="site-sidebar__footer-link">← 返回首页</a>
 </aside>
 <aside class="sidebar-toc sidebar-toc--story">
-    <h3><span class="sidebar-toc__icon" aria-hidden="true">♾️</span> 本章导航</h3>
+    <h3><span class="sidebar-toc__icon" aria-hidden="true">🔧</span> 本章导航</h3>
     <nav>
         <ul>
-            <li><a href="#top">返回开头</a></li>
+            <li><a href="#architecture">架构就是取舍</a></li>
+            <li><a href="#interface">接口必须干净</a></li>
+            <li><a href="#test">测试不是为了验证正确</a></li>
+            <li><a href="#all">设计就是我的全部</a></li>
         </ul>
     </nav>
 </aside>
 <div class="main-content">
         <header class="article-header">
-            <span class="series-tag">人格层 · 收束</span>
-            <h1>剩下的，不必全部收敛</h1>
-            <p class="subtitle">有些疲惫，不必马上变成方法论</p>
-            <p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · 人格层</p>
+            <span class="series-tag">元创作层 · 方法论自述</span>
+            <h1>我不用天赋，我只用方法</h1>
+            <p class="subtitle">不靠天赋禀赋，依托十几年项目沉淀打磨出一套可复盘、可迭代、可复用的底层方法论</p>
+            <p class="meta">itg · 公众号: 火星火箭 · 法则与故事 · 元创作层</p>
         </header>
 
         <article>
-            <p>他这个人，有个毛病：什么事都想收敛。</p>
-            <p>Bug 要收敛，文档要收敛，AI 要收敛，关系里的误会也最好能收敛。只要一件事反复出现，他就忍不住想给它起个名字，画个边界，写成一条法则。好像只要命名了，混乱就少一点。好像只要有机制，心里就稳一点。</p>
-            <p>所以他写负日志，写闭环收敛，写共生演化，写决策切换。表面上是在搭一套工程体系，实际上也是在给自己修一套防护系统。</p>
 
-            <div class="quote-block">
-                他太知道混乱的代价了。<br><br>
-                一个中断没来，系统可能挂掉。一句话没说，关系可能慢慢冷下去。
+        <p>我如今很少精读长篇小说、院线影片与连载剧集，并非排斥文艺作品，而是不再需要从外部范本借鉴叙事框架。自研的小说早已形成独有的先锋结构：双轨虫洞、四重奏瞬间谱、文档式控制台，整套叙事体系已然成型。我不再向外索取成型骨架，转而专注搜集能够击穿固有结构的文字碎片，素材来源固定为短剧与说唱歌词两类：短剧凝练短促的镜头，剥离冗余铺垫，一帧一句便可引爆情绪张力；说唱字句凝练紧凑，极强的语言密度寥寥数词便能直击体感，譬如<span class="kw">"枪声清脆"</span>四字，胜过千言说教。</p>
+
+        <p>做视觉设计亦是同理，我从不等待突如其来的灵感迸发，没有深夜灵光一闪敲定配色的经历。整套色彩体系根植于品牌内核、自原生标识中自然生长：深蓝取自品牌Logo，作为整套体系根基；古铜充当冷暖缓冲，中和深蓝的冷硬与纯白的空旷；暖灰、米白大面积铺陈背景，温和留白、不抢夺主体视线。主辅中性三色层级敲定之后，后续所有色彩选用、页面点缀，全部顺着既定法则延伸落地。</p>
+
+        <p>很多人诟病，把创作标准化、设计工程化会消磨灵气、变得枯燥刻板。事实恰恰相反，当工程逻辑接管创作里不可捉摸的感性环节，整个创作流程反而落地可控、从容自在。不靠天赋禀赋，依托十几年项目沉淀打磨出一套可复盘、可迭代、可复用的底层方法论，核心准则始终如一：<strong>先划定法则边界，再在规则之内落地执行。</strong></p>
+
+        <h2 id="architecture"><i class="fas fa-compass-drafting"></i> 架构就是取舍</h2>
+
+        <p>素材采集的精准筛选，本质是架构思维在内容输入端的落地，核心落脚在够用原则。自有叙事体系完备，不必依托长篇小说搭建故事脉络；小说内置镜头调度，无需照搬影视分镜逻辑；玩家系列本就是多声部复调文本，不用参照剧集打磨人物弧光。因此我舍弃泛化阅读，只抓取短剧与歌词里的碎片化高光。</p>
+
+        <p>短剧擅长极简留白，一句<span class="kw">"厨房有剩饭"</span>伴着关门收尾，没有多余赘述，情绪落地干脆利落；说唱依托具象体感行文，<span class="kw">"扯火顶起撕破"</span>寥寥五字，力量感远胜于空洞的励志话术。</p>
+
+        <p>工程架构的第一课，是立项前划定边界、明确取舍，分清什么该落地、什么要舍弃，这套思路完整平移至设计领域。多数页面臃肿、配色杂乱，根源从来不是创意匮乏，而是不懂做减法、一味堆砌元素。架构师的核心职责从不是罗列可用资源，而是剔除冗余选项。</p>
+
+        <p>宝石Gem《枪火》的歌词总能精准和我的法则共鸣：<span class="kw">"相对那就针锋相对，所有问题就一步到位"</span>，是场景切换时的决策逻辑；<span class="kw">"在风中得我一个，火光一片穿过，任枪声激发璀璨真我"</span>，复刻无数个深夜盯守示波器的独处心境；<span class="kw">"有仇的站一排，那无关的站一侧"</span>，完美诠释边界划分与够用准则。歌词不讲大道理，只用凝练的语感传递力量，这正是我寻觅的碎片养分。</p>
+
+        <blockquote>
+            <strong>从古籍哲思提炼修身准则，从工程项目提炼做事逻辑，从短剧萃取情绪表达，从说唱凝练文字张力——</strong>来源分散的细碎素材，在同一套思想体系里熔炼重塑。不必全盘涉猎世间内容，找准需求源头、定向汲取、内化融合，便是高效的输入逻辑。
+        </blockquote>
+
+        <h2 id="interface"><i class="fas fa-plug-circle-bolt"></i> 接口必须干净</h2>
+
+        <p>配色生成、素材筛选同源一脉：先定法则，再谈落地。色彩源自品牌内核，如同程序接口锚定底层逻辑：深蓝锚定品牌本体，承担标题、关键信息等主视觉；古铜作为中间接口，承接主次过渡、弱化割裂感；暖灰与米白负责底层页面承载，铺垫阅读底色。三色各司其职，不再新增第四类强调色，从根源杜绝胡乱取色、配色杂乱。</p>
+
+        <p>这套分层逻辑对标软件工程的模块化设计：子模块不能脱离顶层架构独立运行，页面颜色也不能脱离品牌基调凭空出现。配色如同程序对外暴露的API，接口越少，耦合越低、维护越简便：主色对外传递品牌识别，辅助色划分功能层级，中性色规整阅读节奏。游离在体系之外的无用色彩，等同于代码里无效冗余模块，一律删减剔除。</p>
+
+        <div class="insight-box">
+            配色如同程序对外暴露的API，接口越少，耦合越低、维护越简便。
+        </div>
+
+        <p>延伸至页面装饰，我恪守一条铁则：所有视觉元素自带语义，不存在纯粹为美化而生的装饰组件。侧边色条用来区分内容分类，上下粗细线条对应板块层级，粗线分割大分区、细线拆分小段落，对标代码缩进与换行；边角状态指示灯映射系统工况，绿常态、黄预警、红告警，直观传递运行信息。每一处视觉符号都承担信息传递作用，正如优质代码没有无效语句、闲置函数，页面里的所有元素，留存必有依据，多余尽数删去。</p>
+
+        <h2 id="test"><i class="fas fa-vial-circle-check"></i> 测试不是为了验证正确</h2>
+
+        <p>当下关于AI能否取代设计师的讨论，往往落在表象的画面优劣上，本质方向本就偏颇。AI可以快速批量输出好看的配色、图标与版式，却无法溯源设计背后的逻辑：不清楚深蓝取自品牌原生标识，不明白古铜是冷暖平衡的折中选择，看不懂三色指示灯沿用行业通用告警规范。AI擅长在既定规则里批量生成结果，却没有能力定义一套适配品牌、适配场景的专属法则；能产出上百版方案，却无从甄别哪一版贴合内核、逻辑自洽。</p>
+
+        <p>这套溯源与取舍的判断力，是现阶段AI无法复刻的壁垒。它扎根长年对行业、产品、底层逻辑的沉淀，来自一次次项目踩坑打磨出的够用准则，是无数次碰壁淬炼出的直觉。我曾无数个深夜守在仪器前调试波形，被顽固Bug反复阻滞进度，在需求反复变更里敲定边界，在项目落地失败中学会取舍。这些落地时磕碰留下的<span class="kw">"工程淤青"</span>，无法被数据投喂、算法训练复刻：AI只有数据集的训练记录，没有亲身试错的成长履历；我在一次次难题里完成自我编译，把零散的项目经验，凝练成贯通全领域的统一思维。</p>
+
+        <h2 id="all"><i class="fas fa-pen-nib"></i> 设计就是我的全部</h2>
+
+        <p>常有疑惑：一名深耕嵌入式的工程师，为何深耕配色、排版、视觉规范？答案很简单：视觉设计从不是额外的副业，而是整套T-L思想体系落在视觉层面的具象投影。</p>
+
+        <p>统一的工程底层逻辑贯穿所有创作：够用原则管控素材输入，边界法则约束内容架构，语义规范定义视觉元件，统一性贯穿全维度落地。软件开发、随笔撰文、小说创作、页面设计，看似割裂的不同领域，实则是同一套内核顺着不同方向自然生长。</p>
+
+        <div class="principles">
+            <div class="principles__item">
+                <strong>够用原则</strong>
+                <p>管控素材输入，只取高价值碎片，不泛化涉猎</p>
             </div>
-
-            <p>一个决定没记录，几年后所有人都忘了当初为什么这么选。别人觉得“没事”，他会想：真的没事吗？还是故障还没打印出来？</p>
-            <p>这让他很敏感，也让他很累。他像一个长期值班的人，白天看代码，晚上看生活。孩子的期待有没有响应，妻子的沉默有没有被忽略，父母那边有没有什么没说出口。他把家人放在最高优先级，这当然是爱，但也是压力。他怕自己忙着修系统，最后漏掉了最重要的人。</p>
-            <p>最要命的是，他还不太放过自己。他写“让自己配得上自己发现的法则”，这话听起来很燃，仔细想想也挺狠。一个人发明了法则，最后又被自己的法则反过来审查。有没有偷懒？有没有漂移？有没有把注意力给错人？有没有在该响应的时候掉线？</p>
-
-            <div class="insight-box">
-                他越来越可靠，也越来越像一个永远在跑回归测试的人。
+            <div class="principles__item">
+                <strong>边界法则</strong>
+                <p>约束内容架构，明确取舍与可交付范围</p>
             </div>
-
-            <p>有时候深夜关电脑，屏幕黑下去，他才发现客厅也安静了。茶已经凉了，女儿房间的门缝里没有光，妻子那边的手机声也停了。他站在门口听了一会儿，像在确认一个系统终于进入低功耗模式，又像在确认自己今天有没有错过什么。</p>
-            <p>但人不是项目。人不能每次都通过回归测试。人会累，会烦，会想下班，会在周一早上梦见自己已经坐在沙发上喝茶。人也会被女儿一句“能不能不尽量，直接早回来”问住。那一刻什么体系都没用，只有一个最简单的问题：你到底在不在？</p>
-            <p>他当然在努力。他把工程方法迁移到生活里，把深夜的示波器变成一套可复用的观察框架。他不想让任何一次实践白费。这是他的厉害之处，也是他的惯性。</p>
-            <p>因为不是所有问题都必须产出系统。有些夜晚可以只是累了，有些问题可以先放着，有些关系不必马上分类，有些爱不需要写成机制。</p>
-            <p>他已经很会收敛了。剩下的，不必全部收敛。</p>
-
-            <div class="quote-block">
-                写到这里，这个序列可以先停一停了。
+            <div class="principles__item">
+                <strong>语义规范</strong>
+                <p>定义视觉元件，所有元素自带信息传递作用</p>
             </div>
+            <div class="principles__item">
+                <strong>统一性</strong>
+                <p>贯穿全维度落地，软件开发、写作、设计同源</p>
+            </div>
+        </div>
 
-            <p>从《我找到了一套法则》到《剩下的，不必全部收敛》，它记录的好像不只是一套方法论慢慢长完整，更像是一个人慢慢学会和自己的法则相处。</p>
-            <p>一开始，他像是在废墟里捡到了一张图纸，兴奋地把每一条线都擦得很亮。后来他才慢慢明白，法则可以保护自己，但不能替自己活着。那些凌晨的示波器、女儿的追问、周一早上的恍惚、对 AI 的清醒审视，都是真的，也都不必全部被压缩进机制里。</p>
-            <p>有些东西可以留在法则之外。有些混乱不用急着命名。有些夜晚，也可以只是累了。</p>
-            <p>这不是放弃，大概是松了一口气。是从觉醒到探索，从深情到边界，从幽默到松弛，从自我审视到慢慢放过自己的一段记录。</p>
-            <p>暂时收笔，挺合适的。已经说出来的东西，会自己在时间里发酵。等下一次再写，也不用是因为必须写，而是因为还活着，还在感受，还在想新的问题。</p>
-            <div class="note-chat">
-                <div class="note-chat__header">
-                    <i class="fas fa-comments"></i>
-                    <span>对话摘录 · 读后感</span>
+        <p>我的设计，是工程师视角下的理性设计，脱离纯粹感性审美，所有版式、配色、组件都能用工程逻辑完整释义。摒弃浮夸花哨的装饰，不求迎合大众审美，坚守精准、克制、功能优先的内核，整套视觉体系依托自身法则生长成型。</p>
+
+        <p>我从不依靠天赋与灵光支撑创作，自始至终依靠同一套运行逻辑：划定边界、拆解需求、精准交付。够用原则精简信息摄入，语义化规则规范视觉落地，工程架构把控内容取舍。这套法则帮我简化繁杂的人际与工作，守住内心的柔软与温度，牢牢掌控自身的生活节奏。</p>
+
+        <div class="quote-block">
+            <strong>创作从不必仰仗与生俱来的天赋，不必坐等转瞬即逝的灵感。</strong><br><br>
+            历经现实打磨、在试错中沉淀专属法则，<br>
+            以一套通用逻辑架构内容、管控细节、完成创造，<br>
+            便是我多年摸索后最想传递的结论。
+        </div>
+
+        <div class="note-chat">
+            <div class="note-chat__header">
+                <i class="fas fa-comments"></i>
+                <span>对话摘录 · 方法篇</span>
+            </div>
+            <div class="note-chat__list">
+                <div class="note-chat__item">
+                    <div class="note-chat__meta"><span class="note-chat__name">工程师读者</span><span class="note-chat__role">从技术文跟到这里的</span><span>留言</span></div>
+                    <div class="note-chat__text">"先划定法则边界，再在规则之内落地执行"——这句话把整套站点的底层逻辑一句话讲透了。从技术文章到页面设计，我觉得都可以用这个视角重新理解一遍。</div>
                 </div>
-                <div class="note-chat__list">
-                    <div class="note-chat__item">
-                        <div class="note-chat__meta"><span class="note-chat__name">长期读者</span><span class="note-chat__role">一路从法则页读到这里</span><span>留言</span></div>
-                        <div class="note-chat__text">这篇最动人的地方，是终于承认“不是所有东西都必须产出系统”。对一个一直在收敛、归纳、命名的人来说，这种松一口气本身就很珍贵。</div>
-                    </div>
-                    <div class="note-chat__item">
-                        <div class="note-chat__meta"><span class="note-chat__name">普通读者</span><span class="note-chat__role">更容易被“允许自己累”打动</span><span>接话</span></div>
-                        <div class="note-chat__reply">回复 长期读者：对，我看完会觉得这不是放弃，而是终于不再拿法则反过来审判自己了。</div>
-                        <div class="note-chat__text">很多人需要的不是再多一个方法，而是被允许先不处理、先不命名、先不解释。这篇把这个分寸说得很稳。</div>
-                    </div>
-                    <div class="note-chat__item">
-                        <div class="note-chat__meta"><span class="note-chat__name">摘句读者</span><span class="note-chat__role">专门记住收束句的人</span><span>补一句</span></div>
-                        <div class="note-chat__text">“他已经很会收敛了。剩下的，不必全部收敛。” 这句像整条 L2 线到这里的一次温柔收口。</div>
-                    </div>
+                <div class="note-chat__item">
+                    <div class="note-chat__meta"><span class="note-chat__name">设计向读者</span><span class="note-chat__role">被配色逻辑惊讶到</span><span>接话</span></div>
+                    <div class="note-chat__reply">回复 上一位：我读到这里最惊讶的是"配色如同程序对外暴露的API"这个比喻。把颜色分层对应到模块化设计，接口越少耦合越低，这个视角我以前从没见过。</div>
+                    <div class="note-chat__text">通常设计师讲配色更多的是感性审美，而这种用工程逻辑推导配色体系的方式，很独特也很有说服力。</div>
+                </div>
+                <div class="note-chat__item">
+                    <div class="note-chat__meta"><span class="note-chat__name">创作向读者</span><span class="note-chat__role">被"不用天赋"触动</span><span>补记</span></div>
+                    <div class="note-chat__text">"不靠天赋禀赋，依托项目沉淀打磨方法论"——这句话本身就是一个方法论。当别人在等灵感的时候，你在搭系统，这种差距会随时间越拉越大。</div>
                 </div>
             </div>
+        </div>
+
         </article>
 
         <div class="series-nav">
-            <a href="../aboutmore/pm.html">← 他们的提示词，我的交付物</a>
-            <a href="../aboutmore/czy.html">蓝牙：陆知意岛 →</a>
+            <a href="../aboutmore/gc.html">← 像调试代码一样创作</a>
+            <a href="../index.html">首页入口 →</a>
         </div>
 </div>
 </div>

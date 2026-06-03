@@ -35,6 +35,7 @@ VISIBLE_FLOW = [
     ("aboutmore/jg.html", "架构定乾坤，笔墨随法则", "meta"),
     ("aboutmore/sryj.html", "十日一剑：创作手记", "meta"),
     ("aboutmore/gc.html", "像调试代码一样创作", "meta"),
+    ("aboutmore/ng.html", "我不用天赋，我只用方法", "meta"),
 ]
 
 FILES = [item[0] for item in VISIBLE_FLOW] + ["aboutmore/ff.html"]
@@ -99,6 +100,7 @@ FILE_ICONS = {
     "aboutmore/jg.html": "🧬",
     "aboutmore/sryj.html": "⚔️",
     "aboutmore/gc.html": "🖥️",
+    "aboutmore/ng.html": "🔧",
     "aboutmore/ff.html": "🕯️",
     "index.html": "🧭",
     "gd.html": "🌾",
