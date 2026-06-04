@@ -277,6 +277,7 @@
 | `[心法]` 🧠 [他们的提示词，我的交付物](https://x-itg.github.io/aboutmore/pm.html) | 把每一次人际交互变成提示词与交付的精准闭环 |
 | `[亲子]` 🎐 [一秒钟的感动](https://x-itg.github.io/aboutmore/seconed.html) | 她用空调给我凉意，我用棋盘给她全世界 |
 | `[哲思]` ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
+| `[心法]` ⚖️ [先稳，再赢](https://x-itg.github.io/aboutmore/xw.html) | 学习AI的理性稳住自己，搭好底座，再用合作连接世界 |
 
 ### Layer 3 · 文学层 · 法则的边界实验
 
