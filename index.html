@@ -13,7 +13,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://x-itg.github.io/index.html">
     <link rel="canonical" href="https://x-itg.github.io/index.html">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preload" href="assets/site-sidebar.css" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" onerror="this.href='https://cdn.bootcdn.net/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'">
     <link rel="stylesheet" href="assets/site-sidebar.css">
     <style>
         :root {
@@ -27,6 +28,8 @@
             --highlight: #fef7df;
             --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
             --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.08);
+            --radius-16: 16px;
+            --radius-full: 999px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -52,8 +55,7 @@
             background: rgba(255, 255, 255, 0.82);
             backdrop-filter: blur(10px);
             border: 1px solid #edf2f7;
-            border-radius: 16px;
-            padding: 14px 10px;
+            border-radius: var(--radius-16);
             box-shadow: var(--shadow-sm);
         }
         .sidebar-toc h3 {
@@ -167,7 +169,7 @@
         .summary-group {
             margin-bottom: 12px;
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: var(--radius-16);
             background: #ffffff;
             overflow: hidden;
         }
@@ -233,12 +235,12 @@
         }
         .new-badge {
             display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.5px;
-            padding:1px 6px; border-radius:3px; margin-left:4px; vertical-align:middle;
+            padding:2px 7px; border-radius:6px; margin-left:4px; vertical-align:middle;
             background:#dcfce7; color:#15803d; border:1px solid #86efac;
         }
         .era-tag {
             display:inline-block; font-size:9px; font-weight:600; letter-spacing:0.3px;
-            padding:1px 5px; border-radius:3px; margin-left:3px; vertical-align:middle;
+            padding:2px 6px; border-radius:6px; margin-left:3px; vertical-align:middle;
         }
         .era-tag.era-e { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
         .era-tag.era-m { background:#fffbeb; color:#b45309; border:1px solid #fde68a; }
@@ -270,7 +272,7 @@
         }
         .story-spotlight__main,
         .story-spotlight__rail {
-            border-radius: 16px;
+            border-radius: var(--radius-16);
             background: rgba(255,255,255,0.82);
             border: 1px solid rgba(191, 162, 123, 0.18);
             padding: 18px;
@@ -406,7 +408,7 @@
             gap: 8px;
             margin-top: 4px;
             padding: 10px 14px;
-            border-radius: 999px;
+            border-radius: var(--radius-full);
             background: #244f86;
             color: #fff;
             text-decoration: none;
@@ -904,6 +906,7 @@
         </section>
 
         <section class="article-flow" id="start">
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;"><i class="fas fa-search" style="margin-right:4px;"></i> 找特定文章？<a href="aboutmore/wx.html" style="font-weight:600;">站点总览 →</a> 可按层级/分类检索全站文章</p>
             <h2>推荐</h2>
             <ol>
                 <li>
@@ -927,10 +930,9 @@
             <div class="novel-overview__grid">
                 <div class="novel-overview__main">
                     <h3>七部作品，一条完整的叙事实验链</h3>
-                    <p>本板块共计七部作品，构成一条逻辑完整、层层递进的<strong>叙事形式实验链</strong>。创作始终围绕核心命题：<strong>叙事形式能否成为内容本身？</strong></p>
-                    <p>依托工程架构思维，打破传统文学的线性叙事范式，依次探索文档目录、纯对话气泡、双栏对照、平行宇宙、复调四重奏、交互意象网络、DNA 双螺旋七大独立叙事形态。每一种形式都从故事内核自然生长，不刻意炫技，让结构、视觉、交互、文字深度共生。</p>
-                    <p>整套作品以「法则与失控」为永恒主题，塑造连贯的人物世界观：理性秩序与人性本心不断碰撞、拉扯、错位、和解。从单视角叙事起步，历经多声部、时空分裂、分层对照、交互式阅读，最终以 <a href="aboutmore/czy.html">《蓝牙：陆知意岛》双螺旋版</a> 回归创作原点。</p>
-                    <p>始于种子，归于圆满。七篇作品首尾呼应、环环相扣，完成<strong>出发 — 探索 — 升华 — 闭环</strong>的完整创作旅程。它不再是传统意义上的短篇故事集，而是一套以代码、架构、交互为工具，以文学为载体的<strong>数字文学实验标本</strong>，也是工程思维与人文情感相融共生的独特创作实践。</p>
+                    <p>七部作品构成一条<strong>叙事形式实验链</strong>，围绕核心命题：<strong>叙事形式能否成为内容本身？</strong></p>
+                    <p>依托工程架构思维，探索文档目录、对话气泡、双栏对照、平行宇宙、复调四重奏、意象网络、DNA 双螺旋七种独立叙事形态。每种形式从故事内核自然生长，让结构、视觉与文字深度共生。</p>
+                    <p>作品以「法则与失控」为主题，理性秩序与人性本心不断碰撞、和解。从单视角起步，历经多声部、时空分裂，最终以 <a href="aboutmore/czy.html">《蓝牙：陆知意岛》双螺旋版</a> 回归原点，完成<strong>出发 — 探索 — 升华 — 闭环</strong>的完整旅程。</p>
                     <div class="novel-overview__chips">
                         <span><i class="fas fa-folder-tree"></i> 文档目录</span>
                         <span><i class="fas fa-comments"></i> 对话气泡</span>
@@ -946,13 +948,13 @@
                     <h3>七篇入口</h3>
                     <p>建议按“起点 → 变体 → 分裂 → 回环”的顺序阅读，也可以从最感兴趣的形式直接切入。</p>
                     <div class="novel-overview__list">
-                        <a href="aboutmore/czy.html"><i class="fas fa-dna"></i><span>蓝牙：陆知意岛</span></a>
-                        <a href="aboutmore/qp-chat.html"><i class="fas fa-comment-dots"></i><span>失控时空·对话版</span></a>
-                        <a href="aboutmore/gary.html"><i class="fas fa-map-marker-alt"></i><span>失控时空：终极玩家</span></a>
-                        <a href="aboutmore/alone.html"><i class="fas fa-city"></i><span>知意知否·孤独玩家</span></a>
-                        <a href="aboutmore/mywj.html"><i class="fas fa-orbit"></i><span>知屿之意·命运玩家</span></a>
-                        <a href="aboutmore/party-high.html"><i class="fas fa-music"></i><span>四季Party High玩家</span></a>
-                        <a href="aboutmore/jsxm.html"><i class="fas fa-folder-open"></i><span>失控时刻·有趣玩家</span></a>
+                        <a href="aboutmore/czy.html" title="错配、走散与回到原点——一个AI工程师等了六年的故事"><i class="fas fa-dna"></i><span>蓝牙：陆知意岛</span></a>
+                        <a href="aboutmore/qp-chat.html" title="以聊天气泡还原对话，让叙事退后、语言顶到最前面"><i class="fas fa-comment-dots"></i><span>失控时空·对话版</span></a>
+                        <a href="aboutmore/gary.html" title="复调轨道式城市叙事，多人失控实验"><i class="fas fa-map-marker-alt"></i><span>失控时空：终极玩家</span></a>
+                        <a href="aboutmore/alone.html" title="繁华世界与个人孤独的对照延伸"><i class="fas fa-city"></i><span>知意知否·孤独玩家</span></a>
+                        <a href="aboutmore/mywj.html" title="双时空对冲与十环共生的三轨宿命结构"><i class="fas fa-orbit"></i><span>知屿之意·命运玩家</span></a>
+                        <a href="aboutmore/party-high.html" title="四重奏并置与瞬间谱采样的复调结构"><i class="fas fa-music"></i><span>四季Party High玩家</span></a>
+                        <a href="aboutmore/jsxm.html" title="文档式副本叙事，形式与内容互相咬合"><i class="fas fa-folder-open"></i><span>失控时刻·有趣玩家</span></a>
                     </div>
                 </div>
             </div>
@@ -977,11 +979,11 @@
                         <h3>同宇宙入口</h3>
                         <p>这几篇可以按“起点 → 失控 → 孤独 → 宿命”一路读过去。</p>
                         <div class="story-spotlight__list">
-                            <a href="aboutmore/czy.html"><i class="fas fa-feather"></i><span>蓝牙：陆知意岛</span></a>
-                            <a href="aboutmore/gary.html"><i class="fas fa-map-marker-alt"></i><span>失控时空：终极玩家</span></a>
-                            <a href="aboutmore/alone.html"><i class="fas fa-city"></i><span>知意知否·孤独玩家</span></a>
-                            <a href="aboutmore/mywj.html"><i class="fas fa-orbit"></i><span>知屿之意·命运玩家</span></a>
-                            <a href="aboutmore/party-high.html"><i class="fas fa-music"></i><span>四季Party High玩家</span></a>
+                            <a href="aboutmore/czy.html" title="错配、走散与回到原点"><i class="fas fa-feather"></i><span>蓝牙：陆知意岛</span></a>
+                            <a href="aboutmore/gary.html" title="复调轨道式城市叙事"><i class="fas fa-map-marker-alt"></i><span>失控时空：终极玩家</span></a>
+                            <a href="aboutmore/alone.html" title="繁华世界与个人孤独"><i class="fas fa-city"></i><span>知意知否·孤独玩家</span></a>
+                            <a href="aboutmore/mywj.html" title="双时空对冲与十环宿命"><i class="fas fa-orbit"></i><span>知屿之意·命运玩家</span></a>
+                            <a href="aboutmore/party-high.html" title="四重奏复调结构"><i class="fas fa-music"></i><span>四季Party High玩家</span></a>
                         </div>
                     </div>
                 </div>
@@ -1065,13 +1067,13 @@
                             <tr><th>序</th><th>文章</th><th>定位</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>1</td><td><a href="aboutmore/czy.html">蓝牙：陆知意岛</a></td><td>小说 · 错配、走散与回到原点</td></tr>
-                            <tr><td>2</td><td><a href="aboutmore/qp-chat.html">失控时空·对话版</a></td><td>实验 · 让语言顶到最前面</td></tr>
-                            <tr><td>3</td><td><a href="aboutmore/gary.html">失控时空：终极玩家</a></td><td>实验 · 复调轨道式城市叙事</td></tr>
-                            <tr><td>4</td><td><a href="aboutmore/alone.html">知意知否·孤独玩家</a></td><td>小说 · 繁华世界与个人孤独的对照延伸</td></tr>
-                            <tr><td>5</td><td><a href="aboutmore/mywj.html">知屿之意·命运玩家</a></td><td>小说实验 · 双时空对冲与十环共生的三轨宿命结构</td></tr>
-                            <tr><td>6</td><td><a href="aboutmore/party-high.html">四季Party High玩家</a></td><td>小说实验 · 四重奏并置与瞬间谱采样的复调结构</td></tr>
-                            <tr><td>7</td><td><a href="aboutmore/jsxm.html">失控时刻·有趣玩家</a></td><td>实验 · 文档式副本叙事</td></tr>
+                            <tr><td>1</td><td><a href="aboutmore/czy.html" title="错配、走散与回到原点——一个AI工程师等了六年的故事">蓝牙：陆知意岛</a></td><td>小说 · 错配、走散与回到原点</td></tr>
+                            <tr><td>2</td><td><a href="aboutmore/qp-chat.html" title="以聊天气泡还原对话，让语言顶到最前面">失控时空·对话版</a></td><td>实验 · 让语言顶到最前面</td></tr>
+                            <tr><td>3</td><td><a href="aboutmore/gary.html" title="复调轨道式城市叙事，多人失控实验">失控时空：终极玩家</a></td><td>实验 · 复调轨道式城市叙事</td></tr>
+                            <tr><td>4</td><td><a href="aboutmore/alone.html" title="繁华世界与个人孤独的对照延伸">知意知否·孤独玩家</a></td><td>小说 · 繁华世界与个人孤独的对照延伸</td></tr>
+                            <tr><td>5</td><td><a href="aboutmore/mywj.html" title="双时空对冲与十环共生的三轨宿命结构">知屿之意·命运玩家</a></td><td>小说实验 · 双时空对冲与十环共生的三轨宿命结构</td></tr>
+                            <tr><td>6</td><td><a href="aboutmore/party-high.html" title="四重奏并置与瞬间谱采样的复调结构">四季Party High玩家</a></td><td>小说实验 · 四重奏并置与瞬间谱采样的复调结构</td></tr>
+                            <tr><td>7</td><td><a href="aboutmore/jsxm.html" title="文档式副本叙事，形式与内容互相咬合">失控时刻·有趣玩家</a></td><td>实验 · 文档式副本叙事</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1105,7 +1107,7 @@
                             <tr><th>序</th><th>文章</th><th>定位</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>后记</td><td>侠士自述</td><td>始于工程，穿过生活，抵达文学，再在元创作里解释自己</td></tr>
+                            <tr><td>后记</td><td><a href="about.html#关于我">侠士自述</a></td><td>始于工程，穿过生活，抵达文学，再在元创作里解释自己</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1114,6 +1116,9 @@
 
         <footer>
             <i class="fas fa-compass"></i>  · <a href="about.html">关于作者</a>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--text-secondary);line-height:1.7;">
+                <i class="fas fa-sync-alt" style="margin-right:4px;"></i>【站点迭代记录】本页｜T·L1~L4 全站入口 · 迭代版本 V1.0｜遵循增量式创作闭环
+            </div>
         </footer>
     </main>
 </div>
