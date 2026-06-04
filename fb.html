@@ -1,425 +1,242 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>从收敛到进化 | 嵌入式AI工程化系列</title>
-<meta name="description" content="融合闭环收敛、共生演化与决策切换的完整框架，提出三重智能与Agent四种性格制衡，构建具备决策智慧的自治系统。">
-<meta name="keywords" content="收敛,进化,决策,共生演化,Agent,嵌入式AI">
+<title>别把AI用成付费上班 | 够用原则与分层路由</title>
+<meta name="description" content="旗舰模型确实更强，但你日常百分之八十的活用不到旗舰。够用原则、分层路由、精准交付——把AI账单用在刀刃上，省钱只是结果，清醒才是内核。">
+<meta name="keywords" content="AI成本,分层路由,够用原则,模型选择,国产模型,性价比,付费上班">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="从收敛到进化 | 嵌入式AI工程化系列">
-<meta property="og:description" content="融合闭环收敛、共生演化与决策切换的完整框架，提出三重智能与Agent四种性格制衡，构建具备决策智慧的自治系统。">
+<meta property="og:title" content="别把AI用成付费上班 | 够用原则与分层路由">
+<meta property="og:description" content="旗舰模型在系统性软件工程任务上确实更强，但你日常百分之八十的活，根本用不到旗舰。分层路由，把工具用在刀刃上。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://x-itg.github.io/fwd.html">
-<link rel="canonical" href="https://x-itg.github.io/fwd.html">
+<meta property="og:url" content="https://x-itg.github.io/fb.html">
+<link rel="canonical" href="https://x-itg.github.io/fb.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-    :root {
-        --bg: #f8f9fa;
-        --card-bg: #ffffff;
-        --text: #2c3e50;
-        --text-secondary: #5a6c7d;
-        --accent: #c0392b;
-        --accent-soft: #e74c3c;
-        --border: #e0e4e8;
-        --code-bg: #1e293b;
-        --code-text: #e2e8f0;
-        --highlight: #fef9e7;
-        --tag-bg: #f0f3f6;
-        --tag-text: #4a5568;
-        --link: #2980b9;
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-        --radius: 6px;
-        --radius-lg: 10px;
-    }
+	:root {
+		--bg: #f8f9fa;
+		--card-bg: #ffffff;
+		--text: #2c3e50;
+		--text-secondary: #5a6c7d;
+		--accent: #c0392b;
+		--accent-soft: #e74c3c;
+		--border: #e0e4e8;
+		--code-bg: #1e293b;
+		--code-text: #e2e8f0;
+		--highlight: #fef9e7;
+		--link: #2980b9;
+		--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--radius: 6px;
+		--radius-lg: 10px;
+	}
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+	* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.8;
-        -webkit-font-smoothing: antialiased;
-    }
+	body {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+		background: var(--bg);
+		color: var(--text);
+		line-height: 1.8;
+		-webkit-font-smoothing: antialiased;
+	}
 
-    .container {
-        max-width: 780px;
-        margin: 0 auto;
-        padding: 40px 24px 80px;
-    }
+	.container {
+		max-width: 780px;
+		margin: 0 auto;
+		padding: 40px 24px 80px;
+	}
 
-/* ===== 三栏布局（方案B） ===== */
+	.top-nav {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 48px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid var(--border);
+		font-size: 14px;
+		color: var(--text-secondary);
+	}
+
+	.top-nav a { color: var(--link); text-decoration: none; transition: color 0.2s; }
+	.top-nav a:hover { color: var(--accent); }
+	.top-nav .sep { color: #c0c7cf; }
+
+	.article-header { margin-bottom: 48px; }
+	.article-header .series-tag {
+		display: inline-block; background: var(--accent); color: #fff;
+		font-size: 12px; font-weight: 600; padding: 3px 10px;
+		border-radius: 3px; letter-spacing: 0.5px; margin-bottom: 16px;
+	}
+	.article-header h1 {
+		font-size: 32px; font-weight: 700; line-height: 1.35;
+		margin-bottom: 12px; letter-spacing: -0.3px;
+	}
+	.article-header .subtitle {
+		font-size: 17px; color: var(--text-secondary); font-weight: 400; margin-bottom: 20px;
+	}
+	.article-header .meta { font-size: 13px; color: #8896a4; }
+
+	h2 {
+		font-size: 24px; font-weight: 700; margin: 56px 0 16px;
+		padding-top: 24px; border-top: 2px solid var(--border);
+		letter-spacing: -0.2px;
+	}
+	h3 {
+		font-size: 19px; font-weight: 600; margin: 36px 0 12px; color: #1a1a2e;
+	}
+	p { margin: 14px 0; }
+	strong { color: #1a1a2e; }
+	ul, ol { margin: 14px 0; padding-left: 24px; }
+	li { margin: 6px 0; }
+
+	.card {
+		background: var(--card-bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		padding: 28px 30px;
+		margin: 28px 0;
+		box-shadow: var(--shadow-sm);
+		text-align: left;
+	}
+
+	.card.accent-left { border-left: 4px solid var(--accent); }
+	.card.tip { background: #f0f7ff; border-color: #b3d4fc; }
+	.card.philosophy { 
+		border-left: 4px solid #8e44ad; 
+		background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%); 
+	}
+	.card.engineer { 
+		border-left: 4px solid #2980b9; 
+		background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%); 
+	}
+	.card.action { 
+		border-left: 4px solid #27ae60; 
+		background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%); 
+	}
+	.card p {
+		text-align: left;
+		margin: 0;
+	}
+	.card p:first-child {
+		margin-top: 0;
+	}
+	.card p:last-child {
+		margin-bottom: 0;
+	}
+	.card strong {
+		display: block;
+		color: var(--text);
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
+
+	.insight-box {
+		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
+		border: 1px solid #f0d78c;
+		border-left: 4px solid #f39c12;
+		border-radius: var(--radius);
+		padding: 20px 24px;
+		margin: 24px 0;
+		font-style: italic;
+		color: #6b4c1e;
+		text-align: left;
+	}
+
+	.insight-box strong { color: #4a340f; font-weight: 600; }
+	.insight-box.decision { 
+		background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
+		border-color: #a8d4e0; 
+		border-left-color: #3498db;
+		color: #1a5276; 
+	}
+	.insight-box.decision strong { color: #0e3a57; }
+	.insight-box.warm { 
+		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
+		border-color: #f0d78c; 
+		border-left-color: #f39c12;
+		color: #6b4c1e; 
+	}
+	.insight-box.warm strong { color: #4a340f; }
+	.insight-box.cool { 
+		background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
+		border-color: #a9cce3; 
+		border-left-color: #2980b9;
+		color: #1f4e79; 
+	}
+	.insight-box.cool strong { color: #154360; }
+
+	.decision-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		margin: 28px 0;
+	}
+
+	.decision-card {
+		background: var(--card-bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		padding: 22px;
+		box-shadow: var(--shadow-sm);
+		transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+	}
+
+	.decision-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-md);
+		border-color: var(--accent-soft);
+	}
+
+	.decision-card h3 {
+		margin: 0 0 10px;
+		font-size: 18px;
+	}
+
+	code {
+		font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+		font-size: 13px;
+	}
+
+	p code, li code {
+		background: #eef1f5;
+		padding: 2px 6px;
+		border-radius: 3px;
+		color: #c0392b;
+		font-size: 12px;
+	}
+
+	pre {
+		background: var(--code-bg);
+		color: var(--code-text);
+		border-radius: var(--radius);
+		padding: 20px 24px;
+		margin: 24px 0;
+		overflow-x: auto;
+		line-height: 1.6;
+	}
+	pre code {
+		background: none;
+		color: inherit;
+		padding: 0;
+		font-size: 13px;
+	}
+
+	@media (max-width: 640px) {
+		.container { padding: 20px 16px 60px; }
+		.article-header h1 { font-size: 26px; }
+		h2 { font-size: 21px; }
+		.decision-grid { grid-template-columns: 1fr; }
+	}
+
 .main-content { flex: 1; min-width: 0; }
 
-.article-header {
-        margin-bottom: 48px;
-    }
-    .article-header .series-tag {
-        display: inline-block;
-        background: var(--accent);
-        color: #fff;
-        font-size: 12px;
-        font-weight: 600;
-        padding: 3px 10px;
-        border-radius: 3px;
-        letter-spacing: 0.5px;
-        margin-bottom: 16px;
-    }
-    .article-header h1 {
-        font-size: 32px;
-        font-weight: 700;
-        line-height: 1.35;
-        margin-bottom: 12px;
-        letter-spacing: -0.3px;
-    }
-    .article-header .subtitle {
-        font-size: 17px;
-        color: var(--text-secondary);
-        font-weight: 400;
-        margin-bottom: 20px;
-    }
-    .article-header .meta {
-        font-size: 13px;
-        color: #8896a4;
-    }
-
-    h2 {
-        font-size: 24px;
-        font-weight: 700;
-        margin: 56px 0 16px;
-        padding-top: 24px;
-        border-top: 2px solid var(--border);
-        letter-spacing: -0.2px;
-    }
-    h3 {
-        font-size: 19px;
-        font-weight: 600;
-        margin: 36px 0 12px;
-        color: #1a1a2e;
-    }
-    h4 {
-        font-size: 16px;
-        font-weight: 600;
-        margin: 24px 0 10px;
-        color: #2c5282;
-    }
-    p {
-        margin: 14px 0;
-    }
-    strong {
-        color: #1a1a2e;
-    }
-
-    .card {
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 28px 30px;
-        margin: 28px 0;
-        box-shadow: var(--shadow-sm);
-    }
-    .card.accent-left {
-        border-left: 4px solid var(--accent);
-    }
-    .card.green-left {
-        border-left: 4px solid #27ae60;
-    }
-    .card.blue-left {
-        border-left: 4px solid #3b82f6;
-    }
-    .card.purple-left {
-        border-left: 4px solid #8b5cf6;
-    }
-
-    .insight-box {
-        background: var(--highlight);
-        border: 1px solid #f0d78c;
-        border-radius: var(--radius);
-        padding: 20px 24px;
-        margin: 24px 0;
-        font-style: italic;
-        color: #6b4c1e;
-    }
-    .insight-box strong {
-        color: #4a340f;
-    }
-
-    code {
-        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
-        font-size: 13px;
-    }
-    p code, li code {
-        background: #eef1f5;
-        padding: 2px 6px;
-        border-radius: 3px;
-        color: #c0392b;
-        font-size: 12px;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 24px 0;
-        font-size: 14px;
-    }
-    table th, table td {
-        padding: 12px 16px;
-        text-align: left;
-        border-bottom: 1px solid var(--border);
-    }
-    table th {
-        font-weight: 700;
-        background: #f5f7fa;
-        color: #4a5568;
-        font-size: 12px;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-    }
-
-    .layer-tag {
-        display: inline-block;
-        background: #1a1a2e;
-        color: #fff;
-        font-size: 11px;
-        padding: 2px 8px;
-        border-radius: 3px;
-        font-weight: 600;
-    }
-    .layer-tag.level1 { background: #3b82f6; }
-    .layer-tag.level2 { background: #8b5cf6; }
-    .layer-tag.level3 { background: #c0392b; }
-
-    .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 16px;
-        margin: 20px 0;
-    }
-    .feature-item {
-        background: #f8fafc;
-        border-radius: 8px;
-        padding: 16px;
-        border: 1px solid #e5e7eb;
-    }
-    .feature-item h4 {
-        font-size: 14px;
-        color: #1e3a8a;
-        margin-bottom: 8px;
-    }
-    .feature-item p {
-        font-size: 13px;
-        color: #5a6c7d;
-        margin: 0;
-    }
-
-    .agent-card {
-        background: white;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 20px;
-        margin: 16px 0;
-    }
-    .agent-card .agent-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 12px;
-    }
-    .agent-card .agent-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        color: white;
-    }
-    .agent-card .agent-icon.reviewer { background: #3b82f6; }
-    .agent-card .agent-icon.explorer { background: #27ae60; }
-    .agent-card .agent-icon.arbiter { background: #c0392b; }
-    .agent-card .agent-icon.teacher { background: #8b5cf6; }
-    .agent-card h4 {
-        font-size: 15px;
-        color: #1a1a2e;
-        margin: 0;
-    }
-    .agent-card .traits {
-        display: flex;
-        gap: 8px;
-        margin: 8px 0;
-        flex-wrap: wrap;
-    }
-    .agent-card .trait-tag {
-        background: #eef3ff;
-        color: #1e3a8a;
-        font-size: 11px;
-        padding: 2px 8px;
-        border-radius: 4px;
-    }
-    .agent-card ul {
-        margin: 8px 0 0 0;
-        padding-left: 20px;
-        font-size: 13px;
-        color: #5a6c7d;
-    }
-
-    .quote-block {
-        background: linear-gradient(135deg, #f8fafc, #f0f6ff);
-        border: 1px solid #e0e8f0;
-        border-radius: 12px;
-        padding: 24px 28px;
-        margin: 24px 0;
-        text-align: center;
-        font-size: 15px;
-        color: #4a5568;
-        line-height: 1.8;
-    }
-    .quote-block strong {
-        color: #1e3a8a;
-    }
-
-    .footnote-section {
-        margin-top: 60px;
-        padding-top: 24px;
-        border-top: 1px solid var(--border);
-    }
-    .footnote-section h4 {
-        font-size: 14px;
-        color: #8896a4;
-        margin-bottom: 10px;
-    }
-    .footnote-section p {
-        font-size: 13px;
-        color: #8896a4;
-        line-height: 1.6;
-        margin: 6px 0;
-    }
-
-    @media (max-width: 780px) {
-.sidebar {
-            width: 100%;
-            position: static;
-        }
-        .container {
-            padding: 20px 16px 60px;
-        }
-        .article-header h1 {
-            font-size: 26px;
-        }
-        h2 {
-            font-size: 21px;
-        }
-    }
-
-        .card.accent-left { border-left: 4px solid var(--accent); }
-        .card.philosophy { 
-            border-left: 4px solid #8e44ad; 
-            background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%);
-        }
-        .card.engineer { 
-            border-left: 4px solid #2980b9; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%);
-        }
-        .card.action { 
-            border-left: 4px solid #27ae60; 
-            background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%);
-        }
-        .card.vision { 
-            border-left: 4px solid #3b82f6; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card.vision:hover { 
-            transform: translateY(-2px); 
-            box-shadow: var(--shadow-md); 
-        }
-        .card {
-            text-align: left;
-        }
-        .card p {
-            text-align: left;
-            margin: 0;
-        }
-        .card p:first-child {
-            margin-top: 0;
-        }
-        .card p:last-child {
-            margin-bottom: 0;
-        }
-        .card strong {
-            display: block;
-            color: var(--text);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .card pre {
-            text-align: left;
-            margin: 12px 0 0;
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 16px 20px;
-            border-radius: 6px;
-            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
-            font-size: 13px;
-            line-height: 1.7;
-            overflow-x: auto;
-        }
-
-        .insight-box {
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border: 1px solid #f0d78c;
-            border-left: 4px solid #f39c12;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin: 24px 0;
-            font-style: italic;
-            color: #6b4c1e;
-            text-align: left;
-        }
-        .insight-box strong {
-            color: #4a340f;
-            font-weight: 600;
-        }
-        .insight-box.decision { 
-            background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
-            border-color: #a8d4e0; 
-            border-left-color: #3498db;
-            color: #1a5276; 
-        }
-        .insight-box.decision strong { 
-            color: #0e3a57; 
-        }
-        .insight-box.warm { 
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border-color: #f0d78c; 
-            border-left-color: #f39c12;
-            color: #6b4c1e; 
-        }
-        .insight-box.warm strong { 
-            color: #4a340f; 
-        }
-        .insight-box.cool { 
-            background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
-            border-color: #a9cce3; 
-            border-left-color: #2980b9;
-            color: #1f4e79; 
-        }
-        .insight-box.cool strong { 
-            color: #154360; 
-        }
-
+	
 </style>
 <link rel="stylesheet" href="assets/site-sidebar.css">
 </head>
 <body class="site-theme-tech">
-
 <div class="layout">
 <aside class="site-sidebar">
     <div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-compass"></i> 乾坤大挪移心法</a></div>
@@ -448,7 +265,7 @@
                     </ul>
                 </div>
             </details>
-            <details class="site-sidebar__subgroup" open>
+            <details class="site-sidebar__subgroup">
                 <summary>核心主线</summary>
                 <div class="site-sidebar__group-body">
                     <ul>
@@ -466,7 +283,7 @@
                             <span class="site-sidebar__link-meta">执行智能 · 双轨收敛让系统在既定路径上自我修正</span>
                         </span>
                     </a></li>
-                    <li><a href="fwd.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                    <li><a href="fwd.html" class="site-sidebar__link site-sidebar__article-link">
                         <span class="site-sidebar__article-icon" aria-hidden="true">🧠</span>
                         <span>
                             <span class="site-sidebar__link-title">从收敛到进化</span>
@@ -546,7 +363,7 @@
                     </ul>
                 </div>
             </details>
-            <details class="site-sidebar__subgroup">
+            <details class="site-sidebar__subgroup" open>
                 <summary>实战与心法</summary>
                 <div class="site-sidebar__group-body">
                     <ul>
@@ -585,7 +402,7 @@
                             <span class="site-sidebar__link-meta">工程心法 · 从古典哲思到AI时代工具调度法则</span>
                         </span>
                     </a></li>
-                    <li><a href="fb.html" class="site-sidebar__link site-sidebar__article-link">
+                    <li><a href="fb.html" class="site-sidebar__link site-sidebar__article-link is-active">
                         <span class="site-sidebar__article-icon" aria-hidden="true">💰</span>
                         <span>
                             <span class="site-sidebar__link-title">别把AI用成付费上班</span>
@@ -863,317 +680,151 @@
     </details>
     <a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
 </aside>
-    <aside class="sidebar-toc">
-        <h3>本章导览</h3>
-        <nav>
-            <ul>
-                <li><a href="#origin">🎯 写作缘起</a></li>
-                <li><a href="#problem">♾️ 核心问题</a></li>
-                <li><a href="#layers">🧩 三层能力</a></li>
-                <li><a href="#agents">🤖 Agent性格体系</a></li>
-                <li><a href="#synergy">📌 三层协同</a></li>
-                <li><a href="#practice">🏗️ 工程实践</a></li>
-            </ul>
-        </nav>
-    </aside>
+	<aside class="sidebar-toc">
+		<h3>本章导览</h3>
+		<nav>
+			<ul>
+				<li><a href="#part1">📌 两千美元的账单</a></li>
+				<li><a href="#part2">📐 够用原则</a></li>
+				<li><a href="#part3">📌 分层路由</a></li>
+				<li><a href="#part4">🤖 真正的护城河</a></li>
+				<li><a href="#part5">🤖 四步找性价比模型</a></li>
+				<li><a href="#part6">💠 结语</a></li>
+			</ul>
+		</nav>
+	</aside>
 
-    <div class="main-content">
-<div class="container">
+	<div class="main-content">
+	<div class="container">
 
-    <header class="article-header">
-        <span class="series-tag">五层进化 · 决策维度</span>
-        <a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
-        <h1>从收敛到进化</h1>
-        <p class="subtitle">构建具备决策智慧的自治系统——<br>融合闭环收敛、共生演化与决策切换的完整框架</p>
-        <p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列 · 三重智能与四种性格</p>
-    </header>
+<nav class="top-nav">
+    <a href="index.html">首页</a>
+    <span class="sep">/</span>
+    <a href="lj.html">君子不器与灵活调度</a>
+    <span class="sep">/</span>
+    <span>别把AI用成付费上班</span>
+</nav>
 
-    <section>
-        <h2 id="origin">写作缘起：实践必然的产物</h2>
+<header class="article-header">
+    <span class="series-tag">实战与心法</span>
+    <h1>别把AI用成付费上班</h1>
+    <p class="subtitle">够用原则、分层路由、精准交付——把AI账单用在刀刃上，省钱只是结果，清醒才是内核</p>
+    <div class="meta">
+        <span>嵌入式AI工程化系列</span> · <span>工程心法</span>
+    </div>
+</header>
 
-        <p>这篇文章不是凭空设计出来的，而是被现实逼出来的。</p>
+<article>
 
-        <div class="card accent-left">
-            <p style="margin-top:0;"><strong>闭环收敛</strong>之所以被提出，是因为在实际调试中反复遇到同一个模式：AI修了一个Bug，引入另一个Bug，你再修，它再引入。被这种无效迭代消耗了太多精力后，自然会想：能不能让每次修复都同步增强测试？这不是理论推导，这是被痛苦逼出来的解法。</p>
+    <div class="card philosophy">
+        <p style="margin-top:0;"><strong>核心结论</strong></p>
+        <p>旗舰模型在系统性软件工程任务上，确实更强——这是事实，不用嘴硬。但你日常百分之八十的活，根本用不到旗舰。同样的活，国产模型一样能干完，价格只要十分之一甚至更低。前提是你要会用。不会用，给你最贵的模型也是浪费；会用，DeepSeek、Kimi、GLM、Qwen一样能把你从加班里捞出来。</p>
+    </div>
+
+    <h2 id="part1">一、两千美元的账单，买的是什么</h2>
+
+    <p>我看到一个数据：有工程师月花近两千美元调用AI的API。不是搞AI创业，就是日常项目开发、改Bug、整理文档。网友调侃说，这不叫用AI，这叫<strong>付费上班</strong>。两千美元是什么概念？按现在的汇率，差不多一万四千块人民币。一个月的AI开销，顶得上很多人的月薪。</p>
+
+    <p>但如果你拉出他的对话记录看，会发现百分之八十以上的请求——改CRUD、写单测、改Lint、整理文档、写周报——中端模型甚至轻量模型就能完美处理。他不是被AI替代了，他是被自己的<strong>"旗舰焦虑"</strong>替代了。</p>
+
+    <div class="insight-box warm">
+        月花两千美元的人，大多数没多写一行真正复杂的业务代码，他们只是把"用最强的模型"当成心理安慰。这种安慰，你的公司不会买单，你的钱包也不会买单。
+    </div>
+
+    <h2 id="part2">二、够用原则：不是最强的，是最合适的</h2>
+
+    <p>我在技术文章里反复写过一个词：<strong>够用原则</strong>。问题解决了，就不要再继续改。版本能跑了，就不要再追求完美。AI的输出已经能满足需求了，就不要再反复调参数。这条原则放在选模型上，同样适用。</p>
+
+    <p>很多人心里有个偏见：国产模型不行。这个偏见在二零二四年可能还成立，到了二零二六年，在大多数日常任务上已经不成立了。我不替国产护短——复杂架构设计、跨文件重构，头部旗舰确实还领先。但你想想，你工作里这类任务占多少比例？我自己复盘过，大概只占百分之十五到百分之二十。剩下百分之八十是改Bug、写单测、写文档、改Lint、简单接口对接。这些任务，旗舰和中端模型你盲测大概率分不出来。</p>
+
+    <div class="card tip">
+        <p style="margin-top:0;"><strong>够用原则回顾</strong></p>
+        <p>此前在<a href="lj.html">《君子不器与灵活调度》</a>和<a href="py.html">《批量修改，先问该不该用脚本》</a>中都探讨过核心思路：<strong>优先做判断，再选择工具</strong>，不为追逐新潮而滥用工具。选模型和选工具是同一个逻辑——不是选最强的，是选最对的。</p>
+    </div>
+
+    <h2 id="part3">三、分层路由：不是选最强的，是选最对的</h2>
+
+    <p>我在工程里一直用一套逻辑：<strong>分层</strong>。不是所有任务都值得调用最强的模型，就像不是所有代码都值得用汇编去写。把任务按复杂度分档，然后匹配对应档位的模型。</p>
+
+    <p>日常任务占八成，用国产中端，响应往往更快，成本只有海外的十分之一。中等复杂度任务占一成半，用海外中端或国产长上下文。真正啃硬骨头的时候，只占半成，才请出海外旗舰。</p>
+
+    <p>如果你把这个逻辑写成一段自动化路由的伪代码，它大概长这样：</p>
+
+<pre><code>def route_task(task):
+    if task.complexity == "simple":
+        return "国产中端"
+    elif task.complexity == "medium":
+        return "海外中端 or 国产长上下文"
+    elif task.complexity == "hard":
+        return "海外旗舰"</code></pre>
+
+    <p>按这个分层走，普通工程师的API账单能从月花上千美元压到几十块到几百块人民币。输出量不掉，响应更快，有时候还省时间。省下来的不是抠门，是<strong>判断力</strong>。是你知道什么时候该用重武器，什么时候一把螺丝刀就够了。</p>
+
+    <div class="decision-grid">
+        <div class="decision-card">
+            <h3>🟢 日常任务 · 80%</h3>
+            <p>改Bug、写单测、改Lint、整理文档、写周报——国产中端模型即可完美处理</p>
         </div>
-
-        <div class="card blue-left">
-            <p style="margin-top:0;"><strong>共生演化</strong>之所以被提出，是因为经历过那种"文档和代码悄悄偏离，半年后才发现"的沉默灾难。知识腐烂不是一次性的意外，而是时间对任何不一致的系统必然施加的熵增。无法阻止它，只能设计一套机制来感知它、纠正它。这不是哲学思辨，这是被遗忘坑过的教训。</p>
+        <div class="decision-card">
+            <h3>🟡 中等任务 · 15%</h3>
+            <p>跨模块调试、长上下文理解、SQL优化——海外中端或国产长上下文</p>
         </div>
-
-        <div class="card purple-left">
-            <p style="margin-top:0;"><strong>决策切换</strong>之所以被提出，是因为亲眼见过AI沿着一个错误方向越走越深，消耗了大量Token却毫无进展。AI不会主动质疑你的初始方向，它只会忠实地在你挖的坑里提供更精致的铲子。制止这种浪费的机制，成了必然的需求。</p>
+        <div class="decision-card">
+            <h3>🔴 硬核任务 · 5%</h3>
+            <p>复杂架构设计、跨文件重构、系统性重构——海外旗舰模型</p>
         </div>
-
-        <div class="insight-box">
-            所以，这套体系不是天才的灵光一现，而是一个工程师被现实反复捶打后，从淤青中长出来的铠甲。<strong>每一个概念背后，都站着一个具体的、让人抓狂的调试夜晚。</strong>
+        <div class="decision-card">
+            <h3>💡 核心逻辑</h3>
+            <p>不是选最强的，是选最对的。判断力决定性价比，而非模型参数</p>
         </div>
-    </section>
+    </div>
 
-    <section>
-        <h2 id="problem">一、问题：收敛与演化都假设了"正确的路径"</h2>
+    <h2 id="part4">四、真正的护城河不是模型，是你自己</h2>
 
-        <p><strong>闭环收敛</strong>解决的是：在一条给定的技术路径上，如何通过代码修复与测试增强的双轨迭代，让系统持续逼近需求目标。</p>
+    <p>我见过太多人，给最强的模型也写不好代码。他们的问题不是模型不够强，是自己不会用。一句话指令——"帮我写个登录功能"，再贵的模型也救不了你。不喂上下文——不贴现有代码、不说技术栈，模型只能瞎猜。一锅炖几十个需求，超长提示词丢进去，模型理解错一半。错了不教，只会重新生成，而不是告诉它错在哪、应该怎么改。</p>
 
-        <p><strong>共生演化</strong>解决的是：在长期运行中，如何让规约与代码在持续对话中识别漂移、请求裁决、形成免疫记忆，防止知识腐烂。</p>
+    <p>这四个毛病不改，旗舰和中端在你手里输出的差距，可能不到一成。反过来，提示词写清楚、上下文喂够、反馈做精准，国产中端一样能给你九十分的结果。旗舰的优势是容错率高——它能在你提示词写得很烂的情况下也猜对意图。但这不是你应该花十几倍价钱去买的东西。</p>
 
-        <div class="card accent-left">
-            <p style="margin-top:0;"><strong>但这两者都隐含了一个前提：当前的解决路径本身是值得继续的。</strong></p>
-            <p style="margin-top:12px;">当这个前提不成立时——当你选错了技术方案，当你在调试一个本应被放弃的API，当你在一个死胡同里越走越深——收敛和演化都帮不了你。它们只会让你更高效地抵达一个错误的目的地。</p>
-        </div>
+    <div class="card engineer">
+        <p style="margin-top:0;"><strong>护城河三件套</strong></p>
+        <p>把那十几倍预算，用来训练自己写好提示词，用来搭建自己的上下文管理流程，用来学会怎么给AI精准的反馈。<strong>这才是你真正的护城河。</strong>模型会迭代，插件会过时，但判断力永远不会贬值。</p>
+    </div>
 
-        <p>这就是我们需要<strong>决策切换</strong>的原因。</p>
-    </section>
+    <div class="insight-box decision">
+        旗舰的优势是容错率高——它能在你提示词写得很烂的情况下也猜对意图。但你应该做的不是花十几倍价钱买容错，而是把自己的提示词写到不需要容错。
+    </div>
 
-    <section>
-        <h2 id="layers">二、三层能力：从执行到演化再到判断</h2>
+    <h2 id="part5">五、四步找到你自己的性价比模型</h2>
 
-        <p>本框架将工程自治系统的能力分为三个递进的层级：</p>
+    <p>不要盲信任何博主推荐，包括我。你的工作场景只有你自己最清楚。</p>
 
-        <div class="card blue-left">
-            <h3><span class="layer-tag level1">层级一</span> 闭环收敛 — 在路径上修正错误</h3>
-            <p style="margin-top:12px;"><strong>回答的问题：</strong>"我如何在这条路上走得更稳？"</p>
-            <p style="margin-top:8px;"><strong>核心机制：</strong>双轨并行</p>
-            <ul style="margin:8px 0 0 20px;font-size:14px;">
-                <li><strong>轨一（代码修复）</strong>：根据失败日志定位根因，生成并应用修复</li>
-                <li><strong>轨二（测试增强）</strong>：分析覆盖盲区，补充新测试用例</li>
-            </ul>
-            <p style="margin-top:12px;"><strong>收敛判据：</strong>连续两轮测试无失败，需求覆盖率100%，且无新的负日志出现</p>
-            <p style="margin-top:8px;font-style:italic;color:#5a6c7d;">这是执行层的智能——让系统在既定方向上持续变好</p>
-        </div>
+    <ol>
+        <li><strong>列出过去一周的AI任务清单。</strong></li>
+        <li><strong>按复杂度分三档</strong>——简单任务如改Bug、写注释、翻译；中等任务如写单测、写文档、SQL优化；复杂任务如跨文件重构、架构设计。</li>
+        <li><strong>每档挑几个任务，用不同档位的模型盲测</strong>，遮掉模型名自己打分。你会发现简单档和中等档的差距小到你不愿意相信。</li>
+        <li><strong>按你的真实任务分布算成本</strong>，你就知道钱该花在哪。这是唯一不会骗你的数据，因为是你自己跑出来的。</li>
+    </ol>
 
-        <div class="card purple-left">
-            <h3><span class="layer-tag level2">层级二</span> 共生演化 — 管理路径与现实的漂移</h3>
-            <p style="margin-top:12px;"><strong>回答的问题：</strong>"这条路本身有没有被时间和现实改变？"</p>
-            <p style="margin-top:8px;"><strong>核心机制：</strong>漂移感知 → 决策仲裁 → 免疫记忆</p>
-            <ul style="margin:8px 0 0 20px;font-size:14px;">
-                <li>当文档与代码偏离时，系统自动下调健康度并告警</li>
-                <li>当偏离超过阈值，转为人工决策</li>
-                <li>裁决结果写入决策账本，形成免疫记忆</li>
-            </ul>
-            <p style="margin-top:8px;font-style:italic;color:#5a6c7d;">这是知识层的智能——让系统感知到自己正在"变老"，并知道如何修复</p>
-        </div>
+    <div class="card action">
+        <p style="margin-top:0;"><strong>行动指南</strong></p>
+        <p>不要看别人用什么你就用什么。花一个小时盲测，跑出来的数据会比任何博主的推荐更诚实。你的工作场景只有你自己最清楚，你的性价比模型也只有你自己能定义。</p>
+    </div>
 
-        <div class="card accent-left">
-            <h3><span class="layer-tag level3">层级三</span> 决策切换 — 审视路径本身的合理性</h3>
-            <p style="margin-top:12px;"><strong>回答的问题：</strong>"这条路本身还值得走吗？"</p>
-            <p style="margin-top:8px;"><strong>代价评估模型：</strong></p>
-            <table style="margin-top:12px;font-size:13px;">
-                <tr><td><code>C_in</code></td><td>已投入的时间/Token</td></tr>
-                <tr><td><code>C_rem(P)</code></td><td>预估完成当前路径所需的额外资源</td></tr>
-                <tr><td><code>S(P)</code></td><td>当前路径最终解决的概率</td></tr>
-                <tr><td><code>C(A)</code></td><td>替代方案的预期成本</td></tr>
-                <tr><td><code>S(A)</code></td><td>替代方案的解决概率</td></tr>
-            </table>
-            <p style="margin-top:12px;"><strong>决策规则：</strong>若 <code>C_in + C_rem(P) × (1/S(P)) > C(A) × (1/S(A))</code>，则应该切换</p>
-            <p style="margin-top:8px;font-style:italic;color:#5a6c7d;">这是判断层的智能——让系统具备"放弃一条路，选择另一条"的工程判断力</p>
-        </div>
-    </section>
+    <h2 id="part6">六、结语：清醒才是内核</h2>
 
-    <section>
-        <h2 id="agents">三、组织保障：构建性格差异化的Agent团队</h2>
+    <p>你最该追的不是全球最强那块奖牌，而是对你来说最划算那张账单。旗舰不是不能用，是不能无脑只用旗舰。国产不是替代品，是你百分之八十工作场景里的主力。那些月花上千美元的人，大多数没多写一行真正复杂的业务代码，他们只是把"用最强的模型"当成心理安慰。</p>
 
-        <p>三层能力定义了系统应该做什么，但还有一个更深层的问题：<strong>由谁来做？</strong></p>
+    <p>真正能让你不被AI取代的，从来不是"我用了最贵的模型"，而是<strong>我知道每个任务该用什么模型，以及怎么把它用到极致</strong>。</p>
 
-        <p>单一Agent即使集成了所有能力，也容易陷入"性格盲区"——要么过于保守，要么过于激进。真正的工程智慧，往往诞生于不同性格Agent之间的制衡与互补。</p>
+    <div class="insight-box cool">
+        够用原则，分层路由，精准交付。这和<a href="lj.html">"君子不器"</a>讲的是同一件事——对内，不把自己活成只会调旗舰的工具；对外，不沉迷于堆砌最贵的模型。守住人的判断力，把工具用在刀刃上。省钱只是结果，清醒才是内核。
+    </div>
 
-        <h3>为何需要性格差异</h3>
-        <div class="feature-grid">
-            <div class="feature-item">
-                <h4><i class="fas fa打破"></i> 打破惯性协作</h4>
-                <p>顺从型Agent会沿初始方向无限深入，"重构者"性格的Agent则天然倾向于挑战前提</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-balance-scale"></i> 实现高效分工</h4>
-                <p>代码生成需要创造性，代码审查需要审慎性，规范重构需要颠覆性</p>
-            </div>
-        </div>
-
-        <h3>四种核心Agent角色</h3>
-
-        <div class="agent-card">
-            <div class="agent-header">
-                <div class="agent-icon reviewer"><i class="fas fa-search"></i></div>
-                <h4>保守的审查者</h4>
-            </div>
-            <div class="traits">
-                <span class="trait-tag">严谨</span>
-                <span class="trait-tag">挑剔</span>
-                <span class="trait-tag">风险厌恶</span>
-            </div>
-            <p><strong>核心视野：</strong>代码规范、安全边界、潜在Bug</p>
-            <ul>
-                <li>闭环收敛的轨二（测试增强）</li>
-                <li>共生演化的漂移感知</li>
-            </ul>
-        </div>
-
-        <div class="agent-card">
-            <div class="agent-header">
-                <div class="agent-icon explorer"><i class="fas fa-rocket"></i></div>
-                <h4>激进的探索者</h4>
-            </div>
-            <div class="traits">
-                <span class="trait-tag">大胆</span>
-                <span class="trait-tag">好奇</span>
-                <span class="trait-tag">发散性强</span>
-            </div>
-            <p><strong>核心视野：</strong>新的技术可能性、替代方案</p>
-            <ul>
-                <li>闭环收敛的轨一（提出创新修复）</li>
-                <li>决策切换的方案生成</li>
-            </ul>
-        </div>
-
-        <div class="agent-card">
-            <div class="agent-header">
-                <div class="agent-icon arbiter"><i class="fas fa-gavel"></i></div>
-                <h4>中立的仲裁者</h4>
-            </div>
-            <div class="traits">
-                <span class="trait-tag">冷静</span>
-                <span class="trait-tag">客观</span>
-                <span class="trait-tag">基于数据</span>
-            </div>
-            <p><strong>核心视野：</strong>对比不同方案的代价与收益</p>
-            <ul>
-                <li>决策切换的代价评估</li>
-                <li>共生演化的决策仲裁</li>
-            </ul>
-        </div>
-
-        <div class="agent-card">
-            <div class="agent-header">
-                <div class="agent-icon teacher"><i class="fas fa-chalkboard-teacher"></i></div>
-                <h4>耐心的教师</h4>
-            </div>
-            <div class="traits">
-                <span class="trait-tag">细致</span>
-                <span class="trait-tag">结构化</span>
-                <span class="trait-tag">有逻辑</span>
-            </div>
-            <p><strong>核心视野：</strong>知识传递、原理拆解</p>
-            <ul>
-                <li>知识生命体征管理</li>
-                <li>新人引导与文档生成</li>
-            </ul>
-        </div>
-    </section>
-
-    <section>
-        <h2 id="synergy">四、三层协同与多角色制衡</h2>
-
-        <p>三个层级不是串行的三个阶段，而是在每一次迭代中同时运作的三层检查。不同性格的Agent在各层中各司其职：</p>
-
-        <div class="card blue-left">
-            <h4><i class="fas fa-sync"></i> 收敛层</h4>
-            <p>激进的探索者提出代码修复方案，保守的审查者同步增强测试用例，确保修复不会引入新风险</p>
-        </div>
-
-        <div class="card purple-left">
-            <h4><i class="fas fa-eye"></i> 演化层</h4>
-            <p>审查者检查本次修改是否引入了新的知识漂移，若发现漂移，提交给中立的仲裁者分析</p>
-        </div>
-
-        <div class="card accent-left">
-            <h4><i class="fas fa-exchange-alt"></i> 切换层</h4>
-            <p>仲裁者评估当前路径是否仍值得继续。它不被已有投入绑架，冷静地计算代价模型</p>
-        </div>
-
-        <h3>换赛道信号检测</h3>
-        <div class="feature-grid">
-            <div class="feature-item">
-                <h4><i class="fas fa-redo"></i> 反复重试</h4>
-                <p>连续多轮无实质性进展</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-database"></i> API依赖</h4>
-                <p>反复调用缺乏文档的底层API</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-plug"></i> 替代方案</h4>
-                <p>存在成熟的替代方案</p>
-            </div>
-        </div>
-
-        <div class="quote-block">
-            当仲裁者触发告警时，系统暂停当前的收敛循环，由探索者发起问题重构——<br><strong>不是问"如何修好SendInput"，而是问"如何在Electron中输入中文"。</strong><br><br>
-            这种更高维的提问，往往能打开被隐含假设封闭的解决方案空间。
-        </div>
-    </section>
-
-    <section>
-        <h2 id="practice">五、工程实践</h2>
-
-        <p>这套三层框架与多角色Agent体系可以直接嵌入你已有的工程体系中：</p>
-
-        <div class="feature-grid">
-            <div class="feature-item">
-                <h4><i class="fas fa-cogs"></i> ConvergenceAgent</h4>
-                <p>增设元决策检查点：当连续N轮迭代未通过收敛判据，自动触发仲裁者的切换评估</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-route"></i> 路径漂移感知</h4>
-                <p>当审查者发现AI反复在同一处代码打转，系统自动告警，由仲裁者判断是否需要重构</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-plug"></i> 决策评估Skill</h4>
-                <p>当开发者遇到棘手问题时，自动调用仲裁者的代价评估能力，对比替代方案</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-desktop"></i> IDE实时监控</h4>
-                <p>监控对话轮次、调试同一文件的次数，超过阈值自动弹出切换提醒</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>六、总结：三重智能，四种性格，一种哲学</h2>
-
-        <table>
-            <thead>
-                <tr><th>能力层级</th><th>解决的问题</th><th>智能类型</th></tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="layer-tag level1">闭环收敛</span></td>
-                    <td>如何在既定路径上持续变好</td>
-                    <td><strong>执行智能</strong></td>
-                </tr>
-                <tr>
-                    <td><span class="layer-tag level2">共生演化</span></td>
-                    <td>如何在时间维度上感知漂移、积累经验</td>
-                    <td><strong>记忆智能</strong></td>
-                </tr>
-                <tr>
-                    <td><span class="layer-tag level3">决策切换</span></td>
-                    <td>如何在更高层面审视路径本身</td>
-                    <td><strong>判断智能</strong></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="quote-block">
-            <strong>支撑这三重智能稳定运转的，是四种性格的制衡：</strong><br><br>
-            审查者守住质量的底线<br>
-            探索者打开新的可能性<br>
-            仲裁者在关键时刻做出客观的切换判断<br>
-            教师则确保每一次决策的上下文被完整记录和传承
-        </div>
-
-        <div class="insight-box">
-            真正的工程智慧不在于如何在一条路上死磕到底，而在于知道何时该修复、何时该放弃、何时该重构问题本身。<strong>而这种智慧，往往不诞生于某个全能的个体，而是诞生于不同视角的碰撞与制衡之中。</strong>
-        </div>
-
-        <div class="card accent-left">
-            <p style="margin-top:0;"><strong>再次回到原点：</strong>这一切不是天才的灵光一现，而是一个工程师被现实反复捶打后，从淤青中长出的铠甲。每一个概念背后，都站着一个具体的、让人抓狂的调试夜晚。</p>
-            <p style="margin-top:12px;"><strong>而这，正是它可靠的原因。</strong></p>
-        </div>
-    </section>
+</article>
 
     <section class="footnote-section">
         <h4>本文定位</h4>
-        <p>本文是对①五层进化、③闭环收敛、⑤共生演化的横向加固。它将"决策切换"作为闭环收敛和共生演化的一个元层能力，并通过拟人化的Agent性格体系为其提供组织保障。</p>
+        <p>本文是嵌入式AI工程化系列的<strong>工程心法篇</strong>。它从"付费上班"这一网络调侃切入，探讨AI模型选择中的够用原则与分层路由策略。核心观点包括：旗舰焦虑（被心理安慰驱动的无效支出）、够用原则（选最对的而非最强的）、分层路由（按任务复杂度匹配模型档位）、护城河在自己（提示词能力 > 模型参数）。与<a href="lj.html">《君子不器与灵活调度》</a>互为补充，前者讲工具调度法则，本文讲模型选择经济学。建议在阅读 lj.html 后阅读，但可独立使用。</p>
         <div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
             <strong>系列导航：</strong>
             <a href="in.html">五层进化</a> ·
@@ -1198,10 +849,10 @@
         </div>
 
 <div class="series-nav">
-    <a href="test.html" aria-label="上一篇：自主修复闭环">← 自主修复闭环</a>
-    <a href="exc.html" aria-label="下一篇：知识的生命体征 ">知识的生命体征  →</a>
+    <a href="lj.html" aria-label="上一篇：君子不器与灵活调度">← 君子不器与灵活调度</a>
+    <a href="14.html" aria-label="下一篇：AI谄媚与专利">AI谄媚与专利 →</a>
 </div>
-<p style="margin-top:12px;"><a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a></p>
+<p style="margin-top:12px;font-size:13px;"><a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a></p>
     </section>
 
 </div>
@@ -1223,6 +874,3 @@
 </div>
 </body>
 </html>
-
-
-

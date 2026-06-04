@@ -40,6 +40,7 @@ TECH_ITEMS: list[tuple[str, str, str, str]] = [
     ("py.html", "🐍", "批量修改，先问该不该用脚本", "工程利器 · 先判断模式，再把批量改造交给脚本执行"),
     ("13.html", "🧵", "拆解与整合", "工程心法 · 驾驭复杂系统的完整工程法则"),
     ("lj.html", "🎓", "君子不器与灵活调度", "工程心法 · 从古典哲思到AI时代工具调度法则"),
+    ("fb.html", "💰", "别把AI用成付费上班", "工程心法 · 够用原则与分层路由，把AI账单用在刀刃上"),
     ("14.html", "⚖️", "AI谄媚与专利", "专业延伸 · 在拿证与保护之间切换审查模式"),
     ("gd.html", "🌾", "始于工程，服务生活", "内核反照 · 工程法则从技术补丁长成生活工具"),
 ]
@@ -48,9 +49,9 @@ TECH_GROUPS = [
     ("总纲", [TECH_ITEMS[0]]),
     ("核心主线", TECH_ITEMS[1:5]),
     ("根系能力", TECH_ITEMS[5:7]),
-    ("专业延伸", [TECH_ITEMS[7], TECH_ITEMS[8], TECH_ITEMS[9], TECH_ITEMS[10], TECH_ITEMS[16]]),
-    ("实战与心法", TECH_ITEMS[11:16]),
-    ("内核反照", [TECH_ITEMS[17]]),
+    ("专业延伸", [TECH_ITEMS[7], TECH_ITEMS[8], TECH_ITEMS[9], TECH_ITEMS[10], TECH_ITEMS[17]]),
+    ("实战与心法", TECH_ITEMS[11:17]),
+    ("内核反照", [TECH_ITEMS[18]]),
 ]
 
 # ═══════════════════════════════════════════════════════════════════
@@ -180,7 +181,7 @@ def build_sidebar(base_indent: str, current_file: str, eol: str) -> str:
     L.append(f'{i1}<details class="site-sidebar__group site-sidebar__group--tech"{t_open}>')
     L.append(f"{i2}<summary>")
     L.append(f'{i2}{unit}<span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>')
-    L.append(f'{i2}{unit}<span class="site-sidebar__summary-meta">技术主线 · 18 篇</span>')
+    L.append(f'{i2}{unit}<span class="site-sidebar__summary-meta">技术主线 · 19 篇</span>')
     L.append(f"{i2}</summary>")
     L.append(f'{i2}<div class="site-sidebar__group-body">')
     for gtitle, items in TECH_GROUPS:

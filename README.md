@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/status-Active-brightgreen?style=flat-square" alt="Status">
   <img src="https://img.shields.io/badge/methodology-Harness_Engineering-blue?style=flat-square" alt="Methodology">
   <img src="https://img.shields.io/badge/topics-Embedded_AI%20|%20Toolchain%20|%20Agents-orange?style=flat-square" alt="Topics">
-  <img src="https://img.shields.io/badge/tech_series-17-orange?style=flat-square" alt="Tech Series">
+  <img src="https://img.shields.io/badge/tech_series-19-orange?style=flat-square" alt="Tech Series">
   <img src="https://img.shields.io/badge/framework-4_Layer_System-8b5cf6?style=flat-square" alt="System">
   <img src="https://img.shields.io/badge/pages-live-222?style=flat-square&logo=github" alt="GitHub Pages">
 </p>
@@ -68,6 +68,8 @@
 | ⑮ | [拆解与整合](https://x-itg.github.io/13.html) | 高阶心法 | 复杂系统、逐块收敛、整体验证 |
 | ⑯ | [AI的谄媚与专利文件的编写](https://x-itg.github.io/14.html) | 守关心法 | 反谄媚、专利审查、风险清单 |
 | ⑰ | [始于工程，服务生活](https://x-itg.github.io/gd.html) | 内核反照 | 工程法则、人生方法、思维外延 |
+| ⑱ | [君子不器与灵活调度](https://x-itg.github.io/lj.html) | 工程心法 | 主体性、灵活调度、够用原则 |
+| ⑲ | [别把AI用成付费上班](https://x-itg.github.io/fb.html) | 工程心法 | 够用原则、分层路由、性价比 |
 
 ---
 
@@ -218,6 +220,24 @@
 > 若只是拿证，AI 的顺服就是顺水推舟；若真要护城守关，就必须切到审查员模式，让它查新、质疑创造性、逼问权利要求边界，把那些“该怼没怼”的地方记进负日志。到这里，这套心法才算补上最后一道关门闸：**会借力，也要会刹车。**
 >
 > [阅读全文](https://x-itg.github.io/14.html)
+
+</details>
+
+<details>
+<summary>⑱ 君子不器与灵活调度：工程心法</summary>
+
+> 从“君子不器”到“灵活调度”，探讨AI时代人与工具的关系。决策切换、多模型评审团、搜索整合、够用原则——把AI从一个“工具”变成一套可以被你调度的“执行系统”。
+>
+> [阅读全文](https://x-itg.github.io/lj.html)
+
+</details>
+
+<details>
+<summary>⑲ 别把AI用成付费上班：性价比心法</summary>
+
+> 旗舰模型确实更强，但你日常百分之八十的活用不到旗舰。分层路由、够用原则、精准交付——省钱只是结果，清醒才是内核。
+>
+> [阅读全文](https://x-itg.github.io/fb.html)
 
 </details>
 
