@@ -298,6 +298,7 @@
 | `[亲子]` 🎐 [一秒钟的感动](https://x-itg.github.io/aboutmore/seconed.html) | 她用空调给我凉意，我用棋盘给她全世界 |
 | `[哲思]` ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
 | `[心法]` ⚖️ [先稳，再赢](https://x-itg.github.io/aboutmore/xw.html) | 学习AI的理性稳住自己，搭好底座，再用合作连接世界 |
+| `[心法]` 💎 [提供情绪价值的三种姿势](https://x-itg.github.io/aboutmore/qj.html) | 品味翻译、沉默接应、公开加冕——真诚看见与克制的表达 |
 
 ### Layer 3 · 文学层 · 法则的边界实验
 
