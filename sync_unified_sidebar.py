@@ -76,6 +76,8 @@ L2_ITEMS = [
     ("aboutmore/pm.html", "🧠", "他们的提示词，我的交付物", "心法·提示与交付"),
     ("aboutmore/seconed.html", "🎐", "一秒钟的感动", "亲子·棋盘与奔赴"),
     ("aboutmore/ta.html", "♾️", "不必全部收敛", "哲思·余味与收敛"),
+    ("aboutmore/xw.html", "⚖️", "先稳，再赢", "心法·先胜再战的完整路径"),
+    ("aboutmore/qj.html", "💎", "提供情绪价值的三种姿势", "心法·真诚看见与克制的表达"),
 ]
 L3_ITEMS = [
     ("aboutmore/czy.html", "📘", "蓝牙：陆知意岛", "小说与对话"),
