@@ -934,6 +934,16 @@ sup.annotation { font-size:10px; color:var(--muted); }
 				<div class="card" style="text-align:center;font-family:var(--font-mono);font-size:14px;">
 				AI → <strong style="color:#c0392b">GCC 编译</strong> → <strong style="color:#2980b9">OpenOCD 烧录</strong> → <strong style="color:#27ae60">GDB 快照</strong> → <strong style="color:#8e44ad">硬件数据回流</strong> → AI 分析闭环
 				</div>
+				<div class="insight-box cool" style="margin:8px 0 20px;font-size:13px;">
+					<strong>🧭 阅读路径指南（分层叙事）</strong><br>
+					🔹 <strong>精读路径</strong>：按 I→II→III→IV 顺序阅读，适合首次接触工具链的新手；<br>
+					🔹 <strong>选读路径</strong>：II 安装 → IV 配置 → III 实战，适合已有工具基础的工程师直接复用配置；<br>
+					🔹 <strong>查阅路径</strong>：故障速查表 + 命令速查表，适合日常开发快速翻查。
+				</div>
+				<div class="insight-box warm" style="margin:8px 0 20px;font-size:13px;">
+					<strong>💡 L1 心法映射：够用原则</strong><br>
+					三件套（ARM GCC + OpenOCD + GDB）不追求功能最全，只追求刚好覆盖「编译→烧录→调试→回读」全链路。不装多余工具、不用商业套件，正是 L1「够用原则」在工程选型中的落地——真正的效率不是你拥有多少工具，而是你能用多小的工具链跑通完整的闭环。
+				</div>
 				<pre><code>make -j8
 openocd &lt;config&gt; -c "program build/app.elf verify reset exit"   # ELF: 含调试符号的 ARM 可执行文件
 arm-none-eabi-gdb build/app.elf \
@@ -1262,6 +1272,11 @@ python scripts/serial_tool.py monitor stop --session SESSION_ID --json</code></p
 
 			<section>
 				<div class="insight-box warm">
+				<strong>🧭 L2 心法映射：复盘思维</strong><br>
+				故障排查和日常矛盾复盘是同一个逻辑链路：先确认环境基线（发生了什么）→ 再查预期差（本应如何）→ 定位根因 → 修复 → 加固预防。你在工程里练出的这套排查肌肉，可以直接平移到 L2 的人际场景——区别只在于这里读的是寄存器，那里读的是情绪信号。
+			</div>
+
+			<div class="insight-box warm">
 					<strong>环境异常快速排查：</strong>90% 的安装报错根因是 <strong>PATH 路径缺失</strong>。安装 arm-none-eabi-gcc 或 OpenOCD 后，先执行 <code>echo $PATH</code>（Linux）或 <code>$env:Path</code>（PowerShell）确认安装目录是否在环境变量中。若不在，手动追加后重开终端即可。
 				</div>
 
@@ -1561,6 +1576,11 @@ generate_html_report(report, output="nightly.html")</code></pre>
 
 				<div class="card tip">
 					<p><strong>无人值守的前提不是 AI 更强，</strong>而是构建、烧录、调试、采样、验证每一步都能被命令化、脚本化、回传化。这层翻译建立后，你定义法则，AI 就能在法则内执行：编译、烧录、读寄存器、抓内存、跑脚本、分析结果、继续收敛。</p>
+				</div>
+
+				<div class="insight-box cool" style="font-size:13px;">
+					<strong>🧭 全站心法收束</strong><br>
+					从 T 层工程工具链出发，穿过 L1 够用原则的选型智慧、L2 复盘思维的排查逻辑，最终回到 L4 「人定义法则、AI 在法则内执行」的创作核心——本文不只是工具教程，它是整套乾坤大挪移心法在嵌入式实操端的标准化落地样本。下一篇《固件铭牌》将继续延用本链的变量读取接口，把单板调试升级为批量设备管理。
 				</div>
 
 				<p>这套组合拳的精髓，从来不只是"全开源、没版权风险"。那只是门槛。真正的价值在于，它把硬件状态、编译输出和调试数据都变成了 AI 能直接操作的语言。人不再承担机械搬运信息的工作，而是只负责方向、边界和最终裁决。</p>
