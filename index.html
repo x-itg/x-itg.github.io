@@ -29,34 +29,40 @@
             --highlight: #fef7df;
             --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
             --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.10);
             --radius-16: 16px;
             --radius-full: 999px;
-            --transition-default: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        html {
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background: linear-gradient(180deg, #f9fbfd 0%, #f3f6fb 100%);
             color: var(--text);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
             line-height: 1.75;
-            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            -webkit-text-size-adjust: 100%;
         }
-        a {
-            color: #245f9c;
-            transition: var(--transition-default);
-            text-decoration: none;
+        a { color: #245f9c; transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; text-decoration-skip-ink: auto; }
+        a:hover { color: #1a4674; }
+        a:active { transition-duration: 0.05s; }
+
+        /* ── 可访问性：skip-link ── */
+        .skip-link {
+            position: absolute; top: -100%; left: 16px; z-index: 9999;
+            padding: 10px 18px; border-radius: 0 0 10px 10px;
+            background: var(--accent); color: #fff; font-weight: 600; font-size: 14px;
+            text-decoration: none; transition: top 0.2s ease;
         }
-        a:hover {
-            text-decoration: underline;
+        .skip-link:focus { top: 0; }
+
+        /* ── 焦点可见性 ── */
+        :focus-visible {
+            outline: 2px solid #5b9bd5;
+            outline-offset: 2px;
+            border-radius: 4px;
         }
         .layout {
             display: flex;
@@ -64,7 +70,6 @@
             margin: 0 auto;
             padding: 24px 16px 64px;
             gap: 24px;
-            position: relative;
         }
         .sidebar-toc {
             width: 180px;
@@ -72,21 +77,25 @@
             position: sticky;
             top: 24px;
             align-self: start;
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px) saturate(1.6);
+            -webkit-backdrop-filter: blur(12px) saturate(1.6);
             border: 1px solid #edf2f7;
             border-radius: var(--radius-16);
             box-shadow: var(--shadow-sm);
-            z-index: 10;
+            max-height: calc(100vh - 48px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #d4dbe4 transparent;
         }
+        .sidebar-toc::-webkit-scrollbar { width: 4px; }
+        .sidebar-toc::-webkit-scrollbar-thumb { background: #d4dbe4; border-radius: 4px; }
         .sidebar-toc h3 {
             font-size: 13px;
             color: #143b69;
-            padding: 14px 10px 8px;
+            padding: 0 10px 8px;
         }
-        .sidebar-toc ul {
-            list-style: none;
-        }
+        .sidebar-toc ul { list-style: none; }
         .sidebar-toc a {
             display: block;
             text-decoration: none;
@@ -95,15 +104,9 @@
             padding: 8px 10px;
             font-size: 13px;
         }
-        .sidebar-toc a:hover {
-            background: #eef4ff;
-            color: #1f4f86;
-            text-decoration: none;
-        }
-        .sidebar-toc i {
-            width: 18px;
-            color: #7f98b7;
-        }
+        .sidebar-toc a:hover { background: #eef4ff; color: #1f4f86; }
+        .sidebar-toc a:active { background: #dce8f5; }
+        .sidebar-toc i { width: 18px; color: #7f98b7; }
         .main-content {
             flex: 1;
             min-width: 0;
@@ -202,7 +205,6 @@
             border-radius: var(--radius-16);
             background: #ffffff;
             overflow: hidden;
-            transition: var(--transition-default);
         }
         .summary-group summary {
             cursor: pointer;
@@ -211,29 +213,33 @@
             background: #f4f7fb;
             color: #294866;
             font-weight: 600;
-            transition: var(--transition-default);
+            transition: background-color 0.2s ease;
             user-select: none;
         }
-        .summary-group summary::-webkit-details-marker {
-            display: none;
-        }
+        .summary-group summary:hover { background: #edf2fa; }
+        .summary-group summary::-webkit-details-marker { display: none; }
         .summary-group summary::before {
             content: "+";
             display: inline-block;
             width: 1rem;
             margin-right: 0.4rem;
             color: #58718e;
-            transition: var(--transition-default);
+            transition: transform 0.25s ease;
         }
         .summary-group[open] summary::before {
-            content: "-";
-            transform: rotate(90deg);
+            content: "+";
+            transform: rotate(45deg);
         }
+        .summary-group[open] summary { border-bottom: 1px solid var(--border); }
         .table-wrap {
             overflow-x: auto;
-            background: #ffffff;
             -webkit-overflow-scrolling: touch;
+            background: #ffffff;
+            scrollbar-width: thin;
+            scrollbar-color: #d4dbe4 transparent;
         }
+        .table-wrap::-webkit-scrollbar { height: 5px; }
+        .table-wrap::-webkit-scrollbar-thumb { background: #d4dbe4; border-radius: 4px; }
         .summary-table table {
             width: 100%;
             border-collapse: collapse;
@@ -270,27 +276,13 @@
             text-decoration: underline;
         }
         .new-badge {
-            display:inline-block;
-            font-size:10px;
-            font-weight:700;
-            letter-spacing:0.5px;
-            padding:2px 7px;
-            border-radius:6px;
-            margin-left:4px;
-            vertical-align:middle;
-            background:#dcfce7;
-            color:#15803d;
-            border:1px solid #86efac;
+            display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.5px;
+            padding:2px 7px; border-radius:6px; margin-left:4px; vertical-align:middle;
+            background:#dcfce7; color:#15803d; border:1px solid #86efac;
         }
         .era-tag {
-            display:inline-block;
-            font-size:9px;
-            font-weight:600;
-            letter-spacing:0.3px;
-            padding:2px 6px;
-            border-radius:6px;
-            margin-left:3px;
-            vertical-align:middle;
+            display:inline-block; font-size:9px; font-weight:600; letter-spacing:0.3px;
+            padding:2px 6px; border-radius:6px; margin-left:3px; vertical-align:middle;
         }
         .era-tag.era-e { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
         .era-tag.era-m { background:#fffbeb; color:#b45309; border:1px solid #fde68a; }
@@ -298,7 +290,7 @@
         .story-spotlight {
             margin: 18px 0 22px;
             padding: 22px;
-            border-radius: 18px;
+            border-radius: 20px;
             border: 1px solid #e5d4bd;
             background: radial-gradient(circle at right top, rgba(36, 95, 156, 0.12), transparent 28%), linear-gradient(135deg, #fffaf2 0%, #f7efe1 58%, #f3f7fb 100%);
             box-shadow: var(--shadow-md);
@@ -326,7 +318,6 @@
             background: rgba(255,255,255,0.82);
             border: 1px solid rgba(191, 162, 123, 0.18);
             padding: 18px;
-            transition: var(--transition-default);
         }
         .story-spotlight__main h3,
         .story-spotlight__rail h3 {
@@ -350,12 +341,11 @@
             color: #fff;
             text-decoration: none;
             font-weight: 600;
-            transition: var(--transition-default);
         }
         .story-spotlight__cta:hover {
             background: #193d69;
             text-decoration: none;
-            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(36, 79, 134, 0.3);
         }
         .story-spotlight__chips,
         .story-spotlight__list {
@@ -375,14 +365,12 @@
             color: #6e5230;
             font-size: 12px;
             text-decoration: none;
-            transition: var(--transition-default);
         }
         .story-spotlight__list a:hover {
             border-color: #b8cae2;
             color: #244f86;
             background: #f7fbff;
             text-decoration: none;
-            transform: translateY(-1px);
         }
         .novel-overview {
             margin: 18px 0 24px;
@@ -415,7 +403,6 @@
             background: rgba(255,255,255,0.84);
             border: 1px solid rgba(191, 210, 232, 0.42);
             padding: 18px;
-            transition: var(--transition-default);
         }
         .novel-overview__main h3,
         .novel-overview__rail h3 {
@@ -451,14 +438,12 @@
             color: #47627f;
             font-size: 12px;
             text-decoration: none;
-            transition: var(--transition-default);
         }
         .novel-overview__list a:hover {
             border-color: #b8cae2;
             color: #244f86;
             background: #f7fbff;
             text-decoration: none;
-            transform: translateY(-1px);
         }
         .novel-overview__cta {
             display: inline-flex;
@@ -471,12 +456,11 @@
             color: #fff;
             text-decoration: none;
             font-weight: 600;
-            transition: var(--transition-default);
         }
         .novel-overview__cta:hover {
             background: #193d69;
             text-decoration: none;
-            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(36, 79, 134, 0.3);
         }
         footer {
             margin-top: 28px;
@@ -486,49 +470,37 @@
             font-size: 13px;
         }
         @media (max-width: 980px) {
-            .layout {
-                flex-direction: column;
+            .layout { flex-direction: column; }
+            .site-sidebar {
+                position: static; width: 100%;
+                max-height: 60vh; overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
             }
-            .sidebar-toc, .site-sidebar {
-                position: static;
-                width: 100%;
-            }
-            .sidebar-toc {
-                padding-bottom: 8px;
-            }
+            .sidebar-toc { display: none; }
         }
         @media (max-width: 720px) {
-            .hero {
-                padding: 24px 20px;
-            }
-            .hero h1 {
-                font-size: 32px;
-            }
-            .article-flow {
-                padding-top: 18px;
-            }
+            .layout { padding: 12px 8px 48px; gap: 16px; }
+            .hero { padding: 20px 16px; }
+            .hero h1 { font-size: 28px; letter-spacing: -0.02em; }
+            .article-flow { padding-top: 18px; }
+            .article-flow h2, .summary-table h2 { font-size: 24px; }
             .story-spotlight__grid,
-            .novel-overview__grid {
-                grid-template-columns: 1fr;
-            }
-            .summary-table table {
-                min-width: 640px;
-            }
+            .novel-overview__grid { grid-template-columns: 1fr; }
+            .summary-table table { min-width: 560px; font-size: 13px; }
+            .summary-table th, .summary-table td { padding: 8px 10px; }
+            .site-sidebar { max-height: 50vh; }
         }
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 28px;
-            }
-            .article-flow h2,
-            .summary-table h2 {
-                font-size: 24px;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
         }
     </style>
 </head>
 <body class="site-theme-tech">
+<a href="#start" class="skip-link">跳至正文内容</a>
 <div class="layout">
-<aside class="site-sidebar">
+<aside class="site-sidebar" aria-label="站点导航">
     <div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-compass"></i> 乾坤大挪移心法</a></div>
     <div class="site-sidebar__quick-links">
         <a href="index.html" class="site-sidebar__quick-link site-sidebar__quick-link--primary"><i class="fas fa-house"></i><span>首页入口</span></a>
@@ -927,49 +899,49 @@
                     <span class="site-sidebar__article-icon" aria-hidden="true">🔄</span>
                     <span>
                         <span class="site-sidebar__link-title">我的创作永不枯竭</span>
-                        <span class="site-sidebar__link-meta">自述 · 系统迭代增量驱动创作的终极闭环</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
                     </span>
                 </a></li>
                 <li><a href="aboutmore/xg.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🏭</span>
                     <span>
                         <span class="site-sidebar__link-title">我承认文章都是AI洗稿</span>
-                        <span class="site-sidebar__link-meta">方法论 · 碎片采集/AI装配/五维质检的工业级内容流水线</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
                     </span>
                 </a></li>
                 <li><a href="aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🏛️</span>
                     <span>
                         <span class="site-sidebar__link-title">四层结构：创作体系</span>
-                        <span class="site-sidebar__link-meta">体系 · 理论 / 人格 / 文学 / 元创作</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
                     </span>
                 </a></li>
                 <li><a href="aboutmore/jg.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🧬</span>
                     <span>
                         <span class="site-sidebar__link-title">架构定乾坤，笔墨随法则</span>
-                        <span class="site-sidebar__link-meta">方法论 · 工程化 AI 创作流水线</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
                     </span>
                 </a></li>
                 <li><a href="aboutmore/sryj.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
                     <span>
                         <span class="site-sidebar__link-title">十日一剑：创作手记</span>
-                        <span class="site-sidebar__link-meta">手记 · 复盘 T·L1~L4 如何在十天内成形并开始自解释</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
                     </span>
                 </a></li>
                 <li><a href="aboutmore/gc.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🖥️</span>
                     <span>
                         <span class="site-sidebar__link-title">像调试代码一样创作</span>
-                        <span class="site-sidebar__link-meta">纪实 · 把创作工作流做成可观测、可回放、可调试的虚拟工作台</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
                     </span>
                 </a></li>
                 <li><a href="aboutmore/ng.html" class="site-sidebar__link site-sidebar__article-link">
                     <span class="site-sidebar__article-icon" aria-hidden="true">🔧</span>
                     <span>
                         <span class="site-sidebar__link-title">我不用天赋，我只用方法</span>
-                        <span class="site-sidebar__link-meta">自述 · 用工程方法论驾驭创作与设计，不依靠直觉与灵感</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
                     </span>
                 </a></li>
             </ul>
@@ -977,7 +949,6 @@
     </details>
     <a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
 </aside>
-
     <aside class="sidebar-toc">
         <h3>入口导览</h3>
         <nav>
@@ -994,7 +965,7 @@
         </nav>
     </aside>
 
-    <main class="main-content">
+    <main class="main-content" id="main-content" role="main">
         <section class="hero">
             <div class="eyebrow"><i class="fas fa-compass"></i> 整站入口</div>
             <h1>嵌入式AI工程化系列</h1>
