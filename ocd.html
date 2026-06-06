@@ -314,7 +314,7 @@ sup.annotation { font-size:10px; color:var(--muted); }
 	.code-lang.lang-make { background:#8e44ad; }
 	.code-lang.lang-json { background:#27ae60; }
 	.btn-copy {
-		position:absolute; top:6px; right:8px;
+		position:absolute; top:30px; right:8px;
 		padding:3px 10px; font-size:11px; font-weight:600;
 		background:rgba(255,255,255,0.15); color:var(--code-text);
 		border:1px solid rgba(255,255,255,0.2); border-radius:4px;
@@ -904,6 +904,9 @@ sup.annotation { font-size:10px; color:var(--muted); }
 			<div style="margin-top:4px;font-size:12px;color:var(--muted);line-height:1.7;">
 				跟着分步安装即可跑通基础编译烧录 ｜ 直接复用 Makefile/launch.json 落地自动化调试 ｜ 聚焦 GDB-batch + serial_tool 搭建 Agent 硬件交互层
 			</div>
+			<p style="font-size:15px;color:var(--heading);font-weight:500;margin:12px 0;">
+			✅ 读完本文，你将拥有一套：<strong>AI 可直接调用的编译 → 烧录 → 硬件采样 → 故障诊断 → 夜间回归全自动化工具链。</strong>
+			</p>
 			<div class="card intro-summary">
 				<p>本文详解 <strong>ARM GCC + OpenOCD + GDB</strong> 这套开源命令行工具链，破除「AI 只能写代码、无法操控硬件」的痛点。手把手搭建可被 AI 脚本调用的自动化调试链路——从环境安装到 UART 故障实战，再到夜间自动化回归，全流程落地。读完本文，你可以实现 <strong>AI 自动编译 → 烧录 → 读硬件 → 故障自检</strong> 的完整闭环。</p>
 			</div>
@@ -927,6 +930,9 @@ sup.annotation { font-size:10px; color:var(--muted); }
 				<p>这三个特性叠起来，意义就变了。AI 不再只是帮你补代码，而是可以直接参与编译、烧录、断点、寄存器读取、内存导出和回归验证。它接触到的不是"你描述过的结果"，而是<strong>第一手的硬件状态</strong>。</p>
 				<div class="card accent-left">
 					<p><strong>关键变化：</strong>当开发链路从图形界面变成命令接口，AI 的角色就会从"码农"升级成"副驾驶"。它不仅能生成代码，还能读取现场、执行流程、回传证据。</p>
+				</div>
+				<div class="card" style="text-align:center;font-family:var(--font-mono);font-size:14px;">
+				AI → <strong style="color:#c0392b">GCC 编译</strong> → <strong style="color:#2980b9">OpenOCD 烧录</strong> → <strong style="color:#27ae60">GDB 快照</strong> → <strong style="color:#8e44ad">硬件数据回流</strong> → AI 分析闭环
 				</div>
 				<pre><code>make -j8
 openocd &lt;config&gt; -c "program build/app.elf verify reset exit"   # ELF: 含调试符号的 ARM 可执行文件
@@ -1572,7 +1578,13 @@ generate_html_report(report, output="nightly.html")</code></pre>
 				</div>
 			</section>
 
-			<h2 id="quick-ref" style="margin-top:48px;border-top:none;padding-top:0;">📋 高频命令速查</h2>
+			<div class="card action">
+				<p><strong>📦 最简可运行 Demo 工程</strong></p>
+				<p>STM32F4 最小工程 + Makefile + launch.json 全套配置，开箱即用。下载后按本文环境准备章节安装工具链，即可直接编译烧录。</p>
+				<p style="margin:10px 0 0;"><a href="#" style="color:var(--accent);font-weight:600;">前往下载 →</a>（链接待补充，可替换为实际仓库地址）</p>
+			</div>
+
+			<h2 id="quick-ref" style="margin-top:32px;border-top:none;padding-top:0;">📋 高频命令速查</h2>
 			<table class="quick-ref">
 				<thead><tr><th>场景</th><th>命令</th></tr></thead>
 				<tbody>
@@ -1688,6 +1700,29 @@ generate_html_report(report, output="nightly.html")</code></pre>
       });
     });
   });
+
+  // ── 桌面侧边目录高亮 ──
+  document.querySelectorAll('.sidebar-toc a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.querySelectorAll('.sidebar-toc a[href^="#"]').forEach(function(a) { a.style.fontWeight = '400'; });
+      this.style.fontWeight = '600';
+    });
+  });
+  // 滚动时自动高亮
+  (function() {
+    var tocLinks = document.querySelectorAll('.sidebar-toc a[href^="#"]');
+    if (!tocLinks.length) return;
+    window.addEventListener('scroll', function() {
+      var current = '';
+      document.querySelectorAll('h2[id]').forEach(function(h) {
+        if (window.scrollY >= h.offsetTop - 120) current = h.id;
+      });
+      tocLinks.forEach(function(a) {
+        a.style.fontWeight = a.getAttribute('href') === '#' + current ? '600' : '400';
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+      });
+    });
+  })();
 
   // ── 代码块语言标识 ──
   document.querySelectorAll('.code-wrap pre').forEach(function(pre) {
