@@ -12,7 +12,8 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://x-itg.github.io/ocd.html">
 <link rel="canonical" href="https://x-itg.github.io/ocd.html">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></noscript>
 <style>
 	:root {
 		--bg: #f8f9fa;
@@ -99,20 +100,78 @@
 		padding: 28px 30px;
 		margin: 28px 0;
 		box-shadow: var(--shadow-sm);
+		text-align: left;
+	}
+	.card > p:first-child { margin-top: 0; }
+	.card > p:last-child { margin-bottom: 0; }
+	.card strong {
+		display: block;
+		color: var(--text);
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
+	.card pre {
+		margin: 12px 0 0;
+		padding: 16px 20px;
+		font-size: 13px;
 	}
 	.card.accent-left { border-left: 4px solid var(--accent); }
 	.card.tip { background: #f0f7ff; border-color: #b3d4fc; }
+	.card.philosophy {
+		border-left: 4px solid #8e44ad;
+		background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%);
+	}
+	.card.engineer {
+		border-left: 4px solid #2980b9;
+		background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%);
+	}
+	.card.action {
+		border-left: 4px solid #27ae60;
+		background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%);
+	}
+	.card.vision {
+		border-left: 4px solid #3b82f6;
+		background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
+		transition: transform 0.2s, box-shadow 0.2s;
+	}
+	.card.vision:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
 
 	.insight-box {
-		background: var(--highlight);
+		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
 		border: 1px solid #f0d78c;
+		border-left: 4px solid #f39c12;
 		border-radius: var(--radius);
 		padding: 20px 24px;
 		margin: 24px 0;
 		font-style: italic;
 		color: #6b4c1e;
+		text-align: left;
 	}
-	.insight-box strong { color: #4a340f; }
+	.insight-box strong { color: #4a340f; font-weight: 600; }
+	.insight-box.decision {
+		background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
+		border-color: #a8d4e0;
+		border-left-color: #3498db;
+		color: #1a5276;
+	}
+	.insight-box.decision strong { color: #0e3a57; }
+	.insight-box.warm {
+		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
+		border-color: #f0d78c;
+		border-left-color: #f39c12;
+		color: #6b4c1e;
+	}
+	.insight-box.warm strong { color: #4a340f; }
+	.insight-box.cool {
+		background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
+		border-color: #a9cce3;
+		border-left-color: #2980b9;
+		color: #1f4e79;
+	}
+	.insight-box.cool strong { color: #154360; }
 
 	pre {
 		background: var(--code-bg);
@@ -138,7 +197,34 @@
 		font-size: 12px;
 	}
 
-.main-content { flex: 1; min-width: 0; }
+	.main-content { flex: 1; min-width: 0; }
+
+	/* TOC 分组标签 */
+	.toc-group-label {
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+		color: #8896a4;
+		margin: 0 0 6px;
+	}
+	.toc-group-label + ul { margin-top: 0; }
+	.sidebar-toc .toc-group-label:not(:first-child) { margin-top: 14px; }
+
+	/* 作者徽章 */
+	.author-badge {
+		display: inline-block;
+		vertical-align: middle;
+		text-decoration: none;
+		background: linear-gradient(135deg, #1a8a3f, #27ae60);
+		color: #fff;
+		padding: 3px 10px;
+		border-radius: 20px;
+		font-size: 12px;
+		font-weight: 600;
+		box-shadow: 0 2px 6px rgba(39, 174, 96, 0.3);
+		white-space: nowrap;
+	}
 
 	/* 章节分组标题 */
 	.section-group-label {
@@ -194,109 +280,16 @@
 		font-size: 12px;
 	}
 
+	html { scroll-behavior: smooth; }
+	h2[id] { scroll-margin-top: 24px; }
+
 	@media (max-width: 640px) {
 		.container { padding: 20px 16px 60px; }
 		.article-header h1 { font-size: 26px; }
 		h2 { font-size: 21px; }
 		pre { padding: 14px 16px; font-size: 12px; }
+		.sidebar-toc { display: none; }
 	}
-
-        .card.accent-left { border-left: 4px solid var(--accent); }
-        .card.philosophy { 
-            border-left: 4px solid #8e44ad; 
-            background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%);
-        }
-        .card.engineer { 
-            border-left: 4px solid #2980b9; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%);
-        }
-        .card.action { 
-            border-left: 4px solid #27ae60; 
-            background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%);
-        }
-        .card.vision { 
-            border-left: 4px solid #3b82f6; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card.vision:hover { 
-            transform: translateY(-2px); 
-            box-shadow: var(--shadow-md); 
-        }
-        .card {
-            text-align: left;
-        }
-        .card p {
-            text-align: left;
-            margin: 0;
-        }
-        .card p:first-child {
-            margin-top: 0;
-        }
-        .card p:last-child {
-            margin-bottom: 0;
-        }
-        .card strong {
-            display: block;
-            color: var(--text);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .card pre {
-            text-align: left;
-            margin: 12px 0 0;
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 16px 20px;
-            border-radius: 6px;
-            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
-            font-size: 13px;
-            line-height: 1.7;
-            overflow-x: auto;
-        }
-
-        .insight-box {
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border: 1px solid #f0d78c;
-            border-left: 4px solid #f39c12;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin: 24px 0;
-            font-style: italic;
-            color: #6b4c1e;
-            text-align: left;
-        }
-        .insight-box strong {
-            color: #4a340f;
-            font-weight: 600;
-        }
-        .insight-box.decision { 
-            background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
-            border-color: #a8d4e0; 
-            border-left-color: #3498db;
-            color: #1a5276; 
-        }
-        .insight-box.decision strong { 
-            color: #0e3a57; 
-        }
-        .insight-box.warm { 
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border-color: #f0d78c; 
-            border-left-color: #f39c12;
-            color: #6b4c1e; 
-        }
-        .insight-box.warm strong { 
-            color: #4a340f; 
-        }
-        .insight-box.cool { 
-            background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
-            border-color: #a9cce3; 
-            border-left-color: #2980b9;
-            color: #1f4e79; 
-        }
-        .insight-box.cool strong { 
-            color: #154360; 
-        }
 
 </style>
 <link rel="stylesheet" href="assets/site-sidebar.css">
@@ -769,22 +762,22 @@
 	<aside class="sidebar-toc">
 		<h3>本章导览</h3>
 		<nav>
-			<p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8896a4;margin:0 0 6px;">I · 认识工具链</p>
+			<p class="toc-group-label">I · 认识工具链</p>
 			<ul>
 				<li><a href="#pain-points">🔧 为什么老是卡住</a></li>
 				<li><a href="#toolchain">🤖 组合拳是什么</a></li>
 			</ul>
-			<p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8896a4;margin:14px 0 6px;">II · 环境搭建</p>
+			<p class="toc-group-label">II · 环境搭建</p>
 			<ul>
 				<li><a href="#prerequisites">📦 工具清单与安装</a></li>
 			</ul>
-			<p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8896a4;margin:14px 0 6px;">III · 能力进阶</p>
+			<p class="toc-group-label">III · 能力进阶</p>
 			<ul>
 				<li><a href="#build-flash">⚡ 编译与烧录</a></li>
 				<li><a href="#read-state">🏷️ 读取硬件状态</a></li>
 				<li><a href="#real-case">📷 实战案例：UART 快照诊断</a></li>
 			</ul>
-			<p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8896a4;margin:14px 0 6px;">IV · 工程闭环</p>
+			<p class="toc-group-label">IV · 工程闭环</p>
 			<ul>
 				<li><a href="#troubleshooting">🚨 常见故障与快速恢复</a></li>
 				<li><a href="#integration">📝 配置文件与工作流</a></li>
@@ -797,7 +790,7 @@
 		<div class="container">
 			<header class="article-header">
 				<span class="series-tag">专业延伸 · 开源工具链</span>
-				<a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
+				<a href="about.html" class="author-badge">👉 关于作者</a>
 				<h1>一套被忽视的工具链组合：ARM GCC + OpenOCD + GDB</h1>
 				<p class="subtitle">把 AI 从“只会写代码”推进到“能感知硬件状态、能自己闭环验证”的命令行工作流</p>
 				<p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
@@ -817,7 +810,7 @@
 				<p>我这些年做嵌入式 AI 工程化，越来越明确地依赖一套常被忽视的组合：<strong>ARM GCC + OpenOCD + GDB</strong>。它们有三个共同点：开源、命令行驱动、可脚本化。</p>
 				<p>这三个特性叠起来，意义就变了。AI 不再只是帮你补代码，而是可以直接参与编译、烧录、断点、寄存器读取、内存导出和回归验证。它接触到的不是“你描述过的结果”，而是<strong>第一手的硬件状态</strong>。</p>
 				<div class="card accent-left">
-					<p style="margin-top:0;"><strong>关键变化：</strong>当开发链路从图形界面变成命令接口，AI 的角色就会从“码农”升级成“副驾驶”。它不仅能生成代码，还能读取现场、执行流程、回传证据。</p>
+					<p><strong>关键变化：</strong>当开发链路从图形界面变成命令接口，AI 的角色就会从“码农”升级成“副驾驶”。它不仅能生成代码，还能读取现场、执行流程、回传证据。</p>
 				</div>
 				<pre><code>make -j8
 openocd -f interface/stlink.cfg -f target/stm32f4x.cfg \
@@ -834,7 +827,7 @@ arm-none-eabi-gdb build/app.elf \
 				<p>在跑通整套流程之前，需要先把工具链装齐。以下是 STM32F446 项目的完整环境配置，Windows 和 Linux 均覆盖。</p>
 
 				<div class="card engineer">
-					<p style="margin-top:0;"><strong>必备工具清单：</strong></p>
+					<p><strong>必备工具清单：</strong></p>
 					<table style="width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 0;">
 						<thead><tr style="border-bottom:2px solid var(--border);">
 							<th style="text-align:left;padding:8px 12px;">序号</th>
@@ -929,7 +922,7 @@ C:\Program Files (x86)\STMicroelectronics\STM32CubeCLT</code></pre>
 				<h3>VS Code 插件配置</h3>
 				<p>在 VS Code 扩展商店搜索安装以下插件：</p>
 				<div class="card action">
-					<p style="margin-top:0;"><strong>必装插件：</strong></p>
+					<p><strong>必装插件：</strong></p>
 					<ul style="margin:0;padding-left:20px;">
 						<li><code>C/C++</code> — 代码智能提示与导航</li>
 						<li><code>Cortex-Debug</code> — ARM 芯片调试器，连接 OpenOCD</li>
@@ -982,7 +975,7 @@ arm-none-eabi-gdb --version</code></pre>
 				<p>期望输出中看到 <code>starting gdb server on 3333</code> 和 <code>Listening on port 3333</code>，说明调试服务器已就绪。</p>
 
 				<div class="card accent-left">
-					<p style="margin-top:0;"><strong>关键变化：</strong>编译和烧录不再是“你点一下，AI 等一下”。AI 改完代码，可以立刻调用构建命令、执行烧录、重启目标板。你在 IDE 里点菜单的时间，AI 已经能跑几十轮“改代码-烧录-验证”了。</p>
+					<p><strong>关键变化：</strong>编译和烧录不再是“你点一下，AI 等一下”。AI 改完代码，可以立刻调用构建命令、执行烧录、重启目标板。你在 IDE 里点菜单的时间，AI 已经能跑几十轮“改代码-烧录-验证”了。</p>
 				</div>
 			</section>
 
@@ -1012,7 +1005,7 @@ arm-none-eabi-gdb --version</code></pre>
   -ex "x/s u2_dbg_last_line" `
   -ex "monitor resume"</code></pre>
 				<div class="card action">
-					<p style="margin-top:0;"><strong>为什么强调 batch 模式？</strong>因为 AI 不需要交互式 GDB。batch 模式让“读取运行时变量”变成一个可编程的原子操作——halt、采样、resume，一次执行，结果直接回流到脚本或 AI 分析链路。</p>
+					<p><strong>为什么强调 batch 模式？</strong>因为 AI 不需要交互式 GDB。batch 模式让“读取运行时变量”变成一个可编程的原子操作——halt、采样、resume，一次执行，结果直接回流到脚本或 AI 分析链路。</p>
 				</div>
 
 				<h3>第三层：RAM 导出与原始字节</h3>
@@ -1049,7 +1042,7 @@ python tools/analyze_fft.py capture.bin</code></pre>
 					<li>对比差值，定位问题层</li>
 				</ol>
 				<div class="card engineer">
-					<p style="margin-top:0;"><strong>差值判断逻辑：</strong></p>
+					<p><strong>差值判断逻辑：</strong></p>
 					<ul style="margin:0;padding-left:20px;">
 						<li><code>u2_idle_cnt</code> 在增长 → IDLE 中断正在发生，物理层信号已到达</li>
 						<li><code>u2_dbg_raw_total</code> 在增长 → 字节确实被接收进了缓冲区</li>
@@ -1061,7 +1054,7 @@ python tools/analyze_fft.py capture.bin</code></pre>
 
 				<h3>PC 侧串口收发：using-serial-devices</h3>
 				<p>GDB batch 解决的是"从芯片内部读变量"。但很多场景你还需要从 <strong>PC 侧</strong>直接向串口发命令、收响应、监控数据流——比如发送测试指令触发 MCU 回传，或者长时间监听串口日志。</p>
-				<p><a href="https://github.com/0xchaihu/using-serial-devices" target="_blank" rel="noopener"><code>using-serial-devices</code></a> 是一个专为 AI Agent 设计的串口 skill，底层基于 pyserial，上层封装成 <strong>CLI + JSON 输出 + 结构化退出码</strong>，跨平台支持 Windows COM / Linux tty / macOS。Agent 可以直接调用，不需要你手动转述。</p>
+				<p><a href="https://github.com/0xchaihu/using-serial-devices" target="_blank" rel="noopener noreferrer"><code>using-serial-devices</code></a> 是一个专为 AI Agent 设计的串口 skill，底层基于 pyserial，上层封装成 <strong>CLI + JSON 输出 + 结构化退出码</strong>，跨平台支持 Windows COM / Linux tty / macOS。Agent 可以直接调用，不需要你手动转述。</p>
 				<pre><code># 安装
 python -m pip install pyserial
 
@@ -1102,7 +1095,7 @@ python scripts/serial_tool.py monitor wait --session SESSION_ID `
 python scripts/serial_tool.py monitor stop --session SESSION_ID --json</code></pre>
 
 				<div class="card engineer">
-					<p style="margin-top:0;"><strong>为什么这个 skill 适合 AI Agent？</strong></p>
+					<p><strong>为什么这个 skill 适合 AI Agent？</strong></p>
 					<ul style="margin:0;padding-left:20px;">
 						<li>所有命令输出 <strong>JSON / JSONL</strong>，Agent 无需正则解析文本</li>
 						<li><strong>结构化退出码</strong>：0=成功，2=端口不可用，3=超时未匹配，Agent 可据此自动重试</li>
@@ -1112,7 +1105,7 @@ python scripts/serial_tool.py monitor stop --session SESSION_ID --json</code></p
 				</div>
 
 				<div class="card action">
-					<p style="margin-top:0;"><strong>与 GDB batch 的分工：</strong></p>
+					<p><strong>与 GDB batch 的分工：</strong></p>
 					<ul style="margin:0;padding-left:20px;">
 						<li><strong>GDB batch</strong>：读取 MCU 内部运行时变量（halt → 采样 → resume），诊断芯片内部状态</li>
 						<li><strong>serial_tool</strong>：PC 侧发送指令、接收响应、后台监控，适合协议验证和数据回流</li>
@@ -1190,7 +1183,7 @@ openocd -f interface/stlink.cfg -f target/stm32f4x.cfg</code></pre>
 }</code></pre>
 
 				<div class="card action">
-					<p style="margin-top:0;"><strong>关键配置说明：</strong></p>
+					<p><strong>关键配置说明：</strong></p>
 					<ul style="margin:0;padding-left:20px;">
 						<li><code>configFiles</code>：OpenOCD 配置文件路径，Windows 下通常指向安装目录的 <code>scripts</code> 文件夹，Linux 下可以自建 <code>openocd_lnx.cfg</code></li>
 						<li><code>armToolchainPath</code> / <code>gdbPath</code>：只在 Linux 配置中需要显式指定，Windows 下 cortex-debug 会自动从 PATH 查找</li>
@@ -1339,7 +1332,7 @@ debug-start:
 	openocd -f board/stm32f4discovery.cfg</code></pre>
 
 				<div class="card vision">
-					<p style="margin-top:0;"><strong>Makefile 实战要点：</strong></p>
+					<p><strong>Makefile 实战要点：</strong></p>
 					<ul style="margin:0;padding-left:20px;">
 						<li><code>GCC_PATH</code> 是工具链路径的开关，换电脑时只改这一行</li>
 						<li><code>DEBUG = 1</code> 确保 <code>-g -gdwarf-2</code> 被加入 CFLAGS，否则 GDB 读不到变量</li>
@@ -1380,7 +1373,7 @@ arm-none-eabi-gdb build/01-RTC.elf -q -batch \
 					<li><strong>清理构建</strong>：在终端输入 <code>make clean</code></li>
 				</ol>
 				<div class="card vision">
-					<p style="margin-top:0;"><strong>这套流程的核心价值：</strong>从编译到调试，全程不需要离开 VS Code。AI 可以直接通过终端命令参与每一步，而不必等你手动操作后转述结果。当 <code>launch.json</code> + <code>Makefile</code> + <code>cortex-debug</code> 三者配合到位，“写代码—烧录—调试—读变量”就是一个完全可编程的闭环。</p>
+					<p><strong>这套流程的核心价值：</strong>从编译到调试，全程不需要离开 VS Code。AI 可以直接通过终端命令参与每一步，而不必等你手动操作后转述结果。当 <code>launch.json</code> + <code>Makefile</code> + <code>cortex-debug</code> 三者配合到位，“写代码—烧录—调试—读变量”就是一个完全可编程的闭环。</p>
 				</div>
 			</section>
 
@@ -1403,7 +1396,7 @@ for test_case in test_suite:
 generate_html_report(report, output="nightly.html")</code></pre>
 
 				<div class="card tip">
-					<p style="margin-top:0;"><strong>无人值守的前提不是 AI 更强，</strong>而是构建、烧录、调试、采样、验证每一步都能被命令化、脚本化、回传化。当这层翻译建立起来，你定义法则，AI 就能在法则内执行：编译、烧录、读寄存器、抓内存、跑脚本、分析结果、继续收敛。</p>
+					<p><strong>无人值守的前提不是 AI 更强，</strong>而是构建、烧录、调试、采样、验证每一步都能被命令化、脚本化、回传化。当这层翻译建立起来，你定义法则，AI 就能在法则内执行：编译、烧录、读寄存器、抓内存、跑脚本、分析结果、继续收敛。</p>
 				</div>
 
 				<p>这套组合拳的精髓，从来不只是"全开源、没版权风险"。那只是门槛。真正的价值在于，它把硬件状态、编译输出和调试数据都变成了 AI 能直接操作的语言。人不再承担机械搬运信息的工作，而是只负责方向、边界和最终裁决。</p>
@@ -1450,7 +1443,7 @@ generate_html_report(report, output="nightly.html")</code></pre>
 <div class="inland-security-footer">
     <div class="tooltip-container">
         <div class="trigger-content">
-            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
+            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noopener noreferrer" class="x-itg-link">
                 <span>itg · -lvgl-</span>
             </a>
         </div>
