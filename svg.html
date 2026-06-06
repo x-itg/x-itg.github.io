@@ -1,406 +1,244 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>合规验证与AI编程 | 嵌入式AI工程化系列</title>
-<meta name="description" content="将合规要求从事后补文档转变为事前建法则的工程化方法，探索在军工、医疗、汽车等场景中让AI编程既有创造力又有边界感。">
-<meta name="keywords" content="合规验证,AI编程,治理,工程化,军工,医疗,汽车">
+<title>别让AI画图，让它写图 | SVG是代码不是图片</title>
+<meta name="description" content="SVG是代码，不是图片。AI画不好位图，但它天生就该用代码画图。用编号精准控制每一个元件，用分层策略拆解每一张复杂框图。">
+<meta name="keywords" content="SVG,AI画图,代码画图,编号系统,分层策略,矢量图,工程思维,设计">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="合规验证与AI编程 | 嵌入式AI工程化系列">
-<meta property="og:description" content="将合规要求从事后补文档转变为事前建法则的工程化方法，探索在军工、医疗、汽车等场景中让AI编程既有创造力又有边界感。">
+<meta property="og:title" content="别让AI画图，让它写图 | SVG是代码不是图片">
+<meta property="og:description" content="AI的强项不是理解像素，是理解代码。SVG的每一根线、每一个色块，背后都是清晰的语法结构。用编号精准定位，用分层策略拆解复杂。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://x-itg.github.io/gmp.html">
-<link rel="canonical" href="https://x-itg.github.io/gmp.html">
+<meta property="og:url" content="https://x-itg.github.io/svg.html">
+<link rel="canonical" href="https://x-itg.github.io/svg.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-    :root {
-        --bg: #f8f9fa;
-        --card-bg: #ffffff;
-        --text: #2c3e50;
-        --text-secondary: #5a6c7d;
-        --accent: #c0392b;
-        --accent-soft: #e74c3c;
-        --border: #e0e4e8;
-        --code-bg: #1e293b;
-        --code-text: #e2e8f0;
-        --highlight: #fef9e7;
-        --tag-bg: #f0f3f6;
-        --tag-text: #4a5568;
-        --link: #2980b9;
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-        --radius: 6px;
-        --radius-lg: 10px;
-    }
+	:root {
+		--bg: #f8f9fa;
+		--card-bg: #ffffff;
+		--text: #2c3e50;
+		--text-secondary: #5a6c7d;
+		--accent: #c0392b;
+		--accent-soft: #e74c3c;
+		--border: #e0e4e8;
+		--code-bg: #1e293b;
+		--code-text: #e2e8f0;
+		--highlight: #fef9e7;
+		--link: #2980b9;
+		--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+		--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--radius: 6px;
+		--radius-lg: 10px;
+	}
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+	* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.8;
-        -webkit-font-smoothing: antialiased;
-    }
+	body {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+		background: var(--bg);
+		color: var(--text);
+		line-height: 1.8;
+		-webkit-font-smoothing: antialiased;
+	}
 
-    .container {
-        max-width: 780px;
-        margin: 0 auto;
-        padding: 40px 24px 80px;
-    }
+	.container {
+		max-width: 780px;
+		margin: 0 auto;
+		padding: 40px 24px 80px;
+	}
 
-/* ===== 三栏布局（方案B） ===== */
-/* 左侧：文章系列导航 */
-/* 右侧：正文 */
-    .main-content { flex: 1; min-width: 0; }
+	.top-nav {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 48px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid var(--border);
+		font-size: 14px;
+		color: var(--text-secondary);
+	}
 
-    /* 文章系列导航系统 */
+	.top-nav a { color: var(--link); text-decoration: none; transition: color 0.2s; }
+	.top-nav a:hover { color: var(--accent); }
+	.top-nav .sep { color: #c0c7cf; }
 
+	.article-header { margin-bottom: 48px; }
+	.article-header .series-tag {
+		display: inline-block; background: var(--accent); color: #fff;
+		font-size: 12px; font-weight: 600; padding: 3px 10px;
+		border-radius: 3px; letter-spacing: 0.5px; margin-bottom: 16px;
+	}
+	.article-header h1 {
+		font-size: 32px; font-weight: 700; line-height: 1.35;
+		margin-bottom: 12px; letter-spacing: -0.3px;
+	}
+	.article-header .subtitle {
+		font-size: 17px; color: var(--text-secondary); font-weight: 400; margin-bottom: 20px;
+	}
+	.article-header .meta { font-size: 13px; color: #8896a4; }
 
-    .article-header {
-        margin-bottom: 48px;
-    }
-    .article-header .series-tag {
-        display: inline-block;
-        background: var(--accent);
-        color: #fff;
-        font-size: 12px;
-        font-weight: 600;
-        padding: 3px 10px;
-        border-radius: 3px;
-        letter-spacing: 0.5px;
-        margin-bottom: 16px;
-    }
-    .article-header h1 {
-        font-size: 32px;
-        font-weight: 700;
-        line-height: 1.35;
-        margin-bottom: 12px;
-        letter-spacing: -0.3px;
-    }
-    .article-header .subtitle {
-        font-size: 17px;
-        color: var(--text-secondary);
-        font-weight: 400;
-        margin-bottom: 20px;
-    }
-    .article-header .meta {
-        font-size: 13px;
-        color: #8896a4;
-    }
+	h2 {
+		font-size: 24px; font-weight: 700; margin: 56px 0 16px;
+		padding-top: 24px; border-top: 2px solid var(--border);
+		letter-spacing: -0.2px;
+	}
+	h3 {
+		font-size: 19px; font-weight: 600; margin: 36px 0 12px; color: #1a1a2e;
+	}
+	p { margin: 14px 0; }
+	strong { color: #1a1a2e; }
+	ul, ol { margin: 14px 0; padding-left: 24px; }
+	li { margin: 6px 0; }
 
-    h2 {
-        font-size: 24px;
-        font-weight: 700;
-        margin: 56px 0 16px;
-        padding-top: 24px;
-        border-top: 2px solid var(--border);
-        letter-spacing: -0.2px;
-    }
-    h3 {
-        font-size: 19px;
-        font-weight: 600;
-        margin: 36px 0 12px;
-        color: #1a1a2e;
-    }
-    p {
-        margin: 14px 0;
-    }
-    strong {
-        color: #1a1a2e;
-    }
+	.card {
+		background: var(--card-bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		padding: 28px 30px;
+		margin: 28px 0;
+		box-shadow: var(--shadow-sm);
+		text-align: left;
+	}
 
-    .card {
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 28px 30px;
-        margin: 28px 0;
-        box-shadow: var(--shadow-sm);
-    }
-    .card.accent-left {
-        border-left: 4px solid var(--accent);
-    }
-    .card.green-left {
-        border-left: 4px solid #27ae60;
-    }
-    .card.blue-left {
-        border-left: 4px solid #3b82f6;
-    }
-    .card.purple-left {
-        border-left: 4px solid #8b5cf6;
-    }
+	.card.accent-left { border-left: 4px solid var(--accent); }
+	.card.tip { background: #f0f7ff; border-color: #b3d4fc; }
+	.card.philosophy { 
+		border-left: 4px solid #8e44ad; 
+		background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%); 
+	}
+	.card.engineer { 
+		border-left: 4px solid #2980b9; 
+		background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%); 
+	}
+	.card.action { 
+		border-left: 4px solid #27ae60; 
+		background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%); 
+	}
+	.card p {
+		text-align: left;
+		margin: 0;
+	}
+	.card p:first-child {
+		margin-top: 0;
+	}
+	.card p:last-child {
+		margin-bottom: 0;
+	}
+	.card strong {
+		display: block;
+		color: var(--text);
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
 
-    .insight-box {
-        background: var(--highlight);
-        border: 1px solid #f0d78c;
-        border-radius: var(--radius);
-        padding: 20px 24px;
-        margin: 24px 0;
-        font-style: italic;
-        color: #6b4c1e;
-    }
-    .insight-box strong {
-        color: #4a340f;
-    }
+	.insight-box {
+		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
+		border: 1px solid #f0d78c;
+		border-left: 4px solid #f39c12;
+		border-radius: var(--radius);
+		padding: 20px 24px;
+		margin: 24px 0;
+		font-style: italic;
+		color: #6b4c1e;
+		text-align: left;
+	}
 
-    code {
-        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
-        font-size: 13px;
-    }
-    p code, li code {
-        background: #eef1f5;
-        padding: 2px 6px;
-        border-radius: 3px;
-        color: #c0392b;
-        font-size: 12px;
-    }
+	.insight-box strong { color: #4a340f; font-weight: 600; }
+	.insight-box.decision { 
+		background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
+		border-color: #a8d4e0; 
+		border-left-color: #3498db;
+		color: #1a5276; 
+	}
+	.insight-box.decision strong { color: #0e3a57; }
+	.insight-box.warm { 
+		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
+		border-color: #f0d78c; 
+		border-left-color: #f39c12;
+		color: #6b4c1e; 
+	}
+	.insight-box.warm strong { color: #4a340f; }
+	.insight-box.cool { 
+		background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
+		border-color: #a9cce3; 
+		border-left-color: #2980b9;
+		color: #1f4e79; 
+	}
+	.insight-box.cool strong { color: #154360; }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 24px 0;
-        font-size: 14px;
-    }
-    table th, table td {
-        padding: 12px 16px;
-        text-align: left;
-        border-bottom: 1px solid var(--border);
-    }
-    table th {
-        font-weight: 700;
-        background: #f5f7fa;
-        color: #4a5568;
-        font-size: 12px;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-    }
+	.decision-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+		margin: 28px 0;
+	}
 
-    .layer-tag {
-        display: inline-block;
-        background: #1a1a2e;
-        color: #fff;
-        font-size: 11px;
-        padding: 2px 8px;
-        border-radius: 3px;
-        font-weight: 600;
-    }
+	.decision-card {
+		background: var(--card-bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		padding: 22px;
+		box-shadow: var(--shadow-sm);
+		transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+	}
 
-    .workflow-step {
-        display: flex;
-        gap: 16px;
-        padding: 16px;
-        background: #f8fafc;
-        border-radius: 8px;
-        margin: 12px 0;
-        align-items: flex-start;
-    }
-    .workflow-step .step-num {
-        width: 28px;
-        height: 28px;
-        background: #1e3a8a;
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 13px;
-        flex-shrink: 0;
-    }
-    .workflow-step .step-content {
-        flex: 1;
-    }
-    .workflow-step .step-content h4 {
-        font-size: 15px;
-        color: #1a1a2e;
-        margin-bottom: 4px;
-    }
-    .workflow-step .step-content p {
-        font-size: 13px;
-        color: #5a6c7d;
-        margin: 0;
-    }
+	.decision-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-md);
+		border-color: var(--accent-soft);
+	}
 
-    .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 16px;
-        margin: 20px 0;
-    }
-    .feature-item {
-        background: #f8fafc;
-        border-radius: 8px;
-        padding: 16px;
-        border: 1px solid #e5e7eb;
-    }
-    .feature-item h4 {
-        font-size: 14px;
-        color: #1e3a8a;
-        margin-bottom: 8px;
-    }
-    .feature-item p {
-        font-size: 13px;
-        color: #5a6c7d;
-        margin: 0;
-    }
+	.decision-card h3 {
+		margin: 0 0 10px;
+		font-size: 18px;
+	}
 
-    .quote-block {
-        background: linear-gradient(135deg, #f8fafc, #f0f6ff);
-        border: 1px solid #e0e8f0;
-        border-radius: 12px;
-        padding: 24px 28px;
-        margin: 24px 0;
-        text-align: center;
-        font-size: 15px;
-        color: #4a5568;
-        line-height: 1.8;
-    }
-    .quote-block strong {
-        color: #1e3a8a;
-    }
+	code {
+		font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
+		font-size: 13px;
+	}
 
-    .footnote-section {
-        margin-top: 60px;
-        padding-top: 24px;
-        border-top: 1px solid var(--border);
-    }
-    .footnote-section h4 {
-        font-size: 14px;
-        color: #8896a4;
-        margin-bottom: 10px;
-    }
-    .footnote-section p {
-        font-size: 13px;
-        color: #8896a4;
-        line-height: 1.6;
-        margin: 6px 0;
-    }
+	p code, li code {
+		background: #eef1f5;
+		padding: 2px 6px;
+		border-radius: 3px;
+		color: #c0392b;
+		font-size: 12px;
+	}
 
-    @media (max-width: 780px) {
-.sidebar {
-            width: 100%;
-            position: static;
-        }
-        .container {
-            padding: 20px 16px 60px;
-        }
-        .article-header h1 {
-            font-size: 26px;
-        }
-        h2 {
-            font-size: 21px;
-        }
-    }
+	pre {
+		background: var(--code-bg);
+		color: var(--code-text);
+		border-radius: var(--radius);
+		padding: 20px 24px;
+		margin: 24px 0;
+		overflow-x: auto;
+		line-height: 1.6;
+	}
+	pre code {
+		background: none;
+		color: inherit;
+		padding: 0;
+		font-size: 13px;
+	}
 
-        .card.accent-left { border-left: 4px solid var(--accent); }
-        .card.philosophy { 
-            border-left: 4px solid #8e44ad; 
-            background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%);
-        }
-        .card.engineer { 
-            border-left: 4px solid #2980b9; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%);
-        }
-        .card.action { 
-            border-left: 4px solid #27ae60; 
-            background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%);
-        }
-        .card.vision { 
-            border-left: 4px solid #3b82f6; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card.vision:hover { 
-            transform: translateY(-2px); 
-            box-shadow: var(--shadow-md); 
-        }
-        .card {
-            text-align: left;
-        }
-        .card p {
-            text-align: left;
-            margin: 0;
-        }
-        .card p:first-child {
-            margin-top: 0;
-        }
-        .card p:last-child {
-            margin-bottom: 0;
-        }
-        .card strong {
-            display: block;
-            color: var(--text);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .card pre {
-            text-align: left;
-            margin: 12px 0 0;
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 16px 20px;
-            border-radius: 6px;
-            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
-            font-size: 13px;
-            line-height: 1.7;
-            overflow-x: auto;
-        }
+	@media (max-width: 640px) {
+		.container { padding: 20px 16px 60px; }
+		.article-header h1 { font-size: 26px; }
+		h2 { font-size: 21px; }
+		.decision-grid { grid-template-columns: 1fr; }
+	}
 
-        .insight-box {
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border: 1px solid #f0d78c;
-            border-left: 4px solid #f39c12;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin: 24px 0;
-            font-style: italic;
-            color: #6b4c1e;
-            text-align: left;
-        }
-        .insight-box strong {
-            color: #4a340f;
-            font-weight: 600;
-        }
-        .insight-box.decision { 
-            background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
-            border-color: #a8d4e0; 
-            border-left-color: #3498db;
-            color: #1a5276; 
-        }
-        .insight-box.decision strong { 
-            color: #0e3a57; 
-        }
-        .insight-box.warm { 
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border-color: #f0d78c; 
-            border-left-color: #f39c12;
-            color: #6b4c1e; 
-        }
-        .insight-box.warm strong { 
-            color: #4a340f; 
-        }
-        .insight-box.cool { 
-            background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
-            border-color: #a9cce3; 
-            border-left-color: #2980b9;
-            color: #1f4e79; 
-        }
-        .insight-box.cool strong { 
-            color: #154360; 
-        }
+.main-content { flex: 1; min-width: 0; }
 
+	
 </style>
 <link rel="stylesheet" href="assets/site-sidebar.css">
 </head>
 <body class="site-theme-tech">
-
 <div class="layout">
+<!-- SIDEBAR_PLACEHOLDER -->
 <aside class="site-sidebar">
     <div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-compass"></i> 乾坤大挪移心法</a></div>
     <div class="site-sidebar__quick-links">
@@ -484,7 +322,7 @@
                     </ul>
                 </div>
             </details>
-            <details class="site-sidebar__subgroup" open>
+            <details class="site-sidebar__subgroup">
                 <summary>专业延伸</summary>
                 <div class="site-sidebar__group-body">
                     <ul>
@@ -509,7 +347,7 @@
                             <span class="site-sidebar__link-meta">专业延伸 · 固件数字身份与协同管理</span>
                         </span>
                     </a></li>
-                    <li><a href="gmp.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                    <li><a href="gmp.html" class="site-sidebar__link site-sidebar__article-link">
                         <span class="site-sidebar__article-icon" aria-hidden="true">📜</span>
                         <span>
                             <span class="site-sidebar__link-title">合规验证与AI编程</span>
@@ -526,7 +364,7 @@
                     </ul>
                 </div>
             </details>
-            <details class="site-sidebar__subgroup">
+            <details class="site-sidebar__subgroup" open>
                 <summary>实战与心法</summary>
                 <div class="site-sidebar__group-body">
                     <ul>
@@ -572,7 +410,7 @@
                             <span class="site-sidebar__link-meta">工程心法 · 够用原则与分层路由，把AI账单用在刀刃上</span>
                         </span>
                     </a></li>
-                    <li><a href="svg.html" class="site-sidebar__link site-sidebar__article-link">
+                    <li><a href="svg.html" class="site-sidebar__link site-sidebar__article-link is-active">
                         <span class="site-sidebar__article-icon" aria-hidden="true">🎨</span>
                         <span>
                             <span class="site-sidebar__link-title">别让AI画图，让它写图</span>
@@ -850,260 +688,143 @@
     </details>
     <a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
 </aside>
-    <aside class="sidebar-toc">
-        <h3>本章导览</h3>
-        <nav>
-            <ul>
-                <li><a href="#pain">✅ 验证文档的噩梦</a></li>
-                <li><a href="#essence">💠 验证友好的本质</a></li>
-                <li><a href="#ai-turning">✅ AI的转折点</a></li>
-                <li><a href="#division">🤖 人与AI的分工</a></li>
-                <li><a href="#ultimate">✅ 合规证据工厂</a></li>
-                <li><a href="#mapping">📐 体系映射</a></li>
-            </ul>
-        </nav>
-    </aside>
+	<aside class="sidebar-toc">
+		<h3>本章导览</h3>
+		<nav>
+			<ul>
+				<li><a href="#part1">📌 SVG是代码，不是图片</a></li>
+				<li><a href="#part2">🔢 用编号精准定位每个元件</a></li>
+				<li><a href="#part3">📐 从小图到大图的分层策略</a></li>
+				<li><a href="#part4">🤖 这才是AI的强项</a></li>
+				<li><a href="#part5">💠 结语</a></li>
+			</ul>
+		</nav>
+	</aside>
 
-    <div class="main-content">
-<div class="container">
+	<div class="main-content">
+	<div class="container">
 
-    <header class="article-header">
-        <span class="series-tag">五层进化 · 验证维度</span>
-        <a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
-        <h1>合规验证与AI编程</h1>
-        <p class="subtitle">当合规验证撞上AI编程：<br>一场从"事后补文档"到"事前建法则"的效率革命。</p>
-        <p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列 · 从嵌入式到软件合规的跨界验证</p>
-    </header>
+<nav class="top-nav">
+    <a href="index.html">首页</a>
+    <span class="sep">/</span>
+    <a href="fb.html">别把AI用成付费上班</a>
+    <span class="sep">/</span>
+    <span>别让AI画图，让它写图</span>
+</nav>
 
-    <section>
-        <h2 id="pain">一、这个行业的痛点，藏在验证文档里</h2>
+<header class="article-header">
+    <span class="series-tag">实战与心法</span>
+    <h1>别让AI画图，让它写图</h1>
+    <p class="subtitle">SVG是代码，不是图片——用编号精准控制每一个元件，用分层策略拆解每一张复杂框图</p>
+    <div class="meta">
+        <span>嵌入式AI工程化系列</span> · <span>工程心法</span>
+    </div>
+</header>
 
-        <p>如果你做过GMP合规项目，你一定经历过这个场景：软件已经开发完了，功能都正常，串口通信稳定，数据库读写无误，审计日志一条不少。但接下来才是真正的噩梦——<strong>验证文档</strong>。</p>
+<article>
 
-        <div class="feature-grid">
-            <div class="feature-item">
-                <h4><i class="fas fa-download"></i> IQ 安装确认</h4>
-                <p>逐项对比安装文件、依赖版本、配置参数</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-play"></i> OQ 运行确认</h4>
-                <p>手动执行几十个测试用例，截图、记录、整理报告</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-chart-line"></i> PQ 性能确认</h4>
-                <p>长期运行系统，每天手工记录运行状态</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-book"></i> SOP 标准操作规程</h4>
-                <p>截屏，写步骤、描述每个按钮的预期结果</p>
-            </div>
+    <div class="card philosophy">
+        <p style="margin-top:0;"><strong>核心结论</strong></p>
+        <p>AI画不好位图，但它天生就该用代码画图。SVG的本质不是图片，是几十行、几百行用XML写的矢量指令。而写代码、改代码，恰恰是AI最擅长的事。用编号精准定位每个元件，用分层策略从小图到大图逐级构建，这就是工程思维在设计领域的投影。</p>
+    </div>
+
+    <h2 id="part1">一、SVG是代码，不是图片</h2>
+
+    <p>我做设计有一个很深的体会：AI画不好位图，但它天生就该用代码画图。这是两种完全不同的工作方式。你让AI去编辑一张PNG图片——调整某个图标的位置、修改某根连接线的粗细、换掉某个颜色——它做得非常吃力。因为位图是像素矩阵，改一个细节意味着重新理解整张图的视觉布局，这对目前的AI来说负担很重，效果也很不稳定。</p>
+
+    <p>但SVG不同。<strong>SVG的本质不是图片，是代码。</strong>是几十行、几百行用XML写的矢量指令。而写代码、改代码，恰恰是AI最擅长的事。</p>
+
+    <div class="insight-box warm">
+        位图是像素矩阵，改一个细节就要重新理解整张图。SVG是结构化代码，每一根线、每一个色块背后都是清晰的语法。AI不需要"看懂"这张图，它只需要"读懂"这段代码。
+    </div>
+
+    <h2 id="part2">二、用编号精准定位每个元件</h2>
+
+    <p>我在实践中摸索出一个非常有效的技巧，就是<strong>给SVG里的每个元素打上编号</strong>。让AI或Agent生成整张框图的初稿时，要求它给每一个视觉元素——发射机、交换机、连接线、文字标注——都分配一个唯一的编号。这些编号在SVG代码里以注释的形式存在，在视觉呈现上就是标注在每个元件旁边的数字。</p>
+
+    <p>这个编号系统有什么用？它把人和AI之间的沟通成本降到了最低。</p>
+
+    <p>以前没有编号的时候，我需要这样告诉AI："把左边第三个发射机的颜色改深一点，把右上角那根连接线的箭头改大一点，把右下角那个标注的字体加粗。"这种描述模糊、不精确，AI理解起来很吃力，改错位置的概率很高。</p>
+
+    <p>有了编号，沟通变成这样：<strong>"把元件12的颜色改深一点，把连接线34的箭头改大一点，把标注56的字体加粗。"</strong>AI不需要理解"左边第三个"是哪个，它只需要找到代码里编号为12的元件，直接修改。精准、高效、一步到位。</p>
+
+    <div class="card engineer">
+        <p style="margin-top:0;"><strong>编号系统的工作流</strong></p>
+        <p>生成初稿时要求AI给每个元件编号 → 视觉呈现上数字标注在元件旁边 → 修改时直接用编号精准定位 → 所有细节调完后，让AI删除全部编号 → 输出最终成品。编号是施工期间的脚手架，交付时不需要留在成品里。</p>
+    </div>
+
+    <div class="decision-grid">
+        <div class="decision-card">
+            <h3>❌ 没有编号</h3>
+            <p>"把左边第三个发射机的颜色改深一点"——模糊、不精确，AI改错位置概率高</p>
         </div>
-
-        <p>这些事情，和软件开发本身的难度无关。它们不考验你的算法能力，不考验你的架构设计水平。它们只考验你的耐心、细心和对重复劳动的忍耐力。</p>
-
-        <div class="card accent-left">
-            <p style="margin-top:0;"><strong>小团队困境：</strong>一个团队或单人开发者，往往在核心功能开发完就已经筋疲力尽。这些"可验证性"特性，在传统开发模式下被视为奢侈品——优先级最低，永远排在"等有时间再说"的清单里。</p>
+        <div class="decision-card">
+            <h3>✅ 有编号</h3>
+            <p>"把元件12的颜色改深一点"——精准、高效、一步到位，沟通成本降到最低</p>
         </div>
+    </div>
 
-        <div class="insight-box">
-            <strong>但AI编程的出现，正在把这件事的底层逻辑彻底改写。</strong>
+    <h2 id="part3">三、从小图到大图的分层策略</h2>
+
+    <p>如果框图规模比较小——十几个元件，几根连接线——直接让DeepSeek在网页上生成整张SVG就够了。它一次性输出完整的代码，调整一两轮就能定稿。</p>
+
+    <p>但如果框图规模很大——几十个元件，复杂的连接关系，多层级的结构——就需要用到工程里的Agent来进行集成布局。流程是这样的：</p>
+
+    <ol>
+        <li><strong>先用DeepSeek生成每一个独立的SVG元件</strong>，全部带上编号。</li>
+        <li><strong>再把所有编号过的元件交给Agent</strong>，告诉它整体的框架结构、各个元件的大致位置、连线关系。</li>
+        <li><strong>Agent负责把这些元件精确地摆放到页面上</strong>，画好连接线，统一配色和标注。</li>
+        <li><strong>最后人在Agent输出的整张图上进行细节微调</strong>——通过编号精准定位，告诉Agent改哪里。</li>
+    </ol>
+
+    <div class="card tip">
+        <p style="margin-top:0;"><strong>分层策略的核心</strong></p>
+        <p>复杂问题拆成多个简单步骤，每一步都用最合适的工具去解决。这和在工程里拆解复杂系统的逻辑完全一致——<a href="13.html">拆解与整合</a>讲的就是这件事，只不过这里拆解的不是代码模块，而是视觉元件。</p>
+    </div>
+
+    <div class="decision-grid">
+        <div class="decision-card">
+            <h3>🟢 小图 · 直接出</h3>
+            <p>十几个元件、几根连接线——DeepSeek网页版直接生成整张SVG，一两轮定稿</p>
         </div>
-    </section>
-
-    <section>
-        <h2 id="essence">二、验证友好的本质：把"人的手工劳动"变成"代码的自动输出"</h2>
-
-        <p>让我们先回到一个更根本的问题：<strong>为什么出验证报告这么慢？</strong></p>
-
-        <p>不是因为我们不努力，而是因为验证报告的生产，传统上依赖的是<strong>人的手工劳动</strong>。人要点按钮、人要截图、人要记录、人要整理。人的注意力是稀缺的，人的时间是不可压缩的。</p>
-
-        <p>但如果换一个思路：<strong>让软件在编程阶段就把验证所需的信息准备好，让验证变成"从系统里导出证据"而不是"手工制造证据"。</strong></p>
-
-        <h3>验证友好化设计的核心策略</h3>
-        <div class="feature-grid">
-            <div class="feature-item">
-                <h4><i class="fas fa-file-code"></i> 配置文件外置</h4>
-                <p>IQ确认时不需要读代码，直接对比配置文件即可</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-stethoscope"></i> 内置自诊断接口</h4>
-                <p>OQ测试时不需要手动点屏幕，脚本调用接口即可</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-camera"></i> 自动合规快照</h4>
-                <p>PQ运行时不需要每天手工记录，系统自动收集即可</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-video"></i> 操作步骤录制</h4>
-                <p>SOP编写时不需要截屏写说明，系统自动生成初稿即可</p>
-            </div>
+        <div class="decision-card">
+            <h3>🟡 大图 · 分层来</h3>
+            <p>几十个元件、复杂连接、多层结构——先生成独立元件，再用Agent集成布局</p>
         </div>
+    </div>
 
-        <div class="card blue-left">
-            <p style="margin-top:0;"><strong>为什么过去难以实现？</strong>这些特性在逻辑上并不复杂，但传统开发模式下<strong>边际成本高</strong>——写配置导出功能、依赖清单生成器、测试模拟接口、自诊断面板，每一项都需要额外大量代码。精力都花在核心功能上，根本没时间做这些。</p>
-        </div>
-    </section>
+    <h2 id="part4">四、这才是真正发挥了AI的优势</h2>
 
-    <section>
-        <h2 id="ai-turning">三、AI编程的转折点：把"可验证性基础设施"从奢侈品变成标配</h2>
+    <p><strong>AI的强项不是理解像素，是理解代码。</strong>SVG的每一根线、每一个色块、每一段文字，背后都是清晰的语法结构。AI可以在语法层面精准地创建、修改、删除。它不需要"看懂"这张图，它只需要"读懂"这段代码。</p>
 
-        <p>AI编程改变的不是验证的逻辑，而是<strong>实现验证友好特性的边际成本</strong>。</p>
+    <p>而人在这个流程里的角色，不是亲自画图，是<strong>定义风格、审核输出、做只有人才能做的审美判断</strong>。AI负责生成和修改，人负责定义和裁决。</p>
 
-        <p>你不需要亲自去写接口和脚本。你只需要告诉AI：</p>
+    <p>这套工作流的核心优势在于<strong>精准和高效</strong>。AI对SVG代码的操作是像素级的精确，每一个坐标、每一个颜色值、每一个线宽，都可以通过修改代码精准控制。没有模糊地带，没有视觉偏差。而且一次建模，反复复用。SVG元件一旦生成，就进了素材库。下次再做类似的框图，不需要重新生成，直接从库里拿出来，让Agent重新布局就行。一套元件，反复复用，迭代成本趋近于零。</p>
 
-        <div class="quote-block">
-            "在我Electron主进程中，增加一个<code>/health</code> HTTP端点，返回数据库连接状态、NTP同步状态、审计日志总条数、最后备份时间。"
-        </div>
+    <div class="card action">
+        <p style="margin-top:0;"><strong>人AI分工法则</strong></p>
+        <p>AI擅长批量，人擅长判断。AI对SVG代码的操作是像素级的精确。人只在最关键的细节上介入——通过编号精准定位，告诉AI哪个元件需要调整、哪个连接线需要修改。两者各做各擅长的事，效率自然最高。</p>
+    </div>
 
-        <p>AI在几秒内就能生成完整代码。你复制粘贴、调试通过，<strong>半小时搞定</strong>。以前这可能需要半天到一天。</p>
+    <div class="insight-box decision">
+        这和<a href="fb.html">够用原则</a>完全一致。工具该做什么就让它做什么，人不该做的就不要做。AI擅长代码操作，就让它在代码层面做所有能做的事。人擅长审美判断和细节把控，就只在最关键的节点介入。不是用最贵的模型，不是用最复杂的工具，而是用最合适的方式，在最合适的节点上施加杠杆。
+    </div>
 
-        <div class="card green-left">
-            <p style="margin-top:0;"><strong>关键转变：</strong>原本"核心功能开发完就筋疲力尽了，实在没精力做验证设施"的困境，现在变成了"顺带就把可验证性做进去了"。可验证性基础设施，从<strong>奢侈品变成了标配</strong>。</p>
-        </div>
+    <h2 id="part5">五、结语：用工程思维重新定义设计</h2>
 
-        <h3>AI的同步维护能力</h3>
-        <p>更进一步，AI还能帮你同时维护产品代码和验证脚本：</p>
-        <div class="workflow-step">
-            <div class="step-num">1</div>
-            <div class="step-content">
-                <h4>修Bug时</h4>
-                <p>AI同步更新对应的测试用例，确保回归测试覆盖</p>
-            </div>
-        </div>
-        <div class="workflow-step">
-            <div class="step-num">2</div>
-            <div class="step-content">
-                <h4>加功能时</h4>
-                <p>AI同步生成这个功能的OQ测试步骤和SOP描述</p>
-            </div>
-        </div>
-        <div class="workflow-step">
-            <div class="step-num">3</div>
-            <div class="step-content">
-                <h4>结果</h4>
-                <p>不会再遇到"软件更新了，验证文档还在上一个版本"的经典脱节</p>
-            </div>
-        </div>
+    <p>设计，也是我整个思想体系在视觉维度上的投影。代码是这样，文章是这样，小说是这样，配色、排版、装饰元件，自然也是这样。它们不是不同的技能，是同一套法则在不同维度上的自然生长。</p>
 
-        <div class="insight-box">
-            <strong>因为AI让同步成本降到几乎为零。</strong>
-        </div>
-    </section>
+    <p><a href="fb.html">够用原则</a>告诉我只需要DeepSeek加Agent这两类工具，<strong>装饰必须说话</strong>告诉我每一个SVG元件都必须有语义功能。我用这套法则去驾驭复杂，用这套法则去管理创作，用编号系统去精准控制每一个细节，用分层策略去拆解每一个复杂问题。</p>
 
-    <section>
-        <h2 id="division">四、新模式下的分工：人做判断，AI做执行</h2>
+    <div class="insight-box cool">
+        这不是在设计，这是在用工程思维重新定义设计。SVG是代码，不是图片；AI的强项是写代码，不是画像素。编号系统是施工的脚手架，分层策略是拆解复杂的利器。够用原则、装饰必须说话——<a href="lj.html">君子不器</a>讲人和工具的关系，这篇讲人和AI在视觉创作里的关系。同一套法则，同一个内核。
+    </div>
 
-        <p>在AI介入之后，整个合规验证的工作流被彻底重构了：</p>
-
-        <table>
-            <thead>
-                <tr><th>阶段</th><th>人的工作</th><th>AI的工作</th></tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="layer-tag">需求</span></td>
-                    <td>定义合规要求和测试场景</td>
-                    <td>生成测试规格说明</td>
-                </tr>
-                <tr>
-                    <td><span class="layer-tag">编码</span></td>
-                    <td>审核和集成</td>
-                    <td>生成业务功能、测试接口、自诊断模块</td>
-                </tr>
-                <tr>
-                    <td><span class="layer-tag">测试</span></td>
-                    <td>执行物理测试和观察结果</td>
-                    <td>生成自动化测试脚本、监控代码</td>
-                </tr>
-                <tr>
-                    <td><span class="layer-tag">文档</span></td>
-                    <td>审阅和签字</td>
-                    <td>生成IQ/OQ/PQ方案草稿、SOP初版</td>
-                </tr>
-                <tr>
-                    <td><span class="layer-tag">报告</span></td>
-                    <td>最终结论和签字</td>
-                    <td>自动收集证据、导出报告骨架</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="card purple-left">
-            <p style="margin-top:0;"><strong>人的工作：</strong>被重新聚焦到那些AI永远无法承担的事情上——判断、决策、签字、<strong>承担法律责任</strong>。</p>
-            <p><strong>AI的工作：</strong>覆盖了所有可重复、可模板化、可自动执行的体力活。</p>
-        </div>
-
-        <div class="quote-block">
-            这不是AI替代人的故事。<br><strong>这是人和AI重新分工的故事。</strong>
-        </div>
-    </section>
-
-    <section>
-        <h2 id="ultimate">五、终极形态：软件本身变成"合规证据工厂"</h2>
-
-        <p>当你把配置导出、测试接口、自诊断、证据收集、SOP录制等功能都用AI生成并集成好后，你的软件本身就变成了一个<strong>"合规证据工厂"</strong>。</p>
-
-        <p>到那时，出验证报告不再是写报告。而是打开软件，插上U盘，点几下按钮，系统自动吐出一份包含所有测试证据和签名的验证包：</p>
-
-        <div class="feature-grid">
-            <div class="feature-item">
-                <h4><i class="fas fa-check-circle"></i> IQ报告</h4>
-                <p>来自系统自校验</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-flask"></i> OQ报告</h4>
-                <p>来自自动化测试脚本的执行结果</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-clock"></i> PQ报告</h4>
-                <p>来自长期运行的合规快照</p>
-            </div>
-            <div class="feature-item">
-                <h4><i class="fas fa-file-video"></i> SOP初稿</h4>
-                <p>来自操作录制模式的自动输出</p>
-            </div>
-        </div>
-
-        <div class="card accent-left">
-            <p style="margin-top:0;"><strong>验证从"事后补文档"变成了"事前建法则"。</strong></p>
-        </div>
-
-        <p>而这个转变的起点，正是你把那些繁琐但AI擅长的事，在编程阶段就交给了AI。AI编程的真正价值，不只是帮你做出产品功能，更关键的是它把合规验证的技术准备工作也"顺手"完成了。</p>
-    </section>
-
-    <section>
-        <h2 id="mapping">六、回到你的体系：这不过是你已有法则的又一次验证</h2>
-
-        <p>如果你一直在读这个系列的文章，你会发现这件事和前面所有的讨论共享同一个哲学内核。</p>
-
-        <div class="card green-left">
-            <p style="margin-top:0;"><strong>"人定义法则，AI在法则内执行。"</strong></p>
-            <p style="margin-top:8px;">你在软件架构里定义了"什么是对的"——配置文件必须有效、依赖版本必须锁定、审计日志必须不可篡改、签名必须绑定到具体记录。这些法则在编程阶段就被AI翻译成了可执行的代码。当验证时刻来临时，系统不需要人去逐项检查，它自己就知道自己是否符合法则。</p>
-        </div>
-
-        <div class="card blue-left">
-            <p style="margin-top:0;"><strong>"把法则在事前定义清楚，让执行在法则内自动完成。"</strong></p>
-            <p style="margin-top:8px;">验证友好化设计，就是把这个原则从代码调试、文档管理、版本控制，扩展到了合规验证领域。你把VSR报告的生产工作，从事后补文档阶段，转移到了事前编程阶段——那个AI最擅长的阶段。</p>
-        </div>
-
-        <div class="card purple-left">
-            <p style="margin-top:0;"><strong>"让正确的事在正确的阶段被完成。"</strong></p>
-            <p style="margin-top:8px;">AI擅长的，是在编程阶段生成结构化的、规则明确的代码。人不擅长的，是事后手工执行重复的验证步骤。把验证的准备工作转移到编程阶段，就是把工作从"人不擅长的阶段"转移到"AI擅长的阶段"。</p>
-        </div>
-
-        <div class="insight-box">
-            <strong>这就是你整套方法论的又一次自我验证。</strong>你从一个嵌入式工程师的具体痛苦出发，构建了一套法则体系。现在，这套体系在GMP合规这个完全不同的领域，再次证明了自己的有效性。
-        </div>
-
-        <div class="quote-block">
-            AI编程让你从一个"用AI写代码的人"变成了一个<br><strong>"用AI构建可验证系统的人"</strong><br><br>
-            而后者，才是真正能高效通过GMP审计、<br>持续迭代、规模交付的壁垒。
-        </div>
-    </section>
+</article>
 
     <section class="footnote-section">
         <h4>本文定位</h4>
-        <p>本文是五层进化系列在<strong>验证维度</strong>的扩展。它将"事前建法则"的思想从代码调试延伸到合规验证领域，提出"合规证据工厂"作为AI编程在制药、医疗器械等合规行业的应用范式。</p>
+        <p>本文是嵌入式AI工程化系列的<strong>工程心法篇</strong>。它从"AI画不好位图但天生该用代码画图"这一实践洞察切入，探讨SVG工作流中的编号系统与分层策略。核心观点包括：SVG是代码不是图片（AI的强项是理解代码而非像素）、编号系统（施工期间的脚手架，交付时删除）、分层策略（小图直接出、大图Agent集成）、人AI分工（AI批量生成，人精准裁决）。与<a href="fb.html">《别把AI用成付费上班》</a>的够用原则、<a href="13.html">《拆解与整合》</a>的分层逻辑、<a href="lj.html">《君子不器与灵活调度》</a>的工具调度法则互为呼应。</p>
         <div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
             <strong>系列导航：</strong>
             <a href="in.html">五层进化</a> ·
@@ -1129,10 +850,10 @@
         </div>
 
 <div class="series-nav">
-    <a href="devs.html" aria-label="上一篇：固件铭牌与设备画像">← 固件铭牌与设备画像</a>
-    <a href="hg.html" aria-label="下一篇：回归现实：单Agent实践框架 ">回归现实：单Agent实践框架  →</a>
+    <a href="fb.html" aria-label="上一篇：别把AI用成付费上班">← 别把AI用成付费上班</a>
+    <a href="14.html" aria-label="下一篇：AI谄媚与专利">AI谄媚与专利 →</a>
 </div>
-<p style="margin-top:12px;"><a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a></p>
+<p style="margin-top:12px;font-size:13px;"><a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a></p>
     </section>
 
 </div>
@@ -1154,6 +875,3 @@
 </div>
 </body>
 </html>
-
-
-

@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/status-Active-brightgreen?style=flat-square" alt="Status">
   <img src="https://img.shields.io/badge/methodology-Harness_Engineering-blue?style=flat-square" alt="Methodology">
   <img src="https://img.shields.io/badge/topics-Embedded_AI%20|%20Toolchain%20|%20Agents-orange?style=flat-square" alt="Topics">
-  <img src="https://img.shields.io/badge/tech_series-19-orange?style=flat-square" alt="Tech Series">
+  <img src="https://img.shields.io/badge/tech_series-20-orange?style=flat-square" alt="Tech Series">
   <img src="https://img.shields.io/badge/framework-4_Layer_System-8b5cf6?style=flat-square" alt="System">
   <img src="https://img.shields.io/badge/pages-live-222?style=flat-square&logo=github" alt="GitHub Pages">
 </p>
@@ -70,6 +70,7 @@
 | ⑰ | [始于工程，服务生活](https://x-itg.github.io/gd.html) | 内核反照 | 工程法则、人生方法、思维外延 |
 | ⑱ | [君子不器与灵活调度](https://x-itg.github.io/lj.html) | 工程心法 | 主体性、灵活调度、够用原则 |
 | ⑲ | [别把AI用成付费上班](https://x-itg.github.io/fb.html) | 工程心法 | 够用原则、分层路由、性价比 |
+| ⑳ | [别让AI画图，让它写图](https://x-itg.github.io/svg.html) | 工程心法 | SVG代码画图、编号系统、分层策略 |
 
 ---
 
@@ -238,6 +239,15 @@
 > 旗舰模型确实更强，但你日常百分之八十的活用不到旗舰。分层路由、够用原则、精准交付——省钱只是结果，清醒才是内核。
 >
 > [阅读全文](https://x-itg.github.io/fb.html)
+
+</details>
+
+<details>
+<summary>⑳ 别让AI画图，让它写图：SVG工程心法</summary>
+
+> SVG是代码，不是图片。AI画不好位图，但它天生就该用代码画图。用编号精准定位每一个元件，用分层策略从小图到大图逐级构建。这是工程思维在设计领域的投影。
+>
+> [阅读全文](https://x-itg.github.io/svg.html)
 
 </details>
 
