@@ -140,7 +140,59 @@
 
 .main-content { flex: 1; min-width: 0; }
 
-	
+	/* 章节分组标题 */
+	.section-group-label {
+		display: block;
+		margin: 64px 0 -40px;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		color: #8896a4;
+		padding: 8px 0;
+		border-bottom: 1px dashed #d0d7de;
+	}
+
+	/* 可折叠安装步骤 */
+	details.install-step {
+		background: var(--card-bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		margin: 12px 0;
+		overflow: hidden;
+	}
+	details.install-step summary {
+		padding: 14px 20px;
+		cursor: pointer;
+		font-weight: 600;
+		color: #1a1a2e;
+		list-style: none;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		user-select: none;
+	}
+	details.install-step summary::-webkit-details-marker { display: none; }
+	details.install-step summary::before {
+		content: "▸";
+		font-size: 14px;
+		transition: transform 0.2s ease;
+		color: var(--accent);
+	}
+	details.install-step[open] summary::before {
+		transform: rotate(90deg);
+	}
+	details.install-step .step-body {
+		padding: 0 20px 16px;
+		border-top: 1px solid var(--border);
+	}
+	details.install-step .step-body p {
+		margin: 10px 0;
+	}
+	details.install-step .step-body pre {
+		margin: 10px 0;
+		font-size: 12px;
+	}
 
 	@media (max-width: 640px) {
 		.container { padding: 20px 16px 60px; }
@@ -717,17 +769,26 @@
 	<aside class="sidebar-toc">
 		<h3>本章导览</h3>
 		<nav>
+			<p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8896a4;margin:0 0 6px;">I · 认识工具链</p>
 			<ul>
 				<li><a href="#pain-points">🔧 为什么老是卡住</a></li>
 				<li><a href="#toolchain">🤖 组合拳是什么</a></li>
-				<li><a href="#hardfault">🤖 HardFault 直达根因</a></li>
-				<li><a href="#pipeline">✅ 编译烧录验证闭环</a></li>
-				<li><a href="#observability">🏷️ 输出与数据回流</a></li>
-				<li><a href="#workflow">📷 实战快照：完整调试流程</a></li>
+			</ul>
+			<p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8896a4;margin:14px 0 6px;">II · 环境搭建</p>
+			<ul>
+				<li><a href="#prerequisites">📦 工具清单与安装</a></li>
+			</ul>
+			<p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8896a4;margin:14px 0 6px;">III · 能力进阶</p>
+			<ul>
+				<li><a href="#build-flash">⚡ 编译与烧录</a></li>
+				<li><a href="#read-state">🏷️ 读取硬件状态</a></li>
+				<li><a href="#real-case">📷 实战案例：UART 快照诊断</a></li>
+			</ul>
+			<p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8896a4;margin:14px 0 6px;">IV · 工程闭环</p>
+			<ul>
 				<li><a href="#troubleshooting">🚨 常见故障与快速恢复</a></li>
-				<li><a href="#automation">✅ 无人值守回归</a></li>
-				<li><a href="#integration">🔗 自动化集成与工程骨架</a></li>
-				<li><a href="#essence">🛠️ 这套组合拳的精髓</a></li>
+				<li><a href="#integration">📝 配置文件与工作流</a></li>
+				<li><a href="#essence">🛠️ 从工具链到翻译层</a></li>
 			</ul>
 		</nav>
 	</aside>
@@ -741,6 +802,8 @@
 				<p class="subtitle">把 AI 从“只会写代码”推进到“能感知硬件状态、能自己闭环验证”的命令行工作流</p>
 				<p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
 			</header>
+
+			<span class="section-group-label">I · 认识工具链</span>
 
 			<section>
 				<h2 id="pain-points">为什么很多 AI 嵌入式调试还停在半路</h2>
@@ -764,10 +827,171 @@ arm-none-eabi-gdb build/app.elf \
   -ex "monitor reset halt"</code></pre>
 			</section>
 
+			<span class="section-group-label">II · 环境搭建</span>
+
 			<section>
-				<h2 id="hardfault">出了 HardFault，AI 能直接帮你盯住根因</h2>
-				<p>传统 HardFault 调试经常是这样的：停机，读寄存器，抄一堆数值，翻 Cortex-M 手册，定位到底是越权访问、总线错误、未对齐访问还是除零。这个流程并不需要“灵感”，它需要的是快速、稳定、完整地读取证据。</p>
-				<p>而 OpenOCD 正好把这些证据暴露成了命令接口。只要把控制口交给 AI，它就能自己读取 CFSR、HFSR、BFAR、MMFAR 和通用寄存器，自行拼出异常现场。</p>
+				<h2 id="prerequisites">环境准备：工具清单与安装</h2>
+				<p>在跑通整套流程之前，需要先把工具链装齐。以下是 STM32F446 项目的完整环境配置，Windows 和 Linux 均覆盖。</p>
+
+				<div class="card engineer">
+					<p style="margin-top:0;"><strong>必备工具清单：</strong></p>
+					<table style="width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 0;">
+						<thead><tr style="border-bottom:2px solid var(--border);">
+							<th style="text-align:left;padding:8px 12px;">序号</th>
+							<th style="text-align:left;padding:8px 12px;">工具</th>
+							<th style="text-align:left;padding:8px 12px;">用途</th>
+						</tr></thead>
+						<tbody>
+							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">1</td><td style="padding:6px 12px;"><code>Python 3</code></td><td style="padding:6px 12px;">运行工程构建脚本（PyYAML / Jinja2 / jsonschema）</td></tr>
+							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">2</td><td style="padding:6px 12px;"><code>ST-Link/V2 驱动</code></td><td style="padding:6px 12px;">USB 调试器硬件驱动（STSW-LINK009）</td></tr>
+							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">3</td><td style="padding:6px 12px;"><code>Git for Windows</code></td><td style="padding:6px 12px;">版本管理 + Git Bash 终端（自带 make）</td></tr>
+							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">4</td><td style="padding:6px 12px;"><code>Visual Studio Code</code></td><td style="padding:6px 12px;">轻量级编辑器 + cortex-debug 调试</td></tr>
+							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">5</td><td style="padding:6px 12px;"><code>arm-none-eabi-gcc</code></td><td style="padding:6px 12px;">ARM 裸机交叉编译器</td></tr>
+							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">6</td><td style="padding:6px 12px;"><code>arm-none-eabi-gdb</code></td><td style="padding:6px 12px;">ARM 调试器（随 gcc 工具链一起安装）</td></tr>
+							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">7</td><td style="padding:6px 12px;"><code>OpenOCD</code></td><td style="padding:6px 12px;">开源调试服务器，驱动 ST-Link 烧录</td></tr>
+							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">8</td><td style="padding:6px 12px;"><code>cortex-debug</code></td><td style="padding:6px 12px;">VS Code 调试扩展插件</td></tr>
+														<tr><td style="padding:6px 12px;">9</td><td style="padding:6px 12px;"><code>pyserial</code></td><td style="padding:6px 12px;">Python 串口通信库，PC 侧收发与监控</td></tr>
+						</tbody>
+					</table>
+				</div>
+
+				<h3>逐步安装</h3>
+
+				<details class="install-step">
+					<summary>Step 1 · 安装 Python 相关组件</summary>
+					<div class="step-body">
+						<p>安装 Python 3 后，在命令终端中运行：</p>
+						<pre><code>pip install PyYAML Jinja2 jsonschema pyserial</code></pre>
+						<p>前三个是构建脚本依赖，<code>pyserial</code> 用于 PC 侧串口收发与监控。</p>
+					</div>
+				</details>
+
+				<details class="install-step">
+					<summary>Step 2 · 安装 ST-Link/V2 驱动</summary>
+					<div class="step-body">
+						<p>从 ST 官网下载 <strong>STSW-LINK009</strong> 驱动包，解压后双击运行 <code>dpinst_amd64.exe</code>，按提示保持默认安装即可。</p>
+						<p>安装完成后插入 ST-Link，在设备管理器中应能看到 <code>STMicroelectronics STLink dongle</code>。</p>
+					</div>
+				</details>
+
+				<details class="install-step">
+					<summary>Step 3 · 安装 Git for Windows</summary>
+					<div class="step-body">
+						<p>双击安装 <code>Git-xxx-64-bit.exe</code>，全程保持默认选项即可。关键配置：</p>
+						<ul>
+							<li>默认编辑器：推荐选 VS Code</li>
+							<li>PATH 环境：选 <strong>Git from the command line and also from 3rd-party software</strong></li>
+							<li>行尾转换：选 <strong>Checkout as-is, commit Unix-style</strong></li>
+							<li>终端：选 <strong>Use MinTTY</strong></li>
+						</ul>
+						<p>Git for Windows 自带 <code>make</code> 工具（MSYS2 编译），后续不需要单独安装。</p>
+					</div>
+				</details>
+
+				<details class="install-step">
+					<summary>Step 4 · 安装 ARM GNU Compiler</summary>
+					<div class="step-body">
+						<p><strong>方式一：xPack（推荐）</strong></p>
+						<pre><code>npm install -g xpm
+xpm install --global @xpack-dev-tools/arm-none-eabi-gcc-xpack</code></pre>
+						<p><strong>方式二：手动解压</strong></p>
+						<p>解压 <code>gcc-arm-none-eabi-xxx.zip</code> 到 <code>C:\Program Files</code>，然后将 bin 目录加入系统 PATH：</p>
+						<pre><code># 示例路径
+C:\Program Files\gcc-arm-none-eabi-7-2018-q2-update-win32\bin</code></pre>
+						<p><strong>方式三：STM32CubeCLT</strong>（ST 官方打包，含 gcc + gdb + openocd + make）</p>
+						<pre><code># Windows 默认路径
+C:\Program Files (x86)\STMicroelectronics\STM32CubeCLT</code></pre>
+					</div>
+				</details>
+
+				<details class="install-step">
+					<summary>Step 5 · 安装 OpenOCD</summary>
+					<div class="step-body">
+						<p><strong>方式一：xPack</strong></p>
+						<pre><code>xpm install --global @xpack-dev-tools/openocd-xpack</code></pre>
+						<p><strong>方式二：手动解压</strong></p>
+						<p>解压 <code>OpenOCD.zip</code> 到 <code>C:\Program Files</code>，将 bin 目录加入 PATH：</p>
+						<pre><code>C:\Program Files\OpenOCD\0.10.0-13\bin</code></pre>
+						<p><strong>Linux：</strong><code>sudo apt install openocd</code></p>
+					</div>
+				</details>
+
+				<details class="install-step">
+					<summary>Step 6 · 安装 Build Tools（Windows 专用）</summary>
+					<div class="step-body">
+						<p>如果不用 Git Bash，需要单独安装 GNU MCU Eclipse Build Tools：</p>
+						<p>解压 <code>gnu-mcu-eclipse-windows-build-tools-xxx.zip</code> 到 <code>C:\Program Files</code>，加入 PATH：</p>
+						<pre><code>C:\Program Files\GNU MCU Eclipse\Build Tools\2.12-20190422-1053\bin</code></pre>
+						<p>这套工具提供 <code>make</code>、<code>rm</code>、<code>mkdir</code> 等 POSIX 命令。</p>
+					</div>
+				</details>
+
+				<h3>VS Code 插件配置</h3>
+				<p>在 VS Code 扩展商店搜索安装以下插件：</p>
+				<div class="card action">
+					<p style="margin-top:0;"><strong>必装插件：</strong></p>
+					<ul style="margin:0;padding-left:20px;">
+						<li><code>C/C++</code> — 代码智能提示与导航</li>
+						<li><code>Cortex-Debug</code> — ARM 芯片调试器，连接 OpenOCD</li>
+						<li><code>Include Autocomplete</code> — 头文件自动补全</li>
+						<li><code>Path Autocomplete</code> — 路径自动补全</li>
+					</ul>
+				</div>
+				<p>配置 <strong>Git Bash 为默认终端</strong>：点击 <code>Terminal → New Terminal</code> → 下拉框 → <code>Select Default Shell</code> → 选择 <code>Git Bash</code>。重启 VS Code 后生效。</p>
+
+				<h3>验证安装</h3>
+				<p>一切就绪后，打开命令终端运行以下命令确认：</p>
+				<pre><code>arm-none-eabi-gcc --version
+arm-none-eabi-gdb --version
+openocd --version
+python --version
+make --version</code></pre>
+				<p>每个命令都应返回版本信息。如果报“不是内部或外部命令”，说明对应工具的 bin 目录没有加入系统 PATH。</p>
+
+				<div class="insight-box decision">
+					<strong>工具链路径的关键原则：</strong>Makefile 中的 <code>GCC_PATH</code> 必须指向 <code>arm-none-eabi-gcc</code> 所在目录。路径不对，<code>make</code> 会报“找不到编译器”。如果用 Git Bash 作为终端，Makefile 中的路径要用正斜杠 <code>/</code> 或双反斜杠 <code>\\</code>。
+				</div>
+			</section>
+
+			<span class="section-group-label">III · 能力进阶</span>
+
+			<section>
+				<h2 id="build-flash">编译与烧录：从 make 到 make upload</h2>
+				<p>工具链的核心价值，是让“写代码”和“硬件验证”之间的距离足够短。在命令行工具链里，这段距离可以被压缩到秒级。</p>
+
+				<h3>确认环境基线</h3>
+				<p>开始之前，确保工具链已就位：</p>
+				<pre><code>Get-Command openocd
+arm-none-eabi-gdb --version</code></pre>
+				<p>目标：<code>STM32F446</code>，固件：<code>build/01-RTC.elf</code>。两个命令都能返回版本信息，环境就立住了。</p>
+
+				<h3>标准三步流程</h3>
+				<p><strong>Step 1 · 构建</strong>——编译固件，多核并行：</p>
+				<pre><code>make -j4</code></pre>
+
+				<p><strong>Step 2 · 烧录</strong>——一条命令把 ELF 推进芯片：</p>
+				<pre><code>make upload</code></pre>
+				<p>内部等价于：</p>
+				<pre><code>openocd -f board/stm32f4discovery.cfg \
+  -c "reset_config trst_only combined" \
+  -c "program build/01-RTC.elf verify reset exit"</code></pre>
+
+				<p><strong>Step 3 · 启动调试服务器</strong>——后台保持运行：</p>
+				<pre><code>make debug-start
+# 等价于: openocd -f board/stm32f4discovery.cfg</code></pre>
+				<p>期望输出中看到 <code>starting gdb server on 3333</code> 和 <code>Listening on port 3333</code>，说明调试服务器已就绪。</p>
+
+				<div class="card accent-left">
+					<p style="margin-top:0;"><strong>关键变化：</strong>编译和烧录不再是“你点一下，AI 等一下”。AI 改完代码，可以立刻调用构建命令、执行烧录、重启目标板。你在 IDE 里点菜单的时间，AI 已经能跑几十轮“改代码-烧录-验证”了。</p>
+				</div>
+			</section>
+
+			<section>
+				<h2 id="read-state">读取硬件状态：寄存器、变量与原始字节</h2>
+				<p>烧录只是单向的。真正的调试闭环，还需要能<strong>把硬件状态读回来</strong>。OpenOCD + GDB 提供了三层读取能力，覆盖从寄存器到应用变量的全部层级。</p>
+
+				<h3>第一层：HardFault 寄存器读取</h3>
+				<p>出了 HardFault，传统调试是停机、读寄存器、抄数值、翻手册。而 OpenOCD 把这些证据暴露成了命令接口：</p>
 				<pre><code>telnet localhost 4444
 &gt; halt
 &gt; reg
@@ -775,82 +999,54 @@ arm-none-eabi-gdb build/app.elf \
 &gt; mdw 0xE000ED2C 1   # HFSR
 &gt; mdw 0xE000ED38 1   # BFAR
 &gt; mdw 0xE000ED34 1   # MMFAR</code></pre>
-				<p>这样一来，AI 不必等你总结“我怀疑是内存踩坏了”。它可以直接从寄存器值推回异常类型，再结合 PC、LR、SP 和栈帧信息去判断问题更像空指针、栈溢出、非法外设访问还是编译器优化带来的错觉。</p>
-				<div class="insight-box">
-					<strong>真正高价值的不是 AI 会不会解释 HardFault，</strong>而是它能不能直接拿到故障寄存器、内存和栈现场。先看到现场，后谈分析，顺序不能反。
-				</div>
-			</section>
+				<p>AI 不必等你总结“我怀疑是内存踩坏了”。它可以直接从寄存器值推回异常类型——空指针、栈溢出、非法外设访问还是编译器优化带来的错觉。</p>
 
-			<section>
-				<h2 id="pipeline">编译、烧录、验证，AI 才能真正一键走通</h2>
-				<p>一旦进入命令行工具链，编译和烧录就不再是“你点一下，AI 等一下”的协作模式。AI 改完代码，可以立刻调用构建命令、执行烧录、校验固件、重启目标板，然后继续跑测试。</p>
-				<p>对嵌入式来说，这一步尤其重要。很多所谓“AI 编程”卡住，不是因为模型写不出代码，而是因为它无法进入烧录后的真实反馈回路。命令行工具链把这个堵点直接拆了。</p>
-				<pre><code>make -j$(nproc)
-openocd -f interface/stlink.cfg -f target/stm32f4x.cfg \
-  -c "init" \
-  -c "reset halt" \
-  -c "program build/app.elf verify" \
-  -c "reset run" \
-  -c "shutdown"</code></pre>
-				<p>如果增量编译和重新链接足够快，改一行代码到硬件验证可以稳定进入秒级闭环。你在 IDE 里点菜单的时间，AI 已经能跑几十轮“改代码-烧录-验证”了。</p>
-			</section>
-
-			<section>
-				<h2 id="observability">不占串口，也能把设备输出和数据带回来</h2>
-				<p>很多板子串口资源并不宽裕。调试期串口被别的外设占了，或者日志一多影响时序，传统手段就开始别扭。这时 OpenOCD + GDB 的另一层价值就出来了。</p>
-				<p>你可以用 semihosting 把 <code>printf</code> 直接打到调试控制台，不占物理串口；也可以用 GDB 直接导出 RAM 缓冲区，把 ADC、DMA 或算法中间结果抓成 CSV，再交给 Python 自动分析。</p>
-				<pre><code>arm-none-eabi-gdb build/app.elf \
-  -ex "target remote :3333" \
-  -ex "dump binary memory capture.bin 0x20002000 0x20002800" \
-  -ex "quit"
-
-python tools/analyze_fft.py capture.bin</code></pre>
-				<p>这样，AI 不只是“看到有没有打印”，而是能拿到原始数据做二次判断。滤波器到底有没有抑制高频噪声，DMA 环形缓冲是不是覆盖了旧样本，这些都可以直接回流到分析脚本里。</p>
-    </section>
-
-			<section>
-				<h2 id="workflow">实战快照：一套 STM32F446 上的完整调试流程</h2>
-				<p>理论讲完了，下面把镜头拉到真实项目。以 STM32F446 + ST-Link 为例，这套流程我反复用过，目标是：<strong>从命令行构建、烧录、启动调试服务器、批量读取运行时变量，全程不需要人坐在 GDB 交互界面里。</strong></p>
-
-				<h3>环境基线确认</h3>
-				<p>在开始之前，确保工具链已就位：</p>
-				<pre><code>Get-Command openocd
-arm-none-eabi-gdb --version</code></pre>
-				<p>目标：<code>STM32F446</code>，固件：<code>build/01-RTC.elf</code>。这两个命令能返回版本信息，环境就立住了。</p>
-
-				<h3>标准四步流程</h3>
-				<p><strong>Step 1 · 构建</strong>——编译固件，多核并行：</p>
-				<pre><code>make -j4</code></pre>
-
-				<p><strong>Step 2 · 烧录</strong>——一条命令把 ELF 推进芯片：</p>
-				<pre><code>make upload</code></pre>
-
-				<p><strong>Step 3 · 启动 OpenOCD GDB 服务器</strong>——后台保持运行：</p>
-				<pre><code>openocd -f interface/stlink.cfg -f target/stm32f4x.cfg</code></pre>
-				<p>期望输出中看到 <code>starting gdb server on 3333</code> 和 <code>Listening on port 3333 for gdb connections</code>，说明调试服务器已就绪。</p>
-
-				<p><strong>Step 4 · 批量快照读取</strong>——这是整个流程的精髓。用 batch 模式让 GDB 自行 halt、读变量、resume，不需要人坐在交互界面：</p>
+				<h3>第二层：GDB batch 模式批量读变量</h3>
+				<p>这是整套流程的精髓。用 batch 模式让 GDB 自行 halt、读变量、resume，不需要人坐在交互界面：</p>
 				<pre><code>arm-none-eabi-gdb build/01-RTC.elf -q -batch `
   -ex "target extended-remote localhost:3333" `
   -ex "monitor halt" `
   -ex "p/d u2_idle_cnt" `
   -ex "p/d u2_line_ok_cnt" `
   -ex "p/d u2_dbg_raw_total" `
-  -ex "p/d u2_line_index" `
   -ex "x/s u2_dbg_last_line" `
   -ex "monitor resume"</code></pre>
-
 				<div class="card action">
 					<p style="margin-top:0;"><strong>为什么强调 batch 模式？</strong>因为 AI 不需要交互式 GDB。batch 模式让“读取运行时变量”变成一个可编程的原子操作——halt、采样、resume，一次执行，结果直接回流到脚本或 AI 分析链路。</p>
 				</div>
 
-				<h3>快照诊断法：用差值定位间歇性问题</h3>
-				<p>间歇性 UART 丢帧是最难调的故障之一。串口日志看不出根因，逻辑分析仪抓不到触发条件。这时候，<strong>快照差值法</strong>反而是最朴素也最有效的路径：</p>
+				<h3>第三层：RAM 导出与原始字节</h3>
+				<p>很多板子串口资源不宽裕。这时可以用 GDB 直接导出 RAM 缓冲区，把 ADC、DMA 或算法中间结果抓成二进制，再交给 Python 分析：</p>
+				<pre><code># 导出 RAM 缓冲区
+arm-none-eabi-gdb build/app.elf \
+  -ex "target remote :3333" \
+  -ex "dump binary memory capture.bin 0x20002000 0x20002800" \
+  -ex "quit"
+
+# 或 dump 特定变量的原始字节
+arm-none-eabi-gdb build/01-RTC.elf -q -batch `
+  -ex "target extended-remote localhost:3333" `
+  -ex "monitor halt" `
+  -ex "x/128bx u2_dbg_raw" `
+  -ex "monitor resume"
+
+python tools/analyze_fft.py capture.bin</code></pre>
+
+				<div class="insight-box">
+					<strong>真正高价值的不是 AI 会不会解释故障，</strong>而是它能不能直接拿到寄存器、变量和原始字节。先看到现场，后谈分析，顺序不能反。
+				</div>
+			</section>
+
+			<section>
+				<h2 id="real-case">实战案例：STM32F446 UART 快照诊断</h2>
+				<p>上面两层能力组合起来，就能解决嵌入式里最棘手的故障类型——<strong>间歇性问题</strong>。以 UART 丢帧为例，串口日志看不出根因，逻辑分析仪抓不到触发条件。</p>
+
+				<h3>快照差值法</h3>
 				<ol>
-					<li>拍快照 A：记录 <code>u2_idle_cnt</code>、<code>u2_dbg_raw_total</code>、<code>u2_line_ok_cnt</code>、<code>u2_dbg_last_line</code></li>
-					<li>让 MCU 运行一段时间（几秒到几分钟）</li>
+					<li>拍快照 A：用 batch GDB 记录 <code>u2_idle_cnt</code>、<code>u2_dbg_raw_total</code>、<code>u2_line_ok_cnt</code>、<code>u2_dbg_last_line</code></li>
+					<li>让 MCU 运行一段时间</li>
 					<li>拍快照 B</li>
-					<li>对比差值</li>
+					<li>对比差值，定位问题层</li>
 				</ol>
 				<div class="card engineer">
 					<p style="margin-top:0;"><strong>差值判断逻辑：</strong></p>
@@ -861,14 +1057,71 @@ arm-none-eabi-gdb --version</code></pre>
 						<li><code>u2_line_ok_cnt</code> 不动，但 idle 在涨 → 帧碎片化，或解析器触发条件有问题</li>
 					</ul>
 				</div>
-				<p>如果需要看原始字节流，可以直接 dump 内存：</p>
-				<pre><code>arm-none-eabi-gdb build/01-RTC.elf -q -batch `
-  -ex "target extended-remote localhost:3333" `
-  -ex "monitor halt" `
-  -ex "x/128bx u2_dbg_raw" `
-  -ex "monitor resume"</code></pre>
-				<p>这一步的价值在于：AI 拿到的是 <strong>16 进制原始字节</strong>，不是你的口头描述。它可以直接看到 <code>0x0D 0x0A</code> 在哪里，帧边界对不对，有没有粘连和错位。</p>
+				<p>AI 拿到的是 <strong>16 进制原始字节</strong>和<strong>计数器差值</strong>，不是你的口头描述。它可以直接看到 <code>0x0D 0x0A</code> 在哪里，帧边界对不对，有没有粘连和错位。</p>
+
+				<h3>PC 侧串口收发：using-serial-devices</h3>
+				<p>GDB batch 解决的是"从芯片内部读变量"。但很多场景你还需要从 <strong>PC 侧</strong>直接向串口发命令、收响应、监控数据流——比如发送测试指令触发 MCU 回传，或者长时间监听串口日志。</p>
+				<p><a href="https://github.com/0xchaihu/using-serial-devices" target="_blank" rel="noopener"><code>using-serial-devices</code></a> 是一个专为 AI Agent 设计的串口 skill，底层基于 pyserial，上层封装成 <strong>CLI + JSON 输出 + 结构化退出码</strong>，跨平台支持 Windows COM / Linux tty / macOS。Agent 可以直接调用，不需要你手动转述。</p>
+				<pre><code># 安装
+python -m pip install pyserial
+
+# 1. 发现可用串口（JSON 输出，Agent 可直接解析）
+python scripts/serial_tool.py list --json
+# {"ok":true,"command":"list","data":{"ports":["COM3","COM7"],"count":2}}
+
+# 2. 探测端口是否可打开
+python scripts/serial_tool.py probe --port COM5 --baud 115200 --json
+
+# 3. 发送 AT 命令并等待 OK 响应（一步完成请求-响应）
+python scripts/serial_tool.py request --port COM5 --baud 115200 `
+  --text "AT+STATUS" --newline crlf --expect "OK" --until-idle 1 --json
+
+# 4. 发送原始 HEX 字节
+python scripts/serial_tool.py write --port COM5 --baud 115200 `
+  --hex "55 aa 00 ff" --json
+
+# 5. 读取直到设备空闲 2 秒
+python scripts/serial_tool.py read --port COM5 --baud 115200 `
+  --until-idle 2 --json</code></pre>
+
+				<h3>后台监控：Agent 边干活边听串口</h3>
+				<p>这个 skill 最强的能力是<strong>后台监控</strong>。Agent 可以在编译、烧录、读文件的同时，后台持续监听串口，互不阻塞：</p>
+				<pre><code># 启动后台监控（返回 session_id）
+python scripts/serial_tool.py monitor start --port COM5 --baud 115200 --json
+
+# Agent 做其他工作（编译、烧录、分析文件...）
+
+# 轮询新事件（非阻塞）
+python scripts/serial_tool.py monitor poll --session SESSION_ID --since 0 --json
+
+# 或阻塞等待特定响应
+python scripts/serial_tool.py monitor wait --session SESSION_ID `
+  --expect "ready|OK|boot complete" --timeout 30 --json
+
+# 停止监控
+python scripts/serial_tool.py monitor stop --session SESSION_ID --json</code></pre>
+
+				<div class="card engineer">
+					<p style="margin-top:0;"><strong>为什么这个 skill 适合 AI Agent？</strong></p>
+					<ul style="margin:0;padding-left:20px;">
+						<li>所有命令输出 <strong>JSON / JSONL</strong>，Agent 无需正则解析文本</li>
+						<li><strong>结构化退出码</strong>：0=成功，2=端口不可用，3=超时未匹配，Agent 可据此自动重试</li>
+						<li><code>request</code> 命令把"发送+等待响应"封装成原子操作，<code>--expect</code> 支持正则匹配</li>
+						<li><code>monitor</code> 模式让 Agent 边编译烧录边听串口，真正实现并行工作</li>
+					</ul>
+				</div>
+
+				<div class="card action">
+					<p style="margin-top:0;"><strong>与 GDB batch 的分工：</strong></p>
+					<ul style="margin:0;padding-left:20px;">
+						<li><strong>GDB batch</strong>：读取 MCU 内部运行时变量（halt → 采样 → resume），诊断芯片内部状态</li>
+						<li><strong>serial_tool</strong>：PC 侧发送指令、接收响应、后台监控，适合协议验证和数据回流</li>
+						<li>两者组合：serial_tool 发送测试指令 → GDB batch 同步读取内部计数器 → 对比两侧数据，交叉验证</li>
+					</ul>
+				</div>
 			</section>
+
+			<span class="section-group-label">IV · 工程闭环</span>
 
 			<section>
 				<h2 id="troubleshooting">常见故障与快速恢复</h2>
@@ -899,48 +1152,261 @@ openocd -f interface/stlink.cfg -f target/stm32f4x.cfg</code></pre>
 			</section>
 
 			<section>
-				<h2 id="automation">跨硬件与仿真的自动化测试，才是真的无人值守</h2>
-				<p>这套链路还有一个特别现实的好处：不管你跑真板还是 QEMU，本质上都可以被 GDB 驱动。AI 可以自动加载测试固件、注入测试输入、读回 RAM 中的断言结果，再决定下一轮该修哪一块。</p>
-				<p>配合 Python 脚本后，夜里跑回归就不是一句口号了。你睡觉的时候，AI 能把测试固件刷进去，执行用例，读取内存，汇总失败点，第二天你看到的是已经整理过的异常证据，而不是一堆没上下文的串口截图。</p>
-				<div class="card tip">
-					<p style="margin-top:0;"><strong>无人值守的前提不是 AI 更强，</strong>而是构建、烧录、调试、采样、验证每一步都能被命令化、脚本化、回传化。</p>
-				</div>
-			</section>
+				<h2 id="integration">配置文件与工作流实战</h2>
+				<p>工具装好了，接下来把调试链路固化成配置文件。下面给出我在 STM32F446 项目中实际使用的 <code>launch.json</code> 和 <code>Makefile</code>，可以直接复制使用。</p>
 
-			<section>
-				<h2 id="integration">自动化集成：从命令到工程骨架</h2>
-				<p>上面的命令已经可以跑了，但如果每次都要手动复制粘贴，就还停在“人操作”层。真正的工程化，是把这些命令固化成可复用的任务单元。</p>
+				<h3>VS Code launch.json：cortex-debug 调试配置</h3>
+				<p>这个配置同时包含 Windows 和 Ubuntu 两套环境，放在项目的 <code>.vscode/launch.json</code> 里：</p>
+				<pre><code>{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "request": "launch",
+      "name": "windows-STLink-OpenOcd",
+      "executable": "${workspaceRoot}/build/01-RTC.elf",
+      "configFiles": [
+        "C:/Program Files (x86)/windowstool/OpenOcd-0.10.0-13/scripts/interface/stlink-v2.cfg",
+        "C:/Program Files (x86)/windowstool/OpenOcd-0.10.0-13/scripts/target/stm32f4x_stlink.cfg"
+      ],
+      "cwd": "${workspaceRoot}"
+    },
+    {
+      "name": "ubuntu-STLink-OpenOcd",
+      "cwd": "${workspaceRoot}",
+      "armToolchainPath": "/opt/st/stm32cubeclt/GNU-tools-for-STM32/bin/arm-none-eabi-gcc",
+      "gdbPath": "/opt/st/stm32cubeclt/GNU-tools-for-STM32/bin/arm-none-eabi-gdb",
+      "executable": "${workspaceFolder}/build/ETH.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "configFiles": [
+        "${workspaceRoot}/openocd_lnx.cfg"
+      ],
+      "postDebugTask": "Reset"
+    }
+  ]
+}</code></pre>
 
-				<h3>一键命令组合</h3>
-				<p><strong>一键构建 + 烧录：</strong></p>
-				<pre><code>make -j4; make upload</code></pre>
-
-				<p><strong>一键快照（单行版，适合脚本调用）：</strong></p>
-				<pre><code>arm-none-eabi-gdb build/01-RTC.elf -q -batch -ex "target extended-remote localhost:3333" -ex "monitor halt" -ex "p/d u2_idle_cnt" -ex "p/d u2_line_ok_cnt" -ex "x/s u2_dbg_last_line" -ex "monitor resume"</code></pre>
-
-				<h3>VS Code 任务集成</h3>
-				<p>建议把调试链路拆成四个 task，写进 <code>tasks.json</code>：</p>
-				<div class="card engineer">
-					<p style="margin-top:0;"><strong>推荐任务拆分：</strong></p>
+				<div class="card action">
+					<p style="margin-top:0;"><strong>关键配置说明：</strong></p>
 					<ul style="margin:0;padding-left:20px;">
-						<li><code>fw:build</code> — 编译固件</li>
-						<li><code>fw:flash</code> — 烧录到目标板</li>
-						<li><code>fw:openocd</code> — 启动调试服务器（后台保持）</li>
-						<li><code>fw:snapshot</code> — 执行一次变量快照</li>
+						<li><code>configFiles</code>：OpenOCD 配置文件路径，Windows 下通常指向安装目录的 <code>scripts</code> 文件夹，Linux 下可以自建 <code>openocd_lnx.cfg</code></li>
+						<li><code>armToolchainPath</code> / <code>gdbPath</code>：只在 Linux 配置中需要显式指定，Windows 下 cortex-debug 会自动从 PATH 查找</li>
+						<li><code>postDebugTask</code>：调试结束后自动执行 Reset 任务，让板子脱离调试器正常运行</li>
+						<li><code>executable</code>：必须指向带调试符号的 <code>.elf</code>，不是 <code>.bin</code> 或 <code>.hex</code></li>
 					</ul>
 				</div>
-				<p>这样 AI 可以直接通过 VS Code 的任务系统调用这些步骤，不必自己拼命令。对 CI 或本地回归测试，同样的命令也可以包进 PowerShell 脚本，跑夜间自动回归。</p>
+
+				<h3>Makefile：从 CubeMX 生成到实战定制</h3>
+				<p>下面是 STM32F446 项目的 Makefile 实战版本（基于 CubeMX 生成，已添加 <code>upload</code> / <code>debug-start</code> / <code>reset</code> 等快捷目标）：</p>
+				<pre><code>######################################
+# target
+######################################
+TARGET = 01-RTC
+GCC_PATH = C:/z/tlGZ/gcc/bin
+
+######################################
+# building variables
+######################################
+DEBUG = 1
+OPT = -Og
+
+#######################################
+# paths
+#######################################
+BUILD_DIR = build
+
+######################################
+# source
+######################################
+C_SOURCES = \
+Core/Src/main.c \
+Core/Src/gpio.c \
+Core/Src/adc.c \
+Core/Src/dma.c \
+Core/Src/rtc.c \
+Core/Src/usart.c \
+Core/Src/stm32f4xx_it.c \
+Core/Src/stm32f4xx_hal_msp.c \
+Core/Src/system_stm32f4xx.c
+# ... （HAL 驱动和中间件源文件根据项目实际添加）
+
+ASM_SOURCES = startup_stm32f446xx.s
+
+#######################################
+# binaries
+#######################################
+PREFIX = arm-none-eabi-
+ifdef GCC_PATH
+CC = $(GCC_PATH)/$(PREFIX)gcc
+AS = $(GCC_PATH)/$(PREFIX)gcc -x assembler-with-cpp
+CP = $(GCC_PATH)/$(PREFIX)objcopy
+SZ = $(GCC_PATH)/$(PREFIX)size
+else
+CC = $(PREFIX)gcc
+AS = $(PREFIX)gcc -x assembler-with-cpp
+CP = $(PREFIX)objcopy
+SZ = $(PREFIX)size
+endif
+HEX = $(CP) -O ihex
+BIN = $(CP) -O binary -S
+
+#######################################
+# CFLAGS
+#######################################
+CPU = -mcpu=cortex-m4
+FPU = -mfpu=fpv4-sp-d16
+FLOAT-ABI = -mfloat-abi=hard
+MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
+
+C_DEFS = -DUSE_HAL_DRIVER -DSTM32F446xx
+C_INCLUDES = -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc \
+  -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -IDrivers/CMSIS/Include
+
+CFLAGS += $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall \
+  -fdata-sections -ffunction-sections
+ifeq ($(DEBUG), 1)
+CFLAGS += -g -gdwarf-2
+endif
+CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
+
+#######################################
+# LDFLAGS
+#######################################
+LDSCRIPT = STM32F446XX_FLASH.ld
+LIBS = -lc -lm -lnosys
+LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBS) \
+  -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections \
+  -u _printf_float
+
+#######################################
+# build rules
+#######################################
+OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
+vpath %.c $(sort $(dir $(C_SOURCES)))
+OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
+vpath %.s $(sort $(dir $(ASM_SOURCES)))
+
+$(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR)
+	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(&lt;:.c=.lst)) $&lt; -o $@
+
+$(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
+	$(AS) -c $(CFLAGS) $&lt; -o $@
+
+$(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+	$(SZ) $@
+
+$(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
+	$(HEX) $&lt; $@
+
+$(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
+	$(BIN) $&lt; $@
+
+$(BUILD_DIR):
+	mkdir $@
+
+all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
+
+clean:
+	-rm -fR $(BUILD_DIR)
+
+-include $(wildcard $(BUILD_DIR)/*.d)</code></pre>
+
+				<p>重点看下面这几个<strong>实战目标</strong>——它们是把 Makefile 从“只能编译”变成“能编译+烧录+调试”的关键：</p>
+				<pre><code># 烧录：用 OpenOCD 把 ELF 写入芯片
+upload: build/$(TARGET).bin
+	openocd -f board/stm32f4discovery.cfg \
+	  -c "reset_config trst_only combined" \
+	  -c "program build/$(TARGET).elf verify reset exit"
+
+# 烧录 hex 格式
+update:
+	openocd -f board/stm32f4discovery.cfg \
+	  -c init -c halt \
+	  -c "program $(BUILD_DIR)/$(TARGET).hex verify reset exit"
+
+# 复位目标板
+reset:
+	openocd -f board/stm32f4discovery.cfg \
+	  -c init -c halt -reset -c shutdown
+
+# 启动 OpenOCD 调试服务器（后台保持运行）
+debug-start:
+	openocd -f board/stm32f4discovery.cfg</code></pre>
+
+				<div class="card vision">
+					<p style="margin-top:0;"><strong>Makefile 实战要点：</strong></p>
+					<ul style="margin:0;padding-left:20px;">
+						<li><code>GCC_PATH</code> 是工具链路径的开关，换电脑时只改这一行</li>
+						<li><code>DEBUG = 1</code> 确保 <code>-g -gdwarf-2</code> 被加入 CFLAGS，否则 GDB 读不到变量</li>
+						<li><code>-u _printf_float</code> 链接器标志，让 <code>printf</code> 支持 <code>%f</code> 浮点输出</li>
+						<li><code>upload</code> 目标依赖 <code>.bin</code> 但实际烧录的是 <code>.elf</code>——这是为了触发完整构建链</li>
+						<li>所有 OpenOCD 命令用 <code>board/stm32f4discovery.cfg</code> 而不是分开写 interface + target，更简洁</li>
+					</ul>
+				</div>
+
+				<h3>一键命令组合</h3>
+				<p>配置文件就位后，日常开发只需要这几个命令：</p>
+				<pre><code># 构建 + 烧录
+make -j4; make upload
+
+# 启动调试服务器
+make debug-start
+
+# 快照读取（单行版，适合脚本调用）
+arm-none-eabi-gdb build/01-RTC.elf -q -batch \
+  -ex "target extended-remote localhost:3333" \
+  -ex "monitor halt" \
+  -ex "p/d u2_idle_cnt" \
+  -ex "p/d u2_line_ok_cnt" \
+  -ex "x/s u2_dbg_last_line" \
+  -ex "monitor resume"</code></pre>
 
 				<div class="insight-box cool">
 					<strong>实战备忘：</strong>UART 帧上传如果出现碎片化（比如只收到 <code>"Tdf="</code> 半截），解析器必须支持跨 IDLE 事件的碎片累积。快照诊断法的价值就在于，它能让你从计数器差值里直接看出“字节到了但帧没拼完”这个事实，而不是靠猜。
 				</div>
+
+				<h3>VS Code 完整工作流：编译 → 烧录 → 调试</h3>
+				<p>配置文件就位后，在 VS Code 中可以走完整个开发闭环：</p>
+				<ol>
+					<li><strong>编译</strong>：点击 <code>Terminal → Run Build Task…</code>，或在终端输入 <code>make -j4</code>，等待编译完成</li>
+					<li><strong>烧录</strong>：点击 <code>Terminal → Run Task… → flash</code>，或在终端输入 <code>make upload</code></li>
+					<li><strong>调试</strong>：点击 <code>Run → Start Debugging</code>（或按 <code>F5</code>），VS Code 会自动启动 OpenOCD 并连接 GDB，进入断点调试状态</li>
+					<li><strong>停止调试</strong>：按 <code>Shift+F5</code> 或点击 Stop，OpenOCD 会自动关闭</li>
+					<li><strong>清理构建</strong>：在终端输入 <code>make clean</code></li>
+				</ol>
+				<div class="card vision">
+					<p style="margin-top:0;"><strong>这套流程的核心价值：</strong>从编译到调试，全程不需要离开 VS Code。AI 可以直接通过终端命令参与每一步，而不必等你手动操作后转述结果。当 <code>launch.json</code> + <code>Makefile</code> + <code>cortex-debug</code> 三者配合到位，“写代码—烧录—调试—读变量”就是一个完全可编程的闭环。</p>
+				</div>
 			</section>
 
 			<section>
-				<h2 id="essence">最后真正重要的，不是工具名，而是翻译层</h2>
+				<h2 id="essence">从工具链到翻译层：无人值守的最后一环</h2>
 				<p>ARM GCC、OpenOCD、GDB 本身都不是新东西。真正关键的是，你有没有把它们输出的编译结果、寄存器状态、断点现场、测试数据，翻译成一套 AI 能持续消费的证据流。</p>
-				<p>一旦这层翻译建立起来，你定义法则，AI 就能在法则内执行：编译、烧录、读寄存器、抓内存、跑脚本、分析结果、继续收敛。人不再承担机械搬运信息的工作，而是只负责方向、边界和最终裁决。</p>
-				<p>这套组合拳的精髓，从来不只是“全开源、没版权风险”。那只是门槛。真正的价值在于，它把硬件状态、编译输出和调试数据都变成了 AI 能直接操作的语言。</p>
+
+				<h3>跨硬件与仿真：QEMU 也能跑同一套 GDB</h3>
+				<p>这套链路还有一个特别现实的好处：不管你跑真板还是 QEMU，本质上都可以被同一套 GDB 命令驱动。AI 可以自动加载测试固件、注入测试输入、读回 RAM 中的断言结果，再决定下一轮该修哪一块。硬件换了，命令不用换；仿真环境换了，证据格式不用换。</p>
+
+				<h3>夜间回归：Python 脚本 + batch GDB</h3>
+				<p>配合 Python 脚本后，夜里跑回归就不是一句口号了。你睡觉的时候，AI 能把测试固件刷进去，执行用例，读取内存，汇总失败点，第二天你看到的是已经整理过的异常证据，而不是一堆没上下文的串口截图。</p>
+				<pre><code># 伪代码：夜间回归骨架
+for test_case in test_suite:
+    flash(test_case.firmware)
+    run_and_wait(timeout=30)
+    snapshot = gdb_batch_read(key_variables)
+    report.append(test_case.name, snapshot)
+
+generate_html_report(report, output="nightly.html")</code></pre>
+
+				<div class="card tip">
+					<p style="margin-top:0;"><strong>无人值守的前提不是 AI 更强，</strong>而是构建、烧录、调试、采样、验证每一步都能被命令化、脚本化、回传化。当这层翻译建立起来，你定义法则，AI 就能在法则内执行：编译、烧录、读寄存器、抓内存、跑脚本、分析结果、继续收敛。</p>
+				</div>
+
+				<p>这套组合拳的精髓，从来不只是"全开源、没版权风险"。那只是门槛。真正的价值在于，它把硬件状态、编译输出和调试数据都变成了 AI 能直接操作的语言。人不再承担机械搬运信息的工作，而是只负责方向、边界和最终裁决。</p>
 				<div class="insight-box">
 					<strong>你负责定义法则，AI 负责执行和反馈。</strong>工具链只是在中间搭了一座桥，让物理世界第一次能够被工程化地喂给 AI。
 				</div>
