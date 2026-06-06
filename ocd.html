@@ -14,7 +14,9 @@
 <link rel="canonical" href="https://x-itg.github.io/ocd.html">
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></noscript>
+<link rel="stylesheet" href="assets/site-sidebar.css">
 <style>
+	/* ===== 1. 设计令牌 ===== */
 	:root {
 		--bg: #f8f9fa;
 		--card-bg: #ffffff;
@@ -25,14 +27,21 @@
 		--code-bg: #1e293b;
 		--code-text: #e2e8f0;
 		--highlight: #fef9e7;
+		--muted: #8896a4;
+		--heading: #1a1a2e;
+		--border-dashed: #d0d7de;
+		--code-inline-bg: #eef1f5;
+		--font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
 		--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
 		--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
 		--radius: 6px;
 		--radius-lg: 10px;
+		--scroll-offset: 24px;
 	}
 
+	/* ===== 2. 基础重置 ===== */
 	* { margin: 0; padding: 0; box-sizing: border-box; }
-
+	html { scroll-behavior: smooth; }
 	body {
 		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
 		background: var(--bg);
@@ -41,12 +50,52 @@
 		-webkit-font-smoothing: antialiased;
 	}
 
-	.container {
-		max-width: 780px;
-		margin: 0 auto;
-		padding: 40px 24px 80px;
+	/* ===== 3. 排版基元 ===== */
+	h2 {
+		font-size: 24px;
+		font-weight: 700;
+		margin: 56px 0 16px;
+		padding-top: 24px;
+		border-top: 2px solid var(--border);
+		letter-spacing: -0.2px;
+	}
+	h2[id] { scroll-margin-top: var(--scroll-offset); }
+	h3[id] { scroll-margin-top: var(--scroll-offset); }
+	h3 { font-size: 19px; font-weight: 600; margin: 36px 0 12px; color: var(--heading); }
+	p { margin: 14px 0; }
+	strong { color: var(--heading); }
+	ul, ol { margin: 14px 0; padding-left: 24px; }
+	li { margin: 6px 0; }
+
+	/* ===== 4. 代码块 ===== */
+	pre {
+		background: var(--code-bg);
+		color: var(--code-text);
+		padding: 20px 24px;
+		border-radius: var(--radius);
+		overflow-x: auto;
+		font-family: var(--font-mono);
+		font-size: 13px;
+		line-height: 1.7;
+		margin: 20px 0;
+		box-shadow: var(--shadow-md);
+		-webkit-overflow-scrolling: touch;
+	}
+	code { font-family: var(--font-mono); font-size: 13px; }
+sup.annotation { font-size:10px; color:var(--muted); }
+	p code, li code {
+		background: var(--code-inline-bg);
+		padding: 2px 6px;
+		border-radius: 3px;
+		color: var(--accent);
+		font-size: 12px;
 	}
 
+	/* ===== 5. 布局容器 ===== */
+	.container { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
+	.main-content { flex: 1; min-width: 0; }
+
+	/* ===== 6. 文章头 ===== */
 	.article-header { margin-bottom: 48px; }
 	.article-header .series-tag {
 		display: inline-block;
@@ -72,27 +121,9 @@
 		font-weight: 400;
 		margin-bottom: 20px;
 	}
-	.article-header .meta { font-size: 13px; color: #8896a4; }
+	.article-header .meta { font-size: 13px; color: var(--muted); }
 
-	h2 {
-		font-size: 24px;
-		font-weight: 700;
-		margin: 56px 0 16px;
-		padding-top: 24px;
-		border-top: 2px solid var(--border);
-		letter-spacing: -0.2px;
-	}
-	h3 {
-		font-size: 19px;
-		font-weight: 600;
-		margin: 36px 0 12px;
-		color: #1a1a2e;
-	}
-	p { margin: 14px 0; }
-	strong { color: #1a1a2e; }
-	ul, ol { margin: 14px 0; padding-left: 24px; }
-	li { margin: 6px 0; }
-
+	/* ===== 7. 卡片组件 ===== */
 	.card {
 		background: var(--card-bg);
 		border: 1px solid var(--border);
@@ -110,11 +141,10 @@
 		font-weight: 600;
 		margin-bottom: 8px;
 	}
-	.card pre {
-		margin: 12px 0 0;
-		padding: 16px 20px;
-		font-size: 13px;
-	}
+	.card pre { margin: 12px 0 0; padding: 16px 20px; font-size: 13px; }
+	.card-list { margin: 0; padding-left: 20px; }
+
+	/* 卡片主题修饰 */
 	.card.accent-left { border-left: 4px solid var(--accent); }
 	.card.tip { background: #f0f7ff; border-color: #b3d4fc; }
 	.card.philosophy {
@@ -134,11 +164,10 @@
 		background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
 		transition: transform 0.2s, box-shadow 0.2s;
 	}
-	.card.vision:hover {
-		transform: translateY(-2px);
-		box-shadow: var(--shadow-md);
-	}
+	.card.vision:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+	.card.intro-summary { margin-top:20px; }
 
+	/* ===== 8. 洞察框组件 ===== */
 	.insight-box {
 		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
 		border: 1px solid #f0d78c;
@@ -153,65 +182,48 @@
 	.insight-box strong { color: #4a340f; font-weight: 600; }
 	.insight-box.decision {
 		background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
-		border-color: #a8d4e0;
-		border-left-color: #3498db;
-		color: #1a5276;
+		border-color: #a8d4e0; border-left-color: #3498db; color: #1a5276;
 	}
 	.insight-box.decision strong { color: #0e3a57; }
 	.insight-box.warm {
 		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-		border-color: #f0d78c;
-		border-left-color: #f39c12;
-		color: #6b4c1e;
+		border-color: #f0d78c; border-left-color: #f39c12; color: #6b4c1e;
 	}
 	.insight-box.warm strong { color: #4a340f; }
 	.insight-box.cool {
 		background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
-		border-color: #a9cce3;
-		border-left-color: #2980b9;
-		color: #1f4e79;
+		border-color: #a9cce3; border-left-color: #2980b9; color: #1f4e79;
 	}
 	.insight-box.cool strong { color: #154360; }
 
-	pre {
-		background: var(--code-bg);
-		color: var(--code-text);
-		padding: 20px 24px;
-		border-radius: var(--radius);
-		overflow-x: auto;
-		font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
-		font-size: 13px;
-		line-height: 1.7;
-		margin: 20px 0;
-		box-shadow: var(--shadow-md);
+	/* ===== 9. 工具表格 ===== */
+	.tools-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 14px;
+		margin: 12px 0 0;
 	}
-	code {
-		font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
-		font-size: 13px;
+	.tools-table th {
+		text-align: left;
+		padding: 8px 12px;
 	}
-	p code, li code {
-		background: #eef1f5;
-		padding: 2px 6px;
-		border-radius: 3px;
-		color: #c0392b;
-		font-size: 12px;
-	}
+	.tools-table thead tr { border-bottom: 2px solid var(--border); }
+	.tools-table tbody tr { border-bottom: 1px solid var(--border); }
+	.tools-table tbody tr:last-child { border-bottom: none; }
+	.tools-table td { padding: 6px 12px; }
 
-	.main-content { flex: 1; min-width: 0; }
-
-	/* TOC 分组标签 */
+	/* ===== 10. 导航与徽章组件 ===== */
 	.toc-group-label {
 		font-size: 11px;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 1.5px;
-		color: #8896a4;
+		color: var(--muted);
 		margin: 0 0 6px;
 	}
 	.toc-group-label + ul { margin-top: 0; }
 	.sidebar-toc .toc-group-label:not(:first-child) { margin-top: 14px; }
 
-	/* 作者徽章 */
 	.author-badge {
 		display: inline-block;
 		vertical-align: middle;
@@ -226,7 +238,6 @@
 		white-space: nowrap;
 	}
 
-	/* 章节分组标题 */
 	.section-group-label {
 		display: block;
 		margin: 64px 0 -40px;
@@ -234,12 +245,111 @@
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 2px;
-		color: #8896a4;
+		color: var(--muted);
 		padding: 8px 0;
-		border-bottom: 1px dashed #d0d7de;
+		border-bottom: 1px dashed var(--border-dashed);
 	}
 
-	/* 可折叠安装步骤 */
+	.bottom-series-links {
+		margin-top: 48px;
+		padding-top: 24px;
+		border-top: 1px solid var(--border);
+		font-size: 14px;
+		line-height: 1.9;
+		color: var(--text-secondary);
+	}
+	.footer-author-wrap {
+		text-align: center;
+		margin-top: 24px;
+		padding-top: 24px;
+		border-top: 1px solid var(--border);
+		color: var(--muted);
+		font-size: 13px;
+	}
+	.footer-author-link { color: var(--accent); text-decoration: none; }
+	.footer-author-link:hover { text-decoration: underline; }
+	.series-nav {
+		display: flex; justify-content: space-between;
+		margin: 40px 0; padding-top: 20px;
+		border-top: 1px solid var(--border);
+		font-size: 15px;
+	}
+	.series-nav a { color: var(--accent); text-decoration: none; font-weight:500; }
+	.series-nav a:hover { text-decoration: underline; }
+
+	/* ===== 13. 悬浮组件 ===== */
+	.float-toc {
+		position:fixed; right:16px; bottom:24px;
+		width:44px; height:44px;
+		background:var(--accent); border-radius:50%; color:#fff;
+		display:flex; align-items:center; justify-content:center;
+		z-index:999; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.2);
+		transition:transform 0.2s, box-shadow 0.2s; opacity:0.85;
+		text-decoration:none; border:none; font-size:18px;
+	}
+	.float-toc:hover { transform:scale(1.08); box-shadow:0 6px 20px rgba(0,0,0,0.25); opacity:1; }
+	.float-toc-panel {
+		display:none; position:fixed; right:16px; bottom:76px;
+		width:220px; max-height:60vh; overflow-y:auto;
+		background:#fff; border:1px solid var(--border); border-radius:10px;
+		box-shadow:0 8px 30px rgba(0,0,0,0.12); z-index:1000; padding:12px 0;
+	}
+	.float-toc-panel.show { display:block; }
+	.float-toc-panel a {
+		display:block; padding:6px 14px; font-size:13px; color:var(--text);
+		text-decoration:none; border-left:3px solid transparent;
+	}
+	.float-toc-panel a:hover, .float-toc-panel a.active { background:#f5f5f5; border-left-color:var(--accent); color:var(--accent); }
+
+	/* ===== 14. 复制按钮与代码块优化 ===== */
+	.code-wrap { position:relative; margin:20px 0; }
+	.code-wrap pre { margin:0; }
+	.code-lang {
+		position:absolute; top:0; right:0;
+		font-size:10px; font-weight:700; letter-spacing:0.5px;
+		padding:4px 10px; border-radius:0 6px 0 6px;
+		color:#fff; text-transform:uppercase;
+	}
+	.code-lang.lang-bash { background:#2980b9; }
+	.code-lang.lang-make { background:#8e44ad; }
+	.code-lang.lang-json { background:#27ae60; }
+	.btn-copy {
+		position:absolute; top:6px; right:8px;
+		padding:3px 10px; font-size:11px; font-weight:600;
+		background:rgba(255,255,255,0.15); color:var(--code-text);
+		border:1px solid rgba(255,255,255,0.2); border-radius:4px;
+		cursor:pointer; z-index:2; transition:background 0.2s; display:none;
+	}
+	.code-wrap:hover .btn-copy { display:block; }
+	.btn-copy:hover { background:rgba(255,255,255,0.3); }
+	.btn-copy.copied { background:#27ae60; border-color:#27ae60; }
+
+	/* ===== 15. 过渡动画 ===== */
+	.card, .insight-box, details.install-step { transition:box-shadow 0.2s ease, transform 0.2s ease; }
+	.card:hover { box-shadow:var(--shadow-md); transform:translateY(-1px); }
+	details.install-step { transition:box-shadow 0.2s ease, border-color 0.2s ease; }
+	details.install-step[open] { border-color:var(--accent); }
+
+	/* ===== 16. 速查表 ===== */
+	.quick-ref { font-size:13px; width:100%; border-collapse:collapse; margin:12px 0; }
+	.quick-ref th { text-align:left; padding:6px 10px; background:var(--code-bg); color:var(--code-text); font-weight:600; }
+	.quick-ref td { padding:5px 10px; border-bottom:1px solid var(--border); font-family:var(--font-mono); font-size:12px; }
+	.quick-ref tr:hover td { background:#f5f5f5; }
+
+	/* ===== 17. 自检清单 ===== */
+	.checklist { margin:16px 0 0; padding:0; list-style:none; }
+	.checklist li {
+		padding:8px 12px 8px 32px; margin:4px 0;
+		background:var(--card-bg); border:1px solid var(--border); border-radius:6px;
+		font-size:14px; position:relative;
+	}
+	.checklist li::before {
+		content:"\2610"; position:absolute; left:10px; top:8px;
+		font-size:16px; color:var(--muted);
+	}
+	.checklist li.done::before { content:"\2611"; color:#27ae60; }
+
+	/* ===== 11. 折叠安装步骤 ===== */
 	details.install-step {
 		background: var(--card-bg);
 		border: 1px solid var(--border);
@@ -251,7 +361,7 @@
 		padding: 14px 20px;
 		cursor: pointer;
 		font-weight: 600;
-		color: #1a1a2e;
+		color: var(--heading);
 		list-style: none;
 		display: flex;
 		align-items: center;
@@ -265,24 +375,15 @@
 		transition: transform 0.2s ease;
 		color: var(--accent);
 	}
-	details.install-step[open] summary::before {
-		transform: rotate(90deg);
-	}
+	details.install-step[open] summary::before { transform: rotate(90deg); }
 	details.install-step .step-body {
 		padding: 0 20px 16px;
 		border-top: 1px solid var(--border);
 	}
-	details.install-step .step-body p {
-		margin: 10px 0;
-	}
-	details.install-step .step-body pre {
-		margin: 10px 0;
-		font-size: 12px;
-	}
+	details.install-step .step-body p { margin: 10px 0; }
+	details.install-step .step-body pre { margin: 10px 0; font-size: 12px; }
 
-	html { scroll-behavior: smooth; }
-	h2[id] { scroll-margin-top: 24px; }
-
+	/* ===== 12. 响应式适配 ===== */
 	@media (max-width: 640px) {
 		.container { padding: 20px 16px 60px; }
 		.article-header h1 { font-size: 26px; }
@@ -290,11 +391,11 @@
 		pre { padding: 14px 16px; font-size: 12px; }
 		.sidebar-toc { display: none; }
 	}
-
 </style>
-<link rel="stylesheet" href="assets/site-sidebar.css">
 </head>
 <body class="site-theme-tech">
+<a href="#" class="float-toc" id="floatTocBtn" aria-label="目录导航">☰</a>
+<div class="float-toc-panel" id="floatTocPanel"></div>
 <div class="layout">
 <aside class="site-sidebar">
     <div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-compass"></i> 乾坤大挪移心法</a></div>
@@ -792,8 +893,20 @@
 				<span class="series-tag">专业延伸 · 开源工具链</span>
 				<a href="about.html" class="author-badge">👉 关于作者</a>
 				<h1>一套被忽视的工具链组合：ARM GCC + OpenOCD + GDB</h1>
-				<p class="subtitle">把 AI 从“只会写代码”推进到“能感知硬件状态、能自己闭环验证”的命令行工作流</p>
-				<p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
+				<p class="subtitle">把 AI 从"只会写代码"推进到"能感知硬件状态、能自己闭环验证"的命令行工作流</p>
+				<p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列 · 阅读约 25 分钟</p>
+			<p style="font-size:14px;color:var(--text-secondary);margin:0 0 8px;line-height:1.6;">本文打通开源命令行工具链与 AI 的壁垒，解决 AI 只能写代码、无法实测硬件的行业痛点，实现编译、烧录、硬件采样、故障诊断全链路自动化，适配 STM32 全系列裸机项目。</p>
+			<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px;">
+				<span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;background:#e8f5e9;color:#2e7d32;">🟢 零基础</span>
+				<span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;background:#fff3e0;color:#e65100;">🟡 工程师</span>
+				<span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;background:#fce4ec;color:#c62828;">🔴 AI 工程化</span>
+			</div>
+			<div style="margin-top:4px;font-size:12px;color:var(--muted);line-height:1.7;">
+				跟着分步安装即可跑通基础编译烧录 ｜ 直接复用 Makefile/launch.json 落地自动化调试 ｜ 聚焦 GDB-batch + serial_tool 搭建 Agent 硬件交互层
+			</div>
+			<div class="card intro-summary">
+				<p>本文详解 <strong>ARM GCC + OpenOCD + GDB</strong> 这套开源命令行工具链，破除「AI 只能写代码、无法操控硬件」的痛点。手把手搭建可被 AI 脚本调用的自动化调试链路——从环境安装到 UART 故障实战，再到夜间自动化回归，全流程落地。读完本文，你可以实现 <strong>AI 自动编译 → 烧录 → 读硬件 → 故障自检</strong> 的完整闭环。</p>
+			</div>
 			</header>
 
 			<span class="section-group-label">I · 认识工具链</span>
@@ -803,47 +916,55 @@
 				<p>如果你在嵌入式开发里用 AI，大概率早就碰过这些卡点。AI 代码能写，但它看不见你的板子；寄存器名能编，但它可能现场瞎编一个根本不存在的外设位；出了 HardFault，真正辛苦的定位工作还是得你自己翻手册、读寄存器、猜根因。</p>
 				<p>更麻烦的是，很多团队的编译、烧录、验证流程还锁在 IDE 里。人得手动点菜单、切窗口、盯串口，AI 只能停在对话框里等你转述结果。再叠上商业 IDE 的授权成本，Keil、IAR 这种闭环对小团队并不轻。</p>
 				<p><strong>问题不在 AI 不够聪明，而在工具链没有把硬件状态暴露成 AI 能直接操作的语言。</strong></p>
+				<div class="card philosophy" style="margin:18px 0 28px;">
+					<p><strong>对比：</strong>Keil/IAR 等传统 IDE 强大但封闭——图形化操作不可脚本调用、授权成本高、CI/CD 集成困难。而 ARM GCC + OpenOCD + GDB 全部开源，每条操作都是命令行，AI 可直接调用、批量执行、嵌入自动化流水线。</p>
+				</div>
 			</section>
 
 			<section>
 				<h2 id="toolchain">这套组合拳，为什么恰好能接上 AI</h2>
 				<p>我这些年做嵌入式 AI 工程化，越来越明确地依赖一套常被忽视的组合：<strong>ARM GCC + OpenOCD + GDB</strong>。它们有三个共同点：开源、命令行驱动、可脚本化。</p>
-				<p>这三个特性叠起来，意义就变了。AI 不再只是帮你补代码，而是可以直接参与编译、烧录、断点、寄存器读取、内存导出和回归验证。它接触到的不是“你描述过的结果”，而是<strong>第一手的硬件状态</strong>。</p>
+				<p>这三个特性叠起来，意义就变了。AI 不再只是帮你补代码，而是可以直接参与编译、烧录、断点、寄存器读取、内存导出和回归验证。它接触到的不是"你描述过的结果"，而是<strong>第一手的硬件状态</strong>。</p>
 				<div class="card accent-left">
-					<p><strong>关键变化：</strong>当开发链路从图形界面变成命令接口，AI 的角色就会从“码农”升级成“副驾驶”。它不仅能生成代码，还能读取现场、执行流程、回传证据。</p>
+					<p><strong>关键变化：</strong>当开发链路从图形界面变成命令接口，AI 的角色就会从"码农"升级成"副驾驶"。它不仅能生成代码，还能读取现场、执行流程、回传证据。</p>
 				</div>
 				<pre><code>make -j8
-openocd -f interface/stlink.cfg -f target/stm32f4x.cfg \
-  -c "program build/app.elf verify reset exit"
+openocd &lt;config&gt; -c "program build/app.elf verify reset exit"   # ELF: 含调试符号的 ARM 可执行文件
 arm-none-eabi-gdb build/app.elf \
   -ex "target remote :3333" \
   -ex "monitor reset halt"</code></pre>
+				<p class="footnote" style="font-size:13px;color:var(--muted);margin:-12px 0 0;">完整 OpenOCD 配置和 Makefile 工程模板见下文「配置文件与工作流实战」章节。</p>
 			</section>
 
 			<span class="section-group-label">II · 环境搭建</span>
 
 			<section>
 				<h2 id="prerequisites">环境准备：工具清单与安装</h2>
+				<div class="card tip" style="margin-bottom:24px;">
+					<p><strong>阅读指引：</strong></p>
+					<p>✅ <strong>新手</strong>：完整跟随 Step 1~Step 6 分步安装；<br>
+					⚡ <strong>老手一键部署</strong>：若已安装 <code>xpm</code>，可一键全装：<code>xpm install @xpack-dev-tools/arm-none-eabi-gcc @xpack-dev-tools/openocd</code>，跳过分步安装直接进入下一章。</p>
+				</div>
 				<p>在跑通整套流程之前，需要先把工具链装齐。以下是 STM32F446 项目的完整环境配置，Windows 和 Linux 均覆盖。</p>
 
 				<div class="card engineer">
 					<p><strong>必备工具清单：</strong></p>
-					<table style="width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 0;">
-						<thead><tr style="border-bottom:2px solid var(--border);">
-							<th style="text-align:left;padding:8px 12px;">序号</th>
-							<th style="text-align:left;padding:8px 12px;">工具</th>
-							<th style="text-align:left;padding:8px 12px;">用途</th>
+					<table class="tools-table">
+						<thead><tr>
+							<th>序号</th>
+							<th>工具</th>
+							<th>用途</th>
 						</tr></thead>
 						<tbody>
-							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">1</td><td style="padding:6px 12px;"><code>Python 3</code></td><td style="padding:6px 12px;">运行工程构建脚本（PyYAML / Jinja2 / jsonschema）</td></tr>
-							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">2</td><td style="padding:6px 12px;"><code>ST-Link/V2 驱动</code></td><td style="padding:6px 12px;">USB 调试器硬件驱动（STSW-LINK009）</td></tr>
-							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">3</td><td style="padding:6px 12px;"><code>Git for Windows</code></td><td style="padding:6px 12px;">版本管理 + Git Bash 终端（自带 make）</td></tr>
-							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">4</td><td style="padding:6px 12px;"><code>Visual Studio Code</code></td><td style="padding:6px 12px;">轻量级编辑器 + cortex-debug 调试</td></tr>
-							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">5</td><td style="padding:6px 12px;"><code>arm-none-eabi-gcc</code></td><td style="padding:6px 12px;">ARM 裸机交叉编译器</td></tr>
-							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">6</td><td style="padding:6px 12px;"><code>arm-none-eabi-gdb</code></td><td style="padding:6px 12px;">ARM 调试器（随 gcc 工具链一起安装）</td></tr>
-							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">7</td><td style="padding:6px 12px;"><code>OpenOCD</code></td><td style="padding:6px 12px;">开源调试服务器，驱动 ST-Link 烧录</td></tr>
-							<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 12px;">8</td><td style="padding:6px 12px;"><code>cortex-debug</code></td><td style="padding:6px 12px;">VS Code 调试扩展插件</td></tr>
-														<tr><td style="padding:6px 12px;">9</td><td style="padding:6px 12px;"><code>pyserial</code></td><td style="padding:6px 12px;">Python 串口通信库，PC 侧收发与监控</td></tr>
+							<tr><td>1</td><td><code>Python 3</code></td><td>运行工程构建脚本（PyYAML / Jinja2 / jsonschema）</td></tr>
+							<tr><td>2</td><td><code>ST-Link/V2 驱动</code></td><td>USB 调试器硬件驱动（STSW-LINK009）</td></tr>
+							<tr><td>3</td><td><code>Git for Windows</code></td><td>版本管理 + Git Bash 终端（自带 make）</td></tr>
+							<tr><td>4</td><td><code>Visual Studio Code</code></td><td>轻量级编辑器 + cortex-debug 调试</td></tr>
+							<tr><td>5</td><td><code>arm-none-eabi-gcc</code></td><td>ARM 裸机交叉编译器</td></tr>
+							<tr><td>6</td><td><code>arm-none-eabi-gdb</code></td><td>ARM 调试器（随 gcc 工具链一起安装）</td></tr>
+							<tr><td>7</td><td><code>OpenOCD</code></td><td>开源调试服务器，驱动 ST-Link 烧录</td></tr>
+							<tr><td>8</td><td><code>cortex-debug</code></td><td>VS Code 调试扩展插件</td></tr>
+														<tr><td>9</td><td><code>pyserial</code></td><td>Python 串口通信库，PC 侧收发与监控</td></tr>
 						</tbody>
 					</table>
 				</div>
@@ -923,7 +1044,7 @@ C:\Program Files (x86)\STMicroelectronics\STM32CubeCLT</code></pre>
 				<p>在 VS Code 扩展商店搜索安装以下插件：</p>
 				<div class="card action">
 					<p><strong>必装插件：</strong></p>
-					<ul style="margin:0;padding-left:20px;">
+					<ul class="card-list">
 						<li><code>C/C++</code> — 代码智能提示与导航</li>
 						<li><code>Cortex-Debug</code> — ARM 芯片调试器，连接 OpenOCD</li>
 						<li><code>Include Autocomplete</code> — 头文件自动补全</li>
@@ -939,24 +1060,38 @@ arm-none-eabi-gdb --version
 openocd --version
 python --version
 make --version</code></pre>
-				<p>每个命令都应返回版本信息。如果报“不是内部或外部命令”，说明对应工具的 bin 目录没有加入系统 PATH。</p>
+				<p>每个命令都应返回版本信息。如果报"不是内部或外部命令"，说明对应工具的 bin 目录没有加入系统 PATH。</p>
 
 				<div class="insight-box decision">
-					<strong>工具链路径的关键原则：</strong>Makefile 中的 <code>GCC_PATH</code> 必须指向 <code>arm-none-eabi-gcc</code> 所在目录。路径不对，<code>make</code> 会报“找不到编译器”。如果用 Git Bash 作为终端，Makefile 中的路径要用正斜杠 <code>/</code> 或双反斜杠 <code>\\</code>。
+					<strong>工具链路径的关键原则：</strong>Makefile 中的 <code>GCC_PATH</code> 必须指向 <code>arm-none-eabi-gcc</code> 所在目录。路径不对，<code>make</code> 会报"找不到编译器"。如果用 Git Bash 作为终端，Makefile 中的路径要用正斜杠 <code>/</code> 或双反斜杠 <code>\\</code>。
 				</div>
 			</section>
+
+			<div class="card action" style="margin-bottom:24px;">
+				<p><strong>✅ 环境安装完毕自检清单</strong></p>
+				<ul class="checklist">
+					<li>终端执行 <code>arm-none-eabi-gcc --version</code> 输出版本号</li>
+					<li>终端执行 <code>openocd --version</code> 输出版本号</li>
+					<li>终端执行 <code>make --version</code> 输出版本号</li>
+					<li><code>pip list | grep pyserial</code> 确认 pyserial 已安装</li>
+					<li>插入 ST-Link 后在设备管理器看到对应设备</li>
+				</ul>
+			</div>
 
 			<span class="section-group-label">III · 能力进阶</span>
 
 			<section>
 				<h2 id="build-flash">编译与烧录：从 make 到 make upload</h2>
-				<p>工具链的核心价值，是让“写代码”和“硬件验证”之间的距离足够短。在命令行工具链里，这段距离可以被压缩到秒级。</p>
+				<p>工具链的核心价值，是让"写代码"和"硬件验证"之间的距离足够短。在命令行工具链里，这段距离可以被压缩到秒级。</p>
 
 				<h3>确认环境基线</h3>
 				<p>开始之前，确保工具链已就位：</p>
 				<pre><code>Get-Command openocd
 arm-none-eabi-gdb --version</code></pre>
 				<p>目标：<code>STM32F446</code>，固件：<code>build/01-RTC.elf</code>。两个命令都能返回版本信息，环境就立住了。</p>
+				<div class="insight-box cool" style="margin-top:18px;">
+					<strong>Windows 注意：</strong>Git Bash 使用 Unix 风格路径（<code>/c/Users/...</code>），PowerShell 使用 Windows 路径（<code>C:\Users\...</code>）。OpenOCD 的 <code>-f</code> 参数在 Git Bash 中需写相对路径或 Unix 路径，在 PowerShell 中可直接写 Windows 路径。两种终端均可正常使用，只需留意路径格式差异。
+				</div>
 
 				<h3>标准三步流程</h3>
 				<p><strong>Step 1 · 构建</strong>——编译固件，多核并行：</p>
@@ -975,7 +1110,7 @@ arm-none-eabi-gdb --version</code></pre>
 				<p>期望输出中看到 <code>starting gdb server on 3333</code> 和 <code>Listening on port 3333</code>，说明调试服务器已就绪。</p>
 
 				<div class="card accent-left">
-					<p><strong>关键变化：</strong>编译和烧录不再是“你点一下，AI 等一下”。AI 改完代码，可以立刻调用构建命令、执行烧录、重启目标板。你在 IDE 里点菜单的时间，AI 已经能跑几十轮“改代码-烧录-验证”了。</p>
+					<p><strong>关键变化：</strong>编译和烧录不再是"你点一下，AI 等一下"。AI 改完代码，可以立刻调用构建命令、执行烧录、重启目标板。你在 IDE 里点菜单的时间，AI 已经能跑几十轮"改代码-烧录-验证"了。</p>
 				</div>
 			</section>
 
@@ -985,27 +1120,30 @@ arm-none-eabi-gdb --version</code></pre>
 
 				<h3>第一层：HardFault 寄存器读取</h3>
 				<p>出了 HardFault，传统调试是停机、读寄存器、抄数值、翻手册。而 OpenOCD 把这些证据暴露成了命令接口：</p>
+				<div class="insight-box cool" style="margin-bottom:12px;">
+					<strong>提示：</strong>Windows 10/11 默认关闭 Telnet 客户端，推荐直接用 GDB batch 模式替代交互式 telnet。若仍需使用，请在"启用或关闭 Windows 功能"中勾选 Telnet Client。
+				</div>
 				<pre><code>telnet localhost 4444
-&gt; halt
+&gt; halt						# 暂停 CPU，GDB/OpenOCD 方可读写寄存器
 &gt; reg
-&gt; mdw 0xE000ED28 1   # CFSR
-&gt; mdw 0xE000ED2C 1   # HFSR
+				&gt; mdw 0xE000ED28 1   # CFSR — 可配置故障状态寄存器，HardFault 根因入口
+				&gt; mdw 0xE000ED2C 1   # HFSR — 硬件故障状态寄存器，指示故障类型
 &gt; mdw 0xE000ED38 1   # BFAR
 &gt; mdw 0xE000ED34 1   # MMFAR</code></pre>
-				<p>AI 不必等你总结“我怀疑是内存踩坏了”。它可以直接从寄存器值推回异常类型——空指针、栈溢出、非法外设访问还是编译器优化带来的错觉。</p>
+				<p>AI 不必等你总结"我怀疑是内存踩坏了"。它可以直接从寄存器值推回异常类型——空指针、栈溢出、非法外设访问还是编译器优化带来的错觉。</p>
 
 				<h3>第二层：GDB batch 模式批量读变量</h3>
 				<p>这是整套流程的精髓。用 batch 模式让 GDB 自行 halt、读变量、resume，不需要人坐在交互界面：</p>
-				<pre><code>arm-none-eabi-gdb build/01-RTC.elf -q -batch `
-  -ex "target extended-remote localhost:3333" `
-  -ex "monitor halt" `
+				<pre><code>arm-none-eabi-gdb build/01-RTC.elf -q -batch \
+  -ex "target extended-remote localhost:3333" \
+  -ex "monitor halt" \
   -ex "p/d u2_idle_cnt" `
   -ex "p/d u2_line_ok_cnt" `
   -ex "p/d u2_dbg_raw_total" `
   -ex "x/s u2_dbg_last_line" `
   -ex "monitor resume"</code></pre>
 				<div class="card action">
-					<p><strong>为什么强调 batch 模式？</strong>因为 AI 不需要交互式 GDB。batch 模式让“读取运行时变量”变成一个可编程的原子操作——halt、采样、resume，一次执行，结果直接回流到脚本或 AI 分析链路。</p>
+					<p><strong>为什么强调 batch 模式？</strong>因为 AI 不需要交互式 GDB。batch 模式让"读取运行时变量"变成一个可编程的原子操作——halt、采样、resume，一次执行，结果直接回流到脚本或 AI 分析链路。</p>
 				</div>
 
 				<h3>第三层：RAM 导出与原始字节</h3>
@@ -1017,9 +1155,9 @@ arm-none-eabi-gdb build/app.elf \
   -ex "quit"
 
 # 或 dump 特定变量的原始字节
-arm-none-eabi-gdb build/01-RTC.elf -q -batch `
-  -ex "target extended-remote localhost:3333" `
-  -ex "monitor halt" `
+arm-none-eabi-gdb build/01-RTC.elf -q -batch \
+  -ex "target extended-remote localhost:3333" \
+  -ex "monitor halt" \
   -ex "x/128bx u2_dbg_raw" `
   -ex "monitor resume"
 
@@ -1043,7 +1181,7 @@ python tools/analyze_fft.py capture.bin</code></pre>
 				</ol>
 				<div class="card engineer">
 					<p><strong>差值判断逻辑：</strong></p>
-					<ul style="margin:0;padding-left:20px;">
+					<ul class="card-list">
 						<li><code>u2_idle_cnt</code> 在增长 → IDLE 中断正在发生，物理层信号已到达</li>
 						<li><code>u2_dbg_raw_total</code> 在增长 → 字节确实被接收进了缓冲区</li>
 						<li><code>u2_line_ok_cnt</code> 在增长 → 完整帧正在被解析</li>
@@ -1096,7 +1234,7 @@ python scripts/serial_tool.py monitor stop --session SESSION_ID --json</code></p
 
 				<div class="card engineer">
 					<p><strong>为什么这个 skill 适合 AI Agent？</strong></p>
-					<ul style="margin:0;padding-left:20px;">
+					<ul class="card-list">
 						<li>所有命令输出 <strong>JSON / JSONL</strong>，Agent 无需正则解析文本</li>
 						<li><strong>结构化退出码</strong>：0=成功，2=端口不可用，3=超时未匹配，Agent 可据此自动重试</li>
 						<li><code>request</code> 命令把"发送+等待响应"封装成原子操作，<code>--expect</code> 支持正则匹配</li>
@@ -1106,7 +1244,7 @@ python scripts/serial_tool.py monitor stop --session SESSION_ID --json</code></p
 
 				<div class="card action">
 					<p><strong>与 GDB batch 的分工：</strong></p>
-					<ul style="margin:0;padding-left:20px;">
+					<ul class="card-list">
 						<li><strong>GDB batch</strong>：读取 MCU 内部运行时变量（halt → 采样 → resume），诊断芯片内部状态</li>
 						<li><strong>serial_tool</strong>：PC 侧发送指令、接收响应、后台监控，适合协议验证和数据回流</li>
 						<li>两者组合：serial_tool 发送测试指令 → GDB batch 同步读取内部计数器 → 对比两侧数据，交叉验证</li>
@@ -1117,22 +1255,26 @@ python scripts/serial_tool.py monitor stop --session SESSION_ID --json</code></p
 			<span class="section-group-label">IV · 工程闭环</span>
 
 			<section>
-				<h2 id="troubleshooting">常见故障与快速恢复</h2>
+				<div class="insight-box warm">
+					<strong>环境异常快速排查：</strong>90% 的安装报错根因是 <strong>PATH 路径缺失</strong>。安装 arm-none-eabi-gcc 或 OpenOCD 后，先执行 <code>echo $PATH</code>（Linux）或 <code>$env:Path</code>（PowerShell）确认安装目录是否在环境变量中。若不在，手动追加后重开终端即可。
+				</div>
+
+				<h2 id="troubleshooting">常见故障速查与快速恢复</h2>
 				<p>自动化调试链路最怕的不是 bug 难查，而是工具链本身卡住。以下三个故障在实际项目中出现频率极高，提前写好恢复路径，AI 就能自己续跑，不用等人来救。</p>
 
-				<h3>故障 A：<code>localhost:3333: Connection timed out</code></h3>
+				<h3>🔴 故障 A：<code>localhost:3333: Connection timed out</code></h3>
 				<p>原因：OpenOCD 服务器没启动，或者端口不对。</p>
 				<pre><code># 确认端口是否在监听
 netstat -ano | findstr 3333</code></pre>
 				<p>修复：重新启动 OpenOCD，确认 <code>Listening on port 3333</code> 出现。</p>
 
-				<h3>故障 B：<code>libusb_open() failed with LIBUSB_ERROR_ACCESS</code></h3>
+				<h3>🟡 故障 B：<code>libusb_open() failed with LIBUSB_ERROR_ACCESS</code></h3>
 				<p>原因：ST-Link 被另一个 OpenOCD / GDB / JLink / CubeProgrammer 进程占着。</p>
 				<p>修复：杀掉已有的 OpenOCD 进程，重新 <code>make upload</code>。在自动化脚本里，可以在烧录前加一步检查：</p>
 				<pre><code># PowerShell：确保没有残留 OpenOCD 占用
 Get-Process openocd -ErrorAction SilentlyContinue | Stop-Process -Force</code></pre>
 
-				<h3>故障 C：<code>unable to connect to the target</code></h3>
+				<h3>🟢 故障 C：<code>unable to connect to the target</code></h3>
 				<p>可能原因：板子供电异常、接线松动、ST-Link 锁死、目标芯片处于不可恢复状态。</p>
 				<p>修复序列：重新插拔 ST-Link 和目标板电源 → 重启 OpenOCD → 重试烧录。在自动化脚本中，可以加一次 power-cycle 等待：</p>
 				<pre><code># 拔插后等待设备重新枚举
@@ -1140,13 +1282,26 @@ Start-Sleep -Seconds 3
 openocd -f interface/stlink.cfg -f target/stm32f4x.cfg</code></pre>
 
 				<div class="insight-box warm">
-					<strong>自动化调试的真正敌人不是 bug，</strong>而是工具链的占用冲突。ST-Link 是独占资源，OpenOCD 和烧录必须串行。在脚本里显式加锁或加检查，比事后排查“为什么又 timeout 了”高效十倍。
+					<strong>自动化调试的真正敌人不是 bug，</strong>而是工具链的占用冲突。ST-Link 是独占资源，OpenOCD 和烧录必须串行。在脚本里显式加锁或加检查，比事后排查"为什么又 timeout 了"高效十倍。
 				</div>
+
+				<h3 style="margin-top:28px;">故障速查表</h3>
+				<table class="tools-table" style="margin:8px 0 0;">
+					<thead><tr><th>故障代码</th><th>诱因</th><th>一键修复</th></tr></thead>
+					<tbody>
+						<tr><td><code>Connection timed out</code></td><td>OpenOCD 未启动或端口被占</td><td><code>openocd -f board/stm32f4discovery.cfg</code></td></tr>
+						<tr><td><code>LIBUSB_ERROR_ACCESS</code></td><td>ST-Link 被其他进程独占</td><td><code>pkill openocd; make upload</code></td></tr>
+						<tr><td><code>unable to connect to target</code></td><td>供电异常 / 接线松动 / 芯片锁死</td><td>重新上电 → 等待 3s → 重试烧录</td></tr>
+					</tbody>
+				</table>
 			</section>
 
 			<section>
 				<h2 id="integration">配置文件与工作流实战</h2>
 				<p>工具装好了，接下来把调试链路固化成配置文件。下面给出我在 STM32F446 项目中实际使用的 <code>launch.json</code> 和 <code>Makefile</code>，可以直接复制使用。</p>
+				<div class="card tip" style="margin:0 0 20px;">
+					<p><strong>跨芯片适配提示：</strong>当前配置基于 STM32F446（Cortex-M4）。更换 F1/Cortex-M3、F7/Cortex-M7 或 L4 系列时，仅需替换 OpenOCD 的 <code>board/</code> 或 <code>target/</code> 配置文件（如 <code>board/stm32f1discovery.cfg</code>）并调整 <code>-mcpu=</code> 编译参数（如 <code>-mcpu=cortex-m3</code>），其余整套命令完全通用。</p>
+				</div>
 
 				<h3>VS Code launch.json：cortex-debug 调试配置</h3>
 				<p>这个配置同时包含 Windows 和 Ubuntu 两套环境，放在项目的 <code>.vscode/launch.json</code> 里：</p>
@@ -1184,7 +1339,7 @@ openocd -f interface/stlink.cfg -f target/stm32f4x.cfg</code></pre>
 
 				<div class="card action">
 					<p><strong>关键配置说明：</strong></p>
-					<ul style="margin:0;padding-left:20px;">
+					<ul class="card-list">
 						<li><code>configFiles</code>：OpenOCD 配置文件路径，Windows 下通常指向安装目录的 <code>scripts</code> 文件夹，Linux 下可以自建 <code>openocd_lnx.cfg</code></li>
 						<li><code>armToolchainPath</code> / <code>gdbPath</code>：只在 Linux 配置中需要显式指定，Windows 下 cortex-debug 会自动从 PATH 查找</li>
 						<li><code>postDebugTask</code>：调试结束后自动执行 Reset 任务，让板子脱离调试器正常运行</li>
@@ -1309,7 +1464,7 @@ clean:
 
 -include $(wildcard $(BUILD_DIR)/*.d)</code></pre>
 
-				<p>重点看下面这几个<strong>实战目标</strong>——它们是把 Makefile 从“只能编译”变成“能编译+烧录+调试”的关键：</p>
+				<p>重点看下面这几个<strong>实战目标</strong>——它们是把 Makefile 从"只能编译"变成"能编译+烧录+调试"的关键：</p>
 				<pre><code># 烧录：用 OpenOCD 把 ELF 写入芯片
 upload: build/$(TARGET).bin
 	openocd -f board/stm32f4discovery.cfg \
@@ -1333,7 +1488,7 @@ debug-start:
 
 				<div class="card vision">
 					<p><strong>Makefile 实战要点：</strong></p>
-					<ul style="margin:0;padding-left:20px;">
+					<ul class="card-list">
 						<li><code>GCC_PATH</code> 是工具链路径的开关，换电脑时只改这一行</li>
 						<li><code>DEBUG = 1</code> 确保 <code>-g -gdwarf-2</code> 被加入 CFLAGS，否则 GDB 读不到变量</li>
 						<li><code>-u _printf_float</code> 链接器标志，让 <code>printf</code> 支持 <code>%f</code> 浮点输出</li>
@@ -1360,7 +1515,10 @@ arm-none-eabi-gdb build/01-RTC.elf -q -batch \
   -ex "monitor resume"</code></pre>
 
 				<div class="insight-box cool">
-					<strong>实战备忘：</strong>UART 帧上传如果出现碎片化（比如只收到 <code>"Tdf="</code> 半截），解析器必须支持跨 IDLE 事件的碎片累积。快照诊断法的价值就在于，它能让你从计数器差值里直接看出“字节到了但帧没拼完”这个事实，而不是靠猜。
+					<strong>实战备忘：</strong>UART 帧上传如果出现碎片化（比如只收到 <code>"Tdf="</code> 半截），解析器必须支持跨 IDLE 事件的碎片累积。快照诊断法的价值就在于，它能让你从计数器差值里直接看出"字节到了但帧没拼完"这个事实，而不是靠猜。
+				</div>
+				<div class="card tip">
+					<p><strong>扩展场景：</strong>快照诊断法不只用于调试阶段——量产抽检时，可以批量读取每块板的传感器初值快照与预期比对；偶发死机场景下，后台轮询变量快照日志可离线定位根因，无需现场复现。</p>
 				</div>
 
 				<h3>VS Code 完整工作流：编译 → 烧录 → 调试</h3>
@@ -1373,7 +1531,7 @@ arm-none-eabi-gdb build/01-RTC.elf -q -batch \
 					<li><strong>清理构建</strong>：在终端输入 <code>make clean</code></li>
 				</ol>
 				<div class="card vision">
-					<p><strong>这套流程的核心价值：</strong>从编译到调试，全程不需要离开 VS Code。AI 可以直接通过终端命令参与每一步，而不必等你手动操作后转述结果。当 <code>launch.json</code> + <code>Makefile</code> + <code>cortex-debug</code> 三者配合到位，“写代码—烧录—调试—读变量”就是一个完全可编程的闭环。</p>
+					<p><strong>这套流程的核心价值：</strong>从编译到调试，全程不需要离开 VS Code。当 <code>launch.json</code> + <code>Makefile</code> + <code>cortex-debug</code> 三者配合到位，"写代码—烧录—调试—读变量"就是一个完全可编程的闭环。</p>
 				</div>
 			</section>
 
@@ -1396,16 +1554,39 @@ for test_case in test_suite:
 generate_html_report(report, output="nightly.html")</code></pre>
 
 				<div class="card tip">
-					<p><strong>无人值守的前提不是 AI 更强，</strong>而是构建、烧录、调试、采样、验证每一步都能被命令化、脚本化、回传化。当这层翻译建立起来，你定义法则，AI 就能在法则内执行：编译、烧录、读寄存器、抓内存、跑脚本、分析结果、继续收敛。</p>
+					<p><strong>无人值守的前提不是 AI 更强，</strong>而是构建、烧录、调试、采样、验证每一步都能被命令化、脚本化、回传化。这层翻译建立后，你定义法则，AI 就能在法则内执行：编译、烧录、读寄存器、抓内存、跑脚本、分析结果、继续收敛。</p>
 				</div>
 
 				<p>这套组合拳的精髓，从来不只是"全开源、没版权风险"。那只是门槛。真正的价值在于，它把硬件状态、编译输出和调试数据都变成了 AI 能直接操作的语言。人不再承担机械搬运信息的工作，而是只负责方向、边界和最终裁决。</p>
 				<div class="insight-box">
 					<strong>你负责定义法则，AI 负责执行和反馈。</strong>工具链只是在中间搭了一座桥，让物理世界第一次能够被工程化地喂给 AI。
 				</div>
+
+				<div class="card action">
+					<p><strong>落地实操小任务（三级）</strong></p>
+					<p>⭐ <strong>新手任务：</strong>使用 batch GDB 读取工程内自定义变量（如 <code>u2_idle_cnt</code>），做一次简易变量快照对比。<br>
+					⭐⭐ <strong>进阶任务：</strong>基于 <code>serial_tool</code> 写一段 Python 自动化测试脚本，实现串口自动收发校验。<br>
+					⭐⭐⭐ <strong>工程化任务：</strong>基于 batch GDB + serial_tool 写一段夜间自动回归脚本，编译、烧录、采样、报告全自动。</p>
+					<p style="margin-top:10px;font-size:13px;color:var(--text-secondary);">📎 <strong>专栏衔接：</strong>下一篇 <a href="devs.html"><strong>《固件铭牌与设备画像》</strong></a> 将基于本工具链，实现固件身份自动化采集与设备批量管理。<br>
+					<strong>拓展方向：</strong>QEMU 仿真批量测试、Agent 脚本二次拓展——同一套 GDB 命令可驱动虚拟硬件，适合 CI 全自动回归流水线。</p>
+				</div>
 			</section>
 
-			<div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
+			<h2 id="quick-ref" style="margin-top:48px;border-top:none;padding-top:0;">📋 高频命令速查</h2>
+			<table class="quick-ref">
+				<thead><tr><th>场景</th><th>命令</th></tr></thead>
+				<tbody>
+					<tr><td>编译</td><td>make -j4</td></tr>
+					<tr><td>烧录</td><td>make upload</td></tr>
+					<tr><td>启动调试服务器</td><td>openocd -f board/stm32f4discovery.cfg</td></tr>
+					<tr><td>GDB batch 读变量</td><td>arm-none-eabi-gdb build/app.elf -q -batch -ex "target remote :3333" -ex "monitor halt" -ex "print var" -ex "monitor resume"</td></tr>
+					<tr><td>串口监控</td><td>serial_tool monitor COM3 115200</td></tr>
+					<tr><td>寄存器快照</td><td>mdw addr len</td></tr>
+					<tr><td>清理构建</td><td>make clean</td></tr>
+				</tbody>
+			</table>
+
+			<div class="bottom-series-links">
 			    <strong>系列导航：</strong>
 			    <a href="in.html">五层进化</a> ·
 			    <a href="true.html">实践项目模板</a> ·
@@ -1431,10 +1612,11 @@ generate_html_report(report, output="nightly.html")</code></pre>
 
 <div class="series-nav">
     <a href="history.html" aria-label="上一篇：历史的包袱">← 历史的包袱</a>
+    <a href="aboutmore/wx.html" aria-label="返回专栏总目录">📋 专栏总目</a>
     <a href="devs.html" aria-label="下一篇：固件铭牌与设备画像 ">固件铭牌与设备画像  →</a>
 </div>
-<div style="text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);color:#8896a4;font-size:13px;">
-				<a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a>
+<div class="footer-author-wrap">
+				<a href="about.html" class="footer-author-link">关于作者</a>
 			</div>
 		</div>
 	</div>
@@ -1453,5 +1635,75 @@ generate_html_report(report, output="nightly.html")</code></pre>
         </div>
     </div>
 </div>
+<script>
+(function() {
+  // ── 悬浮目录 ──
+  const tocBtn = document.getElementById('floatTocBtn');
+  const tocPanel = document.getElementById('floatTocPanel');
+  if (tocBtn && tocPanel) {
+    var items = [];
+    document.querySelectorAll('h2[id]').forEach(function(h) {
+      items.push('<a href="#' + h.id + '">' + h.textContent.trim() + '</a>');
+    });
+    tocPanel.innerHTML = items.join('');
+    tocBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      tocPanel.classList.toggle('show');
+    });
+    document.addEventListener('click', function(e) {
+      if (!tocBtn.contains(e.target) && !tocPanel.contains(e.target)) {
+        tocPanel.classList.remove('show');
+      }
+    });
+    // 滚动高亮
+    var tocLinks = tocPanel.querySelectorAll('a');
+    window.addEventListener('scroll', function() {
+      var current = '';
+      document.querySelectorAll('h2[id]').forEach(function(h) {
+        if (window.scrollY >= h.offsetTop - 100) current = h.id;
+      });
+      tocLinks.forEach(function(a) {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    });
+  }
+
+  // ── 复制按钮 ──
+  document.querySelectorAll('pre').forEach(function(pre) {
+    var wrap = document.createElement('div');
+    wrap.className = 'code-wrap';
+    pre.parentNode.insertBefore(wrap, pre);
+    wrap.appendChild(pre);
+    var btn = document.createElement('button');
+    btn.className = 'btn-copy';
+    btn.textContent = '复制';
+    wrap.appendChild(btn);
+    btn.addEventListener('click', function() {
+      var code = pre.querySelector('code');
+      var txt = code ? code.textContent : pre.textContent;
+      navigator.clipboard.writeText(txt).then(function() {
+        btn.textContent = '已复制';
+        btn.classList.add('copied');
+        setTimeout(function() { btn.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
+      });
+    });
+  });
+
+  // ── 代码块语言标识 ──
+  document.querySelectorAll('.code-wrap pre').forEach(function(pre) {
+    var code = pre.querySelector('code');
+    if (!code) return;
+    var txt = code.textContent || '';
+    var lang = 'bash';
+    if (txt.includes('{') && txt.includes('"version"')) lang = 'json';
+    else if (txt.includes('Makefile') || txt.includes('$(CC)') || txt.includes('build/')) lang = 'make';
+    var badge = document.createElement('div');
+    badge.className = 'code-lang lang-' + lang;
+    badge.textContent = lang;
+    pre.style.position = 'relative';
+    pre.appendChild(badge);
+  });
+})();
+</script>
 </body>
 </html>
