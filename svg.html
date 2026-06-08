@@ -900,6 +900,36 @@
         </div>
     </div>
 
+    <h3>极简示例：三步搭一张大图</h3>
+    <p>假设要画一张"嵌入式系统通信架构图"，包含 3 个传感器、2 个控制器、1 个上位机，总共 20+ 个元件。分层做法如下：</p>
+
+    <div class="card engineer">
+        <p><strong>第 1 层：元件原子（DeepSeek 生成）</strong></p>
+        <p>每个元件单独生成 SVG，带编号：</p>
+        <pre><code>&lt;!-- #1 温度传感器 --&gt;
+&lt;g id="sensor-temp"&gt;
+  &lt;rect x="10" y="10" width="80" height="40"
+        rx="6" fill="#27ae60"/&gt;
+  &lt;text x="50" y="35" text-anchor="middle"&gt;温度&lt;/text&gt;
+&lt;/g&gt;
+
+&lt;!-- #2 湿度传感器 --&gt;
+&lt;g id="sensor-humi"&gt;
+  &lt;rect ... /&gt; ...
+&lt;/g&gt;</code></pre>
+    </div>
+
+    <div class="card tip">
+        <p><strong>第 2 层：组装布局（Agent 集成）</strong></p>
+        <p>把所有元件交给 Agent，用 <code>&lt;use href="#sensor-temp" x="100" y="50"/&gt;</code> 精确定位，自动画连接线。</p>
+    </div>
+
+    <div class="card action">
+        <p><strong>第 3 层：人工微调（编号定位）</strong></p>
+        <p>看到成品后，告诉 AI："把 #3 号连接线改成虚线，把 #7 号元件颜色改成蓝色。" 改完后删除编号，输出成品。</p>
+    </div>
+    <p>整个过程就像拼乐高：先做零件，再拼总成，最后微调细节。</p>
+
     <h2 id="part4">四、这才是真正发挥了AI的优势</h2>
 
     <p><strong>AI的强项不是理解像素，是理解代码。</strong>SVG的每一根线、每一个色块、每一段文字，背后都是清晰的语法结构。AI可以在语法层面精准地创建、修改、删除。它不需要"看懂"这张图，它只需要"读懂"这段代码。</p>
@@ -940,6 +970,7 @@
 
     <h3>核心理念：AI不渲染，只写XML</h3>
     <p>很多AI画图方案让AI直接生成图片，结果是静态截图，无法二次编辑、无法纳入版本管理。<a href="https://github.com/nicholasoxford/next-ai-drawio" target="_blank" rel="noopener noreferrer">Next AI Draw.io</a> 的设计思路相反：<strong>AI不负责渲染，只负责生成和修改Draw.io的底层XML</strong>。浏览器里的Draw.io嵌入组件负责展示，AI产出的是一份可继续编辑、可导出、可版本管理的工程文件。</p>
+    <p>打个比方：传统方案像让AI当"画家"直接在画布上涂油彩；而这里AI是"建筑师"，它只写施工图纸（XML），渲染交给专业的绘图软件。图纸可以反复修改，而油画只能推倒重来。</p>
 
     <p>MCP Server 的架构清晰说明了这一点：</p>
     <pre><code>┌─────────────────┐ stdio ┌─────────────────┐
@@ -958,7 +989,7 @@
                            └────────────────┘</code></pre>
 
     <div class="insight-box decision">
-        <strong>通信原理一句话</strong>：Copilot 通过 <code>stdio</code>（标准输入输出）向 MCP Server 发送工具调用请求，MCP Server 内部通过 HTTP 转发给浏览器中嵌入的 draw.io，再把操作结果原路返回。整条链路无需联网，全部在本地完成。
+        <strong>通信原理一句话</strong>：Copilot 通过 <code>stdio</code>（标准输入输出，类似于两个人通过对讲机对话）向 MCP Server 发送工具调用请求，MCP Server 内部通过 HTTP 转发给浏览器中嵌入的 draw.io，再把操作结果原路返回。整条链路无需联网，全部在本地完成。
     </div>
 
     <div class="card engineer">
@@ -1073,11 +1104,11 @@ codegraph init -i</code></pre>
 
     <h2 id="part6">六、CodeGraph：让 AI 改图时不再从头扫描</h2>
 
-    <p>上面解决了"AI 画图"的单次成本。但真正消耗 Token 的是后续修改。</p>
+    <p>上面解决了"AI 画图"的单次成本。但真正消耗 Token（可以理解为 AI 的"阅读字数"，读得越多费用越高）的是后续修改。</p>
     <p>每次对 AI 说"把输入门的颜色改成蓝色"，AI 都需要重新扫描文件来定位目标节点。这个成本会随着图表规模递增。<a href="https://github.com/nicholasoxford/codegraph" target="_blank" rel="noopener noreferrer">CodeGraph</a> 解决了这个问题。</p>
 
     <h3>原理：预索引的本地知识图谱</h3>
-    <p>CodeGraph 是一个<strong>本地代码知识图谱工具</strong>，通过 MCP 协议为 AI 编程助手提供预索引的语义信息。</p>
+    <p>CodeGraph 是一个<strong>本地代码知识图谱工具</strong>（类似于给你的代码库建了一本"电话簿"，AI 查号码而不是挨家挨户敲门），通过 MCP 协议为 AI 编程助手提供预索引的语义信息。</p>
     <p>核心原理很简单：提前把代码库中的文件结构、符号关系、调用路径全部解析成 SQLite 数据库。AI 直接查询图谱获取所需信息，而不是通过 <code>grep</code>、<code>glob</code>、<code>read</code> 反复扫描文件。一次索引，无限复用。</p>
 
     <h3>官方实测数据</h3>
@@ -1204,6 +1235,42 @@ if command -v ss &gt;/dev/null; then
 else echo "ℹ️  无法检测"; fi
 
 echo "=== 排查完成 ==="</code></pre>
+
+    <details class="install-step">
+        <summary><strong>Windows 用户？点击展开 bat 版本</strong></summary>
+        <pre class="script-block"><code>@echo off
+chcp 65001 &gt;nul
+echo === 环境排查 ===
+
+:: 1. Node.js
+where node &gt;nul 2&gt;&amp;1
+if %errorlevel%==0 (
+  for /f "tokens=*" %%i in ('node -v') do echo ✅ Node.js: %%i
+) else ( echo ❌ Node.js: 未安装 )
+
+:: 2. npx
+where npx &gt;nul 2&gt;&amp;1
+if %errorlevel%==0 (
+  for /f "tokens=*" %%i in ('npx -v') do echo ✅ npx: %%i
+) else ( echo ❌ npx: 未安装 )
+
+:: 3. MCP 配置文件
+if exist .vscode\mcp.json ( echo ✅ mcp.json: 存在 ) else ( echo ❌ mcp.json: 未找到 .vscode\mcp.json )
+
+:: 4. CodeGraph
+where codegraph &gt;nul 2&gt;&amp;1
+if %errorlevel%==0 ( echo ✅ CodeGraph: 已安装 ) else ( echo ℹ️  CodeGraph: 未全局安装（可用 npx 运行） )
+
+:: 5. .codegraph 索引
+if exist .codegraph ( echo ✅ 索引库: 已初始化 ) else ( echo ℹ️  索引库: 未初始化（codegraph init -i） )
+
+:: 6. 端口 6002
+netstat -an | findstr ":6002 " &gt;nul
+if %errorlevel%==0 ( echo ⚠️  端口6002: 已占用 ) else ( echo ✅ 端口6002: 空闲 )
+
+echo === 排查完成 ===
+pause</code></pre>
+    </details>
 
     <span class="section-group-label">IV · 收束</span>
 
