@@ -839,7 +839,7 @@
 
     <p>我做设计有一个很深的体会：AI画不好位图，但它天生就该用代码画图。这是两种完全不同的工作方式。你让AI去编辑一张PNG图片——调整某个图标的位置、修改某根连接线的粗细、换掉某个颜色——它做得非常吃力。因为位图是像素矩阵，改一个细节意味着重新理解整张图的视觉布局，这对目前的AI来说负担很重，效果也很不稳定。</p>
 
-    <p>但SVG不同。<strong>SVG的本质不是图片，是代码。</strong>是几十行、几百行用XML写的矢量指令。而写代码、改代码，恰恰是AI最擅长的事。</p>
+    <p>但SVG不同。<strong>SVG的本质不是图片，是代码。</strong>是几十行、几百行用XML写的矢量指令。打个比方：SVG 就像一份"烹饪食谱"——它不是一张做好的菜的照片，而是写清楚了"放多少盐、炒几分钟、摆盘方式"的操作步骤。食谱可以随意修改某一步，照片只能推倒重拍。</p>
 
     <div class="insight-box warm">
         位图是像素矩阵，改一个细节就要重新理解整张图。SVG是结构化代码，每一根线、每一个色块背后都是清晰的语法。AI不需要"看懂"这张图，它只需要"读懂"这段代码。
@@ -969,7 +969,8 @@
     <p>前面四节讲的是理念：SVG是代码、编号精准定位、分层拆解、人AI分工。这一节进入实战——把理念落地为一条完整的工具链：<strong>DeepSeek 定风格 → GitHub Copilot Agent Mode 调工具 → Draw.io MCP 生成可编辑工程图</strong>。</p>
 
     <h3>核心理念：AI不渲染，只写XML</h3>
-    <p>很多AI画图方案让AI直接生成图片，结果是静态截图，无法二次编辑、无法纳入版本管理。<a href="https://github.com/nicholasoxford/next-ai-drawio" target="_blank" rel="noopener noreferrer">Next AI Draw.io</a> 的设计思路相反：<strong>AI不负责渲染，只负责生成和修改Draw.io的底层XML</strong>。浏览器里的Draw.io嵌入组件负责展示，AI产出的是一份可继续编辑、可导出、可版本管理的工程文件。</p>
+    <p>很多AI画图方案让AI直接生成图片，结果是静态截图，无法二次编辑、无法纳入版本管理。</p>
+    <p><a href="https://github.com/nicholasoxford/next-ai-drawio" target="_blank" rel="noopener noreferrer">Next AI Draw.io</a> 的设计思路相反：<strong>AI不负责渲染，只负责生成和修改Draw.io的底层XML</strong>（XML 就是一种结构化的数据格式，类似于填表格——每个字段都有固定位置，改一个字段不影响其他内容）。浏览器里的Draw.io嵌入组件负责展示，AI产出的是一份可继续编辑、可导出、可版本管理的工程文件。</p>
     <p>打个比方：传统方案像让AI当"画家"直接在画布上涂油彩；而这里AI是"建筑师"，它只写施工图纸（XML），渲染交给专业的绘图软件。图纸可以反复修改，而油画只能推倒重来。</p>
 
     <p>MCP Server 的架构清晰说明了这一点：</p>
@@ -1006,6 +1007,13 @@
 
     <h3>环境准备：VS Code + MCP 配置</h3>
     <p>基础环境要求：VS Code 最新版、Node.js v18+（Windows 建议 v20+）、GitHub Copilot 扩展（1.5.x+，确保 Agent Mode 功能完整可用）。</p>
+    <div class="insight-box warm">
+        <strong>Node.js 版本兼容性说明</strong>：
+        <code>v18.x</code>：MCP Server 可正常运行，但 CodeGraph 要求 ≥ 20。如果只用 MCP 不用 CodeGraph，v18 够用。
+        <code>v20.x</code>：推荐版本，MCP + CodeGraph 全部功能可用，<code>npx</code> 缓存机制更稳定。
+        <code>v22.x</code>：最新 LTS，功能完全兼容，但部分旧版 npm 包可能触发 deprecation 警告，不影响使用。
+        建议用 <code>nvm</code>（Windows 用 <code>nvm-windows</code>）管理多版本，随时切换。
+    </div>
     <p>VS Code 通过配置文件集成 MCP 服务器——在 <code>.vscode/mcp.json</code> 中定义，VS Code 自动管理服务器生命周期。步骤：</p>
     <ol>
         <li>在项目根目录创建 <code>.vscode</code> 文件夹</li>
@@ -1170,6 +1178,18 @@ codegraph init -i</code></pre>
         </table>
     </div>
 
+    <h3>新手极简操作清单（核心三步）</h3>
+    <p>如果上面的完整流程让你觉得信息量太大，这里有一份<strong>极简版</strong>——只做最核心的三步，其他全部跳过：</p>
+    <div class="card action">
+        <p><strong>极简版：15 分钟跑通全链路</strong></p>
+        <ol>
+            <li><strong>装 Node.js</strong>：去 <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">nodejs.org</a> 下载 v20 LTS 安装包，一路下一步。</li>
+            <li><strong>配 MCP</strong>：在项目根目录创建 <code>.vscode/mcp.json</code>，粘贴上面的 JSON 配置（共 7 行）。</li>
+            <li><strong>让 Copilot 画图</strong>：打开 VS Code → Copilot Chat → 切换 Agent Mode → 输入"调用 start_session，然后画一张 LSTM 架构图"。</li>
+        </ol>
+        <p>搞定这三步，你就已经走通了从"文字描述"到"可编辑工程图"的完整链路。CodeGraph、风格原子、排查脚本等进阶内容，等你用熟了再加。</p>
+    </div>
+
     <span class="section-group-label">III · 生产与排查</span>
 
     <h2 id="part7">七、生产环境接入注意事项</h2>
@@ -1280,7 +1300,9 @@ pause</code></pre>
 
     <p>再加上 CodeGraph，这个工作流才真正走完"省钱闭环"：<strong>画图的 Token 花在该花的地方，改图的 Token 通过一次索引无限复用。</strong></p>
 
-    <p>从"AI写SVG代码"到"DeepSeek定风格 + Copilot调MCP工具"再到"CodeGraph省钱闭环"，这条链路验证了同一个内核：<strong>风格定义（DeepSeek）→ Agent工具调用（Copilot + MCP）→ 结构化资产（.drawio + .svg）→ 本地知识图谱（CodeGraph）</strong>。AI不渲染像素，只操作结构化XML。人不做机械搬运，只负责方向、边界和审美裁决。</p>
+    <p>从"AI写SVG代码"到"DeepSeek定风格 + Copilot调MCP工具"再到"CodeGraph省钱闭环"，这条链路验证了同一个内核：</p>
+    <p><strong>风格定义（DeepSeek）→ Agent工具调用（Copilot + MCP）→ 结构化资产（.drawio + .svg）→ 本地知识图谱（CodeGraph）</strong></p>
+    <p>AI不渲染像素，只操作结构化XML。人不做机械搬运，只负责方向、边界和审美裁决。</p>
 
     <p>如果你也在使用 GitHub Copilot Agent Mode，这个工具链值得亲自试一次。最好的验证方式不是看文章，而是直接动手：</p>
 
@@ -1292,6 +1314,19 @@ pause</code></pre>
     <div class="insight-box cool">
         如果最后你得到一个可以继续编辑的 <code>.drawio</code> 文件，并且 Copilot 在修改时通过 CodeGraph 图谱查询完成——那就说明，<strong>从"风格描述"到"可编排工程图"，再到"可维护工程图"的完整链路，已经走通了。</strong>这不是在设计，这是在用工程思维重新定义设计。<a href="lj.html">君子不器</a>讲人和工具的关系，这篇讲人和AI在视觉创作里的关系。同一套法则，同一个内核。
     </div>
+
+    <h3>这套心法在系列中的位置</h3>
+    <p>如果把本系列的核心方法论放在一张表里横向对比，会发现它们其实在解决同一个问题的不同侧面：</p>
+    <table class="tools-table">
+        <thead><tr><th>文章</th><th>解决什么</th><th>核心动作</th></tr></thead>
+        <tbody>
+            <tr><td><a href="13.html">拆解与整合</a></td><td>复杂系统怎么拆</td><td>分层拆解 + 逐级组装</td></tr>
+            <tr><td><a href="fb.html">别把AI用成付费上班</a></td><td>工具怎么选</td><td>够用原则 + 分层路由</td></tr>
+            <tr><td><a href="lj.html">君子不器</a></td><td>人和工具的关系</td><td>人做判断，工具做执行</td></tr>
+            <tr class="highlight"><td><strong>本篇：SVG写图</strong></td><td>视觉资产怎么生产</td><td><strong>风格定义 + MCP工具链 + 知识图谱</strong></td></tr>
+        </tbody>
+    </table>
+    <p>它们共同指向一个内核：<strong>把复杂问题拆成简单步骤，每一步用最合适的工具，人只在关键节点介入。</strong>这个内核不仅适用于写代码、画图，也适用于任何需要 AI 协作的工程场景。</p>
 
 </article>
 
