@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>别让AI画图，让它写图 | SVG是代码不是图片</title>
-<meta name="description" content="SVG是代码，不是图片。AI画不好位图，但它天生就该用代码画图。用编号精准控制每一个元件，用分层策略拆解每一张复杂框图。">
-<meta name="keywords" content="SVG,AI画图,代码画图,编号系统,分层策略,矢量图,工程思维,设计">
+<meta name="description" content="SVG是代码，不是图片。AI画不好位图，但它天生就该用代码画图。从编号精准定位到分层策略拆解，再到DeepSeek+Copilot Agent Mode+Draw.io MCP+CodeGraph完整工具链实战。">
+<meta name="keywords" content="SVG,AI画图,代码画图,编号系统,分层策略,MCP,Draw.io,Copilot Agent Mode,CodeGraph,DeepSeek,工程图,知识图谱">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="别让AI画图，让它写图 | SVG是代码不是图片">
 <meta property="og:description" content="AI的强项不是理解像素，是理解代码。SVG的每一根线、每一个色块，背后都是清晰的语法结构。用编号精准定位，用分层策略拆解复杂。">
@@ -231,6 +231,41 @@
 	}
 
 .main-content { flex: 1; min-width: 0; }
+
+	.section-group-label {
+		display: block;
+		margin: 64px 0 -40px;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		color: #8896a4;
+		padding: 8px 0;
+		border-bottom: 1px dashed #d0d7de;
+	}
+
+	.toc-group-label {
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+		color: #8896a4;
+		margin: 0 0 6px;
+	}
+	.toc-group-label + ul { margin-top: 0; }
+	.sidebar-toc .toc-group-label:not(:first-child) { margin-top: 14px; }
+
+	.tools-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 14px;
+		margin: 12px 0;
+	}
+	.tools-table th { text-align: left; padding: 8px 12px; }
+	.tools-table thead tr { border-bottom: 2px solid var(--border); }
+	.tools-table tbody tr { border-bottom: 1px solid var(--border); }
+	.tools-table tbody tr:last-child { border-bottom: none; }
+	.tools-table td { padding: 6px 12px; }
 
 	
 </style>
@@ -705,12 +740,26 @@
 	<aside class="sidebar-toc">
 		<h3>本章导览</h3>
 		<nav>
+			<p class="toc-group-label">I · 核心理念</p>
 			<ul>
 				<li><a href="#part1">💻 SVG是代码，不是图片</a></li>
 				<li><a href="#part2">📌 用编号精准定位每个元件</a></li>
 				<li><a href="#part3">📌 从小图到大图的分层策略</a></li>
 				<li><a href="#part4">🤖 这才是AI的强项</a></li>
-				<li><a href="#part5">🏗️ 结语</a></li>
+			</ul>
+			<p class="toc-group-label">II · 实战工具链</p>
+			<ul>
+				<li><a href="#part5">🔗 从风格蓝图到可编辑工程图</a></li>
+				<li><a href="#part6">🧠 CodeGraph：改图不再从头扫描</a></li>
+			</ul>
+			<p class="toc-group-label">III · 生产与排查</p>
+			<ul>
+				<li><a href="#part7">⚙️ 生产环境注意事项</a></li>
+				<li><a href="#part8">🔍 常见问题排查</a></li>
+			</ul>
+			<p class="toc-group-label">IV · 收束</p>
+			<ul>
+				<li><a href="#part9">🏗️ 结语：这条路已经走通了</a></li>
 			</ul>
 		</nav>
 	</aside>
@@ -742,7 +791,9 @@
         <p>AI画不好位图，但它天生就该用代码画图。SVG的本质不是图片，是几十行、几百行用XML写的矢量指令。而写代码、改代码，恰恰是AI最擅长的事。用编号精准定位每个元件，用分层策略从小图到大图逐级构建，这就是工程思维在设计领域的投影。</p>
     </div>
 
-    <h2 id="part1">一、SVG是代码，不是图片</h2>
+    <span class="section-group-label">I · 核心理念</span>
+    
+        <h2 id="part1">一、SVG是代码，不是图片</h2>
 
     <p>我做设计有一个很深的体会：AI画不好位图，但它天生就该用代码画图。这是两种完全不同的工作方式。你让AI去编辑一张PNG图片——调整某个图标的位置、修改某根连接线的粗细、换掉某个颜色——它做得非常吃力。因为位图是像素矩阵，改一个细节意味着重新理解整张图的视觉布局，这对目前的AI来说负担很重，效果也很不稳定。</p>
 
@@ -824,21 +875,262 @@
         这和<a href="fb.html">够用原则</a>完全一致。工具该做什么就让它做什么，人不该做的就不要做。AI擅长代码操作，就让它在代码层面做所有能做的事。人擅长审美判断和细节把控，就只在最关键的节点介入。不是用最贵的模型，不是用最复杂的工具，而是用最合适的方式，在最合适的节点上施加杠杆。
     </div>
 
-    <h2 id="part5">五、结语：用工程思维重新定义设计</h2>
+    <span class="section-group-label">II · 实战工具链</span>
 
-    <p>设计，也是我整个思想体系在视觉维度上的投影。代码是这样，文章是这样，小说是这样，配色、排版、装饰元件，自然也是这样。它们不是不同的技能，是同一套法则在不同维度上的自然生长。</p>
+    <h2 id="part5">五、从风格蓝图到可编辑工程图：MCP 工具链实战</h2>
 
-    <p><a href="fb.html">够用原则</a>告诉我只需要DeepSeek加Agent这两类工具，<strong>装饰必须说话</strong>告诉我每一个SVG元件都必须有语义功能。我用这套法则去驾驭复杂，用这套法则去管理创作，用编号系统去精准控制每一个细节，用分层策略去拆解每一个复杂问题。</p>
+    <p>前面四节讲的是理念：SVG是代码、编号精准定位、分层拆解、人AI分工。这一节进入实战——把理念落地为一条完整的工具链：<strong>DeepSeek 定风格 → GitHub Copilot Agent Mode 调工具 → Draw.io MCP 生成可编辑工程图</strong>。</p>
+
+    <h3>核心理念：AI不渲染，只写XML</h3>
+    <p>很多AI画图方案让AI直接生成图片，结果是静态截图，无法二次编辑、无法纳入版本管理。<a href="https://github.com/nicholasoxford/next-ai-drawio" target="_blank" rel="noopener noreferrer">Next AI Draw.io</a> 的设计思路相反：<strong>AI不负责渲染，只负责生成和修改Draw.io的底层XML</strong>。浏览器里的Draw.io嵌入组件负责展示，AI产出的是一份可继续编辑、可导出、可版本管理的工程文件。</p>
+
+    <p>MCP Server 的架构清晰说明了这一点：</p>
+    <pre><code>┌─────────────────┐ stdio ┌─────────────────┐
+│ AI Agent        │&lt;──────│ MCP Server      │
+│ (Copilot/Claude)│       │ (this package)  │
+└─────────────────┘       └────────┬────────┘
+                                   │
+                           ┌───────▼────────┐
+                           │ Embedded HTTP  │
+                           │ Server (:6002) │
+                           └───────┬────────┘
+                                   │
+                           ┌───────▼────────┐
+                           │ User's Browser │
+                           │ (draw.io embed)│
+                           └────────────────┘</code></pre>
+
+    <div class="card engineer">
+        <p><strong>AI 职责三层拆分</strong></p>
+        <p>在此基础上，进一步拆分 AI 职责：</p>
+        <ul style="margin:8px 0 0;padding-left:20px;">
+            <li><strong>DeepSeek</strong>：生成符合风格要求的 SVG 代码（颜色、线条、动画），作为"设计蓝图"</li>
+            <li><strong>GitHub Copilot Agent Mode</strong>：通过 MCP 协议调用 Draw.io 原子工具，将风格蓝图转化为 Draw.io XML</li>
+            <li><strong>CodeGraph</strong>：将项目文件索引为本地知识图谱，AI 查询图谱而非逐文件扫描</li>
+        </ul>
+    </div>
+
+    <p>这验证了一条更完整的链路：<strong>风格定义（DeepSeek）→ Agent 工具调用（Copilot + MCP）→ 结构化资产（.drawio + .svg）→ 本地知识图谱（CodeGraph，零成本反复查询）</strong>。</p>
+
+    <h3>环境准备：VS Code + MCP 配置</h3>
+    <p>基础环境要求：VS Code 最新版、Node.js v18+（Windows 建议 v20+）、GitHub Copilot 扩展（1.5.x+，确保 Agent Mode 功能完整可用）。</p>
+    <p>VS Code 通过配置文件集成 MCP 服务器——在 <code>.vscode/mcp.json</code> 中定义，VS Code 自动管理服务器生命周期。步骤：</p>
+    <ol>
+        <li>在项目根目录创建 <code>.vscode</code> 文件夹</li>
+        <li>创建 <code>mcp.json</code> 并粘贴以下内容：</li>
+    </ol>
+    <pre><code>{
+  "mcpServers": {
+    "drawio": {
+      "command": "npx",
+      "args": ["@next-ai-drawio/mcp-server@0.2.0"]
+    }
+  }
+}</code></pre>
+    <div class="insight-box warm">
+        <strong>生产环境提示</strong>：建议固定版本号（如 <code>@0.2.0</code>），避免 <code>latest</code> 标签变化带来的影响。如果用内网环境，可通过环境变量 <code>DRAWIO_BASE_URL</code> 指定自托管 draw.io 地址。
+    </div>
+    <p>确保在 Copilot Chat 面板中选择 <strong>Agent Mode</strong>。Agent Mode 支持调用 MCP 工具完成多步骤任务。如果模式切换入口不明显，可以点击 Copilot Chat 面板顶部的模式选择器下拉菜单找到"Agent"选项。</p>
+
+    <h3>风格先行：用 DeepSeek 生成 SVG "风格原子"</h3>
+    <p>在调用 MCP 之前，先让 DeepSeek 定义图表的"视觉风格"——这是传统 AI 画图方案缺失的一环：<strong>风格与结构分离</strong>。</p>
+    <p><strong>任务示例</strong>：生成 LSTM 架构图中"动画连接线"的 SVG 元素代码。在 DeepSeek 对话中输入：</p>
+    <div class="card tip">
+        <p>"请生成一段 SVG 代码，表示 LSTM 单元中从'遗忘门'到'细胞状态'的连接线。需要虚线、箭头、流动动画（CSS @keyframes），颜色为橙色。同时给出该连接线所附着节点的位置示意（x,y 坐标）。"</p>
+    </div>
+    <p>DeepSeek 返回类似这样的 SVG 片段：</p>
+    <pre><code>&lt;defs&gt;
+  &lt;marker id="arrowOrange" markerWidth="10" markerHeight="10"
+          refX="9" refY="3" orient="auto"&gt;
+    &lt;path d="M0,0 L0,6 L9,3 z" fill="#FF8C00"/&gt;
+  &lt;/marker&gt;
+  &lt;style&gt;
+    @keyframes dashFlow {
+      0% { stroke-dashoffset: 20; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .animated-line {
+      stroke-dasharray: 5 5;
+      animation: dashFlow 1s linear infinite;
+    }
+  &lt;/style&gt;
+&lt;/defs&gt;
+&lt;line x1="100" y1="50" x2="300" y2="150" stroke="#FF8C00"
+      stroke-width="2" marker-end="url(#arrowOrange)"
+      class="animated-line"/&gt;</code></pre>
+    <p>这个 SVG 元素就是<strong>"风格原子"</strong>——定义了颜色、线型、动画参数，可以被任何支持 SVG 的渲染器理解。接下来把它作为上下文传给 Copilot。</p>
+
+    <h3>MCP 五个核心原子工具</h3>
+    <table class="tools-table">
+        <thead><tr><th>工具</th><th>用途</th><th>关键参数</th></tr></thead>
+        <tbody>
+            <tr><td><code>start_session</code></td><td>打开浏览器并建立实时预览</td><td>无（必须最先调用）</td></tr>
+            <tr><td><code>create_new_diagram</code></td><td>用 XML 新建图</td><td><code>xml</code></td></tr>
+            <tr><td><code>edit_diagram</code></td><td>按 cell ID 增删改</td><td>操作描述</td></tr>
+            <tr><td><code>get_diagram</code></td><td>读取当前图的 XML</td><td>无</td></tr>
+            <tr><td><code>export_diagram</code></td><td>保存为 .drawio 文件</td><td><code>filepath</code></td></tr>
+        </tbody>
+    </table>
+
+    <h3>实测流程：三步走通</h3>
+    <ol>
+        <li><strong>启动预览</strong>：在 Copilot Chat（Agent Mode）中说"调用 drawio 的 start_session 工具，打开 draw.io 浏览器预览窗口"。MCP Server 启动本地 HTTP 服务器（默认端口 6002），浏览器自动打开 draw.io 嵌入窗口。<strong>⚠️ start_session 必须先调用</strong>，否则后续操作报"没有活跃会话"。端口被占用时自动尝试下一个可用端口。</li>
+        <li><strong>生成架构图</strong>：粘贴 DeepSeek 的风格蓝图，让 Copilot 调用 <code>create_new_diagram</code> 创建完整 LSTM 图，包含输入门（绿色）、遗忘门（橙色）、候选门（蓝色）、输出门（紫色）、细胞状态和隐藏状态。所有连接线带 <code>flowAnimation=1</code>——这是 draw.io 官方支持的连接器动画样式参数。</li>
+        <li><strong>导出资产</strong>：确认预览符合预期后，调用 <code>export_diagram</code> 导出为 <code>.drawio</code> 源文件，可在 Draw.io 桌面版或网页版继续手动编辑。</li>
+    </ol>
+
+    <div class="card action">
+        <p><strong>交付的不是截图，是工程文件</strong></p>
+        <p>最终得到一个 <code>.drawio</code> 源文件——可继续编辑、可导出 PNG/SVG、可纳入 Git LFS 做版本管理。把 DeepSeek 生成的优质 SVG 风格片段保存为"风格原子"库，未来直接复用。</p>
+    </div>
+
+    <h3>关键命令序列</h3>
+    <pre><code># 1. 在项目根目录创建 MCP 配置
+mkdir -p .vscode
+cat &gt; .vscode/mcp.json &lt;&lt; EOF
+{
+  "mcpServers": {
+    "drawio": {
+      "command": "npx",
+      "args": ["@next-ai-drawio/mcp-server@0.2.0"]
+    }
+  }
+}
+EOF
+
+# 2. 安装 CodeGraph
+npx @xuefadevdev/codegraph
+
+# 3. 在项目目录中索引
+cd your-project
+codegraph init -i</code></pre>
+    <pre><code># VS Code Copilot Chat (Agent Mode)
+&gt; 调用 drawio 的 start_session 工具，打开浏览器预览。
+&gt; [粘贴 DeepSeek 生成的 SVG 风格蓝图]，调用 create_new_diagram
+&gt;   创建 LSTM 图，所有连接线带 flowAnimation=1
+&gt; 调用 export_diagram 导出为 ./LSTM.drawio</code></pre>
+
+    <h2 id="part6">六、CodeGraph：让 AI 改图时不再从头扫描</h2>
+
+    <p>上面解决了"AI 画图"的单次成本。真正消耗 Token 的是后续修改：每次对 AI 说"把输入门的颜色改成蓝色"，AI 都需要重新扫描文件来定位目标节点。<a href="https://github.com/nicholasoxford/codegraph" target="_blank" rel="noopener noreferrer">CodeGraph</a> 解决了这个问题。</p>
+
+    <h3>原理：预索引的本地知识图谱</h3>
+    <p>CodeGraph 是一个<strong>本地代码知识图谱工具</strong>，通过 MCP 协议为 AI 编程助手提供预索引的语义信息。核心原理：提前把代码库中的文件结构、符号关系、调用路径全部解析成 SQLite 数据库，AI 直接查询图谱获取所需信息，而不是通过 <code>grep</code>、<code>glob</code>、<code>read</code> 反复扫描文件。</p>
+
+    <h3>官方实测数据</h3>
+    <p>CodeGraph 在 7 个真实开源代码库（覆盖 7 种语言）上进行了基准测试，对比 AI Agent 在有和没有 CodeGraph 的情况下回答架构问题的效果，<strong>取中位数</strong>的结果如下：</p>
+    <table class="tools-table">
+        <thead><tr><th>指标</th><th>平均节省</th></tr></thead>
+        <tbody>
+            <tr><td>成本（费用）</td><td>35%</td></tr>
+            <tr><td>Token 消耗</td><td>59%</td></tr>
+            <tr><td>响应时间</td><td>49%</td></tr>
+            <tr><td>工具调用次数</td><td>70%</td></tr>
+        </tbody>
+    </table>
+    <p>在 VS Code 仓库（约 10,000 个 TypeScript 文件）上，Token 节省高达 <strong>73%</strong>，工具调用减少 <strong>72%</strong>。<strong>规律：收益随代码库规模递增</strong>——大仓库上代理通过几次索引查询即可给出答案，零文件读取；小型项目上收益边际收窄。</p>
+
+    <div class="insight-box warm">
+        <strong>成本节省（35%）小于 Token 节省（59%）</strong>，原因是 CodeGraph 的 instructions 本身会常驻 context，且 Claude 的 prompt caching 有折扣。但工具调用次数减少 70% 是实打实的效率提升。
+    </div>
+
+    <h3>接入步骤</h3>
+    <p><strong>环境要求</strong>：CodeGraph 需要 <strong>Node.js ≥ 20.0.0</strong>。安装前用 <code>node -v</code> 确认版本。</p>
+    <ol>
+        <li><strong>零安装运行（推荐）</strong>：交互式安装程序自动检测已安装的编程智能体，自动配置 MCP 服务器——支持 Claude Code、Cursor、Codex CLI、GitHub Copilot Agent Mode 等。</li>
+    </ol>
+    <pre><code>npx @xuefadevdev/codegraph</code></pre>
+    <p>备选方案：偏好全局安装也可执行 <code>npm i -g @xuefadevdev/codegraph</code>。</p>
+    <ol start="2">
+        <li><strong>在项目中初始化索引</strong>：进入存放 <code>.drawio</code> 文件的项目目录：</li>
+    </ol>
+    <pre><code>cd your-project
+codegraph init -i</code></pre>
+    <p>这个命令会创建 <code>.codegraph/</code> 目录存放知识图谱数据库，自动索引项目中的所有文件（包括 <code>.drawio</code> 文件），建立符号关系和调用图。支持<strong>增量同步</strong>——文件保存后自动更新索引，无需重复全量解析。</p>
+    <ol start="3">
+        <li><strong>重启 GitHub Copilot</strong>：重启 VS Code 或重新加载 Copilot 面板，MCP 服务器自动加载。之后只要项目里有 <code>.codegraph/</code> 目录，Copilot 就会自动使用 CodeGraph 的查询工具。</li>
+        <li><strong>验证生效</strong>：在 Copilot Chat（Agent Mode）中输入"使用 codegraph_explore 查看当前项目的文件结构"，如果配置成功，AI 会调用 CodeGraph 的工具而非逐文件扫描。</li>
+    </ol>
+
+    <div class="card tip">
+        <p><strong>在这个工作流中具体省在哪里？</strong></p>
+        <ul style="margin:8px 0 0;padding-left:20px;">
+            <li>修改图表前，AI 调用 <code>codegraph_search</code> 直接定位目标节点，无需 read 整个 .drawio 文件</li>
+            <li>数百节点的图，CodeGraph 一次返回所有受影响的边，不用遍历</li>
+            <li>.drawio 修改后保存，索引自动增量更新，下次查询拿到最新状态</li>
+        </ul>
+    </div>
+
+    <div class="card vision">
+        <p><strong>完整工作流总结</strong></p>
+        <table class="tools-table">
+            <thead><tr><th>步骤</th><th>角色</th><th>动作</th><th>产出</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>用户</td><td>在 DeepSeek 中输入风格要求</td><td>SVG 元素代码</td></tr>
+                <tr><td>2</td><td>用户</td><td>配置 .vscode/mcp.json</td><td>MCP 配置</td></tr>
+                <tr><td>3</td><td>Copilot</td><td>调用 start_session + create_new_diagram</td><td>带动画的工程图</td></tr>
+                <tr><td>4</td><td>用户</td><td>调用 export_diagram</td><td>.drawio 源文件</td></tr>
+                <tr><td>5</td><td>用户</td><td>codegraph init -i</td><td>本地知识图谱</td></tr>
+                <tr><td>6</td><td>Copilot</td><td>通过图谱查询修改图表</td><td>不再全量扫描</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <span class="section-group-label">III · 生产与排查</span>
+
+    <h2 id="part7">七、生产环境接入注意事项</h2>
+
+    <ol>
+        <li><strong>先调用 <code>start_session</code></strong>：否则所有操作报"没有活跃会话"。建议在自动化脚本中加入会话健康检查逻辑。</li>
+        <li><strong>确保 Agent Mode 启用</strong>：普通 Chat 模式无法调用 MCP 工具，务必在 Copilot Chat 面板中选择 Agent Mode。</li>
+        <li><strong>端口冲突处理</strong>：MCP Server 默认使用 6002 端口启动嵌入式 HTTP Server。如果被占用，它会自动尝试下一个可用端口，无需额外配置。</li>
+        <li><strong>私有化部署配置</strong>：内网环境可通过环境变量 <code>DRAWIO_BASE_URL</code> 指定自托管 draw.io 地址。</li>
+        <li><strong>固定 MCP 版本</strong>：生产使用 <code>@next-ai-drawio/mcp-server@x.y.z</code>，避免 <code>latest</code> 漂移。当前稳定版本是 <code>0.2.0</code>。</li>
+        <li><strong>CodeGraph 的 Node 版本要求</strong>：需要 <strong>Node.js ≥ 20.0.0</strong>。如果版本过低请先升级。</li>
+        <li><strong>CodeGraph 的收益随项目规模递增</strong>：大型项目（千级以上文件）收益最明显，小型项目收益边际收窄。</li>
+        <li><strong>风格蓝图可沉淀为模板库</strong>：把 DeepSeek 生成的优质 SVG 风格片段保存为"风格原子"，未来直接复用。</li>
+        <li><strong>制品保存</strong>：将 <code>.drawio</code> 纳入 Git LFS 或制品仓库，可回滚、可 diff。</li>
+    </ol>
+
+    <h2 id="part8">八、常见问题排查</h2>
+
+    <table class="tools-table">
+        <thead><tr><th>问题</th><th>可能原因</th><th>解决方案</th></tr></thead>
+        <tbody>
+            <tr><td>提示"没有活跃会话"</td><td>未调用 <code>start_session</code></td><td>先调用 <code>start_session</code> 后再执行其他操作</td></tr>
+            <tr><td>Copilot Chat 中看不到 MCP 工具</td><td>未切换到 Agent Mode</td><td>点击模式选择器，切换到"Agent"</td></tr>
+            <tr><td>MCP 工具调用失败</td><td><code>mcp.json</code> 配置格式错误</td><td>确认配置文件位于 <code>.vscode/mcp.json</code>，且 JSON 格式正确</td></tr>
+            <tr><td><code>codegraph init -i</code> 报错</td><td>Node 版本过低</td><td>执行 <code>node -v</code> 确认版本，需要 ≥ 20.0.0</td></tr>
+            <tr><td>CodeGraph 未生效</td><td>MCP 服务器未加载</td><td>重启 VS Code 或重新加载 Copilot 面板</td></tr>
+        </tbody>
+    </table>
+
+    <span class="section-group-label">IV · 收束</span>
+
+    <h2 id="part9">九、结语：这条路已经走通了</h2>
+
+    <p>GitHub Copilot Agent Mode 与 MCP 的集成，使得结构化的图表生成任务可以嵌入日常 AI 驱动的编程工作流。DeepSeek 进一步拆解了 AI 的职责——<strong>DeepSeek 负责"画风"，Copilot 负责"画骨"</strong>。最终交付的不是一张截图，而是一个可继续编辑、可导出、可纳入 CI/CD 的工程文件。</p>
+
+    <p>再加上 CodeGraph，这个工作流才真正走完"省钱闭环"：<strong>画图的 Token 花在该花的地方，改图的 Token 通过一次索引无限复用。</strong></p>
+
+    <p>从"AI写SVG代码"到"DeepSeek定风格 + Copilot调MCP工具"再到"CodeGraph省钱闭环"，这条链路验证了同一个内核：<strong>风格定义（DeepSeek）→ Agent工具调用（Copilot + MCP）→ 结构化资产（.drawio + .svg）→ 本地知识图谱（CodeGraph）</strong>。AI不渲染像素，只操作结构化XML。人不做机械搬运，只负责方向、边界和审美裁决。</p>
+
+    <p>如果你也在使用 GitHub Copilot Agent Mode，这个工具链值得亲自试一次。最好的验证方式不是看文章，而是直接动手：</p>
+
+    <div class="card action">
+        <p><strong>动手验证步骤</strong></p>
+        <p>先用 DeepSeek 生成一套 SVG 连接线元素，然后在 VS Code 中配置好 draw.io MCP，让 Copilot Agent Mode 画出带动画连接器的 LSTM 架构图。再把项目纳入 CodeGraph 索引，让 AI 修改图表——看它第二次是否不再从头扫描文件。</p>
+    </div>
 
     <div class="insight-box cool">
-        这不是在设计，这是在用工程思维重新定义设计。SVG是代码，不是图片；AI的强项是写代码，不是画像素。编号系统是施工的脚手架，分层策略是拆解复杂的利器。够用原则、装饰必须说话——<a href="lj.html">君子不器</a>讲人和工具的关系，这篇讲人和AI在视觉创作里的关系。同一套法则，同一个内核。
+        如果最后你得到一个可以继续编辑的 <code>.drawio</code> 文件，并且 Copilot 在修改时通过 CodeGraph 图谱查询完成——那就说明，<strong>从"风格描述"到"可编排工程图"，再到"可维护工程图"的完整链路，已经走通了。</strong>这不是在设计，这是在用工程思维重新定义设计。<a href="lj.html">君子不器</a>讲人和工具的关系，这篇讲人和AI在视觉创作里的关系。同一套法则，同一个内核。
     </div>
 
 </article>
 
     <section class="footnote-section">
         <h4>本文定位</h4>
-        <p>本文是嵌入式AI工程化系列的<strong>工程心法篇</strong>。它从"AI画不好位图但天生该用代码画图"这一实践洞察切入，探讨SVG工作流中的编号系统与分层策略。核心观点包括：SVG是代码不是图片（AI的强项是理解代码而非像素）、编号系统（施工期间的脚手架，交付时删除）、分层策略（小图直接出、大图Agent集成）、人AI分工（AI批量生成，人精准裁决）。与<a href="fb.html">《别把AI用成付费上班》</a>的够用原则、<a href="13.html">《拆解与整合》</a>的分层逻辑、<a href="lj.html">《君子不器与灵活调度》</a>的工具调度法则互为呼应。</p>
+        <p>本文是嵌入式AI工程化系列的<strong>工程心法篇</strong>。它从"AI画不好位图但天生该用代码画图"这一实践洞察切入，探讨SVG工作流中的编号系统与分层策略，并提供完整的实战工具链接入指南：DeepSeek生成SVG风格蓝图、GitHub Copilot Agent Mode通过Draw.io MCP（<code>@next-ai-drawio/mcp-server@0.2.0</code>）生成可编辑工程图、CodeGraph（<code>@xuefadevdev/codegraph</code>）建立本地知识图谱节省Token。包含生产环境注意事项与常见问题排查。核心观点包括：SVG是代码不是图片、编号系统（施工脚手架）、分层策略（小图直接出、大图Agent集成）、MCP工具链（风格与结构分离）、CodeGraph（改图不扫描）。与<a href="fb.html">《别把AI用成付费上班》</a>的够用原则、<a href="13.html">《拆解与整合》</a>的分层逻辑、<a href="lj.html">《君子不器与灵活调度》</a>的工具调度法则互为呼应。</p>
         <div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
             <strong>系列导航：</strong>
             <a href="in.html">五层进化</a> ·
