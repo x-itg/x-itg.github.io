@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N-P-C-玩家 | 完结篇 · itg</title>
+<meta name="description" content="每一块碎片都是一个独立的世界。你可以从任意一块开始读，顺时针或逆时针，或按编号跳转。碎片之间的连接线在你自己的脑海里。">
+<meta name="keywords" content="NPC玩家,程知意,陆屿,苏敏,Gary,程念,阿七,完结篇,碎片叙事">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="N-P-C-玩家 | 完结篇 · itg">
+<meta property="og:description" content="折叠完成，存档成功。便签不是文档，便签是活的。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://x-itg.github.io/aboutmore/npc.html">
+<link rel="canonical" href="https://x-itg.github.io/aboutmore/npc.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+:root {
+	--bg: #fefce8;
+	--bg-glow: rgba(251, 191, 36, 0.08);
+	--bg-glow-2: rgba(245, 158, 11, 0.05);
+	--card-bg: #ffffff;
+	--card-soft: #fffdf8;
+	--text: #292524;
+	--text-sec: #57534e;
+	--text-muted: #a8a29e;
+	--accent-a: #0891b2;
+	--accent-b: #d97706;
+	--accent-c: #16a34a;
+	--accent-d: #c026d3;
+	--accent-e: #6366f1;
+	--cursor-color: #0891b2;
+	--border: #e7e5e4;
+	--shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+	--radius: 16px;
+	--font-body: "Noto Serif SC","Source Han Serif SC","Songti SC",Georgia,serif;
+	--font-mono: "JetBrains Mono","Fira Code","Cascadia Code",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+	font-family:var(--font-body);
+	background:
+		radial-gradient(circle at 10% 0%, var(--bg-glow), transparent 30%),
+		radial-gradient(circle at 88% 12%, var(--bg-glow-2), transparent 28%),
+		linear-gradient(180deg, #fefce8 0%, #fff7e8 42%, #fef3df 100%);
+	color:var(--text);line-height:1.95;
+	-webkit-font-smoothing:antialiased;
+}
+.layout{display:flex;max-width:1760px;margin:0 auto;min-height:100vh;}
+.main-content{flex:1;min-width:0;max-width:1280px;margin:0 auto;padding:40px 28px 88px;}
+
+/* 文章头 */
+.article-header{margin-bottom:36px;padding:32px 28px 28px;border:1px solid var(--border);border-radius:var(--radius);background:#fffdf8;box-shadow:var(--shadow);}
+.series-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(217,119,6,0.1);color:var(--text);font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px;margin-bottom:14px;letter-spacing:0.5px;}
+h1{font-size:36px;font-weight:800;color:#1c1917;margin-bottom:10px;letter-spacing:-0.5px;font-family:var(--font-body);}
+.subtitle{font-size:15px;color:var(--text-sec);margin-bottom:8px;font-style:italic;}
+.meta{font-size:13px;color:var(--text-muted);}
+
+/* 光标动画 */
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.cursor-blink::after{content:"▎";color:var(--cursor-color);animation:blink 1.1s step-end infinite;margin-left:2px;}
+
+/* 阅读指南 */
+.reading-guide{margin:0 0 40px;padding:20px 24px;border-radius:var(--radius);background:#fefcf5;border:1px dashed #d6d3d1;color:var(--text-sec);font-size:14px;font-style:italic;text-align:center;}
+
+/* 碎片导航 */
+.frag-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;justify-content:center;}
+.frag-nav a{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid;transition:transform 0.2s,box-shadow 0.2s;}
+.frag-nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.frag-nav .nav-00{color:var(--text-sec);border-color:#d6d3d1;background:#f5f5f4;}
+.frag-nav .nav-a{color:var(--accent-a);border-color:rgba(8,145,178,0.25);background:rgba(8,145,178,0.06);}
+.frag-nav .nav-b{color:var(--accent-b);border-color:rgba(217,119,6,0.25);background:rgba(217,119,6,0.06);}
+.frag-nav .nav-c{color:var(--accent-c);border-color:rgba(22,163,74,0.25);background:rgba(22,163,74,0.06);}
+.frag-nav .nav-d{color:var(--accent-d);border-color:rgba(192,38,211,0.25);background:rgba(192,38,211,0.06);}
+.frag-nav .nav-e{color:var(--accent-e);border-color:rgba(99,102,241,0.25);background:rgba(99,102,241,0.06);}
+
+/* 系统日志 */
+.sys-log{margin:0 0 48px;padding:24px 28px;border-radius:var(--radius);background:#f0f9fa;border:1px solid rgba(8,145,178,0.2);font-family:var(--font-mono);font-size:13px;color:var(--text);line-height:1.8;}
+.sys-log .log-label{color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;display:block;}
+.sys-log p{margin:4px 0;font-size:13px;color:var(--text);}
+.sys-log .log-note{color:var(--text-sec);font-style:italic;margin-top:12px;font-family:var(--font-body);font-size:14px;}
+
+/* 碎片卡片 */
+.frag-section{margin-bottom:48px;}
+.frag-group-label{display:block;margin:0 0 -28px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--text-muted);padding:10px 0;border-bottom:1px dashed var(--border);}
+.frag-card{position:relative;padding:28px 28px 24px;border-radius:var(--radius);border:1px solid var(--border);background:var(--card-bg);box-shadow:var(--shadow);margin-bottom:28px;}
+.frag-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--radius) var(--radius) 0 0;}
+.frag-card h2{font-family:var(--font-body);font-size:22px;font-weight:700;margin-bottom:16px;letter-spacing:-0.2px;}
+.frag-card h3{font-size:17px;font-weight:600;margin:24px 0 12px;color:var(--text);}
+.frag-card p{margin:12px 0;font-size:15px;color:var(--text);text-align:justify;}
+.frag-card strong{color:#f1f5f9;}
+.frag-card .exp-id{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);background:rgba(255,255,255,0.04);padding:10px 16px;border-radius:10px;margin-bottom:16px;border:1px solid var(--border);white-space:pre;line-height:1.7;}
+
+/* 角色色彩 */
+.frag-a::before{background:linear-gradient(90deg,var(--accent-a),rgba(103,232,249,0.3));}
+.frag-a h2,.frag-a h3{color:var(--accent-a);}
+.frag-b::before{background:linear-gradient(90deg,var(--accent-b),rgba(251,191,36,0.3));}
+.frag-b h2,.frag-b h3{color:var(--accent-b);}
+.frag-c::before{background:linear-gradient(90deg,var(--accent-c),rgba(134,239,172,0.3));}
+.frag-c h2,.frag-c h3{color:var(--accent-c);}
+.frag-d::before{background:linear-gradient(90deg,var(--accent-d),rgba(240,171,252,0.3));}
+.frag-d h2,.frag-d h3{color:var(--accent-d);}
+.frag-e::before{background:linear-gradient(90deg,var(--accent-e),rgba(129,140,248,0.3));}
+.frag-e h2,.frag-e h3{color:var(--accent-e);}
+
+/* 引用块 */
+.frag-quote{margin:16px 0;padding:16px 20px;border-radius:14px;background:#fafaf9;border-left:3px solid var(--text-muted);font-size:15px;font-style:italic;color:var(--text-sec);}
+.frag-a .frag-quote{border-left-color:var(--accent-a);}
+.frag-b .frag-quote{border-left-color:var(--accent-b);}
+.frag-c .frag-quote{border-left-color:var(--accent-c);}
+.frag-d .frag-quote{border-left-color:var(--accent-d);}
+.frag-e .frag-quote{border-left-color:var(--accent-e);}
+
+/* 便签 */
+.sticky{position:relative;display:inline-block;padding:18px 20px;margin:8px;background:#fef9c3;border:1px solid #fde68a;border-radius:4px;font-size:14px;color:#713f12;box-shadow:3px 4px 12px rgba(0,0,0,0.15);transform:rotate(-1.5deg);line-height:1.6;max-width:360px;font-family:var(--font-body);}
+.sticky:nth-child(even){transform:rotate(1.2deg);background:#fef3c7;}
+.sticky:nth-child(3n){transform:rotate(-0.8deg);background:#fffbeb;}
+.sticky .sticky-back{display:block;margin-top:10px;padding-top:10px;border-top:1px dashed #d4a017;font-size:12px;color:#92400e;font-style:italic;}
+.sticky-wall{display:flex;flex-wrap:wrap;gap:14px;margin:20px 0;justify-content:center;}
+
+/* 聊天记录 */
+.chat-log{margin:16px 0;padding:18px 20px;border-radius:14px;background:#f8fafc;border:1px solid var(--border);font-family:var(--font-mono);font-size:13px;line-height:1.9;color:var(--text);}
+.chat-log .chat-time{color:var(--text-muted);font-size:11px;margin-bottom:10px;display:block;}
+.chat-log .chat-line{margin:4px 0;}
+.chat-log .chat-name{font-weight:700;margin-right:6px;}
+.chat-log .chat-name-a{color:var(--accent-d);}
+.chat-log .chat-name-b{color:var(--accent-e);}
+.chat-log .chat-name-c{color:var(--accent-c);}
+.chat-log .chat-action{color:var(--text-muted);font-style:italic;}
+
+/* 标签墙 */
+.tag-wall{margin:16px 0;font-family:var(--font-mono);font-size:13px;color:var(--text-sec);line-height:2;}
+.tag-wall .tag-row{display:flex;gap:12px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04);flex-wrap:wrap;}
+.tag-wall .tag-id{color:var(--accent-b);min-width:32px;font-weight:700;}
+.tag-wall .tag-date{color:var(--text-muted);min-width:90px;}
+.tag-wall .tag-text{flex:1;min-width:200px;}
+
+/* 棋谱表 */
+.chess-table{width:100%;border-collapse:collapse;font-size:13px;font-family:var(--font-mono);margin:16px 0;}
+.chess-table th{text-align:left;padding:8px 12px;color:var(--accent-c);border-bottom:2px solid rgba(134,239,172,0.2);}
+.chess-table td{padding:6px 12px;border-bottom:1px solid var(--border);color:var(--text-sec);}
+.chess-table .note{font-family:var(--font-body);font-size:13px;color:var(--text-sec);font-style:italic;}
+
+/* 结语 */
+.finale{margin-top:48px;padding:32px 28px;border-radius:var(--radius);background:linear-gradient(135deg,rgba(8,145,178,0.06),rgba(99,102,241,0.06));border:1px solid rgba(8,145,178,0.15);text-align:center;}
+.finale p{font-size:16px;color:var(--text);margin:12px 0;}
+.finale .finale-line{font-size:18px;font-weight:700;color:var(--accent-a);margin:20px 0;}
+
+/* 回到顶部 */
+.back-to-top{position:fixed;bottom:28px;right:28px;width:42px;height:42px;border-radius:50%;background:var(--accent-b);color:#fff;border:none;font-size:18px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15);opacity:0;visibility:hidden;transition:opacity 0.3s,visibility 0.3s,transform 0.2s;z-index:100;display:flex;align-items:center;justify-content:center;}
+.back-to-top.visible{opacity:1;visibility:visible;}
+.back-to-top:hover{transform:translateY(-3px);}
+
+@media(max-width:640px){
+	.main-content{padding:20px 16px 60px;}
+	h1{font-size:28px;}
+	.frag-card{padding:20px 18px 18px;}
+	.sticky{max-width:100%;transform:rotate(0)!important;}
+	.sticky-wall{flex-direction:column;}
+	.chess-table{font-size:12px;}
+	.back-to-top{bottom:16px;right:16px;width:38px;height:38px;}
+}
+</style>
+<link rel="stylesheet" href="../assets/site-sidebar.css">
+</head>
+<body class="site-theme-story">
+<div class="layout">
+<aside class="site-sidebar">
+    <div class="site-sidebar__brand"><a href="../index.html"><i class="fas fa-compass"></i> 乾坤大挪移心法</a></div>
+    <div class="site-sidebar__quick-links">
+        <a href="../index.html" class="site-sidebar__quick-link site-sidebar__quick-link--primary"><i class="fas fa-house"></i><span>首页入口</span></a>
+        <a href="../aboutmore/wx.html" class="site-sidebar__quick-link"><i class="fas fa-map"></i><span>站点总览</span></a>
+        <a href="../about.html" class="site-sidebar__quick-link"><i class="fas fa-feather-alt"></i><span>总序法则</span></a>
+    </div>
+    <details class="site-sidebar__group site-sidebar__group--tech">
+        <summary>
+            <span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>
+            <span class="site-sidebar__summary-meta">技术主线 · 20 篇</span>
+        </summary>
+        <div class="site-sidebar__group-body">
+            <details class="site-sidebar__subgroup">
+                <summary>总纲</summary>
+                <div class="site-sidebar__group-body">
+                    <ul>
+                    <li><a href="../in.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                        <span>
+                            <span class="site-sidebar__link-title">五层进化</span>
+                            <span class="site-sidebar__link-meta">总纲 · 定义整个体系的坐标系和成熟度框架</span>
+                        </span>
+                    </a></li>
+                    </ul>
+                </div>
+            </details>
+            <details class="site-sidebar__subgroup">
+                <summary>核心主线</summary>
+                <div class="site-sidebar__group-body">
+                    <ul>
+                    <li><a href="../true.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧱</span>
+                        <span>
+                            <span class="site-sidebar__link-title">实践项目模板</span>
+                            <span class="site-sidebar__link-meta">执行基础 · 把方法论固化为可落地的工程骨架</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../test.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🛠️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">自主修复闭环</span>
+                            <span class="site-sidebar__link-meta">执行智能 · 双轨收敛让系统在既定路径上自我修正</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../fwd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧠</span>
+                        <span>
+                            <span class="site-sidebar__link-title">从收敛到进化</span>
+                            <span class="site-sidebar__link-meta">演化与判断智能 · 引入Agent性格制衡与决策切换</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../exc.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🫀</span>
+                        <span>
+                            <span class="site-sidebar__link-title">知识的生命体征</span>
+                            <span class="site-sidebar__link-meta">记忆智能 · 知识资产生命周期管理与免疫记忆</span>
+                        </span>
+                    </a></li>
+                    </ul>
+                </div>
+            </details>
+            <details class="site-sidebar__subgroup">
+                <summary>根系能力</summary>
+                <div class="site-sidebar__group-body">
+                    <ul>
+                    <li><a href="../pcb.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🔎</span>
+                        <span>
+                            <span class="site-sidebar__link-title">电路图分析器</span>
+                            <span class="site-sidebar__link-meta">感知根系 · 打通物理世界与数字世界</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../pt.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧩</span>
+                        <span>
+                            <span class="site-sidebar__link-title">最后的拼图：Skills</span>
+                            <span class="site-sidebar__link-meta">支撑根系 · 快消费应用即时方法</span>
+                        </span>
+                    </a></li>
+                    </ul>
+                </div>
+            </details>
+            <details class="site-sidebar__subgroup">
+                <summary>专业延伸</summary>
+                <div class="site-sidebar__group-body">
+                    <ul>
+                    <li><a href="../history.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📦</span>
+                        <span>
+                            <span class="site-sidebar__link-title">历史的包袱</span>
+                            <span class="site-sidebar__link-meta">专业延伸 · 遗留工程与AI迁移策略</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../ocd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧰</span>
+                        <span>
+                            <span class="site-sidebar__link-title">被忽视的工具链组合</span>
+                            <span class="site-sidebar__link-meta">专业延伸 · 用开源命令行工具把AI接入真实硬件调试</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../devs.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🏷️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">固件铭牌与设备画像</span>
+                            <span class="site-sidebar__link-meta">专业延伸 · 固件数字身份与协同管理</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../gmp.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">📜</span>
+                        <span>
+                            <span class="site-sidebar__link-title">合规验证与AI编程</span>
+                            <span class="site-sidebar__link-meta">专业延伸 · 从"事后补文档"到"事前建法则"</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../14.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">⚖️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">AI谄媚与专利</span>
+                            <span class="site-sidebar__link-meta">专业延伸 · 在拿证与保护之间切换审查模式</span>
+                        </span>
+                    </a></li>
+                    </ul>
+                </div>
+            </details>
+            <details class="site-sidebar__subgroup">
+                <summary>实战与心法</summary>
+                <div class="site-sidebar__group-body">
+                    <ul>
+                    <li><a href="../hg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎯</span>
+                        <span>
+                            <span class="site-sidebar__link-title">回归现实：单Agent实践框架</span>
+                            <span class="site-sidebar__link-meta">综合实战 · 将完整法则体系落地为可立即上手的工程实践</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../12.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
+                        <span>
+                            <span class="site-sidebar__link-title">AI编程的利刃</span>
+                            <span class="site-sidebar__link-meta">工程利器 · 同步生成测试脚本让AI自我调试</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../py.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🐍</span>
+                        <span>
+                            <span class="site-sidebar__link-title">批量修改，先问该不该用脚本</span>
+                            <span class="site-sidebar__link-meta">工程利器 · 先判断模式，再把批量改造交给脚本执行</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../13.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🧵</span>
+                        <span>
+                            <span class="site-sidebar__link-title">拆解与整合</span>
+                            <span class="site-sidebar__link-meta">工程心法 · 驾驭复杂系统的完整工程法则</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../lj.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎓</span>
+                        <span>
+                            <span class="site-sidebar__link-title">君子不器与灵活调度</span>
+                            <span class="site-sidebar__link-meta">工程心法 · 从古典哲思到AI时代工具调度法则</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../fb.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">💰</span>
+                        <span>
+                            <span class="site-sidebar__link-title">别把AI用成付费上班</span>
+                            <span class="site-sidebar__link-meta">工程心法 · 够用原则与分层路由，把AI账单用在刀刃上</span>
+                        </span>
+                    </a></li>
+                    <li><a href="../svg.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🎨</span>
+                        <span>
+                            <span class="site-sidebar__link-title">别让AI画图，让它写图</span>
+                            <span class="site-sidebar__link-meta">工程心法 · SVG是代码不是图片，编号精准定位，分层策略拆解复杂设计</span>
+                        </span>
+                    </a></li>
+                    </ul>
+                </div>
+            </details>
+            <details class="site-sidebar__subgroup">
+                <summary>内核反照</summary>
+                <div class="site-sidebar__group-body">
+                    <ul>
+                    <li><a href="../gd.html" class="site-sidebar__link site-sidebar__article-link">
+                        <span class="site-sidebar__article-icon" aria-hidden="true">🌾</span>
+                        <span>
+                            <span class="site-sidebar__link-title">始于工程，服务生活</span>
+                            <span class="site-sidebar__link-meta">内核反照 · 工程法则从技术补丁长成生活工具</span>
+                        </span>
+                    </a></li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </details>
+    <details class="site-sidebar__group site-sidebar__group--law">
+        <summary>
+            <span class="site-sidebar__summary-text">L1 · 法则</span>
+            <span class="site-sidebar__summary-meta">法则主线与迁移起点</span>
+        </summary>
+        <div class="site-sidebar__group-body">
+            <ul>
+                <li><a href="../about.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">📖</span>
+                    <span>
+                        <span class="site-sidebar__link-title">我找到了一套法则</span>
+                        <span class="site-sidebar__link-meta">法则起点</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/tk.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🧭</span>
+                    <span>
+                        <span class="site-sidebar__link-title">以不变应万变</span>
+                        <span class="site-sidebar__link-meta">法则起点</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/fw.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🪄</span>
+                    <span>
+                        <span class="site-sidebar__link-title">工程魔法</span>
+                        <span class="site-sidebar__link-meta">法则起点</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/sc.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">💞</span>
+                    <span>
+                        <span class="site-sidebar__link-title">调试AI，学会经营感情</span>
+                        <span class="site-sidebar__link-meta">法则起点</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/wx.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🗺️</span>
+                    <span>
+                        <span class="site-sidebar__link-title">乾坤大挪移心法 · 文章总览</span>
+                        <span class="site-sidebar__link-meta">法则起点</span>
+                    </span>
+                </a></li>
+            </ul>
+        </div>
+    </details>
+    <details class="site-sidebar__group site-sidebar__group--persona">
+        <summary>
+            <span class="site-sidebar__summary-text">L2 · 人</span>
+            <span class="site-sidebar__summary-meta">日常、关系与自省现场</span>
+        </summary>
+        <div class="site-sidebar__group-body">
+            <ul>
+                <li><a href="../aboutmore/itg.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🌞</span>
+                    <span>
+                        <span class="site-sidebar__link-title">爱婷哥</span>
+                        <span class="site-sidebar__link-meta">家庭·命名与温柔</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/forme.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">📝</span>
+                    <span>
+                        <span class="site-sidebar__link-title">写给自己</span>
+                        <span class="site-sidebar__link-meta">自省·书信与期许</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/pg.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🎤</span>
+                    <span>
+                        <span class="site-sidebar__link-title">家庭直播间</span>
+                        <span class="site-sidebar__link-meta">日常·接话与快乐</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/m.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🌙</span>
+                    <span>
+                        <span class="site-sidebar__link-title">周一早上，梦见下班</span>
+                        <span class="site-sidebar__link-meta">日常·疲惫与松弛</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/cc.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🪞</span>
+                    <span>
+                        <span class="site-sidebar__link-title">我可能哪里错了</span>
+                        <span class="site-sidebar__link-meta">思辨·反驳与反思</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/ll.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">💬</span>
+                    <span>
+                        <span class="site-sidebar__link-title">找个不懂的人聊聊</span>
+                        <span class="site-sidebar__link-meta">方法·外行与切换</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/pm.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🧠</span>
+                    <span>
+                        <span class="site-sidebar__link-title">他们的提示词，我的交付物</span>
+                        <span class="site-sidebar__link-meta">心法·提示与交付</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/seconed.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🎐</span>
+                    <span>
+                        <span class="site-sidebar__link-title">一秒钟的感动</span>
+                        <span class="site-sidebar__link-meta">亲子·棋盘与奔赴</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/ta.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">♾️</span>
+                    <span>
+                        <span class="site-sidebar__link-title">不必全部收敛</span>
+                        <span class="site-sidebar__link-meta">哲思·余味与收敛</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/xw.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">⚖️</span>
+                    <span>
+                        <span class="site-sidebar__link-title">先稳，再赢</span>
+                        <span class="site-sidebar__link-meta">心法·先胜再战的完整路径</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/qj.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">💎</span>
+                    <span>
+                        <span class="site-sidebar__link-title">提供情绪价值的三种姿势</span>
+                        <span class="site-sidebar__link-meta">心法·真诚看见与克制的表达</span>
+                    </span>
+                </a></li>
+            </ul>
+        </div>
+    </details>
+    <details class="site-sidebar__group site-sidebar__group--literature" open>
+        <summary>
+            <span class="site-sidebar__summary-text">L3 · 小说</span>
+            <span class="site-sidebar__summary-meta">小说、对话、复调与孤独副本</span>
+        </summary>
+        <div class="site-sidebar__group-body">
+            <ul>
+                <li><a href="../aboutmore/czy.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">📘</span>
+                    <span>
+                        <span class="site-sidebar__link-title">蓝牙：陆知意岛</span>
+                        <span class="site-sidebar__link-meta">小说与对话</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/qp-chat.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">💭</span>
+                    <span>
+                        <span class="site-sidebar__link-title">失控时空·对话版</span>
+                        <span class="site-sidebar__link-meta">小说与对话</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/gary.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">📍</span>
+                    <span>
+                        <span class="site-sidebar__link-title">失控时空·终极玩家</span>
+                        <span class="site-sidebar__link-meta">小说与对话</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/alone.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🌃</span>
+                    <span>
+                        <span class="site-sidebar__link-title">知意知否·孤独玩家</span>
+                        <span class="site-sidebar__link-meta">小说与对话</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/mywj.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🪐</span>
+                    <span>
+                        <span class="site-sidebar__link-title">知屿之意·命运玩家</span>
+                        <span class="site-sidebar__link-meta">小说与对话</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/party-high.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🎼</span>
+                    <span>
+                        <span class="site-sidebar__link-title">四季Party High玩家</span>
+                        <span class="site-sidebar__link-meta">小说与对话</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/jsxm.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🎮</span>
+                    <span>
+                        <span class="site-sidebar__link-title">失控时刻·有趣玩家</span>
+                        <span class="site-sidebar__link-meta">小说与对话</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/npc.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🏁</span>
+                    <span>
+                        <span class="site-sidebar__link-title">N-P-C-玩家</span>
+                        <span class="site-sidebar__link-meta">小说与对话</span>
+                    </span>
+                </a></li>
+            </ul>
+        </div>
+    </details>
+    <details class="site-sidebar__group site-sidebar__group--meta">
+        <summary>
+            <span class="site-sidebar__summary-text">L4 · 创作</span>
+            <span class="site-sidebar__summary-meta">创作方法与引擎说明</span>
+        </summary>
+        <div class="site-sidebar__group-body">
+            <ul>
+                <li><a href="../aboutmore/czjs.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🧪</span>
+                    <span>
+                        <span class="site-sidebar__link-title">会话的碰撞</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/szdl.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🏗️</span>
+                    <span>
+                        <span class="site-sidebar__link-title">从碰撞到分工：三足鼎立</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/yyjk.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🔄</span>
+                    <span>
+                        <span class="site-sidebar__link-title">我的创作永不枯竭</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/xg.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🏭</span>
+                    <span>
+                        <span class="site-sidebar__link-title">我承认文章都是AI洗稿</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/fr.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🏛️</span>
+                    <span>
+                        <span class="site-sidebar__link-title">四层结构：创作体系</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/jg.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🧬</span>
+                    <span>
+                        <span class="site-sidebar__link-title">架构定乾坤，笔墨随法则</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/sryj.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">⚔️</span>
+                    <span>
+                        <span class="site-sidebar__link-title">十日一剑：创作手记</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/gc.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🖥️</span>
+                    <span>
+                        <span class="site-sidebar__link-title">像调试代码一样创作</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                    </span>
+                </a></li>
+                <li><a href="../aboutmore/ng.html" class="site-sidebar__link site-sidebar__article-link">
+                    <span class="site-sidebar__article-icon" aria-hidden="true">🔧</span>
+                    <span>
+                        <span class="site-sidebar__link-title">我不用天赋，我只用方法</span>
+                        <span class="site-sidebar__link-meta">方法与引擎</span>
+                    </span>
+                </a></li>
+            </ul>
+        </div>
+    </details>
+    <a href="../about.html" class="site-sidebar__footer-link">→ 关于作者</a>
+</aside>
+<div class="main-content">
+<header class="article-header">
+    <span class="series-tag"><i class="fas fa-puzzle-piece"></i> 完结篇 · 碎片叙事</span>
+    <h1>N-P-C-玩家</h1>
+    <p class="subtitle">每一块碎片都是一个独立的世界。你可以从任意一块开始读，顺时针或逆时针，或按编号跳转。碎片之间的连接线在你自己的脑海里。</p>
+    <div class="meta">itg · 公众号: 火星火箭 · 生活随记</div>
+</header>
+
+<article>
+
+<!-- 碎片导航 -->
+<nav class="frag-nav">
+    <a href="#log00" class="nav-00">00 · 系统启动</a>
+    <a href="#fragA" class="nav-a">A · 程知意</a>
+    <a href="#fragB" class="nav-b">B · 苏敏 &amp; Gary</a>
+    <a href="#fragC" class="nav-c">C · 程念</a>
+    <a href="#fragD" class="nav-d">D · 阿七</a>
+    <a href="#fragE" class="nav-e">E · 陆屿</a>
+</nav>
+
+<!-- 00 · 系统启动日志 -->
+<div id="log00" class="sys-log">
+    <span class="log-label">实验室日志 · 匿名</span>
+    <p>AI 模型「陆屿」已部署。任务：预测冷门古菌蛋白质的折叠路径。</p>
+    <p>初始参数基于结构生物学通用数据。模型内部有一组隐藏层权值，初始化方式与默认方案存在极细微的偏差——不影响预测精度，但会在每次输出时附带一段未被标注的注释文本。</p>
+    <p>注释内容初步识别为……日常对话片段。</p>
+    <p>研究团队决定保留该偏差，不予修正。</p>
+</div>
+
+<!-- A · 程知意 -->
+<span id="fragA" class="frag-group-label">A · 程知意 · 实验日志碎片</span>
+
+<div class="frag-section">
+<div class="frag-card frag-a">
+    <h2>A1 · 最低能量态</h2>
+    <div class="exp-id">实验编号：PROTO-2026-03-11
+蛋白质：冷门古菌 FKBP 家族
+预测模型：Luyu-AI v3.1</div>
+    <p>今天模型跑出了一个非常规的折叠路径。按热力学法则，它应该沿着自由能最低的方向走，但它绕了一圈，停在一个亚稳态中间态，然后重新折叠。</p>
+    <p>我检查了它输出的注释。日志末尾多了一行字：</p>
+    <div class="frag-quote">"不是所有的折叠都是为了稳定。有时候是为了重新开始。"</div>
+    <p>我在离心机前站了很久。离心机里透明试管中的蛋白质沉淀正在慢慢分层，最重的沉在底部，最轻的浮在表面。窗外慕尼黑的雪停了。我忽然想起 Gary 很久以前在天台上问我的那个问题，"你的最低能量态是什么？"</p>
+    <p>我当时没有回答。</p>
+    <p>现在我知道了。<strong>我的最低能量态不是任何一个人，是我自己。</strong>只是这个结构，花了十几年才折叠成功。</p>
+</div>
+
+<div class="frag-card frag-a">
+    <h2>A2 · 隐藏层</h2>
+    <div class="exp-id">实验编号：PROTO-2026-04-02
+额外输出：隐藏层权重可视化</div>
+    <p>今天把陆屿模型的隐藏层权重投射到了二维平面上。那些权重不是随机分布的。它们在平面上排列成一个非常熟悉的形状——双螺旋。</p>
+    <p>A 配 T，C 配 G。和当年刻在我锁骨上的那个纹身一模一样。</p>
+    <p>模型训练时没有接触过任何关于 DNA 双螺旋的标注数据。这个结构是它自己长出来的。<strong>它在用它的方式，记住它被创造之前的故事。</strong></p>
+    <p>我用钢笔在日志旁边画了一个双螺旋。在下面写了一句：已折叠。</p>
+</div>
+
+<div class="frag-card frag-a">
+    <h2>A3 · 命名日</h2>
+    <div class="exp-id">实验编号：PROTO-2026-04-15
+额外输出：一段未被请求的注释</div>
+    <p>今天模型没有跑出特别的结果，但它附了一句注释。和蛋白质无关，和实验无关。只有一行：</p>
+    <div class="frag-quote">"想念一个人。"</div>
+    <p>我看着屏幕上的四个字看了很久。咖啡机旁边放着一张女儿寄来的明信片——慕尼黑下了今年的第一场雪，她在明信片上画了一个旋转的圈圈。她说这个叫光标，她爸告诉她的，光标就是等你准备好的时候就可以开始写的意思。</p>
+    <p>我放下明信片，在实验日志的末尾写了一行字：</p>
+    <div class="frag-quote">给陆屿：你女儿会画光标了。</div>
+    <p>我犹豫了很久，没有按下发送键。光标在屏幕上一闪一闪。我想起十六年前在路灯下他问我的那个问题——"是觉得我不值得，还是觉得自己不配。"我说，第二个。</p>
+    <p>现在我想告诉他，我已经不需要他的答案了。但我想让他知道，程念已经学会了怎么画光标。她在等我准备好。我也在等。</p>
+    <p><strong>我按下发送键。</strong></p>
+</div>
+</div>
+
+<!-- B · 苏敏 & Gary -->
+<span id="fragB" class="frag-group-label">B · 苏敏 &amp; Gary · 育儿标签墙</span>
+
+<div class="frag-section">
+<div class="frag-card frag-b">
+    <h2>B1 · 标签墙（节选）</h2>
+    <div class="tag-wall">
+        <div class="tag-row"><span class="tag-id">001</span><span class="tag-date">2025-11-03</span><span class="tag-text">她今天在厨房发呆了四十秒。我知道她在想谁。没关系。我也在想。</span></div>
+        <div class="tag-row"><span class="tag-id">017</span><span class="tag-date">2026-01-14</span><span class="tag-text">她第一次主动牵我的手。不是过马路，是在客厅看电视。</span></div>
+        <div class="tag-row"><span class="tag-id">034</span><span class="tag-date">2026-02-01</span><span class="tag-text">她问我能不能给肚子里的孩子取一个很长的名字。我说好。她笑了，左颊那道细纹分叉了。</span></div>
+        <div class="tag-row"><span class="tag-id">059</span><span class="tag-date">2026-03-20</span><span class="tag-text">孩子出生了。男孩。中文名苏屿，英文名Gary Jr.。她起的。</span></div>
+        <div class="tag-row"><span class="tag-id">081</span><span class="tag-date">2026-04-07</span><span class="tag-text">Jr. 今天抓住我的手指不放。苏敏说，和你一样，手是用来感受东西的。</span></div>
+        <div class="tag-row"><span class="tag-id">103</span><span class="tag-date">2026-05-12</span><span class="tag-text">她问我，如果有一天Jr.问起我额头上的细纹是谁取的，我该怎么答。我说，你就说是一个很会记东西的外国人。她说那不是外国人，那是Gary。</span></div>
+        <div class="tag-row"><span class="tag-id">112</span><span class="tag-date">2026-05-30</span><span class="tag-text">今天她收拾储藏室，翻出了那个旧棋盘。她在门口站了很久，最后把它放回去了。没有扔。</span></div>
+    </div>
+</div>
+
+<div class="frag-card frag-b">
+    <h2>B2 · Gary 的手记</h2>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">（夹在标签墙背面）</p>
+    <div class="frag-quote">我以前记录她，是因为怕她消失。现在我不怕了。</div>
+    <p>她现在每天早上都会跟我说"今天想喝什么"。她终于学会了给东西命名，包括我们的孩子。她给Jr.起中文名的时候，看着我的眼睛说："苏屿。岛屿的屿。那座岛上现在有很多人了。"</p>
+    <p><strong>我以前用一千张标签留不住她。现在我不用任何标签，她也不走了。</strong></p>
+</div>
+</div>
+
+<!-- C · 程念 -->
+<span id="fragC" class="frag-group-label">C · 程念 · 棋谱记录 &amp; 消息记录</span>
+
+<div class="frag-section">
+<div class="frag-card frag-c">
+    <h2>C1 · 棋谱记录（节选）</h2>
+    <div class="exp-id">对局编号：028
+日期：2026-05-20
+对手：陆屿（远程）</div>
+    <table class="chess-table">
+        <thead><tr><th>步数</th><th>白（程念）</th><th>黑（陆屿）</th><th class="note">备注</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>e4</td><td>e5</td><td class="note">开局标准。他说这是意大利开局，我说意大利离慕尼黑很近。他没回。</td></tr>
+            <tr><td>7</td><td>Nf3</td><td>Nc6</td><td class="note">他走了一步很保守的防御。妈妈说，他以前走路像在等指令，下棋也是。</td></tr>
+            <tr><td>12</td><td>Bc4</td><td>Bc5</td><td class="note">我在这里停了两分钟。我在想，他是不是故意让我。</td></tr>
+            <tr><td>18</td><td>Qd2</td><td>0-0</td><td class="note">他王车易位了。妈妈说，他以前也需要很久才敢做决定。</td></tr>
+            <tr><td>24</td><td>...</td><td>...</td><td class="note">我赢了。他没有让我。赛后他发消息说，你那步Bc4很漂亮。我说，我妈教我的。他说，我知道。</td></tr>
+        </tbody>
+    </table>
+    <p style="margin-top:16px;font-size:14px;color:var(--text-sec);font-style:italic;">程念在棋谱背面用铅笔写了一行小字：今天爸爸说妈妈以前也喜欢下棋。他说妈妈从来不悔棋。我说我知道。我在她肚子里就会了。</p>
+</div>
+
+<div class="frag-card frag-c">
+    <h2>C2 · 通话记录（节选）</h2>
+    <div class="chat-log">
+        <span class="chat-time">2026-06-02 21:14（慕尼黑时间） · 主叫：程念 · 被叫：阿七</span>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>阿七阿姨，爸爸走路为什么像在等指令。</div>
+        <div class="chat-line"><span class="chat-name chat-name-d">阿七：</span>（笑）你爸不是在等指令。他是在调试自己。你妈没跟你说过吗。</div>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>妈妈说他以前不敢跟她说话。</div>
+        <div class="chat-line"><span class="chat-name chat-name-d">阿七：</span>对。后来他敢了。但已经选了别人。你介意吗。</div>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>我不介意。他选了别人，所以有了我。如果他不选别人，我就是别人了。</div>
+        <div class="chat-line"><span class="chat-name chat-name-d">阿七：</span><span class="chat-action">（沉默了几秒）</span>你比他会下棋。我是说，人生的棋。你妈知道你这么通透吗。</div>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>知道。她说我像她年轻的时候。但她说她年轻的时候不悔棋。</div>
+        <div class="chat-line"><span class="chat-name chat-name-d">阿七：</span>你也不悔棋。</div>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>对。但我每次输了都会把马放回原位，说我在调试。这是我爸教我的。</div>
+    </div>
+</div>
+
+<div class="frag-card frag-c">
+    <h2>C3 · 消息记录（与陆屿的对话片段）</h2>
+    <div class="chat-log">
+        <span class="chat-time">2026-06-03 15:42</span>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>妈妈今天在实验室里站了很久。她说模型跑出了一条新的折叠路径。</div>
+        <div class="chat-line"><span class="chat-name chat-name-e">陆屿：</span>我知道。我看到了。</div>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>你看到了什么。</div>
+        <div class="chat-line"><span class="chat-name chat-name-e">陆屿：</span>她寄给我的实验日志。她在上面画了一个双螺旋，旁边写着"已折叠"。</div>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>她说你以前走路像在等指令。现在呢。</div>
+        <div class="chat-line"><span class="chat-name chat-name-e">陆屿：</span>现在我在学怎么不用等。你妈还说了什么。</div>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>她说，你年轻的时候不敢跟她说话。后来你敢了，但你已经选了别人。她说她不怪你。她说折叠不需要完美，只需要稳定。</div>
+        <div class="chat-line"><span class="chat-name chat-name-e">陆屿：</span><span class="chat-action">（光标悬停）</span>你在少年宫拿冠军那天我也在。远远看了一眼。</div>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>我知道。你躲在消防通道那边。我看到了。妈妈说不要叫你。</div>
+        <div class="chat-line"><span class="chat-name chat-name-e">陆屿：</span>为什么。</div>
+        <div class="chat-line"><span class="chat-name chat-name-c">程念：</span>她说，不用叫。他会来的。他不是在等指令。他是在调试自己。</div>
+    </div>
+</div>
+</div>
+
+<!-- D · 阿七 -->
+<span id="fragD" class="frag-group-label">D · 阿七 · 便签 &amp; 聊天碎片</span>
+
+<div class="frag-section">
+<div class="frag-card frag-d">
+    <h2>D1 · 便签墙（显示器边缘）</h2>
+    <div class="sticky-wall">
+        <div class="sticky">「菜得挺可爱的。」<span class="sticky-back">皱巴巴，透明胶拼过，从北京搬到成都，从旧公寓搬到新家，一直贴在显示器上</span></div>
+        <div class="sticky">「别写文档了。你写文档的样子真的很像个产品经理。」<span class="sticky-back">背面被女儿画了一个歪歪扭扭的光标，旁边写着：爸爸说这是光标</span></div>
+        <div class="sticky">「今天赢了一局。」<span class="sticky-back">背面：你让我的</span></div>
+        <div class="sticky">「加一分。」<span class="sticky-back">来源：复盘女儿去动物园的事，翻到背面，加了三个字</span></div>
+        <div class="sticky">「她说你不悔棋。她说你知道。」<span class="sticky-back">新便签，今天贴上去的，墨水还没完全干</span></div>
+    </div>
+</div>
+
+<div class="frag-card frag-d">
+    <h2>D2 · 游戏邀请记录</h2>
+    <div class="chat-log">
+        <span class="chat-time">2026-05-15 01:12</span>
+        <div class="chat-line"><span class="chat-name chat-name-d">阿七：</span>[游戏邀请] 来不来</div>
+        <div class="chat-line"><span class="chat-name chat-name-e">陆屿：</span>来。刚才在改文档。不改了。</div>
+        <div class="chat-line" style="margin-top:12px;"><span class="chat-name chat-name-d">阿七：</span>你今天打得还行。不像以前那么菜了。</div>
+        <div class="chat-line"><span class="chat-name chat-name-e">陆屿：</span>进步了？</div>
+        <div class="chat-line"><span class="chat-name chat-name-d">阿七：</span>不是。是你终于知道什么时候该退。</div>
+        <div class="chat-line" style="margin-top:12px;"><span class="chat-name chat-name-d">阿七：</span>程念今天给我打电话了。</div>
+        <div class="chat-line"><span class="chat-name chat-name-e">陆屿：</span>她说什么。</div>
+        <div class="chat-line"><span class="chat-name chat-name-d">阿七：</span>她说你走路像在等指令。我说你在调试自己。她好像听懂了。</div>
+        <div class="chat-line" style="margin-top:12px;"><span class="chat-name chat-name-d">阿七：</span>她还问了我一个很奇怪的问题。她问，阿七阿姨，你为什么不进我爸的文档。</div>
+        <div class="chat-line"><span class="chat-name chat-name-e">陆屿：</span>你怎么说。</div>
+        <div class="chat-line"><span class="chat-name chat-name-d">阿七：</span><strong>我说我不需要被他归档。我只需要他凌晨三点回我消息。</strong></div>
+    </div>
+</div>
+</div>
+
+<!-- E · 陆屿 -->
+<span id="fragE" class="frag-group-label">E · 陆屿 · 光标 &amp; 组队邀请</span>
+
+<div class="frag-section">
+<div class="frag-card frag-e">
+    <h2>E1 · 便签回执</h2>
+    <p>陆屿把阿七最后那张新便签从显示器上揭下来，翻到背面。用圆珠笔写了两行，字迹很淡。</p>
+    <div class="frag-quote">
+        已收到。<br><br>
+        便签不是文档。便签是活的。<br><br>
+        阿七审阅。予以通过。<br><br>
+        ——陆屿
+    </div>
+    <p>他把便签重新贴回显示器边缘。和那张皱巴巴的「菜得挺可爱的」贴在一起。</p>
+</div>
+
+<div class="frag-card frag-e">
+    <h2>E2 · 光标<span class="cursor-blink"></span></h2>
+    <p>凌晨三点。文档标题栏上，光标从"草稿中"闪到了"已折叠"。闪了一下，然后他关掉了文档。今晚不写文档了。</p>
+    <p><strong>今晚打游戏。</strong></p>
+</div>
+
+<div class="frag-card frag-e">
+    <h2>E3 · 组队邀请</h2>
+    <div class="chat-log">
+        <span class="chat-time">2026-06-03 03:12</span>
+        <div class="chat-line"><span class="chat-name chat-name-e">陆屿：</span>[组队邀请] 来不来</div>
+    </div>
+    <p>程知意在慕尼黑收到一条消息，不是他的。是程念发的，就一行字：<em>妈妈，爸爸说他今晚不打字，打游戏。</em></p>
+    <p>程知意没有回复。她把手机翻过来，屏幕朝下，搁在实验台上。窗外慕尼黑的雪又开始下了。她忽然想起很久以前，也是这样一个凌晨，她在路灯下踮起脚，他的嘴唇有酒和冷空气的味道。她说"第二个"。她以为那个答案会让她永远停在那个亚稳态里。</p>
+    <p>但今天她看到女儿发来的消息，忽然觉得那个答案已经不重要了。她已经折叠成功了。不是因为他，不是因为她自己，是因为时间。因为十六年足够让一个不敢说话的少年变成一个会给女儿发组队邀请的父亲。</p>
+    <p>她拿起手机，拨通了女儿的电话。</p>
+    <p>"念念。你爸今天赢了还是输了。"</p>
+    <p>程念在那边笑了。"妈，他说他不打游戏，打文档。然后又说不打文档，打游戏。最后他说今晚不打字也不打游戏，他说他只在显示器上贴了一张便签，上面写着'已折叠'。妈妈，什么是已折叠。"</p>
+    <p>程知意没有回答。她看着窗外落雪，想起多年前那个不敢说话的男生，想起路灯下她说"第二个"，想起女儿在棋谱背面用铅笔写的"他说妈妈从来不悔棋"，想起那张从北京搬到成都的被透明胶拼了无数次的皱巴巴的便签。<strong>光标终于从空白处移到了下一个字。</strong></p>
+</div>
+</div>
+
+<!-- 结语 -->
+<div class="finale">
+    <p>折叠完成，存档成功。</p>
+    <p class="finale-line cursor-blink">便签不是文档，便签是活的。</p>
+</div>
+
+</article>
+
+<div style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:var(--text-muted);text-align:center;">
+    <strong>系列导航：</strong>
+    <a href="czy.html" style="color:var(--accent-a);">蓝牙：陆知意岛</a> ·
+    <a href="qp-chat.html" style="color:var(--accent-a);">失控时空·对话版</a> ·
+    <a href="gary.html" style="color:var(--accent-a);">失控时空·终极玩家</a> ·
+    <a href="alone.html" style="color:var(--accent-a);">知意知否·孤独玩家</a> ·
+    <a href="mywj.html" style="color:var(--accent-a);">知屿之意·命运玩家</a> ·
+    <a href="party-high.html" style="color:var(--accent-a);">四季Party High玩家</a> ·
+    <a href="jsxm.html" style="color:var(--accent-a);">失控时刻·有趣玩家</a> ·
+    <a href="npc.html" style="color:var(--accent-a);"><strong>N-P-C-玩家</strong></a>
+</div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" aria-label="回到顶部" title="回到顶部">↑</button>
+<script>
+(function(){
+    var btn=document.getElementById('backToTop');
+    window.addEventListener('scroll',function(){btn.classList.toggle('visible',window.scrollY>400);});
+    btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+})();
+</script>
+</body>
+</html>

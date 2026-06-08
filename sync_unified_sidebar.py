@@ -87,6 +87,7 @@ L3_ITEMS = [
     ("aboutmore/mywj.html", "🪐", "知屿之意·命运玩家", "小说与对话"),
     ("aboutmore/party-high.html", "🎼", "四季Party High玩家", "小说与对话"),
     ("aboutmore/jsxm.html", "🎮", "失控时刻·有趣玩家", "小说与对话"),
+    ("aboutmore/npc.html", "🏁", "N-P-C-玩家", "小说与对话"),
 ]
 L4_ITEMS = [
     ("aboutmore/czjs.html", "🧪", "会话的碰撞", "方法与引擎"),
