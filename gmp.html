@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>合规验证与AI编程 | 嵌入式AI工程化系列</title>
-<meta name="description" content="将合规要求从事后补文档转变为事前建法则的工程化方法，探索在军工、医疗、汽车等场景中让AI编程既有创造力又有边界感。">
-<meta name="keywords" content="合规验证,AI编程,治理,工程化,军工,医疗,汽车">
+<meta name="description" content="将合规要求从事后补文档转变为事前建法则的工程化方法，附压缩气体质量分析仪项目复盘——240人天→7天的实锤验证。">
+<meta name="keywords" content="合规验证,AI编程,治理,工程化,军工,医疗,汽车,项目复盘,工业软件">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="合规验证与AI编程 | 嵌入式AI工程化系列">
 <meta property="og:description" content="将合规要求从事后补文档转变为事前建法则的工程化方法，探索在军工、医疗、汽车等场景中让AI编程既有创造力又有边界感。">
@@ -1120,6 +1120,81 @@
             AI编程让你从一个"用AI写代码的人"变成了一个<br><strong>"用AI构建可验证系统的人"</strong><br><br>
             而后者，才是真正能高效通过GMP审计、<br>持续迭代、规模交付的壁垒。
         </div>
+    </section>
+
+    <section style="margin-top:60px;padding-top:24px;border-top:2px solid var(--border);">
+
+        <h2 id="project-case">📋 实战验证：工业检测系统项目复盘</h2>
+        <p style="font-size:15px;color:var(--text-secondary);margin-bottom:24px;">本文撰写后的一次完整工程落地，对「法则先行，AI执行」方法论在工控合规场景的实锤验证。</p>
+
+        <div class="card blue-left" style="margin-bottom:24px;">
+            <p><strong>项目概述：</strong>MCU 串口通信 + Electron 上位机 + CFR 21 Part 11 合规的工业检测系统。涉及嵌入式固件、桌面应用、数据库、电子签名、审计追踪、工控适配等多领域交叉。传统评估 240 人天，实际 <strong>7 天独立完成</strong>。</p>
+        </div>
+
+        <h3>一、核心逻辑：「法则先行，AI执行」的工程落地</h3>
+        <p>整个项目的核心逻辑自始至终没有变：<strong>先定规则、边界、架构、验收基线，再把机械执行交给工具</strong>。</p>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h4>人·定义规则</h4>
+                <p>MCU串口通信协议、数据分层存储模型、CFR 21 Part 11合规约束、权限矩阵、报表格式、交互逻辑、迭代修改标准——所有顶层约束与业务判定由人完成。</p>
+            </div>
+            <div class="feature-item">
+                <h4>AI·机械执行</h4>
+                <p>代码编写、语法纠错、页面DOM重构、SQL编写、PDF模板绘制、打包配置、基础自测——重复、标准化、有明确输入输出的工作，全盘外包给AI。</p>
+            </div>
+            <div class="feature-item">
+                <h4>人·最终把关</h4>
+                <p>串口异常联调、电子签名兼容性、哈希链防篡改校验、长时间运行稳定性、工控机特殊适配——涉及底层硬件、复杂合规、边界异常的难点，亲自介入。</p>
+            </div>
+        </div>
+
+        <div class="insight-box" style="font-style:normal;">
+            <strong>240 人天 → 7 人天，本质不是"提速"，而是剥离无效劳动，把人力聚焦在不可替代的顶层决策与核心攻坚上。</strong>
+        </div>
+
+        <h3>二、角色跃迁：从执行者到架构设计者</h3>
+        <p><strong>传统全栈工程师</strong>：深耕某一层技术，亲手编码调试，能力上限被个人时间与体力束缚。</p>
+        <p><strong>当前定位：规则 &amp; 架构定义者</strong>——定义整个技术栈的分层、模块边界、交互接口、合规底线、验收标准。MCU固件层、上位机应用层、数据库层、报表签名层、交互层，每一层的职责与层间通信规则都由你划定，AI只是在既定框架内填充内容。</p>
+        <p>这个项目是思想体系的<strong>压力测试</strong>：嵌入式、桌面应用、工业合规、密码学、工控适配多领域交叉，任意一个模块单独拿出来都是独立的工程课题。依靠统一的架构思维和规则体系，把多领域复杂度拆解、约束、落地，全程没有陷入零散问题的泥潭。</p>
+
+        <div class="quote-block" style="text-align:left;">
+            这一步，完成了从<strong>执行型技术人员</strong>到<strong>架构 &amp; 体系设计者</strong>的升维。拼的不再是编码速度，而是拆解复杂度、制定规则、把控全局的思维能力。
+        </div>
+
+        <h3>三、效率与价值的重新解读</h3>
+        <p>数十倍的效率差，根源不是工具本身，而是<strong>工作范式的变革</strong>。传统模式是「人→代码→系统」，人力贯穿全流程；新模式是「人→规则/架构→AI编码/测试→系统」，人力只负责"定义"和"兜底"。</p>
+        <p><strong>AI 是放大器，但能被放大的前提，是你先搭建好了可被执行的规则体系。</strong>没有清晰的架构、接口、验收标准，AI 再强大也只会产出杂乱、不可用的代码。</p>
+        <p>在 AI 普及的当下，纯编码能力的价值持续弱化，但<strong>需求解读、架构设计、风险预判、合规把控、系统整体交付能力</strong>会成为技术人不可替代的核心壁垒。</p>
+
+        <h3>四、后续演进方向</h3>
+        <div class="workflow-step" style="margin-top:16px;">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>可复用项目模板</h4>
+                <p>梳理通用流程：梳理需求 → 分层架构 → 定义规则 → AI执行 → 人工核验。沉淀Electron工程模板、MCU基础驱动、PDF模板、审计模块为通用资产。</p>
+            </div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>代码可维护性治理</h4>
+                <p>要求AI按统一编码规范输出，沉淀项目代码模板。核心模块（签名、审计、串口调度、哈希校验）产出核心流程文档，做到不用逐行读代码也能掌控逻辑。</p>
+            </div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>能力边界拓展</h4>
+                <p>跨嵌入式、桌面应用、工业合规的复杂项目已跑通。向自动化设备、物联网系统、定制化工控软件、配套云服务等方向延伸。</p>
+            </div>
+        </div>
+
+        <div class="card vision" style="margin-top:24px;">
+            <p>从创作、人际、设计，再到工业工程——<strong>「人定义法则，工具执行法则」</strong>的逻辑贯穿始终，并且在复杂度最高、约束最严格的工控+合规场景里，交出了极具说服力的结果。</p>
+            <p style="margin-top:12px;">别人靠团队、靠时间、靠人力堆叠才能完成的工程，依靠<strong>架构思维+规则体系+AI工具</strong>，以极小的时间成本独立落地。至此，这套从顶层思维到落地执行的完整体系，完成了全场景闭环。</p>
+        </div>
+
     </section>
 
     <section class="footnote-section">
