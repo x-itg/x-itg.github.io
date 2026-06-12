@@ -1,18 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>最后的拼图：Skills | 嵌入式AI工程化系列</title>
-<meta name="description" content="定义Core层之上的Skill应用层，以规则感知型Skill为核心理念，实现5分钟即插即用的嵌入式驱动开发，让高频需求享受体系红利。">
-<meta name="keywords" content="Skills,规则感知,嵌入式,驱动开发,AI编程,Core层">
+<title>我把 750 页 GxP 法规，翻译成了一台能直接给药企用的系统 | 嵌入式AI工程化系列</title>
+<meta name="description" content="一个长期和监管打交道的工程师，是怎么把 GxP 法规从"天书"变成"产品"的——时间协议、密码学签名、哈希链审计、SoD 矩阵的全套落地实录。">
+<meta name="keywords" content="GxP,21 CFR Part 11,制药合规,数据可靠性,ALCOA+,电子签名,审计追踪,哈希链,SoD">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="最后的拼图：Skills | 嵌入式AI工程化系列">
-<meta property="og:description" content="定义Core层之上的Skill应用层，以规则感知型Skill为核心理念，实现5分钟即插即用的嵌入式驱动开发，让高频需求享受体系红利。">
+<meta property="og:title" content="我把 750 页 GxP 法规，翻译成了一台能直接给药企用的系统 | 嵌入式AI工程化系列">
+<meta property="og:description" content="一个长期和监管打交道的工程师，是怎么把 GxP 法规从"天书"变成"产品"的。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://x-itg.github.io/pt.html">
-<link rel="canonical" href="https://x-itg.github.io/pt.html">
+<meta property="og:url" content="https://x-itg.github.io/gxp.html">
+<link rel="canonical" href="https://x-itg.github.io/gxp.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="assets/site-sidebar.css">
 <style>
     :root {
         --bg: #f8f9fa;
@@ -34,11 +35,7 @@
         --radius-lg: 10px;
     }
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -48,330 +45,130 @@
         -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-        max-width: 780px;
-        margin: 0 auto;
-        padding: 40px 24px 80px;
-    }
+    .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
+    .container { max-width:780px; margin:0 auto; padding:40px 24px 80px; }
+    .main-content { flex:1; min-width:0; }
 
-    .top-nav {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 48px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid var(--border);
-        font-size: 14px;
-        color: var(--text-secondary);
-    }
-    .top-nav a {
-        color: var(--link);
-        text-decoration: none;
-        transition: color 0.2s;
-    }
-    .top-nav a:hover {
-        color: var(--accent);
-    }
-    .top-nav .sep {
-        color: #c0c7cf;
-    }
-
-    .article-header {
-        margin-bottom: 48px;
-    }
+    .article-header { margin-bottom:48px; }
     .article-header .series-tag {
-        display: inline-block;
-        background: var(--accent);
-        color: #fff;
-        font-size: 12px;
-        font-weight: 600;
-        padding: 3px 10px;
-        border-radius: 3px;
-        letter-spacing: 0.5px;
-        margin-bottom: 16px;
+        display:inline-block; background:var(--accent); color:#fff;
+        font-size:12px; font-weight:600; padding:3px 10px;
+        border-radius:3px; letter-spacing:0.5px; margin-bottom:16px;
     }
     .article-header h1 {
-        font-size: 32px;
-        font-weight: 700;
-        line-height: 1.35;
-        margin-bottom: 12px;
-        letter-spacing: -0.3px;
+        font-size:32px; font-weight:700; line-height:1.35;
+        margin-bottom:12px; letter-spacing:-0.3px;
     }
     .article-header .subtitle {
-        font-size: 17px;
-        color: var(--text-secondary);
-        font-weight: 400;
-        margin-bottom: 20px;
+        font-size:17px; color:var(--text-secondary); font-weight:400; margin-bottom:20px;
     }
-    .article-header .meta {
-        font-size: 13px;
-        color: #8896a4;
-    }
+    .article-header .meta { font-size:13px; color:#8896a4; }
 
     h2 {
-        font-size: 24px;
-        font-weight: 700;
-        margin: 56px 0 16px;
-        padding-top: 24px;
-        border-top: 2px solid var(--border);
-        letter-spacing: -0.2px;
+        font-size:24px; font-weight:700; margin:56px 0 16px;
+        padding-top:24px; border-top:2px solid var(--border); letter-spacing:-0.2px;
     }
-    h3 {
-        font-size: 19px;
-        font-weight: 600;
-        margin: 36px 0 12px;
-        color: #1a1a2e;
+    h3 { font-size:19px; font-weight:600; margin:36px 0 12px; color:#1a1a2e; }
+    p { margin:14px 0; text-align:justify; }
+    strong { color:#1a1a2e; }
+    blockquote {
+        border-left:3px solid var(--accent); padding:12px 20px; margin:20px 0;
+        background:#fef9e7; border-radius:0 6px 6px 0;
+        font-size:15px; color:#6b4c1e;
     }
-    p {
-        margin: 14px 0;
-    }
-    strong {
-        color: #1a1a2e;
-    }
+    blockquote strong { color:#4a340f; }
+    ul, ol { margin:14px 0; padding-left:24px; }
+    li { margin:6px 0; }
 
     .card {
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 28px 30px;
-        margin: 28px 0;
-        box-shadow: var(--shadow-sm);
+        background:var(--card-bg); border:1px solid var(--border);
+        border-radius:var(--radius-lg); padding:28px 30px;
+        margin:28px 0; box-shadow:var(--shadow-sm);
     }
-    .card.accent-left {
-        border-left: 4px solid var(--accent);
-    }
+    .card.accent-left { border-left:4px solid var(--accent); }
+    .card.blue-left { border-left:4px solid #3b82f6; }
+    .card.green-left { border-left:4px solid #27ae60; }
+    .card.purple-left { border-left:4px solid #8b5cf6; }
+    .card p { text-align:left; margin:0; }
+    .card p + p { margin-top:12px; }
+    .card strong { display:block; color:var(--text); font-weight:600; }
 
     .insight-box {
-        background: var(--highlight);
-        border: 1px solid #f0d78c;
-        border-radius: var(--radius);
-        padding: 20px 24px;
-        margin: 24px 0;
-        font-style: italic;
-        color: #6b4c1e;
+        background:var(--highlight); border:1px solid #f0d78c;
+        border-radius:var(--radius); padding:20px 24px;
+        margin:24px 0; font-style:italic; color:#6b4c1e;
     }
-    .insight-box strong {
-        color: #4a340f;
+    .insight-box strong { color:#4a340f; display:inline; }
+    .insight-box.tech {
+        background:#eef5ff; border-color:#b3d4fc; color:#1e3a5f; font-style:normal;
     }
-
-    pre {
-        background: var(--code-bg);
-        color: var(--code-text);
-        padding: 20px 24px;
-        border-radius: var(--radius);
-        overflow-x: auto;
-        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
-        font-size: 13px;
-        line-height: 1.7;
-        margin: 20px 0;
-        box-shadow: var(--shadow-md);
-    }
-    pre .keyword {
-        color: #c792ea;
-    }
-    pre .string {
-        color: #c3e88d;
-    }
-    pre .comment {
-        color: #546e7a;
-        font-style: italic;
-    }
-    pre .func {
-        color: #82aaff;
-    }
-    pre .type {
-        color: #ffcb6b;
-    }
+    .insight-box.tech strong { color:#14356b; }
 
     code {
-        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
-        font-size: 13px;
+        font-family:"JetBrains Mono","Fira Code","Cascadia Code","SF Mono","Consolas",monospace;
+        font-size:13px;
     }
     p code, li code {
-        background: #eef1f5;
-        padding: 2px 6px;
-        border-radius: 3px;
-        color: #c0392b;
-        font-size: 12px;
+        background:#eef1f5; padding:2px 6px; border-radius:3px;
+        color:#c0392b; font-size:12px;
     }
+    pre {
+        background:var(--code-bg); color:var(--code-text);
+        padding:20px 24px; border-radius:var(--radius);
+        overflow-x:auto; font-family:"JetBrains Mono","Fira Code","Cascadia Code",monospace;
+        font-size:13px; line-height:1.7; margin:20px 0;
+        box-shadow:var(--shadow-md);
+    }
+    pre code { background:transparent; padding:0; color:inherit; font-size:13px; }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 24px 0;
-        font-size: 14px;
+    .feature-grid {
+        display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+        gap:16px; margin:20px 0;
     }
-    table th, table td {
-        padding: 12px 16px;
-        text-align: left;
-        border-bottom: 1px solid var(--border);
+    .feature-item {
+        background:#f8fafc; border-radius:8px; padding:16px;
+        border:1px solid #e5e7eb;
     }
-    table th {
-        font-weight: 700;
-        background: #f5f7fa;
-        color: #4a5568;
-        font-size: 12px;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-    }
+    .feature-item h4 { font-size:14px; color:#1e3a8a; margin-bottom:8px; }
+    .feature-item p { font-size:13px; color:#5a6c7d; margin:0; }
 
-    .layer-tag {
-        display: inline-block;
-        background: #1a1a2e;
-        color: #fff;
-        font-size: 11px;
-        padding: 2px 8px;
-        border-radius: 3px;
-        font-weight: 600;
+    .stat-grid {
+        display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+        gap:14px; margin:24px 0;
     }
-    .figure {
-        margin: 32px 0;
-        text-align: center;
+    .stat-card {
+        text-align:center; padding:18px 12px; border-radius:10px;
+        background:linear-gradient(135deg,#f0f7ff,#e8f4f8); border:1px solid #d0e0ef;
     }
-    .figure svg {
-        max-width: 100%;
-        height: auto;
+    .stat-card .stat-num {
+        font-size:28px; font-weight:800; color:#1e3a8a; letter-spacing:-0.5px;
     }
-    .figure .caption {
-        font-size: 12px;
-        color: #8896a4;
-        margin-top: 8px;
-    }
+    .stat-card .stat-label { font-size:12px; color:#5a6c7d; margin-top:4px; }
 
-    .footnote-section {
-        margin-top: 60px;
-        padding-top: 24px;
-        border-top: 1px solid var(--border);
+    table { width:100%; border-collapse:collapse; margin:24px 0; font-size:14px; }
+    table th, table td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--border); }
+    table th { font-weight:700; background:#f5f7fa; color:#4a5568; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+
+    .bottom-series-links { margin-top:48px; padding-top:24px; border-top:1px solid var(--border); font-size:14px; line-height:1.9; color:var(--text-secondary); }
+    .series-nav {
+        display:flex; justify-content:space-between; margin:40px 0; padding-top:20px;
+        border-top:1px solid var(--border); font-size:15px;
     }
-    .footnote-section h4 {
-        font-size: 14px;
-        color: #8896a4;
-        margin-bottom: 10px;
+    .series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
+    .series-nav a:hover { text-decoration:underline; }
+    .footer-author-wrap { text-align:center; margin-top:24px; padding-top:24px; border-top:1px solid var(--border); color:#8896a4; font-size:13px; }
+    .footer-author-link { color:var(--accent); text-decoration:none; }
+    .footer-author-link:hover { text-decoration:underline; }
+
+    @media (max-width:780px) {
+        .container { padding:20px 16px 60px; }
+        .article-header h1 { font-size:26px; }
+        h2 { font-size:21px; }
+        .stat-grid { grid-template-columns:repeat(2,1fr); }
     }
-    .footnote-section p {
-        font-size: 13px;
-        color: #8896a4;
-        line-height: 1.6;
-    }
-
-/* ===== 三栏布局（方案B） ===== */
-/* 左侧：文章系列导航 */
-/* 右侧：正文 */
-    .main-content { flex: 1; min-width: 0; }
-
-    /* 文章系列导航系统 */
-@media (max-width: 640px) {
-        .container { padding: 20px 16px 60px; }
-        .article-header h1 { font-size: 26px; }
-        h2 { font-size: 21px; }
-        .card { padding: 18px 16px; }
-        pre { padding: 14px 16px; font-size: 12px; }
-    }
-    
-
-        .card.accent-left { border-left: 4px solid var(--accent); }
-        .card.philosophy { 
-            border-left: 4px solid #8e44ad; 
-            background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%);
-        }
-        .card.engineer { 
-            border-left: 4px solid #2980b9; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%);
-        }
-        .card.action { 
-            border-left: 4px solid #27ae60; 
-            background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%);
-        }
-        .card.vision { 
-            border-left: 4px solid #3b82f6; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card.vision:hover { 
-            transform: translateY(-2px); 
-            box-shadow: var(--shadow-md); 
-        }
-        .card {
-            text-align: left;
-        }
-        .card p {
-            text-align: left;
-            margin: 0;
-        }
-        .card p:first-child {
-            margin-top: 0;
-        }
-        .card p:last-child {
-            margin-bottom: 0;
-        }
-        .card strong {
-            display: block;
-            color: var(--text);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .card pre {
-            text-align: left;
-            margin: 12px 0 0;
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 16px 20px;
-            border-radius: 6px;
-            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
-            font-size: 13px;
-            line-height: 1.7;
-            overflow-x: auto;
-        }
-
-        .insight-box {
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border: 1px solid #f0d78c;
-            border-left: 4px solid #f39c12;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin: 24px 0;
-            font-style: italic;
-            color: #6b4c1e;
-            text-align: left;
-        }
-        .insight-box strong {
-            color: #4a340f;
-            font-weight: 600;
-        }
-        .insight-box.decision { 
-            background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
-            border-color: #a8d4e0; 
-            border-left-color: #3498db;
-            color: #1a5276; 
-        }
-        .insight-box.decision strong { 
-            color: #0e3a57; 
-        }
-        .insight-box.warm { 
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border-color: #f0d78c; 
-            border-left-color: #f39c12;
-            color: #6b4c1e; 
-        }
-        .insight-box.warm strong { 
-            color: #4a340f; 
-        }
-        .insight-box.cool { 
-            background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
-            border-color: #a9cce3; 
-            border-left-color: #2980b9;
-            color: #1f4e79; 
-        }
-        .insight-box.cool strong { 
-            color: #154360; 
-        }
-
 </style>
-<link rel="stylesheet" href="assets/site-sidebar.css">
 </head>
 <body class="site-theme-tech">
-
 <div class="layout">
 <aside class="site-sidebar">
     <div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-compass"></i> 乾坤大挪移心法</a></div>
@@ -435,7 +232,7 @@
                     </ul>
                 </div>
             </details>
-            <details class="site-sidebar__subgroup" open>
+            <details class="site-sidebar__subgroup">
                 <summary>根系能力</summary>
                 <div class="site-sidebar__group-body">
                     <ul>
@@ -446,7 +243,7 @@
                             <span class="site-sidebar__link-meta">感知根系 · 打通物理世界与数字世界</span>
                         </span>
                     </a></li>
-                    <li><a href="pt.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                    <li><a href="pt.html" class="site-sidebar__link site-sidebar__article-link">
                         <span class="site-sidebar__article-icon" aria-hidden="true">🧩</span>
                         <span>
                             <span class="site-sidebar__link-title">最后的拼图：Skills</span>
@@ -456,7 +253,7 @@
                     </ul>
                 </div>
             </details>
-            <details class="site-sidebar__subgroup">
+            <details class="site-sidebar__subgroup" open>
                 <summary>专业延伸</summary>
                 <div class="site-sidebar__group-body">
                     <ul>
@@ -488,7 +285,7 @@
                             <span class="site-sidebar__link-meta">专业延伸 · 从"事后补文档"到"事前建法则"</span>
                         </span>
                     </a></li>
-                    <li><a href="gxp.html" class="site-sidebar__link site-sidebar__article-link">
+                    <li><a href="gxp.html" class="site-sidebar__link site-sidebar__article-link is-active">
                         <span class="site-sidebar__article-icon" aria-hidden="true">📋</span>
                         <span>
                             <span class="site-sidebar__link-title">GxP法规工程化</span>
@@ -836,270 +633,221 @@
     </details>
     <a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
 </aside>
-    <aside class="sidebar-toc">
-        <h3>本章导览</h3>
-        <nav>
-            <ul>
-                <li><a href="#efficiency">⚔️ 效率命题</a></li>
-                <li><a href="#plug-and-play">⚙️ 即插即用基础</a></li>
-                <li><a href="#runtime">⚙️ Skill 运行链</a></li>
-                <li><a href="#principles">📐 设计原则</a></li>
-                <li><a href="#mapping">🧠 与五层映射</a></li>
-                <li><a href="#final-piece">📌 最后的拼图</a></li>
-            </ul>
-        </nav>
-    </aside>
-    <div class="main-content">
+<div class="main-content">
 <div class="container">
 
     <header class="article-header">
-        <span class="series-tag">五层进化 · 应用层</span>
-        <a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
-        <h1>最后的拼图：Skills</h1>
-        <p class="subtitle">你的体系已经搭好了高速公路。<br>现在，你需要让车跑起来——不是任何车，而是高度适配你路基的、5 分钟就能上路的快车。</p>
-        <p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列 · 快消费应用即时方法</p>
+        <span class="series-tag">专业延伸 · GxP 合规工程</span>
+        <h1>我把 750 页 GxP 法规，翻译成了一台能直接给药企用的系统</h1>
+        <p class="subtitle">一个长期和监管打交道的工程师，是怎么把"天书"变成"产品"的</p>
+        <p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
     </header>
 
-    <section>
-        <h2 id="efficiency">一、体系不是终点，效率才是</h2>
-
-        <p>前六篇文章，我们一直在做一件缓慢而郑重的事：定义坐标系，搭建工程骨架，设计闭环收敛，打通物理世界，管理知识演化，解放历史遗产。它们是基础设徊，是法度，是高速公路。它们回答的问题是：<strong>"AI 生成的代码，如何成为能在物理世界中负责任地运行的资产？"</strong></p>
-
-        <p>但高速公路建好之后，真正的问题才浮出水面：<strong>"今天下午，我需要在已有工程里增加一个 I2C 传感器驱动——能不能在 5 分钟内搞定，并且代码直接可用，不需要我重读昨天的规约？"</strong></p>
-
-        <div class="card accent-left">
-            <p style="margin-top:0;"><strong>核心洞察：</strong>一个完整的方法论体系，如果只有"慢建构"的能力，它就只能在项目启动时被郑重其事地应用一次，然后逐渐被遗忘在日常琐碎里。它需要一个<strong>"快消费"的伴侣层</strong>——不是替代体系，而是运行在体系之上，让日常高频需求也能享受严谨法度的红利。</p>
-        </div>
-
-        <p>这一层，就是 <strong>Skills</strong>。它不是新概念，而是你整个体系自然生长的另一半。如果说前六篇是<strong>"Core 层"</strong>——定义法则、搭建骨架、管理演化，那么 Skills 就是<strong>"应用层"</strong>——在法则之内，快速解决高度具体的、一次性的、但频繁出现的问题。两者不是竞争关系，是共生关系。</p>
-
-        <div class="insight-box">
-            <strong>本文的命题：</strong>不是"如何设计 skill"，而是"你的 Core 体系如何成为 skill 的最佳运行时环境"。Skills 不是零散的代码片段，它们是浸透了项目规约、硬件上下文和验证闭环的<strong>规则感知型即时方法</strong>。而你的六篇文章，正好为这种高级 skill 提供了全部前置条件。
-        </div>
-    </section>
-
-    <!-- 架构图 SVG -->
-    <figure class="figure">
-        <svg viewBox="0 0 680 300" width="100%" style="max-width:680px;">
-            <defs>
-                <marker id="arrow-down" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                    <polygon points="0 0, 8 3, 0 6" fill="#5a6c7d" />
-                </marker>
-            </defs>
-            <!-- 底层 Core -->
-            <rect x="30" y="180" width="620" height="90" rx="10" fill="#f5f7fa" stroke="#d0dbe6" stroke-width="2" />
-            <text x="340" y="210" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1a2e">Core 层（前六篇）</text>
-            <text x="340" y="232" text-anchor="middle" font-size="12" fill="#5a6c7d">五层进化 · 工程模板 · 闭环收敛 · PCB分析器 · 知识生命体征 · 历史包袱</text>
-            <text x="340" y="252" text-anchor="middle" font-size="11" fill="#8896a4">职责：定义领域法则、搭建基础设施、管理长期演化</text>
-
-            <!-- 上层 Skills -->
-            <rect x="30" y="50" width="620" height="80" rx="10" fill="#fff" stroke="#27ae60" stroke-width="2.5" stroke-dasharray="6 3" />
-            <text x="340" y="80" text-anchor="middle" font-size="16" font-weight="700" fill="#27ae60">Skill 层（第七篇）</text>
-            <text x="340" y="102" text-anchor="middle" font-size="12" fill="#5a6c7d">I2C驱动生成 · GPIO配置 · 中断服务模板 · 传感器校准 · 通信协议适配</text>
-            <text x="340" y="122" text-anchor="middle" font-size="11" fill="#8896a4">职责：在 Core 法则内，5 分钟解决一个具体问题</text>
-
-            <!-- 从上到下的连接箭头 -->
-            <line x1="340" y1="130" x2="340" y2="178" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow-down)" stroke-dasharray="4 2"/>
-            <text x="355" y="158" font-size="11" fill="#27ae60">运行时依赖</text>
-
-            <!-- 侧面标注 -->
-            <text x="660" y="100" font-size="11" fill="#8896a4" transform="rotate(90, 660, 100)">快消费 · 高频 · 即用即走</text>
-            <text x="660" y="235" font-size="11" fill="#8896a4" transform="rotate(90, 660, 235)">慢建构 · 低频 · 长期受益</text>
-        </svg>
-        <p class="caption">图1：Core 层与 Skill 层的共生架构——Core 提供法则和上下文，Skill 在法则内高速运转。</p>
-    </figure>
-
-    <section>
-        <h2 id="plug-and-play">二、为什么你的体系能让 skill 真正"即插即用"</h2>
-
-        <p>市面上大多数的 AI 编程 skill，本质上是泛化的代码片段生成器。它们能生成一段 I2C 驱动，但不知道你用的是哪颗芯片、你的工程模板要求什么代码风格、你的硬件原理图上 SDA 和 SCL 分别连在哪个 GPIO。你拿到那段代码后，仍然需要阅读、修改、适配。</p>
-
-        <p>你的体系，恰好把"适配"所需的信息全部结构化了：</p>
-
-        <div class="card">
-            <table>
-                <thead>
-                    <tr><th>Skill 运行时所需的上下文</th><th>你的体系如何提供</th></tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>项目规约与代码风格</strong></td>
-                        <td><code>agents.md</code>（② + ⑤）定义了断言、负日志宏、命名规范等，skill 生成的代码自动遵守</td>
-                    </tr>
-                    <tr>
-                        <td><strong>硬件拓扑与外设映射</strong></td>
-                        <td>PCB分析器（④）提供了完整的外设-GPIO 映射表，skill 可以直接查询"I2C1 的 SDA 在 PA9"</td>
-                    </tr>
-                    <tr>
-                        <td><strong>工程模板与 HAL 约定</strong></td>
-                        <td>高复用模板（②）固化了模块文件结构、include 路径和初始化风格，skill 产物直接贴合</td>
-                    </tr>
-                    <tr>
-                        <td><strong>验证与闭环</strong></td>
-                        <td>闭环收敛（③）提供了自动测试框架，skill 生成的代码可以被立即验证，发现问题自动反馈给 skill 修正</td>
-                    </tr>
-                    <tr>
-                        <td><strong>历史约束</strong></td>
-                        <td>决策账本（⑤ + ⑥）记录了哪些做法是禁区，skill 绝不上演"已经被证明是坏主意"的代码</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <p><strong>这意味着：</strong>在你的体系上运行 skill，生成的代码不是"泛用模板"，而是<strong>带着这个项目完整上下文和全部历史教训的、几乎可以直接烧录的最终代码</strong>。你不需要再去想"这个项目用的是 LL 库还是 HAL"，skill 已经知道。你不需要再查"这颗芯片的 Flash 写入后必须等几个 NOP"，skill 从你的规约文件里读到了。</p>
-
-        <div class="insight-box">
-            <strong>核心信条：</strong>所有的 skill 都应该是<strong>规则感知型</strong>的。而一个强大的 Core 层，就是为 skill 提供规则感知能力的唯一可靠途径。没有 Core 的 skill，是散兵游勇；没有 skill 的 Core，是空转的引擎。
-        </div>
-    </section>
-
-    <section>
-        <h2 id="runtime">三、一个具体的 skill 是如何在你的体系中运行的</h2>
-
-        <p>让我们模拟一个真实场景。下午 3 点，你需要为当前项目增加一个 <strong>I2C 温度传感器 TMP117</strong> 的驱动。</p>
-
-        <p><strong>传统流程：</strong>打开数据手册 → 查找 I2C 地址 → 回忆项目里 I2C 用的是哪路 → 找到其他 I2C 设备驱动当模板 → 逐行修改寄存器操作 → 编译 → 调试 → 发现忘了配置中断优先级 → 再来一遍。耗时：45 分钟到 2 小时。</p>
-
-        <p><strong>在你的体系下，这次操作是一个 skill 调用：</strong></p>
-
-        <pre><span class="comment">// 开发者只需要提供一个意图声明</span>
-<span class="comment">// 然后启动 "i2c-sensor-skill"</span>
-
-<span class="comment">// 意图文件: tmp117_intent.yaml</span>
-<span class="keyword">sensor</span>: TMP117
-<span class="keyword">bus</span>: I2C1
-<span class="keyword">i2c_address</span>: 0x48
-<span class="keyword">sample_rate</span>: 1Hz
-<span class="keyword">alert_threshold</span>: 85.0  <span class="comment"># 摄氏度</span>
-<span class="keyword">output</span>: tmp117_driver</pre>
-
-        <p>Skill 启动后，自动执行以下查询链：</p>
-        <ol>
-            <li><strong>查询 PCB 分析器：</strong>"I2C1 的 SDA/SCL 分别映射到哪两个 GPIO？当前有没有其他设备共享这条总线？"</li>
-            <li><strong>查询 agents.md：</strong>"I2C 驱动必须使用 DMA 模式，中断优先级必须为 4，严禁在 ISR 中调用任何日志函数。"</li>
-            <li><strong>查询工程模板：</strong>"驱动文件应放在 <code>Src/drivers/</code>，头文件在 <code>Inc/drivers/</code>，并遵循统一的错误返回码约定。"</li>
-            <li><strong>查询决策账本：</strong>"历史上是否有与 TMP117 或 I2C1 相关的已知陷阱？"（账本记录：某次 I2C1 与 SPI2 同时使用时出现总线冲突，原因是 DMA 通道重叠，已通过调整通道号解决。）</li>
-            <li><strong>生成代码：</strong>基于以上所有上下文，生成完整的 <code>tmp117.c</code> 和 <code>tmp117.h</code>，代码已经遵循了负日志规范（包含期望值检查），使用了模板规定的 HAL 封装风格。</li>
-            <li><strong>立即验证：</strong>闭环收敛 Agent 被触发，自动编译、烧录、运行 I2C 扫描测试和温度读取测试，确认传感器在线且数据在合理范围内。</li>
-        </ol>
-
-        <p><strong>耗时：5 分钟。</strong>其中 4 分钟是编译和烧录的物理时间，你真正参与的只有第一步——写一个意图声明。</p>
-
-        <p>这就是 <strong>Skill 层的价值：它把日常开发从"写代码"转变为"声明意图，审查结果"。</strong></p>
-    </section>
-
-    <section>
-        <h2 id="principles">四、Skill 的设计原则：快，但不牺牲质量和可追溯性</h2>
-
-        <p>快消费不代表"用完就扔，不管后果"。在你体系中运行的 skill，必须遵循几条硬性原则。这些原则，直接来自于你的 Core 层哲学：</p>
-
-        <div class="card">
-            <p style="margin-top:0;"><strong>原则一：所有 skill 产物必须可验证。</strong></p>
-            <p>Skill 生成的代码，必须能立即被 CI 或闭环收敛 Agent 接管。如果 skill 生成了一段 I2C 驱动，那么对应的 I2C 扫描测试和压力测试就必须同步生成，并且必须在硬件上跑通。不允许"生成完就不管"的 skill。</p>
-        </div>
-
-        <div class="card">
-            <p style="margin-top:0;"><strong>原则二：所有 skill 必须尊重决策账本。</strong></p>
-            <p>Skill 在生成代码前，必须查询账本中的历史禁区和已知陷阱。如果账本明确指示"I2C1 的 DMA 不能与 TIM2 的 CH2 共用通道"，skill 必须自动避开，而不是再次踩坑后等人来救。</p>
-        </div>
-
-        <div class="card">
-            <p style="margin-top:0;"><strong>原则三：Skill 的运行上下文必须被记录。</strong></p>
-            <p>当一个 skill 生成了代码并被接受，这个事件本身就是一个决策——相当于人在说："这个 skill 的判断在当时是正确的。"这个决策必须被写回决策账本，以便未来的知识生命体征管理能追踪这次增量的来龙去脉。</p>
-        </div>
-
-        <div class="card">
-            <p style="margin-top:0;"><strong>原则四：Skill 不替代 Core，Core 不限制 Skill。</strong></p>
-            <p>Skill 可以快速创建和废弃，但 Core 层（规约、模板、验证闭环）是稳定的。反之，Core 层永远不应该为了适应某个具体的 skill 而临时降低标准。两者各守其界，才能长期保持健康。</p>
-        </div>
-    </section>
-
-    <section>
-        <h2 id="mapping">五、Skills 与五层进化的映射</h2>
-
-        <p>Skills 不是外挂，而是五层进化每一层在"日常高频使用"时的自然延伸：</p>
-
-        <table>
-            <thead>
-                <tr><th>五层进化</th><th>Skill 如何在其上运行</th></tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="layer-tag">L1 上下文增强</span></td>
-                    <td>Skill 自动查询 PCB 分析器和芯片数据库，获得完整的硬件上下文</td>
-                </tr>
-                <tr>
-                    <td><span class="layer-tag">L2 可观测性</span></td>
-                    <td>Skill 生成的代码自动嵌入负日志，确保生成即带可观测性</td>
-                </tr>
-                <tr>
-                    <td><span class="layer-tag">L3 数据闭环</span></td>
-                    <td>Skill 产物立即触发自动测试，失败则自动反馈修正</td>
-                </tr>
-                <tr>
-                    <td><span class="layer-tag">L4 自动化</span></td>
-                    <td>Skill 调用链是全自动的，从意图声明到验证通过，无人介入</td>
-                </tr>
-                <tr>
-                    <td><span class="layer-tag">L5 自治与共生</span></td>
-                    <td>Skill 的每一次执行结果都被记录进决策账本，参与未来的知识生命体征管理</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <p>从这个角度看，<strong>Skill 是让你的 L4 和 L5 日常化、平民化的关键</strong>。没有 skill，那些强大的自治机制只在重大迭代时被唤起；有了 skill，它们每一天都在为你的小修小补保驾护航。</p>
-    </section>
-
-    <section>
-        <h2 id="final-piece">六、最后的拼图</h2>
-
-        <p>你的六篇文章，定义了一整套嵌入式 AI 工程化的严肃纪律。但纪律如果只存在于项目启动会议和重大重构中，它就会慢慢变成摆设。真正能让纪律活下来的，是把它融入到每一天、每一个具体小需求的执行里。</p>
-
-        <p>Skills 就是这一块拼图。它不是你体系的升级，而是你体系的<strong>日常化</strong>。它确保：当你在下午 3 点需要加一个传感器驱动时，你不会因为嫌麻烦而绕过所有精心设计的规约——因为 skill 让你在不绕路的情况下，比绕路更快。</p>
-
-        <div class="insight-box">
-            <strong>系列至此完整：</strong>你有了一纵一横的深度，有了向历史回望的担当，现在又有了覆盖日常高频操作的快消费层。你可以安静地说出那句话了——<strong>"这不再是一套只在理想条件下运转的理论，而是一套能落地到每一天日常工作中的、完整的工程哲学。"</strong>
-        </div>
-    </section>
-
-    <section class="footnote-section">
-        <h4>本文定位</h4>
-        <p>本文是五层进化系列<strong>支撑根系</strong>的核心文章。它提出了 Skill 层作为 Core 层的共生伴侣，定义了 skill 的运行原则，并将其映射到五层进化的每一级。建议与《实践项目模板》《自主修复闭环》《从收敛到进化》联合阅读，理解 skill 如何在规约、硬件上下文和决策账本的加持下，实现真正的"即插即用"。</p>
-        <div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
-            <strong>系列导航：</strong>
-            <a href="in.html">五层进化</a> ·
-            <a href="true.html">实践项目模板</a> ·
-            <a href="test.html">自主修复闭环</a> ·
-            <a href="fwd.html">从收敛到进化</a> ·
-            <a href="exc.html">知识的生命体征</a> ·
-            <a href="pcb.html">电路图分析器</a> ·
-            <a href="pt.html">最后的拼图：Skills</a> ·
-            <a href="history.html">历史的包袱</a> ·
-            <a href="ocd.html">被忽视的工具链组合</a> ·
-            <a href="devs.html">固件铭牌与设备画像</a> ·
-            <a href="gmp.html">合规验证与AI编程</a> ·
-            <a href="hg.html">回归现实：单Agent实践框架</a> ·
-            <a href="12.html">AI编程的利刃</a> ·
-            <a href="py.html">批量修改，先问该不该用脚本</a> ·
-            <a href="13.html">拆解与整合</a> ·
-            <a href="lj.html">君子不器与灵活调度</a> ·
-            <a href="fb.html">别把AI用成付费上班</a> ·
-            <a href="svg.html">别让AI画图，让它写图</a> ·
-            <a href="14.html">AI谄媚与专利</a> ·
-            <a href="gd.html">始于工程，服务生活</a>
-        </div>
-
-<div class="series-nav">
-    <a href="pcb.html" aria-label="上一篇：电路图分析器">← 电路图分析器</a>
-    <a href="history.html" aria-label="下一篇：历史的包袱 ">历史的包袱  →</a>
-</div>
-<p style="margin-top:12px;font-size:13px;color:#8896a4;"><a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a></p>
-        
-    </section>
-
-</div>
-
+    <div class="stat-grid">
+        <div class="stat-card"><div class="stat-num">750</div><div class="stat-label">页法规</div></div>
+        <div class="stat-card"><div class="stat-num">36</div><div class="stat-label">环境监测类型</div></div>
+        <div class="stat-card"><div class="stat-num">17</div><div class="stat-label">合规 API</div></div>
+        <div class="stat-card"><div class="stat-num">13</div><div class="stat-label">合规数据表</div></div>
+        <div class="stat-card"><div class="stat-num">48</div><div class="stat-label">端到端测试</div></div>
+        <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">业务领域</div></div>
     </div>
+
+    <div class="card accent-left">
+        <p><strong>一句话总结这篇文章：</strong>我把 750 页 GxP 法规读完了，然后把我理解到的"应该怎么做"，翻译成了一套实际的系统。每一处实现都能溯源到一条法规——这是我做这个项目最骄傲的地方。</p>
+    </div>
+
+    <h2 id="turning-point">一件事的转折</h2>
+    <p>前几天跟一位药企的 QA 总监聊天。</p>
+    <p>他说，<strong>法规是给药监局看的，代码是给开发写的。这两拨人互相听不懂。</strong></p>
+    <blockquote>"我们 IT 跟我说 5 年了，要做合规，10 个项目推进了 6 个，剩下 4 个永远'在下个季度'。"</blockquote>
+    <p>这句话的真正意思不是 IT 不努力。是<strong>翻译能力</strong>这道墙太厚。</p>
+    <ul>
+        <li>法规里"secure, computer-generated time-stamp"，开发可能直接用 <code>new Date()</code> 就过了。</li>
+        <li>法规里"signature shall be permanently linked to its record"，开发可能贴个图片就交差。</li>
+        <li>法规里"audit trail"，开发可能加个 log 表就完了。</li>
+    </ul>
+    <blockquote><strong>每一条都"做了"，每一条都没"做对"。监管来查，整套推翻重做。</strong></blockquote>
+    <p>我决定做那个"翻译者"。</p>
+    <p>读 21 CFR Part 11，读 EU GMP Annex 11，读 ALCOA+ 9 要素，读 GAMP 5，读中国药典 2025 版附录，读 PIC/S PI 011-3。读完不写 PPT，写<strong>系统</strong>。</p>
+
+    <h2 id="key-designs">这套系统的几个关键设计</h2>
+
+    <h3 id="time">一、"时间"这件事，远比你想象的复杂</h3>
+    <p>合规上叫"Contemporaneous（同步性）"——事件发生时要<strong>立即</strong>记录。但<strong>立即是多久</strong>？10 秒？1 分钟？1 小时？更重要的是：<strong>用谁的时间？</strong></p>
+    <p>如果用客户端时间，检验员把系统时间往前调 3 年，他就"在 2029 年补录"了。监管 100% 不认。</p>
+    <div class="card blue-left">
+        <p><strong>所以：</strong></p>
+        <ul style="margin:8px 0 0 0;padding-left:18px;">
+            <li>服务端发时间，客户端只接收</li>
+            <li>客户端每几分钟跟服务端"对表"</li>
+            <li><strong>漂移&gt;1 秒警告，&gt;60 秒拒绝操作</strong></li>
+            <li>离线场景单独处理：记本地时间 + 漂移值，联网后用算法补偿</li>
+        </ul>
+    </div>
+    <p>这一套下来，"时间"不再是 <code>new Date()</code> 那一行，而是<strong>一整套带密码学签名的对时协议</strong>。</p>
+
+    <h3 id="signature">二、签名的本质：不是图片，是"不可分离"</h3>
+    <p>法规上"Signature/Record Linking"——签了字的记录，改一个字节，签名就废。我做的时候第一反应是用图片签名（90% 的系统这么干）。但读法规注释：<code>"shall be permanently linked"</code>——是<strong>密码学意义上的链接</strong>，不是视觉链接。</p>
+    <p>所以最终方案是<strong>五要素同时哈希</strong>：</p>
+    <pre><code>签名 = SHA256(资源 hash + 签名人 + reason + intent + TOTP)</code></pre>
+    <p>其中：</p>
+    <ul>
+        <li><strong>资源 hash</strong> 改了 → 签名废</li>
+        <li><strong>reason</strong>（Approved/Reviewed/Released...）不是下拉，是白名单校验</li>
+        <li><strong>intent</strong>（签字意图）≥5 字符用户必填</li>
+        <li><strong>TOTP</strong> 是第二因素（30 秒换一次码，手机令牌那种）</li>
+    </ul>
+    <p>更关键的是<strong>职责分离</strong>：</p>
+    <ul>
+        <li>检验员不能给自己 approve</li>
+        <li>主管不能给自己 release</li>
+        <li>系统管理员不能参与任何业务审批</li>
+    </ul>
+    <div class="insight-box tech">
+        <strong>硬阻断：</strong>这条不是"建议"，是硬阻断。UI 上按钮就禁用了，API 层直接 reject。一个普通员工试图绕过？前端的按钮藏起来没用——他直接调 API 也过不了校验。
+    </div>
+
+    <h3 id="audit">三、审计的本质：不是日志，是"链"</h3>
+    <p>法规上"Original"（原始性）——记录改不了。传统做法是触发器+日志。问题是<strong>审计表本身也被人改呢</strong>？</p>
+    <p>我做了一件事：<strong>区块链式哈希链</strong>。</p>
+    <pre><code>每条审计记录包含：
+&bull; 前一条的 hash
+&bull; 本条所有字段的 hash
+&bull; 一个 nonce（抗碰撞）
+
+验证时整条链从创世块走一遍，发现 hash 不连续就报警。</code></pre>
+    <blockquote>想篡改一条？得连带改后面 10 万条。改完所有计算量大概要几年。想伪造一条插入中间？算不出对应的 prev_hash。<br><br><strong>改一条 = 链断了 = 监管立刻知道。</strong></blockquote>
+
+    <h3 id="password">四、密码策略：不是"复杂"两个字</h3>
+    <p>法规上"Password Controls"——光"复杂"不够，要<strong>全生命周期</strong>。</p>
+    <table>
+        <thead><tr><th>要求</th><th>实现</th></tr></thead>
+        <tbody>
+            <tr><td>复杂度</td><td>10 位 + 大小写 + 数字 + 特殊字符</td></tr>
+            <tr><td>历史</td><td>5 次不重用</td></tr>
+            <tr><td>过期</td><td>90 天强制换</td></tr>
+            <tr><td>会话</td><td>30 分钟不动就锁，8 小时强制登出</td></tr>
+            <tr><td>存储</td><td>PBKDF2-SHA256 10 万次迭代</td></tr>
+        </tbody>
+    </table>
+    <p>这些<strong>全部一起</strong>做，才能算"密码学意义上的安全"。</p>
+
+    <h2 id="counterintuitive">几件更"反直觉"的事</h2>
+
+    <h3>监管不只看"功能"，还看"文档"</h3>
+    <p>所以我做了 13 张合规表——专门用来存"证据链"：</p>
+    <ul>
+        <li>培训记录：谁在什么时候学的 GxP 基础</li>
+        <li>验证运行：URS → FS → IQ → OQ → PQ 每一步的日期、执行人、QA 复核人</li>
+        <li>偏差事件：严重度、根因、CAPA 编号、关闭时间</li>
+        <li>备份恢复：什么类型、多大、checksum 多少、恢复测试结果</li>
+        <li>权限复核：每季度回顾一次</li>
+        <li>数据保留：哪张表存几年、几年后 WORM 归档</li>
+    </ul>
+    <blockquote><strong>监管不看你"现在"做了啥，看你"过程"留没留痕。</strong></blockquote>
+
+    <h3>数据要存多久？</h3>
+    <p>监管说：<strong>30 年</strong>。7 年后还要把数据搬到<strong>不可擦写的 WORM 介质</strong>（一次写入永远不能改）。为什么是 30 年？因为人用过的药，10 年后还能追溯"当年这批药是在哪个环境指标下生产出来的"。我做的时候一开始觉得"30 年太久了吧"，后来查资料——<strong>最严的 FDA 案子里有 50 年的要求</strong>。</p>
+
+    <div class="insight-box">30 年 = 药上市后的全生命周期。</div>
+
+    <h3>验证是什么？</h3>
+    <p>工程师和监管对"测试"的理解不一样：</p>
+    <ul>
+        <li>工程师觉得"功能能用"= 测试通过</li>
+        <li>监管觉得"在异常情况下也按预期运行"= 验证</li>
+    </ul>
+    <p>我做的时候补了几类测试：</p>
+    <ul>
+        <li>改一个字节 → 签名失效</li>
+        <li>时间漂移 61 秒 → 操作被拒</li>
+        <li>密码弱 → 拒绝</li>
+        <li>跨表外键断 → 写入拒绝</li>
+        <li>审计链断 → 报警</li>
+    </ul>
+    <div class="insight-box tech"><strong>这些"负向"测试比"正向"更重要。</strong></div>
+
+    <h2 id="output">这件事我做了多久</h2>
+    <p>不短。期间我<strong>同时还在做业务</strong>——白天跟药企打交道，晚上写代码。</p>
+
+    <div class="card purple-left">
+        <p><strong>这个系统的产出形式：</strong></p>
+        <ul style="margin:8px 0 0 0;padding-left:18px;">
+            <li>完整的产品 demo（可在浏览器直接打开）</li>
+            <li>全套功能（36 类环境监测、6 大业务领域）</li>
+            <li>全套产品演示物料（截图、文档、可运行 demo）</li>
+            <li>13 张合规数据表</li>
+            <li>17 个合规 API</li>
+            <li>6 角色 SoD 矩阵</li>
+            <li>48 个端到端测试</li>
+        </ul>
+    </div>
+
+    <p><strong>系统里的每一处实现都能溯源到一条法规</strong>——这是我最骄傲的地方。</p>
+
+    <div class="card blue-left">
+        <p><strong>这套东西给谁用：</strong></p>
+        <ul style="margin:8px 0 0 0;padding-left:18px;">
+            <li><strong>药企 IT 总监</strong>：想知道 GxP 系统到底长什么样，自己招人做要花多少钱</li>
+            <li><strong>药企 QA 总监</strong>：想知道监管来查的时候，自己的系统能不能撑住</li>
+            <li><strong>CXO</strong>：想知道"软件合规"到底要解决哪些事，要花多少资源</li>
+            <li><strong>同行业的工程师</strong>：想知道法规→代码的翻译怎么落地</li>
+            <li><strong>投资人 / 产业研究</strong>：想知道国产 GxP 软件到了什么水平</li>
+        </ul>
+    </div>
+
+    <div class="card" style="background:linear-gradient(135deg,#f0f7ff,#e8f4f8);border-left:4px solid #1e3a8a;">
+        <p style="font-size:16px;font-style:italic;color:#1a1a2e;">
+            "我经常被问：你到底是做法规的，还是写代码的？"
+        </p>
+        <p style="margin-top:12px;font-size:16px;font-weight:600;color:#1e3a8a;">
+            我做的事情，本质上是把模糊的"应该"翻译成具体的"怎么做"——这个能力，未来 10 年都会稀缺。
+        </p>
+        <p style="margin-top:12px;font-size:14px;color:#5a6c7d;">
+            不是因为法规多、不是因为代码难。是因为两件事都做到 70 分的人很多，做到 90 分的人很少。而 90 分的"翻译者"，恰恰是让一家药企的 LIMS 系统能通过 FDA 审计的关键角色。这正是我接下来要做的事。
+        </p>
+    </div>
+
+    <p style="margin-top:40px;font-size:14px;color:#8896a4;">
+        <strong>行业身份：</strong>长期和监管打交道的合规工程师<br>
+        <strong>能力领域：</strong>GxP 法规落地 · 实验室系统架构 · 数据可靠性<br>
+        <strong>覆盖法规：</strong>21 CFR Part 11 / EU Annex 11 / ALCOA+ / GAMP 5 / 中国药典 2025 / PIC/S
+    </p>
+
+    <div class="bottom-series-links">
+        <strong>系列导航：</strong>
+        <a href="in.html">五层进化</a> ·
+        <a href="true.html">实践项目模板</a> ·
+        <a href="test.html">自主修复闭环</a> ·
+        <a href="fwd.html">从收敛到进化</a> ·
+        <a href="exc.html">知识的生命体征</a> ·
+        <a href="pcb.html">电路图分析器</a> ·
+        <a href="pt.html">最后的拼图：Skills</a> ·
+        <a href="history.html">历史的包袱</a> ·
+        <a href="ocd.html">被忽视的工具链组合</a> ·
+        <a href="devs.html">固件铭牌与设备画像</a> ·
+        <a href="gmp.html">合规验证与AI编程</a> ·
+        <a href="gxp.html">GxP 法规工程化</a> ·
+        <a href="14.html">AI谄媚与专利</a> ·
+        <a href="hg.html">回归现实：单Agent实践框架</a> ·
+        <a href="12.html">AI编程的利刃</a> ·
+        <a href="py.html">批量修改</a> ·
+        <a href="13.html">拆解与整合</a> ·
+        <a href="lj.html">君子不器</a> ·
+        <a href="gd.html">始于工程，服务生活</a>
+    </div>
+
+    <div class="series-nav">
+        <a href="gmp.html" aria-label="上一篇：合规验证与AI编程">← 合规验证与AI编程</a>
+        <a href="14.html" aria-label="下一篇：AI谄媚与专利 ">AI谄媚与专利 →</a>
+    </div>
+
+    <div class="footer-author-wrap">
+        <a href="about.html" class="footer-author-link">关于作者</a>
+    </div>
+
+</div>
+</div>
 </div>
 
 <div class="inland-security-footer">
@@ -1117,5 +865,3 @@
 </div>
 </body>
 </html>
-
-
