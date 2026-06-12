@@ -1,251 +1,81 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>拆解与整合：驾驭复杂系统的完整工程法则 | 为AI编程工程化立宪</title>
-<meta name="description" content="提出以拆解和整合为核心的完整工程法则，教你把复杂系统拆解为独立可验证模块，再渐进式整合为完整系统。">
-<meta name="keywords" content="拆解,整合,复杂系统,嵌入式,AI编程,模块化,回歸测试">
+<title>实验室信息化：LIMS 系统集成的 18 条硬核法则 | 嵌入式AI工程化系列</title>
+<meta name="description" content="基于 ASTM E1578 E13 章节，拆解 LIMS 系统集成与数据存储的 18 条可落地需求，覆盖跨系统对接、数据全生命周期管理、架构设计三大块。">
+<meta name="keywords" content="LIMS,ASTM E1578,实验室信息化,系统集成,数据存储,GxP,合规">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="拆解与整合：驾驭复杂系统的完整工程法则 | 为AI编程工程化立宪">
-<meta property="og:description" content="提出以拆解和整合为核心的完整工程法则，教你把复杂系统拆解为独立可验证模块，再渐进式整合为完整系统。">
+<meta property="og:title" content="实验室信息化：LIMS 系统集成的 18 条硬核法则 | 嵌入式AI工程化系列">
+<meta property="og:description" content="基于 ASTM E1578 E13 章节，拆解 LIMS 系统集成与数据存储的 18 条可落地需求。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://x-itg.github.io/13.html">
-<link rel="canonical" href="https://x-itg.github.io/13.html">
+<meta property="og:url" content="https://x-itg.github.io/lims.html">
+<link rel="canonical" href="https://x-itg.github.io/lims.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="assets/site-sidebar.css">
 <style>
     :root {
-        --bg: #f8f9fa;
-        --card-bg: #ffffff;
-        --text: #2c3e50;
-        --text-secondary: #5a6c7d;
-        --accent: #c0392b;
-        --accent-soft: #e74c3c;
-        --border: #e0e4e8;
-        --code-bg: #1e293b;
-        --code-text: #e2e8f0;
-        --highlight: #fef9e7;
-        --tag-bg: #f0f3f6;
-        --tag-text: #4a5568;
-        --link: #2980b9;
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-        --radius: 6px;
-        --radius-lg: 10px;
+        --bg: #f8f9fa; --card-bg: #ffffff; --text: #2c3e50; --text-secondary: #5a6c7d;
+        --accent: #c0392b; --border: #e0e4e8; --code-bg: #1e293b; --code-text: #e2e8f0;
+        --highlight: #fef9e7; --link: #2980b9;
+        --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        --radius: 6px; --radius-lg: 10px;
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.8;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .container {
-        max-width: 780px;
-        margin: 0 auto;
-        padding: 40px 24px 80px;
-    }
-
-    /* 顶部导航 */
-    .top-nav {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 48px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid var(--border);
-        font-size: 14px;
-        color: var(--text-secondary);
-    }
-    .top-nav a { color: var(--link); text-decoration: none; transition: color 0.2s; }
-    .top-nav a:hover { color: var(--accent); }
-    .top-nav .sep { color: #c0c7cf; }
-
-    /* 文章头部 */
-    .article-header { margin-bottom: 48px; }
-    .article-header .series-tag {
-        display: inline-block; background: var(--accent); color: #fff;
-        font-size: 12px; font-weight: 600; padding: 3px 10px;
-        border-radius: 3px; letter-spacing: 0.5px; margin-bottom: 16px;
-    }
-    .article-header h1 {
-        font-size: 32px; font-weight: 700; line-height: 1.35;
-        margin-bottom: 12px; letter-spacing: -0.3px;
-    }
-    .article-header .subtitle {
-        font-size: 17px; color: var(--text-secondary); font-weight: 400; margin-bottom: 20px;
-    }
-    .article-header .meta { font-size: 13px; color: #8896a4; }
-
-    /* 通用排版 */
-    h2 {
-        font-size: 24px; font-weight: 700; margin: 56px 0 16px;
-        padding-top: 24px; border-top: 2px solid var(--border);
-        letter-spacing: -0.2px;
-    }
-    h3 {
-        font-size: 19px; font-weight: 600; margin: 36px 0 12px; color: #1a1a2e;
-    }
-    h4 {
-        font-size: 16px; font-weight: 600; margin: 24px 0 10px; color: #1a1a2e;
-    }
-    p { margin: 14px 0; }
-    strong { color: #1a1a2e; }
-    ul, ol { margin: 14px 0; padding-left: 24px; }
-    li { margin: 6px 0; }
-
-    /* 卡片 */
-    .card {
-        background: var(--card-bg); border: 1px solid var(--border);
-        border-radius: var(--radius-lg); padding: 28px 30px;
-        margin: 28px 0; box-shadow: var(--shadow-sm);
-    }
-    .card.accent-left { border-left: 4px solid var(--accent); }
-    .card.tip { background: #f0f7ff; border-color: #b3d4fc; }
-
-    /* 高亮段落 */
-    .insight-box {
-        background: var(--highlight); border: 1px solid #f0d78c;
-        border-radius: var(--radius); padding: 20px 24px;
-        margin: 24px 0; font-style: italic; color: #6b4c1e;
-    }
-    .insight-box strong { color: #4a340f; }
-
-    /* 代码块 */
-    pre {
-        background: var(--code-bg); color: var(--code-text);
-        padding: 20px 24px; border-radius: var(--radius);
-        overflow-x: auto; font-family: "JetBrains Mono","Fira Code","Cascadia Code","SF Mono","Consolas","Monaco",monospace;
-        font-size: 13px; line-height: 1.7; margin: 20px 0; box-shadow: var(--shadow-md);
-    }
-    code {
-        font-family: "JetBrains Mono","Fira Code","Cascadia Code","SF Mono","Consolas","Monaco",monospace;
-        font-size: 13px;
-    }
-    p code, li code {
-        background: #eef1f5; padding: 2px 6px; border-radius: 3px;
-        color: #c0392b; font-size: 12px;
-    }
-
-    /* 响应式 */
-    @media (max-width: 640px) {
-        .container { padding: 20px 16px 60px; }
-        .article-header h1 { font-size: 26px; }
-        h2 { font-size: 21px; }
-        pre { padding: 14px 16px; font-size: 12px; }
-    }
-
-    /* ===== 三栏布局（方案B） ===== */
-/* 左侧：文章系列导航 */
-/* 右侧：正文 */
-    .main-content { flex: 1; min-width: 0; }
-
-    /* 文章系列导航系统 */
-
-
-        .card.accent-left { border-left: 4px solid var(--accent); }
-        .card.philosophy { 
-            border-left: 4px solid #8e44ad; 
-            background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%);
-        }
-        .card.engineer { 
-            border-left: 4px solid #2980b9; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%);
-        }
-        .card.action { 
-            border-left: 4px solid #27ae60; 
-            background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%);
-        }
-        .card.vision { 
-            border-left: 4px solid #3b82f6; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card.vision:hover { 
-            transform: translateY(-2px); 
-            box-shadow: var(--shadow-md); 
-        }
-        .card {
-            text-align: left;
-        }
-        .card p {
-            text-align: left;
-            margin: 0;
-        }
-        .card p:first-child {
-            margin-top: 0;
-        }
-        .card p:last-child {
-            margin-bottom: 0;
-        }
-        .card strong {
-            display: block;
-            color: var(--text);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .card pre {
-            text-align: left;
-            margin: 12px 0 0;
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 16px 20px;
-            border-radius: 6px;
-            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
-            font-size: 13px;
-            line-height: 1.7;
-            overflow-x: auto;
-        }
-
-        .insight-box {
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border: 1px solid #f0d78c;
-            border-left: 4px solid #f39c12;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin: 24px 0;
-            font-style: italic;
-            color: #6b4c1e;
-            text-align: left;
-        }
-        .insight-box strong {
-            color: #4a340f;
-            font-weight: 600;
-        }
-        .insight-box.decision { 
-            background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
-            border-color: #a8d4e0; 
-            border-left-color: #3498db;
-            color: #1a5276; 
-        }
-        .insight-box.decision strong { 
-            color: #0e3a57; 
-        }
-        .insight-box.warm { 
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border-color: #f0d78c; 
-            border-left-color: #f39c12;
-            color: #6b4c1e; 
-        }
-        .insight-box.warm strong { 
-            color: #4a340f; 
-        }
-        .insight-box.cool { 
-            background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
-            border-color: #a9cce3; 
-            border-left-color: #2980b9;
-            color: #1f4e79; 
-        }
-        .insight-box.cool strong { 
-            color: #154360; 
-        }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.8; -webkit-font-smoothing:antialiased; }
+    .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
+    .container { max-width:780px; margin:0 auto; padding:40px 24px 80px; }
+    .main-content { flex:1; min-width:0; }
+    .article-header { margin-bottom:48px; }
+    .article-header .series-tag { display:inline-block; background:var(--accent); color:#fff; font-size:12px; font-weight:600; padding:3px 10px; border-radius:3px; letter-spacing:0.5px; margin-bottom:16px; }
+    .article-header h1 { font-size:32px; font-weight:700; line-height:1.35; margin-bottom:12px; letter-spacing:-0.3px; }
+    .article-header .subtitle { font-size:17px; color:var(--text-secondary); font-weight:400; margin-bottom:20px; }
+    .article-header .meta { font-size:13px; color:#8896a4; }
+    h2 { font-size:24px; font-weight:700; margin:56px 0 16px; padding-top:24px; border-top:2px solid var(--border); letter-spacing:-0.2px; }
+    h3 { font-size:19px; font-weight:600; margin:36px 0 12px; color:#1a1a2e; }
+    h4 { font-size:16px; font-weight:600; margin:24px 0 10px; color:#1a1a2e; }
+    p { margin:14px 0; text-align:justify; }
+    strong { color:#1a1a2e; }
+    blockquote { border-left:3px solid var(--accent); padding:12px 20px; margin:20px 0; background:#fef9e7; border-radius:0 6px 6px 0; font-size:15px; color:#6b4c1e; }
+    blockquote strong { color:#4a340f; }
+    ul, ol { margin:14px 0; padding-left:24px; }
+    li { margin:6px 0; }
+    .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px 26px; margin:24px 0; box-shadow:var(--shadow-sm); }
+    .card.accent-left { border-left:4px solid var(--accent); }
+    .card.blue-left { border-left:4px solid #3b82f6; }
+    .card.green-left { border-left:4px solid #27ae60; }
+    .card.purple-left { border-left:4px solid #8b5cf6; }
+    .card p { text-align:left; margin:0; }
+    .card p + p { margin-top:10px; }
+    .card strong { display:block; color:var(--text); font-weight:600; }
+    .card ul { margin:8px 0 0 0; padding-left:18px; }
+    .insight-box { background:var(--highlight); border:1px solid #f0d78c; border-radius:var(--radius); padding:20px 24px; margin:24px 0; font-style:italic; color:#6b4c1e; }
+    .insight-box strong { color:#4a340f; display:inline; }
+    .insight-box.tech { background:#eef5ff; border-color:#b3d4fc; color:#1e3a5f; font-style:normal; }
+    .insight-box.tech strong { color:#14356b; }
+    code { font-family:"JetBrains Mono","Fira Code","Cascadia Code","SF Mono","Consolas",monospace; font-size:13px; }
+    p code, li code { background:#eef1f5; padding:2px 6px; border-radius:3px; color:#c0392b; font-size:12px; }
+    table { width:100%; border-collapse:collapse; margin:24px 0; font-size:14px; }
+    table th, table td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--border); }
+    table th { font-weight:700; background:#f5f7fa; color:#4a5568; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+    .rule-card { padding:18px 20px; margin:12px 0; border-radius:8px; background:#f8fafc; border:1px solid #e5e7eb; }
+    .rule-card h4 { margin:0 0 6px; color:#1e3a8a; font-size:15px; }
+    .rule-card p { margin:0; font-size:14px; color:#5a6c7d; text-align:left; }
+    .rule-card .rule-ref { font-size:11px; color:#8896a4; font-weight:600; letter-spacing:0.5px; margin-bottom:6px; display:block; }
+    .bottom-series-links { margin-top:48px; padding-top:24px; border-top:1px solid var(--border); font-size:14px; line-height:1.9; color:var(--text-secondary); }
+    .series-nav { display:flex; justify-content:space-between; margin:40px 0; padding-top:20px; border-top:1px solid var(--border); font-size:15px; }
+    .series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
+    .series-nav a:hover { text-decoration:underline; }
+    .footer-author-wrap { text-align:center; margin-top:24px; padding-top:24px; border-top:1px solid var(--border); color:#8896a4; font-size:13px; }
+    .footer-author-link { color:var(--accent); text-decoration:none; }
+    .footer-author-link:hover { text-decoration:underline; }
+    .section-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:1px; padding:3px 10px; border-radius:999px; margin-bottom:12px; }
+    .section-badge.integration { background:#dbeafe; color:#1e40af; }
+    .section-badge.storage { background:#dcfce7; color:#166534; }
+    .section-badge.arch { background:#fef3c7; color:#92400e; }
+    @media (max-width:780px) { .container { padding:20px 16px 60px; } .article-header h1 { font-size:26px; } h2 { font-size:21px; } }
 </style>
-<link rel="stylesheet" href="assets/site-sidebar.css">
 </head>
 <body class="site-theme-tech">
 <div class="layout">
@@ -332,7 +162,7 @@
                     </ul>
                 </div>
             </details>
-            <details class="site-sidebar__subgroup">
+            <details class="site-sidebar__subgroup" open>
                 <summary>专业延伸</summary>
                 <div class="site-sidebar__group-body">
                     <ul>
@@ -371,7 +201,7 @@
                             <span class="site-sidebar__link-meta">专业延伸 · 把750页法规翻译成可运行的系统</span>
                         </span>
                     </a></li>
-                    <li><a href="lims.html" class="site-sidebar__link site-sidebar__article-link">
+                    <li><a href="lims.html" class="site-sidebar__link site-sidebar__article-link is-active">
                         <span class="site-sidebar__article-icon" aria-hidden="true">🧪</span>
                         <span>
                             <span class="site-sidebar__link-title">LIMS系统集成法则</span>
@@ -388,7 +218,7 @@
                     </ul>
                 </div>
             </details>
-            <details class="site-sidebar__subgroup" open>
+            <details class="site-sidebar__subgroup">
                 <summary>实战与心法</summary>
                 <div class="site-sidebar__group-body">
                     <ul>
@@ -413,7 +243,7 @@
                             <span class="site-sidebar__link-meta">工程利器 · 先判断模式，再把批量改造交给脚本执行</span>
                         </span>
                     </a></li>
-                    <li><a href="13.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                    <li><a href="13.html" class="site-sidebar__link site-sidebar__article-link">
                         <span class="site-sidebar__article-icon" aria-hidden="true">🧵</span>
                         <span>
                             <span class="site-sidebar__link-title">拆解与整合</span>
@@ -719,161 +549,194 @@
     </details>
     <a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
 </aside>
-    <aside class="sidebar-toc">
-        <h3>本章导览</h3>
-        <nav>
-            <ul>
-                <li><a href="#problem">🧵 复杂系统的困境</a></li>
-                <li><a href="#decomposition">🧵 拆解：把复杂变简单</a></li>
-                <li><a href="#integration">🧵 整合：从简单重建复杂</a></li>
-                <li><a href="#closed-loop">🔄 拆解与整合闭环</a></li>
-                <li><a href="#mapping">⚙️ 与整套体系映射</a></li>
-                <li><a href="#summary">🧵 一枚硬币的两面</a></li>
-            </ul>
-        </nav>
-    </aside>
+<div class="main-content">
+<div class="container">
+    <header class="article-header">
+        <span class="series-tag">专业延伸 · LIMS 合规工程</span>
+        <h1>实验室信息化：LIMS 系统集成的 18 条硬核法则</h1>
+        <p class="subtitle">基于 ASTM E1578 E13 章节，拆解系统集成与数据存储的 18 条可落地需求</p>
+        <p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
+    </header>
 
-    <div class="main-content">
-        <div class="container">
+    <div class="card blue-left">
+        <p>做实验室信息化项目，URS（用户需求规范）是起点，直接影响系统落地的精准度。行业里有份权威指南叫 <strong>ASTM E1578</strong>，专门给 URS 编写提供标准化框架。E13 章节——系统集成与数据存储，刚好对应 QC 微系统的核心需求。这 18 条需求，覆盖了跨系统对接、数据全生命周期管理、架构设计三大块，既满足 GMP 和数据完整性要求，又兼顾业务自动化与系统扩展性。</p>
+        <p style="margin-top:10px;">以下用我自己的语言，把每条需求拆成可落地的场景。</p>
+    </div>
 
-        <header class="article-header">
-            <span class="series-tag">工程心法 · 系统思维</span>
-            <a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
-            <h1>拆解与整合：驾驭复杂系统的完整工程法则</h1>
-            <p class="subtitle">拆解教会我们定义边界，整合教会我们跨越边界——一枚硬币的两面</p>
-            <p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
-        </header>
+    <h2 id="integration">一、系统集成：让数据自动流动</h2>
 
-        <section>
-            <h2 id="problem">⏳️复杂系统的困境</h2>
-            <p>面对一个庞大、错综复杂的嵌入式系统，工程师的本能反应往往是焦虑。你担心AI看不懂系统全貌，担心牵一发而动全身，担心项目进度不可控。</p>
-            <p>问题的根源在于：<strong>你把复杂问题当作一个整体去处理。</strong>而AI在面对超出其上下文理解能力的复杂性时，确实会顾此失彼。</p>
-            <p>要驾驭复杂系统，我们需要掌握两门核心手艺：<strong>拆解</strong>和<strong>整合</strong>。它们是一枚硬币的两面——拆解教会我们定义边界，整合教会我们跨越边界。</p>
-        </section>
+    <div class="rule-card">
+        <span class="rule-ref">E13-01</span>
+        <h4>系统要能把样品、批次、仪器的状态变化，主动通知外部系统</h4>
+        <p>这不是"等着别人来查"，是"状态变了主动说"。比如 WMS 或 MES 把请验单和样品数据推给 LIMS；LIMS 检测完成后，把调查、偏差、结果推给 QMS。事件驱动，不是轮询。</p>
+    </div>
 
-        <section>
-            <h2 id="decomposition">🧲上篇：拆解——把复杂变简单</h2>
-            <p>市面上有很多成熟的设计方法，但它们大多停留在纸面原则，没有回答最实际的问题：怎样让AI参与拆解？怎样确保每个部分能独立工作、自我验证？</p>
+    <div class="rule-card">
+        <span class="rule-ref">E13-02</span>
+        <h4>状态变化要能推送给外部系统</h4>
+        <p>典型场景：试剂库存低于阈值时，LIMS 通过消息队列把状态推给采购系统。采购系统自动生成订单，通知采购员跟进。避免试剂断档导致业务中断。</p>
+    </div>
 
-            <div class="card accent-left">
-                <p style="margin-top:0;"><strong>核心理念：</strong>永远不要把一个复杂问题作为整体交给AI。永远先拆解，再逐个击破。</p>
-            </div>
+    <div class="rule-card">
+        <span class="rule-ref">E13-06</span>
+        <h4>系统要提供对接第三方报表工具的接口</h4>
+        <p>COA（分析报告）通常靠水晶报表或 JasperReport 生成。LIMS 负责存储和整理数据，报表工具负责呈现。接口要标准化，换报表工具时不伤核心业务。</p>
+    </div>
 
-            <h3>💡第一步：识别独立的物理功能单元</h3>
-            <p>判断标准只有一条：<strong>这个单元能不能脱离其他部分单独验证？</strong>如果能，它就是一个独立模块。以一个典型的工业监测设备为例，它可以被拆解为传感器采集、通信协议处理、报警判断、数据存储、用户权限、操作审计、报告生成、身份认证等独立模块。</p>
+    <div class="rule-card">
+        <span class="rule-ref">E13-07</span>
+        <h4>系统要符合企业当前的数据存储平台和标准</h4>
+        <p>一般通过 ESB（企业服务总线）解决：统一接口标准，解决不同系统的"语言不通"；转发数据，减少系统间直接耦合；提供路由、监控、容错，降低集成复杂度。这和我在工程里强调的"分层解耦"完全一致。</p>
+    </div>
 
-            <h3>💡第二步：为每个模块定义接口法则</h3>
-            <p>拆解之后最关键的一步，是定义模块之间的通信契约。每个模块必须声明：输入什么、输出什么、依赖哪些资源、出错时如何恢复。这个接口法则，就是模块和模块之间的"宪法"。</p>
+    <div class="rule-card">
+        <span class="rule-ref">E13-14</span>
+        <h4>系统要提供文档化的 API，让第三方能在细粒度上对接底层功能</h4>
+        <p>比如样品条码打印工具需要调 LIMS 的样品信息。通过 API 文档，开发者快速获取接口，按文档配置参数即可对接，不用看 LIMS 底层代码。这就是"接口先行"的价值。</p>
+    </div>
 
-            <h3>💡第三步：用工程模板独立构建每个模块</h3>
-            <p>有了接口法则，每个模块就可以交给AI独立开发。每个模块都有独立的文件夹结构，AI不需要理解整个系统，只需要在模块边界内工作，遵守接口法则。</p>
+    <div class="rule-card">
+        <span class="rule-ref">E13-15</span>
+        <h4>系统要支持基于通用方法的数据集成和交换</h4>
+        <p>LIMS 用 HL7、CSV、JSON 这些通用格式，和医院 HIS 系统对接。患者样品信息通过 HL7 传入 LIMS，检测结果以 JSON 回传。不用人工转换格式，双向互通。</p>
+    </div>
 
-            <h3>💡第四步：用闭环收敛让每个模块自我证明</h3>
-            <p>每个模块在并入主系统之前，必须通过自身的收敛测试。运行测试，收集日志，喂回给AI。AI自己分析、自己修复、自己重测，直到所有测试通过。只有通过收敛测试的模块，才有资格进入主系统。</p>
-        </section>
+    <div class="rule-card">
+        <span class="rule-ref">E13-17</span>
+        <h4>系统要支持与 ERP 对接</h4>
+        <p>检测完成后，LIMS 自动把样品编号、检测项目、费用、耗材消耗同步到 ERP。ERP 基于这些数据自动核算成本、生成采购计划。业务、财务、采购联动，减少手工对账。</p>
+    </div>
 
-        <section>
-            <h2 id="integration">📃下篇：整合——从简单重建复杂</h2>
-            <p>很多项目在拆解阶段做得很好，但在整合阶段翻了车：两个模块接口不匹配、边界条件意外触发、日志量爆炸无从排查。问题出在整合方式——<strong>一次性全部拼接，是最危险的策略</strong>。</p>
+    <div class="rule-card">
+        <span class="rule-ref">E13-18</span>
+        <h4>系统要能与企业中间件对接</h4>
+        <p>比如用 Kafka 做消息中间件，实现异步通信。LIMS 把样品接收、检测开始、报告审核等关键事件发到 Kafka 消息队列，OA 系统、质量管理系统订阅后自动触发流程——OA 发任务提醒给审核人员，全自动流转。</p>
+    </div>
 
-            <div class="card accent-left">
-                <p style="margin-top:0;"><strong>核心原则：</strong>每次只新增一个模块，然后立即进行全系统回归测试。测试通过再加下一个，测试失败则问题一定出在刚加入的模块上。</p>
-            </div>
+    <h2 id="storage">二、数据存储：完整、可恢复、可追溯</h2>
 
-            <h3>💡第一步：选择集成主干</h3>
-            <p>先确定一个"集成主干"——通常是核心调度模块或数据流中枢。它先独立完成收敛测试，然后作为整合的起点。</p>
+    <div class="rule-card">
+        <span class="rule-ref">E13-03</span>
+        <h4>系统要能归档数据和元数据</h4>
+        <p>每季度结束后，LIMS 自动把该季度所有检测数据（原始数据、报告、图谱）及元数据（检测方法版本、仪器参数、操作人员信息）归档到专用存储节点。按"检测项目-时间-样品类型"分类索引，支持快速检索历史数据。这和你强调的"数据完整性"是一个逻辑——不是"存了就行"，是"随时能找到、能追溯"。</p>
+    </div>
 
-            <h3>💡第二步：每次只添加一个模块</h3>
-            <p>按照依赖关系顺序：先基础模块（通信、存储），再业务模块（采集、报警），最后输出模块（报告、认证）。</p>
+    <div class="rule-card">
+        <span class="rule-ref">E13-04</span>
+        <h4>系统要能恢复归档数据</h4>
+        <p>备份、归档、恢复，三位一体。归档不是存进冷库就不管了，恢复能力才是归档的价值。</p>
+    </div>
 
-            <h3>💡第三步：全系统回归测试</h3>
-            <p>添加新模块后，运行整个系统的测试套件。因为新模块可能触发已有模块从未暴露的边界条件。全系统回归不需要每次都从头编写——先建立回归基线，每次添加后重跑，对比即可。</p>
+    <div class="rule-card">
+        <span class="rule-ref">E13-05</span>
+        <h4>数据存储系统必须可靠、有效、有技术支持</h4>
+        <p>用企业级数据库，搭配分布式存储架构。支持 7×24 小时运行，有成熟技术团队响应故障。实验室每天数千份样品数据的高频读写，事务一致性必须保证，不能丢数据、不能卡顿。</p>
+    </div>
 
-            <h3>💡第四步：通过后再加下一个</h3>
-            <p>测试通过，记录整合决策，继续添加。测试失败，在局部范围内修复重测，直到通过。绝不带着已知问题继续整合。</p>
+    <div class="rule-card">
+        <span class="rule-ref">E13-08</span>
+        <h4>数据结构要能灵活修改，不需要改底层代码</h4>
+        <p>实验室新增检测项目（比如微生物残留检测），需要新增字段：微生物种类、残留限值、培养时间。管理员通过配置模块直接加字段，关联到检测模板，同步到报表和查询功能。这就是"架构设计"的价值——预留扩展性，不写死。</p>
+    </div>
 
-            <div class="card tip">
-                <p style="margin-top:0;"><strong>整合测试同样可以运用"AI自己看日志、自己改代码"的方法。</strong>将日志喂给AI，它自行分析、定位、修复、重测。</p>
-            </div>
-        </section>
+    <div class="rule-card">
+        <span class="rule-ref">E13-09</span>
+        <h4>数据存储要支持多环境，能从开发迁移到测试再到生产</h4>
+        <p>LIMS 部署开发、测试、生产三个环境。开发环境完成新配置后，通过环境迁移工具一键同步到测试环境，验证无误后再到生产。迁移过程保持数据完整性，避免重复配置。这和我说的"版本基线"和"回滚路径"完全一致。</p>
+    </div>
 
-        <section>
-            <h2 id="closed-loop">🖇拆解与整合：完整闭环</h2>
-            <p><strong>拆解阶段：</strong>用决策账本记录拆解理由和接口定义，用工程模板搭建模块骨架，用闭环收敛让每个模块自我证明。</p>
-            <p><strong>整合阶段：</strong>每次只加一个模块，每次加后全系统回归。通过后记录决策，失败后在局部修复重测。</p>
-            <p><strong>长期运行阶段：</strong>用知识生命体征监控模块健康，用共生演化追踪接口漂移。模块升级时只需重新验证该模块本身及接口一致性，无需从头回归整个系统。</p>
+    <div class="rule-card">
+        <span class="rule-ref">E13-10</span>
+        <h4>数据存储要能微调性能和数据安全</h4>
+        <p>检测高峰期（批次样品集中送检），通过性能调优临时提升查询缓存优先级、调整数据库连接池大小，保证多用户同时录入数据、查询报告不卡顿。同时开启字段级权限控制，敏感数据（客户隐私、核心配方）仅授权人员可查看。</p>
+    </div>
 
-            <div class="insight-box">
-                <strong>拆解的价值在集成时被验证，整合的风险在拆解时被控制。</strong>两者互为前提、互相验证，构成完整的工程闭环。
-            </div>
-        </section>
+    <div class="rule-card">
+        <span class="rule-ref">E13-11</span>
+        <h4>备份和恢复要遵循行业最佳实践</h4>
+        <p>"每日增量备份加每周全量备份"，异地加密存储。生产环境数据库崩溃后，通过最近一次全量备份加增量备份，短时间内完成恢复，恢复后数据与崩溃前一致，不丢检测记录。这是合规底线。</p>
+    </div>
 
-        <section>
-            <h2 id="mapping">📍与整套体系的完整映射</h2>
-            <ul>
-                <li><strong>PCB分析器：</strong>从电路图识别物理模块边界</li>
-                <li><strong>工程模板：</strong>接口头文件、模块结构标准化</li>
-                <li><strong>Skills：</strong>驱动生成、测试生成等高频操作</li>
-                <li><strong>闭环收敛：</strong>功能代码与测试脚本双轨收敛</li>
-                <li><strong>决策账本：</strong>记录拆解理由、接口定义、整合时间</li>
-                <li><strong>知识生命体征：</strong>追踪整体性能和模块间交互异常</li>
-                <li><strong>共生演化：</strong>模块升级时自动检测接口漂移</li>
-            </ul>
-        </section>
+    <div class="rule-card">
+        <span class="rule-ref">E13-16</span>
+        <h4>数据存储要可复制，硬件故障时保证可恢复</h4>
+        <p>主从复制架构。主服务器存实时数据，从服务器同步复制。主服务器硬盘故障时，自动切换到从服务器，业务不中断。故障修复后，从服务器数据反向同步回主服务器，保证一致性。</p>
+    </div>
 
-        <section>
-            <h2 id="summary">🪙拆解与整合：一枚硬币的两面</h2>
-            <p>拆解教会我们如何定义边界。整合教会我们如何跨越边界。拆解让我们从复杂中找到简单。整合让我们从简单中重建复杂。拆解的价值在集成时被验证，整合的风险在拆解时被控制。</p>
-            <p>能拆解复杂系统，说明理解了系统的结构。能渐进式整合复杂系统，说明掌握了工程的方法。两者兼备，才是完整的工程能力。</p>
+    <h2 id="architecture">三、架构设计：模块化、高并发、可扩展</h2>
 
-            <div class="card tip">
-                <p style="margin-top:0;"><strong>而这套体系存在的全部意义，就是让AI在拆解和整合的每一个环节中，都能在法则内独立工作</strong>——自我验证、自我修复、自我收敛。你定义法则，AI在法则内执行。无论面对多么复杂的系统，你都不再是一个人扛。</p>
-            </div>
-        </section>
+    <div class="rule-card">
+        <span class="rule-ref">E13-12</span>
+        <h4>系统架构要分成逻辑模块，模块间用标准接口通信</h4>
+        <p>LIMS 按样品管理、环境监测、稳定性管理、仪器管理、试剂管理拆成独立模块。需要替换第三方报表工具时，只改报表输出模块的接口配置，不动核心业务模块。这就是够用原则——模块解耦，降低改造风险。</p>
+    </div>
 
-        <div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
-            <strong>系列导航：</strong>
-            <a href="in.html">五层进化</a> ·
-            <a href="true.html">实践项目模板</a> ·
-            <a href="test.html">自主修复闭环</a> ·
-            <a href="fwd.html">从收敛到进化</a> ·
-            <a href="exc.html">知识的生命体征</a> ·
-            <a href="pcb.html">电路图分析器</a> ·
-            <a href="pt.html">最后的拼图：Skills</a> ·
-            <a href="history.html">历史的包袱</a> ·
-            <a href="ocd.html">被忽视的工具链组合</a> ·
-            <a href="devs.html">固件铭牌与设备画像</a> ·
-            <a href="gmp.html">合规验证与AI编程</a> ·
-            <a href="hg.html">回归现实：单Agent实践框架</a> ·
-            <a href="12.html">AI编程的利刃</a> ·
-            <a href="py.html">批量修改，先问该不该用脚本</a> ·
-            <a href="13.html">拆解与整合</a> ·
-            <a href="lj.html">君子不器与灵活调度</a> ·
-            <a href="fb.html">别把AI用成付费上班</a> ·
-            <a href="svg.html">别让AI画图，让它写图</a> ·
-            <a href="14.html">AI谄媚与专利</a> ·
-            <a href="gd.html">始于工程，服务生活</a>
-        </div>
+    <div class="rule-card">
+        <span class="rule-ref">E13-13</span>
+        <h4>系统要高效利用硬件资源，支持高并发</h4>
+        <p>大型项目时，可能同时有几十个用户录入样品信息、多台仪器实时上传数据、多个用户在查询报告。通过负载均衡分配硬件资源，优化数据库查询语句，保证高峰时段系统响应不超时、不卡顿。</p>
+    </div>
 
-<div class="series-nav">
-    <a href="py.html" aria-label="上一篇：批量修改，先问该不该用脚本">← 批量修改，先问该不该用脚本</a>
-    <a href="lj.html" aria-label="下一篇：君子不器与灵活调度 ">君子不器与灵活调度  →</a>
-</div>
-<div style="text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);color:#8896a4;font-size:13px;">
-            <a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a>
-        </div>
+    <h2 id="homology">四、这 18 条法则，和我那套体系完全同源</h2>
 
-        </div>
+    <div class="insight-box" style="font-style:normal;">
+        <p style="margin:0;"><strong>事件驱动，不是轮询。</strong>状态变了主动推送，不是等着别人来查。这是"负日志"在系统集成维度的投影。</p>
+    </div>
+    <div class="insight-box" style="font-style:normal;border-left-color:#3b82f6;background:#eef5ff;">
+        <p style="margin:0;"><strong>接口标准化，分层解耦。</strong>模块间通过标准接口通信，替换组件时不伤核心业务。这是"够用原则"和"架构设计"在软件工程里的落地。</p>
+    </div>
+    <div class="insight-box" style="font-style:normal;border-left-color:#27ae60;background:#f0fff4;">
+        <p style="margin:0;"><strong>数据完整性，全程留痕。</strong>归档要分类索引、备份要异地加密、恢复要不丢数据。这是"合规验证"的核心——数据不只是"存下来"，是"能追溯、能恢复、能证明"。</p>
+    </div>
+    <div class="insight-box" style="font-style:normal;border-left-color:#8b5cf6;background:#f5f0ff;">
+        <p style="margin:0;"><strong>性能调优，适应高峰。</strong>高峰期临时提升缓存、调整连接池，平时回归正常。这是"灵活调度"——不是一直开着最高配置，是按需调整。</p>
+    </div>
+    <div class="insight-box" style="font-style:normal;border-left-color:#f59e0b;background:#fffbeb;">
+        <p style="margin:0;"><strong>多环境迁移，版本基线。</strong>开发环境配置一键同步到测试再到生产，全程可追溯、可回滚。这和 Git 的工作逻辑完全一致——每次变更都有记录，每一步都能回退。</p>
+    </div>
+
+    <div class="card purple-left">
+        <p>这些法则，不只适用于实验室 LIMS 系统。任何需要对接多个外部系统、需要满足合规要求、需要在高并发下稳定运行的软件项目，底层架构都逃不开这几条。我写这篇文章，不只是为了理解 ASTM 标准，更是为了验证我那套"法则思维"在另一个领域的普适性。</p>
+        <p style="margin-top:10px;"><strong>事实证明，它又成立了一次。</strong></p>
+    </div>
+
+    <div class="bottom-series-links">
+        <strong>系列导航：</strong>
+        <a href="in.html">五层进化</a> ·
+        <a href="true.html">实践项目模板</a> ·
+        <a href="test.html">自主修复闭环</a> ·
+        <a href="fwd.html">从收敛到进化</a> ·
+        <a href="exc.html">知识的生命体征</a> ·
+        <a href="pcb.html">电路图分析器</a> ·
+        <a href="pt.html">最后的拼图：Skills</a> ·
+        <a href="history.html">历史的包袱</a> ·
+        <a href="ocd.html">被忽视的工具链组合</a> ·
+        <a href="devs.html">固件铭牌与设备画像</a> ·
+        <a href="gmp.html">合规验证与AI编程</a> ·
+        <a href="gxp.html">GxP法规工程化</a> ·
+        <a href="lims.html">LIMS系统集成法则</a> ·
+        <a href="14.html">AI谄媚与专利</a> ·
+        <a href="hg.html">回归现实</a> ·
+        <a href="12.html">AI编程的利刃</a> ·
+        <a href="gd.html">始于工程</a>
+    </div>
+
+    <div class="series-nav">
+        <a href="gxp.html" aria-label="上一篇：GxP法规工程化">← GxP法规工程化</a>
+        <a href="14.html" aria-label="下一篇：AI谄媚与专利">AI谄媚与专利 →</a>
+    </div>
+
+    <div class="footer-author-wrap">
+        <a href="about.html" class="footer-author-link">关于作者</a>
     </div>
 </div>
+</div>
+</div>
 
-<!-- 页脚署名 -->
 <div class="inland-security-footer">
     <div class="tooltip-container">
         <div class="trigger-content">
-            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
-                <span>itg · -lvgl-</span>
-            </a>
+            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link"><span>itg · -lvgl-</span></a>
         </div>
         <div class="tooltip-content">
             <section class="info-section"><span>itg</span></section>
@@ -883,5 +746,3 @@
 </div>
 </body>
 </html>
-
-
