@@ -37,6 +37,7 @@ TECH_ITEMS: list[tuple[str, str, str, str]] = [
     ("gmp.html", "📜", "合规验证与AI编程", "专业延伸 · 从\"事后补文档\"到\"事前建法则\""),
     ("gxp.html", "📋", "GxP法规工程化", "专业延伸 · 把750页法规翻译成可运行的系统"),
     ("lims.html", "🧪", "LIMS系统集成法则", "专业延伸 · ASTM E1578标准落地与18条集成法则"),
+    ("ylqx.html", "🏥", "医疗器械注册通道", "专业延伸 · NMPA注册通道拆解与工程化路径选择"),
     ("hg.html", "🎯", "回归现实：单Agent实践框架", "综合实战 · 将完整法则体系落地为可立即上手的工程实践"),
     ("12.html", "⚔️", "AI编程的利刃", "工程利器 · 同步生成测试脚本让AI自我调试"),
     ("py.html", "🐍", "批量修改，先问该不该用脚本", "工程利器 · 先判断模式，再把批量改造交给脚本执行"),
@@ -52,9 +53,9 @@ TECH_GROUPS = [
     ("总纲", [TECH_ITEMS[0]]),
     ("核心主线", TECH_ITEMS[1:5]),
     ("根系能力", TECH_ITEMS[5:7]),
-    ("专业延伸", [TECH_ITEMS[7], TECH_ITEMS[8], TECH_ITEMS[9], TECH_ITEMS[10], TECH_ITEMS[11], TECH_ITEMS[12], TECH_ITEMS[18]]),
-    ("实战与心法", TECH_ITEMS[13:18]),
-    ("内核反照", [TECH_ITEMS[19]]),
+    ("专业延伸", [TECH_ITEMS[7], TECH_ITEMS[8], TECH_ITEMS[9], TECH_ITEMS[10], TECH_ITEMS[11], TECH_ITEMS[12], TECH_ITEMS[13], TECH_ITEMS[19]]),
+    ("实战与心法", TECH_ITEMS[14:19]),
+    ("内核反照", [TECH_ITEMS[20]]),
 ]
 
 # ═══════════════════════════════════════════════════════════════════

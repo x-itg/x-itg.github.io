@@ -3,238 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>别把AI用成付费上班 | 够用原则与分层路由</title>
-<meta name="description" content="旗舰模型确实更强，但你日常百分之八十的活用不到旗舰。够用原则、分层路由、精准交付——把AI账单用在刀刃上，省钱只是结果，清醒才是内核。">
-<meta name="keywords" content="AI成本,分层路由,够用原则,模型选择,国产模型,性价比,付费上班">
+<title>医疗器械注册通道：用工程思维拆解三条路径 | 嵌入式AI工程化系列</title>
+<meta name="description" content="NMPA 医疗器械注册的核心通道拆解——常规、创新、优先三条路径的适用场景、门槛与代价，用工程架构思维选对注册路径。">
+<meta name="keywords" content="医疗器械注册,NMPA,创新通道,优先通道,医疗合规,注册策略,产品分类">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="别把AI用成付费上班 | 够用原则与分层路由">
-<meta property="og:description" content="旗舰模型在系统性软件工程任务上确实更强，但你日常百分之八十的活，根本用不到旗舰。分层路由，把工具用在刀刃上。">
+<meta property="og:title" content="医疗器械注册通道：用工程思维拆解三条路径 | 嵌入式AI工程化系列">
+<meta property="og:description" content="NMPA 医疗器械注册的核心通道拆解——常规、创新、优先三条路径的适用场景、门槛与代价。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://x-itg.github.io/fb.html">
-<link rel="canonical" href="https://x-itg.github.io/fb.html">
+<meta property="og:url" content="https://x-itg.github.io/ylqx.html">
+<link rel="canonical" href="https://x-itg.github.io/ylqx.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-	:root {
-		--bg: #f8f9fa;
-		--card-bg: #ffffff;
-		--text: #2c3e50;
-		--text-secondary: #5a6c7d;
-		--accent: #c0392b;
-		--accent-soft: #e74c3c;
-		--border: #e0e4e8;
-		--code-bg: #1e293b;
-		--code-text: #e2e8f0;
-		--highlight: #fef9e7;
-		--link: #2980b9;
-		--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-		--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-		--radius: 6px;
-		--radius-lg: 10px;
-	}
-
-	* { margin: 0; padding: 0; box-sizing: border-box; }
-
-	body {
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-		background: var(--bg);
-		color: var(--text);
-		line-height: 1.8;
-		-webkit-font-smoothing: antialiased;
-	}
-
-	.container {
-		max-width: 780px;
-		margin: 0 auto;
-		padding: 40px 24px 80px;
-	}
-
-	.top-nav {
-		display: flex;
-		align-items: center;
-		gap: 12px;
-		margin-bottom: 48px;
-		padding-bottom: 20px;
-		border-bottom: 1px solid var(--border);
-		font-size: 14px;
-		color: var(--text-secondary);
-	}
-
-	.top-nav a { color: var(--link); text-decoration: none; transition: color 0.2s; }
-	.top-nav a:hover { color: var(--accent); }
-	.top-nav .sep { color: #c0c7cf; }
-
-	.article-header { margin-bottom: 48px; }
-	.article-header .series-tag {
-		display: inline-block; background: var(--accent); color: #fff;
-		font-size: 12px; font-weight: 600; padding: 3px 10px;
-		border-radius: 3px; letter-spacing: 0.5px; margin-bottom: 16px;
-	}
-	.article-header h1 {
-		font-size: 32px; font-weight: 700; line-height: 1.35;
-		margin-bottom: 12px; letter-spacing: -0.3px;
-	}
-	.article-header .subtitle {
-		font-size: 17px; color: var(--text-secondary); font-weight: 400; margin-bottom: 20px;
-	}
-	.article-header .meta { font-size: 13px; color: #8896a4; }
-
-	h2 {
-		font-size: 24px; font-weight: 700; margin: 56px 0 16px;
-		padding-top: 24px; border-top: 2px solid var(--border);
-		letter-spacing: -0.2px;
-	}
-	h3 {
-		font-size: 19px; font-weight: 600; margin: 36px 0 12px; color: #1a1a2e;
-	}
-	p { margin: 14px 0; }
-	strong { color: #1a1a2e; }
-	ul, ol { margin: 14px 0; padding-left: 24px; }
-	li { margin: 6px 0; }
-
-	.card {
-		background: var(--card-bg);
-		border: 1px solid var(--border);
-		border-radius: var(--radius-lg);
-		padding: 28px 30px;
-		margin: 28px 0;
-		box-shadow: var(--shadow-sm);
-		text-align: left;
-	}
-
-	.card.accent-left { border-left: 4px solid var(--accent); }
-	.card.tip { background: #f0f7ff; border-color: #b3d4fc; }
-	.card.philosophy { 
-		border-left: 4px solid #8e44ad; 
-		background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%); 
-	}
-	.card.engineer { 
-		border-left: 4px solid #2980b9; 
-		background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%); 
-	}
-	.card.action { 
-		border-left: 4px solid #27ae60; 
-		background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%); 
-	}
-	.card p {
-		text-align: left;
-		margin: 0;
-	}
-	.card p:first-child {
-		margin-top: 0;
-	}
-	.card p:last-child {
-		margin-bottom: 0;
-	}
-	.card strong {
-		display: block;
-		color: var(--text);
-		font-weight: 600;
-		margin-bottom: 8px;
-	}
-
-	.insight-box {
-		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-		border: 1px solid #f0d78c;
-		border-left: 4px solid #f39c12;
-		border-radius: var(--radius);
-		padding: 20px 24px;
-		margin: 24px 0;
-		font-style: italic;
-		color: #6b4c1e;
-		text-align: left;
-	}
-
-	.insight-box strong { color: #4a340f; font-weight: 600; }
-	.insight-box.decision { 
-		background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
-		border-color: #a8d4e0; 
-		border-left-color: #3498db;
-		color: #1a5276; 
-	}
-	.insight-box.decision strong { color: #0e3a57; }
-	.insight-box.warm { 
-		background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-		border-color: #f0d78c; 
-		border-left-color: #f39c12;
-		color: #6b4c1e; 
-	}
-	.insight-box.warm strong { color: #4a340f; }
-	.insight-box.cool { 
-		background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
-		border-color: #a9cce3; 
-		border-left-color: #2980b9;
-		color: #1f4e79; 
-	}
-	.insight-box.cool strong { color: #154360; }
-
-	.decision-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 18px;
-		margin: 28px 0;
-	}
-
-	.decision-card {
-		background: var(--card-bg);
-		border: 1px solid var(--border);
-		border-radius: var(--radius-lg);
-		padding: 22px;
-		box-shadow: var(--shadow-sm);
-		transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-	}
-
-	.decision-card:hover {
-		transform: translateY(-4px);
-		box-shadow: var(--shadow-md);
-		border-color: var(--accent-soft);
-	}
-
-	.decision-card h3 {
-		margin: 0 0 10px;
-		font-size: 18px;
-	}
-
-	code {
-		font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", "Monaco", monospace;
-		font-size: 13px;
-	}
-
-	p code, li code {
-		background: #eef1f5;
-		padding: 2px 6px;
-		border-radius: 3px;
-		color: #c0392b;
-		font-size: 12px;
-	}
-
-	pre {
-		background: var(--code-bg);
-		color: var(--code-text);
-		border-radius: var(--radius);
-		padding: 20px 24px;
-		margin: 24px 0;
-		overflow-x: auto;
-		line-height: 1.6;
-	}
-	pre code {
-		background: none;
-		color: inherit;
-		padding: 0;
-		font-size: 13px;
-	}
-
-	@media (max-width: 640px) {
-		.container { padding: 20px 16px 60px; }
-		.article-header h1 { font-size: 26px; }
-		h2 { font-size: 21px; }
-		.decision-grid { grid-template-columns: 1fr; }
-	}
-
-.main-content { flex: 1; min-width: 0; }
-
-	
-</style>
 <link rel="stylesheet" href="assets/site-sidebar.css">
+<style>
+    :root { --bg:#f8f9fa; --card-bg:#ffffff; --text:#2c3e50; --text-secondary:#5a6c7d; --accent:#c0392b; --border:#e0e4e8; --code-bg:#1e293b; --code-text:#e2e8f0; --highlight:#fef9e7; --shadow-sm:0 1px 2px rgba(0,0,0,0.05); --shadow-md:0 4px 12px rgba(0,0,0,0.08); --radius:6px; --radius-lg:10px; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.8; -webkit-font-smoothing:antialiased; }
+    .layout { display:flex; max-width:1200px; margin:0 auto; min-height:100vh; }
+    .container { max-width:780px; margin:0 auto; padding:40px 24px 80px; }
+    .main-content { flex:1; min-width:0; }
+    .article-header { margin-bottom:48px; }
+    .article-header .series-tag { display:inline-block; background:var(--accent); color:#fff; font-size:12px; font-weight:600; padding:3px 10px; border-radius:3px; letter-spacing:0.5px; margin-bottom:16px; }
+    .article-header h1 { font-size:32px; font-weight:700; line-height:1.35; margin-bottom:12px; letter-spacing:-0.3px; }
+    .article-header .subtitle { font-size:17px; color:var(--text-secondary); font-weight:400; margin-bottom:20px; }
+    .article-header .meta { font-size:13px; color:#8896a4; }
+    h2 { font-size:24px; font-weight:700; margin:56px 0 16px; padding-top:24px; border-top:2px solid var(--border); letter-spacing:-0.2px; }
+    h3 { font-size:19px; font-weight:600; margin:36px 0 12px; color:#1a1a2e; }
+    p { margin:14px 0; text-align:justify; }
+    strong { color:#1a1a2e; }
+    blockquote { border-left:3px solid var(--accent); padding:12px 20px; margin:20px 0; background:#fef9e7; border-radius:0 6px 6px 0; font-size:15px; color:#6b4c1e; }
+    ul, ol { margin:14px 0; padding-left:24px; }
+    li { margin:6px 0; }
+    .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px 26px; margin:24px 0; box-shadow:var(--shadow-sm); }
+    .card.accent-left { border-left:4px solid var(--accent); }
+    .card.blue-left { border-left:4px solid #3b82f6; }
+    .card.green-left { border-left:4px solid #27ae60; }
+    .card.purple-left { border-left:4px solid #8b5cf6; }
+    .card p { text-align:left; margin:0; } .card p + p { margin-top:10px; }
+    .card strong { display:block; color:var(--text); font-weight:600; }
+    .card ul { margin:8px 0 0 0; padding-left:18px; }
+    .insight-box { background:var(--highlight); border:1px solid #f0d78c; border-radius:var(--radius); padding:20px 24px; margin:24px 0; font-style:italic; color:#6b4c1e; }
+    .insight-box strong { color:#4a340f; display:inline; }
+    .insight-box.tech { background:#eef5ff; border-color:#b3d4fc; color:#1e3a5f; font-style:normal; }
+    .insight-box.tech strong { color:#14356b; }
+    code { font-family:"JetBrains Mono","Fira Code","Cascadia Code","SF Mono","Consolas",monospace; font-size:13px; }
+    p code, li code { background:#eef1f5; padding:2px 6px; border-radius:3px; color:#c0392b; font-size:12px; }
+    table { width:100%; border-collapse:collapse; margin:24px 0; font-size:14px; }
+    table th, table td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--border); }
+    table th { font-weight:700; background:#f5f7fa; color:#4a5568; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+    .path-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:24px 0; }
+    .path-card { padding:18px; border-radius:10px; border:1px solid var(--border); background:#f8fafc; }
+    .path-card h4 { font-size:15px; font-weight:700; margin-bottom:6px; color:#1e3a8a; }
+    .path-card .path-tag { display:inline-block; font-size:11px; font-weight:600; padding:2px 8px; border-radius:999px; margin-bottom:8px; }
+    .path-card .tag-green { background:#dcfce7; color:#166534; }
+    .path-card .tag-blue { background:#dbeafe; color:#1e40af; }
+    .path-card .tag-red { background:#fef2f2; color:#991b1b; }
+    .path-card .tag-purple { background:#f5f0ff; color:#5b21b6; }
+    .path-card p { font-size:13px; color:#5a6c7d; margin:0; }
+    .bottom-series-links { margin-top:48px; padding-top:24px; border-top:1px solid var(--border); font-size:14px; line-height:1.9; color:var(--text-secondary); }
+    .series-nav { display:flex; justify-content:space-between; margin:40px 0; padding-top:20px; border-top:1px solid var(--border); font-size:15px; }
+    .series-nav a { color:var(--accent); text-decoration:none; font-weight:500; }
+    .series-nav a:hover { text-decoration:underline; }
+    .footer-author-wrap { text-align:center; margin-top:24px; padding-top:24px; border-top:1px solid var(--border); color:#8896a4; font-size:13px; }
+    .footer-author-link { color:var(--accent); text-decoration:none; }
+    @media (max-width:780px) { .container { padding:20px 16px 60px; } .article-header h1 { font-size:26px; } h2 { font-size:21px; } }
+</style>
 </head>
 <body class="site-theme-tech">
 <div class="layout">
@@ -367,14 +199,14 @@
                             <span class="site-sidebar__link-meta">专业延伸 · ASTM E1578标准落地与18条集成法则</span>
                         </span>
                     </a></li>
-                    <li><a href="ylqx.html" class="site-sidebar__link site-sidebar__article-link">
+                    <li><a href="ylqx.html" class="site-sidebar__link site-sidebar__article-link is-active">
                         <span class="site-sidebar__article-icon" aria-hidden="true">🏥</span>
                         <span>
                             <span class="site-sidebar__link-title">医疗器械注册通道</span>
                             <span class="site-sidebar__link-meta">专业延伸 · NMPA注册通道拆解与工程化路径选择</span>
                         </span>
                     </a></li>
-                    <li><a href="fb.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                    <li><a href="fb.html" class="site-sidebar__link site-sidebar__article-link">
                         <span class="site-sidebar__article-icon" aria-hidden="true">💰</span>
                         <span>
                             <span class="site-sidebar__link-title">别把AI用成付费上班</span>
@@ -715,193 +547,121 @@
     </details>
     <a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
 </aside>
-	<aside class="sidebar-toc">
-		<h3>本章导览</h3>
-		<nav>
-			<ul>
-				<li><a href="#part1">📌 两千美元的账单</a></li>
-				<li><a href="#part2">📐 够用原则</a></li>
-				<li><a href="#part3">📌 分层路由</a></li>
-				<li><a href="#part4">🤖 真正的护城河</a></li>
-				<li><a href="#part5">🤖 四步找性价比模型</a></li>
-				<li><a href="#part6">💠 结语</a></li>
-			</ul>
-		</nav>
-	</aside>
+<div class="main-content">
+<div class="container">
+    <header class="article-header">
+        <span class="series-tag">专业延伸 · 医疗器械合规</span>
+        <h1>医疗器械注册通道：用工程思维拆解三条路径</h1>
+        <p class="subtitle">NMPA 注册通道的核心逻辑拆解——常规、创新、优先，每一条路怎么走、门槛在哪、代价是什么</p>
+        <p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
+    </header>
 
-	<div class="main-content">
-	<div class="container">
-
-<nav class="top-nav">
-    <a href="index.html">首页</a>
-    <span class="sep">/</span>
-    <a href="lj.html">君子不器与灵活调度</a>
-    <span class="sep">/</span>
-    <span>别把AI用成付费上班</span>
-</nav>
-
-<header class="article-header">
-    <span class="series-tag">实战与心法</span>
-    <h1>别把AI用成付费上班</h1>
-    <p class="subtitle">够用原则、分层路由、精准交付——把AI账单用在刀刃上，省钱只是结果，清醒才是内核</p>
-    <div class="meta">
-        <span>嵌入式AI工程化系列</span> · <span>工程心法</span>
-    </div>
-</header>
-
-<article>
-
-    <div class="card philosophy">
-        <p style="margin-top:0;"><strong>核心结论</strong></p>
-        <p>旗舰模型在系统性软件工程任务上，确实更强——这是事实，不用嘴硬。但你日常百分之八十的活，根本用不到旗舰。同样的活，国产模型一样能干完，价格只要十分之一甚至更低。前提是你要会用。不会用，给你最贵的模型也是浪费；会用，DeepSeek、Kimi、GLM、Qwen一样能把你从加班里捞出来。</p>
+    <div class="card accent-left">
+        <p>我做医疗器械的合规和注册，有一个很深的体会：<strong>选注册通道这件事，和工程里选技术方案是一样的。</strong>不同的产品，对应不同的风险等级、不同的临床需求、不同的技术成熟度，需要匹配不同的注册路径。</p>
+        <p style="margin-top:10px;">很多人把注册看成"提交材料等审批"，但真正专业的做法是：<strong>在立项阶段就把注册路径作为产品需求的一部分，和硬件选型、软件架构一起纳入设计输入。</strong></p>
     </div>
 
-    <h2 id="part1">一、两千美元的账单，买的是什么</h2>
+    <h2 id="three-paths">一、三条核心通道：常规、创新、优先</h2>
+    <p>中国医疗器械注册的核心逻辑，是按风险等级分级管理。一类风险最低，备案即可；二类中等风险，省级审批；三类高风险，国家局审批。在这三级基础框架上，国家又开了两条"加速通道"——创新通道和优先通道。加上最基础的一类备案，一共五条路径。</p>
 
-    <p>我看到一个数据：有工程师月花近两千美元调用AI的API。不是搞AI创业，就是日常项目开发、改Bug、整理文档。网友调侃说，这不叫用AI，这叫<strong>付费上班</strong>。两千美元是什么概念？按现在的汇率，差不多一万四千块人民币。一个月的AI开销，顶得上很多人的月薪。</p>
-
-    <p>但如果你拉出他的对话记录看，会发现百分之八十以上的请求——改CRUD、写单测、改Lint、整理文档、写周报——中端模型甚至轻量模型就能完美处理。他不是被AI替代了，他是被自己的<strong>"旗舰焦虑"</strong>替代了。</p>
-
-    <div class="insight-box warm">
-        月花两千美元的人，大多数没多写一行真正复杂的业务代码，他们只是把"用最强的模型"当成心理安慰。这种安慰，你的公司不会买单，你的钱包也不会买单。
-    </div>
-
-    <h2 id="part2">二、够用原则：不是最强的，是最合适的</h2>
-
-    <p>我在技术文章里反复写过一个词：<strong>够用原则</strong>。问题解决了，就不要再继续改。版本能跑了，就不要再追求完美。AI的输出已经能满足需求了，就不要再反复调参数。这条原则放在选模型上，同样适用。</p>
-
-    <p>很多人心里有个偏见：国产模型不行。这个偏见在二零二四年可能还成立，到了二零二六年，在大多数日常任务上已经不成立了。我不替国产护短——复杂架构设计、跨文件重构，头部旗舰确实还领先。但你想想，你工作里这类任务占多少比例？我自己复盘过，大概只占百分之十五到百分之二十。剩下百分之八十是改Bug、写单测、写文档、改Lint、简单接口对接。这些任务，旗舰和中端模型你盲测大概率分不出来。</p>
-
-    <div class="card tip">
-        <p style="margin-top:0;"><strong>够用原则回顾</strong></p>
-        <p>此前在<a href="lj.html">《君子不器与灵活调度》</a>和<a href="py.html">《批量修改，先问该不该用脚本》</a>中都探讨过核心思路：<strong>优先做判断，再选择工具</strong>，不为追逐新潮而滥用工具。选模型和选工具是同一个逻辑——不是选最强的，是选最对的。</p>
-    </div>
-
-    <h2 id="part3">三、分层路由：不是选最强的，是选最对的</h2>
-
-    <p>我在工程里一直用一套逻辑：<strong>分层</strong>。不是所有任务都值得调用最强的模型，就像不是所有代码都值得用汇编去写。把任务按复杂度分档，然后匹配对应档位的模型。</p>
-
-    <p>日常任务占八成，用国产中端，响应往往更快，成本只有海外的十分之一。中等复杂度任务占一成半，用海外中端或国产长上下文。真正啃硬骨头的时候，只占半成，才请出海外旗舰。</p>
-
-    <p>如果你把这个逻辑写成一段自动化路由的伪代码，它大概长这样：</p>
-
-<pre><code>def route_task(task):
-    if task.complexity == "simple":
-        return "国产中端"
-    elif task.complexity == "medium":
-        return "海外中端 or 国产长上下文"
-    elif task.complexity == "hard":
-        return "海外旗舰"</code></pre>
-
-    <p>按这个分层走，普通工程师的API账单能从月花上千美元压到几十块到几百块人民币。输出量不掉，响应更快，有时候还省时间。省下来的不是抠门，是<strong>判断力</strong>。是你知道什么时候该用重武器，什么时候一把螺丝刀就够了。</p>
-
-    <div class="decision-grid">
-        <div class="decision-card">
-            <h3>🟢 日常任务 · 80%</h3>
-            <p>改Bug、写单测、改Lint、整理文档、写周报——国产中端模型即可完美处理</p>
+    <div class="path-grid">
+        <div class="path-card">
+            <span class="path-tag tag-green">一类备案</span>
+            <h4>风险极低</h4>
+            <p>医用绷带、牙科模型等。不需临床试验、不需技术审评，市级备案即可。周期极短、费用极低。相当于工程里的"默认配置"。</p>
         </div>
-        <div class="decision-card">
-            <h3>🟡 中等任务 · 15%</h3>
-            <p>跨模块调试、长上下文理解、SQL优化——海外中端或国产长上下文</p>
+        <div class="path-card">
+            <span class="path-tag tag-blue">二类常规</span>
+            <h4>中风险标准路径</h4>
+            <p>血压计、监护仪等。省级审评，周期12-18个月。临床评价通常需要，但可通过同品种比对替代——够用原则：能用现有证据解决的，不必从头做临床。</p>
         </div>
-        <div class="decision-card">
-            <h3>🔴 硬核任务 · 5%</h3>
-            <p>复杂架构设计、跨文件重构、系统性重构——海外旗舰模型</p>
+        <div class="path-card">
+            <span class="path-tag tag-red">三类常规</span>
+            <h4>最高风险</h4>
+            <p>心脏起搏器、植入式除颤器等。国家局审评，几乎100%需临床试验。周期18-36个月起步，没有捷径。</p>
         </div>
-        <div class="decision-card">
-            <h3>💡 核心逻辑</h3>
-            <p>不是选最强的，是选最对的。判断力决定性价比，而非模型参数</p>
+        <div class="path-card">
+            <span class="path-tag tag-purple">创新通道</span>
+            <h4>原创技术绿灯</h4>
+            <p>发明专利 + 国内首创 + 基本定型。CMDE专人对接、早期指导。通过率约22.8%，最终上市率约六成。</p>
+        </div>
+        <div class="path-card">
+            <span class="path-tag tag-blue">优先通道</span>
+            <h4>临床急需加速</h4>
+            <p>罕见病、恶性肿瘤、儿童专用等。审评时限压缩至90个工作日，不用发明专利，门槛比创新通道低。</p>
         </div>
     </div>
 
-    <h2 id="part4">四、真正的护城河不是模型，是你自己</h2>
+    <h2 id="innovation">二、创新通道：为真正的原创技术开绿灯</h2>
+    <p>创新通道的全称是"创新医疗器械特别审查程序"，业内也叫"绿色通道"。它的核心逻辑不是"加速审批"，而是<strong>早期介入、全程指导、优先处理</strong>。NMPA 在审评中心（CMDE）安排专人对接，从标准制定、检验方法、临床试验方案设计这些环节就开始介入指导，而不是等你所有材料都齐了才开始审。</p>
 
-    <p>我见过太多人，给最强的模型也写不好代码。他们的问题不是模型不够强，是自己不会用。一句话指令——"帮我写个登录功能"，再贵的模型也救不了你。不喂上下文——不贴现有代码、不说技术栈，模型只能瞎猜。一锅炖几十个需求，超长提示词丢进去，模型理解错一半。错了不教，只会重新生成，而不是告诉它错在哪、应该怎么改。</p>
-
-    <p>这四个毛病不改，旗舰和中端在你手里输出的差距，可能不到一成。反过来，提示词写清楚、上下文喂够、反馈做精准，国产中端一样能给你九十分的结果。旗舰的优势是容错率高——它能在你提示词写得很烂的情况下也猜对意图。但这不是你应该花十几倍价钱去买的东西。</p>
-
-    <div class="card engineer">
-        <p style="margin-top:0;"><strong>护城河三件套</strong></p>
-        <p>把那十几倍预算，用来训练自己写好提示词，用来搭建自己的上下文管理流程，用来学会怎么给AI精准的反馈。<strong>这才是你真正的护城河。</strong>模型会迭代，插件会过时，但判断力永远不会贬值。</p>
+    <div class="card blue-left">
+        <p><strong>三个硬性条件必须同时满足：</strong></p>
+        <ul style="margin:8px 0 0 0;padding-left:18px;">
+            <li><strong>核心技术必须有发明专利</strong>（不是实用新型，不是外观设计），且已授权（授权后五年内）或处于公开阶段但有检索报告证明新颖性</li>
+            <li><strong>技术必须国内首创、国际领先</strong>——在产品工作原理、作用机理或临床应用上，和现有产品有本质区别</li>
+            <li><strong>产品必须已经基本定型</strong>——已完成前期研究，有完整数据证明安全有效性基本可行</li>
+        </ul>
     </div>
 
-    <div class="insight-box decision">
-        旗舰的优势是容错率高——它能在你提示词写得很烂的情况下也猜对意图。但你应该做的不是花十几倍价钱买容错，而是把自己的提示词写到不需要容错。
+    <div class="insight-box tech">
+        <p style="margin:0;"><strong>数据佐证：</strong>2024年全年受理457项，通过104项，通过率22.8%。2014-2024十年间，共535个产品进入通道，最终获批上市仅315个。进入通道不代表最终能上市——约四成产品在后续审评中被淘汰。</p>
     </div>
 
-    <h2 id="part5">五、四步找到你自己的性价比模型</h2>
+    <p>创新通道的价值不在于"快"，而在于<strong>确定性和指导性</strong>。对于真正有原创技术的产品，早期介入能帮你避免在设计阶段就埋下审评隐患，专人对接能让你少走弯路，优先处理能压缩几个月的等待时间。但如果你只是想省时间，产品本身没有真正的技术创新，硬冲这条通道的代价就是浪费几个月准备材料，被退回后再走常规路径，反而更慢。</p>
 
-    <p>不要盲信任何博主推荐，包括我。你的工作场景只有你自己最清楚。</p>
+    <h2 id="priority">三、优先通道：为临床急需产品抢时间</h2>
+    <p>优先通道的核心逻辑和创新通道完全不同。创新通道是为"新"开绿灯，优先通道是为"急"开绿灯。</p>
 
-    <ol>
-        <li><strong>列出过去一周的AI任务清单。</strong></li>
-        <li><strong>按复杂度分三档</strong>——简单任务如改Bug、写注释、翻译；中等任务如写单测、写文档、SQL优化；复杂任务如跨文件重构、架构设计。</li>
-        <li><strong>每档挑几个任务，用不同档位的模型盲测</strong>，遮掉模型名自己打分。你会发现简单档和中等档的差距小到你不愿意相信。</li>
-        <li><strong>按你的真实任务分布算成本</strong>，你就知道钱该花在哪。这是唯一不会骗你的数据，因为是你自己跑出来的。</li>
-    </ol>
-
-    <div class="card action">
-        <p style="margin-top:0;"><strong>行动指南</strong></p>
-        <p>不要看别人用什么你就用什么。花一个小时盲测，跑出来的数据会比任何博主的推荐更诚实。你的工作场景只有你自己最清楚，你的性价比模型也只有你自己能定义。</p>
+    <div class="card green-left">
+        <p><strong>适用情形（满足任意一条即可）：</strong></p>
+        <ul style="margin:8px 0 0 0;padding-left:18px;">
+            <li>产品用于诊断或治疗罕见病、恶性肿瘤、老年病、儿童专用疾病，且有明显临床优势</li>
+            <li>产品属于临床急需，国内尚无同类产品上市</li>
+            <li>产品被列入国家科技重大专项或国家重点研发计划</li>
+        </ul>
     </div>
 
-    <h2 id="part6">六、结语：清醒才是内核</h2>
+    <p>这条通道的核心优势是<strong>时限压缩</strong>。常规二类技术审评120-180个工作日，三类180-240个工作日，优先通道直接压缩到90个工作日。行政审批也从常规的20-30个工作日压缩到10个工作日。和创新通道相比，优先通道对专利和技术领先性没有硬性要求，更关注疾病严重程度、市场空缺和临床价值。</p>
 
-    <p>你最该追的不是全球最强那块奖牌，而是对你来说最划算那张账单。旗舰不是不能用，是不能无脑只用旗舰。国产不是替代品，是你百分之八十工作场景里的主力。那些月花上千美元的人，大多数没多写一行真正复杂的业务代码，他们只是把"用最强的模型"当成心理安慰。</p>
+    <h2 id="strategy">四、选路径就是做架构</h2>
+    <p>回到最开始说的：选注册通道这件事，和工程选技术方案是一样的。不能看到一个"创新通道"就去冲，也不能因为怕麻烦就全部走常规。选错了路径，要么是浪费时间和成本冲不进去，要么是明明有条件加速却白白多等了半年。</p>
 
-    <p>真正能让你不被AI取代的，从来不是"我用了最贵的模型"，而是<strong>我知道每个任务该用什么模型，以及怎么把它用到极致</strong>。</p>
-
-    <div class="insight-box cool">
-        够用原则，分层路由，精准交付。这和<a href="lj.html">"君子不器"</a>讲的是同一件事——对内，不把自己活成只会调旗舰的工具；对外，不沉迷于堆砌最贵的模型。守住人的判断力，把工具用在刀刃上。省钱只是结果，清醒才是内核。
+    <div class="card purple-left">
+        <p><strong>建议：</strong></p>
+        <ul style="margin:8px 0 0 0;padding-left:18px;">
+            <li><strong>低风险产品</strong>走一类备案，没必要折腾</li>
+            <li><strong>常规中高风险产品，无特殊临床价值或技术突破的</strong>，走二类或三类常规，路径成熟、确定性高</li>
+            <li><strong>真正有原创技术、专利扎实、数据完整的</strong>，冲击创新通道。即使失败也可退回常规，不影响后续注册</li>
+            <li><strong>针对罕见病、恶性肿瘤、儿童危重症且国内无同类产品的</strong>，优先通道更现实，性价比高</li>
+            <li><strong>如同时考虑中美上市</strong>，需注意两国的分类逻辑和临床要求完全不同。美国510(k)依赖"实质等同"必须找对比产品，中国创新通道为原创产品准备，两条路径可并行但不能简单复用临床数据</li>
+        </ul>
     </div>
 
-</article>
+    <div class="insight-box">
+        <p style="margin:0;">做医疗器械注册，和做嵌入式系统架构的底层逻辑是一样的：<strong>先定义边界条件，再匹配最优路径，别用蛮力，别走弯路。</strong>法规是死的，选路径是活的。真正专业的注册策略，不是等产品做完了才去问"该走哪条路"，而是在产品定义阶段就把注册路径作为设计输入的一部分。路径选对了，整个开发周期和成本都能控制在最优区间。</p>
+    </div>
 
-    <section class="footnote-section">
-        <h4>本文定位</h4>
-        <p>本文是嵌入式AI工程化系列的<strong>工程心法篇</strong>。它从"付费上班"这一网络调侃切入，探讨AI模型选择中的够用原则与分层路由策略。核心观点包括：旗舰焦虑（被心理安慰驱动的无效支出）、够用原则（选最对的而非最强的）、分层路由（按任务复杂度匹配模型档位）、护城河在自己（提示词能力 > 模型参数）。与<a href="lj.html">《君子不器与灵活调度》</a>互为补充，前者讲工具调度法则，本文讲模型选择经济学。建议在阅读 lj.html 后阅读，但可独立使用。</p>
-        <div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
-            <strong>系列导航：</strong>
-            <a href="in.html">五层进化</a> ·
-            <a href="true.html">实践项目模板</a> ·
-            <a href="test.html">自主修复闭环</a> ·
-            <a href="fwd.html">从收敛到进化</a> ·
-            <a href="exc.html">知识的生命体征</a> ·
-            <a href="pcb.html">电路图分析器</a> ·
-            <a href="pt.html">最后的拼图：Skills</a> ·
-            <a href="history.html">历史的包袱</a> ·
-            <a href="ocd.html">被忽视的工具链组合</a> ·
-            <a href="devs.html">固件铭牌与设备画像</a> ·
-            <a href="gmp.html">合规验证与AI编程</a> ·
-            <a href="hg.html">回归现实：单Agent实践框架</a> ·
-            <a href="12.html">AI编程的利刃</a> ·
-            <a href="py.html">批量修改，先问该不该用脚本</a> ·
-            <a href="13.html">拆解与整合</a> ·
-            <a href="lj.html">君子不器与灵活调度</a> ·
-            <a href="fb.html">别把AI用成付费上班</a> ·
-            <a href="svg.html">别让AI画图，让它写图</a> ·
-            <a href="14.html">AI谄媚与专利</a> ·
-            <a href="gd.html">始于工程，服务生活</a>
-        </div>
+    <div class="bottom-series-links">
+        <strong>系列导航：</strong>
+        <a href="in.html">五层进化</a> · <a href="true.html">实践项目模板</a> · <a href="test.html">自主修复闭环</a> · <a href="fwd.html">从收敛到进化</a> · <a href="exc.html">知识的生命体征</a> · <a href="pcb.html">电路图分析器</a> · <a href="pt.html">最后的拼图：Skills</a> · <a href="history.html">历史的包袱</a> · <a href="ocd.html">被忽视的工具链组合</a> · <a href="devs.html">固件铭牌与设备画像</a> · <a href="gmp.html">合规验证与AI编程</a> · <a href="gxp.html">GxP法规工程化</a> · <a href="lims.html">LIMS系统集成法则</a> · <a href="ylqx.html">医疗器械注册通道</a> · <a href="14.html">AI谄媚与专利</a> · <a href="hg.html">回归现实</a> · <a href="gd.html">始于工程</a>
+    </div>
 
-<div class="series-nav">
-    <a href="lj.html" aria-label="上一篇：君子不器与灵活调度">← 君子不器与灵活调度</a>
-    <a href="svg.html" aria-label="下一篇：别让AI画图，让它写图">别让AI画图，让它写图 →</a>
+    <div class="series-nav">
+        <a href="lims.html" aria-label="上一篇：LIMS系统集成法则">← LIMS系统集成法则</a>
+        <a href="14.html" aria-label="下一篇：AI谄媚与专利">AI谄媚与专利 →</a>
+    </div>
+
+    <div class="footer-author-wrap">
+        <a href="about.html" class="footer-author-link">关于作者</a>
+    </div>
 </div>
-<p style="margin-top:12px;font-size:13px;"><a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a></p>
-    </section>
-
 </div>
-    </div>
 </div>
 
 <div class="inland-security-footer">
     <div class="tooltip-container">
-        <div class="trigger-content">
-            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
-                <span>itg · -lvgl-</span>
-            </a>
-        </div>
+        <div class="trigger-content"><a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link"><span>itg · -lvgl-</span></a></div>
         <div class="tooltip-content">
             <section class="info-section"><span>itg</span></section>
             <section class="info-section"><span>微信号: -lvgl-</span></section>

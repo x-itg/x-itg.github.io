@@ -64,6 +64,7 @@
 | ⑪ | [合规验证与 AI 编程](https://x-itg.github.io/gmp.html) | 专业延伸 | GMP、验证报告、合规证据 |
 | ⑫ | [GxP 法规工程化](https://x-itg.github.io/gxp.html) | 专业延伸 | 750 页法规翻译为可运行的系统 |
 | ⑬ | [LIMS 系统集成法则](https://x-itg.github.io/lims.html) | 专业延伸 | ASTM E1578 标准与 18 条可落地集成法则 |
+| ⑭ | [医疗器械注册通道](https://x-itg.github.io/ylqx.html) | 专业延伸 | NMPA 注册通道拆解与工程化路径选择 |
 | ⑫ | [回归现实：单 Agent 实践框架](https://x-itg.github.io/hg.html) | 综合实战 | 单 Agent、决策账本、轻量落地 |
 | ⑬ | [AI 编程的利刃](https://x-itg.github.io/12.html) | 工程利器 | 测试脚本、自我调试、负日志 |
 | ⑭ | [批量修改，先问该不该用脚本](https://x-itg.github.io/py.html) | 工程利器 | 模式判断、脚本生成、批量改造 |
