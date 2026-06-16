@@ -1,254 +1,114 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>拆解与整合：驾驭复杂系统的完整工程法则 | 为AI编程工程化立宪</title>
-<meta name="description" content="提出以拆解和整合为核心的完整工程法则，教你把复杂系统拆解为独立可验证模块，再渐进式整合为完整系统。">
-<meta name="keywords" content="拆解,整合,复杂系统,嵌入式,AI编程,模块化,回歸测试">
+<title>信任黑箱：AI时代，我们如何重新建立可控的确定性？ | Context Engineering</title>
+<meta name="description" content="从输入→规则→输出的底层公式出发，拆解Context Engineering四大模块架构、Context Assembler自动组装服务、长任务三层防腐化方案，在AI黑箱里搭建透明工程外壳。">
+<meta name="keywords" content="Context Engineering,信任黑箱,上下文工程,闭环收敛,负日志,决策切换,共生演化,AI可控性">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="拆解与整合：驾驭复杂系统的完整工程法则 | 为AI编程工程化立宪">
-<meta property="og:description" content="提出以拆解和整合为核心的完整工程法则，教你把复杂系统拆解为独立可验证模块，再渐进式整合为完整系统。">
+<meta property="og:title" content="信任黑箱：Context Engineering | 工程心法">
+<meta property="og:description" content="黑箱无法消除，但可以被管理。信任无法绝对，但可以被可控。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://x-itg.github.io/13.html">
-<link rel="canonical" href="https://x-itg.github.io/13.html">
+<meta property="og:url" content="https://x-itg.github.io/cx.html">
+<link rel="canonical" href="https://x-itg.github.io/cx.html">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-    :root {
-        --bg: #f8f9fa;
-        --card-bg: #ffffff;
-        --text: #2c3e50;
-        --text-secondary: #5a6c7d;
-        --accent: #c0392b;
-        --accent-soft: #e74c3c;
-        --border: #e0e4e8;
-        --code-bg: #1e293b;
-        --code-text: #e2e8f0;
-        --highlight: #fef9e7;
-        --tag-bg: #f0f3f6;
-        --tag-text: #4a5568;
-        --link: #2980b9;
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-        --radius: 6px;
-        --radius-lg: 10px;
-    }
+	:root {
+		--bg: #f8f9fa; --card-bg: #ffffff; --text: #2c3e50;
+		--text-secondary: #5a6c7d; --accent: #c0392b; --accent-soft: #e74c3c;
+		--border: #e0e4e8; --code-bg: #1e293b; --code-text: #e2e8f0;
+		--highlight: #fef9e7; --link: #2980b9;
+		--shadow-sm: 0 1px 2px rgba(0,0,0,0.05); --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+		--radius: 6px; --radius-lg: 10px;
+	}
+	* { margin:0; padding:0; box-sizing:border-box; }
+	body {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+		background: var(--bg); color: var(--text); line-height: 1.8;
+		-webkit-font-smoothing: antialiased;
+	}
+	.layout { display:flex; max-width:1400px; margin:0 auto; min-height:100vh; }
+	.main-content { flex:1; min-width:0; max-width:820px; margin:0 auto; padding:40px 28px 88px; }
+	.article-header { margin-bottom:40px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+	.series-tag { display:inline-flex; align-items:center; gap:8px; background:rgba(192,57,43,0.08); color:var(--accent); font-size:12px; font-weight:700; padding:5px 14px; border-radius:999px; margin-bottom:14px; }
+	h1 { font-size:28px; font-weight:800; color:#1a202c; margin-bottom:10px; letter-spacing:-0.3px; }
+	.subtitle { font-size:15px; color:var(--text-secondary); margin-bottom:8px; font-style:italic; }
+	.meta { font-size:13px; color:#95a5a6; }
+	h2 { font-size:21px; font-weight:700; color:#1a202c; margin:44px 0 16px; padding-bottom:8px; border-bottom:2px solid var(--accent-soft); display:flex; align-items:center; gap:8px; }
+	h2 i { color:var(--accent); }
+	h3 { font-size:17px; font-weight:700; color:#1a202c; margin:28px 0 12px; }
+	p { margin:14px 0; font-size:15px; color:#374151; text-align:justify; }
+	strong { color:#1a202c; font-weight:600; }
+	hr { border:none; border-top:1px dashed var(--border); margin:40px 0; }
+	.insight-box { background:var(--highlight); border-left:4px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0; padding:18px 22px; margin:24px 0; font-size:15px; color:#78350f; line-height:1.8; }
+	.insight-box strong { color:#92400e; }
+	.quote-block { background:linear-gradient(135deg,#f8f9fa,#eef2f7); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px 28px; margin:28px 0; text-align:center; font-size:15px; color:var(--text); line-height:1.9; }
+	.quote-block strong { color:var(--accent); }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+	/* 对比卡片 */
+	.compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0; }
+	.compare-card { background:#fff; border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px 22px; box-shadow:var(--shadow-sm); }
+	.compare-card h3 { margin:0 0 10px; font-size:15px; display:flex; align-items:center; gap:8px; }
+	.compare-card p { margin:6px 0; font-size:14px; color:#4b5563; }
+	.compare-card.traditional { border-top:3px solid #27ae60; }
+	.compare-card.blackbox { border-top:3px solid var(--accent); }
 
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.8;
-        -webkit-font-smoothing: antialiased;
-    }
+	/* 架构层卡片 */
+	.arch-stack { display:flex; flex-direction:column; gap:12px; margin:24px 0; }
+	.arch-layer { background:#fff; border:1px solid var(--border); border-radius:var(--radius-lg); padding:18px 22px; box-shadow:var(--shadow-sm); position:relative; }
+	.arch-layer::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; border-radius:var(--radius-lg) 0 0 var(--radius-lg); }
+	.arch-layer.l-sys::before { background:#c0392b; }
+	.arch-layer.l-user::before { background:#2980b9; }
+	.arch-layer.l-mem::before { background:#27ae60; }
+	.arch-layer.l-rag::before { background:#f39c12; }
+	.arch-layer .layer-tag { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px; display:inline-block; padding:2px 10px; border-radius:4px; }
+	.arch-layer.l-sys .layer-tag { background:rgba(192,57,43,0.1); color:#c0392b; }
+	.arch-layer.l-user .layer-tag { background:rgba(41,128,185,0.1); color:#2980b9; }
+	.arch-layer.l-mem .layer-tag { background:rgba(39,174,96,0.1); color:#27ae60; }
+	.arch-layer.l-rag .layer-tag { background:rgba(243,156,18,0.1); color:#d68910; }
+	.arch-layer h4 { font-size:15px; font-weight:700; color:#1a202c; margin:6px 0; }
+	.arch-layer p { margin:4px 0; font-size:14px; color:#4b5563; }
 
-    .container {
-        max-width: 780px;
-        margin: 0 auto;
-        padding: 40px 24px 80px;
-    }
+	/* 方案卡片 */
+	.solution-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:24px 0; }
+	.solution-card { background:#fff; border:1px solid var(--border); border-radius:var(--radius-lg); padding:18px 16px; box-shadow:var(--shadow-sm); text-align:center; }
+	.solution-card .sol-icon { font-size:28px; margin-bottom:8px; display:block; }
+	.solution-card h4 { font-size:14px; font-weight:700; color:#1a202c; margin-bottom:6px; }
+	.solution-card p { margin:4px 0; font-size:13px; color:#4b5563; text-align:left; }
 
-    /* 顶部导航 */
-    .top-nav {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 48px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid var(--border);
-        font-size: 14px;
-        color: var(--text-secondary);
-    }
-    .top-nav a { color: var(--link); text-decoration: none; transition: color 0.2s; }
-    .top-nav a:hover { color: var(--accent); }
-    .top-nav .sep { color: #c0c7cf; }
+	/* 踩坑卡片 */
+	.pit-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:24px 0; }
+	.pit-card { background:#fff; border:1px solid var(--border); border-radius:var(--radius-lg); padding:18px 20px; box-shadow:var(--shadow-sm); border-left:4px solid var(--accent); }
+	.pit-card h4 { font-size:14px; font-weight:700; color:var(--accent); margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+	.pit-card p { margin:4px 0; font-size:14px; color:#4b5563; }
 
-    /* 文章头部 */
-    .article-header { margin-bottom: 48px; }
-    .article-header .series-tag {
-        display: inline-block; background: var(--accent); color: #fff;
-        font-size: 12px; font-weight: 600; padding: 3px 10px;
-        border-radius: 3px; letter-spacing: 0.5px; margin-bottom: 16px;
-    }
-    .article-header h1 {
-        font-size: 32px; font-weight: 700; line-height: 1.35;
-        margin-bottom: 12px; letter-spacing: -0.3px;
-    }
-    .article-header .subtitle {
-        font-size: 17px; color: var(--text-secondary); font-weight: 400; margin-bottom: 20px;
-    }
-    .article-header .meta { font-size: 13px; color: #8896a4; }
+	/* 流程清单 */
+	.flow-steps { background:#fff; border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px 26px; margin:24px 0; box-shadow:var(--shadow-sm); }
+	.flow-steps .flow-title { font-size:14px; font-weight:700; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+	.flow-steps ol { padding-left:22px; }
+	.flow-steps li { padding:6px 0; font-size:14px; color:#374151; }
+	.flow-steps li strong { color:#1a202c; }
 
-    /* 通用排版 */
-    h2 {
-        font-size: 24px; font-weight: 700; margin: 56px 0 16px;
-        padding-top: 24px; border-top: 2px solid var(--border);
-        letter-spacing: -0.2px;
-    }
-    h3 {
-        font-size: 19px; font-weight: 600; margin: 36px 0 12px; color: #1a1a2e;
-    }
-    h4 {
-        font-size: 16px; font-weight: 600; margin: 24px 0 10px; color: #1a1a2e;
-    }
-    p { margin: 14px 0; }
-    strong { color: #1a1a2e; }
-    ul, ol { margin: 14px 0; padding-left: 24px; }
-    li { margin: 6px 0; }
-
-    /* 卡片 */
-    .card {
-        background: var(--card-bg); border: 1px solid var(--border);
-        border-radius: var(--radius-lg); padding: 28px 30px;
-        margin: 28px 0; box-shadow: var(--shadow-sm);
-    }
-    .card.accent-left { border-left: 4px solid var(--accent); }
-    .card.tip { background: #f0f7ff; border-color: #b3d4fc; }
-
-    /* 高亮段落 */
-    .insight-box {
-        background: var(--highlight); border: 1px solid #f0d78c;
-        border-radius: var(--radius); padding: 20px 24px;
-        margin: 24px 0; font-style: italic; color: #6b4c1e;
-    }
-    .insight-box strong { color: #4a340f; }
-
-    /* 代码块 */
-    pre {
-        background: var(--code-bg); color: var(--code-text);
-        padding: 20px 24px; border-radius: var(--radius);
-        overflow-x: auto; font-family: "JetBrains Mono","Fira Code","Cascadia Code","SF Mono","Consolas","Monaco",monospace;
-        font-size: 13px; line-height: 1.7; margin: 20px 0; box-shadow: var(--shadow-md);
-    }
-    code {
-        font-family: "JetBrains Mono","Fira Code","Cascadia Code","SF Mono","Consolas","Monaco",monospace;
-        font-size: 13px;
-    }
-    p code, li code {
-        background: #eef1f5; padding: 2px 6px; border-radius: 3px;
-        color: #c0392b; font-size: 12px;
-    }
-
-    /* 响应式 */
-    @media (max-width: 640px) {
-        .container { padding: 20px 16px 60px; }
-        .article-header h1 { font-size: 26px; }
-        h2 { font-size: 21px; }
-        pre { padding: 14px 16px; font-size: 12px; }
-    }
-
-    /* ===== 三栏布局（方案B） ===== */
-/* 左侧：文章系列导航 */
-/* 右侧：正文 */
-    .main-content { flex: 1; min-width: 0; }
-
-    /* 文章系列导航系统 */
-
-
-        .card.accent-left { border-left: 4px solid var(--accent); }
-        .card.philosophy { 
-            border-left: 4px solid #8e44ad; 
-            background: linear-gradient(135deg, #faf5ff 0%, #f5f0ff 100%);
-        }
-        .card.engineer { 
-            border-left: 4px solid #2980b9; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e8f4f8 100%);
-        }
-        .card.action { 
-            border-left: 4px solid #27ae60; 
-            background: linear-gradient(135deg, #f0fff4 0%, #e8f8ee 100%);
-        }
-        .card.vision { 
-            border-left: 4px solid #3b82f6; 
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card.vision:hover { 
-            transform: translateY(-2px); 
-            box-shadow: var(--shadow-md); 
-        }
-        .card {
-            text-align: left;
-        }
-        .card p {
-            text-align: left;
-            margin: 0;
-        }
-        .card p:first-child {
-            margin-top: 0;
-        }
-        .card p:last-child {
-            margin-bottom: 0;
-        }
-        .card strong {
-            display: block;
-            color: var(--text);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .card pre {
-            text-align: left;
-            margin: 12px 0 0;
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 16px 20px;
-            border-radius: 6px;
-            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", "Consolas", monospace;
-            font-size: 13px;
-            line-height: 1.7;
-            overflow-x: auto;
-        }
-
-        .insight-box {
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border: 1px solid #f0d78c;
-            border-left: 4px solid #f39c12;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin: 24px 0;
-            font-style: italic;
-            color: #6b4c1e;
-            text-align: left;
-        }
-        .insight-box strong {
-            color: #4a340f;
-            font-weight: 600;
-        }
-        .insight-box.decision { 
-            background: linear-gradient(135deg, #e8f4f8 0%, #dceef5 100%);
-            border-color: #a8d4e0; 
-            border-left-color: #3498db;
-            color: #1a5276; 
-        }
-        .insight-box.decision strong { 
-            color: #0e3a57; 
-        }
-        .insight-box.warm { 
-            background: linear-gradient(135deg, #fef9e7 0%, #fef5d7 100%);
-            border-color: #f0d78c; 
-            border-left-color: #f39c12;
-            color: #6b4c1e; 
-        }
-        .insight-box.warm strong { 
-            color: #4a340f; 
-        }
-        .insight-box.cool { 
-            background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
-            border-color: #a9cce3; 
-            border-left-color: #2980b9;
-            color: #1f4e79; 
-        }
-        .insight-box.cool strong { 
-            color: #154360; 
-        }
-
+	.back-to-top { position:fixed; bottom:28px; right:28px; width:42px; height:42px; border-radius:50%; background:var(--accent); color:#fff; border:none; font-size:18px; cursor:pointer; box-shadow:0 8px 24px rgba(0,0,0,0.15); opacity:0; visibility:hidden; transition:opacity 0.3s,visibility 0.3s,transform 0.2s; z-index:100; display:flex; align-items:center; justify-content:center; }
+	.back-to-top.visible { opacity:1; visibility:visible; }
+	.back-to-top:hover { transform:translateY(-3px); }
+	.series-nav { display:flex; justify-content:space-between; gap:16px; margin-top:40px; padding-top:24px; border-top:2px solid var(--border); font-size:14px; }
+	.series-nav a { color:var(--link); text-decoration:none; font-weight:600; }
+	.series-nav a:hover { text-decoration:underline; color:var(--accent); }
+	@media(max-width:640px) {
+		.main-content { padding:20px 16px 60px; }
+		h1 { font-size:22px; }
+		.compare-grid, .pit-grid { grid-template-columns:1fr; }
+		.solution-grid { grid-template-columns:1fr; }
+		.back-to-top { bottom:16px; right:16px; width:38px; height:38px; }
+	}
 </style>
 <link rel="stylesheet" href="assets/site-sidebar.css">
 </head>
 <body class="site-theme-tech">
 <div class="layout">
+<!-- SIDEBAR_PLACEHOLDER -->
 <aside class="site-sidebar">
     <div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-compass"></i> 乾坤大挪移心法</a></div>
     <div class="site-sidebar__quick-links">
@@ -420,7 +280,7 @@
                             <span class="site-sidebar__link-meta">工程利器 · 先判断模式，再把批量改造交给脚本执行</span>
                         </span>
                     </a></li>
-                    <li><a href="13.html" class="site-sidebar__link site-sidebar__article-link is-active">
+                    <li><a href="13.html" class="site-sidebar__link site-sidebar__article-link">
                         <span class="site-sidebar__article-icon" aria-hidden="true">🧵</span>
                         <span>
                             <span class="site-sidebar__link-title">拆解与整合</span>
@@ -455,7 +315,7 @@
                             <span class="site-sidebar__link-meta">工程心法 · 同一个时代两种失眠，找到属于自己的节奏旋钮</span>
                         </span>
                     </a></li>
-                    <li><a href="cx.html" class="site-sidebar__link site-sidebar__article-link">
+                    <li><a href="cx.html" class="site-sidebar__link site-sidebar__article-link is-active">
                         <span class="site-sidebar__article-icon" aria-hidden="true">🔐</span>
                         <span>
                             <span class="site-sidebar__link-title">信任黑箱：Context Engineering</span>
@@ -761,169 +621,278 @@
     </details>
     <a href="about.html" class="site-sidebar__footer-link">→ 关于作者</a>
 </aside>
-    <aside class="sidebar-toc">
-        <h3>本章导览</h3>
-        <nav>
-            <ul>
-                <li><a href="#problem">🧵 复杂系统的困境</a></li>
-                <li><a href="#decomposition">🧵 拆解：把复杂变简单</a></li>
-                <li><a href="#integration">🧵 整合：从简单重建复杂</a></li>
-                <li><a href="#closed-loop">🔄 拆解与整合闭环</a></li>
-                <li><a href="#mapping">⚙️ 与整套体系映射</a></li>
-                <li><a href="#summary">🧵 一枚硬币的两面</a></li>
-            </ul>
-        </nav>
-    </aside>
+<aside class="sidebar-toc">
+	<h3>🔐 本章导航</h3>
+	<nav>
+		<ul>
+			<li><a href="#formula">📌 软件的底层公式</a></li>
+			<li><a href="#window-cost">💫 窗口越大，失控成本越高</a></li>
+			<li><a href="#context-eng">📌 Context Engineering</a></li>
+			<li><a href="#symbiosis">🤖 上下文质量决定共生高度</a></li>
+			<li><a href="#assembler">✅ Context Assembler 决策切换</a></li>
+			<li><a href="#long-task">🏗️ 长任务三层防腐化</a></li>
+			<li><a href="#pitfalls">🏗️ 四类致命坑</a></li>
+			<li><a href="#conclusion">📌 控制你能控制的</a></li>
+		</ul>
+	</nav>
+</aside>
+<div class="main-content">
+<header class="article-header" id="top">
+	<span class="series-tag"><i class="fas fa-lock"></i> T · 工程心法</span>
+	<h1>信任黑箱：AI时代，我们如何重新建立可控的确定性？</h1>
+	<p class="subtitle">黑箱无法消除，但可以被管理。信任无法绝对，但可以被可控。</p>
+	<div class="meta">itg · 公众号: 火星火箭 · 工程心法</div>
+</header>
 
-    <div class="main-content">
-        <div class="container">
+<article>
 
-        <header class="article-header">
-            <span class="series-tag">工程心法 · 系统思维</span>
-            <a href="about.html" style="display:inline-block;vertical-align:middle;text-decoration:none;background:linear-gradient(135deg,#1a8a3f,#27ae60);color:#fff;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(39,174,96,0.3);white-space:nowrap;">👉 关于作者</a>
-            <h1>拆解与整合：驾驭复杂系统的完整工程法则</h1>
-            <p class="subtitle">拆解教会我们定义边界，整合教会我们跨越边界——一枚硬币的两面</p>
-            <p class="meta">itg · 公众号: 火星火箭 · 嵌入式AI工程化系列</p>
-        </header>
+<h2 id="formula"><i class="fas fa-square-root-variable"></i> 软件的底层公式</h2>
 
-        <section>
-            <h2 id="problem">⏳️复杂系统的困境</h2>
-            <p>面对一个庞大、错综复杂的嵌入式系统，工程师的本能反应往往是焦虑。你担心AI看不懂系统全貌，担心牵一发而动全身，担心项目进度不可控。</p>
-            <p>问题的根源在于：<strong>你把复杂问题当作一个整体去处理。</strong>而AI在面对超出其上下文理解能力的复杂性时，确实会顾此失彼。</p>
-            <p>要驾驭复杂系统，我们需要掌握两门核心手艺：<strong>拆解</strong>和<strong>整合</strong>。它们是一枚硬币的两面——拆解教会我们定义边界，整合教会我们跨越边界。</p>
-        </section>
+<p>我做嵌入式开发、AI工程落地这么久，始终笃定一句话：<strong>软件的底层公式，几十年从未变过。</strong></p>
 
-        <section>
-            <h2 id="decomposition">🧲上篇：拆解——把复杂变简单</h2>
-            <p>市面上有很多成熟的设计方法，但它们大多停留在纸面原则，没有回答最实际的问题：怎样让AI参与拆解？怎样确保每个部分能独立工作、自我验证？</p>
+<p>永远是：<strong>输入 → 规则 → 输出。</strong></p>
 
-            <div class="card accent-left">
-                <p style="margin-top:0;"><strong>核心理念：</strong>永远不要把一个复杂问题作为整体交给AI。永远先拆解，再逐个击破。</p>
-            </div>
+<p>用户提供数据，系统执行既定逻辑，最终反馈确定结果。早年我写嵌入式固件、工控上位机代码，整套逻辑极度直白：需求落地为逐条 if-else、固定分支、明确时序逻辑。每一条规则都可见、可审查、可追溯。</p>
 
-            <h3>💡第一步：识别独立的物理功能单元</h3>
-            <p>判断标准只有一条：<strong>这个单元能不能脱离其他部分单独验证？</strong>如果能，它就是一个独立模块。以一个典型的工业监测设备为例，它可以被拆解为传感器采集、通信协议处理、报警判断、数据存储、用户权限、操作审计、报告生成、身份认证等独立模块。</p>
+<p>程序出Bug，不需要猜。通过Git版本追溯、日志打点、时序复现，总能精准定位到具体代码行。修复、验证、上线，形成完整<a href="test.html" style="color:var(--link);">闭环收敛</a>。</p>
 
-            <h3>💡第二步：为每个模块定义接口法则</h3>
-            <p>拆解之后最关键的一步，是定义模块之间的通信契约。每个模块必须声明：输入什么、输出什么、依赖哪些资源、出错时如何恢复。这个接口法则，就是模块和模块之间的"宪法"。</p>
+<div class="insight-box">那个时代，我们对软件的信任，来源于<strong>透明和确定</strong>。规则是人写的、固定的、不变的，输入一致，输出必然一致。</div>
 
-            <h3>💡第三步：用工程模板独立构建每个模块</h3>
-            <p>有了接口法则，每个模块就可以交给AI独立开发。每个模块都有独立的文件夹结构，AI不需要理解整个系统，只需要在模块边界内工作，遵守接口法则。</p>
+<p>但大模型时代，这套稳定体系彻底被打破。</p>
 
-            <h3>💡第四步：用闭环收敛让每个模块自我证明</h3>
-            <p>每个模块在并入主系统之前，必须通过自身的收敛测试。运行测试，收集日志，喂回给AI。AI自己分析、自己修复、自己重测，直到所有测试通过。只有通过收敛测试的模块，才有资格进入主系统。</p>
-        </section>
+<div class="compare-grid">
+	<div class="compare-card traditional">
+		<h3><i class="fas fa-code" style="color:#27ae60;"></i> 传统代码</h3>
+		<p>人逐条定义规则，机器严格执行。没有固定代码分支之外的逻辑，执行链路完全可追溯。</p>
+		<p><strong>不确定性来源：人的书写疏漏。</strong></p>
+	</div>
+	<div class="compare-card blackbox">
+		<h3><i class="fas fa-brain" style="color:var(--accent);"></i> 大模型</h3>
+		<p>模型自主归纳逻辑、自主匹配规则、自主生成输出。没有固定代码分支、没有明文逻辑、没有可追溯的执行链路。</p>
+		<p><strong>不确定性来源：模型自主演化的不可观测性。</strong></p>
+	</div>
+</div>
 
-        <section>
-            <h2 id="integration">📃下篇：整合——从简单重建复杂</h2>
-            <p>很多项目在拆解阶段做得很好，但在整合阶段翻了车：两个模块接口不匹配、边界条件意外触发、日志量爆炸无从排查。问题出在整合方式——<strong>一次性全部拼接，是最危险的策略</strong>。</p>
+<p>同样的需求输入、同样的资料投喂，今天输出精准可用，明天大概率逻辑跑偏。你看不到它的推理路径，不知道它采信了哪些信息、忽略了哪些约束、变更了哪些隐性规则。</p>
 
-            <div class="card accent-left">
-                <p style="margin-top:0;"><strong>核心原则：</strong>每次只新增一个模块，然后立即进行全系统回归测试。测试通过再加下一个，测试失败则问题一定出在刚加入的模块上。</p>
-            </div>
+<div class="quote-block"><strong>它把效率拉满的同时，也给自己封成了一个绝对的信任黑箱。</strong></div>
 
-            <h3>💡第一步：选择集成主干</h3>
-            <p>先确定一个"集成主干"——通常是核心调度模块或数据流中枢。它先独立完成收敛测试，然后作为整合的起点。</p>
+<hr>
 
-            <h3>💡第二步：每次只添加一个模块</h3>
-            <p>按照依赖关系顺序：先基础模块（通信、存储），再业务模块（采集、报警），最后输出模块（报告、认证）。</p>
+<h2 id="window-cost"><i class="fas fa-expand"></i> 窗口越大，失控成本越高</h2>
 
-            <h3>💡第三步：全系统回归测试</h3>
-            <p>添加新模块后，运行整个系统的测试套件。因为新模块可能触发已有模块从未暴露的边界条件。全系统回归不需要每次都从头编写——先建立回归基线，每次添加后重跑，对比即可。</p>
+<p>很多人迷信大模型超大窗口能力，动辄调侃："现在百万上下文窗口，把整套项目源码、需求文档、设计规范全塞进去，不就一劳永逸？"</p>
 
-            <h3>💡第四步：通过后再加下一个</h3>
-            <p>测试通过，记录整合决策，继续添加。测试失败，在局部范围内修复重测，直到通过。绝不带着已知问题继续整合。</p>
+<p>从业落地多年，我的答案始终很坚定：<strong>窗口能装得下，不代表系统能用得好。</strong></p>
 
-            <div class="card tip">
-                <p style="margin-top:0;"><strong>整合测试同样可以运用"AI自己看日志、自己改代码"的方法。</strong>将日志喂给AI，它自行分析、定位、修复、重测。</p>
-            </div>
-        </section>
+<p>行业普遍存在一个认知误区：上下文窗口越大，模型准确度越高。但在真实工程落地中，长上下文带来的最大问题，是<strong>信息噪声泛滥与关键信息沉没</strong>，也就是工程里典型的「上下文腐化」。</p>
 
-        <section>
-            <h2 id="closed-loop">🖇拆解与整合：完整闭环</h2>
-            <p><strong>拆解阶段：</strong>用决策账本记录拆解理由和接口定义，用工程模板搭建模块骨架，用闭环收敛让每个模块自我证明。</p>
-            <p><strong>整合阶段：</strong>每次只加一个模块，每次加后全系统回归。通过后记录决策，失败后在局部修复重测。</p>
-            <p><strong>长期运行阶段：</strong>用知识生命体征监控模块健康，用共生演化追踪接口漂移。模块升级时只需重新验证该模块本身及接口一致性，无需从头回归整个系统。</p>
+<div class="insight-box">这和我体系里的<a href="fwd.html" style="color:#92400e;">负日志</a>逻辑高度契合：大量本不该出现的错误、本不该遗漏的关键约束，在大模型长上下文场景下呈指数级爆发。传统软件开发，错误可复现、可定位、可收敛；大模型长上下文场景，很多错误随机出现、无固定规律、无法提前规避。</div>
 
-            <div class="insight-box">
-                <strong>拆解的价值在集成时被验证，整合的风险在拆解时被控制。</strong>两者互为前提、互相验证，构成完整的工程闭环。
-            </div>
-        </section>
+<p>业内经典的「中间信息丢失（Lost in the Middle）」现象，更是所有AI开发者的常态：模型对对话开头的指令约束、结尾的新鲜输入高度敏感，但对中段密密麻麻的核心参数、硬性约束、边界条件，极易自动过滤遗漏。</p>
 
-        <section>
-            <h2 id="mapping">📍与整套体系的完整映射</h2>
-            <ul>
-                <li><strong>PCB分析器：</strong>从电路图识别物理模块边界</li>
-                <li><strong>工程模板：</strong>接口头文件、模块结构标准化</li>
-                <li><strong>Skills：</strong>驱动生成、测试生成等高频操作</li>
-                <li><strong>闭环收敛：</strong>功能代码与测试脚本双轨收敛</li>
-                <li><strong>决策账本：</strong>记录拆解理由、接口定义、整合时间</li>
-                <li><strong>知识生命体征：</strong>追踪整体性能和模块间交互异常</li>
-                <li><strong>共生演化：</strong>模块升级时自动检测接口漂移</li>
-            </ul>
-        </section>
+<p>我做工控AI项目深有体会：把整套设备协议、校准规范、通讯帧格式全部喂进上下文，模型依然会忽略关键时序约束、漏掉必填校验位。<strong>不是它没读到，是海量噪声稀释了核心信息。</strong></p>
 
-        <section>
-            <h2 id="summary">🪙拆解与整合：一枚硬币的两面</h2>
-            <p>拆解教会我们如何定义边界。整合教会我们如何跨越边界。拆解让我们从复杂中找到简单。整合让我们从简单中重建复杂。拆解的价值在集成时被验证，整合的风险在拆解时被控制。</p>
-            <p>能拆解复杂系统，说明理解了系统的结构。能渐进式整合复杂系统，说明掌握了工程的方法。两者兼备，才是完整的工程能力。</p>
+<p>更核心的问题，是我一直强调的<strong>闭环失效</strong>：</p>
 
-            <div class="card tip">
-                <p style="margin-top:0;"><strong>而这套体系存在的全部意义，就是让AI在拆解和整合的每一个环节中，都能在法则内独立工作</strong>——自我验证、自我修复、自我收敛。你定义法则，AI在法则内执行。无论面对多么复杂的系统，你都不再是一个人扛。</p>
-            </div>
-        </section>
+<div class="compare-grid">
+	<div class="compare-card traditional">
+		<h3><i class="fas fa-arrows-rotate" style="color:#27ae60;"></i> 传统工程闭环</h3>
+		<p>人工写规则 → 机器执行 → 人工验证修复。双向可控。</p>
+	</div>
+	<div class="compare-card blackbox">
+		<h3><i class="fas fa-circle-xmark" style="color:var(--accent);"></i> AI的伪闭环</h3>
+		<p>模型自主定规则、自主执行、自主校验。我们只能看到最终输出，完全观测不到中间推理状态。</p>
+	</div>
+</div>
 
-        <div class="bottom-series-links" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;line-height:1.9;color:#5a6c7d;">
-            <strong>系列导航：</strong>
-            <a href="in.html">五层进化</a> ·
-            <a href="true.html">实践项目模板</a> ·
-            <a href="test.html">自主修复闭环</a> ·
-            <a href="fwd.html">从收敛到进化</a> ·
-            <a href="exc.html">知识的生命体征</a> ·
-            <a href="pcb.html">电路图分析器</a> ·
-            <a href="pt.html">最后的拼图：Skills</a> ·
-            <a href="history.html">历史的包袱</a> ·
-            <a href="ocd.html">被忽视的工具链组合</a> ·
-            <a href="devs.html">固件铭牌与设备画像</a> ·
-            <a href="gmp.html">合规验证与AI编程</a> ·
-            <a href="hg.html">回归现实：单Agent实践框架</a> ·
-            <a href="12.html">AI编程的利刃</a> ·
-            <a href="py.html">批量修改，先问该不该用脚本</a> ·
-            <a href="13.html">拆解与整合</a> ·
-            <a href="lj.html">君子不器与灵活调度</a> ·
-            <a href="fb.html">别把AI用成付费上班</a> ·
-            <a href="svg.html">别让AI画图，让它写图</a> ·
-            <a href="14.html">AI谄媚与专利</a> ·
-            <a href="gd.html">始于工程，服务生活</a>
-        </div>
+<p>你以为系统已经收敛稳定，实则模型大概率收敛到了一套自洽但不符合业务规范的私有逻辑。这种看不见的偏差，就是信任黑箱的根源：<strong>确定性彻底消失，信任从"有据可依"，变成了"被动赌博"。</strong></p>
+
+<hr>
+
+<h2 id="context-eng"><i class="fas fa-layer-group"></i> Context Engineering，是黑箱的唯一透明外壳</h2>
+
+<p>很多人把提示词工程与上下文工程混为一谈，在我的工程体系里，二者边界极其清晰：</p>
+
+<div class="compare-grid">
+	<div class="compare-card" style="border-top:3px solid #2980b9;">
+		<h3><i class="fas fa-file-code" style="color:#2980b9;"></i> Prompt Engineering</h3>
+		<p><strong>= 定义指令规则</strong></p>
+		<p>告诉模型：任务目标、输出格式、角色约束、行为边界。是静态规则定义。</p>
+		<p>类比：工控系统的<strong>固件底层配置</strong>。</p>
+	</div>
+	<div class="compare-card" style="border-top:3px solid #27ae60;">
+		<h3><i class="fas fa-database" style="color:#27ae60;"></i> Context Engineering</h3>
+		<p><strong>= 管理内存环境</strong></p>
+		<p>控制每一轮模型调用：该加载什么、淘汰什么、挂载什么、压缩什么。是动态资源调度。</p>
+		<p>类比：工控系统的<strong>实时内存与数据流调度</strong>。</p>
+	</div>
+</div>
+
+<div class="insight-box">简单来说：<strong>Prompt 决定模型"该做什么"，Context 决定模型"能做好什么"。</strong>模型能力再强，上下文混乱、信息残缺、噪声过载，最终输出必然失控。</div>
+
+<p>这也是我落地AI项目的核心架构思路，整套体系分为四大可控模块：</p>
+
+<div class="arch-stack">
+	<div class="arch-layer l-sys">
+		<span class="layer-tag">System 层</span>
+		<h4>1. 静态基线规则</h4>
+		<p>固化项目全局约束，对应 .cursorrules、架构规范、业务红线。永久生效、不随对话迭代变更，是模型行为的底层边界，杜绝根本性逻辑跑偏。</p>
+	</div>
+	<div class="arch-layer l-user">
+		<span class="layer-tag">User 层</span>
+		<h4>2. 动态业务输入</h4>
+		<p>清洗每一轮真实业务输入，剔除无效话术、重复信息、冗余描述，保证输入数据流干净无噪声。</p>
+	</div>
+	<div class="arch-layer l-mem">
+		<span class="layer-tag">Memory 层</span>
+		<h4>3. 分层记忆调度</h4>
+		<p>短期做滑动窗口淘汰，避免上下文臃肿；长期通过文件存储、KV索引、结构化笔记留存核心架构决策、Bug记录、边界参数，避免重复踩坑。</p>
+	</div>
+	<div class="arch-layer l-rag">
+		<span class="layer-tag">RAG/Tools 层</span>
+		<h4>4. 工具与检索可控挂载</h4>
+		<p>不盲目全量检索、不随意挂载工具。根据任务类型，精准调取Top-K核心资料、匹配对应工具集，杜绝无效检索带来的信息污染。</p>
+	</div>
+</div>
+
+<hr>
+
+<h2 id="symbiosis"><i class="fas fa-dna"></i> 上下文质量，决定人与AI的共生演化高度</h2>
+
+<p>我一直提出「人与AI<a href="fwd.html" style="color:var(--link);">共生演化</a>」的核心观点：<strong>AI的输出质量，从来不是模型单方面决定的，而是由人类投喂的上下文质量决定的。</strong></p>
+
+<p>我拿自己嵌入式固件开发场景举一个最真实的落地对比：</p>
+
+<div class="compare-grid">
+	<div class="compare-card blackbox">
+		<h3>场景一：裸模型调用</h3>
+		<p>仅输入一句需求："帮我优化ESP32-P4设备的串口通讯逻辑，修复丢包问题。"</p>
+		<p>没有硬件原理图、没有原有通讯协议、没有波特率参数、没有报错日志、没有时序约束。</p>
+		<p><strong>结果：</strong>通用模板代码，无法适配硬件版型，解决不了特异性丢包问题。</p>
+	</div>
+	<div class="compare-card traditional">
+		<h3>场景二：结构化精准上下文</h3>
+		<p>通过上下文组装服务，自动挂载：设备硬件参数、历史3次丢包Bug记录、工业串口固定约束、串口日志解析工具、仅优化通讯容错的精准指令。</p>
+		<p><strong>结果：</strong>精准匹配硬件、贴合工程场景、规避历史问题、符合业务约束。</p>
+	</div>
+</div>
+
+<div class="quote-block"><strong>模型没变，变的是上下文的可控性。</strong><br>一味追求更高配模型、更大窗口，却忽略了上下文结构化，才是AI落地的核心护城河。</div>
+
+<hr>
+
+<h2 id="assembler"><i class="fas fa-gears"></i> Context Assembler：用决策切换终结"每次从零验证"</h2>
+
+<p>很多开发者都会陷入一种内耗：每一次模型调用，都要手动梳理资料、手动调整prompt、手动筛选历史、手动排查错误。明知低效，却不得不做，因为AI没有稳定规则，每一次输出都是全新随机态。</p>
+
+<p>这恰好印证了我的<a href="fwd.html" style="color:var(--link);">决策切换</a>法则：<strong>成熟的工程体系，必须固定流程、动态换参，杜绝每次重新决策、重新试错。</strong></p>
+
+<p>为此我在个人项目中，落地了一套 <strong>Context Assembler 上下文自动组装服务</strong>，彻底解决黑箱不可控问题。这套服务只做一件事：在模型推理之前，用固定工程流程，替代人工随机组装。</p>
+
+<div class="flow-steps">
+	<div class="flow-title"><i class="fas fa-list-check"></i> 固定执行链路（7步）</div>
+	<ol>
+		<li>通过会话ID拉取<strong>压缩后的核心历史摘要</strong>，摒弃冗余对话</li>
+		<li>根据当前任务类型，自动加载<strong>专属静态规则模板</strong></li>
+		<li>按需执行精准RAG检索，只留存<strong>Top-K高关联核心资料</strong></li>
+		<li>匹配任务场景，精准挂载<strong>对应工具集</strong>，杜绝工具泛滥</li>
+		<li>按优先级排序：<strong>系统约束 > 任务目标 > 核心证据 > 工具规则 > 历史摘要</strong></li>
+		<li><strong>Token预算校验</strong>，分级压缩冗余信息，保留核心业务数据</li>
+		<li>输出<strong>标准化、结构化、可追溯</strong>的完整上下文</li>
+	</ol>
+</div>
+
+<div class="insight-box"><strong>流程永久固定，唯一变量是业务参数。</strong>同时我搭建了专属工程评测集，沉淀50+真实嵌入式、软件开发场景用例。每一次迭代优化组装规则，都要全量跑一遍评测集，用数据验证稳定性。这正是<a href="fwd.html" style="color:#92400e;">负日志</a>体系的正向应用：把所有遗漏、失真、误判的失败案例沉淀下来，反向迭代优化上下文组装规则，让系统持续<a href="test.html" style="color:#92400e;">闭环收敛</a>。</div>
+
+<hr>
+
+<h2 id="long-task"><i class="fas fa-shield-halved"></i> 长任务落地：三种工程方案破解上下文腐化</h2>
+
+<p>面对长时间、多轮次、高复杂度的开发任务，单一的上下文组装服务不足以支撑全程稳定，长期运行必然出现信息冗余、过期结论、无效数据堆积。</p>
+
+<p>我在实战中沉淀了三套分层解决方案，全覆盖长周期AI任务：</p>
+
+<div class="solution-grid">
+	<div class="solution-card">
+		<span class="sol-icon">📦</span>
+		<h4>上下文压缩 Compaction</h4>
+		<p>窗口临近饱和时，自动摘要归档：保留架构决策、未解决Bug、核心参数，丢弃冗余工具日志、过期调试信息，轻量化重启对话窗口。</p>
+	</div>
+	<div class="solution-card">
+		<span class="sol-icon">📝</span>
+		<h4>结构化外置存档</h4>
+		<p>让AI将每一轮核心进展、决策结论、待办事项，自动写入 NOTES.md 结构化文档。窗口重置后，通过读取外置笔记延续进度。</p>
+	</div>
+	<div class="solution-card">
+		<span class="sol-icon">🔀</span>
+		<h4>子Agent拆分</h4>
+		<p>主Agent统筹，子Agent负责专项检索、调试、编码。子Agent只向主Agent输出高密度结论，不传输原始冗余数据，保证顶层上下文极度干净。</p>
+	</div>
+</div>
+
+<hr>
+
+<h2 id="pitfalls"><i class="fas fa-triangle-exclamation"></i> AI上下文工程，最容易踩的四类致命坑</h2>
+
+<p>结合大量落地<a href="fwd.html" style="color:var(--link);">负日志</a>复盘，总结四个高频翻车点：</p>
+
+<div class="pit-grid">
+	<div class="pit-card">
+		<h4><i class="fas fa-wrench"></i> 坑一：工具边界模糊</h4>
+		<p>很多人写工具描述只求详细，不定义边界。合格的工具文档，必须明确：适用场景、禁用场景、参数范例、副作用约束。<strong>边界模糊，必然导致模型乱调用、错调用。</strong></p>
+	</div>
+	<div class="pit-card">
+		<h4><i class="fas fa-floppy-disk"></i> 坑二：检索结果裸投喂</h4>
+		<p>RAG检索后直接全量塞入上下文，不裁剪、不摘要、不筛选。海量原始日志、冗余文档淹没核心信息，直接引发上下文腐化。<strong>需保留关键溯源信息，精简无效内容。</strong></p>
+	</div>
+	<div class="pit-card">
+		<h4><i class="fas fa-copy"></i> 坑三：少样本示例泛滥</h4>
+		<p>堆砌几十条边缘案例，试图覆盖所有场景。最终模型过度拟合示例表面格式，忽略底层业务逻辑。<strong>3-5个典型标杆案例，远胜百条冗余特例。</strong></p>
+	</div>
+	<div class="pit-card">
+		<h4><i class="fas fa-life-ring"></i> 坑四：无降级兜底策略</h4>
+		<p>未设计失败分支：检索无结果、工具超时、摘要丢失、多工具冲突时无预案。<strong>工程化落地，无兜底的设计，就是最大的设计缺陷。</strong></p>
+	</div>
+</div>
+
+<hr>
+
+<h2 id="conclusion"><i class="fas fa-shield"></i> 真正的信任，不靠赌，靠可控</h2>
+
+<p>回到文章最初的软件公式：输入、规则、输出。</p>
+
+<p>没变的是公式，变的是规则的定义者。从前是人定规则、机器执行，全程透明可控；现在是人机协同定规则、模型自主执行，全程黑箱未知。</p>
+
+<p>所有人对AI的不信任，本质不是不信任模型能力，而是<strong>不信任这份永恒的不确定性</strong>。</p>
+
+<p>但Context Engineering的价值，就是在绝对的黑箱里，人工搭建一层透明的工程外壳。我们不再被动等待模型输出结果，而是前置控制输入环境、结构化数据流、标准化推理边界。出问题不再盲目试错，而是可回溯、可定位、可迭代、可收敛。</p>
+
+<div class="insight-box">这也像我写<a href="aboutmore/pq.html" style="color:#92400e;">亲密关系</a>时悟出的道理：真正的信任，从来不是无条件的盲从。<strong>真正的信任，是明知它会出错，但我有完整的体系，修正错误、规避风险、持续优化。</strong></div>
+
+<div class="quote-block">
+	<strong>AI时代的确定性，早已不在模型本身。<br>而在我们人为搭建的、层层约束、闭环迭代、持续收敛的工程体系里。</strong><br><br>
+	黑箱无法消除，但可以被管理。<br>
+	信任无法绝对，但可以被可控。<br><br>
+	<strong>控制你能控制的，验证你不能控制的。<br>这，就是我们对抗AI不确定性的终极解法。</strong>
+</div>
+
+</article>
 
 <div class="series-nav">
-    <a href="py.html" aria-label="上一篇：批量修改，先问该不该用脚本">← 批量修改，先问该不该用脚本</a>
-    <a href="lj.html" aria-label="下一篇：君子不器与灵活调度 ">君子不器与灵活调度  →</a>
+	<a href="ai.html">← 当AI闯入你的代码王国</a>
+	<a href="14.html">AI谄媚与专利 →</a>
 </div>
-<div style="text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);color:#8896a4;font-size:13px;">
-            <a href="about.html" style="color:#c0392b;text-decoration:none;">关于作者</a>
-        </div>
-
-        </div>
-    </div>
+</div>
 </div>
 
-<!-- 页脚署名 -->
-<div class="inland-security-footer">
-    <div class="tooltip-container">
-        <div class="trigger-content">
-            <a href="https://x-itg.github.io/about.html" target="_blank" rel="noreferrer" class="x-itg-link">
-                <span>itg · -lvgl-</span>
-            </a>
-        </div>
-        <div class="tooltip-content">
-            <section class="info-section"><span>itg</span></section>
-            <section class="info-section"><span>微信号: -lvgl-</span></section>
-        </div>
-    </div>
-</div>
+<button class="back-to-top" id="backToTop" aria-label="回到顶部" title="回到顶部">↑</button>
+<script>
+(function(){
+	var btn=document.getElementById('backToTop');
+	window.addEventListener('scroll',function(){btn.classList.toggle('visible',window.scrollY>400);});
+	btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+})();
+</script>
 </body>
 </html>
-
-

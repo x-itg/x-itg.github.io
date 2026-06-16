@@ -45,7 +45,9 @@ TECH_ITEMS: list[tuple[str, str, str, str]] = [
     ("lj.html", "🎓", "君子不器与灵活调度", "工程心法 · 从古典哲思到AI时代工具调度法则"),
     ("fb.html", "💰", "别把AI用成付费上班", "工程心法 · 够用原则与分层路由，把AI账单用在刀刃上"),
     ("svg.html", "🎨", "别让AI画图，让它写图", "工程心法 · SVG是代码不是图片，编号精准定位，分层策略拆解复杂设计"),
-    ("14.html", "⚖️", "AI谄媚与专利", "专业延伸 · 在拿证与保护之间切换审查模式"),
+    ("ai.html", "🤖", "当AI闯入你的代码王国", "工程心法 · 同一个时代两种失眠，找到属于自己的节奏旋钮"),
+    ("cx.html", "🔐", "信任黑箱：Context Engineering", "工程心法 · 在绝对黑箱里人工搭建透明工程外壳，控制你能控制的"),
+    ("14.html", "⚖️", "AI诌媚与专利", "专业延伸 · 在拿证与保护之间切换审查模式"),
     ("gd.html", "🌾", "始于工程，服务生活", "内核反照 · 工程法则从技术补丁长成生活工具"),
 ]
 
@@ -53,9 +55,9 @@ TECH_GROUPS = [
     ("总纲", [TECH_ITEMS[0]]),
     ("核心主线", TECH_ITEMS[1:5]),
     ("根系能力", TECH_ITEMS[5:7]),
-    ("专业延伸", [TECH_ITEMS[7], TECH_ITEMS[8], TECH_ITEMS[9], TECH_ITEMS[10], TECH_ITEMS[11], TECH_ITEMS[12], TECH_ITEMS[13], TECH_ITEMS[19]]),
-    ("实战与心法", TECH_ITEMS[14:19]),
-    ("内核反照", [TECH_ITEMS[20]]),
+    ("专业延伸", [TECH_ITEMS[7], TECH_ITEMS[8], TECH_ITEMS[9], TECH_ITEMS[10], TECH_ITEMS[11], TECH_ITEMS[12], TECH_ITEMS[13], TECH_ITEMS[23]]),
+    ("实战与心法", TECH_ITEMS[14:23]),
+    ("内核反照", [TECH_ITEMS[24]]),
 ]
 
 # ═══════════════════════════════════════════════════════════════════
@@ -79,6 +81,7 @@ L2_ITEMS = [
     ("aboutmore/pm.html", "🧠", "他们的提示词，我的交付物", "心法·提示与交付"),
     ("aboutmore/seconed.html", "🎐", "一秒钟的感动", "亲子·棋盘与奔赴"),
     ("aboutmore/ta.html", "♾️", "不必全部收敛", "哲思·余味与收敛"),
+    ("aboutmore/pq.html", "🔥", "最差的脾气，留给最亲的人", "自省·情绪管理与亲密关系"),
     ("aboutmore/xw.html", "⚖️", "先稳，再赢", "心法·先胜再战的完整路径"),
     ("aboutmore/qj.html", "💎", "提供情绪价值的三种姿势", "心法·真诚看见与克制的表达"),
 ]
@@ -90,7 +93,7 @@ L3_ITEMS = [
     ("aboutmore/mywj.html", "🪐", "知屿之意·命运玩家", "小说与对话"),
     ("aboutmore/party-high.html", "🎼", "四季Party High玩家", "小说与对话"),
     ("aboutmore/jsxm.html", "🎮", "失控时刻·有趣玩家", "小说与对话"),
-    ("aboutmore/npc.html", "🏁", "N-P-C-玩家", "小说与对话"),
+    ("aboutmore/npc.html", "🧩", "N-P-C-玩家 · 完结篇", "碎片叙事 · 折叠完成"),
 ]
 L4_ITEMS = [
     ("aboutmore/czjs.html", "🧪", "会话的碰撞", "方法与引擎"),
@@ -188,7 +191,7 @@ def build_sidebar(base_indent: str, current_file: str, eol: str) -> str:
     L.append(f'{i1}<details class="site-sidebar__group site-sidebar__group--tech"{t_open}>')
     L.append(f"{i2}<summary>")
     L.append(f'{i2}{unit}<span class="site-sidebar__summary-text">T · 嵌入式AI工程化</span>')
-    L.append(f'{i2}{unit}<span class="site-sidebar__summary-meta">技术主线 · 20 篇</span>')
+    L.append(f'{i2}{unit}<span class="site-sidebar__summary-meta">技术主线 · {len(TECH_ITEMS)} 篇</span>')
     L.append(f"{i2}</summary>")
     L.append(f'{i2}<div class="site-sidebar__group-body">')
     for gtitle, items in TECH_GROUPS:

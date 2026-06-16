@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/status-Active-brightgreen?style=flat-square" alt="Status">
   <img src="https://img.shields.io/badge/methodology-Harness_Engineering-blue?style=flat-square" alt="Methodology">
   <img src="https://img.shields.io/badge/topics-Embedded_AI%20|%20Toolchain%20|%20Agents-orange?style=flat-square" alt="Topics">
-  <img src="https://img.shields.io/badge/tech_series-20-orange?style=flat-square" alt="Tech Series">
+  <img src="https://img.shields.io/badge/tech_series-25-orange?style=flat-square" alt="Tech Series">
   <img src="https://img.shields.io/badge/framework-4_Layer_System-8b5cf6?style=flat-square" alt="System">
   <img src="https://img.shields.io/badge/pages-live-222?style=flat-square&logo=github" alt="GitHub Pages">
 </p>
@@ -74,6 +74,8 @@
 | ⑱ | [君子不器与灵活调度](https://x-itg.github.io/lj.html) | 工程心法 | 主体性、灵活调度、够用原则 |
 | ⑲ | [别把AI用成付费上班](https://x-itg.github.io/fb.html) | 工程心法 | 够用原则、分层路由、性价比 |
 | ⑳ | [别让AI画图，让它写图](https://x-itg.github.io/svg.html) | 工程心法 | SVG代码画图、编号系统、分层策略 |
+| ㉑ | [当AI闯入你的代码王国](https://x-itg.github.io/ai.html) | 工程心法 | 同一个时代两种失眠，找到属于自己的节奏旋钮 |
+| ㉒ | [信任黑箱：Context Engineering](https://x-itg.github.io/cx.html) | 工程心法 | 上下文工程四大模块，在黑箱里搭建透明工程外壳 |
 
 ---
 
@@ -255,6 +257,24 @@
 </details>
 
 <details>
+<summary>㉑ 当AI闯入你的代码王国：节奏心法</summary>
+
+> 凌晨两点，老张焦虑得失眠，小陈刷着剧把活干完。同一个时代，两种失眠。AI只是一个放大器——它放大你的效率，也放大你的懒惰。关键不在于用不用，而在于你清不清楚自己在用什么。
+>
+> [阅读全文](https://x-itg.github.io/ai.html)
+
+</details>
+
+<details>
+<summary>㉒ 信任黑箱：Context Engineering</summary>
+
+> 软件的底层公式从未变过：输入→规则→输出。但大模型把规则的定义权利抢走了，封成了一个信任黑箱。Context Engineering 是黑箱的唯一透明外壳——控制你能控制的，验证你不能控制的。
+>
+> [阅读全文](https://x-itg.github.io/cx.html)
+
+</details>
+
+<details>
 <summary>⑰ 始于工程，服务生活：内核反照</summary>
 
 > 当前十六篇文章把法则铺进了工程，这一篇回头解释它们为什么不会随着模型能力增长而失效。会过时的是"给AI补短板"的具体补丁，不会过时的是它背后的思维方式：定义边界、感知异常、闭环修正、决策切换。
@@ -293,7 +313,7 @@
 | `[认知]` 🧠 [以不变应万变](https://x-itg.github.io/aboutmore/tk.html) | 从 AI 编程到生活法则的认知升维 |
 | `[心法]` 🪄 [用工程魔法打败生活魔法](https://x-itg.github.io/aboutmore/fw.html) | 一套思想体系的七种不正经应用 |
 | `[关系]` ❤️ [我用调试 AI 的方法，学会了经营感情](https://x-itg.github.io/aboutmore/sc.html) | 当工程法则走出代码，走进亲密关系 |
-| `[索引]` 🧭 [乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html) | 十七篇技术文章一篇看完 |
+| `[索引]` 🧭 [乾坤大挪移心法 · 文章总览](https://x-itg.github.io/aboutmore/wx.html) | 二十五篇技术文章一篇看完 |
 
 ### Layer 2 · 人格层 · 法则的生活检验
 
@@ -310,6 +330,7 @@
 | `[心法]` 🧠 [他们的提示词，我的交付物](https://x-itg.github.io/aboutmore/pm.html) | 把每一次人际交互变成提示词与交付的精准闭环 |
 | `[亲子]` 🎐 [一秒钟的感动](https://x-itg.github.io/aboutmore/seconed.html) | 她用空调给我凉意，我用棋盘给她全世界 |
 | `[哲思]` ♾️ [剩下的，不必全部收敛](https://x-itg.github.io/aboutmore/ta.html) | 允许生活保留余味，不把一切都压成结论 |
+| `[自省]` 🔥 [最差的脾气，留给最亲的人](https://x-itg.github.io/aboutmore/pq.html) | 情绪管理、阻抗最低通道与三条可落地准则 |
 | `[心法]` ⚖️ [先稳，再赢](https://x-itg.github.io/aboutmore/xw.html) | 学习AI的理性稳住自己，搭好底座，再用合作连接世界 |
 | `[心法]` 💎 [提供情绪价值的三种姿势](https://x-itg.github.io/aboutmore/qj.html) | 品味翻译、沉默接应、公开加冕——真诚看见与克制的表达 |
 
@@ -324,7 +345,7 @@
 | `[小说实验]` 📍 [失控时空：终极玩家](https://x-itg.github.io/aboutmore/gary.html) | 把人物关系写成复调轨道，在城市地图里展开一场多人失控实验 |
 | `[小说]` 🌃 [知意知否·孤独玩家](https://x-itg.github.io/aboutmore/alone.html) | 让繁华世界继续发光，让真正孤独的人独自穿过雨夜、机场与凌晨四点的街头 |
 | `[小说实验]` 🎮 [失控时刻·有趣玩家](https://x-itg.github.io/aboutmore/jsxm.html) | 把关系写成文档、批注和文件夹，一篇形式与内容互相咬合的"副本叙事" |
-| `[完结篇]` 🏁 [N-P-C-玩家](https://x-itg.github.io/aboutmore/npc.html) | 碎片叙事与系统存档，小说系列收官之作 |
+| `[完结篇]` 🧩 [N-P-C-玩家](https://x-itg.github.io/aboutmore/npc.html) | 碎片叙事与系统存档，小说系列收官之作 |
 
 ### Layer 4 · 元创作层 · 引擎的公开
 
