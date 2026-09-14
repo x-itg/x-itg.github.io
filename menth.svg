@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1240" viewBox="0 0 1600 1240" font-family="'Microsoft YaHei','PingFang SC','Noto Sans SC','Source Han Sans SC',sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0E1620"/>
+      <stop offset="100%" stop-color="#0A1119"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#18242F"/>
+      <stop offset="100%" stop-color="#131C26"/>
+    </linearGradient>
+    <linearGradient id="formulaGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A2530"/>
+      <stop offset="100%" stop-color="#141E28"/>
+    </linearGradient>
+    <linearGradient id="goldLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C9964A" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#E8C382" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#C9964A" stop-opacity="0"/>
+    </linearGradient>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#C9964A"/>
+    </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#5FA8A0"/>
+    </marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#7A8B9D"/>
+    </marker>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#16212E" stroke-width="0.6"/>
+    </pattern>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1600" height="1240" fill="url(#bgGrad)"/>
+  <rect width="1600" height="1240" fill="url(#grid)" opacity="0.55"/>
+
+  <!-- 四角装饰 -->
+  <path d="M 40 40 L 100 40 M 40 40 L 40 100" fill="none" stroke="#C9964A" stroke-width="1" opacity="0.35"/>
+  <path d="M 1560 40 L 1500 40 M 1560 40 L 1560 100" fill="none" stroke="#C9964A" stroke-width="1" opacity="0.35"/>
+  <path d="M 40 1200 L 100 1200 M 40 1200 L 40 1140" fill="none" stroke="#C9964A" stroke-width="1" opacity="0.35"/>
+  <path d="M 1560 1200 L 1500 1200 M 1560 1200 L 1560 1140" fill="none" stroke="#C9964A" stroke-width="1" opacity="0.35"/>
+
+  <!-- ================= 标题 ================= -->
+  <text x="800" y="86" text-anchor="middle" font-size="13" fill="#5A6B7D" letter-spacing="10">METHODOLOGY · 一张图</text>
+  <text x="800" y="152" text-anchor="middle" font-size="44" fill="#E8E4DC" font-weight="300" letter-spacing="14">从 意 图 到 工 程</text>
+  <line x1="560" y1="184" x2="1040" y2="184" stroke="url(#goldLine)" stroke-width="1.2"/>
+  <circle cx="800" cy="184" r="3" fill="#E8C382"/>
+  <text x="800" y="210" text-anchor="middle" font-size="13" fill="#7A8B9D" letter-spacing="3">一套可被验证、可被论证的工程生产方法</text>
+
+  <!-- ================= 源头：对话 ================= -->
+  <rect x="500" y="246" width="600" height="92" rx="10" fill="url(#cardGrad)" stroke="#2A4255" stroke-width="1"/>
+  <rect x="500" y="246" width="600" height="92" rx="10" fill="none" stroke="#C9964A" stroke-width="0.6" opacity="0.35"/>
+  <text x="800" y="288" text-anchor="middle" font-size="22" fill="#E8E4DC" letter-spacing="6">对 话 · 意 图 · 判 断</text>
+  <text x="800" y="316" text-anchor="middle" font-size="12.5" fill="#5A6B7D" letter-spacing="3">唯一不可外化的部分 — 它决定了所有后续产出</text>
+
+  <!-- 源头 → 飞轮 -->
+  <line x1="800" y1="338" x2="800" y2="384" stroke="#C9964A" stroke-width="1.4" marker-end="url(#arrowGold)"/>
+
+  <!-- ================= 三元飞轮 ================= -->
+  <!-- 分叉线 -->
+  <line x1="800" y1="384" x2="800" y2="400" stroke="#C9964A" stroke-width="1.2"/>
+  <line x1="380" y1="400" x2="1220" y2="400" stroke="#C9964A" stroke-width="1.2"/>
+  <line x1="380" y1="400" x2="380" y2="418" stroke="#C9964A" stroke-width="1.2" marker-end="url(#arrowGold)"/>
+  <line x1="800" y1="400" x2="800" y2="418" stroke="#C9964A" stroke-width="1.2" marker-end="url(#arrowGold)"/>
+  <line x1="1220" y1="400" x2="1220" y2="418" stroke="#C9964A" stroke-width="1.2" marker-end="url(#arrowGold)"/>
+
+  <!-- 飞轮卡片 1：算法 -->
+  <rect x="210" y="424" width="340" height="118" rx="10" fill="url(#cardGrad)" stroke="#3A5068" stroke-width="1"/>
+  <text x="232" y="450" font-size="11" fill="#C9964A" opacity="0.65" letter-spacing="2">01</text>
+  <text x="380" y="478" text-anchor="middle" font-size="26" fill="#E8C382" letter-spacing="8">算 法</text>
+  <text x="380" y="508" text-anchor="middle" font-size="12.5" fill="#8FA3B5" letter-spacing="1">代码 · 结构 · 实现</text>
+  <text x="380" y="528" text-anchor="middle" font-size="11.5" fill="#5A6B7D" letter-spacing="1">把可描述需求翻译成工程结构</text>
+
+  <!-- 飞轮卡片 2：验证 -->
+  <rect x="630" y="424" width="340" height="118" rx="10" fill="url(#cardGrad)" stroke="#3A5068" stroke-width="1"/>
+  <text x="652" y="450" font-size="11" fill="#C9964A" opacity="0.65" letter-spacing="2">02</text>
+  <text x="800" y="478" text-anchor="middle" font-size="26" fill="#E8C382" letter-spacing="8">验 证</text>
+  <text x="800" y="508" text-anchor="middle" font-size="12.5" fill="#8FA3B5" letter-spacing="1">逐位 · 逐帧 · 可复现</text>
+  <text x="800" y="528" text-anchor="middle" font-size="11.5" fill="#5A6B7D" letter-spacing="1">用真值裁判锁住行为边界</text>
+
+  <!-- 飞轮卡片 3：论文 -->
+  <rect x="1050" y="424" width="340" height="118" rx="10" fill="url(#cardGrad)" stroke="#3A5068" stroke-width="1"/>
+  <text x="1072" y="450" font-size="11" fill="#C9964A" opacity="0.65" letter-spacing="2">03</text>
+  <text x="1220" y="478" text-anchor="middle" font-size="26" fill="#E8C382" letter-spacing="8">论 文</text>
+  <text x="1220" y="508" text-anchor="middle" font-size="12.5" fill="#8FA3B5" letter-spacing="1">证据 · 边界 · 因果</text>
+  <text x="1220" y="528" text-anchor="middle" font-size="11.5" fill="#5A6B7D" letter-spacing="1">把设计决策固化为不可丢失的资产</text>
+
+  <!-- 飞轮之间的水平箭头 -->
+  <line x1="552" y1="483" x2="624" y2="483" stroke="#C9964A" stroke-width="1.2" marker-end="url(#arrowGold)"/>
+  <line x1="972" y1="483" x2="1044" y2="483" stroke="#C9964A" stroke-width="1.2" marker-end="url(#arrowGold)"/>
+
+  <!-- 飞轮 → 支柱（竖直细线） -->
+  <line x1="380" y1="542" x2="380" y2="596" stroke="#5FA8A0" stroke-width="0.9" opacity="0.6" marker-end="url(#arrowTeal)"/>
+  <line x1="800" y1="542" x2="800" y2="596" stroke="#5FA8A0" stroke-width="0.9" opacity="0.6" marker-end="url(#arrowTeal)"/>
+  <line x1="1220" y1="542" x2="1220" y2="596" stroke="#5FA8A0" stroke-width="0.9" opacity="0.6" marker-end="url(#arrowTeal)"/>
+
+  <!-- ================= 三支柱 ================= -->
+  <!-- 支柱卡片 1 -->
+  <rect x="210" y="600" width="340" height="96" rx="10" fill="url(#cardGrad)" stroke="#2A4255" stroke-width="1"/>
+  <text x="380" y="638" text-anchor="middle" font-size="17" fill="#5FA8A0" letter-spacing="3">AI 展 开 器</text>
+  <text x="380" y="664" text-anchor="middle" font-size="11.5" fill="#7A8B9D" letter-spacing="1">把系统展开到能回答任何具体问题</text>
+  <text x="380" y="682" text-anchor="middle" font-size="11" fill="#5A6B7D" letter-spacing="1">检索 · 追踪 · 推断 · 对比</text>
+
+  <!-- 支柱卡片 2 -->
+  <rect x="630" y="600" width="340" height="96" rx="10" fill="url(#cardGrad)" stroke="#2A4255" stroke-width="1"/>
+  <text x="800" y="638" text-anchor="middle" font-size="17" fill="#5FA8A0" letter-spacing="3">测 试 真 值 裁 判</text>
+  <text x="800" y="664" text-anchor="middle" font-size="11.5" fill="#7A8B9D" letter-spacing="1">不依赖 AI 生成的独立行为基准</text>
+  <text x="800" y="682" text-anchor="middle" font-size="11" fill="#5A6B7D" letter-spacing="1">L1 模型 · L2 固件在环 · L3 差分等价</text>
+
+  <!-- 支柱卡片 3 -->
+  <rect x="1050" y="600" width="340" height="96" rx="10" fill="url(#cardGrad)" stroke="#2A4255" stroke-width="1"/>
+  <text x="1220" y="638" text-anchor="middle" font-size="17" fill="#5FA8A0" letter-spacing="3">文 档 固 化 锚 点</text>
+  <text x="1220" y="664" text-anchor="middle" font-size="11.5" fill="#7A8B9D" letter-spacing="1">跨迭代的共享内存</text>
+  <text x="1220" y="682" text-anchor="middle" font-size="11" fill="#5A6B7D" letter-spacing="1">把发现变成不可丢失的资产</text>
+
+  <!-- ================= 闭环回环 ================= -->
+  <path d="M 1220 700 L 1220 748 L 380 748 L 380 702"
+        fill="none" stroke="#C9964A" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrowGold)"/>
+  <text x="800" y="772" text-anchor="middle" font-size="12" fill="#7A8B9D" letter-spacing="4">闭 环 · 每 轮 迭 代 都 被 永 久 继 承</text>
+
+  <!-- ================= 核心公式 ================= -->
+  <!-- 外光晕 -->
+  <rect x="176" y="822" width="1248" height="176" rx="16" fill="none" stroke="#C9964A" stroke-width="0.5" opacity="0.25"/>
+  <!-- 主体框 -->
+  <rect x="180" y="818" width="1240" height="176" rx="14" fill="url(#formulaGrad)" stroke="#C9964A" stroke-width="1.3"/>
+  <!-- 顶部金色短线 -->
+  <line x1="640" y1="818" x2="960" y2="818" stroke="#E8C382" stroke-width="1.6"/>
+  <!-- 角标 -->
+  <text x="220" y="852" font-size="11" fill="#C9964A" opacity="0.55" letter-spacing="4">CORE</text>
+  <text x="220" y="870" font-size="11" fill="#C9964A" opacity="0.55" letter-spacing="4">E Q U A T I O N</text>
+
+  <!-- 公式 -->
+  <text x="385" y="928" text-anchor="middle" font-size="48" fill="#E8C382" font-weight="300" letter-spacing="2">可描述</text>
+  <text x="515" y="926" text-anchor="middle" font-size="34" fill="#7A8B9D" font-weight="300">+</text>
+  <text x="668" y="928" text-anchor="middle" font-size="48" fill="#E8C382" font-weight="300" letter-spacing="2">硬件基础</text>
+  <text x="824" y="930" text-anchor="middle" font-size="40" fill="#5FA8A0" font-weight="300">=</text>
+  <text x="956" y="928" text-anchor="middle" font-size="48" fill="#E8C382" font-weight="300" letter-spacing="2">可验证</text>
+  <text x="1085" y="926" text-anchor="middle" font-size="34" fill="#7A8B9D" font-weight="300">+</text>
+  <text x="1215" y="928" text-anchor="middle" font-size="48" fill="#E8C382" font-weight="300" letter-spacing="2">可论证</text>
+
+  <!-- 公式下方注释 -->
+  <text x="800" y="972" text-anchor="middle" font-size="12.5" fill="#7A8B9D" letter-spacing="2">把物理直觉翻译成无歧义约束 —— 硬件给出真值 —— 验证给出信心 —— 论证给出把握</text>
+
+  <!-- ================= 闭环 ================= -->
+  <!-- 标题 -->
+  <text x="800" y="1058" text-anchor="middle" font-size="12" fill="#5A6B7D" letter-spacing="8">T H E   C L O S E D   L O O P</text>
+
+  <!-- 节点 1 -->
+  <rect x="185" y="1080" width="190" height="72" rx="8" fill="url(#cardGrad)" stroke="#2A4255" stroke-width="1"/>
+  <text x="280" y="1124" text-anchor="middle" font-size="15" fill="#E8E4DC" letter-spacing="2">物理直觉</text>
+
+  <!-- 节点 2 -->
+  <rect x="445" y="1080" width="190" height="72" rx="8" fill="url(#cardGrad)" stroke="#2A4255" stroke-width="1"/>
+  <text x="540" y="1124" text-anchor="middle" font-size="15" fill="#E8E4DC" letter-spacing="2">可描述约束</text>
+
+  <!-- 节点 3 -->
+  <rect x="705" y="1080" width="190" height="72" rx="8" fill="url(#cardGrad)" stroke="#2A4255" stroke-width="1"/>
+  <text x="800" y="1124" text-anchor="middle" font-size="15" fill="#E8E4DC" letter-spacing="2">仿真验证</text>
+
+  <!-- 节点 4 -->
+  <rect x="965" y="1080" width="190" height="72" rx="8" fill="url(#cardGrad)" stroke="#2A4255" stroke-width="1"/>
+  <text x="1060" y="1124" text-anchor="middle" font-size="15" fill="#E8E4DC" letter-spacing="2">硬件确认</text>
+
+  <!-- 节点 5 -->
+  <rect x="1225" y="1080" width="190" height="72" rx="8" fill="url(#cardGrad)" stroke="#2A4255" stroke-width="1"/>
+  <text x="1320" y="1124" text-anchor="middle" font-size="15" fill="#E8E4DC" letter-spacing="2">现场反馈</text>
+
+  <!-- 节点之间箭头 -->
+  <line x1="378" y1="1116" x2="442" y2="1116" stroke="#5FA8A0" stroke-width="1.1" marker-end="url(#arrowTeal)"/>
+  <line x1="638" y1="1116" x2="702" y2="1116" stroke="#5FA8A0" stroke-width="1.1" marker-end="url(#arrowTeal)"/>
+  <line x1="898" y1="1116" x2="962" y2="1116" stroke="#5FA8A0" stroke-width="1.1" marker-end="url(#arrowTeal)"/>
+  <line x1="1158" y1="1116" x2="1222" y2="1116" stroke="#5FA8A0" stroke-width="1.1" marker-end="url(#arrowTeal)"/>
+
+  <!-- 回环箭头（节点 5 → 节点 1） -->
+  <path d="M 1320 1152 L 1320 1192 L 280 1192 L 280 1156"
+        fill="none" stroke="#C9964A" stroke-width="1.1" stroke-dasharray="5,4" marker-end="url(#arrowGold)"/>
+  <text x="800" y="1182" text-anchor="middle" font-size="11.5" fill="#7A8B9D" letter-spacing="3">现场反馈 → 新的物理直觉</text>
+
+  <!-- 底部装饰线 -->
+  <line x1="700" y1="1224" x2="900" y2="1224" stroke="#C9964A" stroke-width="0.8" opacity="0.4"/>
+  <circle cx="800" cy="1224" r="2.5" fill="#C9964A" opacity="0.6"/>
+
+</svg>

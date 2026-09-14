@@ -157,34 +157,6 @@
             font-size: 13px;
             color: var(--text-secondary);
         }
-        .article-flow {
-            margin-top: 26px;
-            padding-top: 22px;
-            border-top: 1px solid var(--border);
-        }
-        .article-flow h2 {
-            font-size: 28px;
-            margin-bottom: 14px;
-            letter-spacing: -0.03em;
-        }
-        .article-flow ol {
-            margin: 0;
-            padding-left: 1.4rem;
-        }
-        .article-flow li {
-            margin: 0 0 18px;
-            color: var(--text-secondary);
-        }
-        .article-flow strong {
-            color: var(--text);
-        }
-        .article-flow a {
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .article-flow a:hover {
-            text-decoration: underline;
-        }
         .summary-table {
             margin-top: 30px;
             padding-top: 22px;
@@ -287,180 +259,258 @@
         .era-tag.era-e { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
         .era-tag.era-m { background:#fffbeb; color:#b45309; border:1px solid #fde68a; }
         .era-tag.era-l { background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; }
-        .story-spotlight {
-            margin: 18px 0 22px;
-            padding: 22px;
-            border-radius: 20px;
-            border: 1px solid #e5d4bd;
-            background: radial-gradient(circle at right top, rgba(36, 95, 156, 0.12), transparent 28%), linear-gradient(135deg, #fffaf2 0%, #f7efe1 58%, #f3f7fb 100%);
-            box-shadow: var(--shadow-md);
+        .methodology {
+            margin: 26px 0 10px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border);
         }
-        .story-spotlight__eyebrow {
+        .methodology__eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 10px;
             font-size: 12px;
             font-weight: 700;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
-            color: #8a5b18;
+            color: var(--accent);
         }
-        .story-spotlight__grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-            gap: 16px;
-            align-items: stretch;
-        }
-        .story-spotlight__main,
-        .story-spotlight__rail {
-            border-radius: var(--radius-16);
-            background: rgba(255,255,255,0.82);
-            border: 1px solid rgba(191, 162, 123, 0.18);
-            padding: 18px;
-        }
-        .story-spotlight__main h3,
-        .story-spotlight__rail h3 {
-            margin: 0 0 10px;
-            font-size: 20px;
-            color: #2f2418;
-        }
-        .story-spotlight__main p,
-        .story-spotlight__rail p {
-            color: #645849;
-            margin: 0 0 12px;
-            font-size: 14px;
-        }
-        .story-spotlight__cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            border-radius: 999px;
-            background: #244f86;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .story-spotlight__cta:hover {
-            background: #193d69;
-            text-decoration: none;
-            box-shadow: 0 4px 14px rgba(36, 79, 134, 0.3);
-        }
-        .story-spotlight__chips,
-        .story-spotlight__list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .story-spotlight__chips span,
-        .story-spotlight__list a {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 7px 10px;
-            border-radius: 999px;
-            border: 1px solid #e9dbc6;
-            background: #fff9f1;
-            color: #6e5230;
-            font-size: 12px;
-            text-decoration: none;
-        }
-        .story-spotlight__list a:hover {
-            border-color: #b8cae2;
-            color: #244f86;
-            background: #f7fbff;
-            text-decoration: none;
-        }
-        .novel-overview {
-            margin: 18px 0 24px;
-            padding: 24px;
-            border-radius: 20px;
-            border: 1px solid #d9e4f2;
-            background: radial-gradient(circle at right top, rgba(36, 95, 156, 0.10), transparent 28%), linear-gradient(135deg, #f8fbff 0%, #fff8ee 54%, #f3f8ff 100%);
-            box-shadow: var(--shadow-md);
-        }
-        .novel-overview__eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #245f9c;
-        }
-        .novel-overview__grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-            gap: 16px;
-            align-items: start;
-        }
-        .novel-overview__main,
-        .novel-overview__rail {
-            border-radius: 16px;
-            background: rgba(255,255,255,0.84);
-            border: 1px solid rgba(191, 210, 232, 0.42);
-            padding: 18px;
-        }
-        .novel-overview__main h3,
-        .novel-overview__rail h3 {
-            margin: 0 0 12px;
-            font-size: 22px;
-            color: #20344e;
+        .methodology h2 {
+            font-size: 34px;
             letter-spacing: -0.03em;
+            margin: 10px 0 8px;
         }
-        .novel-overview__main p,
-        .novel-overview__rail p {
-            margin: 0 0 12px;
-            color: #5f7388;
-            font-size: 14px;
+        .methodology__lead {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 62ch;
         }
-        .novel-overview__main strong {
-            color: #20344e;
+        .methodology__figure {
+            margin: 24px 0;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid #223040;
+            background: #0E1620;
+            box-shadow: var(--shadow-md);
+            line-height: 0;
         }
-        .novel-overview__chips,
-        .novel-overview__list {
+        .methodology__figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .methodology__formula {
+            margin: 22px 0;
+            padding: 26px 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(201, 150, 74, 0.35);
+            background: linear-gradient(135deg, #101a24 0%, #16232f 100%);
+            text-align: center;
+        }
+        .methodology__formula .eq {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-        }
-        .novel-overview__chips span,
-        .novel-overview__list a {
-            display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 7px 10px;
-            border-radius: 999px;
-            border: 1px solid #dbe6f3;
-            background: #fbfdff;
-            color: #47627f;
-            font-size: 12px;
-            text-decoration: none;
+            justify-content: center;
+            gap: 10px 14px;
         }
-        .novel-overview__list a:hover {
-            border-color: #b8cae2;
-            color: #244f86;
-            background: #f7fbff;
-            text-decoration: none;
+        .methodology__formula .term {
+            font-size: 26px;
+            font-weight: 300;
+            letter-spacing: 0.06em;
+            color: #E8C382;
         }
-        .novel-overview__cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 4px;
-            padding: 10px 14px;
-            border-radius: var(--radius-full);
-            background: #244f86;
-            color: #fff;
-            text-decoration: none;
+        .methodology__formula .op {
+            font-size: 22px;
+            font-weight: 300;
+            color: #5FA8A0;
+        }
+        .methodology__formula p {
+            margin: 16px 0 0;
+            font-size: 13px;
+            letter-spacing: 0.04em;
+            color: #8FA3B5;
+        }
+        .methodology__flow {
+            margin: 26px 0;
+        }
+        .methodology__flow h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+        .methodology__flow h3 .en {
+            font-size: 11px;
             font-weight: 600;
+            letter-spacing: 0.18em;
+            color: var(--text-secondary);
+            margin-left: 8px;
         }
-        .novel-overview__cta:hover {
-            background: #193d69;
-            text-decoration: none;
-            box-shadow: 0 4px 14px rgba(36, 79, 134, 0.3);
+        .methodology__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        .methodology__card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+        .methodology__card .idx {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+        }
+        .methodology__card h4 {
+            font-size: 18px;
+            margin: 6px 0 8px;
+            color: var(--text);
+        }
+        .methodology__card p {
+            margin: 0 0 8px;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .methodology__card p.mini {
+            font-size: 12px;
+            letter-spacing: 0.03em;
+            color: #7f98b7;
+        }
+        .methodology__loop {
+            margin: 22px 0 8px;
+            padding: 20px 22px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.82);
+            text-align: center;
+        }
+        .methodology__loop .steps {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px 12px;
+        }
+        .methodology__loop .steps span {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .methodology__loop .steps i {
+            color: var(--accent);
+            font-size: 12px;
+        }
+        .methodology__loop p {
+            margin: 14px 0 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .methodology__hint {
+            margin: -4px 0 14px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .methodology__callout {
+            margin: 22px 0;
+            padding: 20px 24px;
+            border-radius: 16px;
+            border: 1px solid #f0d99a;
+            background: var(--highlight);
+        }
+        .methodology__callout .tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: #9a3412;
+            background: #ffedd5;
+            padding: 3px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+        .methodology__callout p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: #694d18;
+        }
+        .methodology__grid--seven {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .methodology__grid--seven .methodology__card h4 {
+            font-size: 15.5px;
+        }
+        .methodology__grid--seven .methodology__card p {
+            font-size: 13px;
+        }
+        .methodology__table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0 0;
+            font-size: 13.5px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .methodology__table th,
+        .methodology__table td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        .methodology__table th {
+            background: #f4f7fb;
+            color: #294866;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .methodology__table td {
+            color: var(--text-secondary);
+        }
+        .methodology__table tr:last-child td {
+            border-bottom: none;
+        }
+        .methodology__table td strong {
+            color: var(--text);
+        }
+        .methodology__value {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin: 14px 0 0;
+        }
+        .methodology__value .vcard {
+            padding: 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(201, 150, 74, 0.35);
+            background: linear-gradient(135deg, #101a24 0%, #16232f 100%);
+            color: #C7D2DD;
+        }
+        .methodology__value .vcard h4 {
+            color: #E8C382;
+            font-size: 16px;
+            margin: 0 0 8px;
+        }
+        .methodology__value .vcard p {
+            margin: 0;
+            font-size: 13.5px;
+            color: #9FB0C0;
+        }
+        .methodology__boundary {
+            margin: 14px 0 0;
+            padding: 16px 20px;
+            border-radius: 14px;
+            border: 1px dashed #d9c7a3;
+            background: #fffdf7;
+            font-size: 13.5px;
+            color: #7a6a4e;
+        }
+        .methodology__boundary strong {
+            color: #5a4a2e;
         }
         footer {
             margin-top: 28px;
@@ -483,10 +533,12 @@
             .layout { padding: 12px 8px 48px; gap: 16px; }
             .hero { padding: 20px 16px; }
             .hero h1 { font-size: 28px; letter-spacing: -0.02em; }
-            .article-flow { padding-top: 18px; }
-            .article-flow h2, .summary-table h2 { font-size: 24px; }
-            .story-spotlight__grid,
-            .novel-overview__grid { grid-template-columns: 1fr; }
+            .summary-table h2 { font-size: 24px; }
+            .methodology h2 { font-size: 26px; }
+            .methodology__grid,
+            .methodology__grid--seven,
+            .methodology__value { grid-template-columns: 1fr; }
+            .methodology__formula .term { font-size: 20px; }
             .summary-table table { min-width: 560px; font-size: 13px; }
             .summary-table th, .summary-table td { padding: 8px 10px; }
             .site-sidebar { max-height: 50vh; }
@@ -498,7 +550,7 @@
     </style>
 </head>
 <body class="site-theme-tech">
-<a href="#start" class="skip-link">跳至正文内容</a>
+<a href="#methodology" class="skip-link">跳至正文内容</a>
 <div class="layout">
 <aside class="site-sidebar">
     <div class="site-sidebar__brand"><a href="index.html"><i class="fas fa-compass"></i> 乾坤大挪移心法</a></div>
@@ -1016,8 +1068,8 @@
         <h3>入口导览</h3>
         <nav>
             <ul>
-                <li><a href="#start">📌 三步进入</a></li>
-                <li><a href="#l3-fiction-overview">📘 L3 小说总览</a></li>
+                <li><a href="#methodology">🧭 核心方法论</a></li>
+                <li><a href="#testbench">🔬 测试台</a></li>
                 <li><a href="#overview-table">🏗️ 总表 🖥️ T · 工程化</a></li>
                 <li><a href="#table-l1">📐 L1 · 法则</a></li>
                 <li><a href="#table-l2">🌿 L2 · 人</a></li>
@@ -1035,90 +1087,146 @@
             <div class="hero-meta">itg · 公众号: 火星火箭</div>
         </section>
 
-        <section class="article-flow" id="start">
-            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;"><i class="fas fa-search" style="margin-right:4px;"></i> 找特定文章？<a href="aboutmore/wx.html" style="font-weight:600;">站点总览 →</a> 可按层级/分类检索全站文章</p>
-            <h2>推荐</h2>
-            <ol>
-                <li>
-                    <strong>框架：</strong>
-                    <a href="in.html">《五层进化》</a>
-                </li>
-                <li>
-                    <strong>预览：</strong>
-                    <a href="aboutmore/wx.html">技术文章总览</a>
-                </li>
-                <li>
-                    <strong>关于：</strong>
-                    <a href="about.html">《我找到了一套法则》</a>，法则长出工程之外。
-                </li>
-            </ol>
-            <p>如果你想直接看这套体系是怎样在十天内长成四层结构，可以先读 <a href="aboutmore/sryj.html">《十日一剑：创作手记》</a>；如果你更想看创作过程如何被做成"可观测、可回放、可调试"的工作台，再接着读 <a href="aboutmore/gc.html">《像调试代码一样创作》</a>。</p>
-        </section>
+        <section class="methodology" id="methodology">
+            <div class="methodology__eyebrow"><i class="fas fa-diagram-project"></i> 核心方法论 · SIGNATURE METHOD</div>
+            <h2>论文格式即认知脚手架</h2>
+            <p class="methodology__lead">这是我压箱底的一套工作方法：让 AI 在<strong>无法靠一次聪明解决</strong>的复杂系统里，持续产出<strong>可验证、可论证</strong>的结论。它不需要 AI 变聪明，只需要你换一种"要求"——要求它写论文，而不是写文档。</p>
 
-        <section class="novel-overview" id="l3-fiction-overview">
-            <span class="novel-overview__eyebrow"><i class="fas fa-dna"></i> L3・小说与对话 | 叙事实验体系总览</span>
-            <div class="novel-overview__grid">
-                <div class="novel-overview__main">
-                    <h3>八部作品，一条完整的叙事实验链</h3>
-                    <p>八部作品构成一条<strong>叙事形式实验链</strong>，围绕核心命题：<strong>叙事形式能否成为内容本身？</strong></p>
-                    <p>依托工程架构思维，探索文档目录、对话气泡、双栏对照、平行宇宙、复调四重奏、意象网络、DNA 双螺旋七种独立叙事形态。每种形式从故事内核自然生长，让结构、视觉与文字深度共生。</p>
-                    <p>作品以「法则与失控」为主题，理性秩序与人性本心不断碰撞、和解。从单视角起步，历经多声部、时空分裂，最终以 <a href="aboutmore/czy.html">《蓝牙：陆知意岛》双螺旋版</a> 回归原点，完成<strong>出发 — 探索 — 升华 — 闭环</strong>的完整旅程。</p>
-                    <div class="novel-overview__chips">
-                        <span><i class="fas fa-folder-tree"></i> 文档目录</span>
-                        <span><i class="fas fa-comments"></i> 对话气泡</span>
-                        <span><i class="fas fa-columns"></i> 双栏对照</span>
-                        <span><i class="fas fa-globe"></i> 平行宇宙</span>
-                        <span><i class="fas fa-music"></i> 复调四重奏</span>
-                        <span><i class="fas fa-project-diagram"></i> 交互意象网络</span>
-                        <span><i class="fas fa-dna"></i> DNA 双螺旋</span>
-                    </div>
-                    <a href="aboutmore/wx.html" class="novel-overview__cta"><i class="fas fa-book-open"></i><span>查看法则与故事总览</span></a>
+            <figure class="methodology__figure">
+                <img src="menth.svg" width="1600" height="1240" loading="lazy" alt="从意图到工程方法论全景图：源头（对话·意图·判断）、三元飞轮（算法·验证·论文）、三根支柱（AI 展开器·测试真值裁判·文档固化锚点）、核心公式（可描述＋硬件基础＝可验证＋可论证）与闭环（物理直觉→可描述约束→仿真验证→硬件确认→现场反馈）">
+            </figure>
+
+            <div class="methodology__callout">
+                <span class="tag">反直觉的观察</span>
+                <p>同一个 AI，同一个系统，同样的知识——被要求"写文档"和被要求"写论文"，产出的思考深度有<strong>结构性差异</strong>。差异不在长度，而在<strong>断言强度</strong>：文档允许"看起来合理"，论文要求"可证伪"。</p>
+                <p><strong>论文格式不（只）是表达规范，它（更根本地）是认知脚手架——它不告诉你答案，它逼你去想。</strong></p>
+            </div>
+
+            <div class="methodology__flow">
+                <h3>七个认知约束 <span class="en">SEVEN CONSTRAINTS</span></h3>
+                <p class="methodology__hint">每一条约束，都对应一种"隐性推理"的显性化——它们共同把 AI 从"叙述模式"拉进"论证模式"。</p>
+                <div class="methodology__grid methodology__grid--seven">
+                    <article class="methodology__card"><h4>① 可证伪断言</h4><p>每句话都必须能被验证——不能停留在"看起来对"。</p></article>
+                    <article class="methodology__card"><h4>② 相关工作定位</h4><p>每个贡献都必须相对已有工作说明——不能"重新发明轮子"。</p></article>
+                    <article class="methodology__card"><h4>③ 明确贡献列表</h4><p>必须说清楚"新在哪"——不能含糊带过。</p></article>
+                    <article class="methodology__card"><h4>④ 形式化陈述</h4><p>模糊的主张必须精确化——"很快"要变成"5200 ms"。</p></article>
+                    <article class="methodology__card"><h4>⑤ 论证链条</h4><p>结论必须有前提——不能"我觉得这样"。</p></article>
+                    <article class="methodology__card"><h4>⑥ 边界声明</h4><p>必须承认方法不适用什么——不能当"万能药"。</p></article>
+                    <article class="methodology__card"><h4>⑦ 可复现数据</h4><p>必须给出能复核的数字——不能只说"我们测了"。</p></article>
                 </div>
-                <div class="novel-overview__rail">
-                    <h3>八篇入口</h3>
-                    <p>建议按"起点 → 变体 → 分裂 → 回环 → 归档"的顺序阅读，也可以从最感兴趣的形式直接切入。</p>
-                    <div class="novel-overview__list">
-                        <a href="aboutmore/czy.html" title="错配、走散与回到原点——一个AI工程师等了六年的故事"><i class="fas fa-dna"></i><span>蓝牙：陆知意岛</span></a>
-                        <a href="aboutmore/qp-chat.html" title="以聊天气泡还原对话，让叙事退后、语言顶到最前面"><i class="fas fa-comment-dots"></i><span>失控时空·对话版</span></a>
-                        <a href="aboutmore/gary.html" title="复调轨道式城市叙事，多人失控实验"><i class="fas fa-map-marker-alt"></i><span>失控时空：终极玩家</span></a>
-                        <a href="aboutmore/alone.html" title="繁华世界与个人孤独的对照延伸"><i class="fas fa-city"></i><span>知意知否·孤独玩家</span></a>
-                        <a href="aboutmore/mywj.html" title="双时空对冲与十环共生的三轨宿命结构"><i class="fas fa-orbit"></i><span>知屿之意·命运玩家</span></a>
-                        <a href="aboutmore/party-high.html" title="四重奏并置与瞬间谱采样的复调结构"><i class="fas fa-music"></i><span>四季Party High玩家</span></a>
-                        <a href="aboutmore/jsxm.html" title="文档式副本叙事，形式与内容互相咬合"><i class="fas fa-folder-open"></i><span>失控时刻·有趣玩家</span></a>
-                        <a href="aboutmore/npc.html" title="碎片叙事与系统存档，小说系列收官之作"><i class="fas fa-flag-checkered"></i><span>N-P-C-玩家</span></a>
+            </div>
+
+            <div class="methodology__flow">
+                <h3>三支柱 · 格式的客观后果 <span class="en">PILLARS</span></h3>
+                <p class="methodology__hint">三支柱不是"独立发明的方法"，而是"论文格式强制你做事的方式"——每一条格式要求，都在强制某一支柱运转。</p>
+                <div class="methodology__grid">
+                    <article class="methodology__card">
+                        <h4>AI 展开器</h4>
+                        <p>把系统展开到能回答任何具体问题。</p>
+                        <p class="mini">检索 · 追踪 · 推断 · 对比</p>
+                    </article>
+                    <article class="methodology__card">
+                        <h4>测试真值裁判</h4>
+                        <p>不依赖 AI 生成的独立行为基准。</p>
+                        <p class="mini">L1 模型 · L2 固件在环 · L3 差分等价</p>
+                    </article>
+                    <article class="methodology__card">
+                        <h4>文档固化锚点</h4>
+                        <p>跨迭代的共享内存，把发现变成不可丢失的资产。</p>
+                        <p class="mini">发现 → 论文 → 回归用例 → 可被检索</p>
+                    </article>
+                </div>
+                <table class="methodology__table">
+                    <thead><tr><th>论文格式要求</th><th>强制哪一柱</th><th>强制方式</th></tr></thead>
+                    <tbody>
+                        <tr><td>可证伪断言</td><td>测试真值裁判</td><td>断言必须有验证手段</td></tr>
+                        <tr><td>相关工作定位</td><td>AI 展开器</td><td>差异必须逐维度检索</td></tr>
+                        <tr><td>明确贡献列表</td><td>三柱全用</td><td>"新在哪"需要检索 + 验证 + 记录</td></tr>
+                        <tr><td>形式化陈述</td><td>测试 + 文档</td><td>精确数字来自测试，记录来自文档</td></tr>
+                        <tr><td>论证链条</td><td>三柱全用</td><td>前提显式化需要检索 + 验证 + 记录</td></tr>
+                        <tr><td>边界声明</td><td>三柱全用</td><td>边界需要检索已有方案 + 测试极端条件 + 记录分析</td></tr>
+                        <tr><td>可复现数据</td><td>文档固化锚点</td><td>数据必须结构化记录</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="methodology__flow" id="testbench">
+                <h3>测试台 · 真值裁判的物理载体 <span class="en">TEST BENCH</span></h3>
+                <p class="methodology__hint">"可证伪"不能只停在嘴边——它需要一个<strong>不依赖 AI 生成内容</strong>的独立基准。测试台就是这个基准：一套三层验证体系，用真实固件给 AI 的每一个结论打分。</p>
+                <div class="methodology__grid">
+                    <article class="methodology__card">
+                        <span class="idx">L1</span>
+                        <h4>行为级模型</h4>
+                        <p class="mini">Python 模型 · 与固件 1:1 对齐</p>
+                        <p>回答：算法对不对、收敛性成不成立。不能回答：真实时序。</p>
+                    </article>
+                    <article class="methodology__card">
+                        <span class="idx">L2</span>
+                        <h4>固件在环</h4>
+                        <p class="mini">真实固件源码编成的本机进程</p>
+                        <p>回答：真实状态机 / 常量 / 时序下的行为。不能回答：模型是否已漂移。</p>
+                    </article>
+                    <article class="methodology__card">
+                        <span class="idx">L3</span>
+                        <h4>差分等价</h4>
+                        <p class="mini">同激励下 固件 vs 模型 逐帧逐字节</p>
+                        <p>回答：模型是否仍是固件的忠实等价物——补齐"模型漂移"这一层。</p>
+                    </article>
+                </div>
+                <table class="methodology__table">
+                    <thead><tr><th>测试台能力</th><th>作用</th></tr></thead>
+                    <tbody>
+                        <tr><td>总线全帧留痕</td><td>每一帧都留痕，图与结论由真实帧序列导出——不得把推导冒充实测</td></tr>
+                        <tr><td>背景负载注入</td><td>把负载从轻载 1.4% 拉到现场级 38%，验证落位 / 计数 / 收敛时间逐项不变</td></tr>
+                        <tr><td>形态 / 相位矩阵</td><td>8 种接入形态 × 5 个插入时刻，穷举那些"没想到要测"的边界组合</td></tr>
+                    </tbody>
+                </table>
+                <div class="methodology__callout">
+                    <span class="tag">它抓到过什么</span>
+                    <p>L3 差分实际抓到过<strong>四类真实差异</strong>（OFFER 首次抖动机理、重试间隔、ISN 复用、PROBE 应答抢占）——<strong>不是靠读代码一眼看出来的，而是靠"跑一遍看数值"发现的</strong>。这类"半对半错"的实现，人工审查极难发现。</p>
+                    <p>测试台当前战绩：<strong>L1 行为级 17/17 · L2 固件在环 8/8 · L2 相位矩阵 5/5 · L3 差分等价 8/8 逐帧逐字节一致</strong>。</p>
+                </div>
+            </div>
+
+            <div class="methodology__formula">
+                <div class="eq">
+                    <span class="term">可描述</span><span class="op">+</span><span class="term">硬件基础</span><span class="op">=</span><span class="term">可验证</span><span class="op">+</span><span class="term">可论证</span>
+                </div>
+                <p>把物理直觉翻译成无歧义约束 —— 硬件给出真值 —— 验证给出信心 —— 论证给出把握</p>
+            </div>
+
+            <div class="methodology__flow">
+                <h3>为什么它"一劳永逸" <span class="en">COMPOUNDING</span></h3>
+                <p class="methodology__hint">它省的不是"这一次的麻烦"，而是"以后每一次重头再来"的麻烦。</p>
+                <div class="methodology__value">
+                    <div class="vcard">
+                        <h4>工程复利</h4>
+                        <p>普通开发里每次迭代都是一次知识流失；本方法把"修完 bug"的结论写成引理 / 不变量 / 边界声明，让下一次迭代在它之上叠加。单次改动的重新理解成本不再随迭代次数累积——不是省一次，而是让未来每一次都更便宜。</p>
+                    </div>
+                    <div class="vcard">
+                        <h4>反脆弱</h4>
+                        <p>每一类意外都有固定的"意外 → 资产"转化通道：现场出问题 → 回填仿真成回归用例；审阅挑出隐含前提 → 写成引理 / 不变量；AI 建议破坏全局 → 由测试拦住；新机制落地 → 模型必须同步。波动不是被扛过去，而是被主动转化为永久资产。</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="methodology__boundary">
+                <strong>边界声明（方法不适用什么）：</strong>它需要系统同时满足"复杂度超过单脑带宽"与"存在真值源"；它显著增加时间与 token 成本，只适用于"错误的代价远高于思考的代价"的场合（协议 / 并发 / 安全相关）。它不跟复杂度硬碰硬，而是给复杂度装了一个持续的探测器——<strong>它不是"防住所有问题"，而是"让问题不能悄悄发生"。</strong>
+            </div>
+
+            <div class="methodology__loop">
+                <div class="steps">
+                    <span>物理直觉</span><i class="fas fa-arrow-right"></i>
+                    <span>可描述约束</span><i class="fas fa-arrow-right"></i>
+                    <span>仿真验证</span><i class="fas fa-arrow-right"></i>
+                    <span>硬件确认</span><i class="fas fa-arrow-right"></i>
+                    <span>现场反馈</span><i class="fas fa-rotate-left"></i>
+                </div>
+                <p>闭环 · 每轮迭代都被永久继承 —— 现场反馈回到新的物理直觉，飞轮再转一圈。</p>
             </div>
         </section>
 
         <section class="summary-table" id="overview-table">
-            <section class="story-spotlight">
-                <span class="story-spotlight__eyebrow"><i class="fas fa-orbit"></i> 命运玩家宇宙</span>
-                <div class="story-spotlight__grid">
-                    <div class="story-spotlight__main">
-                        <h3>从"陆知意岛"走到"三轨宿命"</h3>
-                        <p>如果你想直接进入这一组小说里最完整、最具结构实验感的一页，可以从《知屿之意·命运玩家》切入。它把归家与不归并排展开，再用十环共生意象把所有失去、迟到与回声缝回一个圆环。</p>
-                        <div class="story-spotlight__chips">
-                            <span><i class="fas fa-house"></i> 世界A · 正序</span>
-                            <span><i class="fas fa-road"></i> 世界B · 倒序</span>
-                            <span><i class="fas fa-ring"></i> 十环共生</span>
-                            <span><i class="fas fa-chess-knight"></i> 命运玩家</span>
-                        </div>
-                        <a href="aboutmore/mywj.html" class="story-spotlight__cta"><i class="fas fa-book-open"></i><span>进入专题页</span></a>
-                    </div>
-                    <div class="story-spotlight__rail">
-                        <h3>同宇宙入口</h3>
-                        <p>这几篇可以按"起点 → 失控 → 孤独 → 宿命"一路读过去。</p>
-                        <div class="story-spotlight__list">
-                            <a href="aboutmore/czy.html" title="错配、走散与回到原点"><i class="fas fa-feather"></i><span>蓝牙：陆知意岛</span></a>
-                            <a href="aboutmore/gary.html" title="复调轨道式城市叙事"><i class="fas fa-map-marker-alt"></i><span>失控时空：终极玩家</span></a>
-                            <a href="aboutmore/alone.html" title="繁华世界与个人孤独"><i class="fas fa-city"></i><span>知意知否·孤独玩家</span></a>
-                            <a href="aboutmore/mywj.html" title="双时空对冲与十环宿命"><i class="fas fa-orbit"></i><span>知屿之意·命运玩家</span></a>
-                            <a href="aboutmore/party-high.html" title="四重奏复调结构"><i class="fas fa-music"></i><span>四季Party High玩家</span></a>
-                        </div>
-                    </div>
-                </div>
-            </section>
             <details class="summary-group" open id="table-t">
                 <summary>T · 嵌入式AI工程化</summary>
                 <div class="table-wrap">
