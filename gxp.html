@@ -733,16 +733,16 @@
             <li>离线场景单独处理：记本地时间 + 漂移值，联网后用算法补偿</li>
         </ul>
     </div>
-    <p>这一套下来，"时间"不再是 <code>new Date()</code> 那一行，而是<strong>一整套带密码学签名的对时协议</strong>。</p>
+    <p>这一套下来，"时间"变成了<strong>一整套带密码学签名的对时协议</strong>。</p>
 
-    <h3 id="signature">二、签名的本质：不是图片，是"不可分离"</h3>
+    <h3 id="signature">二、签名的本质：是"不可分离"</h3>
     <p>法规上"Signature/Record Linking"——签了字的记录，改一个字节，签名就废。我做的时候第一反应是用图片签名（90% 的系统这么干）。但读法规注释：<code>"shall be permanently linked"</code>——是<strong>密码学意义上的链接</strong>，不是视觉链接。</p>
     <p>所以最终方案是<strong>五要素同时哈希</strong>：</p>
     <pre><code>签名 = SHA256(资源 hash + 签名人 + reason + intent + TOTP)</code></pre>
     <p>其中：</p>
     <ul>
         <li><strong>资源 hash</strong> 改了 → 签名废</li>
-        <li><strong>reason</strong>（Approved/Reviewed/Released...）不是下拉，是白名单校验</li>
+        <li><strong>reason</strong>（Approved/Reviewed/Released...）走白名单校验</li>
         <li><strong>intent</strong>（签字意图）≥5 字符用户必填</li>
         <li><strong>TOTP</strong> 是第二因素（30 秒换一次码，手机令牌那种）</li>
     </ul>
@@ -753,10 +753,10 @@
         <li>系统管理员不能参与任何业务审批</li>
     </ul>
     <div class="insight-box tech">
-        <strong>硬阻断：</strong>这条不是"建议"，是硬阻断。UI 上按钮就禁用了，API 层直接 reject。一个普通员工试图绕过？前端的按钮藏起来没用——他直接调 API 也过不了校验。
+        <strong>硬阻断：</strong>这条是硬阻断。UI 上按钮就禁用了，API 层直接 reject。一个普通员工试图绕过？前端的按钮藏起来没用——他直接调 API 也过不了校验。
     </div>
 
-    <h3 id="audit">三、审计的本质：不是日志，是"链"</h3>
+    <h3 id="audit">三、审计的本质：是"链"</h3>
     <p>法规上"Original"（原始性）——记录改不了。传统做法是触发器+日志。问题是<strong>审计表本身也被人改呢</strong>？</p>
     <p>我做了一件事：<strong>区块链式哈希链</strong>。</p>
     <pre><code>每条审计记录包含：

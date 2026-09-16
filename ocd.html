@@ -957,7 +957,7 @@ sup.annotation { font-size:10px; color:var(--muted); }
 				<h2 id="pain-points">为什么很多 AI 嵌入式调试还停在半路</h2>
 				<p>如果你在嵌入式开发里用 AI，大概率早就碰过这些卡点。AI 代码能写，但它看不见你的板子；寄存器名能编，但它可能现场瞎编一个根本不存在的外设位；出了 HardFault，真正辛苦的定位工作还是得你自己翻手册、读寄存器、猜根因。</p>
 				<p>更麻烦的是，很多团队的编译、烧录、验证流程还锁在 IDE 里。人得手动点菜单、切窗口、盯串口，AI 只能停在对话框里等你转述结果。再叠上商业 IDE 的授权成本，Keil、IAR 这种闭环对小团队并不轻。</p>
-				<p><strong>问题不在 AI 不够聪明，而在工具链没有把硬件状态暴露成 AI 能直接操作的语言。</strong></p>
+				<p><strong>问题在于工具链没有把硬件状态暴露成 AI 能直接操作的语言。</strong></p>
 				<div class="card philosophy" style="margin:18px 0 28px;">
 					<p><strong>对比：</strong>Keil/IAR 等传统 IDE 强大但封闭——图形化操作不可脚本调用、授权成本高、CI/CD 集成困难。而 ARM GCC + OpenOCD + GDB 全部开源，每条操作都是命令行，AI 可直接调用、批量执行、嵌入自动化流水线。</p>
 				</div>
@@ -966,7 +966,7 @@ sup.annotation { font-size:10px; color:var(--muted); }
 			<section>
 				<h2 id="toolchain">这套组合拳，为什么恰好能接上 AI</h2>
 				<p>我这些年做嵌入式 AI 工程化，越来越明确地依赖一套常被忽视的组合：<strong>ARM GCC + OpenOCD + GDB</strong>。它们有三个共同点：开源、命令行驱动、可脚本化。</p>
-				<p>这三个特性叠起来，意义就变了。AI 不再只是帮你补代码，而是可以直接参与编译、烧录、断点、寄存器读取、内存导出和回归验证。它接触到的不是"你描述过的结果"，而是<strong>第一手的硬件状态</strong>。</p>
+				<p>这三个特性叠起来，意义就变了。AI 不再只是帮你补代码，而是可以直接参与编译、烧录、断点、寄存器读取、内存导出和回归验证。它接触到的是<strong>第一手的硬件状态</strong>。</p>
 				<div class="card accent-left">
 					<p><strong>关键变化：</strong>当开发链路从图形界面变成命令接口，AI 的角色就会从"码农"升级成"副驾驶"。它不仅能生成代码，还能读取现场、执行流程、回传证据。</p>
 				</div>
@@ -981,7 +981,7 @@ sup.annotation { font-size:10px; color:var(--muted); }
 				</div>
 				<div class="insight-box warm" style="margin:8px 0 20px;font-size:13px;">
 					<strong>💡 L1 心法映射：够用原则</strong><br>
-					三件套（ARM GCC + OpenOCD + GDB）不追求功能最全，只追求刚好覆盖「编译→烧录→调试→回读」全链路。不装多余工具、不用商业套件，正是 L1「够用原则」在工程选型中的落地——真正的效率不是你拥有多少工具，而是你能用多小的工具链跑通完整的闭环。
+					三件套（ARM GCC + OpenOCD + GDB）不追求功能最全，只追求刚好覆盖「编译→烧录→调试→回读」全链路。不装多余工具、不用商业套件，正是 L1「够用原则」在工程选型中的落地——真正的效率是你能用多小的工具链跑通完整的闭环。
 				</div>
 				<pre><code>make -j8
 openocd &lt;config&gt; -c "program build/app.elf verify reset exit"   # ELF: 含调试符号的 ARM 可执行文件
@@ -1219,7 +1219,7 @@ arm-none-eabi-gdb build/01-RTC.elf -q -batch \
 python tools/analyze_fft.py capture.bin</code></pre>
 
 				<div class="insight-box">
-					<strong>真正高价值的不是 AI 会不会解释故障，</strong>而是它能不能直接拿到寄存器、变量和原始字节。先看到现场，后谈分析，顺序不能反。
+					<strong>真正高价值的是</strong>它能不能直接拿到寄存器、变量和原始字节。先看到现场，后谈分析，顺序不能反。
 				</div>
 			</section>
 
@@ -1320,7 +1320,7 @@ python scripts/serial_tool.py monitor stop --session SESSION_ID --json</code></p
 				</div>
 
 				<h2 id="troubleshooting">常见故障速查与快速恢复</h2>
-				<p>自动化调试链路最怕的不是 bug 难查，而是工具链本身卡住。以下三个故障在实际项目中出现频率极高，提前写好恢复路径，AI 就能自己续跑，不用等人来救。</p>
+				<p>自动化调试链路最怕的是工具链本身卡住。以下三个故障在实际项目中出现频率极高，提前写好恢复路径，AI 就能自己续跑，不用等人来救。</p>
 
 				<h3>🔴 故障 A：<code>localhost:3333: Connection timed out</code></h3>
 				<p>原因：OpenOCD 服务器没启动，或者端口不对。</p>
@@ -1342,7 +1342,7 @@ Start-Sleep -Seconds 3
 openocd -f interface/stlink.cfg -f target/stm32f4x.cfg</code></pre>
 
 				<div class="insight-box warm">
-					<strong>自动化调试的真正敌人不是 bug，</strong>而是工具链的占用冲突。ST-Link 是独占资源，OpenOCD 和烧录必须串行。在脚本里显式加锁或加检查，比事后排查"为什么又 timeout 了"高效十倍。
+					<strong>自动化调试的真正敌人是</strong>工具链的占用冲突。ST-Link 是独占资源，OpenOCD 和烧录必须串行。在脚本里显式加锁或加检查，比事后排查"为什么又 timeout 了"高效十倍。
 				</div>
 
 				<h3 style="margin-top:28px;">故障速查表</h3>
@@ -1614,7 +1614,7 @@ for test_case in test_suite:
 generate_html_report(report, output="nightly.html")</code></pre>
 
 				<div class="card tip">
-					<p><strong>无人值守的前提不是 AI 更强，</strong>而是构建、烧录、调试、采样、验证每一步都能被命令化、脚本化、回传化。这层翻译建立后，你定义法则，AI 就能在法则内执行：编译、烧录、读寄存器、抓内存、跑脚本、分析结果、继续收敛。</p>
+					<p><strong>无人值守的前提是</strong>构建、烧录、调试、采样、验证每一步都能被命令化、脚本化、回传化。这层翻译建立后，你定义法则，AI 就能在法则内执行：编译、烧录、读寄存器、抓内存、跑脚本、分析结果、继续收敛。</p>
 				</div>
 
 				<div class="insight-box cool" style="font-size:13px;">
