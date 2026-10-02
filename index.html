@@ -138,20 +138,54 @@
         }
         .hero-recommend {
             display: block;
-            margin-top: 22px;
-            padding: 18px 20px;
+            margin-top: 26px;
+            padding: 24px 26px;
             border-radius: 16px;
             border: 1px solid #f0d99a;
-            background: var(--highlight);
+            border-left: 5px solid var(--accent);
+            background: linear-gradient(135deg, #fffdf4 0%, #fef7df 100%);
             text-decoration: none;
             color: #694d18;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hero-recommend:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: #694d18;
+        }
+        .hero-recommend__tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: #9a3412;
+            background: #ffedd5;
+            border: 1px solid #fed7aa;
+            padding: 3px 12px;
+            border-radius: 999px;
+            margin-bottom: 12px;
         }
         .hero-recommend strong {
             display: block;
             color: #49330e;
-            margin-bottom: 6px;
-            font-size: 16px;
+            margin-bottom: 8px;
+            font-size: 21px;
+            line-height: 1.35;
+            letter-spacing: -0.02em;
         }
+        .hero-recommend p {
+            margin: 0;
+            font-size: 14.5px;
+            line-height: 1.8;
+            color: #7a5a1e;
+        }
+        .hero-recommend p strong { display: inline; font-size: 14.5px; margin: 0; }
+        .hero-recommend .hero-meta { margin-top: 14px; font-size: 13px; color: var(--text-secondary); }
+        .hero-recommend .hero-meta a { color: #245f9c; font-weight: 600; text-decoration: none; }
+        .hero-recommend .hero-meta a:hover { text-decoration: underline; }
         .hero-meta {
             margin-top: 10px;
             font-size: 13px;
@@ -532,6 +566,8 @@
         @media (max-width: 720px) {
             .layout { padding: 12px 8px 48px; gap: 16px; }
             .hero { padding: 20px 16px; }
+            .hero-recommend { padding: 18px 16px; }
+            .hero-recommend strong { font-size: 17px; }
             .hero h1 { font-size: 28px; letter-spacing: -0.02em; }
             .summary-table h2 { font-size: 24px; }
             .methodology h2 { font-size: 26px; }
@@ -1092,6 +1128,13 @@
             <div class="eyebrow"><i class="fas fa-compass"></i> 整站入口</div>
             <h1>嵌入式AI工程化系列</h1>
             <div class="hero-meta">itg · 公众号: 火星火箭</div>
+
+            <a class="hero-recommend" href="pp.html" aria-label="阅读最新重磅文章：从一鱼多吃到一劳永逸">
+                <span class="hero-recommend__tag"><i class="fas fa-fire"></i> 最新重磅 · 全站首推</span>
+                <strong>从一鱼多吃到一劳永逸：我们自研的AI知识中枢完整架构 <span class="new-badge">新</span></strong>
+                <p>从单次价值最大化的「一鱼多吃」，升级为长期无限复利的「一劳永逸」：<strong>双层知识复用定义 · 四维资产闭环 · 结构同构识别 · 执行-积累-复用三层架构 · AI入驻源码的自举闭环</strong>——让每一次投入，都产生永久可复用的系统资产。</p>
+                <div class="hero-meta">🧬 工程心法 · 事实锚定 / 结构抽象 / 机器识别 / 自举闭环 ｜ 开源项目：<a href="https://gitee.com/x-itg/perfect-prompt" target="_blank" rel="noopener">perfect-prompt ↗</a></div>
+            </a>
         </section>
 
         <section class="methodology" id="methodology">
