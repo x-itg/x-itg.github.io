@@ -47,6 +47,7 @@ TECH_ITEMS: list[tuple[str, str, str, str]] = [
     ("svg.html", "🎨", "别让AI画图，让它写图", "工程心法 · SVG是代码不是图片，编号精准定位，分层策略拆解复杂设计"),
     ("ai.html", "🤖", "当AI闯入你的代码王国", "工程心法 · 同一个时代两种失眠，找到属于自己的节奏旋钮"),
     ("cx.html", "🔐", "信任黑箱：Context Engineering", "工程心法 · 在绝对黑箱里人工搭建透明工程外壳，控制你能控制的"),
+    ("pp.html", "🧬", "从一鱼多吃到一劳永逸", "工程心法 · 自研AI知识中枢完整架构：结构同构识别与自举闭环"),
     ("14.html", "⚖️", "AI诌媚与专利", "专业延伸 · 在拿证与保护之间切换审查模式"),
     ("gd.html", "🌾", "始于工程，服务生活", "内核反照 · 工程法则从技术补丁长成生活工具"),
 ]
@@ -55,9 +56,9 @@ TECH_GROUPS = [
     ("总纲", [TECH_ITEMS[0]]),
     ("核心主线", TECH_ITEMS[1:5]),
     ("根系能力", TECH_ITEMS[5:7]),
-    ("专业延伸", [TECH_ITEMS[7], TECH_ITEMS[8], TECH_ITEMS[9], TECH_ITEMS[10], TECH_ITEMS[11], TECH_ITEMS[12], TECH_ITEMS[13], TECH_ITEMS[23]]),
-    ("实战与心法", TECH_ITEMS[14:23]),
-    ("内核反照", [TECH_ITEMS[24]]),
+    ("专业延伸", [TECH_ITEMS[7], TECH_ITEMS[8], TECH_ITEMS[9], TECH_ITEMS[10], TECH_ITEMS[11], TECH_ITEMS[12], TECH_ITEMS[13], TECH_ITEMS[24]]),
+    ("实战与心法", TECH_ITEMS[14:24]),
+    ("内核反照", [TECH_ITEMS[25]]),
 ]
 
 # ═══════════════════════════════════════════════════════════════════
